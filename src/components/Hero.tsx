@@ -263,10 +263,11 @@ export default function Hero(props: { imageUrl?: string }) {
                                     <input
                                         ref={dateRef}
                                         type="date"
-                                        className={styles.nativeInput}
+                                        className={`${styles.nativeInput} ${!date ? styles.emptyDate : ''}`}
                                         value={date}
                                         min={today}
                                         onChange={e => setDate(e.target.value)}
+                                        placeholder="dd/mm/yy"
                                     />
                                     <select
                                         className={styles.hourSelect}

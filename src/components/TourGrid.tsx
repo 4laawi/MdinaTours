@@ -289,10 +289,11 @@ export default function TourGrid() {
                                     <label className={styles.sectionLabel}>{t('plan_tour_date')}</label>
                                     <input
                                         type="date"
-                                        className={styles.dateInput}
+                                        className={`${styles.dateInput} ${!bookingDate ? styles.emptyDate : ''}`}
                                         value={bookingDate}
                                         min={today}
                                         onChange={(e) => setBookingDate(e.target.value)}
+                                        placeholder="dd/mm/yy"
                                     />
                                 </div>
 

@@ -44,7 +44,6 @@ export default function Footer() {
                                 width={200}
                                 height={60}
                                 className={styles.logo}
-                                style={{ width: '200px', height: 'auto' }}
                                 priority
                             />
                         </Link>

@@ -54,6 +54,8 @@
     /* Forces it to be stark white and clean */
     margin-bottom: 24px;
     transition: transform 0.3s ease;
+    width: 200px;
+    height: auto;
 }
 
 .logo:hover {

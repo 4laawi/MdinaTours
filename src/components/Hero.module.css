@@ -329,6 +329,27 @@
     color: #333;
     outline: none;
     width: 100%;
+    position: relative;
+    min-height: 1.5rem;
+}
+
+.nativeInput.emptyDate::-webkit-datetime-edit,
+.nativeInput.emptyDate::-webkit-datetime-edit-year-field,
+.nativeInput.emptyDate::-webkit-datetime-edit-month-field,
+.nativeInput.emptyDate::-webkit-datetime-edit-day-field,
+.nativeInput.emptyDate::-webkit-datetime-edit-text {
+    color: transparent;
+}
+
+.nativeInput.emptyDate::before {
+    content: attr(placeholder);
+    color: #333;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-weight: 600;
 }
 
 .dateTimeInputGroup .nativeInput {

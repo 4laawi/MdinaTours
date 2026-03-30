@@ -477,6 +477,27 @@
     transition: border-color 0.2s;
     background: #fff;
     cursor: pointer;
+    position: relative;
+    min-height: 52px;
+}
+
+.dateInput.emptyDate::-webkit-datetime-edit,
+.dateInput.emptyDate::-webkit-datetime-edit-year-field,
+.dateInput.emptyDate::-webkit-datetime-edit-month-field,
+.dateInput.emptyDate::-webkit-datetime-edit-day-field,
+.dateInput.emptyDate::-webkit-datetime-edit-text {
+    color: transparent;
+}
+
+.dateInput.emptyDate::before {
+    content: attr(placeholder);
+    color: #999;
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-weight: 500;
 }
 
 .dateInput:focus {
