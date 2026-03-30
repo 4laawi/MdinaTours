@@ -1,0 +1,248 @@
+.footer {
+    position: relative;
+    /* Gradient starts from primary color and goes to a deeper, more premium shade */
+    background: linear-gradient(180deg, var(--primary) 0%, #8c4b2a 100%);
+    padding: 120px 0 0 0;
+    color: #ffffff;
+    font-family: var(--font-poppins), sans-serif;
+    overflow: hidden;
+}
+
+.shapeContainer {
+    direction: ltr;
+    left: 0;
+    line-height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: -1px;
+    z-index: 10;
+}
+
+.shapeContainer svg {
+    display: block;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    width: calc(100% + 1.3px);
+    fill: #fcf9f6;
+    /* Matches the background of the previous section */
+}
+
+.footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    position: relative;
+    z-index: 20;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.logoWrapper {
+    margin-bottom: 24px;
+}
+
+.logo {
+    filter: brightness(0) invert(1);
+    /* Forces it to be stark white and clean */
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    color: #ffffff;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 30px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.linksList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.linksList a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.linksList a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+}
+
+.contactItem svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+}
+
+.socialGrid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.socialIcon {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.socialIcon:hover {
+    background: #ffffff;
+    color: var(--primary);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.socialIcon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.paymentWrapper {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.paymentIcons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    filter: brightness(0) invert(1) opacity(0.8);
+}
+
+.bottomSection {
+    margin-top: 100px;
+    padding: 30px 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bottomContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+}
+
+.agencyLink {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 5px;
+}
+
+.agencyLink:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.legalLinks {
+    display: flex;
+    gap: 24px;
+}
+
+.legalLinks a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.legalLinks a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+    .footerContent {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footerContent {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .bottomContainer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}

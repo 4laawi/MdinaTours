@@ -1,0 +1,141 @@
+.featuresWrapper {
+    position: relative;
+    width: 100%;
+    padding: 0 15px 120px 15px;
+    /* Increased bottom padding to separate from FAQ content */
+    background: transparent;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+}
+
+.featuresHeader {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.featureItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.iconContainer {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Background shapes for each icon */
+.featureItem:nth-child(1) .iconContainer {
+    background-image: url("https://tangier-trip.com/wp-content/uploads/2020/11/h1_shape-5.png");
+}
+
+.featureItem:nth-child(2) .iconContainer {
+    background-image: url("https://tangier-trip.com/wp-content/uploads/2020/11/h1_shape-7.png");
+}
+
+.featureItem:nth-child(3) .iconContainer {
+    background-image: url("https://tangier-trip.com/wp-content/uploads/2020/11/h1_shape-6.png");
+}
+
+.featureItem:nth-child(4) .iconContainer {
+    background-image: url("https://tangier-trip.com/wp-content/uploads/2020/11/h1_shape-8.png");
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.iconWrapper svg {
+    width: 70px;
+    height: 70px;
+}
+
+.featureItem:hover .iconWrapper {
+    transform: translateY(-12px) scale(1.1);
+}
+
+.featureItem:hover .iconContainer {
+    transform: scale(1.05);
+}
+
+.content {
+    width: 100%;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    text-transform: capitalize;
+    font-family: var(--font-poppins), sans-serif;
+}
+
+.description {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    padding: 0 10px;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+/* SVG Colors */
+.fillPrimary {
+    fill: var(--primary);
+}
+
+.fillSecondary {
+    fill: var(--secondary);
+}
+
+.fillAccent {
+    fill: #202f59;
+    transition: fill 0.3s ease;
+}
+
+.featureItem:hover .fillAccent {
+    fill: var(--primary);
+}
+
+@media (max-width: 1024px) {
+    .featuresGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .featuresGrid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+}
