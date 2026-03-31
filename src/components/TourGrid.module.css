@@ -710,20 +710,149 @@
 
 @media (max-width: 480px) {
     .modalContent {
-        padding: 30px 20px;
+        padding: 20px 15px;
         max-height: 90vh;
         overflow-y: auto;
     }
 
+    .closeModal {
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        font-size: 1.25rem;
+    }
+
+    .modalHeader {
+        margin-bottom: 16px;
+    }
+
+    .modalBadge {
+        padding: 4px 12px;
+        font-size: 0.65rem;
+        margin-bottom: 8px;
+    }
+
     .modalTitle {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    .tourShortDesc {
+        font-size: 0.85rem;
+        margin-top: 4px;
+    }
+
+    .selectionSummary {
+        padding: 12px;
+        margin-bottom: 16px;
+        gap: 8px;
+        border-radius: 12px;
+    }
+
+    .summaryLabel {
+        font-size: 0.7rem;
+    }
+
+    .summaryValue {
+        font-size: 0.85rem;
+    }
+
+    .bookingInputSection {
+        margin-bottom: 16px;
+    }
+
+    .sectionLabel {
+        margin-bottom: 8px;
+        font-size: 0.8rem;
+    }
+
+    .dateInput {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        border-radius: 10px;
+    }
+
+    .dateInput.emptyDate::before {
+        left: 14px;
+    }
+
+    .passengerSection {
+        margin-bottom: 20px;
     }
 
     .passengerGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .passengerBtn {
+        padding: 10px 6px;
+        font-size: 0.75rem;
+        border-radius: 10px;
+    }
+
+    .modalFooter {
+        gap: 12px;
+    }
+
+    .priceContainer {
+        padding-top: 12px;
+    }
+
+    .priceLabel {
+        font-size: 0.9rem;
+    }
+
+    .priceValue {
+        font-size: 1.5rem;
+    }
+
+    .continueBtn {
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+    }
+
+    .contactForm {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .inputGroup {
+        gap: 4px;
+    }
+
+    .inputLabel {
+        font-size: 0.65rem;
+    }
+
+    .modalInput,
+    .modalSelect,
+    .modalTextarea {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+
+    .modalTextarea {
+        min-height: 60px;
+    }
+
+    .primaryCta {
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+    }
+
+    .secondaryCta {
+        padding: 10px;
+        font-size: 0.8rem;
+        border-radius: 12px;
     }
 
     .secondaryCtas {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
     }
 }

@@ -824,24 +824,134 @@
 
 @media (max-width: 480px) {
     .modalContent {
-        padding: 30px 20px;
+        padding: 20px 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .closeModal {
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        font-size: 1.25rem;
+    }
+
+    .modalHeader {
+        margin-bottom: 20px;
+    }
+
+    .modalBadge {
+        padding: 4px 12px;
+        font-size: 0.65rem;
+        margin-bottom: 8px;
     }
 
     .modalTitle {
         font-size: 1.5rem;
     }
 
+    .selectionSummary {
+        padding: 15px;
+        margin-bottom: 20px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+
+    .summaryLabel {
+        font-size: 0.65rem;
+    }
+
+    .summaryValue {
+        font-size: 0.9rem;
+    }
+
+    .passengerSection {
+        margin-bottom: 24px;
+    }
+
+    .sectionLabel {
+        margin-bottom: 12px;
+        font-size: 0.85rem;
+    }
+
     .passengerGrid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .passengerBtn {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+
+    .modalFooter {
+        gap: 16px;
+    }
+
+    .priceContainer {
+        padding-top: 16px;
+    }
+
+    .priceLabel {
+        font-size: 1rem;
+    }
+
+    .priceValue {
+        font-size: 1.75rem;
+    }
+
+    .continueBtn {
+        padding: 14px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+
+    .contactForm {
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .inputGroup {
+        gap: 4px;
+    }
+
+    .inputLabel {
+        font-size: 0.65rem;
+    }
+
+    .modalInput {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .primaryCta {
+        padding: 14px;
+        font-size: 0.95rem;
+        border-radius: 12px;
+    }
+
+    .secondaryCta {
+        padding: 10px;
+        font-size: 0.8rem;
+        border-radius: 12px;
     }
 
     .secondaryCtas {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 
     .emailCta,
     .callCta {
         grid-column: span 1;
+    }
+
+    .backBtn {
+        font-size: 0.8rem;
+        margin-top: 4px;
     }
 }
 

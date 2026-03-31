@@ -10,7 +10,8 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-:global(.mobile-menu-open) .stickySocials {
+:global(.mobile-menu-open) .stickySocials,
+:global(.modal-open) .stickySocials {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -73,7 +74,8 @@
     text-decoration: none;
 }
 
-:global(.mobile-menu-open) .whatsappFloat {
+:global(.mobile-menu-open) .whatsappFloat,
+:global(.modal-open) .whatsappFloat {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -112,7 +114,8 @@
     pointer-events: auto;
 }
 
-:global(.mobile-menu-open) .scrollToTop {
+:global(.mobile-menu-open) .scrollToTop,
+:global(.modal-open) .scrollToTop {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;

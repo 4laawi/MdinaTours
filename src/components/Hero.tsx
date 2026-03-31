@@ -77,6 +77,15 @@ export default function Hero(props: { imageUrl?: string }) {
     const [flightNumber, setFlightNumber] = useState("");
     const [preciseLocation, setPreciseLocation] = useState("");
 
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => document.body.classList.remove('modal-open');
+    }, [isModalOpen]);
+
     const isAirport = (loc: string) => loc.toLowerCase().includes('airport') || loc.toLowerCase().includes('med');
     const showFlightField = isAirport(pickup) || isAirport(dropoff);
 

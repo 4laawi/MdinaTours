@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -44,6 +44,15 @@ export default function TourGrid() {
     const [address, setAddress] = useState("");
     const [tourLanguage, setTourLanguage] = useState("English");
     const [notes, setNotes] = useState("");
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => document.body.classList.remove('modal-open');
+    }, [isModalOpen]);
 
     // Helper to get localized path
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;

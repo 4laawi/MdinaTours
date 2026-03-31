@@ -117,3 +117,7 @@ button {
   margin-bottom: 0.5rem;
   font-weight: 400;
 }
+/* Lock scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
