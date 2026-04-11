@@ -73,7 +73,7 @@ export default async function LocaleLayout({
         "@context": "https://schema.org",
         "@type": "TravelAgency",
         "name": "ZahriTours",
-        "image": "https://zahritours.com/logo-primary.png",
+        "image": "https://zahritours.com/ZahriTours-Logo.png",
         "description": lang === 'en'
             ? "ZahriTours is a top Morocco travel agency offering desert tours, city trips, and tailor-made adventures. Explore Morocco with our trusted guides."
             : "ZahriTours est une agence de voyage de premier plan au Maroc proposant des circuits dans le désert, des excursions en ville et des aventures sur mesure.",

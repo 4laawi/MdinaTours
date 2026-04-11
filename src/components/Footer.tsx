@@ -39,7 +39,7 @@ export default function Footer() {
                     <div className={styles.logoWrapper}>
                         <Link href={getPath('/')}>
                             <Image
-                                src="/logo-primary.png"
+                                src="/ZahriTours-Logo.png"
                                 alt="ZahriTours Logo"
                                 width={200}
                                 height={60}

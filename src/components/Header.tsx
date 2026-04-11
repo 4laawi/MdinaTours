@@ -61,7 +61,7 @@ export default function Header() {
             <div className={`container ${styles.navInner}`}>
                 <Link href={getPath('/')} className={styles.logo}>
                     <Image
-                        src="/logo-primary.png"
+                        src="/ZahriTours-Logo.png"
                         alt="ZahriTours Logo"
                         width={300}
                         height={100}

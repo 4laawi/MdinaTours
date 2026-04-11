@@ -29,7 +29,7 @@
 
 .logoImage {
     object-fit: contain;
-    height: 85px;
+    height: 65px;
     width: auto;
 }
 
@@ -313,6 +313,6 @@
     }
 
     .logoImage {
-        height: 55px;
+        height: 42px;
     }
 }
