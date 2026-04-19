@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const isEn = lang === 'en';
 
     return {
-        title: isEn ? 'Contact Us – ZahriTours | Private Transfers & Guided Tours Morocco' : 'Contactez-nous – ZahriTours | Transferts Privés & Tours Guidés au Maroc',
+        title: isEn ? 'Contact Us – ZahriTours | Private Transfers & Custom Tours Morocco' : 'Contactez-nous – ZahriTours | Transferts Privés & Circuits sur Mesure au Maroc',
         description: isEn
-            ? 'Get in touch with ZahriTours for private transfers, guided tours, and custom travel arrangements in Morocco. We are here to help you plan your perfect trip.'
-            : 'Contactez ZahriTours pour des transferts privés, des visites guidées et des arrangements de voyage sur mesure au Maroc. Nous sommes là pour vous aider à planifier votre voyage parfait.',
+            ? 'Get in touch with ZahriTours for private transfers, custom tours, and personal travel arrangements in Morocco. We are here to help you plan your perfect trip.'
+            : 'Contactez ZahriTours pour des transferts privés, des circuits sur mesure et des arrangements de voyage au Maroc. Nous sommes là pour vous aider à planifier votre voyage parfait.',
     };
 }
 

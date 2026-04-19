@@ -8,7 +8,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'contact_us': 'CONTACT US',
         'plan_trip': 'Plan Your Trip',
         'hero_title': "Explore Morocco's Breathtaking Landscapes Today",
-        'hero_subtitle': 'Private transfers & guided tours, anywhere in Morocco',
+        'hero_subtitle': 'Private transfers & custom tours, anywhere in Morocco',
         'book_driver': 'Book Your Private Driver',
         'pickup': 'Pickup',
         'dropoff': 'Drop-off',
@@ -91,7 +91,7 @@ export const translations: Record<Language, Record<string, string>> = {
         // Tours Detail
         'tour_1_title': 'Tangier City Tour (2h)',
         'tour_1_duration': '2 hours',
-        'tour_1_desc': 'Discover the highlights of Tangier with a guided city tour including historic landmarks and panoramic viewpoints.',
+        'tour_1_desc': 'Discover the highlights of Tangier with a city tour including historic landmarks and panoramic viewpoints.',
         'tour_2_title': 'Tangier City Tour (4h)',
         'tour_2_duration': '4 hours',
         'tour_2_desc': 'Explore Tangier in depth including the Kasbah, Medina, and scenic coastal views.',
@@ -109,7 +109,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'tour_6_desc': 'Design your own Moroccan adventure! Tell us your preferences and let our experts create a personalized itinerary just for you.',
         // Includes
         'inc_transport': 'Transport',
-        'inc_guide': 'Guide',
+        'inc_guide': 'Optional Guide',
         'inc_custom': 'Custom',
         // FAQ items
         'faq_1_q': '1. How do I book a tour?',
@@ -121,7 +121,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'faq_4_q': '4. Can tours be customized?',
         'faq_4_a': 'Yes, all tours can be tailored to your interests, schedule, and travel style.',
         'faq_5_q': '5. What’s included in the price?',
-        'faq_5_a': 'Most tours include transportation, guiding services, and accommodations. Meals and extras can be arranged on request.',
+        'faq_5_a': 'Our tours include professional transportation. Local guides are available as an optional add-on for a more in-depth experience. Meals and other extras can also be arranged on request.',
         'faq_6_q': '6. Is Morocco safe for travelers?',
         'faq_6_a': 'Yes, Morocco is safe for tourists. We ensure your journey is comfortable, secure, and stress-free.',
         // Activities / Day Trips
@@ -129,11 +129,11 @@ export const translations: Record<Language, Record<string, string>> = {
         'daytrips_title': 'Must-Try Activities in Morocco',
         'daytrips_desc': 'Discover the soul of Morocco through these hand-picked experiences, from desert adventures to culinary delights.',
         'activity_1_title': 'Camel Riding in the Desert',
-        'activity_1_desc': 'Experience the Sahara dunes on camelback with a guided tour.',
+        'activity_1_desc': 'Experience the Sahara dunes on camelback with a private tour.',
         'activity_2_title': 'Quad Biking Adventure',
         'activity_2_desc': 'Explore scenic desert trails and coastal paths with thrilling quad bike rides.',
         'activity_3_title': 'Explore Old Medina',
-        'activity_3_desc': 'Immerse yourself in the vibrant history and culture of Morocco’s ancient Medinas with a guided walking tour.',
+        'activity_3_desc': 'Immerse yourself in the vibrant history and culture of Morocco’s ancient Medinas with a walking tour.',
         'all_activities_btn': 'Plan Your Adventure – Contact Us',
         'day': 'day',
         'days_label': 'days',
@@ -144,11 +144,11 @@ export const translations: Record<Language, Record<string, string>> = {
         'explore_blog': 'Explore Our Stories',
         // Zahri Tours Section
         'zt_title': 'Experience Morocco with Zahri Tours',
-        'zt_quote': '“At Zahri Tours, we are a premier tourism agency dedicated to providing seamless travel experiences. With professional private chauffeurs and bespoke guided tours, we ensure every moment of your journey reflects the authentic beauty and rich heritage of Morocco.”',
+        'zt_quote': '“At Zahri Tours, we are a premier tourism agency dedicated to providing seamless travel experiences. With professional private chauffeurs and bespoke custom tours, we ensure every moment of your journey reflects the authentic beauty and rich heritage of Morocco.”',
         'zt_card_title': 'Join Our Travel Trip',
         'zt_card_subtitle': 'Cultural Experiences You Shouldn’t Miss',
         // Footer
-        'footer_desc': 'ZahriTours is a premium Morocco-based travel agency specializing in authentic desert escapes, private chauffeur services, and guided cultural tours. We bridge the gap between local traditions and luxury travel for unforgettable journeys.',
+        'footer_desc': 'ZahriTours is a premium Morocco-based travel agency specializing in authentic desert escapes, private chauffeur services, and custom cultural tours. We bridge the gap between local traditions and luxury travel for unforgettable journeys.',
         'footer_explore': 'Explore Trips',
         'footer_contact': 'Contact Info',
         'footer_follow': 'Follow Us',
@@ -190,7 +190,7 @@ export const translations: Record<Language, Record<string, string>> = {
         // Contact
         'contact_banner_title': 'Get In Touch With Our Team',
         'contact_help_title': 'How Can We Help You?',
-        'contact_help_desc': "Whether you're looking for a private transfer, a customized guided tour, or just have a question about traveling in Morocco, our team is here to assist you 24/7.",
+        'contact_help_desc': "Whether you're looking for a private transfer, a customized tour, or just have a question about traveling in Morocco, our team is here to assist you 24/7.",
         'contact_info_location': 'Our Location',
         'contact_info_phone': 'Phone Number',
         'contact_info_email': 'Email Address',
@@ -208,7 +208,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'contact_form_error': 'An error occurred while sending your message. Please try again later.',
         // SEO
         'seo_title': 'ZahriTours – Best Morocco Tours & Trips',
-        'seo_desc': 'ZahriTours is a top Morocco travel agency offering desert tours, city trips, and tailor-made adventures. Explore Morocco with our trusted guides.',
+        'seo_desc': 'ZahriTours is a top Morocco travel agency offering desert tours, city trips, and tailor-made adventures. Explore Morocco with our trusted team.',
     },
     fr: {
         'home': 'ACCUEIL',
@@ -217,7 +217,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'contact_us': 'CONTACTEZ-NOUS',
         'plan_trip': 'Planifiez Votre Voyage',
         'hero_title': "Explorez les Paysages Époustouflants du Maroc Dès Aujourd'hui",
-        'hero_subtitle': 'Transferts privés et visites guidées, partout au Maroc',
+        'hero_subtitle': 'Transferts privés et circuits sur mesure, partout au Maroc',
         'book_driver': 'Réservez Votre Chauffeur Privé',
         'pickup': 'Départ',
         'dropoff': 'Arrivée',
@@ -300,7 +300,7 @@ export const translations: Record<Language, Record<string, string>> = {
         // Tours Detail
         'tour_1_title': 'Visite de Tanger (2h)',
         'tour_1_duration': '2 heures',
-        'tour_1_desc': 'Découvrez les points forts de Tanger avec une visite guidée de la ville comprenant des monuments historiques et des points de vue panoramiques.',
+        'tour_1_desc': 'Découvrez les points forts de Tanger avec une visite de la ville comprenant des monuments historiques et des points de vue panoramiques.',
         'tour_2_title': 'Visite de Tanger (4h)',
         'tour_2_duration': '4 heures',
         'tour_2_desc': 'Explorez Tanger en profondeur, y compris la Kasbah, la Médina et les vues côtières pittoresques.',
@@ -318,7 +318,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'tour_6_desc': 'Créez votre propre aventure marocaine ! Dites-nous vos préférences et laissez nos experts créer un itinéraire personnalisé juste pour vous.',
         // Includes
         'inc_transport': 'Transport',
-        'inc_guide': 'Guide',
+        'inc_guide': 'Guide Optionnel',
         'inc_custom': 'Personnalisé',
         // FAQ items
         'faq_1_q': '1. Comment réserver un tour ?',
@@ -330,7 +330,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'faq_4_q': '4. Les tours peuvent-ils être personnalisés ?',
         'faq_4_a': 'Oui, tous les tours peuvent être adaptés à vos intérêts, votre emploi du temps et votre style de voyage.',
         'faq_5_q': '5. Qu\'est-ce qui est inclus dans le prix ?',
-        'faq_5_a': 'La plupart des tours incluent le transport, les services de guidage et l\'hébergement. Les repas et les extras peuvent être organisés sur demande.',
+        'faq_5_a': 'Nos tours incluent un transport professionnel. Des guides locaux sont disponibles en option pour une expérience plus approfondie. Les repas et autres extras peuvent également être organisés sur demande.',
         'faq_6_q': '6. Le Maroc est-il sûr pour les voyageurs ?',
         'faq_6_a': 'Oui, le Maroc est sûr pour les touristes. Nous veillons à ce que votre voyage soit confortable, sûr et sans stress.',
         // Activities / Day Trips
@@ -338,11 +338,11 @@ export const translations: Record<Language, Record<string, string>> = {
         'daytrips_title': 'Activités incontournables au Maroc',
         'daytrips_desc': 'Découvrez l\'âme du Maroc à travers ces expériences triées sur le volet, des aventures dans le désert aux délices culinaires.',
         'activity_1_title': 'Balade à dos de chameau',
-        'activity_1_desc': 'Découvrez les dunes du Sahara à dos de chameau avec une visite guidée.',
+        'activity_1_desc': 'Découvrez les dunes du Sahara à dos de chameau avec une visite privée.',
         'activity_2_title': 'Aventure en Quad',
         'activity_2_desc': 'Explorez les sentiers du désert et les sentiers côtiers lors d\'une randonnée palpitante.',
         'activity_3_title': 'Explorez la Vieille Médina',
-        'activity_3_desc': 'Plongez dans l’histoire et la culture vibrantes des anciennes médinas du Maroc avec une visite guidée à pied.',
+        'activity_3_desc': 'Plongez dans l’histoire et la culture vibrantes des anciennes médinas du Maroc avec une visite à pied.',
         'all_activities_btn': 'Planifiez votre aventure – Contactez-nous',
         'day': 'jour',
         'days_label': 'jours',
@@ -353,11 +353,11 @@ export const translations: Record<Language, Record<string, string>> = {
         'explore_blog': 'Découvrez Nos Récits',
         // Zahri Tours Section
         'zt_title': 'Découvrez le Maroc avec Zahri Tours',
-        'zt_quote': '“Chez Zahri Tours, nous sommes une agence de tourisme de premier plan dédiée à offrir des expériences de voyage fluides. Avec des chauffeurs privés professionnels et des tours guidés sur mesure, nous veillons à ce que chaque moment de votre voyage reflète la beauté authentique et le riche patrimoine du Maroc.”',
+        'zt_quote': '“Chez Zahri Tours, nous sommes une agence de tourisme de premier plan dédiée à offrir des expériences de voyage fluides. Avec des chauffeurs privés professionnels et des circuits sur mesure, nous veillons à ce que chaque moment de votre voyage reflète la beauté authentique et le riche patrimoine du Maroc.”',
         'zt_card_title': 'Rejoignez nos voyages',
         'zt_card_subtitle': 'Des expériences culturelles à ne pas manquer',
         // Footer
-        'footer_desc': 'ZahriTours est une agence de voyage premium basée au Maroc, spécialisée dans les escapades authentiques dans le désert, les services de chauffeur privé et les circuits culturels guidés. Nous comblons le fossé entre les traditions locales et les voyages de luxe pour des voyages inoubliables.',
+        'footer_desc': 'ZahriTours est une agence de voyage premium basée au Maroc, spécialisée dans les escapades authentiques dans le désert, les services de chauffeur privé et les circuits culturels sur mesure. Nous comblons le fossé entre les traditions locales et les voyages de luxe pour des voyages inoubliables.',
         'footer_explore': 'Explorer les voyages',
         'footer_contact': 'Coordonnées',
         'footer_follow': 'Suivez-nous',
@@ -399,7 +399,7 @@ export const translations: Record<Language, Record<string, string>> = {
         // Contact
         'contact_banner_title': 'Contactez notre équipe',
         'contact_help_title': 'Comment pouvons-nous vous aider ?',
-        'contact_help_desc': 'Que vous recherchiez un transfert privé, une visite guidée personnalisée ou que vous ayez simplement une question sur un voyage au Maroc, notre équipe est là pour vous aider 24/7.',
+        'contact_help_desc': 'Que vous recherchiez un transfert privé, un circuit personnalisé ou que vous ayez simplement une question sur un voyage au Maroc, notre équipe est là pour vous aider 24/7.',
         'contact_info_location': 'Notre emplacement',
         'contact_info_phone': 'Numéro de téléphone',
         'contact_info_email': 'Adresse e-mail',
@@ -417,6 +417,6 @@ export const translations: Record<Language, Record<string, string>> = {
         'contact_form_error': 'Une erreur s\'est produite lors de l\'envoi de votre message. Veuillez réessayer plus tard.',
         // SEO
         'seo_title': 'ZahriTours – Meilleures Visites et Voyages au Maroc',
-        'seo_desc': 'ZahriTours est une agence de voyage de premier plan au Maroc proposant des circuits dans le désert, des excursions en ville et des aventures sur mesure. Explorez le Maroc avec nos guides de confiance.',
+        'seo_desc': 'ZahriTours est une agence de voyage de premier plan au Maroc proposant des circuits dans le désert, des excursions en ville et des aventures sur mesure. Explorez le Maroc avec notre équipe de confiance.',
     }
 };
