@@ -63,7 +63,7 @@ const ZahriToursSection = () => {
                         <div className={styles.topSideImage}>
                             <div className={styles.imageWrapper}>
                                 <Image
-                                    src="/Tangier-Morocco-Photo.webp"
+                                    src="/veto.webp"
                                     alt="Travelers in Morocco"
                                     fill
                                     className={styles.gridImage}
