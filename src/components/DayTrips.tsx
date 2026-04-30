@@ -19,7 +19,7 @@ export default function DayTrips() {
             duration: '2-3 Hours',
             rating: 5.0,
             reviews: 148,
-            price: '25.00',
+            price: '30.00',
             badge: 'Most Popular'
         },
         {
@@ -30,7 +30,7 @@ export default function DayTrips() {
             duration: '2 Hours',
             rating: 4.9,
             reviews: 96,
-            price: '45.00',
+            price: '54.00',
             badge: 'Top Choice'
         },
         {
@@ -41,7 +41,7 @@ export default function DayTrips() {
             duration: '2-4 Hours',
             rating: 5.0,
             reviews: 84,
-            price: '30.00',
+            price: '36.00',
             badge: 'Cultural Heritage'
         }
     ];
