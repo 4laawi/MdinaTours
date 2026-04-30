@@ -39,19 +39,19 @@ const setPricing = (loc1: string, loc2: string, prices: Prices) => {
 };
 
 // Local Tangier transfers
-setPricing("Tangier Airport", "Tangier City Center", { 3: 26, 4: 28, 5: 31, 7: 78 });
-setPricing("Tangier Airport", "Hilton Houara", { 3: 34, 4: 38, 5: 42, 7: 84 });
-setPricing("Tangier Airport", "Mnar Zone", { 3: 32, 4: 40, 5: 48, 7: 96 });
-setPricing("Tangier Med", "Tangier City Center", { 3: 90, 4: 96, 5: 144, 7: 216 });
+setPricing("Tangier Airport", "Tangier City Center", { 3: 27.5, 4: 28.75, 5: 32.5, 7: 81.25 });
+setPricing("Tangier Airport", "Hilton Houara", { 3: 35, 4: 40, 5: 43.75, 7: 87.5 });
+setPricing("Tangier Airport", "Mnar Zone", { 3: 33.75, 4: 41.25, 5: 50, 7: 100 });
+setPricing("Tangier Med", "Tangier City Center", { 3: 93.75, 4: 100, 5: 150, 7: 225 });
 
 // Intercity transfers (from Tangier to other destinations)
 const longDistanceDestinations = [
-    { dest: "Tetouan", prices: { 3: 96, 4: 120, 5: 144, 7: 240 } },
-    { dest: "Chefchaouen", prices: { 3: 120, 4: 144, 5: 180, 7: 300 } },
-    { dest: "Rabat", prices: { 3: 264, 4: 288, 5: 312, 7: 420 } },
-    { dest: "Casablanca", prices: { 3: 360, 4: 384, 5: 408, 7: 480 } },
-    { dest: "Fes", prices: { 3: 408, 4: 432, 5: 456, 7: 576 } },
-    { dest: "Marrakech", prices: { 3: 600, 4: 624, 5: 696, 7: 744 } }
+    { dest: "Tetouan", prices: { 3: 100, 4: 125, 5: 150, 7: 250 } },
+    { dest: "Chefchaouen", prices: { 3: 125, 4: 150, 5: 187.5, 7: 312.5 } },
+    { dest: "Rabat", prices: { 3: 275, 4: 300, 5: 325, 7: 437.5 } },
+    { dest: "Casablanca", prices: { 3: 375, 4: 400, 5: 425, 7: 500 } },
+    { dest: "Fes", prices: { 3: 425, 4: 450, 5: 475, 7: 600 } },
+    { dest: "Marrakech", prices: { 3: 625, 4: 650, 5: 725, 7: 775 } }
 ];
 
 // Treat "Tangier" base prices identically for Airport and City Center

@@ -7,11 +7,11 @@ import { useLanguage } from '@/context/LanguageContext';
 import styles from './TourGrid.module.css';
 
 const TOUR_PRICING: Record<string, Record<string, number>> = {
-    'Tangier City Tour (2h)': { '1–3': 72, '4–5': 102, '6–7': 132 },
-    'Tangier City Tour (4h)': { '1–3': 108, '4–5': 132, '6–7': 156 },
-    'Asilah Tour': { '1–3': 120, '4–5': 144, '6–7': 168 },
-    'Tetouan Tour': { '1–3': 144, '4–5': 168, '6–7': 192 },
-    'Chefchaouen Tour': { '1–3': 216, '4–5': 264, '6–7': 300 }
+    'Tangier City Tour (2h)': { '1–3': 75, '4–5': 106.25, '6–7': 137.5 },
+    'Tangier City Tour (4h)': { '1–3': 112.5, '4–5': 137.5, '6–7': 162.5 },
+    'Asilah Tour': { '1–3': 125, '4–5': 150, '6–7': 175 },
+    'Tetouan Tour': { '1–3': 150, '4–5': 175, '6–7': 200 },
+    'Chefchaouen Tour': { '1–3': 225, '4–5': 275, '6–7': 312.5 }
 };
 
 const PASSENGER_OPTIONS = ['1–3', '4–5', '6–7'];
@@ -63,7 +63,7 @@ export default function TourGrid() {
             title: t('tour_1_title'),
             originalTitle: 'Tangier City Tour (2h)',
             duration: t('tour_1_duration'),
-            startingPrice: '72',
+            startingPrice: '75',
             rating: 5.0,
             reviews: 124,
             description: t('tour_1_desc'),
@@ -75,7 +75,7 @@ export default function TourGrid() {
             title: t('tour_2_title'),
             originalTitle: 'Tangier City Tour (4h)',
             duration: t('tour_2_duration'),
-            startingPrice: '108',
+            startingPrice: '112.5',
             rating: 4.8,
             reviews: 92,
             description: t('tour_2_desc'),
@@ -87,7 +87,7 @@ export default function TourGrid() {
             title: t('tour_3_title'),
             originalTitle: 'Asilah Tour',
             duration: t('tour_3_duration'),
-            startingPrice: '120',
+            startingPrice: '125',
             rating: 5.0,
             reviews: 78,
             description: t('tour_3_desc'),
@@ -99,7 +99,7 @@ export default function TourGrid() {
             title: t('tour_4_title'),
             originalTitle: 'Tetouan Tour',
             duration: t('tour_4_duration'),
-            startingPrice: '144',
+            startingPrice: '150',
             rating: 4.7,
             reviews: 64,
             description: t('tour_4_desc'),
@@ -111,7 +111,7 @@ export default function TourGrid() {
             title: t('tour_5_title'),
             originalTitle: 'Chefchaouen Tour',
             duration: t('tour_5_duration'),
-            startingPrice: '216',
+            startingPrice: '225',
             rating: 5.0,
             reviews: 156,
             description: t('tour_5_desc'),
