@@ -7,11 +7,11 @@ import { useLanguage } from '@/context/LanguageContext';
 import styles from './TourGrid.module.css';
 
 const TOUR_PRICING: Record<string, Record<string, number>> = {
-    'Tangier City Tour (2h)': { '1–3': 75, '4–5': 106.25, '6–7': 137.5 },
-    'Tangier City Tour (4h)': { '1–3': 112.5, '4–5': 137.5, '6–7': 162.5 },
+    'Tangier City Tour (2h)': { '1–3': 75, '4–5': 106, '6–7': 137 },
+    'Tangier City Tour (4h)': { '1–3': 112, '4–5': 137, '6–7': 162 },
     'Asilah Tour': { '1–3': 125, '4–5': 150, '6–7': 175 },
     'Tetouan Tour': { '1–3': 150, '4–5': 175, '6–7': 200 },
-    'Chefchaouen Tour': { '1–3': 225, '4–5': 275, '6–7': 312.5 }
+    'Chefchaouen Tour': { '1–3': 225, '4–5': 275, '6–7': 312 }
 };
 
 const PASSENGER_OPTIONS = ['1–3', '4–5', '6–7'];
@@ -75,7 +75,7 @@ export default function TourGrid() {
             title: t('tour_2_title'),
             originalTitle: 'Tangier City Tour (4h)',
             duration: t('tour_2_duration'),
-            startingPrice: '112.5',
+            startingPrice: '112',
             rating: 4.8,
             reviews: 92,
             description: t('tour_2_desc'),
