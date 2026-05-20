@@ -193,6 +193,10 @@ export default function Hero(props: { imageUrl?: string }) {
                 if (index === currentImageIndex) statusClass = styles.active;
                 else if (index === prevImageIndex) statusClass = styles.prev;
 
+                // Only the first image is priority (LCP candidate).
+                // All others are lazy-loaded to avoid wasting bandwidth on slideshow images.
+                const isFirst = index === 0;
+
                 return (
                     <div key={src} className={`${styles.bgImageContainer} ${statusClass}`}>
                         <Image
@@ -200,12 +204,14 @@ export default function Hero(props: { imageUrl?: string }) {
                             alt="ZahriTours Background"
                             fill
                             className={styles.heroBg}
-                            priority={index === currentImageIndex || index === nextImageIndex}
+                            priority={isFirst}
+                            loading={isFirst ? undefined : 'lazy'}
                             sizes="100vw"
                         />
                     </div>
                 );
             })}
+
 
             <div className={styles.overlay} />
 

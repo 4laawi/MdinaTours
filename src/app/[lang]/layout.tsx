@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import SEOMetadata from '@/components/SEOMetadata';
+import ReactDOM from 'react-dom';
 
 const poppins = Poppins({
     weight: ['400', '500', '600', '700'],
@@ -85,6 +86,12 @@ export default async function LocaleLayout({
             "addressCountry": "MA"
         }
     };
+
+    // Preconnect to Google Fonts origin to reduce font load latency
+    ReactDOM.preconnect('https://fonts.googleapis.com');
+    ReactDOM.preconnect('https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
+    // Preload the hero image (LCP candidate) for both locales
+    ReactDOM.preload('/hero-marrakech.webp', { as: 'image', fetchPriority: 'high' });
 
     return (
         <html lang={lang} className={`${poppins.variable}`}>

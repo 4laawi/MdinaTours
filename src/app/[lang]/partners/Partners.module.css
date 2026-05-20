@@ -890,6 +890,8 @@
     .problemImageCol {
         background-image: url('/Traditional-low.webp');
         height: 320px;
+        /* Warm sand placeholder — shown immediately while the webp loads */
+        background-color: #c9b49a;
     }
     
     .imageFadeOverlay {

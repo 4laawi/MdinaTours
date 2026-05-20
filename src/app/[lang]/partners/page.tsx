@@ -1,11 +1,15 @@
+import dynamic from 'next/dynamic';
+import ReactDOM from 'react-dom';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import FloatingElements from '@/components/FloatingElements';
 import styles from './Partners.module.css';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import PartnersForm from './PartnersForm';
 import { translations, Language } from '@/lib/translations';
+
+// Lazy-load heavy below-fold client components
+const PartnersForm = dynamic(() => import('./PartnersForm'));
+const Footer = dynamic(() => import('@/components/Footer'));
+const FloatingElements = dynamic(() => import('@/components/FloatingElements'));
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -31,6 +35,10 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
 
     // Helper to get localized path
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+
+    // Preload critical mobile background image via React DOM resource hint
+    // (works correctly with Next.js streaming SSR unlike raw <link>)
+    ReactDOM.preload('/Traditional-low.webp', { as: 'image', media: '(max-width: 768px)' });
 
     return (
         <>
