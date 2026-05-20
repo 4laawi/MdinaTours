@@ -75,6 +75,9 @@ export default function Footer() {
                         <li>
                             <Link href={getPath('/blog')}>{t('footer_blog')}</Link>
                         </li>
+                        <li>
+                            <Link href={getPath('/partners')}>{t('partners')}</Link>
+                        </li>
                     </ul>
                 </div>
 

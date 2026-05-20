@@ -74,6 +74,12 @@
     text-decoration: none;
 }
 
+.whatsappFloat.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 :global(.mobile-menu-open) .whatsappFloat,
 :global(.modal-open) .whatsappFloat {
     opacity: 0;

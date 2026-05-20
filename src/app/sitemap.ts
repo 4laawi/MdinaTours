@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://zahritours.com';
     const locales = ['en', 'fr'];
 
-    const staticRoutes = ['', '/contact', '/blog'];
+    const staticRoutes = ['', '/contact', '/blog', '/partners'];
 
     const blogSlugs = [
         'tangier-city-stories',

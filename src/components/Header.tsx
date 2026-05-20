@@ -85,6 +85,12 @@ export default function Header() {
                         {t('blog')}
                     </Link>
                     <Link
+                        href={getPath('/partners')}
+                        className={`${styles.navLink} ${isActive('/partners') ? styles.active : ''}`}
+                    >
+                        {t('partners')}
+                    </Link>
+                    <Link
                         href={getPath('/contact')}
                         className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
                     >
@@ -128,6 +134,13 @@ export default function Header() {
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {t('blog')}
+                        </Link>
+                        <Link
+                            href={getPath('/partners')}
+                            className={`${styles.mobileNavLink} ${isActive('/partners') ? styles.mobileActive : ''}`}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {t('partners')}
                         </Link>
                         <Link
                             href={getPath('/contact')}

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans:400,400i,500,500i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
 
 @font-face {
   font-family: 'Aeonik';
@@ -121,3 +123,248 @@ button {
 body.modal-open {
   overflow: hidden;
 }
+
+/* B2B partnerships Hero Section */
+:root { 
+    --orange: #e87e04; 
+    --cream: #f5f0e8; 
+    --text: #2c2c2c; 
+    --purple: #2a2438;
+} 
+
+.section-7qd { 
+    position: relative; 
+    background: #2a2438; 
+    overflow: hidden;
+} 
+
+.section-29r { 
+    min-height: 65vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 100px 40px;
+} 
+
+.overlay-6rk  { 
+    position: absolute; 
+    inset: 0; 
+    background: radial-gradient(ellipse 80% 60% at 50% 40%,rgba(232,126,4,.04) 0,transparent 70%); 
+    pointer-events: none;
+} 
+
+.purple-kd4  { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    height: 40%; 
+    pointer-events: none; 
+    z-index: 1; 
+    opacity: .22;
+} 
+
+.purple-kd4 svg  { 
+    width: 100%; 
+    height: 100%;
+} 
+
+.content-ebw { 
+    text-align: center; 
+    max-width: 900px; 
+    position: relative; 
+    z-index: 10;
+} 
+
+.icon-vfo { 
+    width: 80px; 
+    height: 80px; 
+    margin: 0 auto 40px; 
+    opacity: 0; 
+    animation: 1s .2s forwards fadeIn;
+} 
+
+.icon-vfo svg  { 
+    width: 100%; 
+    height: 100%;
+} 
+
+.row-qwy { 
+    font-size: 11px; 
+    font-weight: 600; 
+    letter-spacing: 5px; 
+    text-transform: uppercase; 
+    color: var(--orange); 
+    margin-bottom: 25px; 
+    opacity: 0; 
+    animation: 1s .4s forwards fadeIn;
+} 
+
+.title-gla { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(2.25rem, 7vw, 5.5rem); 
+    font-weight: 300; 
+    line-height: 1.05; 
+    letter-spacing: -.02em; 
+    margin-bottom: 30px; 
+    color: #fff; 
+    opacity: 0; 
+    animation: 1s .6s forwards fadeIn;
+} 
+
+.title-gla em  { 
+    font-style: italic; 
+    color: var(--orange);
+} 
+
+.subtitle-ktg { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(1.1rem, 2vw, 1.4rem); 
+    font-style: italic; 
+    color: rgba(255,255,255,.6); 
+    max-width: 650px; 
+    margin: 0 auto 50px; 
+    line-height: 1.9; 
+    opacity: 0; 
+    animation: 1s .8s forwards fadeIn;
+} 
+
+.hero-cta-ixn { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+    opacity: 0; 
+    animation: 1s 1s forwards fadeIn;
+} 
+
+.cta-ovi { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 20px 45px; 
+    background: var(--orange); 
+    color: #fff; 
+    font-size: 11px; 
+    font-weight: 600; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-decoration: none; 
+    transition: all .4s ease;
+} 
+
+.cta-ovi svg  { 
+    width: 14px; 
+    height: 14px; 
+    stroke: currentColor; 
+    fill: none; 
+    stroke-width: 2; 
+    transition: transform .3s ease;
+} 
+
+.cta-ovi:hover { 
+    background: #fff; 
+    color: var(--purple); 
+    transform: translateY(-3px); 
+    box-shadow: 0 20px 50px rgba(232,126,4,.4);
+} 
+
+.cta-ovi:hover svg {
+    transform: translateX(4px);
+}
+
+.gen-lwi-tz6 { 
+    box-shadow: none; 
+    text-decoration: none;
+} 
+
+.cta-qoz { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 18px 40px; 
+    background: 0 0; 
+    color: rgba(255,255,255,.7); 
+    border: 1px solid rgba(232,126,4,.35); 
+    font-size: 11px; 
+    font-weight: 600; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-decoration: none; 
+    transition: all .3s ease;
+} 
+
+.cta-qoz:hover { 
+    border-color: var(--orange); 
+    color: #fff; 
+    background: rgba(232,126,4,.1);
+} 
+
+@keyframes fadeIn { 
+  0% {  
+      opacity: 0; 
+      transform: translateY(20px); 
+  }  
+  100% {  
+      opacity: 1; 
+      transform: translateY(0); 
+  }  
+}
+
+.gen-tCU-split-illu { 
+    width: 100%; 
+    height: 100%;
+}
+
+.gen-3of-split-illu { 
+    width: 100%; 
+    height: 100%;
+}
+
+/* Mobile adjustments for B2B partnerships Hero */
+@media (max-width: 768px) {
+    .section-29r {
+        padding: 80px 20px;
+        min-height: auto;
+    }
+    
+    .icon-vfo {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 25px;
+    }
+    
+    .row-qwy {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+    }
+    
+    .subtitle-ktg {
+        margin-bottom: 35px;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-cta-ixn {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        gap: 12px;
+    }
+    
+    .cta-ovi,
+    .cta-qoz {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+        font-size: 10px;
+    }
+}
+
+
+
