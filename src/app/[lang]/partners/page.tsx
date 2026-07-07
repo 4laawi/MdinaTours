@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import ReactDOM from 'react-dom';
 import Header from '@/components/Header';
 import styles from './Partners.module.css';
-import Link from 'next/link';
 import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 
@@ -11,37 +10,95 @@ const PartnersForm = dynamic(() => import('./PartnersForm'));
 const Footer = dynamic(() => import('@/components/Footer'));
 const FloatingElements = dynamic(() => import('@/components/FloatingElements'));
 
+export async function generateStaticParams() {
+    return [{ lang: 'en' }, { lang: 'fr' }];
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const isEn = lang === 'en';
 
+    const title = isEn 
+        ? 'Morocco Local Travel Partner for Hotels & Agencies – Mdina Tours' 
+        : 'Partenaire Voyage & Transport local au Maroc – Mdina Tours';
+    const description = isEn
+        ? 'Offer your guests reliable private transfers, custom day trips, expert guides, and premium transport across Morocco. Join our local partner program.'
+        : 'Offrez à vos clients des transferts privés fiables, des excursions sur mesure, des guides locaux et un transport haut de gamme au Maroc. Rejoignez notre programme.';
+    const url = `https://mdinatours.com/${lang}/partners`;
+
     return {
-        title: isEn 
-            ? 'Morocco Local Travel Partner for Hotels & Agencies – ZahriTours' 
-            : 'Partenaire Voyage & Transport local au Maroc – ZahriTours',
-        description: isEn
-            ? 'Offer your guests reliable private transfers, custom day trips, expert guides, and premium transport across Morocco. Join our local partner program.'
-            : 'Offrez à vos clients des transferts privés fiables, des excursions sur mesure, des guides locaux et un transport haut de gamme au Maroc. Rejoignez notre programme.',
+        title,
+        description,
+        alternates: {
+            canonical: url,
+            languages: {
+                'en': 'https://mdinatours.com/en/partners',
+                'fr': 'https://mdinatours.com/fr/partners',
+            },
+        },
+        openGraph: {
+            title,
+            description,
+            url,
+            siteName: 'Mdina Tours',
+            images: [
+                {
+                    url: 'https://mdinatours.com/Traditional-low.webp',
+                    width: 1200,
+                    height: 630,
+                    alt: 'Partners Mdina Tours',
+                },
+            ],
+            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: ['https://mdinatours.com/Traditional-low.webp'],
+        },
     };
 }
 
 export default async function PartnersPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     const language = (lang as Language) || 'en';
+    const isEn = language === 'en';
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
         return langSection[key] || key;
     };
 
-    // Helper to get localized path
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
-
     // Preload critical mobile background image via React DOM resource hint
     // (works correctly with Next.js streaming SSR unlike raw <link>)
     ReactDOM.preload('/Traditional-low.webp', { as: 'image', media: '(max-width: 768px)' });
 
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Partners" : "Partenaires",
+                "item": `https://mdinatours.com/${language}/partners`
+            }
+        ]
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
             <Header />
             <main>
                 {/* B2B Partnerships Hero Banner */}
@@ -300,7 +357,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
                     </div>
                 </section>
             </main>
-            <Footer />
+            <Footer lang={language} />
             <FloatingElements hideWhatsappUntilScroll={true} />
         </>
     );

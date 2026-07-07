@@ -2,26 +2,65 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import styles from './Contact.module.css';
+import PageBanner from '@/components/PageBanner';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import ContactForm from './ContactForm';
 import { translations, Language } from '@/lib/translations';
 
+export async function generateStaticParams() {
+    return [{ lang: 'en' }, { lang: 'fr' }];
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const isEn = lang === 'en';
 
+    const title = isEn ? 'Contact Us – Mdina Tours | Private Transfers & Custom Tours Morocco' : 'Contactez-nous – Mdina Tours | Transferts Privés & Circuits sur Mesure au Maroc';
+    const description = isEn
+        ? 'Get in touch with Mdina Tours for private transfers, custom tours, and personal travel arrangements in Morocco. We are here to help you plan your perfect trip.'
+        : 'Contactez Mdina Tours pour des transferts privés, des circuits sur mesure et des arrangements de voyage au Maroc. Nous sommes là pour vous aider à planifier votre voyage parfait.';
+    const url = `https://mdinatours.com/${lang}/contact`;
+
     return {
-        title: isEn ? 'Contact Us – ZahriTours | Private Transfers & Custom Tours Morocco' : 'Contactez-nous – ZahriTours | Transferts Privés & Circuits sur Mesure au Maroc',
-        description: isEn
-            ? 'Get in touch with ZahriTours for private transfers, custom tours, and personal travel arrangements in Morocco. We are here to help you plan your perfect trip.'
-            : 'Contactez ZahriTours pour des transferts privés, des circuits sur mesure et des arrangements de voyage au Maroc. Nous sommes là pour vous aider à planifier votre voyage parfait.',
+        title,
+        description,
+        alternates: {
+            canonical: url,
+            languages: {
+                'en': 'https://mdinatours.com/en/contact',
+                'fr': 'https://mdinatours.com/fr/contact',
+            },
+        },
+        openGraph: {
+            title,
+            description,
+            url,
+            siteName: 'Mdina Tours',
+            images: [
+                {
+                    url: 'https://mdinatours.com/hero-landscape-2.webp',
+                    width: 1200,
+                    height: 630,
+                    alt: 'Contact Mdina Tours',
+                },
+            ],
+            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: ['https://mdinatours.com/hero-landscape-2.webp'],
+        },
     };
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     const language = (lang as Language) || 'en';
+    const isEn = language === 'en';
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
         return langSection[key] || key;
@@ -30,39 +69,41 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     // Helper to get localized path
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Contact" : "Contact",
+                "item": `https://mdinatours.com/${language}/contact`
+            }
+        ]
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
             <Header />
             <main>
                 {/* Contact semi-hero banner */}
-                <section
-                    className={styles.contactBanner}
-                    style={{ backgroundImage: `url('/hero-landscape-2.webp')` }}
-                >
-                    <div className={styles.overlay}></div>
-                    <div className={styles.container}>
-                        <div className={styles.column} style={{ maxWidth: '100%', flex: '1 1 auto' }}>
-                            <div className={styles.contentWrapper}>
-                                <div className={styles.breadcrumbWrapper}>
-                                    <ul className={styles.breadcrumbList}>
-                                        <li className={styles.breadcrumbItem}>
-                                            <Link href={getPath('/')} className={styles.breadcrumbLink}>{t('home')}</Link>
-                                        </li>
-                                        <li className={styles.breadcrumbItem}>
-                                            <span className={styles.breadcrumbIcon}>
-                                                <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
-                                                </svg>
-                                            </span>
-                                            <span>{t('contact')}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h1 className={styles.title}>{t('contact_banner_title')}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <PageBanner 
+                    title={t('contact_banner_title')}
+                    bgImage="/img/Morocco-trip-tour-hero08.webp"
+                    homeLabel={t('home')}
+                    homeLink={getPath('/')}
+                    currentLabel={t('contact')}
+                />
 
                 {/* Contact content section */}
                 <section className={styles.contactContent}>
@@ -82,14 +123,14 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                                         </div>
                                         <div className={styles.infoText}>
                                             <h4>{t('contact_info_location')}</h4>
-                                            <p>Lot Jamila 33, Tangier, Tangier 90000</p>
+                                            <p>Avenue Mohammed V, Rabat, Morocco 10000</p>
                                         </div>
                                     </div>
 
                                     <div className={styles.infoItem}>
                                         <div className={styles.iconWrapper}>
                                             <svg viewBox="0 0 512 512" fill="currentColor">
-                                                <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A178.66 178.66 0 0 1 130.4 203.1l60.6-49.6a24 24 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6 0H24 A24 24 0 0 0 0 24c0 269.56 218.44 488 488 488a24 24 0 0 0 24-24v-98.6a24.16 24.16 0 0 0-14.61-22.6z" />
+                                                <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A178.66 178.66 0 0 1 130.4 203.1l60.6-49.6a24 24 0 0 0 6.9-28l-48-112a24.16 24.16 0 0 0 122.6 0H24 A24 24 0 0 0 0 24c0 269.56 218.44 488 488 488a24 24 0 0 0 24-24v-98.6a24.16 24.16 0 0 0-14.61-22.6z" />
                                             </svg>
                                         </div>
                                         <div className={styles.infoText}>
@@ -106,7 +147,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                                         </div>
                                         <div className={styles.infoText}>
                                             <h4>{t('contact_info_email')}</h4>
-                                            <p>booking@tiqalgs.com</p>
+                                            <p>booking@mdinatours.com</p>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +161,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                     </div>
                 </section>
             </main>
-            <Footer />
+            <Footer lang={language} />
             <FloatingElements />
         </>
     );

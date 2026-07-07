@@ -65,6 +65,7 @@
     align-items: center;
     color: #FFFFFF;
     font-size: 14px;
+    gap: 8px;
 }
 
 .breadcrumbLink {
@@ -84,6 +85,13 @@
     height: 12px;
     fill: #FFFFFF;
 }
+
+.breadcrumbIcon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 
 .title {
     font-size: 48px;
@@ -210,5 +218,163 @@
 
     .blogContent {
         padding: 60px 0;
+    }
+}
+
+/* Morocco Visual Gallery styles */
+.gallerySection {
+    padding: 100px 0;
+    background-color: #f7f3ed;
+    border-top: 1px solid #ebdccb;
+}
+
+.galleryHeader {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.galleryTitle {
+    font-size: 36px;
+    font-weight: 800;
+    color: #202f59;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 12px;
+}
+
+.galleryTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #dc834e;
+    border-radius: 2px;
+}
+
+.gallerySubtitle {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.galleryItem {
+    position: relative;
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.galleryImage {
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.galleryOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 70%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.galleryTag {
+    align-self: flex-start;
+    background: #dc834e;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.galleryText {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Hover effects */
+.galleryItem:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(32, 47, 89, 0.15);
+}
+
+.galleryItem:hover .galleryImage {
+    transform: scale(1.08);
+}
+
+.galleryItem:hover .galleryOverlay {
+    opacity: 1;
+}
+
+@media (max-width: 1200px) {
+    .galleryGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallerySection {
+        padding: 60px 0;
+    }
+    
+    .galleryTitle {
+        font-size: 28px;
+    }
+    
+    .galleryGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .galleryItem {
+        height: 220px;
+    }
+    
+    .galleryOverlay {
+        opacity: 1;
+        padding: 12px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 80%, transparent 100%);
+    }
+    
+    .galleryText {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .galleryGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .galleryItem {
+        height: 260px;
     }
 }

@@ -279,3 +279,324 @@
         font-size: 2rem;
     }
 }
+
+/* Programmatic SEO Element Styles */
+.toc {
+    background: #fdfaf6;
+    border: 1px solid #ebdccb;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+.toc h3 {
+    font-size: 1.25rem;
+    color: #202f59;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.tocList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.tocList li a {
+    color: #bc8246;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    font-size: 0.95rem;
+}
+
+.tocList li a:hover {
+    color: #202f59;
+}
+
+.sectionTitle {
+    font-size: 1.75rem;
+    color: #202f59;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid #f0e6df;
+    padding-bottom: 10px;
+}
+
+.sectionContent {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+.sectionContent p {
+    margin-bottom: 15px;
+}
+
+.sectionContent strong {
+    color: #222;
+}
+
+.comparisonTableWrapper {
+    overflow-x: auto;
+    margin: 30px 0;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+}
+
+.comparisonTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.comparisonTable th {
+    background-color: #202f59;
+    color: white;
+    padding: 14px 18px;
+    font-weight: 600;
+}
+
+.comparisonTable td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.comparisonTable tr:last-child td {
+    border-bottom: none;
+}
+
+.comparisonTable tr:nth-child(even) {
+    background-color: #fbf9f6;
+}
+
+.bulletList {
+    margin: 25px 0;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.bulletList li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.bulletList li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #dc834e;
+    font-weight: bold;
+}
+
+.ctaBlock {
+    background: linear-gradient(135deg, #202f59 0%, #121d39 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    margin: 40px 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(32, 47, 89, 0.15);
+}
+
+.ctaBlock h3 {
+    color: white !important;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.ctaBlock p {
+    color: #e5e5e5;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ctaButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #dc834e;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(220, 131, 78, 0.2);
+}
+
+.ctaButton:hover {
+    background: #bc8246;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
+    color: white !important;
+}
+
+.faqSection {
+    margin-top: 60px;
+    border-top: 2px solid #f0e6df;
+    padding-top: 50px;
+}
+
+.faqSection h2 {
+    font-size: 1.8rem;
+    color: #202f59;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.faqContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faqItem {
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background: #fafafa;
+    overflow: hidden;
+}
+
+.faqQuestion {
+    padding: 18px 25px;
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.faqAnswer {
+    padding: 18px 25px;
+    color: #555;
+    line-height: 1.6;
+    font-size: 1rem;
+    background: #fdfcfb;
+}
+
+/* Visual Journey Gallery */
+.journeyGallery {
+    margin-top: 60px;
+    padding-top: 50px;
+    border-top: 1px solid #f0e6df;
+}
+
+.journeyTitle {
+    font-size: 1.8rem;
+    color: #202f59;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.journeySubtitle {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.journeyGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.journeyItem {
+    position: relative;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.journeyImage {
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.journeyOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 80%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.journeyTag {
+    background: #dc834e;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Hover effects */
+.journeyItem:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(32, 47, 89, 0.15);
+}
+
+.journeyItem:hover .journeyImage {
+    transform: scale(1.08);
+}
+
+.journeyItem:hover .journeyOverlay {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .journeyGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .journeyItem {
+        height: 160px;
+    }
+    
+    .journeyOverlay {
+        opacity: 1;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .journeyGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .journeyItem {
+        height: 200px;
+    }
+}

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/api/',
         },
-        sitemap: 'https://zahritours.com/sitemap.xml',
+        sitemap: 'https://mdinatours.com/sitemap.xml',
     }
 }

@@ -1,11 +1,12 @@
-"use client";
-
 import React from 'react';
-import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 import styles from './Features.module.css';
 
-const Features: React.FC = () => {
-    const { t } = useLanguage();
+export default function Features({ lang = 'en' }: { lang?: Language }) {
+    const t = (key: string) => {
+        const langSection = translations[lang] || translations['en'];
+        return langSection[key] || key;
+    };
 
     const features = [
         {
@@ -167,6 +168,4 @@ const Features: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default Features;
+}

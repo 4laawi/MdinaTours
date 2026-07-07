@@ -1,14 +1,15 @@
-"use client";
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 import styles from './TourGrid.module.css';
 
-export default function DayTrips() {
-    const { t, language } = useLanguage();
+export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
+    const t = (key: string) => {
+        const langSection = translations[lang] || translations['en'];
+        return langSection[key] || key;
+    };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => `/${lang}${path === '/' ? '' : path}`;
 
     const dayTrips = [
         {

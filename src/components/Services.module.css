@@ -86,9 +86,11 @@
 
     .imageWrapper {
         width: 100%;
+        max-width: 190px;
         height: auto;
         aspect-ratio: 190 / 270;
         border-radius: 100px;
+        margin: 0 auto;
     }
 
     .serviceTitle {
@@ -103,7 +105,7 @@
         margin-top: -22px;
     }
 
-    .serviceCard:last-child {
-        display: none;
+    .serviceCard:nth-child(5) {
+        grid-column: span 2;
     }
 }

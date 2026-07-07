@@ -1,13 +1,16 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
-export default function Header() {
+interface HeaderProps {
+    lightBg?: boolean;
+}
+
+export default function Header({ lightBg = false }: HeaderProps) {
     const pathname = usePathname();
     const router = useRouter();
     const { language, t } = useLanguage();
@@ -36,6 +39,7 @@ export default function Header() {
 
     // Close menu when pathname changes
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMenuOpen(false);
     }, [pathname]);
 
@@ -56,46 +60,43 @@ export default function Header() {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+    // Navigation configuration
+    const navItems = [
+        { path: '/', label: t('home') },
+        { path: '/tours', label: isEn ? 'Tours' : 'Circuits' },
+        { path: '/transfers', label: isEn ? 'Transfers' : 'Transferts' },
+        { path: '/private-driver', label: isEn ? 'Private Driver' : 'Chauffeur Privé' },
+        { path: '/faq', label: 'FAQ' },
+        { path: '/blog', label: t('blog') },
+        { path: '/about', label: isEn ? 'About Us' : 'À Propos' },
+    ];
+
     return (
-        <header className={`${styles.header} ${isMenuOpen ? styles.headerActive : ''}`}>
+        <header className={`${styles.header} ${isMenuOpen ? styles.headerActive : ''} ${lightBg ? styles.lightBg : ''}`}>
             <div className={`container ${styles.navInner}`}>
-                <Link href={getPath('/')} className={styles.logo}>
-                    <Image
-                        src="/ZahriTours-Logo.png"
-                        alt="ZahriTours Logo"
-                        width={300}
-                        height={100}
-                        className={styles.logoImage}
-                        priority
-                    />
+                <Link href={getPath('/')} className={styles.logo} aria-label="Mdina Tours Homepage">
+                    <svg viewBox="0 0 280 80" width="180" height="50" className={styles.logoSvg}>
+                        <g transform="translate(10, 15)">
+                            <path d="M25 5 C15 5 10 15 10 25 L10 45 L40 45 L40 25 C40 15 35 5 25 5 Z" fill="none" stroke="#dc834e" strokeWidth="2.5" />
+                            <path d="M25 10 C18 10 15 18 15 25 L15 40 L35 40 L35 25 C35 18 32 10 25 10 Z" fill="#dc834e" opacity="0.15" />
+                            <polygon points="25,20 28,26 34,26 29,30 31,36 25,32 19,36 21,30 16,26 22,26" fill="#dc834e" />
+                        </g>
+                        <text x="65" y="38" fontFamily="'Cormorant Garamond', serif" fontSize="26" fontWeight="bold" fill="#202f59" letterSpacing="1">Mdina</text>
+                        <text x="65" y="58" fontFamily="'Inter', sans-serif" fontSize="12" fontWeight="600" fill="#dc834e" letterSpacing="4.5">TOURS</text>
+                    </svg>
                 </Link>
 
                 {/* Desktop Nav */}
                 <nav className={styles.navPill}>
-                    <Link
-                        href={getPath('/')}
-                        className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
-                    >
-                        {t('home')}
-                    </Link>
-                    <Link
-                        href={getPath('/blog')}
-                        className={`${styles.navLink} ${isActive('/blog') ? styles.active : ''}`}
-                    >
-                        {t('blog')}
-                    </Link>
-                    <Link
-                        href={getPath('/partners')}
-                        className={`${styles.navLink} ${isActive('/partners') ? styles.active : ''}`}
-                    >
-                        {t('partners')}
-                    </Link>
-                    <Link
-                        href={getPath('/contact')}
-                        className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
-                    >
-                        {t('contact')}
-                    </Link>
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.path}
+                            href={getPath(item.path)}
+                            className={`${styles.navLink} ${isActive(item.path) ? styles.active : ''}`}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
                 </nav>
 
                 <div className={styles.rightAction}>
@@ -108,7 +109,7 @@ export default function Header() {
                     <button
                         className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerActive : ''}`}
                         onClick={toggleMenu}
-                        aria-label="Menu"
+                        aria-label="Toggle navigation menu"
                     >
                         <span className={styles.hamburgerLine}></span>
                         <span className={styles.hamburgerLine}></span>
@@ -121,27 +122,16 @@ export default function Header() {
             <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}>
                 <div className={styles.mobileMenuContent}>
                     <nav className={styles.mobileNav}>
-                        <Link
-                            href={getPath('/')}
-                            className={`${styles.mobileNavLink} ${isActive('/') ? styles.mobileActive : ''}`}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('home')}
-                        </Link>
-                        <Link
-                            href={getPath('/blog')}
-                            className={`${styles.mobileNavLink} ${isActive('/blog') ? styles.mobileActive : ''}`}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('blog')}
-                        </Link>
-                        <Link
-                            href={getPath('/partners')}
-                            className={`${styles.mobileNavLink} ${isActive('/partners') ? styles.mobileActive : ''}`}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('partners')}
-                        </Link>
+                        {navItems.map((item) => (
+                            <Link
+                                key={`mobile-${item.path}`}
+                                href={getPath(item.path)}
+                                className={`${styles.mobileNavLink} ${isActive(item.path) ? styles.mobileActive : ''}`}
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
                         <Link
                             href={getPath('/contact')}
                             className={styles.mobileContactBtn}
@@ -173,7 +163,7 @@ export default function Header() {
                 <button
                     onClick={() => handleLanguageSwitch('en')}
                     className={`${styles.langText} ${isEn ? styles.activeLang : ''}`}
-                    aria-label="English"
+                    aria-label="Switch to English"
                 >
                     EN
                 </button>
@@ -181,7 +171,7 @@ export default function Header() {
                 <button
                     onClick={() => handleLanguageSwitch('fr')}
                     className={`${styles.langText} ${!isEn ? styles.activeLang : ''}`}
-                    aria-label="Français"
+                    aria-label="Passer au Français"
                 >
                     FR
                 </button>

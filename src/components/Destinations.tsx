@@ -1,11 +1,12 @@
-"use client";
-
 import Link from 'next/link';
-import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 import styles from './Destinations.module.css';
 
-export default function Destinations() {
-    const { t, language } = useLanguage();
+export default function Destinations({ lang = 'en' }: { lang?: Language }) {
+    const t = (key: string) => {
+        const langSection = translations[lang] || translations['en'];
+        return langSection[key] || key;
+    };
 
     return (
         <section className={styles.destinationsSection}>
@@ -30,7 +31,7 @@ export default function Destinations() {
                     <h2 className="section-title" dangerouslySetInnerHTML={{ __html: t('dest_title').replace('\n', '<br />') }}></h2>
                     <p className={styles.description} dangerouslySetInnerHTML={{ __html: t('dest_desc').replace('\n', '<br />') }}></p>
                     <div className={styles.action}>
-                        <Link href={`/${language}/blog`} className="btn-primary">
+                        <Link href={`/${lang}/blog`} className="btn-primary">
                             {t('explore_blog')} <span className={styles.arrow}>→</span>
                         </Link>
                     </div>
@@ -53,5 +54,4 @@ export default function Destinations() {
             </div>
         </section>
     );
-
 }

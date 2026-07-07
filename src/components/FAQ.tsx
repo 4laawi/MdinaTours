@@ -1,48 +1,43 @@
-"use client";
-
-import { useState } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 import styles from './FAQ.module.css';
 import Features from './Features';
 
-export default function FAQ() {
-    const { t } = useLanguage();
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+export default function FAQ({ lang = 'en' }: { lang?: Language }) {
+    const t = (key: string) => {
+        const langSection = translations[lang] || translations['en'];
+        return langSection[key] || key;
+    };
 
     const faqs = [
         {
-            question: t('faq_1_q') || "1. How do I book a tour?",
-            answer: t('faq_1_a') || "You can book directly through our website or by contacting us via WhatsApp or email."
+            question: t('faq_1_q') || "How far in advance should I book a tour in Morocco?",
+            answer: t('faq_1_a') || "We recommend booking at least 2-4 weeks in advance, especially during peak seasons (Spring and Autumn), to ensure the availability of our best drivers and guides."
         },
         {
-            question: t('faq_2_q') || "2. Are the tours private or group-based?",
-            answer: t('faq_2_a') || "We offer both private and group tours, depending on your preference and budget."
+            question: t('faq_2_q') || "What payment methods do you accept?",
+            answer: t('faq_2_a') || "You can pay securely via credit card online, or pay your driver directly in cash (Euros or Dirhams) upon arrival. No upfront deposit is required for most day trips."
         },
         {
-            question: t('faq_3_q') || "3. What languages do you speak?",
-            answer: t('faq_3_a') || "Tours are available in English, French, Spanish, and Arabic."
+            question: t('faq_3_q') || "What is your cancellation policy?",
+            answer: t('faq_3_a') || "We offer a flexible cancellation policy. You can cancel free of charge up to 48 hours before your scheduled tour or transfer."
         },
         {
-            question: t('faq_4_q') || "4. Can tours be customized?",
-            answer: t('faq_4_a') || "Yes, all tours can be tailored to your interests, schedule, and travel style."
+            question: t('faq_4_q') || "Is Morocco safe for tourists?",
+            answer: t('faq_4_a') || "Yes, Morocco is very safe for tourists, including solo and female travelers. Our private drivers and official guides ensure you have a secure, hassle-free experience."
         },
         {
-            question: t('faq_5_q') || "5. What’s included in the price?",
-            answer: t('faq_5_a') || "Most tours include transportation, guiding services, and accommodations. Meals and extras can be arranged on request."
+            question: t('faq_5_q') || "What is the best time to visit Morocco?",
+            answer: t('faq_5_a') || "The best times to visit are during Spring (March to May) and Autumn (September to November) when the weather is warm and pleasant across the country."
         },
         {
-            question: t('faq_6_q') || "6. Is Morocco safe for travelers?",
-            answer: t('faq_6_a') || "Yes, Morocco is safe for tourists. We ensure your journey is comfortable, secure, and stress-free."
+            question: t('faq_6_q') || "Do people speak English in Morocco?",
+            answer: t('faq_6_a') || "While Arabic and French are the main languages, English is widely spoken in tourist areas. All our private drivers and guides speak fluent English."
         }
     ];
 
-    const toggleAccordion = (index: number) => {
-        setActiveIndex(activeIndex === index ? null : index);
-    };
-
     return (
         <section className={styles.faqSection} id="faq">
-            <Features />
+            <Features lang={lang} />
             <div className="container">
                 <div className={styles.intro}>
                     <div className="section-subtitle">{t('faq_subtitle')}</div>
@@ -55,40 +50,40 @@ export default function FAQ() {
                 <div className={styles.accordionGrid}>
                     <div className={styles.accordionColumn}>
                         {faqs.slice(0, 3).map((faq, index) => (
-                            <div key={index} className={`${styles.accordionItem} ${activeIndex === index ? styles.active : ''}`}>
-                                <button className={styles.accordionHeader} onClick={() => toggleAccordion(index)} aria-expanded={activeIndex === index}>
+                            <details key={index} className={styles.accordionItem} name="homepage-faq">
+                                <summary className={styles.accordionHeader}>
                                     <span className={styles.question}>{faq.question}</span>
                                     <div className={styles.iconWrapper}>
                                         <svg className={styles.chevron} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                             <polyline points="6 9 12 15 18 9"></polyline>
                                         </svg>
                                     </div>
-                                </button>
+                                </summary>
                                 <div className={styles.accordionContent}>
                                     <div className={styles.answerInner}>
                                         <p>{faq.answer}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </details>
                         ))}
                     </div>
                     <div className={styles.accordionColumn}>
                         {faqs.slice(3, 6).map((faq, index) => (
-                            <div key={index + 3} className={`${styles.accordionItem} ${activeIndex === index + 3 ? styles.active : ''}`}>
-                                <button className={styles.accordionHeader} onClick={() => toggleAccordion(index + 3)} aria-expanded={activeIndex === index + 3}>
+                            <details key={index + 3} className={styles.accordionItem} name="homepage-faq">
+                                <summary className={styles.accordionHeader}>
                                     <span className={styles.question}>{faq.question}</span>
                                     <div className={styles.iconWrapper}>
                                         <svg className={styles.chevron} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                             <polyline points="6 9 12 15 18 9"></polyline>
                                         </svg>
                                     </div>
-                                </button>
+                                </summary>
                                 <div className={styles.accordionContent}>
                                     <div className={styles.answerInner}>
                                         <p>{faq.answer}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </details>
                         ))}
                     </div>
                 </div>

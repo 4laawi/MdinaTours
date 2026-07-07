@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
-import SEOMetadata from '@/components/SEOMetadata';
 import ReactDOM from 'react-dom';
 
 const poppins = Poppins({
@@ -20,11 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params;
     const isEn = lang === 'en';
 
-    const title = isEn ? 'ZahriTours – Best Morocco Tours & Trips' : 'ZahriTours – Meilleures Visites et Voyages au Maroc';
+    const title = isEn ? 'Mdina Tours – Private Morocco Tours & Transfers' : 'Mdina Tours – Circuits Privés & Transferts au Maroc';
     const description = isEn
-        ? 'ZahriTours is a top Morocco travel agency offering desert tours, city trips, and tailor-made adventures. Explore Morocco with our trusted guides.'
-        : 'ZahriTours est une agence de voyage de premier plan au Maroc proposant des circuits dans le désert, des excursions en ville et des aventures sur mesure.';
-    const url = `https://zahritours.com/${lang}`;
+        ? 'Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat.'
+        : 'Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.';
+    const url = `https://mdinatours.com/${lang}`;
 
     return {
         title,
@@ -32,21 +31,21 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         alternates: {
             canonical: url,
             languages: {
-                'en': 'https://zahritours.com/en',
-                'fr': 'https://zahritours.com/fr',
+                'en': 'https://mdinatours.com/en',
+                'fr': 'https://mdinatours.com/fr',
             },
         },
         openGraph: {
             title,
             description,
             url,
-            siteName: 'ZahriTours',
+            siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://zahritours.com/hero-marrakech.webp',
+                    url: 'https://mdinatours.com/img/Morocco-trip-tour-hero01.webp',
                     width: 1200,
                     height: 630,
-                    alt: 'ZahriTours Morocco',
+                    alt: 'Mdina Tours Morocco',
                 },
             ],
             locale: lang === 'fr' ? 'fr_FR' : 'en_US',
@@ -56,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://zahritours.com/hero-marrakech.webp'],
+            images: ['https://mdinatours.com/img/Morocco-trip-tour-hero01.webp'],
         },
     };
 }
@@ -73,17 +72,35 @@ export default async function LocaleLayout({
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
-        "name": "ZahriTours",
-        "image": "https://zahritours.com/ZahriTours-Logo.png",
+        "name": "Mdina Tours",
+        "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
+        "logo": "https://mdinatours.com/logo-primary.png",
         "description": lang === 'en'
-            ? "ZahriTours is a top Morocco travel agency offering desert tours, city trips, and tailor-made adventures. Explore Morocco with our trusted guides."
-            : "ZahriTours est une agence de voyage de premier plan au Maroc proposant des circuits dans le désert, des excursions en ville et des aventures sur mesure.",
-        "url": `https://zahritours.com/${lang}`,
+            ? "Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat."
+            : "Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.",
+        "url": `https://mdinatours.com/${lang}`,
         "telephone": "+212766816992",
+        "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Tangier",
+            "addressLocality": "Rabat",
+            "addressRegion": "Rabat-Salé-Kénitra",
             "addressCountry": "MA"
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "184",
+            "bestRating": "5",
+            "worstRating": "1"
         }
     };
 
@@ -91,13 +108,12 @@ export default async function LocaleLayout({
     ReactDOM.preconnect('https://fonts.googleapis.com');
     ReactDOM.preconnect('https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
     // Preload the hero image (LCP candidate) for both locales
-    ReactDOM.preload('/hero-marrakech.webp', { as: 'image', fetchPriority: 'high' });
+    ReactDOM.preload('/img/Morocco-trip-tour-hero01.webp', { as: 'image', fetchPriority: 'high' });
 
     return (
         <html lang={lang} className={`${poppins.variable}`}>
             <body>
                 <LanguageProvider initialLanguage={lang as 'en' | 'fr'}>
-                    <SEOMetadata />
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

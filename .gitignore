@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE, assistant, and temporary tool folders
+.cursor/
+.gemini/
+.claude/
+.impeccable/
+temp_ast/
+
+# Scratch files and backups
+move_navbar*.js
+split.js
+scratch_css.txt
+*.bak

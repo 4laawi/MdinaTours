@@ -2,38 +2,48 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import styles from './Blog.module.css';
+import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
+import { getProgrammaticPost, programmaticSlugs } from '@/lib/programmaticSeo';
+
+export async function generateStaticParams() {
+    return [{ lang: 'en' }, { lang: 'fr' }];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const isEn = lang === 'en';
 
-    const title = isEn ? 'Blog – ZahriTours | Morocco Travel News, Guides & Promo' : 'Blog – ZahriTours | Actualités Voyage au Maroc, Guides & Promos';
+    const title = isEn ? 'Morocco Travel Blog & Guides | Mdina Tours' : 'Blog Voyage Maroc & Conseils | Mdina Tours';
     const description = isEn
-        ? 'Read our latest travel articles about Morocco. Discover hidden gems, desert adventures, and cultural guides for your next trip.'
-        : 'Lisez nos derniers articles de voyage sur le Maroc. Découvrez les joyaux cachés, les aventures dans le désert et les guides culturels pour votre prochain voyage.';
-    const url = `https://zahritours.com/${lang}/blog`;
+        ? 'Read our latest travel guides about Morocco. Discover Rabat secrets, Sahara desert planning tips, and traditional cuisine insights.'
+        : 'Lisez nos derniers guides de voyage sur le Maroc. Conseils pour visiter Rabat, le désert du Sahara et comprendre les traditions culinaires.';
+    const url = `https://mdinatours.com/${lang}/blog`;
 
     return {
         title,
         description,
         alternates: {
             canonical: url,
+            languages: {
+                'en': 'https://mdinatours.com/en/blog',
+                'fr': 'https://mdinatours.com/fr/blog',
+            },
         },
         openGraph: {
             title,
             description,
             url,
-            siteName: 'ZahriTours',
+            siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://zahritours.com/hero-marrakech.webp',
+                    url: 'https://mdinatours.com/hero-marrakech.webp',
                     width: 1200,
                     height: 630,
-                    alt: 'ZahriTours Blog',
+                    alt: 'Mdina Tours Blog',
                 },
             ],
             locale: lang === 'fr' ? 'fr_FR' : 'en_US',
@@ -43,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://zahritours.com/hero-marrakech.webp'],
+            images: ['https://mdinatours.com/hero-marrakech.webp'],
         },
     };
 }
@@ -56,37 +66,39 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         return langSection[key] || key;
     };
 
+    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+
     const blogPosts = [
         {
             id: 1,
-            slug: 'tangier-city-stories',
+            slug: 'rabat-travel-guide',
             title: t('blog_post_1_title'),
             excerpt: t('blog_post_1_excerpt'),
-            image: "/Tangier-Morocco-Photo.webp",
+            image: "/img2/rabat-hassan-tour.jpg",
             date: "March 15, 2026",
             category: t('blog_post_1_category')
         },
         {
             id: 2,
-            slug: 'sahara-desert-magic',
+            slug: 'sahara-desert-tour-plan',
             title: t('blog_post_2_title'),
             excerpt: t('blog_post_2_excerpt'),
-            image: "/hero-sahara.webp",
+            image: "/b-roll/activity-sahara-camel-riding-broll.webp",
             date: "March 10, 2026",
             category: t('blog_post_2_category')
         },
         {
             id: 3,
-            slug: 'marrakech-architecture-guide',
+            slug: 'moroccan-architecture-guide',
             title: t('blog_post_3_title'),
             excerpt: t('blog_post_3_excerpt'),
-            image: "/hero-marrakech.webp",
+            image: "/img2/fes_gate.jpg",
             date: "March 5, 2026",
             category: t('blog_post_3_category')
         },
         {
             id: 4,
-            slug: 'moroccan-cuisine-soul',
+            slug: 'moroccan-food-traditions',
             title: t('blog_post_4_title'),
             excerpt: t('blog_post_4_excerpt'),
             image: "/Traditional.webp",
@@ -95,7 +107,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         },
         {
             id: 5,
-            slug: 'chefchaouen-blue-pearl',
+            slug: 'chefchaouen-blue-pearl-tips',
             title: t('blog_post_5_title'),
             excerpt: t('blog_post_5_excerpt'),
             image: "/hero-chefchaouen.webp",
@@ -104,57 +116,98 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         },
         {
             id: 6,
-            slug: 'private-driver-morocco',
+            slug: 'private-driver-morocco-guide',
             title: t('blog_post_6_title'),
             excerpt: t('blog_post_6_excerpt'),
-            image: "/hero-landscape-1.webp",
+            image: "/img2/private-vito-vans-3.webp",
             date: "February 15, 2026",
             category: t('blog_post_6_category')
         }
     ];
 
-    // Helper to get localized path
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    // Load and append programmatic posts (avoiding any duplicate slugs like rabat-travel-guide)
+    const programmaticPostsMapped = programmaticSlugs
+        .filter(slug => !blogPosts.some(bp => bp.slug === slug))
+        .map((slug, index) => {
+            const prog = getProgrammaticPost(slug, language);
+            if (!prog) return null;
+            return {
+                id: 100 + index,
+                slug: prog.slug,
+                title: prog.title,
+                excerpt: prog.excerpt,
+                image: prog.image,
+                date: prog.date,
+                category: prog.category
+            };
+        })
+        .filter((post): post is NonNullable<typeof post> => post !== null);
+
+    const allBlogPosts = [...blogPosts, ...programmaticPostsMapped];
+
+    const galleryImages = [
+        { src: "/b-roll/Tourists-in-marrakech.avif", alt: "Tourists exploring Marrakech medina", tag: "Marrakech" },
+        { src: "/b-roll/activity-sahara-camel-riding-broll.webp", alt: "Camel trekking at sunset in Sahara", tag: "Sahara" },
+        { src: "/b-roll/moroccan-family-urban.jpg", alt: "Moroccan local urban life", tag: "Culture" },
+        { src: "/b-roll/vito-airoport-parking.jpg", alt: "Private Mercedes Vito airport transfer", tag: "Transport" },
+        { src: "/b-roll/3-Mercedes-vito-airoport.jpg", alt: "Mercedes Vito Airport shuttle fleet", tag: "Fleet" },
+        { src: "/img/Ait Benhaddou.jpg", alt: "UNESCO Kasbah Ait Benhaddou", tag: "Heritage" },
+        { src: "/img/Essaouira.webp", alt: "Seaside views of historic Essaouira port", tag: "Essaouira" },
+        { src: "/img/agafay.jpg", alt: "Stony Agafay desert sunset camp", tag: "Agafay" },
+        { src: "/img/marrakech-tour.webp", alt: "Historic Marrakech tour streets", tag: "Marrakech" },
+        { src: "/img/ouzoud waterfalls.jpg", alt: "Lush green Ouzoud Waterfalls", tag: "Nature" },
+        { src: "/img2/Airport_Casablanca_Mohammed.webp", alt: "Casablanca Mohammed V Airport transfer", tag: "Airport" },
+        { src: "/img2/Asilah-Morocco.jpg", alt: "Whitewashed streets of Asilah medina", tag: "Asilah" },
+        { src: "/img2/Asilah_water.webp", alt: "Coast walls of ocean-side Asilah", tag: "Asilah" },
+        { src: "/img2/Marrakech_atlas.jpg", alt: "Panoramic view of Atlas mountains from Marrakech", tag: "Atlas" },
+        { src: "/img2/agadir-marina.jpg", alt: "Modern Agadir Marina and yachts", tag: "Agadir" },
+        { src: "/img2/casablanca_MOSQUE.webp", alt: "Stunning Hassan II Mosque Casablanca", tag: "Casablanca" },
+        { src: "/img2/fes_gate.jpg", alt: "Golden gates of Fes Royal Palace", tag: "Fes" },
+        { src: "/img2/rabat-hassan-tour.jpg", alt: "Iconic Hassan Tower in Rabat capital", tag: "Rabat" },
+        { src: "/img2/tangier_hero.webp", alt: "Aerial harbor view of Tangier", tag: "Tangier" },
+        { src: "/img2/premium-chauffeur.jpg", alt: "Professional private chauffeur in Morocco", tag: "Chauffeur" }
+    ];
+
+    const isEn = language === 'en';
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": t('blog'),
+                "item": `https://mdinatours.com/${language}/blog`
+            }
+        ]
+    };
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
             <Header />
             <main>
-                {/* Blog semi-hero banner */}
-                <section
-                    className={styles.blogBanner}
-                    style={{ backgroundImage: `url('/hero-marrakech.webp')` }}
-                >
-                    <div className={styles.overlay}></div>
-                    <div className={styles.container}>
-                        <div className={styles.column} style={{ maxWidth: '100%', flex: '1 1 auto' }}>
-                            <div className={styles.contentWrapper}>
-                                <div className={styles.breadcrumbWrapper}>
-                                    <ul className={styles.breadcrumbList}>
-                                        <li className={styles.breadcrumbItem}>
-                                            <Link href={getPath('/')} className={styles.breadcrumbLink}>{t('home')}</Link>
-                                        </li>
-                                        <li className={styles.breadcrumbItem}>
-                                            <span className={styles.breadcrumbIcon}>
-                                                <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
-                                                </svg>
-                                            </span>
-                                            <span>{t('blog')}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h1 className={styles.title}>{t('blog_banner_title')}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <PageBanner 
+                    title={t('blog_banner_title')}
+                    bgImage="/img/Morocco-trip-tour-hero02.webp"
+                    homeLabel={t('home')}
+                    homeLink={getPath('/')}
+                    currentLabel={t('blog')}
+                />
 
-                {/* Blog content section */}
                 <section className={styles.blogContent}>
                     <div className={styles.container}>
                         <div className={styles.blogGrid}>
-                            {blogPosts.map(post => (
+                            {allBlogPosts.map(post => (
                                 <article key={post.id} className={styles.blogCard}>
                                     <div className={styles.cardImageContainer}>
                                         <Image
@@ -168,7 +221,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                                     </div>
                                     <div className={styles.cardContent}>
                                         <span className={styles.postDate}>{post.date}</span>
-                                        <h3 className={styles.postTitle}>{post.title}</h3>
+                                        <h2 className={styles.postTitle}>{post.title}</h2>
                                         <p className={styles.excerpt}>{post.excerpt}</p>
                                         <Link href={getPath(`/blog/${post.slug}`)} className={styles.readMore}>
                                             {t('blog_read_more')} <span>→</span>
@@ -179,8 +232,40 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                         </div>
                     </div>
                 </section>
+
+                <section className={styles.gallerySection}>
+                    <div className={styles.container}>
+                        <div className={styles.galleryHeader}>
+                            <h2 className={styles.galleryTitle}>
+                                {isEn ? "Morocco in Photos" : "Le Maroc en Photos"}
+                            </h2>
+                            <p className={styles.gallerySubtitle}>
+                                {isEn 
+                                    ? "A visual journey through the locations we serve, our fleet, and local experiences."
+                                    : "Un voyage visuel à travers nos destinations, notre flotte et les expériences locales."}
+                            </p>
+                        </div>
+                        <div className={styles.galleryGrid}>
+                            {galleryImages.map((img, idx) => (
+                                <div key={idx} className={styles.galleryItem}>
+                                    <Image
+                                        src={img.src}
+                                        alt={img.alt}
+                                        fill
+                                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                                        className={styles.galleryImage}
+                                    />
+                                    <div className={styles.galleryOverlay}>
+                                        <span className={styles.galleryTag}>{img.tag}</span>
+                                        <p className={styles.galleryText}>{img.alt}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
             </main>
-            <Footer />
+            <Footer lang={language} />
             <FloatingElements />
         </>
     );

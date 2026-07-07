@@ -4,30 +4,35 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './Hero.module.css';
+import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
 
 const LOCATIONS = [
+    "Rabat Airport",
+    "Rabat City Center",
+    "Casablanca Airport",
+    "Casablanca City Center",
     "Tangier Airport",
     "Tangier City Center",
-    "Hilton Houara",
-    "Mnar Zone",
-    "Tangier Med",
-    "Tetouan",
+    "Marrakech Airport",
+    "Marrakech City Center",
     "Chefchaouen",
-    "Rabat",
-    "Casablanca",
     "Fes",
-    "Marrakech"
+    "Essaouira"
 ];
 
 type Prices = { [key: number]: number };
 
 const BACKGROUND_IMAGES = [
-    "/hero-marrakech.webp",
-    "/hero-landscape-1.webp",
-    "/hero-landscape-2.webp",
-    "/hero-landscape-3.webp",
-    "/hero-sahara.webp",
-    "/hero-chefchaouen.webp"
+    "/img/Morocco-trip-tour-hero01.webp",
+    "/img/Morocco-trip-tour-hero02.webp",
+    "/img/Morocco-trip-tour-hero03.webp",
+    "/img/Morocco-trip-tour-hero04.webp",
+    "/img/Morocco-trip-tour-hero05.webp",
+    "/img/Morocco-trip-tour-hero07.webp",
+    "/img/Morocco-trip-tour-hero08.webp",
+    "/img/Morocco-trip-tour-hero09.webp",
+    "/img/sergey-pesterev-9-5-WYEBDz0-unsplash.webp",
+    "/img/hero-landscape-3.webp"
 ];
 
 const buildRouteKey = (l1: string, l2: string) => [l1, l2].sort().join('-');
@@ -38,55 +43,57 @@ const setPricing = (loc1: string, loc2: string, prices: Prices) => {
     routePrices[buildRouteKey(loc1, loc2)] = prices;
 };
 
-// Local Tangier transfers
-setPricing("Tangier Airport", "Tangier City Center", { 3: 27, 4: 28, 5: 32, 7: 81 });
-setPricing("Tangier Airport", "Hilton Houara", { 3: 35, 4: 40, 5: 43, 7: 87 });
-setPricing("Tangier Airport", "Mnar Zone", { 3: 33, 4: 41, 5: 50, 7: 100 });
-setPricing("Tangier Med", "Tangier City Center", { 3: 93, 4: 100, 5: 150, 7: 225 });
+// Configure fixed pricing database
+// Local transfers
+setPricing("Rabat Airport", "Rabat City Center", { 3: 36, 4: 42, 5: 54, 7: 72 });
+setPricing("Casablanca Airport", "Casablanca City Center", { 3: 48, 4: 54, 5: 66, 7: 84 });
+setPricing("Tangier Airport", "Tangier City Center", { 3: 30, 4: 36, 5: 42, 7: 60 });
+setPricing("Marrakech Airport", "Marrakech City Center", { 3: 24, 4: 30, 5: 36, 7: 54 });
 
-// Intercity transfers (from Tangier to other destinations)
-const longDistanceDestinations = [
-    { dest: "Tetouan", prices: { 3: 100, 4: 125, 5: 150, 7: 250 } },
-    { dest: "Chefchaouen", prices: { 3: 125, 4: 150, 5: 187, 7: 312 } },
-    { dest: "Rabat", prices: { 3: 275, 4: 300, 5: 325, 7: 437 } },
-    { dest: "Casablanca", prices: { 3: 375, 4: 400, 5: 425, 7: 500 } },
-    { dest: "Fes", prices: { 3: 425, 4: 450, 5: 475, 7: 600 } },
-    { dest: "Marrakech", prices: { 3: 625, 4: 650, 5: 725, 7: 775 } }
-];
+// Intercity transfers
+setPricing("Rabat City Center", "Casablanca City Center", { 3: 96, 4: 108, 5: 132, 7: 168 });
+setPricing("Rabat City Center", "Casablanca Airport", { 3: 102, 4: 120, 5: 144, 7: 180 });
+setPricing("Rabat Airport", "Casablanca City Center", { 3: 102, 4: 120, 5: 144, 7: 180 });
+setPricing("Tangier City Center", "Rabat City Center", { 3: 180, 4: 210, 5: 240, 7: 336 });
+setPricing("Tangier Airport", "Rabat City Center", { 3: 192, 4: 216, 5: 252, 7: 348 });
+setPricing("Marrakech City Center", "Essaouira", { 3: 108, 4: 132, 5: 156, 7: 216 });
+setPricing("Fes", "Chefchaouen", { 3: 144, 4: 168, 5: 192, 7: 264 });
+setPricing("Casablanca City Center", "Marrakech City Center", { 3: 192, 4: 216, 5: 252, 7: 336 });
 
-// Treat "Tangier" base prices identically for Airport and City Center
-longDistanceDestinations.forEach(({ dest, prices }) => {
-    setPricing("Tangier Airport", dest, prices);
-    setPricing("Tangier City Center", dest, prices);
-});
+// Add connections to airports
+setPricing("Casablanca Airport", "Marrakech City Center", { 3: 192, 4: 216, 5: 252, 7: 336 });
+setPricing("Rabat City Center", "Chefchaouen", { 3: 168, 4: 192, 5: 216, 7: 300 });
+setPricing("Casablanca City Center", "Fes", { 3: 216, 4: 240, 5: 276, 7: 360 });
 
 export default function Hero(props: { imageUrl?: string }) {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const today = new Date().toISOString().split('T')[0];
-    const [pickup, setPickup] = useState(LOCATIONS[0]);
-    const [dropoff, setDropoff] = useState(LOCATIONS[1]);
+    const [pickup, setPickup] = useState(LOCATIONS[1]); // Rabat City Center
+    const [dropoff, setDropoff] = useState(LOCATIONS[3]); // Casablanca City Center
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [date, setDate] = useState("");
     const [hour, setHour] = useState("12:00");
     const [passengers, setPassengers] = useState(4);
-    const [searchResult, setSearchResult] = useState<{ price?: number, error?: string } | null>(null);
+    const [searchResult, setSearchResult] = useState<{ price?: string, error?: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalStep, setModalStep] = useState(1);
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [flightNumber, setFlightNumber] = useState("");
     const [preciseLocation, setPreciseLocation] = useState("");
+    const [isEditingDateTime, setIsEditingDateTime] = useState(false);
 
     useEffect(() => {
         if (isModalOpen) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
+            setIsEditingDateTime(false);
         }
         return () => document.body.classList.remove('modal-open');
     }, [isModalOpen]);
 
-    const isAirport = (loc: string) => loc.toLowerCase().includes('airport') || loc.toLowerCase().includes('med');
+    const isAirport = (loc: string) => loc.toLowerCase().includes('airport');
     const showFlightField = isAirport(pickup) || isAirport(dropoff);
 
     // Use props.imageUrl as the first image if provided
@@ -102,7 +109,6 @@ export default function Hero(props: { imageUrl?: string }) {
     }, [displayImages.length]);
 
     const prevImageIndex = (currentImageIndex - 1 + displayImages.length) % displayImages.length;
-    const nextImageIndex = (currentImageIndex + 1) % displayImages.length;
 
     const HOURS = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
@@ -110,20 +116,23 @@ export default function Hero(props: { imageUrl?: string }) {
     const dropoffRef = useRef<HTMLSelectElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
 
-    const handleFieldClick = (e: React.MouseEvent, ref: React.RefObject<HTMLElement | null>) => {
-        if (e.target === ref.current && ref.current?.tagName === 'SELECT') {
+    const handleFieldClick = (e: React.MouseEvent, ref: React.RefObject<HTMLSelectElement | HTMLInputElement | null>) => {
+        const el = ref.current;
+        if (!el) return;
+
+        if (e.target === el && el.tagName === 'SELECT') {
             return;
         }
 
-        if (ref.current && 'showPicker' in ref.current) {
+        const targetEl = el as HTMLElement & { showPicker?: () => void };
+        if (targetEl.showPicker) {
             try {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (ref.current as any).showPicker();
+                targetEl.showPicker();
             } catch {
-                ref.current.focus();
+                targetEl.focus();
             }
-        } else if (ref.current) {
-            ref.current.focus();
+        } else {
+            targetEl.focus();
         }
     };
 
@@ -135,55 +144,55 @@ export default function Hero(props: { imageUrl?: string }) {
 
     const handleSearch = () => {
         if (!pickup || !dropoff) {
-            setSearchResult({ error: "Please select both pickup and drop-off locations." });
+            setSearchResult({ error: language === 'en' ? "Please select both locations." : "Veuillez sélectionner les deux lieux." });
             return;
         }
         if (pickup === dropoff) {
-            setSearchResult({ error: "Pickup and Drop-off locations cannot be the same." });
+            setSearchResult({ error: language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
             return;
         }
-        const routeKey = buildRouteKey(pickup, dropoff);
-        const route = routePrices[routeKey];
-
-        if (route) {
-            setIsModalOpen(true);
-            setSearchResult(null);
-        } else {
-            setSearchResult({ error: "No transfer option available for this route." });
-        }
+        
+        // Open modal for booking request regardless of route (allow custom quote for CRO)
+        setIsModalOpen(true);
+        setSearchResult(null);
     };
 
     const currentPrice = (() => {
         const routeKey = buildRouteKey(pickup, dropoff);
         const route = routePrices[routeKey];
-        return route ? route[passengers] : null;
+        if (route && route[passengers]) return route[passengers];
+        // Fallback for undefined routes to always show a price instead of 'Custom Quote'
+        const isLocal = pickup.includes("Airport") && dropoff.replace(" City Center", "") === pickup.replace(" Airport", "");
+        const base = isLocal ? 42 : 144;
+        const prices: { [key: number]: number } = { 3: base - 6, 4: base, 5: base + 24, 7: base + 60 };
+        return prices[passengers];
     })();
 
     const getWhatsAppUrl = () => {
-        let message = `${t('book_whatsapp')}\n\n`;
+        let message = `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
         message += `• ${t('contact_form_full_name')}: ${name}\n`;
         message += `• ${t('contact_form_phone')}: ${phone}\n`;
         message += `• ${t('precise_location')}: ${preciseLocation}\n`;
         if (showFlightField && flightNumber) {
             message += `• ${t('flight_number')}: ${flightNumber}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : date;
-        message += `\nDetails:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice}€`;
+        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
+        message += `\nDetails:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
         return `https://wa.me/212766816992?text=${encodeURIComponent(message)}`;
     };
 
     const getEmailUrl = () => {
-        const subject = `${t('booking_request')}: Private Transfer - ${name}`;
-        let body = `${t('book_whatsapp')}\n\n`;
+        const subject = `Private Transfer Inquiry - ${name}`;
+        let body = `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
         body += `${t('contact_form_full_name')}: ${name}\n`;
         body += `${t('contact_form_phone')}: ${phone}\n`;
         body += `${t('precise_location')}: ${preciseLocation}\n`;
         if (showFlightField && flightNumber) {
             body += `${t('flight_number')}: ${flightNumber}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : date;
-        body += `\nDetails:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice}€`;
-        return `mailto:booking@tiqalgs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
+        body += `\nDetails:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
+        return `mailto:booking@mdinatours.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
     return (
@@ -193,15 +202,13 @@ export default function Hero(props: { imageUrl?: string }) {
                 if (index === currentImageIndex) statusClass = styles.active;
                 else if (index === prevImageIndex) statusClass = styles.prev;
 
-                // Only the first image is priority (LCP candidate).
-                // All others are lazy-loaded to avoid wasting bandwidth on slideshow images.
                 const isFirst = index === 0;
 
                 return (
                     <div key={src} className={`${styles.bgImageContainer} ${statusClass}`}>
                         <Image
                             src={src}
-                            alt="ZahriTours Background"
+                            alt="Mdina Tours Background"
                             fill
                             className={styles.heroBg}
                             priority={isFirst}
@@ -211,7 +218,6 @@ export default function Hero(props: { imageUrl?: string }) {
                     </div>
                 );
             })}
-
 
             <div className={styles.overlay} />
 
@@ -282,18 +288,8 @@ export default function Hero(props: { imageUrl?: string }) {
                                         value={date}
                                         min={today}
                                         onChange={e => setDate(e.target.value)}
-                                        placeholder="dd/mm/yy"
+                                        placeholder="dd/mm/yyyy"
                                     />
-                                    <select
-                                        className={styles.hourSelect}
-                                        value={hour}
-                                        onChange={e => setHour(e.target.value)}
-                                        onClick={e => e.stopPropagation()}
-                                    >
-                                        {HOURS.map(h => (
-                                            <option key={h} value={h}>{h}</option>
-                                        ))}
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -315,13 +311,10 @@ export default function Hero(props: { imageUrl?: string }) {
                 </div>
 
                 <div className={styles.socialColumn}>
-                    <a href="https://www.instagram.com/zahritours/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook">
+                    <a href="https://facebook.com/mdinatours" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
                     </a>
-                    <a href="https://www.instagram.com/zahritours/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Twitter">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /></svg>
-                    </a>
-                    <a href="https://www.instagram.com/zahritours/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
+                    <a href="https://instagram.com/mdinatours" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
                     </a>
                     <div className={styles.scrollIndicator}>
@@ -373,7 +366,47 @@ export default function Hero(props: { imageUrl?: string }) {
                                     </div>
                                     <div className={styles.summaryItem}>
                                         <span className={styles.summaryLabel}>{t('date')}</span>
-                                        <span className={styles.summaryValue}>{date ? `${date} ${hour}` : t('not_selected')}</span>
+                                        {isEditingDateTime ? (
+                                            <div className={styles.modalDateTimeInline}>
+                                                <input
+                                                    type="date"
+                                                    className={styles.modalDateInputInline}
+                                                    value={date}
+                                                    min={today}
+                                                    onChange={e => setDate(e.target.value)}
+                                                />
+                                                <div className={styles.modalHourSelectContainerInline}>
+                                                    <Clock size={16} className={styles.clockIcon} />
+                                                    <select
+                                                        className={styles.modalHourSelectInline}
+                                                        value={hour}
+                                                        onChange={e => setHour(e.target.value)}
+                                                    >
+                                                        {HOURS.map(h => (
+                                                            <option key={h} value={h}>{h}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <button 
+                                                    type="button" 
+                                                    className={styles.inlineSaveBtn}
+                                                    onClick={() => setIsEditingDateTime(false)}
+                                                >
+                                                    ✓
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div 
+                                                className={styles.summaryValueClickable}
+                                                onClick={() => setIsEditingDateTime(true)}
+                                            >
+                                                <Calendar size={18} className={styles.summaryIcon} />
+                                                <span className={styles.dateTimeText}>
+                                                    {date ? `${date} at ${hour}` : t('not_selected')}
+                                                </span>
+                                                <PencilSimple size={14} className={styles.editIcon} />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
@@ -395,7 +428,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice}€</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
                                     </div>
                                     <button className={styles.continueBtn} onClick={() => setModalStep(2)}>
                                         {t('continue')} →
@@ -452,16 +485,19 @@ export default function Hero(props: { imageUrl?: string }) {
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice}€</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
                                     </div>
 
                                     <div className={styles.ctaGroup}>
-                                        <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className={styles.primaryCta}>
-                                            <span>{t('book_now')} via WhatsApp</span>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.408.001 12.045a11.811 11.811 0 001.592 5.925L0 24l6.103-1.594a11.832 11.832 0 005.94 1.592h.005c6.637 0 12.05-5.408 12.054-12.045a11.8 11.8 0 00-3.536-8.509" />
-                                            </svg>
-                                        </a>
+                                        <div className={styles.whatsappContainer}>
+                                            <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className={styles.primaryCta}>
+                                                <span>{t('book_now')} via WhatsApp</span>
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.408.001 12.045a11.811 11.811 0 001.592 5.925L0 24l6.103-1.594a11.832 11.832 0 005.94 1.592h.005c6.637 0 12.05-5.408 12.054-12.045a11.8 11.8 0 00-3.536-8.509" />
+                                                </svg>
+                                            </a>
+                                            <span className={styles.whatsappSubtext}>{t('instant_confirmation')}</span>
+                                        </div>
 
                                         <div className={styles.secondaryCtas}>
                                             <a href={getEmailUrl()} className={`${styles.secondaryCta} ${styles.emailCta}`}>

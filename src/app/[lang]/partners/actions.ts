@@ -21,7 +21,7 @@ export async function submitPartnerForm(formData: FormData) {
         
         let htmlContent = `
             <h2>New B2B Partner Registration Request</h2>
-            <p>A new company has applied to join the ZahriTours B2B Partner Program.</p>
+            <p>A new company has applied to join the Mdina Tours B2B Partner Program.</p>
             <hr />
             <h3>Company Details</h3>
             <p><strong>Company Name:</strong> ${companyName}</p>
@@ -37,7 +37,7 @@ export async function submitPartnerForm(formData: FormData) {
             <p><strong>Professional Email:</strong> ${email}</p>
         `;
 
-        const attachments: any[] = [];
+        const attachments: { filename: string; content: Buffer }[] = [];
         
         if (licenseFile && licenseFile.size > 0) {
             // Check file size (max 5MB)
@@ -64,7 +64,7 @@ export async function submitPartnerForm(formData: FormData) {
 
         const { error } = await resend.emails.send({
             from: "contact@sitepro.ma",
-            to: "booking@tiqalgs.com",
+            to: "booking@mdinatours.com",
             subject: `B2B Partner Application: ${companyName} (${businessType})`,
             html: htmlContent,
             attachments: attachments.length > 0 ? attachments : undefined,

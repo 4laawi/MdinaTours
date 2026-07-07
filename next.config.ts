@@ -17,6 +17,26 @@ const nextConfig: NextConfig = {
   // Compress responses on Vercel edge
   compress: true,
 
+  // Enable Turbopack configuration to silence Webpack warning in dev mode
+  turbopack: {},
+
+  // Combine CSS files into a single styles chunk to prevent render-blocking separate requests
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks.cacheGroups = {
+        ...config.optimization.splitChunks.cacheGroups,
+        styles: {
+          name: "styles",
+          test: /\.(css|scss|sass)$/,
+          chunks: "all",
+          enforce: true,
+          priority: 200,
+        },
+      };
+    }
+    return config;
+  },
+
   // Security + performance headers
   async headers() {
     return [

@@ -13,8 +13,8 @@ export async function sendEmail(formData: FormData) {
     try {
         const { error } = await resend.emails.send({
             from: "contact@sitepro.ma",
-            to: "booking@tiqalgs.com",
-            subject: `New Message from ${name} (ZahriTours)`,
+            to: "booking@mdinatours.com",
+            subject: `New Message from ${name} (Mdina Tours)`,
             html: `
                 <h2>New Contact Form Submission</h2>
                 <p><strong>Name:</strong> ${name}</p>

@@ -1,33 +1,20 @@
-"use client";
-
 import Image from 'next/image';
-import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 import styles from './Services.module.css';
 
-export default function Services() {
-    const { t } = useLanguage();
+export default function Services({ lang = 'en' }: { lang?: Language }) {
+    const t = (key: string) => {
+        const langSection = translations[lang] || translations['en'];
+        return langSection[key] || key;
+    };
 
     const services = [
-        { id: 1, title: t('service_tours'), image: '/service_tours.png', icon: '🛣️' },
-        { id: 2, title: t('service_excursions'), image: '/service_excursions.png', icon: '🚢' },
-        { id: 3, title: t('service_activities'), image: '/service_activities.png', icon: '🏛️' },
-        { id: 4, title: t('service_chauffeurs'), image: '/service_other.png', icon: '🚐' },
-        { id: 5, title: t('service_other'), image: '/hero-sahara.webp', icon: '🌐' }
+        { id: 1, title: lang === 'en' ? "Private Driver Morocco" : "Chauffeur Privé Maroc", image: '/service_other.png', icon: '🚐', href: `/${lang}/private-driver` },
+        { id: 2, title: lang === 'en' ? "City-to-City Transfers" : "Transferts de Ville à Ville", image: '/b-roll/3-Mercedes-vito-airoport.jpg', icon: '🚗', href: `/${lang}/transfers` },
+        { id: 3, title: lang === 'en' ? "Custom Guided Tours" : "Circuits sur Mesure", image: '/Traditional-low.webp', icon: '🛣️', href: `/${lang}/tours` },
+        { id: 4, title: lang === 'en' ? "Day Trips" : "Excursions", image: '/camel_riding.png', icon: '🐪', href: `/${lang}#activities` },
+        { id: 5, title: lang === 'en' ? "B2B Partnerships" : "Partenariats B2B", image: '/b2b-moroccan.jpeg', icon: '🤝', href: `/${lang}/partners` }
     ];
-
-    const handleCardClick = (id: number) => {
-        let targetId = '';
-        if (id === 1 || id === 2) targetId = 'tours';
-        if (id === 3) targetId = 'activities';
-        if (id === 4) targetId = 'hero';
-        
-        if (targetId) {
-            const element = document.getElementById(targetId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    };
 
     return (
         <section className={styles.servicesSection}>
@@ -38,10 +25,10 @@ export default function Services() {
                 </div>
                 <div className={styles.servicesGrid}>
                     {services.map((service) => (
-                        <div 
+                        <a 
                             key={service.id} 
                             className={styles.serviceCard}
-                            onClick={() => handleCardClick(service.id)}
+                            href={service.href}
                         >
                             <div className={styles.imageWrapper}>
                                 <Image
@@ -56,7 +43,7 @@ export default function Services() {
                                 {service.icon}
                             </div>
                             <h3 className={styles.serviceTitle}>{service.title}</h3>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>
