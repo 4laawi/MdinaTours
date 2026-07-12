@@ -639,7 +639,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                                                 <span className="fleet-price-suffix">
                                                     {isEightDays 
                                                         ? `· ${isEn ? "8-Day All-Inclusive" : "8 Jours Tout-Inclus"}`
-                                                        : `/ ${isEn ? "day" : "jour"} · ${isEn ? "All-Inclusive" : "Tout-Inclus"}`
+                                                        : `/ ${isEn ? "hour" : "heure"} · ${isEn ? "All-Inclusive" : "Tout-Inclus"}`
                                                     }
                                                 </span>
                                             </div>

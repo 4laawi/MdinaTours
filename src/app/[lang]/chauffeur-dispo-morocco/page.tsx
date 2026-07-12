@@ -133,7 +133,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             capacity: "1-3 PAX",
             luggage: "3 Bags",
             suitability: isEn ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or business meetings." : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
-            price: "€80",
+            price: "€20",
             image: "/cars/flotte-superb.webp"
         },
         {
@@ -142,7 +142,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             capacity: "1-5 PAX",
             luggage: "4 Bags",
             suitability: isEn ? "A premium mid-size SUV offering high ground clearance, excellent stability for mountain roads, and spacious comfort." : "Un SUV familial haut de gamme offrant une excellente garde au sol, une stabilité parfaite pour l'Atlas.",
-            price: "€100",
+            price: "€22",
             image: "/cars/flotte-skoda-kodiaq.webp"
         },
         {
@@ -151,7 +151,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             capacity: "1-6 PAX",
             luggage: "5 Bags",
             suitability: isEn ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions." : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
-            price: "€120",
+            price: "€25",
             image: "/cars/flotte-fiat-scudo.webp"
         },
         {
@@ -160,7 +160,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             capacity: "1-7 PAX",
             luggage: "6 Bags",
             suitability: isEn ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room." : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
-            price: "€140",
+            price: "€28",
             image: "/cars/flotte-vito.webp"
         },
         {
@@ -169,7 +169,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             capacity: "8-16 PAX",
             luggage: "12 Bags",
             suitability: isEn ? "A custom-configured executive minibus designed for large tour groups, corporate delegates, or multi-family excursions." : "Un minibus de prestige configuré sur mesure, conçu pour les délégations professionnelles et les grands groupes.",
-            price: "€200",
+            price: "€35",
             image: "/cars/flotte-sprinter.webp"
         }
     ];

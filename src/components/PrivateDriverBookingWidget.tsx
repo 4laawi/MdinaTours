@@ -34,7 +34,7 @@ const VEHICLES: VehicleOption[] = [
         luggage: "4 Bags",
         pricePerDay: 132,
         price8Days: 936,
-        pricePerHour: 15,
+        pricePerHour: 22,
         image: "/img/Morocco-trip-tour-hero08.webp"
     },
     {
@@ -46,7 +46,7 @@ const VEHICLES: VehicleOption[] = [
         luggage: "8 Bags",
         pricePerDay: 144,
         price8Days: 1020,
-        pricePerHour: 18,
+        pricePerHour: 28,
         image: "/img2/private-vito-vans-3.webp"
     },
     {
@@ -58,7 +58,7 @@ const VEHICLES: VehicleOption[] = [
         luggage: "16 Bags",
         pricePerDay: 216,
         price8Days: 1536,
-        pricePerHour: 25,
+        pricePerHour: 35,
         image: "/b-roll/3-Mercedes-vito-airoport.jpg"
     }
 ];
@@ -74,7 +74,7 @@ export default function PrivateDriverBookingWidget({
 
     // State inputs
     const [startCity, setStartCity] = useState("");
-    const [hireType, setHireType] = useState<'hourly' | 'daily'>('daily');
+    const [hireType, setHireType] = useState<'hourly' | 'daily'>('hourly');
     const [travelPlan, setTravelPlan] = useState("");
     const [duration, setDuration] = useState(defaultDays);
     const [travelDate, setTravelDate] = useState(() => {
