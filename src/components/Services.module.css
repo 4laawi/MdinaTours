@@ -73,39 +73,58 @@
 }
 
 @media (max-width: 768px) {
+    .servicesSection {
+        padding: 40px 0;
+    }
+
+    .servicesIntro {
+        margin-bottom: 25px;
+    }
+
     .servicesGrid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px 16px;
-        padding: 0 15px;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Hide default scrollbar on Firefox */
+        gap: 16px;
+        padding: 10px 20px 25px 20px;
+        margin: 0 -20px;
+        scroll-padding: 0 20px;
+        justify-content: flex-start;
+    }
+
+    .servicesGrid::-webkit-scrollbar {
+        display: none; /* Hide scrollbar on Chrome, Safari, Opera */
     }
 
     .serviceCard {
-        width: 100%;
+        flex: 0 0 150px;
+        width: 150px;
+        scroll-snap-align: start;
     }
 
     .imageWrapper {
         width: 100%;
-        max-width: 190px;
+        max-width: 150px;
         height: auto;
         aspect-ratio: 190 / 270;
-        border-radius: 100px;
+        border-radius: 75px;
         margin: 0 auto;
     }
 
     .serviceTitle {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         margin-top: 5px;
+        line-height: 1.3;
     }
 
     .iconWrapper {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-        margin-top: -22px;
-    }
-
-    .serviceCard:nth-child(5) {
-        grid-column: span 2;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        margin-top: -20px;
     }
 }

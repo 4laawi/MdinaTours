@@ -682,6 +682,44 @@ export default function PrivateDriverBookingWidget({
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', boxSizing: 'border-box' }}>
+            <style>{`
+                .booking-date-duration-row {
+                    display: grid;
+                    grid-template-columns: 1.2fr 0.8fr;
+                    gap: 10px;
+                }
+                @media (max-width: 500px) {
+                    .booking-date-duration-row {
+                        grid-template-columns: 1fr;
+                        gap: 12px;
+                    }
+                }
+                .booking-select-input {
+                    width: 100%;
+                    height: 46px;
+                    box-sizing: border-box;
+                    min-width: 0;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23717171' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 5 3 3 3-3'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: right 14px center;
+                    background-size: 14px;
+                    padding: 0 36px 0 12px !important;
+                }
+                .booking-date-input {
+                    width: 100%;
+                    height: 46px;
+                    box-sizing: border-box;
+                    min-width: 0;
+                    padding: 0 12px !important;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    line-height: 43px;
+                }
+            `}</style>
             <div style={{
                 backgroundColor: '#fff',
                 borderRadius: '16px',
@@ -788,9 +826,8 @@ export default function PrivateDriverBookingWidget({
                                     localStorage.removeItem('mdina_tours_private_driver_start_city');
                                 }
                             }}
+                            className="booking-select-input"
                             style={{
-                                width: '100%',
-                                padding: '12px',
                                 borderRadius: '10px',
                                 border: '1.5px solid #cbd5e1',
                                 fontSize: '14px',
@@ -820,7 +857,7 @@ export default function PrivateDriverBookingWidget({
                     </div>
 
                     {/* Date and Duration Row */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '10px' }}>
+                    <div className="booking-date-duration-row">
                         <div>
                             <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
                                 {isEn ? "Start Date" : "Date de début"}
@@ -830,17 +867,15 @@ export default function PrivateDriverBookingWidget({
                                 value={travelDate}
                                 min={new Date().toISOString().split('T')[0]}
                                 onChange={(e) => setTravelDate(e.target.value)}
+                                className="booking-date-input"
                                 style={{
-                                    width: '100%',
-                                    padding: '11px 12px',
                                     borderRadius: '10px',
                                     border: '1.5px solid #cbd5e1',
                                     fontSize: '14px',
                                     outline: 'none',
                                     color: '#222',
                                     fontWeight: 600,
-                                    backgroundColor: '#fff',
-                                    boxSizing: 'border-box'
+                                    backgroundColor: '#fff'
                                 }}
                             />
                         </div>
@@ -851,9 +886,8 @@ export default function PrivateDriverBookingWidget({
                             <select 
                                 value={duration}
                                 onChange={(e) => setDuration(parseInt(e.target.value))}
+                                className="booking-select-input"
                                 style={{
-                                    width: '100%',
-                                    padding: '12px',
                                     borderRadius: '10px',
                                     border: '1.5px solid #cbd5e1',
                                     fontSize: '14px',
