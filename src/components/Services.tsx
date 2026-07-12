@@ -13,7 +13,7 @@ export default function Services({ lang = 'en' }: { lang?: Language }) {
         { id: 2, title: lang === 'en' ? "City-to-City Transfers" : "Transferts de Ville à Ville", image: '/b-roll/3-Mercedes-vito-airoport.jpg', icon: '🚗', href: `/${lang}/transfers` },
         { id: 3, title: lang === 'en' ? "Custom Guided Tours" : "Circuits sur Mesure", image: '/Traditional-low.webp', icon: '🛣️', href: `/${lang}/tours` },
         { id: 4, title: lang === 'en' ? "Day Trips" : "Excursions", image: '/camel_riding.png', icon: '🐪', href: `/${lang}#activities` },
-        { id: 5, title: lang === 'en' ? "B2B Partnerships" : "Partenariats B2B", image: '/b2b-moroccan.jpeg', icon: '🤝', href: `/${lang}/partners` }
+        { id: 5, title: lang === 'en' ? "B2B Partnerships" : "Partenariats B2B", image: '/b-roll/b2b.jpg', icon: '🤝', href: `/${lang}/partners` }
     ];
 
     return (
