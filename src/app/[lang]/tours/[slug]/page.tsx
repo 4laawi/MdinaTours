@@ -86,11 +86,15 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
     // JSON-LD Structured Data for TouristTrip
     const tripJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TouristTrip",
+        "@type": ["Product", "TouristTrip"],
         "name": local.title,
         "description": local.description,
         "image": `https://mdinatours.com${tour.image}`,
         "touristType": "International Tourists",
+        "brand": {
+            "@type": "Brand",
+            "name": "Mdina Tours"
+        },
         "offers": {
             "@type": "Offer",
             "priceCurrency": "EUR",
@@ -98,12 +102,18 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
             "availability": "https://schema.org/InStock",
             "validFrom": "2026-01-01"
         },
-        "itinerary": local.itinerary.map((item, index) => ({
-            "@type": "HowToStep",
-            "position": index + 1,
-            "name": item.title,
-            "text": item.desc
-        })),
+        "itinerary": {
+            "@type": "ItemList",
+            "itemListElement": local.itinerary.map((item, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "Place",
+                    "name": item.title,
+                    "description": item.desc
+                }
+            }))
+        },
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
