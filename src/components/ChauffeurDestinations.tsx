@@ -58,7 +58,7 @@ const CITIES: CityOption[] = [
 
 interface ChauffeurDestinationsProps {
     lang: 'en' | 'fr';
-    pageType: 'morocco' | 'casablanca' | 'marrakech' | '8-days';
+    pageType: 'morocco' | 'casablanca' | 'marrakech' | '8-days' | 'fes' | 'tangier' | 'agadir' | 'rabat' | 'chefchaouen';
     upperBgColor?: string;
 }
 
@@ -82,6 +82,46 @@ export default function ChauffeurDestinations({ lang = 'en', pageType, upperBgCo
                     desc: isEn 
                         ? "Ready to explore Marrakech or depart to other imperial cities? Select Marrakech as your starting city below to update the booking form and secure your premium private vehicle."
                         : "Prêt à explorer Marrakech ou à partir vers d'autres villes ? Sélectionnez Marrakech comme ville de départ ci-dessous pour mettre à jour le formulaire et réserver votre véhicule premium."
+                };
+            case 'fes':
+                return {
+                    subtitle: isEn ? "Fes Chauffeur Service" : "Service Chauffeur Fès",
+                    title: isEn ? "Explore Fes & Cultural Landmarks" : "Explorez Fès & ses Lieux Culturels",
+                    desc: isEn 
+                        ? "Starting in the spiritual heart of Morocco? Select Fes as your starting point below to configure your custom tour, Medina excursion, or intercity travel."
+                        : "Vous partez du cœur spirituel du Maroc ? Sélectionnez Fès comme ville de départ ci-dessous pour configurer votre circuit sur mesure, visite de la médina ou voyage interurbain."
+                };
+            case 'tangier':
+                return {
+                    subtitle: isEn ? "Tangier Chauffeur Service" : "Service Chauffeur Tanger",
+                    title: isEn ? "Discover Northern Morocco from Tangier" : "Découvrez le Nord du Maroc Depuis Tanger",
+                    desc: isEn 
+                        ? "Arriving by ferry or at Tangier Airport? Select Tangier as your starting city below to set up your dispo driver and explore the northern coastline, Rif Mountains, or historic sites."
+                        : "Arrivée en ferry ou à l'aéroport de Tanger ? Sélectionnez Tanger comme ville de départ ci-dessous pour réserver votre chauffeur dispo et explorer la côte nord, le Rif ou les sites historiques."
+                };
+            case 'agadir':
+                return {
+                    subtitle: isEn ? "Agadir Chauffeur Service" : "Service Chauffeur Agadir",
+                    title: isEn ? "Explore Agadir & Coastline" : "Explorez Agadir & la Côte",
+                    desc: isEn 
+                        ? "Starting your beach holiday or southern exploration in Agadir? Select Agadir below to plan your trip to Paradise Valley, Taghazout, or transfer to Marrakech."
+                        : "Vous commencez vos vacances ou votre exploration du Sud à Agadir ? Sélectionnez Agadir ci-dessous pour planifier votre excursion à Paradise Valley, Taghazout ou vers Marrakech."
+                };
+            case 'rabat':
+                return {
+                    subtitle: isEn ? "Rabat Chauffeur Service" : "Service Chauffeur Rabat",
+                    title: isEn ? "Explore the Capital City Rabat" : "Explorez la Capitale Rabat",
+                    desc: isEn 
+                        ? "Starting your business or leisure trip in Rabat? Select Rabat below to coordinate your corporate dispo chauffeur, airport transfers, or custom tours."
+                        : "Vous démarrez votre voyage d'affaires ou d'agrément à Rabat ? Sélectionnez Rabat ci-dessous pour coordonner votre chauffeur à disposition, vos transferts ou circuits."
+                };
+            case 'chefchaouen':
+                return {
+                    subtitle: isEn ? "Chefchaouen Chauffeur Service" : "Service Chauffeur Chefchaouen",
+                    title: isEn ? "Begin in the Blue City Chefchaouen" : "Démarrez dans la Ville Bleue de Chefchaouen",
+                    desc: isEn 
+                        ? "Planning to explore the Rif region or start your trip from Chefchaouen? Select Chefchaouen below to configure your private driver package and itinerary."
+                        : "Vous prévoyez d'explorer la région du Rif ou de démarrer votre voyage à Chefchaouen ? Sélectionnez Chefchaouen ci-dessous pour configurer votre formule avec chauffeur."
                 };
             case '8-days':
                 return {
