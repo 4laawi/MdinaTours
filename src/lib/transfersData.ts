@@ -43,7 +43,7 @@ export const transfersData: TransferData[] = [
         image: "/Traditional.webp",
         prices: { 3: 102, 4: 120, 5: 144, 7: 180 },
         en: {
-            title: "Private Transfer from Casablanca Airport to Rabat",
+            title: "Private Transfer from Casablanca Airport to Rabat or Salé",
             tagline: "Seamless, Premium Chauffeur Service Direct to Your Hotel or Riad",
             pickup: "Casablanca Mohammed V International Airport (CMN)",
             dropoff: "Rabat or Salé City Center",
@@ -70,7 +70,7 @@ export const transfersData: TransferData[] = [
                 { q: "Can I pay in euros?", a: "Yes, you can pay your driver in cash using either Euros or Moroccan Dirhams (MAD) at the end of your journey." },
                 { q: "How long does it take to get from Casablanca Airport to Rabat?", a: "The drive typically takes about 1 hour and 30 minutes, depending on traffic conditions upon entering Rabat." }
             ],
-            seoTitle: "Premium Casablanca Airport (CMN) to Rabat Private Transfer",
+            seoTitle: "Premium Casablanca Airport (CMN) to Rabat & Salé Private Transfer",
             seoDesc: "Pre-book a first-class private transfer from Casablanca Mohammed V Airport to Rabat. Fixed luxury rates, real-time flight tracking, and pristine modern vehicles.",
             seoIntro: "Embark on your Moroccan journey with the ultimate comfort of a dedicated private transfer from Casablanca Mohammed V International Airport (CMN) directly to Rabat. Skip the crowded train terminals and the uncertainty of airport taxi lines. Our bespoke service coordinates a professional local chauffeur to meet you inside the arrivals hall, assist with your luggage, and escort you to a premium, climate-controlled vehicle. Whether you are traveling for a business summit in Hay Riad or heading to a boutique riad in the heart of the historic Medina, our door-to-door transit promises a peaceful, reliable, and scenic ride along the Atlantic coast.",
             aboutDestination: {
@@ -93,7 +93,7 @@ export const transfersData: TransferData[] = [
             ]
         },
         fr: {
-            title: "Transfert Privé de l'Aéroport de Casablanca vers Rabat",
+            title: "Transfert Privé de l'Aéroport de Casablanca vers Rabat ou Salé",
             tagline: "Chauffeur Privé et Service Premium Direct jusqu'à votre Hôtel ou Riad",
             pickup: "Aéroport International Mohammed V de Casablanca (CMN)",
             dropoff: "Centre-ville de Rabat ou Salé",
@@ -112,7 +112,7 @@ export const transfersData: TransferData[] = [
                 { q: "Que se passe-t-il si mon vol a du retard ?", a: "Nous suivons l'état de votre vol en temps réel. Le chauffeur s'adaptera sans aucun surcoût." },
                 { q: "Comment repérer mon chauffeur à l'aéroport ?", a: "Dès votre sortie du hall des bagages, votre chauffeur se tiendra visible avec une pancarte arborant votre nom et le logo de Mdina Tours." }
             ],
-            seoTitle: "Chauffeur Privé Aéroport Casablanca CMN vers Rabat | Mdina Tours",
+            seoTitle: "Chauffeur Privé Aéroport Casablanca CMN vers Rabat / Salé | Mdina Tours",
             seoDesc: "Service de transfert privé haut de gamme depuis l'Aéroport de Casablanca (CMN) vers Rabat. Tarif fixe garanti, accueil personnalisé et berlines/vans climatisés."
         }
     },
@@ -172,10 +172,10 @@ export const transfersData: TransferData[] = [
         image: "/Tangier-Morocco-Photo.webp",
         prices: { 3: 180, 4: 210, 5: 240, 7: 336 },
         en: {
-            title: "Tangier to Rabat Private Expressway Transfer",
+            title: "Tangier to Rabat or Salé Private Expressway Transfer",
             tagline: "Comfortable City-to-City Chauffeur Travel via the Atlantic Highway",
             pickup: "Tangier (Airport, Port, or Hotel)",
-            dropoff: "Rabat (Hotel, Riad, or Airport)",
+            dropoff: "Rabat or Salé (Hotel, Riad, or Airport)",
             distance: "250 km",
             duration: "2 hours 45 minutes",
             capacityText: "1 to 7 passengers in premium multi-purpose vehicles",
@@ -191,14 +191,14 @@ export const transfersData: TransferData[] = [
                 { q: "Are we allowed to stop in Asilah or Larache along the way?", a: "Yes! If you would like to stretch your legs or have lunch in the historic coastal town of Asilah or Larache, please let us know when booking so we can block out extra time for your driver." },
                 { q: "Is the Atlantic highway route safe?", a: "Yes, the A1 coastal expressway is a modern, high-speed toll road built to international safety standards, ensuring a smooth and secure trip." }
             ],
-            seoTitle: "Private Transfer Tangier to Rabat | Mdina Tours",
+            seoTitle: "Private Transfer Tangier to Rabat & Salé | Mdina Tours",
             seoDesc: "Travel in comfort with a private city-to-city transfer from Tangier to Rabat. Pristine air-conditioned vehicles, professional bilingual drivers, and door-to-door convenience."
         },
         fr: {
-            title: "Transfert de Tanger à Rabat",
+            title: "Transfert de Tanger à Rabat ou Salé",
             tagline: "Liaison Intervilles Confortable via l'Autoroute de l'Atlantique",
             pickup: "Tanger (Hôtel, Port ou Aéroport)",
-            dropoff: "Rabat (Hôtel, Riad ou Aéroport)",
+            dropoff: "Rabat ou Salé (Hôtel, Riad ou Aéroport)",
             distance: "250 km",
             duration: "2 heures 45 minutes",
             capacityText: "1 à 7 passagers dans des monospaces ou vans haut de gamme",
@@ -214,7 +214,7 @@ export const transfersData: TransferData[] = [
                 { q: "Peut-on s'arrêter à Asilah en chemin ?", a: "Oui, un arrêt découverte à Asilah est tout à fait possible. Signalez-le lors de votre réservation pour adapter le planning du chauffeur." },
                 { q: "Comment se déroule le paiement ?", a: "Vous réglez directement le chauffeur en espèces (Euros ou Dirhams) à la fin de la prestation." }
             ],
-            seoTitle: "Chauffeur Privé Tanger vers Rabat | Mdina Tours",
+            seoTitle: "Chauffeur Privé Tanger vers Rabat / Salé | Mdina Tours",
             seoDesc: "Navette privée de Tanger à Rabat. Voyagez confortablement à bord de nos véhicules récents conduits par des chauffeurs expérimentés."
         }
     },
@@ -223,9 +223,9 @@ export const transfersData: TransferData[] = [
         image: "/hero-landscape-1.webp",
         prices: { 3: 96, 4: 108, 5: 132, 7: 168 },
         en: {
-            title: "Rabat to Casablanca Private Transfer",
+            title: "Rabat or Salé to Casablanca Private Transfer",
             tagline: "Quick and Premium Business & Leisure Transfers between Morocco's Two Major Hubs",
-            pickup: "Rabat (Hotel, Office, or Airport)",
+            pickup: "Rabat or Salé (Hotel, Office, or Airport)",
             dropoff: "Casablanca (Hotel, Office, Port, or Airport)",
             distance: "90 km",
             duration: "1 hour 10 minutes",
@@ -242,13 +242,13 @@ export const transfersData: TransferData[] = [
                 { q: "Do you offer corporate accounts?", a: "Yes, we work with several national and international companies to provide daily or weekly executive transport between Rabat and Casablanca." },
                 { q: "Can we book a return transfer on the same day?", a: "Yes, we can arrange same-day round trips. Your driver can wait for you at your meeting venue or city location." }
             ],
-            seoTitle: "Private Driver Rabat to Casablanca Transfer | Mdina Tours",
+            seoTitle: "Private Driver Rabat & Salé to Casablanca Transfer | Mdina Tours",
             seoDesc: "Fast and professional private transfers between Rabat and Casablanca. Perfect for corporate travel, families, and airport connections."
         },
         fr: {
-            title: "Transfert de Rabat à Casablanca",
-            tagline: "Liaison Premium pour Affaires et Loisirs entre Rabat et Casablanca",
-            pickup: "Rabat (Hôtel, Bureau ou Aéroport)",
+            title: "Transfert de Rabat ou Salé à Casablanca",
+            tagline: "Liaison Premium pour Affaires et Loisirs entre Rabat/Salé et Casablanca",
+            pickup: "Rabat ou Salé (Hôtel, Bureau ou Aéroport)",
             dropoff: "Casablanca (Hôtel, Bureau ou Aéroport)",
             distance: "90 km",
             duration: "1 heure 10 minutes",
@@ -265,7 +265,7 @@ export const transfersData: TransferData[] = [
                 { q: "Proposez-vous des tarifs pour les entreprises ?", a: "Oui, nous pouvons mettre en place des contrats réguliers pour les déplacements de vos collaborateurs ou clients." },
                 { q: "Peut-on réserver un aller-retour dans la journée ?", a: "Absolument. Le chauffeur peut vous attendre sur votre lieu de rendez-vous ou vous récupérer à une heure convenue." }
             ],
-            seoTitle: "Transfert Privé Rabat Casablanca | Mdina Tours",
+            seoTitle: "Transfert Privé Rabat / Salé vers Casablanca | Mdina Tours",
             seoDesc: "Chauffeur privé entre Rabat et Casablanca. Trajets rapides, confort garanti et ponctualité pour vos rendez-vous d'affaires ou loisirs."
         }
     },
@@ -631,9 +631,9 @@ export const transfersData: TransferData[] = [
         image: "/hero-landscape-1.webp",
         prices: { 3: 204, 4: 228, 5: 264, 7: 360 },
         en: {
-            title: "Rabat to Marrakech Private Transfer",
+            title: "Rabat or Salé to Marrakech Private Transfer",
             tagline: "Premium Intercity Transfer from the Capital to the Red City",
-            pickup: "Rabat (Hotel, Riad, or Office)",
+            pickup: "Rabat or Salé (Hotel, Riad, or Office)",
             dropoff: "Marrakech (Hotel, Riad, or Airport)",
             distance: "325 km",
             duration: "3 hours 15 minutes",
@@ -650,13 +650,13 @@ export const transfersData: TransferData[] = [
                 { q: "Are highway tolls included in the price?", a: "Yes, all expressway toll fees, fuel, and driver costs are fully included." },
                 { q: "Can the driver drop us directly in Marrakech medina?", a: "Your driver will drop you at the nearest accessible point and coordinate with your riad host to ensure a smooth check-in." }
             ],
-            seoTitle: "Rabat to Marrakech Private Transfer | Mdina Tours",
+            seoTitle: "Rabat & Salé to Marrakech Private Transfer | Mdina Tours",
             seoDesc: "Book a private transfer from Rabat to Marrakech. Professional drivers, modern vehicles, fixed prices, and direct door-to-door service."
         },
         fr: {
-            title: "Transfert de Rabat à Marrakech",
+            title: "Transfert de Rabat ou Salé à Marrakech",
             tagline: "Liaison Privée Premium de la Capitale à la Ville Rouge",
-            pickup: "Rabat (Hôtel, Riad ou Bureau)",
+            pickup: "Rabat ou Salé (Hôtel, Riad ou Bureau)",
             dropoff: "Marrakech (Hôtel, Riad ou Aéroport)",
             distance: "325 km",
             duration: "3 heures 15 minutes",
@@ -673,7 +673,7 @@ export const transfersData: TransferData[] = [
                 { q: "Les frais d'autoroute sont-ils inclus ?", a: "Oui, le tarif indiqué inclut tous les frais d'autoroute, de carburant et de chauffeur." },
                 { q: "Le chauffeur dépose-t-il devant le riad à Marrakech ?", a: "Nous vous déposons à la porte d'accès la plus proche de la médina et contactons votre riad pour organiser l'accueil." }
             ],
-            seoTitle: "Chauffeur Privé Rabat vers Marrakech | Mdina Tours",
+            seoTitle: "Chauffeur Privé Rabat / Salé vers Marrakech | Mdina Tours",
             seoDesc: "Réservez votre transfert privé de Rabat à Marrakech. Service fiable de porte à porte, véhicules confortables et tarifs clairs."
         }
     },
@@ -682,9 +682,9 @@ export const transfersData: TransferData[] = [
         image: "/hero-landscape-3.webp",
         prices: { 3: 132, 4: 156, 5: 180, 7: 240 },
         en: {
-            title: "Rabat to Fes Private Transfer",
+            title: "Rabat or Salé to Fes Private Transfer",
             tagline: "Fast and Convenient Transfer Between Morocco's Historic Capital Cities",
-            pickup: "Rabat (Hotel, Riad, or Office)",
+            pickup: "Rabat or Salé (Hotel, Riad, or Office)",
             dropoff: "Fes (Hotel, Riad, or Airport)",
             distance: "200 km",
             duration: "2 hours 10 minutes",
@@ -701,13 +701,13 @@ export const transfersData: TransferData[] = [
                 { q: "Can we visit Meknes or Volubilis?", a: "Yes, we can arrange a custom itinerary including stops at Meknes or Volubilis. Please ask when booking." },
                 { q: "Is the price per vehicle?", a: "Yes, all prices are per vehicle for your private group." }
             ],
-            seoTitle: "Rabat to Fes Private Transfer | Mdina Tours",
+            seoTitle: "Rabat & Salé to Fes Private Transfer | Mdina Tours",
             seoDesc: "Private transfer between Rabat and Fes. Fixed prices, professional drivers, and clean air-conditioned vehicles."
         },
         fr: {
-            title: "Transfert de Rabat à Fès",
+            title: "Transfert de Rabat ou Salé à Fès",
             tagline: "Liaison Express Confortable entre les Deux Cités Impériales",
-            pickup: "Rabat (Hôtel, Riad ou Bureau)",
+            pickup: "Rabat ou Salé (Hôtel, Riad ou Bureau)",
             dropoff: "Fès (Hôtel, Riad ou Aéroport)",
             distance: "200 km",
             duration: "2 heures 10 minutes",
@@ -724,7 +724,7 @@ export const transfersData: TransferData[] = [
                 { q: "Est-il possible de faire une halte à Meknès ?", a: "Oui, nous pouvons intégrer une visite de Meknès ou des ruines romaines de Volubilis avec un supplément." },
                 { q: "Le tarif est-il par groupe ou par personne ?", a: "Tous nos prix sont calculés par véhicule pour l'ensemble de votre groupe." }
             ],
-            seoTitle: "Transfert Privé Rabat vers Fès | Mdina Tours",
+            seoTitle: "Transfert Privé Rabat / Salé vers Fès | Mdina Tours",
             seoDesc: "Réservez votre navette privée de Rabat à Fès. Chauffeurs professionnels, confort garanti et tarifs forfaitaires fixes."
         }
     },
@@ -733,9 +733,9 @@ export const transfersData: TransferData[] = [
         image: "/hero-chefchaouen.webp",
         prices: { 3: 180, 4: 210, 5: 240, 7: 336 },
         en: {
-            title: "Rabat to Chefchaouen Private Transfer",
+            title: "Rabat or Salé to Chefchaouen Private Transfer",
             tagline: "Direct Private Taxi to the Blue City in the Rif Mountains",
-            pickup: "Rabat (Hotel, Riad, or Office)",
+            pickup: "Rabat or Salé (Hotel, Riad, or Office)",
             dropoff: "Chefchaouen (Hotel or Riad)",
             distance: "250 km",
             duration: "4 hours",
@@ -752,13 +752,13 @@ export const transfersData: TransferData[] = [
                 { q: "What is the best route?", a: "The drive passes through Kenitra and Ouazzane before ascending into the Rif Mountains. Your driver will stop for coffee or restrooms on request." },
                 { q: "Where does the driver drop us off?", a: "As the medina is pedestrian-only, your driver will drop you at the nearest gate and contact your riad manager." }
             ],
-            seoTitle: "Rabat to Chefchaouen Private Transfer | Mdina Tours",
+            seoTitle: "Rabat & Salé to Chefchaouen Private Transfer | Mdina Tours",
             seoDesc: "Private transfer from Rabat to Chefchaouen. Safe drive, fixed pricing, and professional drivers."
         },
         fr: {
-            title: "Transfert de Rabat à Chefchaouen",
+            title: "Transfert de Rabat ou Salé à Chefchaouen",
             tagline: "Navette Privée Directe vers la Cité Bleue du Nord",
-            pickup: "Rabat (Hôtel, Riad ou Bureau)",
+            pickup: "Rabat ou Salé (Hôtel, Riad ou Bureau)",
             dropoff: "Chefchaouen (Hôtel ou Riad)",
             distance: "250 km",
             duration: "4 heures",
@@ -775,7 +775,7 @@ export const transfersData: TransferData[] = [
                 { q: "Quel est l'itinéraire emprunté ?", a: "Le trajet traverse Kénitra et Ouazzane avant de monter dans les montagnes. Des pauses sont prévues en chemin." },
                 { q: "Où se fait l'arrivée à Chefchaouen ?", a: "Le chauffeur vous dépose à l'entrée de la médina piétonne et prévient votre riad." }
             ],
-            seoTitle: "Chauffeur Privé Rabat vers Chefchaouen | Mdina Tours",
+            seoTitle: "Chauffeur Privé Rabat / Salé vers Chefchaouen | Mdina Tours",
             seoDesc: "Réservez votre transfert privé de Rabat à Chefchaouen. Véhicules récents et confortables avec chauffeurs expérimentés."
         }
     },

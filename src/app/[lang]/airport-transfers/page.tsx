@@ -150,11 +150,11 @@ export default async function AirportTransfersPage({ params }: { params: Promise
                             </h2>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                                 <Link href={getPath('/transfers/casablanca-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
-                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Casablanca Airport (CMN) ⇄ Rabat</h4>
+                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Casablanca Airport (CMN) ⇄ Rabat or Salé</h4>
                                     <span style={{ fontSize: '0.85rem', color: '#888' }}>{isEn ? 'From €85 • Private Sedan or Van' : 'À partir de 85 € • Berline ou Van'}</span>
                                 </Link>
                                 <Link href={getPath('/transfers/rabat-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
-                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Rabat Airport (RBA) ⇄ Rabat City</h4>
+                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Rabat-Salé Airport (RBA) ⇄ Rabat or Salé</h4>
                                     <span style={{ fontSize: '0.85rem', color: '#888' }}>{isEn ? 'From €30 • Fast City Shuttle' : 'À partir de 30 € • Navette Ville Rapide'}</span>
                                 </Link>
                                 <Link href={getPath('/transfers/tangier-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>

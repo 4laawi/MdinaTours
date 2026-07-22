@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/private-driver-tangier',
         '/private-driver-agadir',
         '/private-driver-rabat',
+        '/private-driver-sale',
         '/private-driver-chefchaouen',
         '/private-driver-morocco',
         '/chauffeur-dispo-morocco',

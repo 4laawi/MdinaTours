@@ -6,21 +6,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import styles from './Hero.module.css';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
 
-const LOCATIONS = [
-    "Rabat Airport",
-    "Rabat City Center",
-    "Casablanca Airport",
-    "Casablanca City Center",
-    "Tangier Airport",
-    "Tangier City Center",
-    "Marrakech Airport",
-    "Marrakech City Center",
-    "Chefchaouen",
-    "Fes",
-    "Essaouira"
-];
-
-type Prices = { [key: number]: number };
+import { LOCATIONS, getRoutePrice } from '@/lib/transferLocations';
+import LocationCombobox from '@/components/LocationCombobox';
 
 const BACKGROUND_IMAGES = [
     "/img/Morocco-trip-tour-hero01.webp",
@@ -35,41 +22,13 @@ const BACKGROUND_IMAGES = [
     "/img/hero-landscape-3.webp"
 ];
 
-const buildRouteKey = (l1: string, l2: string) => [l1, l2].sort().join('-');
-
-const routePrices: Record<string, Prices> = {};
-
-const setPricing = (loc1: string, loc2: string, prices: Prices) => {
-    routePrices[buildRouteKey(loc1, loc2)] = prices;
-};
-
-// Configure fixed pricing database
-// Local transfers
-setPricing("Rabat Airport", "Rabat City Center", { 3: 36, 4: 42, 5: 54, 7: 72 });
-setPricing("Casablanca Airport", "Casablanca City Center", { 3: 48, 4: 54, 5: 66, 7: 84 });
-setPricing("Tangier Airport", "Tangier City Center", { 3: 30, 4: 36, 5: 42, 7: 60 });
-setPricing("Marrakech Airport", "Marrakech City Center", { 3: 24, 4: 30, 5: 36, 7: 54 });
-
-// Intercity transfers
-setPricing("Rabat City Center", "Casablanca City Center", { 3: 96, 4: 108, 5: 132, 7: 168 });
-setPricing("Rabat City Center", "Casablanca Airport", { 3: 102, 4: 120, 5: 144, 7: 180 });
-setPricing("Rabat Airport", "Casablanca City Center", { 3: 102, 4: 120, 5: 144, 7: 180 });
-setPricing("Tangier City Center", "Rabat City Center", { 3: 180, 4: 210, 5: 240, 7: 336 });
-setPricing("Tangier Airport", "Rabat City Center", { 3: 192, 4: 216, 5: 252, 7: 348 });
-setPricing("Marrakech City Center", "Essaouira", { 3: 108, 4: 132, 5: 156, 7: 216 });
-setPricing("Fes", "Chefchaouen", { 3: 144, 4: 168, 5: 192, 7: 264 });
-setPricing("Casablanca City Center", "Marrakech City Center", { 3: 192, 4: 216, 5: 252, 7: 336 });
-
-// Add connections to airports
-setPricing("Casablanca Airport", "Marrakech City Center", { 3: 192, 4: 216, 5: 252, 7: 336 });
-setPricing("Rabat City Center", "Chefchaouen", { 3: 168, 4: 192, 5: 216, 7: 300 });
-setPricing("Casablanca City Center", "Fes", { 3: 216, 4: 240, 5: 276, 7: 360 });
-
 export default function Hero(props: { imageUrl?: string }) {
     const { t, language } = useLanguage();
     const today = new Date().toISOString().split('T')[0];
-    const [pickup, setPickup] = useState(LOCATIONS[1]); // Rabat City Center
-    const [dropoff, setDropoff] = useState(LOCATIONS[3]); // Casablanca City Center
+    const [pickup, setPickup] = useState<string>("Rabat");
+    const [dropoff, setDropoff] = useState<string>("Casablanca");
+    const [isCustomPickup, setIsCustomPickup] = useState(false);
+    const [isCustomDropoff, setIsCustomDropoff] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [date, setDate] = useState("");
     const [hour, setHour] = useState("12:00");
@@ -112,17 +71,11 @@ export default function Hero(props: { imageUrl?: string }) {
 
     const HOURS = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
-    const pickupRef = useRef<HTMLSelectElement>(null);
-    const dropoffRef = useRef<HTMLSelectElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
 
-    const handleFieldClick = (e: React.MouseEvent, ref: React.RefObject<HTMLSelectElement | HTMLInputElement | null>) => {
+    const handleFieldClick = (e: React.MouseEvent, ref: React.RefObject<HTMLInputElement | null>) => {
         const el = ref.current;
         if (!el) return;
-
-        if (e.target === el && el.tagName === 'SELECT') {
-            return;
-        }
 
         const targetEl = el as HTMLElement & { showPicker?: () => void };
         if (targetEl.showPicker) {
@@ -137,17 +90,21 @@ export default function Hero(props: { imageUrl?: string }) {
     };
 
     const handleSwap = () => {
+        const tempP = pickup;
+        const tempCustomP = isCustomPickup;
         setPickup(dropoff);
-        setDropoff(pickup);
+        setIsCustomPickup(isCustomDropoff);
+        setDropoff(tempP);
+        setIsCustomDropoff(tempCustomP);
         setSearchResult(null);
     };
 
     const handleSearch = () => {
-        if (!pickup || !dropoff) {
-            setSearchResult({ error: language === 'en' ? "Please select both locations." : "Veuillez sélectionner les deux lieux." });
+        if (!pickup.trim() || !dropoff.trim()) {
+            setSearchResult({ error: language === 'en' ? "Please enter both pickup and drop-off locations." : "Veuillez préciser les lieux de départ et d'arrivée." });
             return;
         }
-        if (pickup === dropoff) {
+        if (pickup.trim().toLowerCase() === dropoff.trim().toLowerCase()) {
             setSearchResult({ error: language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
             return;
         }
@@ -157,16 +114,8 @@ export default function Hero(props: { imageUrl?: string }) {
         setSearchResult(null);
     };
 
-    const currentPrice = (() => {
-        const routeKey = buildRouteKey(pickup, dropoff);
-        const route = routePrices[routeKey];
-        if (route && route[passengers]) return route[passengers];
-        // Fallback for undefined routes to always show a price instead of 'Custom Quote'
-        const isLocal = pickup.includes("Airport") && dropoff.replace(" City Center", "") === pickup.replace(" Airport", "");
-        const base = isLocal ? 42 : 144;
-        const prices: { [key: number]: number } = { 3: base - 6, 4: base, 5: base + 24, 7: base + 60 };
-        return prices[passengers];
-    })();
+    const isCustomRoute = isCustomPickup || isCustomDropoff;
+    const currentPrice = isCustomRoute ? null : getRoutePrice(pickup, dropoff, passengers);
 
     const getWhatsAppUrl = () => {
         let message = `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
@@ -224,34 +173,30 @@ export default function Hero(props: { imageUrl?: string }) {
             <div className={styles.contentContainer}>
                 <div className={styles.mainContent}>
                     <div className={styles.textColumn}>
-                        <div className={styles.badge}>{t('plan_trip')}</div>
-                        <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: t('hero_title').replace('Today', '<br />Today') }}>
-                        </h1>
+                        <div className={styles.eyebrow}>{t('plan_trip')}</div>
+                        <h1 className={styles.title}>{t('hero_title')}</h1>
                         <p className={styles.subtitle}>
                             {t('hero_subtitle')}
                         </p>
-                        <div className={styles.bookNowText}>
-                            {t('book_driver')} <span className={styles.arrowIcon}>↓</span>
-                        </div>
                     </div>
                 </div>
 
                 <div className={styles.searchWrapper}>
                     <div className={styles.searchWidget}>
-                        <div className={styles.searchField} onClick={(e) => handleFieldClick(e, pickupRef)}>
+                        <div className={styles.searchField}>
                             <div className={styles.iconWrapper}>📍</div>
                             <div className={styles.fieldText}>
                                 <span className={styles.fieldLabel}>{t('pickup')}</span>
-                                <select
-                                    ref={pickupRef}
-                                    className={styles.nativeSelect}
+                                <LocationCombobox
                                     value={pickup}
-                                    onChange={e => { setPickup(e.target.value); setSearchResult(null); }}
-                                >
-                                    {LOCATIONS.map(loc => (
-                                        <option key={`pickup-${loc}`} value={loc}>{loc}</option>
-                                    ))}
-                                </select>
+                                    onChange={(val, isCustom) => {
+                                        setPickup(val);
+                                        setIsCustomPickup(!!isCustom);
+                                        setSearchResult(null);
+                                    }}
+                                    language={language as 'en' | 'fr'}
+                                    placeholder={t('pickup')}
+                                />
                             </div>
                         </div>
 
@@ -259,20 +204,20 @@ export default function Hero(props: { imageUrl?: string }) {
                             ⇄
                         </button>
 
-                        <div className={styles.searchField} onClick={(e) => handleFieldClick(e, dropoffRef)}>
+                        <div className={styles.searchField}>
                             <div className={styles.iconWrapper}>🏁</div>
                             <div className={styles.fieldText}>
                                 <span className={styles.fieldLabel}>{t('dropoff')}</span>
-                                <select
-                                    ref={dropoffRef}
-                                    className={styles.nativeSelect}
+                                <LocationCombobox
                                     value={dropoff}
-                                    onChange={e => { setDropoff(e.target.value); setSearchResult(null); }}
-                                >
-                                    {LOCATIONS.map(loc => (
-                                        <option key={`dropoff-${loc}`} value={loc}>{loc}</option>
-                                    ))}
-                                </select>
+                                    onChange={(val, isCustom) => {
+                                        setDropoff(val);
+                                        setIsCustomDropoff(!!isCustom);
+                                        setSearchResult(null);
+                                    }}
+                                    language={language as 'en' | 'fr'}
+                                    placeholder={t('dropoff')}
+                                />
                             </div>
                         </div>
 
@@ -308,6 +253,10 @@ export default function Hero(props: { imageUrl?: string }) {
                             <p className={styles.errorText}>{searchResult.error}</p>
                         </div>
                     )}
+
+                    <div className={styles.trustMicrocopy}>
+                        {t('trust_microcopy')}
+                    </div>
                 </div>
 
                 <div className={styles.socialColumn}>

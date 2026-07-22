@@ -135,7 +135,9 @@
     display: flex;
     align-items: stretch;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+    z-index: 100;
     min-height: 80px;
 }
 
@@ -149,6 +151,17 @@
     border-right: 1px solid #f0f0f0;
     cursor: pointer;
     transition: background 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.searchField:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.searchField:focus-within {
+    z-index: 100;
 }
 
 .searchField:nth-child(4) {
@@ -265,7 +278,7 @@
     align-items: center;
     justify-content: center;
     margin: auto -20px;
-    z-index: 2;
+    z-index: 1001;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     color: #333;
@@ -288,6 +301,8 @@
     font-size: 1.1rem;
     padding: 0 45px;
     border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
     display: flex;
@@ -840,12 +855,19 @@
     .searchWidget {
         flex-direction: column;
         border-radius: 16px;
+        overflow: visible;
     }
 
     .searchField {
         border-right: none;
         border-bottom: 1px solid #f0f0f0;
         padding: 18px 20px;
+    }
+
+    .searchField:first-child {
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        border-bottom-left-radius: 0;
     }
 
     .searchField:nth-child(4) {
@@ -858,7 +880,9 @@
         justify-content: center;
         font-size: 1.25rem;
         padding: 0;
-        border-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
     }
 
     .swapBtn {

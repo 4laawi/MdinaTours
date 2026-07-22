@@ -28,10 +28,10 @@ const CITIES: CityOption[] = [
     },
     {
         name: 'Rabat',
-        labelEn: 'Rabat',
-        labelFr: 'Rabat',
-        descEn: 'Imperial capital, coastal stays & corporate trips',
-        descFr: 'Capitale impériale, séjours côtiers & voyages d\'affaires'
+        labelEn: 'Rabat / Salé',
+        labelFr: 'Rabat / Salé',
+        descEn: 'Imperial capital, Salé coastal stays & corporate trips',
+        descFr: 'Capitale impériale, séjours côtiers à Salé & voyages d\'affaires'
     },
     {
         name: 'Tangier',

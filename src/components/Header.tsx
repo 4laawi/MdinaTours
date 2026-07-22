@@ -60,16 +60,25 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    // Navigation configuration
-    const navItems = [
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    // Main navigation configuration
+    const mainNavItems = [
         { path: '/', label: t('home') },
         { path: '/tours', label: isEn ? 'Tours' : 'Circuits' },
         { path: '/transfers', label: isEn ? 'Transfers' : 'Transferts' },
         { path: '/private-driver', label: isEn ? 'Private Driver' : 'Chauffeur Privé' },
+        { path: '/contact', label: t('contact_us') },
+    ];
+
+    const moreNavItems = [
         { path: '/faq', label: 'FAQ' },
         { path: '/blog', label: t('blog') },
         { path: '/about', label: isEn ? 'About Us' : 'À Propos' },
     ];
+
+    const allNavItems = [...mainNavItems, ...moreNavItems];
+    const isMoreActive = moreNavItems.some((item) => isActive(item.path));
 
     return (
         <header className={`${styles.header} ${isMenuOpen ? styles.headerActive : ''} ${lightBg ? styles.lightBg : ''}`}>
@@ -88,7 +97,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
                 {/* Desktop Nav */}
                 <nav className={styles.navPill}>
-                    {navItems.map((item) => (
+                    {mainNavItems.map((item) => (
                         <Link
                             key={item.path}
                             href={getPath(item.path)}
@@ -97,12 +106,56 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             {item.label}
                         </Link>
                     ))}
+
+                    {/* More Dropdown */}
+                    <div
+                        className={styles.dropdownContainer}
+                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        onMouseLeave={() => setIsDropdownOpen(false)}
+                    >
+                        <button
+                            className={`${styles.navLink} ${styles.dropdownTrigger} ${isMoreActive ? styles.active : ''}`}
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            aria-expanded={isDropdownOpen}
+                        >
+                            {isEn ? 'More' : 'Plus'}
+                            <span className={`${styles.dropdownChevron} ${isDropdownOpen ? styles.chevronOpen : ''}`}>▾</span>
+                        </button>
+                        {isDropdownOpen && (
+                            <div className={styles.dropdownMenu}>
+                                {moreNavItems.map((item) => (
+                                    <Link
+                                        key={item.path}
+                                        href={getPath(item.path)}
+                                        className={`${styles.dropdownItem} ${isActive(item.path) ? styles.dropdownItemActive : ''}`}
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </nav>
 
                 <div className={styles.rightAction}>
-                    <Link href={getPath('/contact')} className={styles.contactBtn}>
-                        {t('contact_us')} <span className={styles.arrow}>→</span>
-                    </Link>
+                    <div className={styles.langBtnContainer}>
+                        <button
+                            onClick={() => handleLanguageSwitch('en')}
+                            className={`${styles.langText} ${isEn ? styles.activeLang : ''}`}
+                            aria-label="Switch to English"
+                        >
+                            EN
+                        </button>
+                        <span className={styles.langSeparator}>/</span>
+                        <button
+                            onClick={() => handleLanguageSwitch('fr')}
+                            className={`${styles.langText} ${!isEn ? styles.activeLang : ''}`}
+                            aria-label="Passer au Français"
+                        >
+                            FR
+                        </button>
+                    </div>
                 </div>
 
                 <div className={styles.mobileToggle}>
@@ -122,7 +175,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
             <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}>
                 <div className={styles.mobileMenuContent}>
                     <nav className={styles.mobileNav}>
-                        {navItems.map((item) => (
+                        {allNavItems.map((item) => (
                             <Link
                                 key={`mobile-${item.path}`}
                                 href={getPath(item.path)}
@@ -157,24 +210,6 @@ export default function Header({ lightBg = false }: HeaderProps) {
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <div className={styles.langBtnContainer}>
-                <button
-                    onClick={() => handleLanguageSwitch('en')}
-                    className={`${styles.langText} ${isEn ? styles.activeLang : ''}`}
-                    aria-label="Switch to English"
-                >
-                    EN
-                </button>
-                <span className={styles.langSeparator}>/</span>
-                <button
-                    onClick={() => handleLanguageSwitch('fr')}
-                    className={`${styles.langText} ${!isEn ? styles.activeLang : ''}`}
-                    aria-label="Passer au Français"
-                >
-                    FR
-                </button>
             </div>
         </header>
     );

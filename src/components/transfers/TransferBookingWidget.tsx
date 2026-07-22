@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-
+import { LOCATIONS, getRoutePrice } from '@/lib/transferLocations';
+import LocationCombobox from '@/components/LocationCombobox';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TransferBookingWidget(props: any) {
@@ -35,8 +36,32 @@ export default function TransferBookingWidget(props: any) {
     urgency, 
     isPast, 
     language,
-    hasPendingChanges
+    hasPendingChanges,
+    searchedTravelers,
+    searchedTravelDate,
+    searchedPickupTime,
+    getTierLabel
   } = props;
+
+  const [isEditingRoute, setIsEditingRoute] = useState(false);
+  const [activePickup, setActivePickup] = useState<string>(local?.pickup || "Rabat");
+  const [activeDropoff, setActiveDropoff] = useState<string>(local?.dropoff || "Casablanca");
+  const [isCustomPickup, setIsCustomPickup] = useState(false);
+  const [isCustomDropoff, setIsCustomDropoff] = useState(false);
+
+  const isRouteChanged = activePickup !== local?.pickup || activeDropoff !== local?.dropoff || isCustomPickup || isCustomDropoff;
+  const calculatedPrice = (isCustomPickup || isCustomDropoff) ? null : getRoutePrice(activePickup, activeDropoff, selectedTier || 3);
+  const displayPrice = isRouteChanged ? calculatedPrice : currentPrice;
+
+  const getCustomizedWhatsAppUrl = () => {
+    if (!isRouteChanged) return getWhatsAppUrlForTier(selectedTier);
+    const tierLabel = getTierLabel ? getTierLabel(selectedTier) : `${travelers} Passengers`;
+    const priceText = displayPrice ? `€${displayPrice}` : 'Custom Quote Request';
+    const msg = isEn
+        ? `Hello Mdina Tours,\nI would like to book a private transfer.\n\n• Route: ${activePickup} ⇄ ${activeDropoff}\n• Date: ${searchedTravelDate || travelDate}\n• Time: ${searchedPickupTime || pickupTime}\n• Travelers: ${searchedTravelers || travelers} (${tierLabel})\n• Price: ${priceText}\n\nPlease let me know availability.`
+        : `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé.\n\n• Trajet : ${activePickup} ⇄ ${activeDropoff}\n• Date : ${searchedTravelDate || travelDate}\n• Heure : ${searchedPickupTime || pickupTime}\n• Voyageurs : ${searchedTravelers || travelers} (${tierLabel})\n• Tarif : ${priceText}\n\nMerci de me confirmer la disponibilité.`;
+    return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', boxSizing: 'border-box' }}>
@@ -46,9 +71,116 @@ export default function TransferBookingWidget(props: any) {
           border: '1px solid #e2e8f0',
           boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06)',
           width: '100%',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          padding: '20px',
+          position: 'relative',
+          zIndex: 10,
+          overflow: 'visible'
       }} className="booking-widget-sidebar">
           
+          {/* Route Header with Change Route Link */}
+          <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '16px',
+              paddingBottom: '12px',
+              borderBottom: '1px solid #f1f5f9'
+          }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 600, color: '#334155' }}>
+                  <span>📍</span>
+                  <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '200px' }}>
+                      {activePickup} ⇄ {activeDropoff}
+                  </span>
+              </div>
+              <button
+                  type="button"
+                  onClick={() => setIsEditingRoute(!isEditingRoute)}
+                  style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'var(--primary, #dc834e)',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      padding: 0
+                  }}
+              >
+                  ✏️ {isEn ? "Change route" : "Modifier"}
+              </button>
+          </div>
+
+          {/* Expandable Route Editor with Comboboxes */}
+          {isEditingRoute && (
+              <div style={{
+                  backgroundColor: '#f8fafc',
+                  borderRadius: '12px',
+                  padding: '14px',
+                  marginBottom: '16px',
+                  border: '1px solid #cbd5e1',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                  position: 'relative',
+                  zIndex: 20,
+                  overflow: 'visible'
+              }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>
+                          {isEn ? "Pickup Location" : "Lieu de départ"}
+                      </label>
+                      <LocationCombobox
+                          value={activePickup}
+                          onChange={(val, isCustom) => {
+                              setActivePickup(val);
+                              setIsCustomPickup(!!isCustom);
+                          }}
+                          language={language as 'en' | 'fr'}
+                          placeholder={isEn ? "Pickup location" : "Lieu de départ"}
+                      />
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>
+                          {isEn ? "Drop-off Location" : "Lieu d'arrivée"}
+                      </label>
+                      <LocationCombobox
+                          value={activeDropoff}
+                          onChange={(val, isCustom) => {
+                              setActiveDropoff(val);
+                              setIsCustomDropoff(!!isCustom);
+                          }}
+                          language={language as 'en' | 'fr'}
+                          placeholder={isEn ? "Drop-off location" : "Lieu d'arrivée"}
+                      />
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                      <button
+                          type="button"
+                          onClick={() => setIsEditingRoute(false)}
+                          style={{
+                              flex: 1,
+                              backgroundColor: 'var(--secondary, #063c33)',
+                              color: '#fff',
+                              border: 'none',
+                              borderRadius: '8px',
+                              padding: '10px',
+                              fontSize: '13px',
+                              fontWeight: 700,
+                              cursor: 'pointer'
+                          }}
+                      >
+                          {isEn ? "Done" : "Valider"}
+                      </button>
+                  </div>
+              </div>
+          )}
+
           {/* Top trust bar */}
           <div style={{ 
               display: 'flex', 
@@ -70,9 +202,13 @@ export default function TransferBookingWidget(props: any) {
           
           {/* Price */}
           <div style={{ marginBottom: '24px' }}>
-              <div style={{ fontSize: '36px', fontWeight: 500, color: 'var(--accent)', lineHeight: '1.2' }}>€{currentPrice}</div>
+              <div style={{ fontSize: '36px', fontWeight: 500, color: 'var(--accent)', lineHeight: '1.2' }}>
+                  {displayPrice !== null ? `€${displayPrice}` : (isEn ? "Custom Quote" : "Devis Sur-Mesure")}
+              </div>
               <div style={{ color: '#717171', fontSize: '13px', marginTop: '4px' }}>
-                  {isEn ? "Fixed price — no surprises, no hidden fees." : "Tarif fixe — pas de surprise, pas de frais cachés."}
+                  {displayPrice !== null 
+                    ? (isEn ? "Fixed price — no surprises, no hidden fees." : "Tarif fixe — pas de surprise, pas de frais cachés.")
+                    : (isEn ? "Tailored route estimate — fast response via WhatsApp." : "Devis sur-mesure — réponse rapide par WhatsApp.")}
               </div>
           </div>
 
@@ -378,7 +514,7 @@ export default function TransferBookingWidget(props: any) {
                               )}
                               {/* Primary CTA (WhatsApp) */}
                               <a 
-                                  href={getWhatsAppUrlForTier(selectedTier)}
+                                  href={getCustomizedWhatsAppUrl()}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   style={{

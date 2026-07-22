@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const isEn = lang === 'en';
 
     const title = isEn 
-        ? 'Private Driver Rabat & Salé – Professional Chauffeur Service | Mdina Tours' 
-        : 'Chauffeur Privé Rabat & Salé – Voiture avec Chauffeur au Maroc | Mdina Tours';
+        ? 'Private Driver Salé – Professional Chauffeur Service | Mdina Tours' 
+        : 'Chauffeur Privé Salé – Voiture avec Chauffeur au Maroc | Mdina Tours';
     const description = isEn
-        ? 'Book a professional private driver in Rabat & Salé. Premium vehicles with English-speaking local chauffeurs (Dispo Chauffeur) for corporate events, city tours, and airport transfers.'
-        : 'Louez un véhicule avec chauffeur privé à Rabat et Salé. Chauffeurs professionnels bilingues (Disposition Chauffeur) pour vos réunions d\'affaires et excursions.';
-    const url = `https://mdinatours.com/${lang}/private-driver-rabat`;
+        ? 'Book a professional private driver in Salé. Premium vehicles with English-speaking local chauffeurs (Dispo Chauffeur) for corporate events, city tours, and airport transfers.'
+        : 'Louez un véhicule avec chauffeur privé à Salé. Chauffeurs professionnels bilingues (Disposition Chauffeur) pour vos réunions d\'affaires et excursions.';
+    const url = `https://mdinatours.com/${lang}/private-driver-sale`;
 
     return {
         title,
@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         alternates: {
             canonical: url,
             languages: {
-                'en': 'https://mdinatours.com/en/private-driver-rabat',
-                'fr': 'https://mdinatours.com/fr/private-driver-rabat',
+                'en': 'https://mdinatours.com/en/private-driver-sale',
+                'fr': 'https://mdinatours.com/fr/private-driver-sale',
             },
         },
         openGraph: {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     url: 'https://mdinatours.com/img2/rabat-hassan-tour.jpg',
                     width: 1200,
                     height: 630,
-                    alt: 'Private Driver Rabat & Salé Mdina Tours',
+                    alt: 'Private Driver Salé Mdina Tours',
                 },
             ],
             locale: lang === 'fr' ? 'fr_FR' : 'en_US',
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     };
 }
 
-export default async function PrivateDriverRabatPage({ params }: { params: Promise<{ lang: string }> }) {
+export default async function PrivateDriverSalePage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
@@ -84,21 +84,21 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
         return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
     };
 
-    const textRabat = {
-        h1: isEn ? "Private Driver in Rabat & Salé – Professional Chauffeur Service" : "Chauffeur Privé à Rabat & Salé – Service de Chauffeur de Disposition",
+    const textSale = {
+        h1: isEn ? "Private Driver in Salé – Professional Chauffeur Service" : "Chauffeur Privé à Salé – Service de Chauffeur de Disposition",
         subtitle: isEn 
-            ? "Explore Morocco's capital region (Rabat & Salé), coordinate business meetings, or transfer to Casablanca with a professional, bilingual driver. Luxury vehicles, clear pricing."
-            : "Explorez la région de la capitale (Rabat et Salé), organisez vos réunions ou rendez-vous à Casablanca avec un chauffeur bilingue. Véhicules de luxe, prix clairs.",
-        bannerLabel: isEn ? "Rabat & Salé Driver" : "Chauffeur Rabat & Salé",
+            ? "Explore Salé and Morocco's capital region, coordinate business meetings, or transfer to Casablanca with a professional, bilingual driver. Luxury vehicles, clear pricing."
+            : "Explorez Salé et la région de la capitale, organisez vos réunions ou rendez-vous à Casablanca avec un chauffeur bilingue. Véhicules de luxe, prix clairs.",
+        bannerLabel: isEn ? "Salé Driver" : "Chauffeur Salé",
         whatsappHeroMsg: isEn 
-            ? "Hello Mdina Tours, I would like to book a private driver service in Rabat or Salé."
-            : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé à Rabat ou Salé.",
-        introTitle: isEn ? "Premium Rabat-Salé Chauffeur & Dispo Service" : "Service de Chauffeur Privé & Disposition Premium à Rabat-Salé",
+            ? "Hello Mdina Tours, I would like to book a private driver service in Salé."
+            : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé à Salé.",
+        introTitle: isEn ? "Premium Salé Chauffeur & Dispo Service" : "Service de Chauffeur Privé & Disposition Premium à Salé",
         introP1: isEn
-            ? "For visitors to the Rabat-Salé metropolitan area, coordinating transport for corporate meetings or leisurely sightseeing can require precision. Our professional private driver dispo service (locally called \"Dispo Chauffeur\") offers an executive-level solution. Instead of relying on local city taxis or public transit, you get a premium vehicle and a dedicated chauffeur on standby for as long as you need—ensuring you arrive at your meetings, the Rabat-Salé Airport, Hassan Tower, or the Kasbah of the Udayas on time and in complete comfort."
-            : "Pour les visiteurs de l'agglomération de Rabat-Salé, coordonner les déplacements pour des réunions professionnelles ou des visites peut demander beaucoup de précision. Notre service de chauffeur privé à disposition (« Dispo Chauffeur ») est la solution premium idéale. Au lieu de dépendre des taxis de la ville, vous disposez d'un véhicule haut de gamme et d'un chauffeur dédié en attente pour vous rendre à vos rendez-vous, à l'Aéroport de Rabat-Salé, à la Tour Hassan ou à la Kasbah des Oudayas.",
-        faqTitle: isEn ? "Rabat & Salé Chauffeur Dispo FAQs" : "Questions Fréquentes - Chauffeur Dispo à Rabat & Salé",
-        useCasesTitle: isEn ? "Popular Rabat & Salé Chauffeur Use Cases" : "Exemples d'excursions avec chauffeur à Rabat & Salé"
+            ? "For visitors to Salé, coordinating transport for corporate meetings or leisurely sightseeing can require precision. Our professional private driver dispo service (locally called \"Dispo Chauffeur\") offers an executive-level solution. Instead of relying on local city taxis or public transit, you get a premium vehicle and a dedicated chauffeur on standby for as long as you need—ensuring you arrive at your meetings, the Rabat-Salé Airport, the historic Medina of Salé, or corporate zones on time and in complete comfort."
+            : "Pour les visiteurs à Salé, coordonner les déplacements pour des réunions professionnelles ou des visites peut demander beaucoup de précision. Notre service de chauffeur privé à disposition (« Dispo Chauffeur ») est la solution premium idéale. Au lieu de dépendre des taxis de la ville, vous disposez d'un véhicule haut de gamme et d'un chauffeur dédié en attente pour vous rendre à vos rendez-vous, à l'Aéroport de Rabat-Salé ou à la Médina historique de Salé.",
+        faqTitle: isEn ? "Salé Chauffeur Dispo FAQs" : "Questions Fréquentes - Chauffeur Dispo à Salé",
+        useCasesTitle: isEn ? "Popular Salé Chauffeur Use Cases" : "Exemples d'excursions avec chauffeur à Salé"
     };
 
     const vehicles = [
@@ -153,41 +153,41 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
         {
             title: isEn ? "Rabat-Salé Airport & City Transfers" : "Transferts Aéroport Rabat-Salé & Ville",
             desc: isEn 
-                ? "Safe and punctual transfers between Rabat-Salé Airport (RBA) and your local hotel or office."
-                : "Transferts sécurisés et ponctuels entre l'Aéroport de Rabat-Salé (RBA) et votre hôtel ou bureau.",
+                ? "Safe and punctual transfers between Rabat-Salé Airport (RBA) and your local hotel or office in Salé or Rabat."
+                : "Transferts sécurisés et ponctuels entre l'Aéroport de Rabat-Salé (RBA) et votre hôtel ou bureau à Salé ou Rabat.",
             price: isEn ? "From €35" : "À partir de 35 €",
             cta: isEn ? "View Transfers" : "Voir les transferts",
             image: "/img2/vito-aeroport.jpg",
             href: "/transfers",
         },
         {
-            title: isEn ? "Rabat to Casablanca Business Transfer" : "Transfert d'Affaires Rabat - Casablanca",
+            title: isEn ? "Salé/Rabat to Casablanca Business Transfer" : "Transfert d'Affaires Salé/Rabat - Casablanca",
             desc: isEn 
-                ? "Fast executive travel between the administrative capital Rabat and the commercial hub Casablanca."
-                : "Trajet d'affaires rapide entre la capitale administrative Rabat et la capitale économique Casablanca.",
+                ? "Fast executive travel between the Rabat-Salé metropolitan region and the commercial hub Casablanca."
+                : "Trajet d'affaires rapide entre la région de Rabat-Salé et la capitale économique Casablanca.",
             price: isEn ? "From €80" : "À partir de 80 €",
             cta: isEn ? "View Tours" : "Voir les circuits",
             image: "/img2/casablanca_MOSQUE.webp",
             href: "/tours",
         },
         {
-            title: isEn ? "Rabat to Fes Historical Excursion" : "Excursion Historique Rabat - Fès",
+            title: isEn ? "Salé/Rabat to Fes Historical Excursion" : "Excursion Historique Salé/Rabat - Fès",
             desc: isEn 
                 ? "Visit the ancient Medina of Fes with a dedicated private vehicle and return in the evening."
-                : "Visitez la médina historique de Fès avec un véhicule privé et retournez à Rabat le soir.",
+                : "Visitez la médina historique de Fès avec un véhicule privé et retournez le soir.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
             image: "/img2/fes_gate.jpg",
-            msg: "Hello Mdina Tours, I would like to get a quote for a private driver service from Rabat to Fes."
+            msg: "Hello Mdina Tours, I would like to get a quote for a private driver service from Salé to Fes."
         }
     ];
 
     const reviews = [
         {
             quote: isEn ? (
-                <>We used the dispo service for 3 days in Rabat for our business meetings. Impeccable timing, extremely professional driver who helped us coordinate schedules, and a pristine Mercedes Vito. <strong style={{ fontWeight: 800 }}>Highly recommended for corporate travel.</strong></>
+                <>We used the dispo service for 3 days in Salé & Rabat for our business meetings. Impeccable timing, extremely professional driver who helped us coordinate schedules, and a pristine Mercedes Vito. <strong style={{ fontWeight: 800 }}>Highly recommended for corporate travel.</strong></>
             ) : (
-                <>Nous avons utilisé le service dispo pendant 3 jours à Rabat pour nos réunions. Timing impeccable, chauffeur extrêmement professionnel et van Mercedes Vito de qualité. <strong style={{ fontWeight: 800 }}>Fortement recommandé pour le professionnel.</strong></>
+                <>Nous avons utilisé le service dispo pendant 3 jours à Salé et Rabat pour nos réunions. Timing impeccable, chauffeur extrêmement professionnel et van Mercedes Vito de qualité. <strong style={{ fontWeight: 800 }}>Fortement recommandé pour le professionnel.</strong></>
             ),
             author: "David W.",
             flag: "🇺🇸"
@@ -205,22 +205,22 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
 
     const faqs = [
         {
-            q: isEn ? "What is a private driver (\"dispo chauffeur\") in Rabat?" : "Qu'est-ce qu'un service de chauffeur privé (« dispo chauffeur ») à Rabat ?",
+            q: isEn ? "What is a private driver (\"dispo chauffeur\") in Salé?" : "Qu'est-ce qu'un service de chauffeur privé (« dispo chauffeur ») à Salé ?",
             a: isEn 
-                ? "A dispo chauffeur is a premium vehicle hired with a professional driver at your complete disposal. It is ideal for corporate meetings, administrative trips, exploring historical sights, or traveling between Rabat and Casablanca."
+                ? "A dispo chauffeur is a premium vehicle hired with a professional driver at your complete disposal. It is ideal for corporate meetings, administrative trips, exploring historical sights, or traveling between Salé, Rabat, and Casablanca."
                 : "La formule « dispo chauffeur » désigne la location d'un véhicule avec chauffeur à votre entière disposition. Idéal pour vos réunions, déplacements administratifs ou trajets vers Casablanca."
         },
         {
             q: isEn ? "Can I book a driver from Rabat-Salé Airport (RBA)?" : "Puis-je réserver un chauffeur depuis l'Aéroport de Rabat-Salé (RBA) ?",
             a: isEn
-                ? "Yes, you can schedule a pickup. Your driver will monitor flight status, wait in the arrivals hall with a name sign, and immediately drive you to your destination."
+                ? "Yes, you can schedule a pickup. Your driver will monitor flight status, wait in the arrivals hall with a name sign, and immediately drive you to your destination in Salé or Rabat."
                 : "Oui, vous pouvez programmer une prise en charge. Votre chauffeur suivra l'état du vol et vous attendra dans le hall avec un panneau nominatif."
         },
         {
-            q: isEn ? "Can we travel from Rabat to Casablanca or Fes?" : "Puis-je voyager de Rabat vers Casablanca ou Fès ?",
+            q: isEn ? "Can we travel from Salé to Casablanca or Fes?" : "Puis-je voyager de Salé vers Casablanca ou Fès ?",
             a: isEn
-                ? "Yes, Casablanca is only about 1 hour away and Fes is 2 hours away. The dispo service makes intercity day trips simple, covering highway tolls and fuel."
-                : "Oui, Casablanca est à environ 1h et Fès à 2h. Le service dispo facilite vos trajets interurbains avec carburant et péages inclus."
+                ? "Yes, Casablanca is only about 1 hour and 15 minutes away and Fes is 2 hours away. The dispo service makes intercity day trips simple, covering highway tolls and fuel."
+                : "Oui, Casablanca est à environ 1h15 et Fès à 2h. Le service dispo facilite vos trajets interurbains avec carburant et péages inclus."
         },
         {
             q: isEn ? "Are fuel and highway tolls included in the price?" : "Le carburant et les péages sont-ils inclus ?",
@@ -229,7 +229,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                 : "Oui. Tous nos tarifs journaliers incluent le carburant, les péages d'autoroute, les frais de stationnement et le chauffeur."
         },
         {
-            q: isEn ? "Do Rabat drivers speak English?" : "Les chauffeurs à Rabat parlent-ils anglais ?",
+            q: isEn ? "Do drivers speak English?" : "Les chauffeurs parlent-ils anglais ?",
             a: isEn
                 ? "Yes, our drivers speak fluent English and French. They are professional, discreet, and well-accustomed to international tourists and corporate clients."
                 : "Oui, nos chauffeurs parlent couramment anglais et français. Ils sont discrets et habitués à une clientèle d'affaires internationale."
@@ -239,8 +239,8 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
     const serviceJsonLd = {
         "@context": "https://schema.org",
         "@type": "TaxiService",
-        "name": isEn ? "Professional Private Driver & Chauffeur Service Rabat" : "Service de Chauffeur Privé et Disposition Rabat",
-        "description": textRabat.subtitle,
+        "name": isEn ? "Professional Private Driver & Chauffeur Service Salé" : "Service de Chauffeur Privé et Disposition Salé",
+        "description": textSale.subtitle,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -249,13 +249,13 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Rabat",
+                "addressLocality": "Salé",
                 "addressCountry": "MA"
             }
         },
         "areaServed": {
             "@type": "AdministrativeArea",
-            "name": "Rabat"
+            "name": "Salé"
         },
         "offers": vehicles.map(v => ({
             "@type": "Offer",
@@ -295,7 +295,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                     <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '8px', fontSize: '0.9rem', color: '#666', marginBottom: '15px' }}>
                         <Link href={getPath('/')} style={{ color: '#666', transition: 'color 0.2s' }}>{t('home')}</Link>
                         <span style={{ color: '#ccc' }}>›</span>
-                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{textRabat.bannerLabel}</span>
+                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{textSale.bannerLabel}</span>
                     </nav>
 
                     <h1 style={{
@@ -306,14 +306,14 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                         lineHeight: '1.2',
                         fontFamily: "var(--font-poppins), sans-serif",
                     }}>
-                        {textRabat.h1}
+                        {textSale.h1}
                     </h1>
 
                     <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', fontSize: '0.85rem', marginBottom: '20px' }}>
                         <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
                             <span className="star-icon" style={{ color: '#f59e0b' }}>★</span>
                             <span style={{ fontWeight: 700 }}>5.0</span>
-                            <span style={{ color: '#717171', fontWeight: 500 }}>(29 {isEn ? "reviews" : "avis"})</span>
+                            <span style={{ color: '#717171', fontWeight: 500 }}>(24 {isEn ? "reviews" : "avis"})</span>
                         </div>
                         <div className="recommended-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
                             <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
@@ -333,9 +333,9 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                 <section id="booking" className="main-booking-section" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }} className="grid-responsive-layout">
                         <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
-                            <PrivateDriverHeroGallery language={language} city="Rabat" title={textRabat.h1} />
+                            <PrivateDriverHeroGallery language={language} city="Salé" title={textSale.h1} />
                             <div className="mobile-booking-widget" style={{ marginTop: '20px' }}>
-                                <PrivateDriverBookingWidget language={language} defaultCity="Rabat" defaultDays={1} />
+                                <PrivateDriverBookingWidget language={language} defaultCity="Salé" defaultDays={1} />
                             </div>
                             <PrivateDriverMetaSection language={language} />
                         </div>
@@ -352,7 +352,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                             zIndex: 10
                         }} className="booking-widget-sticky-wrapper">
                             <div className="desktop-booking-widget">
-                                <PrivateDriverBookingWidget language={language} defaultCity="Rabat" defaultDays={1} />
+                                <PrivateDriverBookingWidget language={language} defaultCity="Salé" defaultDays={1} />
                             </div>
                         </div>
                     </div>
@@ -463,7 +463,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                                 {isEn ? "Popular Itineraries" : "Itinéraires Fréquents"}
                             </span>
                             <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
-                                {textRabat.useCasesTitle}
+                                {textSale.useCasesTitle}
                             </h2>
                         </div>
                         <div className="private-driver-routes-grid">
@@ -544,7 +544,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                                 {isEn ? "Got Questions?" : "Des Questions ?"}
                             </span>
                             <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
-                                {textRabat.faqTitle}
+                                {textSale.faqTitle}
                             </h2>
                         </div>
 
@@ -590,8 +590,8 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                                 {isEn ? "Morocco (National)" : "Maroc (National)"}
                             </Link>
                             <span>|</span>
-                            <Link href={getPath('/private-driver-sale')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                {isEn ? "Salé dispo" : "Salé dispo"}
+                            <Link href={getPath('/private-driver-rabat')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                {isEn ? "Rabat dispo" : "Rabat dispo"}
                             </Link>
                             <span>|</span>
                             <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>

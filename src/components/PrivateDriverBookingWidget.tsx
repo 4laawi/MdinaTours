@@ -850,6 +850,7 @@ export default function PrivateDriverBookingWidget({
                             <option value="Merzouga">Merzouga</option>
                             <option value="Ouarzazate">Ouarzazate</option>
                             <option value="Rabat">Rabat</option>
+                            <option value="Salé">Salé</option>
                             <option value="Tangier">Tangier / Tanger</option>
                             <option value="Tetouan">Tetouan</option>
                             <option value="Other">{isEn ? "Other / Custom" : "Autre / Sur mesure"}</option>
