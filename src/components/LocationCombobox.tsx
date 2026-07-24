@@ -42,7 +42,7 @@ export default function LocationCombobox({
 
     // Handle click outside to close dropdown
     useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
                 setIsOpen(false);
                 // If query doesn't match value, reset query or keep typed text as custom
@@ -57,7 +57,11 @@ export default function LocationCombobox({
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
     }, [query, value, onChange]);
 
     // Filter locations based on query

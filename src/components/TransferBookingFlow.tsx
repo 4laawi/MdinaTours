@@ -626,14 +626,16 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const timePickerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
+        function handleClickOutside(event: MouseEvent | TouchEvent) {
             if (timePickerRef.current && !timePickerRef.current.contains(event.target as Node)) {
                 setIsTimePickerOpen(false);
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
         };
     }, []);
 
