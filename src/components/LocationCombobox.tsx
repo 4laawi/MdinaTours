@@ -42,6 +42,8 @@ export default function LocationCombobox({
 
     // Handle click outside to close dropdown
     useEffect(() => {
+        if (!isOpen) return;
+
         const handleClickOutside = (e: MouseEvent | TouchEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
                 setIsOpen(false);
@@ -62,7 +64,7 @@ export default function LocationCombobox({
             document.removeEventListener('mousedown', handleClickOutside);
             document.removeEventListener('touchstart', handleClickOutside);
         };
-    }, [query, value, onChange]);
+    }, [isOpen, query, value, onChange]);
 
     // Filter locations based on query
     const filteredLocations = React.useMemo(() => {
@@ -89,6 +91,11 @@ export default function LocationCombobox({
         onChange(cleanName, isCustom);
         setIsOpen(false);
         setActiveIndex(-1);
+
+        // Blur the input to close the mobile keyboard and release focus cleanly
+        if (inputRef.current) {
+            inputRef.current.blur();
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -187,6 +194,10 @@ export default function LocationCombobox({
                                 role="option"
                                 aria-selected={isSelected}
                                 className={`${styles.optionItem} ${isSelected ? styles.selectedOption : ''} ${isActive ? styles.activeOption : ''}`}
+                                onMouseDown={(e) => {
+                                    // Prevent input focus loss (and keyboard collapse/layout shift) on click/tap
+                                    e.preventDefault();
+                                }}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     handleSelectOption(loc, false);
@@ -213,6 +224,10 @@ export default function LocationCombobox({
                             role="option"
                             aria-selected={activeIndex === filteredLocations.length}
                             className={`${styles.optionItem} ${styles.customOptionItem} ${activeIndex === filteredLocations.length ? styles.activeOption : ''}`}
+                            onMouseDown={(e) => {
+                                // Prevent input focus loss (and keyboard collapse/layout shift) on click/tap
+                                e.preventDefault();
+                            }}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleSelectOption(query, true);
