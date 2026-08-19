@@ -85,7 +85,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
     // WhatsApp Booking Link Builder
     const getWhatsAppUrl = (pCount: number, price: number) => {
         const msg = `Hello Mdina Tours,\nI would like to book a private transfer: "${local.title}".\n\n• Route: ${local.pickup} ⇄ ${local.dropoff}\n• Travelers: ${pCount}\n• Price: €${price}\n\nPlease let me know availability.`;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     // JSON-LD Structured Data
@@ -98,7 +98,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/hero-marrakech.webp",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",

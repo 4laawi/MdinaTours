@@ -103,7 +103,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         const baseMsg = isEn 
             ? `Hello Mdina Tours, I would like to book a private driver dispo service with the "${vName}" vehicle.`
             : `Bonjour Mdina Tours, je souhaite réserver un service de chauffeur privé avec le véhicule "${vName}".`;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(baseMsg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(baseMsg)}`;
     };
 
     const getVehicleMetadata = (name: string) => {

@@ -82,7 +82,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textDispo = {
@@ -313,7 +313,7 @@ export default async function ChauffeurDispoMoroccoPage({ params }: { params: Pr
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img/Morocco-trip-tour-hero04.webp",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",

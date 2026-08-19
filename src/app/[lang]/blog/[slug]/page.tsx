@@ -316,7 +316,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     // WhatsApp Booking Link Builder
     const getWhatsAppUrl = (type: string, link: string) => {
         const msg = `Hello Mdina Tours,\nI read your article: "${title}".\nI am interested in booking a private ${type} for this route.\n\nPlease let me know availability.`;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     // FAQ Schema

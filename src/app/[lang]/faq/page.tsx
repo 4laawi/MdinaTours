@@ -239,7 +239,7 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
             }
             if (lowerPart === 'whatsapp') {
                 return (
-                    <a key={i} href="https://wa.me/212766816992" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
+                    <a key={i} href="https://wa.me/212724114775" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
                         {part}
                     </a>
                 );

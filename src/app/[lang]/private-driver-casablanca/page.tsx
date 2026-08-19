@@ -82,7 +82,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textCasablanca = {
@@ -321,7 +321,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img2/casablanca_MOSQUE.webp",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",

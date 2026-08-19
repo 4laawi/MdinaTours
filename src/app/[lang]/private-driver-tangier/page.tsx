@@ -81,7 +81,7 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textTangier = {
@@ -245,7 +245,7 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img2/tangier_hero.webp",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",

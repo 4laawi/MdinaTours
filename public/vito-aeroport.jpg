@@ -1,0 +1,15 @@
+const sharp = require('/Users/mac/Documents/MdinaTours/node_modules/sharp');
+const path = require('path');
+
+const imgPath = '/Users/mac/Documents/MdinaTours/public/img2/vito-aeroport.jpg';
+const destPath = path.join(__dirname, 'test_output.webp');
+
+sharp(imgPath)
+  .webp()
+  .toFile(destPath)
+  .then(() => {
+    console.log('SUCCESS: Sharp successfully processed vito-aeroport.jpg');
+  })
+  .catch(err => {
+    console.error('ERROR processing with Sharp:', err);
+  });

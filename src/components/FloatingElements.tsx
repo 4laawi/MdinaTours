@@ -30,7 +30,7 @@ export default function FloatingElements({ hideWhatsappUntilScroll = false }: Fl
     return (
         <>
             <a 
-                href="https://wa.me/212766816992" 
+                href="https://wa.me/212724114775" 
                 className={`${styles.whatsappFloat} ${hideWhatsappUntilScroll && !isVisible ? styles.hide : ''}`} 
                 title="Chat on WhatsApp" 
                 target="_blank" 

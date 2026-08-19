@@ -181,7 +181,7 @@ export default function PrivateDriverBookingWidget({
         }
         
         msg += isEn ? `\n\nPlease let me know availability.` : `\n\nMerci de me confirmer la disponibilité.`;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

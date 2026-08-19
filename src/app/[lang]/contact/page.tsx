@@ -135,7 +135,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                                         </div>
                                         <div className={styles.infoText}>
                                             <h4>{t('contact_info_phone')}</h4>
-                                            <p>+212 766 816 992</p>
+                                            <p>+212 724-114775</p>
                                         </div>
                                     </div>
 

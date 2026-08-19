@@ -81,7 +81,7 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textFes = {
@@ -245,7 +245,7 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img2/fes_gate.jpg",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",

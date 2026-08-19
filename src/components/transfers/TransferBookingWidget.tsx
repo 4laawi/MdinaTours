@@ -60,7 +60,7 @@ export default function TransferBookingWidget(props: any) {
     const msg = isEn
         ? `Hello Mdina Tours,\nI would like to book a private transfer.\n\n• Route: ${activePickup} ⇄ ${activeDropoff}\n• Date: ${searchedTravelDate || travelDate}\n• Time: ${searchedPickupTime || pickupTime}\n• Travelers: ${searchedTravelers || travelers} (${tierLabel})\n• Price: ${priceText}\n\nPlease let me know availability.`
         : `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé.\n\n• Trajet : ${activePickup} ⇄ ${activeDropoff}\n• Date : ${searchedTravelDate || travelDate}\n• Heure : ${searchedPickupTime || pickupTime}\n• Voyageurs : ${searchedTravelers || travelers} (${tierLabel})\n• Tarif : ${priceText}\n\nMerci de me confirmer la disponibilité.`;
-    return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
   };
 
   return (

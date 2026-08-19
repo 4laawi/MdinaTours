@@ -163,7 +163,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
         const baseMsg = isEn 
             ? `Hello Mdina Tours,\nI would like to book a private transfer: "${local.title}".\n\n• Route: ${local.pickup} ⇄ ${local.dropoff}\n• Vehicle: ${vName}\n• Price: ${priceStr}\n\nPlease let me know availability.`
             : `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé : "${local.title}".\n\n• Trajet : ${local.pickup} ⇄ ${local.dropoff}\n• Véhicule : ${vName}\n• Tarif : ${priceStr}\n\nMerci de me confirmer la disponibilité.`;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(baseMsg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(baseMsg)}`;
     };
 
     const getVehicleMetadata = (name: string) => {

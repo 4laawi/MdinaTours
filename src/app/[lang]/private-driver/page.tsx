@@ -80,7 +80,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
     const getWhatsAppUrl = (msg?: string) => {
         const defaultMsg = `Hello Mdina Tours,\nI would like to inquire about booking a private driver/chauffeur service in Morocco.`;
         const text = msg ? msg : defaultMsg;
-        return `https://wa.me/212766816992?text=${encodeURIComponent(text)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(text)}`;
     };
 
     const textPrivate = {
@@ -325,7 +325,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
             ? "Book a professional private driver in Morocco with Mdina Tours. Comfort, safety, and reliability."
             : "Louez un véhicule avec chauffeur privé au Maroc avec Mdina Tours. Confort, sécurité, et fiabilité.",
         "image": "https://mdinatours.com/hero-landscape-1.webp",
-        "telephone": "+212766816992",
+        "telephone": "+212724114775",
         "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",

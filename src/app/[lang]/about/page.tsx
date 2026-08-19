@@ -175,7 +175,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                                      : "Laissez nos spécialistes planifier votre trajet ou excursion idéale. Écrivez-nous sur WhatsApp pour une réponse rapide."}
                             </p>
                             <a
-                                href="https://wa.me/212766816992"
+                                href="https://wa.me/212724114775"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{

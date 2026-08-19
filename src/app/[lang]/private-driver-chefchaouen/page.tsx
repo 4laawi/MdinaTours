@@ -81,7 +81,7 @@ export default async function PrivateDriverChefchaouenPage({ params }: { params:
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textChefchaouen = {
@@ -245,7 +245,7 @@ export default async function PrivateDriverChefchaouenPage({ params }: { params:
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/hero-chefchaouen.webp",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",

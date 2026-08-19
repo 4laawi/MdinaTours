@@ -789,7 +789,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         msg = msg.replace("%tier%", tierLabel);
         msg = msg.replace("%price%", price.toString());
 
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const handleShare = () => {

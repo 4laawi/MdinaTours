@@ -81,7 +81,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
     const getWhatsAppUrl = (msg: string) => {
-        return `https://wa.me/212766816992?text=${encodeURIComponent(msg)}`;
+        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
 
     const textAgadir = {
@@ -245,7 +245,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img2/agadir-marina.jpg",
-            "telephone": "+212766816992",
+            "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
                 "@type": "PostalAddress",
