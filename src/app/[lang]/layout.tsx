@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ReactDOM from 'react-dom';
 
-const poppins = Poppins({
-    weight: ['400', '500', '600', '700'],
+const outfit = Outfit({
+    weight: ['400', '500', '600', '700', '800'],
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-poppins',
@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params;
     const isEn = lang === 'en';
 
-    const title = isEn ? 'Mdina Tours – Private Morocco Tours & Transfers' : 'Mdina Tours – Circuits Privés & Transferts au Maroc';
+    const title = isEn ? 'Mdina Tours | Bespoke Morocco Chauffeur & Private Tours' : 'Mdina Tours | Chauffeur Privé & Circuits d\'Exception au Maroc';
     const description = isEn
-        ? 'Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat.'
-        : 'Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.';
+        ? 'Mdina Tours provides executive private driver services, intercity airport transfers, and tailor-made Morocco tours across Rabat, Casablanca, Marrakech, and Tangier.'
+        : 'Mdina Tours propose des services de chauffeur privé haut de gamme, des navettes aéroport et des circuits sur mesure à Rabat, Casablanca, Marrakech et Tanger.';
     const url = `https://mdinatours.com/${lang}`;
 
     return {
@@ -111,7 +111,7 @@ export default async function LocaleLayout({
     ReactDOM.preload('/img/Morocco-trip-tour-hero01.webp', { as: 'image', fetchPriority: 'high' });
 
     return (
-        <html lang={lang} className={`${poppins.variable}`}>
+        <html lang={lang} className={`${outfit.variable}`}>
             <body>
                 <LanguageProvider initialLanguage={lang as 'en' | 'fr'}>
                     <script

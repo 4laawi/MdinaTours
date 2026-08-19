@@ -14,10 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params;
     const isEn = lang === 'en';
 
-    const title = isEn ? 'About Mdina Tours | Leading Morocco Travel Partner' : 'À Propos de Mdina Tours | Votre Partenaire Voyage au Maroc';
+    const title = isEn ? 'About Mdina Tours | Premier Morocco Chauffeur & Agency' : 'À Propos de Mdina Tours | Excellence du Transport Privé au Maroc';
     const description = isEn
-        ? 'Learn about Mdina Tours, a premier digital travel agency based in Rabat. We provide comfortable private transfers, day trips, and custom travel experiences through our partner network.'
-        : 'Découvrez l\'histoire de Mdina Tours, agence réceptive basée à Rabat. Nous offrons des transferts privés et des circuits sur mesure dans tout le Maroc.';
+        ? 'Discover Mdina Tours, Rabat\'s premier private mobility and tour operator. We deliver luxury intercity transfers, accredited local drivers, and bespoke Moroccan itineraries.'
+        : 'Découvrez Mdina Tours, entreprise spécialisée dans le transport privé et les circuits d\'exception basés à Rabat. Chauffeurs professionnels et véhicules de prestige.';
     const url = `https://mdinatours.com/${lang}/about`;
 
     return {

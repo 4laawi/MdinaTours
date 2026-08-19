@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const isEn = lang === 'en';
 
     const title = isEn 
-        ? 'Mdina Tours | Private Morocco Tours & Premium Transfers' 
-        : 'Mdina Tours | Circuits Privés & Transferts Premium au Maroc';
+        ? 'Mdina Tours | Executive Morocco Chauffeur & Private Tours' 
+        : 'Mdina Tours | Service de Chauffeur Privé & Excursions au Maroc';
     const description = isEn
-        ? 'Book luxury private driver services, intercity transfers, and expert-guided Morocco tours from Rabat, Casablanca, Marrakech, and Tangier. Pay cash on arrival.'
-        : 'Réservez votre chauffeur privé, transferts interurbains et circuits sur mesure au Maroc. Véhicules confortables, chauffeurs bilingues, paiement sur place.';
+        ? 'Reserve executive private driver services, airport transfers, and tailor-made Morocco travel itineraries across Rabat, Casablanca, Marrakech, and Tangier. Zero prepayment.'
+        : 'Réservez votre chauffeur privé, navettes aéroport et circuits personnalisés au Maroc. Chauffeurs d\'élite bilingues, véhicules de prestige et paiement à l\'arrivée.';
     const url = `https://mdinatours.com/${lang}`;
 
     return {
