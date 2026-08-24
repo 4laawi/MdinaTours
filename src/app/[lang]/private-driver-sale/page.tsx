@@ -238,9 +238,11 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
 
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Salé" : "Service de Chauffeur Privé et Disposition Salé",
         "description": textSale.subtitle,
+        "image": "https://mdinatours.com/img2/rabat-hassan-tour.jpg",
+        "url": `https://mdinatours.com/${language}/private-driver-sale`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -261,8 +263,34 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
             "@type": "Offer",
             "name": v.name,
             "priceCurrency": "EUR",
-            "price": v.price.replace('€', '')
+            "price": v.price.replace('€', ''),
+            "availability": "https://schema.org/InStock"
         }))
+    };
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Private Driver" : "Chauffeur Privé",
+                "item": `https://mdinatours.com/${language}/private-driver`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Salé",
+                "item": `https://mdinatours.com/${language}/private-driver-sale`
+            }
+        ]
     };
 
     const faqJsonLd = {
@@ -283,6 +311,10 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"

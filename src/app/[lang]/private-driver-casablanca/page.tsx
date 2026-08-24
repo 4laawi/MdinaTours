@@ -314,9 +314,11 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
     // JSON-LD Schemas
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Casablanca" : "Service de Chauffeur Privé et Disposition Casablanca",
         "description": textCasablanca.subtitle,
+        "image": "https://mdinatours.com/img2/casablanca_MOSQUE.webp",
+        "url": `https://mdinatours.com/${language}/private-driver-casablanca`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -337,8 +339,34 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
             "@type": "Offer",
             "name": v.name,
             "priceCurrency": "EUR",
-            "price": v.price.replace('€', '')
+            "price": v.price.replace('€', ''),
+            "availability": "https://schema.org/InStock"
         }))
+    };
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Private Driver" : "Chauffeur Privé",
+                "item": `https://mdinatours.com/${language}/private-driver`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Casablanca",
+                "item": `https://mdinatours.com/${language}/private-driver-casablanca`
+            }
+        ]
     };
 
     const faqJsonLd = {
@@ -359,6 +387,10 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"

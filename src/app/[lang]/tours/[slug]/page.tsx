@@ -90,6 +90,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
         "name": local.title,
         "description": local.description,
         "image": `https://mdinatours.com${tour.image}`,
+        "url": `https://mdinatours.com/${language}/tours/${slug}`,
         "touristType": "International Tourists",
         "brand": {
             "@type": "Brand",
@@ -100,7 +101,8 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
             "priceCurrency": "EUR",
             "price": tour.price,
             "availability": "https://schema.org/InStock",
-            "validFrom": "2026-01-01"
+            "validFrom": "2026-01-01",
+            "url": `https://mdinatours.com/${language}/tours/${slug}`
         },
         "itinerary": {
             "@type": "ItemList",
@@ -124,6 +126,10 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
         "review": [
             {
                 "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Product",
+                    "name": local.title
+                },
                 "author": {
                     "@type": "Person",
                     "name": isEn ? "Sarah L." : "Sophie D."

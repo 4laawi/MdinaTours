@@ -69,6 +69,27 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     // Helper to get localized path
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    const contactPageJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": isEn ? "Contact Mdina Tours" : "Contactez Mdina Tours",
+        "description": isEn
+            ? "Get in touch with Mdina Tours for executive Morocco private driver bookings and travel inquiries."
+            : "Contactez l'équipe de Mdina Tours pour réserver votre chauffeur privé au Maroc.",
+        "url": `https://mdinatours.com/${language}/contact`,
+        "mainEntity": {
+            "@type": "TravelAgency",
+            "name": "Mdina Tours",
+            "telephone": "+212724114775",
+            "email": "contact@mdinatours.com",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Rabat",
+                "addressCountry": "MA"
+            }
+        }
+    };
+
     const breadcrumbJsonLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -90,6 +111,10 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

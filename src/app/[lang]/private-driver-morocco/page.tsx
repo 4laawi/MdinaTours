@@ -324,9 +324,11 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
     const taxiServiceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": isEn ? "Private Chauffeur & Dispo Driver Service Morocco" : "Service de Chauffeur Privé et Disposition Maroc",
         "description": textMorocco.subtitle,
+        "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
+        "url": `https://mdinatours.com/${language}/private-driver-morocco`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -347,8 +349,34 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             "@type": "Offer",
             "name": v.name,
             "priceCurrency": "EUR",
-            "price": v.price.replace("€", "")
+            "price": v.price.replace("€", ""),
+            "availability": "https://schema.org/InStock"
         }))
+    };
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Private Driver" : "Chauffeur Privé",
+                "item": `https://mdinatours.com/${language}/private-driver`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Morocco",
+                "item": `https://mdinatours.com/${language}/private-driver-morocco`
+            }
+        ]
     };
 
     const faqJsonLd = {
@@ -369,6 +397,10 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(taxiServiceJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"

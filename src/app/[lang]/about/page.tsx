@@ -67,6 +67,22 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    const aboutPageJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": isEn ? "About Mdina Tours" : "À Propos de Mdina Tours",
+        "description": isEn
+            ? "Learn about Mdina Tours, Morocco's leading executive private driver and luxury tour service."
+            : "Découvrez Mdina Tours, leader des services de chauffeur privé et circuits d'exception au Maroc.",
+        "url": `https://mdinatours.com/${language}/about`,
+        "mainEntity": {
+            "@type": "TravelAgency",
+            "name": "Mdina Tours",
+            "url": `https://mdinatours.com/${language}`,
+            "telephone": "+212724114775"
+        }
+    };
+
     const breadcrumbJsonLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -88,6 +104,10 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

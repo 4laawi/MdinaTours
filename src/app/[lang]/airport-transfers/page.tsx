@@ -67,6 +67,27 @@ export default async function AirportTransfersPage({ params }: { params: Promise
 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    const serviceJsonLd = {
+        "@context": "https://schema.org",
+        "@type": ["Product", "TaxiService"],
+        "name": isEn ? "Morocco Airport Transfers" : "Transferts Aéroport au Maroc",
+        "description": isEn
+            ? "Stress-free pickups from Casablanca, Rabat, Marrakech, and Tangier airports."
+            : "Navettes privées fiables à prix fixes depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger.",
+        "image": "https://mdinatours.com/img/Morocco-trip-tour-hero09.webp",
+        "url": `https://mdinatours.com/${language}/airport-transfers`,
+        "provider": {
+            "@type": "LocalBusiness",
+            "name": "Mdina Tours",
+            "telephone": "+212724114775",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Rabat",
+                "addressCountry": "MA"
+            }
+        }
+    };
+
     const breadcrumbJsonLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -88,6 +109,10 @@ export default async function AirportTransfersPage({ params }: { params: Promise
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

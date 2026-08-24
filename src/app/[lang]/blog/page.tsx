@@ -169,6 +169,20 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
     ];
 
     const isEn = language === 'en';
+
+    const itemListJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "numberOfItems": allBlogPosts.length,
+        "itemListElement": allBlogPosts.map((post, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "url": `https://mdinatours.com/${language}/blog/${post.slug}`,
+            "name": post.title,
+            "image": `https://mdinatours.com${post.image}`
+        }))
+    };
+
     const breadcrumbJsonLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -190,6 +204,10 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

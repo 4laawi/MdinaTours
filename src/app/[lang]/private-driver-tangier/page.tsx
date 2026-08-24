@@ -238,9 +238,11 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
 
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Tangier" : "Service de Chauffeur Privé et Disposition Tanger",
         "description": textTangier.subtitle,
+        "image": "https://mdinatours.com/img2/tangier_hero.webp",
+        "url": `https://mdinatours.com/${language}/private-driver-tangier`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -261,8 +263,34 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
             "@type": "Offer",
             "name": v.name,
             "priceCurrency": "EUR",
-            "price": v.price.replace('€', '')
+            "price": v.price.replace('€', ''),
+            "availability": "https://schema.org/InStock"
         }))
+    };
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Private Driver" : "Chauffeur Privé",
+                "item": `https://mdinatours.com/${language}/private-driver`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Tangier",
+                "item": `https://mdinatours.com/${language}/private-driver-tangier`
+            }
+        ]
     };
 
     const faqJsonLd = {
@@ -283,6 +311,10 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"

@@ -91,9 +91,15 @@ export default async function TransferLandingPage({ params }: { params: Promise<
     // JSON-LD Structured Data
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": local.title,
         "description": local.tagline,
+        "image": `https://mdinatours.com${trans.image}`,
+        "url": `https://mdinatours.com/${language}/transfers/${slug}`,
+        "brand": {
+            "@type": "Brand",
+            "name": "Mdina Tours"
+        },
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -113,7 +119,9 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             "@type": "Offer",
             "name": `${pCount} Passenger Tier`,
             "priceCurrency": "EUR",
-            "price": price
+            "price": price,
+            "availability": "https://schema.org/InStock",
+            "url": `https://mdinatours.com/${language}/transfers/${slug}`
         })),
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -125,6 +133,10 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         "review": [
             {
                 "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Product",
+                    "name": local.title
+                },
                 "author": {
                     "@type": "Person",
                     "name": isEn ? "David K." : "Jean P."

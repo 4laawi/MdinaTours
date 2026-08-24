@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack",
+    "validate-schema": "node scripts/validate-schema.js",
+    "build": "npm run validate-schema && next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },

@@ -359,9 +359,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         ]
     };
 
+    // Article / BlogPosting Schema
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": progPost ? progPost.seoDesc : title,
+        "image": `https://mdinatours.com${image}`,
+        "datePublished": "2026-03-15",
+        "dateModified": "2026-03-15",
+        "author": {
+            "@type": "Organization",
+            "name": "Mdina Tours",
+            "url": `https://mdinatours.com/${language}`
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Mdina Tours",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://mdinatours.com/${language}/blog/${slug}`
+        }
+    };
+
     return (
         <>
             <Header />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+            />
             {faqSchema && (
                 <script
                     type="application/ld+json"

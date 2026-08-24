@@ -266,9 +266,11 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
     // JSON-LD Schemas
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": "TaxiService",
+        "@type": ["Product", "TaxiService"],
         "name": isEn ? "8-Day Morocco Car with Driver Package" : "Forfait 8 Jours Voiture avec Chauffeur au Maroc",
         "description": text8Days.subtitle,
+        "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
+        "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -289,8 +291,34 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
             "@type": "Offer",
             "name": v.name,
             "priceCurrency": "EUR",
-            "price": v.price.replace('€', '').replace(',', '')
+            "price": v.price.replace('€', '').replace(',', ''),
+            "availability": "https://schema.org/InStock"
         }))
+    };
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": isEn ? "Home" : "Accueil",
+                "item": `https://mdinatours.com/${language}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": isEn ? "Private Driver" : "Chauffeur Privé",
+                "item": `https://mdinatours.com/${language}/private-driver`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "8-Day Car with Driver Morocco",
+                "item": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`
+            }
+        ]
     };
 
     const faqJsonLd = {
@@ -311,6 +339,10 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"
