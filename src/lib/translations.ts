@@ -67,7 +67,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'friendly_service': 'Multilingual Chauffeurs',
         'friendly_service_desc': 'Travel with courteous drivers fluent in English, French, and Arabic who serve as attentive local hosts.',
         
-        // About Mohammed / ZahriToursSection -> MdinaToursSection
+        // About Us / MdinaToursSection
         'about_mohammed_title': 'Your Moroccan Travel Partners',
         'about_mohammed_p1': 'Headquartered in Rabat, Mdina Tours is a dedicated private transportation and tour operator. We bridge the gap between premium executive transport and authentic cultural exploration, delivering seamless door-to-door transit across Morocco.',
         'about_mohammed_p2': 'Our fleet of modern sedans, luxury minivans, and executive coaches is operated by vetted chauffeurs who prioritize your safety, comfort, and schedule above all else.',
@@ -402,7 +402,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'friendly_service': 'Chauffeurs Bilingues & Courtois',
         'friendly_service_desc': 'Nos chauffeurs maîtrisent le français, l\'anglais et l\'arabe pour vous accompagner avec professionnalisme.',
         
-        // About Mohammed / ZahriToursSection -> MdinaToursSection
+        // About Us / MdinaToursSection
         'about_mohammed_title': 'Votre Partenaire Voyage au Maroc',
         'about_mohammed_p1': 'Basée à Rabat, Mdina Tours est une entreprise spécialisée dans le transport privé de personnes et les circuits touristiques. Nous offrons des prestations haut de gamme combinant sécurité, confort et réactivité.',
         'about_mohammed_p2': 'Notre flotte moderne composée de berlines de prestige, minivans spacieux et minibus VIP est conduite par des chauffeurs expérimentés dédiés à votre satisfaction.',

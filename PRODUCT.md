@@ -5,10 +5,10 @@
 brand
 
 ## Users
-Both individual travelers/tourists visiting Malta (seeking easy airport transfers and curated day tours) and B2B partners like hotels or travel agencies booking transfers/tours on behalf of their guests. Users expect high-reliability, speed, and absolute clarity when planning and booking.
+Both individual travelers/tourists visiting Morocco (seeking easy airport transfers and curated day tours) and B2B partners like hotels or travel agencies booking transfers/tours on behalf of their guests. Users expect high-reliability, speed, and absolute clarity when planning and booking.
 
 ## Product Purpose
-To showcase and facilitate premium private transfers and tours across Malta. Success looks like a highly intuitive user flow that converts visitors into bookings with high speed and zero confusion.
+To showcase and facilitate premium private transfers and tours across Morocco. Success looks like a highly intuitive user flow that converts visitors into bookings with high speed and zero confusion.
 
 ## Brand Personality
 Professional, trustworthy, and efficient. Driven by clean utility that delivers confidence.

@@ -74,7 +74,7 @@ export default async function LocaleLayout({
         "@type": "TravelAgency",
         "name": "Mdina Tours",
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
-        "logo": "https://mdinatours.com/logo-primary.png",
+        "logo": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "description": lang === 'en'
             ? "Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat."
             : "Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.",
