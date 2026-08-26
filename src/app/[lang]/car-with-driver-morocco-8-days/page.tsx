@@ -1,3 +1,4 @@
+import { getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
@@ -32,13 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     return {
         title,
         description,
-        alternates: {
-            canonical: url,
-            languages: {
-                'en': 'https://mdinatours.com/en/car-with-driver-morocco-8-days',
-                'fr': 'https://mdinatours.com/fr/car-with-driver-morocco-8-days',
-            },
-        },
+        alternates: getAlternates(lang, '/car-with-driver-morocco-8-days'),
         openGraph: {
             title,
             description,

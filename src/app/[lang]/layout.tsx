@@ -1,3 +1,4 @@
+import { getAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 import '../globals.css';
@@ -28,13 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     return {
         title,
         description,
-        alternates: {
-            canonical: url,
-            languages: {
-                'en': 'https://mdinatours.com/en',
-                'fr': 'https://mdinatours.com/fr',
-            },
-        },
+        alternates: getAlternates(lang),
         openGraph: {
             title,
             description,

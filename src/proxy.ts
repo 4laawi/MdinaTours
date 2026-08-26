@@ -17,7 +17,8 @@ export function proxy(request: NextRequest) {
         // Here you can also detect the browser's language preference
         // and redirect to the corresponding locale instead of always 'en'
         return NextResponse.redirect(
-            new URL(`/${defaultLocale}${pathname}`, request.url)
+            new URL(`/${defaultLocale}${pathname}`, request.url),
+            308
         );
     }
 }

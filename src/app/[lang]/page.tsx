@@ -1,3 +1,4 @@
+import { getAlternates } from '@/lib/seo';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -35,13 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     return {
         title,
         description,
-        alternates: {
-            canonical: url,
-            languages: {
-                'en': 'https://mdinatours.com/en',
-                'fr': 'https://mdinatours.com/fr',
-            },
-        },
+        alternates: getAlternates(lang),
         openGraph: {
             title,
             description,

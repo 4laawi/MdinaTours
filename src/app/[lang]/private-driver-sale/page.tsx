@@ -1,3 +1,4 @@
+import { getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -36,13 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     return {
         title,
         description,
-        alternates: {
-            canonical: url,
-            languages: {
-                'en': 'https://mdinatours.com/en/private-driver-sale',
-                'fr': 'https://mdinatours.com/fr/private-driver-sale',
-            },
-        },
+        alternates: getAlternates(lang, '/private-driver-sale'),
         openGraph: {
             title,
             description,

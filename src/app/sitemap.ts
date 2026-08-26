@@ -63,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                     languages: {
                         en: `${baseUrl}/en${route}`,
                         fr: `${baseUrl}/fr${route}`,
+                        'x-default': `${baseUrl}/en${route}`,
                     }
                 }
             });
@@ -79,6 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                     languages: {
                         en: `${baseUrl}/en/blog/${slug}`,
                         fr: `${baseUrl}/fr/blog/${slug}`,
+                        'x-default': `${baseUrl}/en/blog/${slug}`,
                     }
                 }
             });
@@ -95,6 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                     languages: {
                         en: `${baseUrl}/en/tours/${slug}`,
                         fr: `${baseUrl}/fr/tours/${slug}`,
+                        'x-default': `${baseUrl}/en/tours/${slug}`,
                     }
                 }
             });
@@ -111,6 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                     languages: {
                         en: `${baseUrl}/en/transfers/${slug}`,
                         fr: `${baseUrl}/fr/transfers/${slug}`,
+                        'x-default': `${baseUrl}/en/transfers/${slug}`,
                     }
                 }
             });
