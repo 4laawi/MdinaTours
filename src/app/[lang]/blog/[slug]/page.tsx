@@ -155,6 +155,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             languages: {
                 'en': `https://mdinatours.com/en/blog/${slug}`,
                 'fr': `https://mdinatours.com/fr/blog/${slug}`,
+                'x-default': `https://mdinatours.com/en/blog/${slug}`,
             }
         },
         openGraph: {

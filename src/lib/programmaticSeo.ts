@@ -399,55 +399,69 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         };
     }
 
-    // 4. PRIVATE DRIVER PAGES
-    const driverSlugs = [
-        "hire-a-driver-in-morocco", "private-chauffeur-morocco", "luxury-driver-morocco",
-        "english-speaking-driver-morocco", "driver-guide-morocco", "driver-for-morocco-itinerary", "driver-for-sahara-desert-tour"
-    ];
-    if (driverSlugs.includes(slug)) {
+    // 4. PRIVATE DRIVER PAGES - Each slug has 100% unique E-E-A-T content
+    if (slug === "hire-a-driver-in-morocco") {
         const title = isEn
-            ? `Private Driver in Morocco: Hire a Licensed Chauffeur & Guide`
-            : `Chauffeur Privé au Maroc : Louer une Voiture avec Chauffeur`;
-        
+            ? "How to Hire a Private Driver in Morocco: Fares, Legal Rules & Tips"
+            : "Comment Louer un Chauffeur Privé au Maroc : Tarifs, Règles & Conseils";
         const excerpt = isEn
-            ? "Discover how to hire a private driver in Morocco for custom road trips, imperial cities, and Sahara desert expeditions. Licensed drivers, vehicles, and costs."
-            : "Guide complet pour louer un véhicule avec chauffeur privé au Maroc. Idéal pour vos circuits sur mesure, voyages d'affaires ou vacances en famille.";
+            ? "Everything you need to know about hiring a licensed private driver in Morocco. Compare official tourist transport vs unlicensed taxis, average rates, and safety rules."
+            : "Tout ce qu'il faut savoir pour louer un chauffeur privé agréé au Maroc. Différences avec les taxis, grilles tarifaires et règles de sécurité.";
 
         const sections: ProgrammaticSection[] = [
             {
-                id: "intro",
-                title: isEn ? "Why Hire a Private Driver in Morocco?" : "Pourquoi faire appel à un Chauffeur Privé au Maroc ?",
+                id: "licensing",
+                title: isEn ? "Understanding Tourist Transport Licensing in Morocco" : "Comprendre l'Agrément de Transport Touristique au Maroc",
                 content: isEn
-                    ? `<p>Morocco is a beautiful country with diverse landscapes ranging from the Rif mountains to the Sahara dunes. However, driving yourself can be difficult due to aggressive local driving habits, narrow medina gates, and mountain roads. Hiring a private driver with <strong>Mdina Tours</strong> gives you the freedom of a road trip without the stress of navigating, allowing you to enjoy the scenery in comfort.</p>`
-                    : `<p>Conduire au Maroc peut être fatiguant en raison de la circulation dense et des routes sinueuses du Haut Atlas. Louer une voiture avec chauffeur privé vous permet de vous détendre et de profiter pleinement des paysages magnifiques en toute sécurité.</p>`
+                    ? `<p>When hiring a private driver in Morocco, it is critical to choose an officially licensed transport company registered with the Ministry of Tourism. Official tourist transport vehicles carry commercial registration plates and comprehensive passenger insurance. Unlicensed drivers operating private cars face strict police checkpoints, which can cause significant delays or travel cancellation during your holiday.</p>
+                       <p>At <strong>Mdina Tours</strong>, all our drivers possess professional transport licenses, and our fleet undergoes mandatory bi-annual technical inspections to guarantee your safety across all highways and mountain roads.</p>`
+                    : `<p>Pour louer un chauffeur privé au Maroc, il est essentiel de faire appel à une société de transport touristique officielle immatriculée auprès du Ministère du Tourisme. Les véhicules agréés disposent de plaques de transport et d'une assurance professionnelle pour les passagers. Les chauffeurs clandestins s'exposent à des contrôles de police fréquents risquant de perturber votre séjour.</p>
+                       <p>Chez <strong>Mdina Tours</strong>, l'ensemble de nos chauffeurs détiennent des cartes professionnelles et nos véhicules passent des contrôles de sécurité semestriels rigoureux.</p>`
             },
             {
-                id: "fleet",
-                title: isEn ? "Our Fleet of Vehicles" : "Notre flotte de véhicules",
+                id: "rates",
+                title: isEn ? "Average Private Driver Costs & Rates in Morocco" : "Tarifs Moyens d'un Chauffeur Privé au Maroc",
                 content: isEn
-                    ? `<p>We offer premium, modern vehicles matching your group size and budget. All cars are licensed, air-conditioned, and fully insured:</p>`
-                    : `<p>Nous proposons une gamme de véhicules récents adaptés à la taille de votre groupe :</p>`,
+                    ? `<p>Private driver pricing in Morocco depends on vehicle category (executive sedan, 7-seater minivan, or 16-seat minibus), total distance, and duration. For long-distance intercity transfers or multi-day road trips, expected standard rates range between <strong>€90 and €250 per day</strong>.</p>`
+                    : `<p>Le prix d'un chauffeur privé varie selon le véhicule (berline, van 7 places ou minibus 16 places), la distance et la durée du séjour. Pour les circuits interurbains et trajets au long cours, comptez en moyenne entre <strong>90€ et 250€ par jour</strong>.</p>`,
+                table: {
+                    headers: isEn ? ["Vehicle Type", "Capacity", "Daily Rate Range", "Best Suited For"] : ["Type de Véhicule", "Capacité", "Tarif Journalier", "Recommandé Pour"],
+                    rows: [
+                        [isEn ? "Executive Sedan (Skoda Superb)" : "Berline Premium (Skoda Superb)", "1-3 PAX", "€90 - €130 / day", isEn ? "Couples, solo travelers, business trips" : "Couples, voyageurs solos, affaires"],
+                        [isEn ? "VIP Minivan (Mercedes Vito)" : "Van VIP (Mercedes Vito)", "4-7 PAX", "€130 - €180 / day", isEn ? "Families, small friend groups, luggage" : "Familles, petits groupes, bagages"],
+                        [isEn ? "Executive Minibus (Mercedes Sprinter)" : "Minibus Prestige (Sprinter)", "8-16 PAX", "€200 - €300 / day", isEn ? "Large tours, delegations, corporate" : "Grands groupes, séminaires, clubs"]
+                    ]
+                }
+            },
+            {
+                id: "whats-included",
+                title: isEn ? "What Is Included in Your Chauffeur Rate?" : "Ce qui est inclus dans le Tarif Chauffeur",
+                content: isEn
+                    ? `<p>All Mdina Tours private chauffeur packages include fixed transparent pricing with no hidden surprises:</p>`
+                    : `<p>Tous nos tarifs de chauffeur privé Mdina Tours sont forfaitaires et clairs :</p>`,
                 list: isEn
                     ? [
-                        "Premium Sedans (Mercedes E-Class, Peugeot 508) – Perfect for 1-3 passengers",
-                        "Spacious Minivans (Mercedes Vito, Hyundai H1) – Perfect for 4-7 passengers",
-                        "Comfortable 4x4 Off-Roaders (Toyota Prado) – Recommended for desert routes"
+                        "Commercial fuel and toll fees for all highways",
+                        "Chauffeur meals and overnight lodging during multi-day tours",
+                        "Unlimited luggage space and passenger insurance",
+                        "Complimentary bottled water and phone charging ports"
                       ]
                     : [
-                        "Berlines confortables – Idéal pour 1 à 3 passagers",
-                        "Monospaces et Vans spacieux (Mercedes Vito) – Idéal pour 4 à 7 passagers",
-                        "Véhicules 4x4 tout-terrain (Toyota Prado) – Parfaits pour le désert"
+                        "Carburant et péages autoroutiers inclus",
+                        "Hébergement et repas du chauffeur pris en charge lors des circuits",
+                        "Bagages illimités et assurance passagers",
+                        "Bouteilles d'eau offertes et prises de recharge"
                       ]
             },
             {
                 id: "cta",
-                title: isEn ? "Hire Your Private Driver Today" : "Réservez Votre Chauffeur Privé",
+                title: isEn ? "Reserve Your Licensed Driver Today" : "Réservez Votre Chauffeur Agréé",
                 content: isEn
-                    ? `<p>Plan your custom Moroccan itinerary. Contact our Rabat office on WhatsApp to receive a personalized chauffeur quote.</p>`
-                    : `<p>Concevez votre itinéraire personnalisé. Contactez notre équipe sur WhatsApp pour obtenir un devis de chauffeur privé.</p>`,
+                    ? `<p>Ready to explore Morocco stress-free? Contact our booking team via WhatsApp for an immediate quote tailored to your exact dates and itinerary.</p>`
+                    : `<p>Prêt à voyager sans stress ? Contactez notre équipe sur WhatsApp pour obtenir un devis rapide adapté à vos dates.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: `/private-driver`
+                ctaLink: '/private-driver'
             }
         ];
 
@@ -455,20 +469,362 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Private Driver" : "Chauffeur Privé",
             date: "June 14, 2026",
-            image: slug === "luxury-driver-morocco" ? "/img2/premium-chauffeur.jpg" : slug === "driver-for-sahara-desert-tour" ? "/b-roll/activity-sahara-camel-riding-broll.webp" : "/img2/private-vito-vans-3.webp",
-            seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
+            image: "/img2/private-van-at-hotel.webp",
+            seoTitle: `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
             sections,
             faqs: [
                 {
-                    q: isEn ? "Are drivers licensed and insured?" : "Les chauffeurs sont-ils déclarés et assurés ?",
-                    a: isEn
-                        ? "Yes. All our drivers hold professional transport licenses and all vehicles are fully commercial insured."
-                        : "Oui, absolument. Tous nos chauffeurs disposent de cartes professionnelles de transport touristique et nos véhicules possèdent des assurances complètes."
+                    q: isEn ? "Are fuel and highway tolls included in the rate?" : "Le carburant et les péages sont-ils inclus ?",
+                    a: isEn ? "Yes. All Mdina Tours driver quotes are all-inclusive covering fuel, toll highways, parking, and driver expenses." : "Oui. Tous nos devis comprennent le carburant, les autoroutes, les frais de parking et les frais du chauffeur."
+                },
+                {
+                    q: isEn ? "How far in advance should we book a private driver?" : "Combien de temps à l'avance faut-il réserver ?",
+                    a: isEn ? "We recommend booking at least 48 to 72 hours in advance during high season (spring and autumn) to guarantee availability." : "Nous conseillons de réserver au moins 48h à 72h à l'avance en haute saison (printemps et automne)."
                 }
             ],
-            relatedSlugs: ["private-driver", "morocco-itinerary-7-days"]
+            relatedSlugs: ["private-chauffeur-morocco", "luxury-driver-morocco"]
+        };
+    }
+
+    if (slug === "private-chauffeur-morocco") {
+        const title = isEn
+            ? "Private Chauffeur Morocco: Executive Point-to-Point Mobility & City Transfers"
+            : "Chauffeur Privé Maroc : Service VIP & Transferts Sur Mesure";
+        const excerpt = isEn
+            ? "Executive chauffeur services for corporate travel, intercity transfers, and VIP private road trips across Morocco with premium Mercedes vans and sedans."
+            : "Service de chauffeur de maître pour voyages d'affaires, évènements et circuits VIP à travers tout le Maroc avec vans Mercedes d'exception.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "executive-service",
+                title: isEn ? "Executive Private Mobility Across Moroccan Cities" : "Transport Privé Haut de Gamme entre les Villes du Maroc",
+                content: isEn
+                    ? `<p>Whether traveling for executive business meetings in Casablanca, diplomatic conferences in Rabat, or bespoke holiday stays in Marrakech, having a private chauffeur ensures punctual, comfortable, and discreet transport. Skip terminal waiting lines and enjoy door-to-door transit in premium air-conditioned vehicles.</p>`
+                    : `<p>Pour vos rendez-vous professionnels à Casablanca, sommets diplomatiques à Rabat ou séjours de prestige à Marrakech, bénéficier d'un chauffeur privé garantit ponctualité, discrétion et confort. Évitez les files d'attente et profitez d'une mobilité sur mesure.</p>`
+            },
+            {
+                id: "on-demand",
+                title: isEn ? "Chauffeur Dispo: Hourly & Daily Standby Options" : "Service Chauffeur à la Disposition (Heure ou Journée)",
+                content: isEn
+                    ? `<p>Need a driver standing by for an evening dinner, wedding event, or flexible city tours? Our <strong>Chauffeur Dispo</strong> service places a dedicated vehicle and driver at your disposal for 4, 8, or 12 consecutive hours with unlimited local intra-city kilometers.</p>`
+                    : `<p>Besoin d'un chauffeur disponible pour une soirée, un mariage ou des visites en ville ? Notre service <strong>Chauffeur à la Disposition</strong> met à votre service un véhicule avec chauffeur pour 4, 8 ou 12 heures consécutives.</p>`
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Your Private Chauffeur" : "Réservez Votre Chauffeur Privé",
+                content: isEn
+                    ? `<p>Send your requested schedule and destination cities to receive instant WhatsApp confirmation.</p>`
+                    : `<p>Envoyez-nous vos horaires et trajets pour recevoir une confirmation immédiate sur WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/private-driver'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Private Driver" : "Chauffeur Privé",
+            date: "June 14, 2026",
+            image: "/img2/vito-chaufeeur-privé.jpg",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Can I book a private chauffeur for half-day city errands?" : "Peut-on réserver un chauffeur pour une demi-journée ?",
+                    a: isEn ? "Yes. We offer 4-hour half-day and 8-hour full-day dedicated chauffeur services in Rabat, Casablanca, Marrakech, and Tangier." : "Oui. Nous proposons des forfaits 4h (demi-journée) et 8h (journée entière) à Rabat, Casablanca, Marrakech et Tanger."
+                }
+            ],
+            relatedSlugs: ["hire-a-driver-in-morocco", "luxury-driver-morocco"]
+        };
+    }
+
+    if (slug === "luxury-driver-morocco") {
+        const title = isEn
+            ? "Luxury Private Driver Morocco: Premium Mercedes Fleet & VIP Concierge"
+            : "Chauffeur de Luxe au Maroc : Flotte Mercedes VIP et Service Conciergerie";
+        const excerpt = isEn
+            ? "Experience first-class travel in Morocco with our luxury Mercedes-Benz Vito and Sprinter fleet. VIP hospitality, leather seating, bottled water, and English chauffeurs."
+            : "Voyagez en première classe au Maroc. Berlines et vans Mercedes tout confort avec chauffeurs en costume et service personnalisé.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "luxury-fleet",
+                title: isEn ? "The First-Class Mercedes Experience" : "L'Expérience Première Classe Mercedes",
+                content: isEn
+                    ? `<p>For discerning travelers expecting flawless hospitality, Mdina Tours offers a dedicated fleet of luxury Mercedes-Benz Vito minivans and executive sedans. Featuring plush leather upholstery, privacy glass tinting, high-speed Wi-Fi hotspots, USB charging ports, and chilled bottled water, your travel experience across Morocco feels effortless.</p>`
+                    : `<p>Pour les voyageurs exigeants, Mdina Tours met à disposition une flotte exclusive de Mercedes-Benz Vito et Sprinter. Intérieurs cuir, vitres teintées, connexion Wi-Fi haut débit et rafraîchissements garantissent un trajet dans les meilleures conditions.</p>`
+            },
+            {
+                id: "concierge",
+                title: isEn ? "VIP Meet & Greet at Airport Terminals" : "Accueil VIP aux Terminaux d'Aéroport",
+                content: isEn
+                    ? `<p>Our luxury private driver service includes complimentary flight tracking and VIP terminal meet-and-greet. Your chauffeur meets you directly past customs with a personalized nameboard, handles all heavy luggage, and escort you to your vehicle parked steps away in reserved zones.</p>`
+                    : `<p>Chaque prise en charge comprend le suivi des vols et l'accueil en hall d'arrivée avec pancarte nominative, prise en charge complète des bagages et accès prioritaire aux parkings aéroportuaires.</p>`
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Luxury Transport" : "Réservez Votre Transport de Luxe",
+                content: isEn ? `<p>Reserve your VIP Mercedes transport with Mdina Tours today.</p>` : `<p>Réservez votre transfert VIP Mercedes avec Mdina Tours dès maintenant.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/private-driver'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Luxury Mobility" : "Transport de Luxe",
+            date: "June 14, 2026",
+            image: "/img2/premium-chauffeur.jpg",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "What luxury amenities are included in the vehicle?" : "Quels équipements VIP sont disponibles à bord ?",
+                    a: isEn ? "Leather seating, individual air-con controls, bottled water, mobile chargers, Wi-Fi, and luggage assistance." : "Sièges en cuir, climatisation individuelle, bouteilles d'eau, chargeurs mobiles, Wi-Fi et assistance bagages."
+                }
+            ],
+            relatedSlugs: ["private-chauffeur-morocco", "hire-a-driver-in-morocco"]
+        };
+    }
+
+    if (slug === "english-speaking-driver-morocco") {
+        const title = isEn
+            ? "English-Speaking Private Driver Morocco: Friendly Local Guides & Easy Trips"
+            : "Chauffeur Privé Anglophone au Maroc : Voyager Sereinement sans Barrière de la Langue";
+        const excerpt = isEn
+            ? "Book a fluent English-speaking driver in Morocco for seamless travel, cultural explanations, hassle-free navigation, and friendly local assistance."
+            : "Réservez un chauffeur marocain parfaitement anglophone et francophone pour échanger facilement et comprendre la culture locale.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "language",
+                title: isEn ? "Seamless Communication Throughout Your Trip" : "Une Communication Fluide tout au long du Voyage",
+                content: isEn
+                    ? `<p>Language barriers should never get in the way of a great travel experience. When hiring an English-speaking driver with Mdina Tours, you can easily ask questions about local customs, request spontaneous photo stops, adjust departure times, and get recommendations for authentic roadside diners without misunderstanding.</p>`
+                    : `<p>La barrière de la langue ne doit pas entraver votre voyage. En réservant un chauffeur bilingue (anglais et français), vous pouvez poser toutes vos questions sur les coutumes locales, adapter vos horaires et demander des conseils sur les meilleurs restaurants locaux.</p>`
+            },
+            {
+                id: "cultural-bridge",
+                title: isEn ? "Local Cultural Context & Hospitality" : "Conseils Culturels et Accueil Marocain",
+                content: isEn
+                    ? `<p>Beyond steering the wheel, your driver acts as a welcoming ambassador to Morocco. Learn about Berber traditions, tea rituals, regional music, and medina etiquette while enjoying the scenery from the comfort of your private vehicle.</p>`
+                    : `<p>En plus de conduire, votre chauffeur agit comme un véritable ambassadeur. Découvrez l'histoire des médinas, les rituels du thé et la musique régionale tout en admirant les paysages.</p>`
+            },
+            {
+                id: "cta",
+                title: isEn ? "Request an English-Speaking Driver" : "Demandez un Chauffeur Bilingue",
+                content: isEn ? `<p>Guarantee an English-fluent chauffeur for your journey by booking on WhatsApp.</p>` : `<p>Garantissez un chauffeur bilingue français/anglais en réservant via WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/private-driver'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Private Driver" : "Chauffeur Privé",
+            date: "June 14, 2026",
+            image: "/b-roll/chauffaur.jpg",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Do all your drivers speak English?" : "Tous vos chauffeurs parlent-ils anglais ?",
+                    a: isEn ? "Yes. All our tourist driver staff are fluent in both English and French." : "Oui. L'ensemble de notre équipe de chauffeurs maîtrise couramment l'anglais et le français."
+                }
+            ],
+            relatedSlugs: ["driver-guide-morocco", "hire-a-driver-in-morocco"]
+        };
+    }
+
+    if (slug === "driver-guide-morocco") {
+        const title = isEn
+            ? "Private Driver-Guide Morocco: Scenic Photography Stops & Hidden Gems"
+            : "Chauffeur-Guide Privé au Maroc : Pauses Panoramiques et Découvertes Authentiques";
+        const excerpt = isEn
+            ? "Discover hidden viewpoints, traditional Berber villages, and authentic roadside spots with a knowledgeable private driver-guide."
+            : "Combinez le confort d'un transport privé et la richesse des explications d'un chauffeur local connaissant le terrain sur le bout des doigts.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "storytelling",
+                title: isEn ? "Beyond Driving: Roadside Knowledge & Hidden Panorama Spots" : "Plus qu'un Chauffeur : Connaissance du Terrain & Halte Panoramiques",
+                content: isEn
+                    ? `<p>A private driver-guide gives you the perfect middle ground between standard point-to-point transit and full group tour packages. During long highway and mountain drives, your driver highlights historic points of interest, Berber grain stores, argan oil cooperatives, and scenic valley photo spots that tour buses bypass.</p>`
+                    : `<p>Le chauffeur-guide est la solution idéale pour voyager à votre rythme. Durant le trajet à travers l'Atlas ou la côte, il vous fait découvrir des coopératives d'huile d'argan authentiques, des points de vue panoramiques méconnus et des villages de montagne.</p>`
+            },
+            {
+                id: "flexibility",
+                title: isEn ? "Total Schedule Freedom on the Road" : "Liberté Totale de Planning sur la Route",
+                content: isEn
+                    ? `<p>Spotted a panoramic canyon or a local market along the road? Simply ask your driver-guide to pull over. You control the pace of your journey without rigid timetable pressures.</p>`
+                    : `<p>Vous apercevez un marché traditionnel ou un paysage grandiose ? Demandez simplement à votre chauffeur de s'arrêter. Vous décidez du rythme de votre itinéraire.</p>`
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book a Driver-Guide Today" : "Réservez Votre Chauffeur-Guide",
+                content: isEn ? `<p>Experience Morocco through the eyes of a local expert. Reserve your driver-guide on WhatsApp.</p>` : `<p>Découvrez le Maroc avec un expert local. Réservez votre chauffeur-guide sur WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/private-driver'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Driver Guide" : "Chauffeur Guide",
+            date: "June 14, 2026",
+            image: "/b-roll/private-transfer-chauffaur-vito.jpg",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Can a driver-guide take us inside medina monuments?" : "Le chauffeur-guide effectue-t-il les visites à l'intérieur des médinas ?",
+                    a: isEn ? "Driver-guides manage all road travel and sightseeing stops. For historical monuments inside pedestrian medinas (like Fes or Marrakech), licensed city guides can be arranged upon request." : "Le chauffeur-guide gère l'ensemble du trajet routier. Pour les médinas piétonnes (Fès, Marrakech), nous mettons à votre disposition des guides officiels certifiés."
+                }
+            ],
+            relatedSlugs: ["english-speaking-driver-morocco", "driver-for-morocco-itinerary"]
+        };
+    }
+
+    if (slug === "driver-for-morocco-itinerary") {
+        const title = isEn
+            ? "Private Driver for Custom Morocco Itineraries: 3 to 14 Day Road Trips"
+            : "Chauffeur Privé pour Itinéraire Sur Mesure au Maroc : Circuits de 3 à 14 Jours";
+        const excerpt = isEn
+            ? "Planning a multi-day trip across Morocco? Hire a dedicated chauffeur for your custom road trip starting from Rabat, Casablanca, Marrakech, or Tangier."
+            : "Concevez votre grand tour du Maroc avec un chauffeur dédié pendant 3, 7, 10 ou 14 jours. Flexibilité absolue et itinéraire à votre rythme.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "multi-day",
+                title: isEn ? "How Multi-Day Driver Services Work" : "Fonctionnement de la Location de Chauffeur Multi-Jours",
+                content: isEn
+                    ? `<p>Designing a multi-day grand tour of Morocco (e.g. Casablanca -> Chefchaouen -> Fes -> Sahara Desert -> Marrakech) requires reliable long-distance transportation. When you hire a private driver for your itinerary, the same professional vehicle and driver stay with your travel group for the entire length of your vacation.</p>
+                       <p>Your driver manages all navigation, mountain passes, parking fees, vehicle maintenance, and luggage loading, allowing you to relax each day.</p>`
+                    : `<p>Organiser un grand tour du Maroc (ex: Casablanca -> Chefchaouen -> Fès -> Désert -> Marrakech) nécessite un transport fiable sur de longues distances. Votre chauffeur dédié vous accompagne du premier au dernier jour de votre voyage.</p>
+                       <p>Il prend en charge le trajet, les péages, le stationnement et les bagages pour vous laisser profiter pleinement de chaque étape.</p>`
+            },
+            {
+                id: "flexibility-routes",
+                title: isEn ? "Popular Cross-Country Routes" : "Axes de Circuits Populaires",
+                content: isEn
+                    ? `<p>Our multi-day drivers frequently cover iconic itineraries including:</p>`
+                    : `<p>Nos chauffeurs effectuent régulièrement les grands axes touristiques :</p>`,
+                list: isEn
+                    ? [
+                        "Imperial Cities Loop (7 Days): Rabat, Meknes, Fes, Volubilis & Marrakech",
+                        "Northern Blue Pearl & Coast (5 Days): Tangier, Chefchaouen, Asilah & Rabat",
+                        "Grand Sahara Expedition (10 Days): Tangier to Merzouga Dunes ending in Marrakech"
+                      ]
+                    : [
+                        "Villes Impériales (7 Jours) : Rabat, Meknès, Fès, Volubilis & Marrakech",
+                        "Perle Bleue & Côte Nord (5 Jours) : Tanger, Chefchaouen, Asilah & Rabat",
+                        "Grand Circuit Désert (10 Jours) : De Tanger à Merzouga avec arrivée à Marrakech"
+                      ]
+            },
+            {
+                id: "cta",
+                title: isEn ? "Plan Your Itinerary Driver" : "Organisez Votre Circuit avec Chauffeur",
+                content: isEn ? `<p>Send us your desired stops and trip length to receive a custom quote.</p>` : `<p>Transmettez-nous vos étapes pour recevoir votre devis sur mesure.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/contact'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Itinerary Driver" : "Circuit Chauffeur",
+            date: "June 14, 2026",
+            image: "/img2/happy-traverlers-group.webp",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Do we need to pay for the driver's lodging?" : "Faut-il payer l'hôtel du chauffeur ?",
+                    a: isEn ? "No. All driver accommodations, meals, and daily allowances during multi-day tours are fully covered by Mdina Tours." : "Non. Tous les frais de logement et de repas du chauffeur durant le circuit sont intégralement pris en charge par Mdina Tours."
+                }
+            ],
+            relatedSlugs: ["morocco-itinerary-7-days", "driver-for-sahara-desert-tour"]
+        };
+    }
+
+    if (slug === "driver-for-sahara-desert-tour") {
+        const title = isEn
+            ? "Private Driver for Sahara Desert Tours: Marrakech to Merzouga & Fes"
+            : "Chauffeur Privé pour Circuit Désert du Sahara : De Marrakech à Merzouga";
+        const excerpt = isEn
+            ? "Travel safely through the High Atlas Mountains and Dades Gorges to the Erg Chebbi sand dunes with an experienced mountain and desert driver."
+            : "Traversez le Haut Atlas et les gorges du Todra en toute sécurité jusqu'aux dunes de l'Erg Chebbi avec un chauffeur expérimenté.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "desert-safety",
+                title: isEn ? "Navigating High Atlas Passes & Desert Highways Safely" : "Traversée en Sécurité des Cols de l'Atlas et des Routes du Désert",
+                content: isEn
+                    ? `<p>Driving from Marrakech or Fes into the Sahara Desert (Erg Chebbi, Merzouga) involves traversing winding mountain roads like Tizi n'Tichka (2,260m elevation) and long desert stretches. Hiring a specialized desert driver ensures safety on sharp mountain bends and comfortable transit in high-clearance minivans or 4x4 vehicles equipped with strong air conditioning.</p>`
+                    : `<p>Rejoindre le désert du Sahara depuis Marrakech ou Fès implique de franchir des cols escarpés comme le Tizi n'Tichka (2 260m). Faire appel à un chauffeur expérimenté garantit une conduite sûre dans les lacets de montagne et un confort parfait en climatisation.</p>`
+            },
+            {
+                id: "desert-highlights",
+                title: isEn ? "Key Sightseeing Stops Along the Desert Route" : "Étapes Incontournables de la Route du Désert",
+                content: isEn
+                    ? `<p>Your private desert driver handles stops at renowned landmarks along the route:</p>`
+                    : `<p>Votre chauffeur privé fait escale dans les plus beaux lieux de la route du désert :</p>`,
+                list: isEn
+                    ? [
+                        "Ait Benhaddou UNESCO Kasbah – Historic mud-brick fortress",
+                        "Ouarzazate Film Studios & Taourirt Kasbah",
+                        "Dades & Todra Gorges – Massive red limestone canyons",
+                        "Merzouga Camel Treks – Seamless handover to desert luxury camps"
+                      ]
+                    : [
+                        "Kasbah d'Aït Benhaddou (Patrimoine UNESCO)",
+                        "Studios de cinéma de Ouarzazate",
+                        "Gorges du Dadès et du Todra",
+                        "Accueil aux pieds des dunes pour la balade à dromadaire"
+                      ]
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Your Sahara Driver" : "Réservez Votre Chauffeur Désert",
+                content: isEn ? `<p>Reserve your private driver for the Marrakech-Merzouga-Fes desert route on WhatsApp.</p>` : `<p>Réservez votre chauffeur privé pour la traversée du désert sur WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'driver',
+                ctaLink: '/private-driver'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Sahara Driver" : "Chauffeur Désert",
+            date: "June 14, 2026",
+            image: "/b-roll/activity-sahara-camel-riding-broll.webp",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Can the driver drop us off in Fes after a desert tour starting in Marrakech?" : "Le chauffeur peut-il nous déposer à Fès après le désert depuis Marrakech ?",
+                    a: isEn ? "Yes! The Marrakech -> Merzouga Desert -> Fes route is one of our most popular one-way private driver itineraries." : "Oui ! Le circuit Marrakech -> Désert de Merzouga -> Fès est l'un de nos trajets sur mesure les plus demandés."
+                }
+            ],
+            relatedSlugs: ["sahara-desert-tour-plan", "driver-for-morocco-itinerary"]
         };
     }
 
@@ -612,56 +968,57 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         };
     }
 
-    // 7. CRUISE TOURISM PAGES
-    const cruiseSlugs = [
-        "tangier-shore-excursions", "casablanca-shore-excursions",
-        "best-day-trips-from-tangier-port", "best-day-trips-from-casablanca-port"
-    ];
-    if (cruiseSlugs.includes(slug)) {
-        const portCity = slug.includes("tangier") ? (isEn ? "Tangier" : "Tanger") : "Casablanca";
-        
+    // 7. CRUISE TOURISM PAGES - Distinct per-slug logic for Tangier & Casablanca
+    if (slug === "tangier-shore-excursions") {
         const title = isEn
-            ? `${portCity} Shore Excursions: Private Port Day Trips`
-            : `Excursions d'Escale à ${portCity} : Circuits Privés depuis le Port`;
-        
+            ? "Tangier Shore Excursions: Private Port Tours & Medina Pickups"
+            : "Excursions d'Escale à Tanger : Circuits Privés depuis le Port";
         const excerpt = isEn
-            ? `Premium private shore excursions from ${portCity} Port. We offer dedicated English-speaking drivers, and a guaranteed back-to-ship policy.`
-            : `Circuits privés d'une journée pour les croisiéristes au port de ${portCity}. Chauffeurs bilingues et garantie de retour au navire à l'heure.`;
+            ? "Short 4-6 hour private shore excursions directly from Tangier City Port (Port de Tanger Ville). Explore the Kasbah, Cap Spartel, and Hercules Caves."
+            : "Circuits d'escale de 4 à 6 heures au départ du Port de Tanger Ville. Visite guidée de la Kasbah, Cap Spartel et les Grottes d'Hercule.";
 
         const sections: ProgrammaticSection[] = [
             {
-                id: "safety-guarantee",
-                title: isEn ? "Our Back-To-Ship Timing Guarantee" : "Garantie de retour à l'heure au navire",
+                id: "port-meet",
+                title: isEn ? "Direct Passenger Terminal Pickup at Tangier Port" : "Prise en Charge Directe au Terminal Passagers du Port de Tanger",
                 content: isEn
-                    ? `<p>As a cruise traveler, your primary concern is returning to the dock before your ship departs. We understand this constraint. Mdina Tours offers a <strong>Strict Back-To-Ship Guarantee</strong>: we plan all itineraries to return you to the port terminal gates at least 1 hour before all boarding times, ensuring a worry-free day of exploration.</p>`
-                    : `<p>Pour les croisiéristes, la ponctualité est indispensable. Nous garantissons un retour au port d'embarquement au moins 1 heure avant le départ du navire, pour une excursion en toute tranquillité d'esprit.</p>`
+                    ? `<p>Disembarking at <strong>Tangier City Port (Port de Tanger Ville)</strong>? Skip crowded cruise tour buses. Your private Mdina Tours chauffeur waits directly at the passenger arrival gates holding a sign with your name, ensuring a prompt departure so you maximize every minute of your port stay.</p>`
+                    : `<p>Vous débarquez au <strong>Port de Tanger Ville</strong> ? Votre chauffeur privé vous accueille directement au hall d'arrivée des voyageurs muni d'une pancarte à votre nom pour démarrer votre excursion sans perdre une seconde.</p>`
             },
             {
-                id: "excursion-options",
-                title: isEn ? "Popular Shore Excursion Itineraries" : "Nos itinéraires d'excursion populaires",
+                id: "tangier-highlights",
+                title: isEn ? "Highlights of the 4-6 Hour Tangier Port Tour" : "Les Étapes Fortes de l'Escale à Tanger (4-6h)",
                 content: isEn
-                    ? `<p>Depending on your port duration, you can choose from these private excursions:</p>
-                       <ul>
-                         <li><strong>${portCity} Medina & Kasbah Tour</strong> (4-5 hours) – Perfect for short port stops.</li>
-                         <li><strong>Day Trip to Chefchaouen (The Blue City)</strong> (8-9 hours) – Available from Tangier Port.</li>
-                         <li><strong>Day Trip to Rabat Capital</strong> (7-8 hours) – Available from Casablanca Port.</li>
-                       </ul>`
-                    : `<p>Selon la durée de votre escale, plusieurs choix s'offrent à vous :</p>
-                       <ul>
-                         <li><strong>Visite de la ville et de la médina</strong> (4-5 heures) – Idéal pour les escales courtes.</li>
-                         <li><strong>Excursion à Chefchaouen</strong> (8-9 heures) – Au départ du port de Tanger.</li>
-                         <li><strong>Excursion à Rabat</strong> (7-8 heures) – Au départ du port de Casablanca.</li>
-                       </ul>`
+                    ? `<p>Our compact Tangier shore excursion covers all essential coastal and medina highlights:</p>`
+                    : `<p>Notre circuit court d'escale à Tanger couvre les incontournables de la ville :</p>`,
+                list: isEn
+                    ? [
+                        "Cap Spartel – Where the Atlantic Ocean meets the Mediterranean Sea",
+                        "Caves of Hercules – Ancient sea-carved caverns shaped like Africa",
+                        "The Historic Tangier Kasbah & Sultan's Palace (Dar el-Makhzen)",
+                        "Grand Socco & Petit Socco Medina Markets"
+                      ]
+                    : [
+                        "Cap Spartel – Rencontre entre l'Océan Atlantique et la Méditerranée",
+                        "Grottes d'Hercule – Cavités mythiques surplombant la mer",
+                        "La Kasbah de Tanger et le Palais du Sultan",
+                        "Grand Socco et ruelles vivantes de la Médina"
+                      ]
+            },
+            {
+                id: "guarantee",
+                title: isEn ? "Guaranteed Back-To-Ship Timing Policy" : "Garantie Restitution au Navire à l'Heure",
+                content: isEn
+                    ? `<p>We guarantee to return you to the cruise ship dock at least 1 hour prior to your ship's scheduled all-aboard time.</p>`
+                    : `<p>Nous garantissons un retour au quai d'embarquement au moins 1h avant l'heure limite d'embarquement du navire.</p>`
             },
             {
                 id: "cta",
-                title: isEn ? "Reserve Your Shore Excursion" : "Réservez Votre Excursion d'Escale",
-                content: isEn
-                    ? `<p>Provide your ship name, arrival time, and boarding time. Contact us on WhatsApp to reserve your private chauffeur.</p>`
-                    : `<p>Indiquez-nous le nom de votre navire et vos horaires. Réservez votre chauffeur privé d'escale sur WhatsApp.</p>`,
+                title: isEn ? "Book Your Tangier Shore Excursion" : "Réservez Votre Excursion à Tanger",
+                content: isEn ? `<p>Provide your cruise ship name and port docking hours on WhatsApp to book.</p>` : `<p>Indiquez-nous le nom de votre navire et vos horaires d'escale sur WhatsApp.</p>`,
                 isCallToAction: true,
                 ctaType: 'general',
-                ctaLink: `/contact`
+                ctaLink: '/contact'
             }
         ];
 
@@ -669,20 +1026,209 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Shore Excursions" : "Escales Croisières",
             date: "June 14, 2026",
-            image: portCity === "Tangier" ? "/img2/tangier_hero.webp" : "/img2/casablanca_MOSQUE.webp",
-            seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
+            image: "/img2/tangier_hero.webp",
+            seoTitle: `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
             sections,
             faqs: [
                 {
-                    q: isEn ? "Where does the driver pick us up?" : "Où se fait la prise en charge au port ?",
-                    a: isEn
-                        ? "Your driver will meet you directly at the cruise passenger exit terminal, holding a sign displaying your name."
-                        : "Votre chauffeur vous attendra directement à la sortie voyageurs du port, muni d'une pancarte à votre nom."
+                    q: isEn ? "Where does the driver wait at Tangier Port?" : "Où attend le chauffeur au port de Tanger ?",
+                    a: isEn ? "Directly outside the passenger customs exit gate at Port de Tanger Ville holding a name sign." : "Juste à la sortie douane du terminal passagers du Port de Tanger Ville avec une pancarte."
                 }
             ],
-            relatedSlugs: [`tangier-travel-guide`, `casablanca-travel-guide`]
+            relatedSlugs: ["best-day-trips-from-tangier-port", "tangier-travel-guide"]
+        };
+    }
+
+    if (slug === "best-day-trips-from-tangier-port") {
+        const title = isEn
+            ? "Best Day Trips from Tangier Port: Chefchaouen, Asilah & Tetouan"
+            : "Les Meilleures Excursions au Départ du Port de Tanger : Chefchaouen & Asilah";
+        const excerpt = isEn
+            ? "Planning a full-day shore stop at Tangier Port? Book private driver day trips to Chefchaouen (The Blue Pearl), coastal Asilah, or UNESCO Tetouan."
+            : "Prolongez votre escale à Tanger. Excursions d'une journée en chauffeur privé vers Chefchaouen (la Ville Bleue), Asilah ou Tétouan.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "full-day-destinations",
+                title: isEn ? "Top Full-Day Excursions for Tangier Cruise Passengers" : "Les Grands Circuits d'une Journée depuis le Port de Tanger",
+                content: isEn
+                    ? `<p>If your cruise ship docks in Tangier for 8 to 12 hours, taking a full-day private trip into northern Morocco is the highlight of your cruise itinerary. Our private vehicles provide rapid transit so you can explore surrounding UNESCO gems before returning to your ship.</p>`
+                    : `<p>Si votre navire fait escale à Tanger pendant 8 à 12 heures, profitez-en pour réaliser un grand circuit privé à travers le nord du Maroc.</p>`
+            },
+            {
+                id: "trip-options",
+                title: isEn ? "Choose Your Day Trip Route" : "Choisissez Votre Itinéraire d'Excursion",
+                content: isEn
+                    ? `<p>Select from these top day trips starting directly from Tangier Port:</p>`
+                    : `<p>Sélectionnez votre parcours au départ du port :</p>`,
+                list: isEn
+                    ? [
+                        "Chefchaouen Blue City Day Trip (8 Hours) – Scenic Rif Mountain drive to the famous blue-painted alleys.",
+                        "Asilah Atlantic Coastal Village (5 Hours) – Historic Portuguese sea ramparts and whitewashed medina.",
+                        "Tetouan UNESCO Medina Tour (6 Hours) – Authentic Hispano-Moorish architecture and artisan souks."
+                      ]
+                    : [
+                        "Excursion à Chefchaouen (8 Hours) – Traversée du Rif vers les ruelles bleues photogéniques.",
+                        "Excursion à Asilah (5 Hours) – Remparts portugais et médina blanche au bord de l'océan.",
+                        "Visite de Tétouan (6 Hours) – Médina UNESCO à l'architecture hispano-mauresque."
+                      ]
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Your Tangier Port Day Trip" : "Réservez Votre Excursion depuis le Port",
+                content: isEn ? `<p>Reserve your private day trip from Tangier Port on WhatsApp.</p>` : `<p>Réservez votre grande excursion depuis le Port de Tanger sur WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'general',
+                ctaLink: '/contact'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Shore Excursions" : "Escales Croisières",
+            date: "June 14, 2026",
+            image: "/hero-chefchaouen.webp",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Is there enough time to visit Chefchaouen during a cruise stop?" : "A-t-on le temps de visiter Chefchaouen pendant une escale ?",
+                    a: isEn ? "Yes! Driving to Chefchaouen takes ~2h15m each way. With an 8 to 9 hour port docking window, you have 3 to 4 full hours to explore the Blue City." : "Oui ! Le trajet prend environ 2h15. Pour une escale de 8h à 9h, vous profitez de 3h à 4h de visite sur place."
+                }
+            ],
+            relatedSlugs: ["tangier-shore-excursions", "chefchaouen-travel-guide"]
+        };
+    }
+
+    if (slug === "casablanca-shore-excursions") {
+        const title = isEn
+            ? "Casablanca Shore Excursions: Hassan II Mosque & Medina Port Tours"
+            : "Excursions d'Escale à Casablanca : Mosquée Hassan II & Port";
+        const excerpt = isEn
+            ? "Explore Casablanca's iconic Hassan II Mosque, Habous Quarter, and Rick's Cafe on a private 4-5 hour shore excursion from Casablanca Cruise Port."
+            : "Découvrez la célèbre Mosquée Hassan II, le quartier des Habous et Rick's Café lors d'une excursion d'escale privée de 4 à 5h au port de Casablanca.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "casablanca-port",
+                title: isEn ? "Private Chauffeur Pickup at Casablanca Cruise Terminal" : "Prise en Charge au Port de Croisière de Casablanca",
+                content: isEn
+                    ? `<p>Casablanca Cruise Port is a busy commercial harbor. Finding reliable taxis at the port gate can be difficult and stressful. With Mdina Tours, your private chauffeur greets you directly at the port exit with a name sign, whisking you away in a modern executive vehicle for a comfortable city tour.</p>`
+                    : `<p>Le port de croisière de Casablanca est un grand port de commerce. Votre chauffeur privé vous accueille dès la sortie du terminal passagers avec une pancarte pour démarrer votre visite guidée.</p>`
+            },
+            {
+                id: "highlights",
+                title: isEn ? "Key Sights Covered in 4-5 Hours" : "Les Incontournables en 4-5 Heures",
+                content: isEn
+                    ? `<p>Our Casablanca shore excursion includes access to top architectural landmarks:</p>`
+                    : `<p>Notre circuit d'escale à Casablanca comprend les grands monuments :</p>`,
+                list: isEn
+                    ? [
+                        "Hassan II Mosque – Guided access to one of the largest mosques in the world",
+                        "Habous Quarter – Traditional New Medina famous for pastries and olive markets",
+                        "Rick's Cafe – Photo stop at the iconic Casablanca movie-themed landmark",
+                        "Ain Diab Corniche – Oceanfront promenade and Boulevard Mohammed V architecture"
+                      ]
+                    : [
+                        "Mosquée Hassan II – Visite de ce chef-d'œuvre surplombant l'océan",
+                        "Quartier des Habous – Nouvelle médina célèbre pour ses pâtisseries",
+                        "Rick's Café – Halte photo devant l'adresse mythique du film Casablanca",
+                        "La Corniche d'Aïn Diab – Promenade en bord de mer"
+                      ]
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Casablanca Excursion" : "Réservez Votre Excursion à Casablanca",
+                content: isEn ? `<p>Reserve your private Casablanca cruise excursion on WhatsApp.</p>` : `<p>Réservez votre excursion d'escale à Casablanca sur WhatsApp.</p>`,
+                isCallToAction: true,
+                ctaType: 'general',
+                ctaLink: '/contact'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Shore Excursions" : "Escales Croisières",
+            date: "June 14, 2026",
+            image: "/img2/casablanca_MOSQUE.webp",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Do we need pre-booked tickets for Hassan II Mosque?" : "Faut-il réserver les billets pour la Mosquée Hassan II à l'avance ?",
+                    a: isEn ? "Official guided tour tickets can be purchased at the mosque entrance hall. Your driver aligns your itinerary with official tour schedules." : "Les billets pour les visites guidées de la mosquée s'achètent sur place. Votre chauffeur adapte l'heure d'arrivée aux créneaux officiels."
+                }
+            ],
+            relatedSlugs: ["best-day-trips-from-casablanca-port", "casablanca-travel-guide"]
+        };
+    }
+
+    if (slug === "best-day-trips-from-casablanca-port") {
+        const title = isEn
+            ? "Best Day Trips from Casablanca Port: Rabat & Marrakech Excursions"
+            : "Les Meilleures Excursions au Départ du Port de Casablanca : Rabat & Marrakech";
+        const excerpt = isEn
+            ? "Maximize your cruise stop at Casablanca Port with full-day private driver trips to Rabat Imperial Capital (1 hour drive) or Marrakech Red City (2.5 hours)."
+            : "Profitez de votre escale au Port de Casablanca pour visiter Rabat (à 1h) ou Marrakech (à 2h30) en chauffeur privé.";
+
+        const sections: ProgrammaticSection[] = [
+            {
+                id: "day-trips-casa",
+                title: isEn ? "Explore Beyond Casablanca During Your Cruise Stop" : "Explorez la Région depuis le Port de Casablanca",
+                content: isEn
+                    ? `<p>While Casablanca offers modern landmarks, surrounding cities offer incredible imperial history. Thanks to Morocco's high-speed highway network, cruise passengers docking at Casablanca Port can easily visit Rabat or Marrakech in a single day with a private driver.</p>`
+                    : `<p>Grâce au réseau autoroutier rapide, une escale au port de Casablanca permet de visiter facilement la capitale Rabat ou la ville rouge de Marrakech sur la journée.</p>`
+            },
+            {
+                id: "routes",
+                title: isEn ? "Top Recommended Day Trip Destinations" : "Nos Recommandations d'Excursions",
+                content: isEn
+                    ? `<p>Choose from these top full-day itineraries starting from Casablanca Port:</p>`
+                    : `<p>Sélectionnez votre grand circuit d'escale :</p>`,
+                list: isEn
+                    ? [
+                        "Rabat Imperial Capital Day Trip (6 Hours total) – Hassan Tower, Kasbah Oudayas & Chellah (Only 1 hour highway drive)",
+                        "Marrakech Red City Day Trip (10 Hours total) – Majorelle Garden, Bahia Palace & Jemaa el-Fnaa (2.5 hour drive each way)",
+                        "El Jadida Portuguese Fortress (6 Hours total) – UNESCO Portuguese cistern and coastal fortress (1.5 hour drive)"
+                      ]
+                    : [
+                        "Excursion à Rabat (6 Hours) – Tour Hassan, Oudayas et Chellah à seulement 1h de route",
+                        "Excursion à Marrakech (10 Hours) – Jardin Majorelle, Palais Bahia et la place Jemaa el-Fna (2h30 de route)",
+                        "Cité Portugaise d'El Jadida (6 Hours) – Citerne portugaise classée par l'UNESCO (1h30 de route)"
+                      ]
+            },
+            {
+                id: "cta",
+                title: isEn ? "Book Your Day Trip from Casablanca Port" : "Réservez Votre Excursion d'Escale",
+                content: isEn ? `<p>Contact us on WhatsApp with your ship details to arrange your private day trip.</p>` : `<p>Contactez-nous sur WhatsApp pour réserver votre excursion privée d'escale.</p>`,
+                isCallToAction: true,
+                ctaType: 'general',
+                ctaLink: '/contact'
+            }
+        ];
+
+        return {
+            slug, title, excerpt,
+            category: isEn ? "Shore Excursions" : "Escales Croisières",
+            date: "June 14, 2026",
+            image: "/img2/rabat-hassan-tour.jpg",
+            seoTitle: `${title} | Mdina Tours`,
+            seoDesc: excerpt,
+            tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+            sections,
+            faqs: [
+                {
+                    q: isEn ? "Is Rabat close enough for a worry-free day trip from Casablanca Port?" : "Rabat est-elle assez proche pour une excursion sans risque ?",
+                    a: isEn ? "Yes! Rabat is only 1 hour away via the A1 highway, making it the safest and most popular day trip option for cruise travelers docking in Casablanca." : "Oui ! Rabat n'est qu'à 1h d'autoroute, ce qui en fait l'excursion la plus sûre et la plus fluide depuis le port de Casablanca."
+                }
+            ],
+            relatedSlugs: ["casablanca-shore-excursions", "rabat-travel-guide"]
         };
     }
 
