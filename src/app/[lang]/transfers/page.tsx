@@ -149,54 +149,28 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
             />
 
-            <main style={{ minHeight: '80vh', backgroundColor: '#f9f9fb', padding: '60px 0 100px 0' }}>
-                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-                    
-                    {/* Header Title Section */}
-                    <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                        <span style={{ 
-                            color: 'var(--primary)', 
-                            fontWeight: 700, 
-                            fontSize: '0.9rem', 
-                            textTransform: 'uppercase', 
-                            letterSpacing: '1.5px',
-                            display: 'block',
-                            marginBottom: '10px'
-                        }}>
-                            {isEn ? 'Private Intercity & Airport Routes' : 'Trajets Privés Interurbains & Aéroports'}
-                        </span>
-                        <h1 style={{ 
-                            fontSize: 'clamp(2rem, 4vw, 2.8rem)', 
-                            fontWeight: 800, 
-                            color: 'var(--secondary)',
-                            marginBottom: '15px'
-                        }}>
-                            {isEn ? 'Morocco Private Transfers & Chauffeur Services' : 'Transferts Privés & Chauffeurs au Maroc'}
-                        </h1>
-                        <p style={{ 
-                            maxWidth: '700px', 
-                            margin: '0 auto', 
-                            color: '#666', 
-                            fontSize: '1.05rem', 
-                            lineHeight: 1.6 
-                        }}>
-                            {isEn 
-                                ? 'Fixed-price point-to-point transfers between all major cities and international airports in Morocco. Modern air-conditioned fleet with professional drivers.'
-                                : 'Transferts porte-à-porte à tarif fixe entre les principales villes et aéroports du Maroc. Flotte moderne et climatisée avec chauffeurs expérimentés.'
-                            }
-                        </p>
-                    </div>
+            <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
+                <TransfersHero 
+                    title={isEn ? 'Morocco Private Transfers' : 'Transferts Privés au Maroc'}
+                    subtitle={isEn ? 'Punctual meet & greet service, fixed rates, and clean air-conditioned vehicles between all major airports and medinas.' : 'Service d\'accueil ponctuel, prix fermes sans surprise, berlines et monospaces climatisés reliant tous les aéroports.'}
+                    bgImage="/img/Morocco-trip-tour-hero04.webp"
+                    homeLabel={t('home')}
+                    homeLink={getPath('/')}
+                    currentLabel={isEn ? 'Private Transfers' : 'Transferts Privés'}
+                />
 
-                    {/* Transfers Listing Grid */}
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '25px'
-                    }}>
-                        {transfersData.map((trans) => {
-                            const local = trans[language] || trans.en;
-                            const startingPrice = trans.prices[3] || trans.prices[4];
-                            const thumbnailUrl = getTransferThumbnail(trans.slug, trans.image);
+                {/* Catalog Listing */}
+                <section style={{ padding: '80px 20px' }}>
+                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '25px'
+                        }}>
+                            {transfersData.map((trans) => {
+                                const local = trans[language] || trans.en;
+                                const startingPrice = trans.prices[3] || trans.prices[4];
+                                const thumbnailUrl = getTransferThumbnail(trans.slug, trans.image);
 
                                 return (
                                     <div key={trans.slug} style={{
@@ -275,9 +249,10 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                             })}
                         </div>
                     </div>
-                </main>
-                <Footer lang={language} />
-                <FloatingElements />
-            </>
-        );
+                </section>
+            </main>
+            <Footer lang={language} />
+            <FloatingElements />
+        </>
+    );
 }

@@ -89,7 +89,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     const moreNavItems = [
         { path: '/faq', label: 'FAQ' },
-        { path: '/blog', label: t('blog') },
+        ...(language === 'es' ? [] : [{ path: '/blog', label: t('blog') }]),
         { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos') },
     ];
 
