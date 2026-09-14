@@ -41,7 +41,7 @@ export interface TransferData {
 export const transfersData: TransferData[] = [
     {
         slug: "casablanca-airport-transfer",
-        image: "/Traditional.webp",
+        image: "/img3/tourists-happy-private-driver-casablanca.webp",
         prices: { 3: 120, 4: 140, 5: 165, 7: 210 },
         en: {
             title: "Private Transfer from Casablanca Airport to Rabat or Salé",
@@ -143,7 +143,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-airport-transfer",
-        image: "/hero-landscape-1.webp",
+        image: "/img3/aeroport-rabat-sale-mdinatours.webp",
         prices: { 3: 45, 4: 55, 5: 70, 7: 95 },
         en: {
             title: "Rabat-Salé Airport (RBA) Private Chauffeur",
@@ -268,7 +268,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-to-casablanca-transfer",
-        image: "/hero-landscape-1.webp",
+        image: "/img3/aeroport-rabat-sale-mdinatours.webp",
         prices: { 3: 110, 4: 130, 5: 155, 7: 195 },
         en: {
             title: "Rabat or Salé to Casablanca Private Transfer",

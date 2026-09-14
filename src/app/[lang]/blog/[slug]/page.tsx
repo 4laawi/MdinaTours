@@ -289,7 +289,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/private-van-at-hotel.webp", tag: "Hotel Pickups", alt: "Mercedes Vito hotel transfer", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
         { src: "/img2/private-vito-vans-3.webp", tag: "Our Minivans", alt: "Mercedes Vito tourist transport", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
         { src: "/img2/vito-aeroport.jpg", tag: "Airport Transfer", alt: "Mercedes Vito airport pickup", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur", "airport"] },
-        { src: "/img2/vito-chaufeeur-privé.jpg", tag: "Private Chauffeur", alt: "Private driver service", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
+        { src: "/img3/mdinatours-drivers-cars.webp", tag: "Private Chauffeur", alt: "Private driver service", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
         { src: "/img2/vito.jpg", tag: "Mercedes Vito", alt: "Mercedes Vito details", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
         { src: "/b-roll/private-transfer-chauffaur-vito.jpg", tag: "Chauffeur", alt: "Airport pickup Mercedes Vito", keywords: ["driver", "transfer", "transport", "vito", "fleet", "luxury", "chauffeur"] },
         { src: "/img2/happy-traverlers-group.webp", tag: "Happy Travelers", alt: "Groups traveling in Morocco", keywords: ["driver", "group", "itinerary", "tour"] },

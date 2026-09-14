@@ -527,7 +527,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Private Driver" : "Chauffeur Privé",
             date: "June 14, 2026",
-            image: "/img2/vito-chaufeeur-privé.jpg",
+            image: "/img3/mdinatours-drivers-cars.webp",
             seoTitle: `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),

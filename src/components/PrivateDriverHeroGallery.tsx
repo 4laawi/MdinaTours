@@ -16,12 +16,12 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     
     const getGalleryImages = () => {
         return [
-            '/b-roll/vito-airoport-parking.jpg',
-            '/img2/vito-chaufeeur-privé.jpg',
-            '/img/agafay.jpg',
+            '/img3/mdinatours-drivers-cars.webp',
+            '/img3/tourists-happy-private-driver-casablanca.webp',
+            '/img3/vito-mercedes-closeup.webp',
             '/img2/private-vito-vans-3.webp',
-            '/img2/happy-traverlers-group.webp',
-            '/b-roll/chauffaur.jpg',
+            '/img3/happy-tourists-in-casabalanca.webp',
+            '/img3/two-big-van.webp',
             '/img2/private-chauffeur-maroc.webp',
             '/img2/private-van-at-hotel.webp'
         ];

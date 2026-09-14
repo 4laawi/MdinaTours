@@ -200,7 +200,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
     // 1. First image position: Absolute most relevant image for the starting point / route
     if (isAirport) {
         if (hasCasablanca) {
-            images.push('/img2/Airport_Casablanca_Mohammed.webp');
+            images.push('/img3/tourists-happy-private-driver-casablanca.webp');
         } else if (hasRabat) {
             images.push('/img2/rabat-airport.webp');
         } else if (hasTangier) {
@@ -210,7 +210,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasAgadir) {
             images.push('/img2/agadir-airport.webp');
         } else if (hasMarrakech) {
-            images.push('/b-roll/3-Mercedes-vito-airoport.jpg');
+            images.push('/img3/aeroport-marrakech-menara.webp');
         }
     } else {
         // If city-to-city, prioritize landmarks (prioritizing Essaouira first to ensure it displays correctly)
@@ -221,7 +221,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasRabat) {
             images.push('/img2/rabat-hassan-tour.jpg');
         } else if (hasCasablanca) {
-            images.push('/img2/casablanca_MOSQUE.webp');
+            images.push('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp');
         } else if (hasFes) {
             images.push('/img2/fes_gate.jpg');
         } else if (hasMarrakech) {
@@ -232,16 +232,19 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
 
     // 2. Second image position: Destination landmark or secondary route image
-    if (hasCasablanca && !images.includes('/img2/casablanca_MOSQUE.webp')) {
-        images.push('/img2/casablanca_MOSQUE.webp');
+    if (isAirport && hasRabat && !images.includes('/img3/aeroport-rabat-sale-mdinatours.webp')) {
+        images.push('/img3/aeroport-rabat-sale-mdinatours.webp');
+    }
+    if (hasCasablanca && !images.includes('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp')) {
+        images.push('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp');
     }
     if (hasFes && !images.includes('/img2/fes_gate.jpg')) {
         images.push('/img2/fes_gate.jpg');
     }
     if (hasMarrakech && !hasEssaouira) { // Do not push Marrakech landmark for Essaouira route
         if (isAirport) {
-            if (!images.includes('/img2/aeroport-marrakech.webp')) {
-                images.push('/img2/aeroport-marrakech.webp');
+            if (!images.includes('/img3/aeroport-marrakech-menara.webp')) {
+                images.push('/img3/aeroport-marrakech-menara.webp');
             }
         } else {
             if (!images.includes('/hero-marrakech.webp')) {
@@ -258,34 +261,33 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (hasAgadir && !images.includes('/img2/agadir-marina.jpg')) {
         images.push('/img2/agadir-marina.jpg');
     }
-    if (hasRabat && !images.includes('/img2/rabat-hassan-tour.jpg') && !images.includes('/hero-landscape-1.webp')) {
-        images.push('/hero-landscape-1.webp');
+    if (hasRabat && !isAirport && !images.includes('/img2/rabat-hassan-tour.jpg')) {
+        images.push('/img2/rabat-hassan-tour.jpg');
     }
     if (hasTangier && !images.includes('/img2/tangier_hero.webp') && !images.includes('/img2/tangier-mdina.jpg')) {
         images.push('/img2/tangier-mdina.jpg');
     }
 
-    // Ensure transImage is in the list
-    if (!images.includes(transImage)) {
+    // 3. For Rabat to Casablanca route, include the Rabat-Salé hub image as View 3
+    if (normalizedSlug.includes('rabat-to-casablanca') && !images.includes('/img3/aeroport-rabat-sale-mdinatours.webp')) {
+        images.push('/img3/aeroport-rabat-sale-mdinatours.webp');
+    }
+
+    // Ensure transImage is in the list if not generic landscape placeholder
+    if (!images.includes(transImage) && !transImage.includes('hero-landscape')) {
         images.push(transImage);
     }
 
-    // 3. Third image position: Private Van (Vito) Image
-    if (isAirport) {
-        images.push('/img2/vito-aeroport.jpg');
-    } else {
-        images.push('/img2/private-van-at-hotel.webp');
-    }
-
-    // 4. Fourth image position: Professional Chauffeur
-    if (isAirport) {
-        images.push('/img2/vito-chaufeeur-privé.jpg');
-    } else {
-        images.push('/b-roll/private-transfer-chauffaur-vito.jpg');
-    }
+    // 4. Vehicle & Fleet Showcase
+    images.push('/img3/vito-mercedes-closeup.webp');
+    images.push('/img3/mdinatours-drivers-cars.webp');
 
     // 5. Fifth image position: Happy Travelers / Family
-    images.push('/img2/happy-traverlers-group.webp');
+    if (hasCasablanca) {
+        images.push('/img3/happy-tourists-in-casabalanca.webp');
+    } else {
+        images.push('/img2/happy-traverlers-group.webp');
+    }
 
     // 6. Extra supporting images (avoiding duplicate Vitos)
     if (hasFes && !isAirport) {
@@ -300,12 +302,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (hasRabat) {
         images.push('/img2/rabat_monemont.jpg');
     }
-    if (isAirport) {
-        images.push('/b-roll/vito-airoport-parking.jpg');
-    } else {
-        images.push('/img2/vito.jpg');
-    }
-    images.push('/b-roll/moroccan-family-urban.jpg');
+    images.push('/img3/two-big-van.webp');
 
     // Return unique elements, capped at 6 images for clean layout
     return Array.from(new Set(images)).slice(0, 6);

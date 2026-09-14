@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://mdinatours.com/img2/casablanca_MOSQUE.webp',
+                    url: 'https://mdinatours.com/img3/tourists-happy-private-driver-casablanca.webp',
                     width: 1200,
                     height: 630,
                     alt: 'Private Driver Casablanca Mdina Tours',
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://mdinatours.com/img2/casablanca_MOSQUE.webp'],
+            images: ['https://mdinatours.com/img3/tourists-happy-private-driver-casablanca.webp'],
         },
     };
 }
