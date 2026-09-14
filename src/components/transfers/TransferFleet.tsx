@@ -13,9 +13,11 @@ interface Vehicle {
     image: string;
 }
 
+import { Language } from '@/lib/translations';
+
 interface TransferFleetProps {
     prices: { [passengers: number]: number };
-    lang: 'en' | 'fr';
+    lang: Language;
     local: any;
 }
 

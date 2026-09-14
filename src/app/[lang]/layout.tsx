@@ -12,18 +12,29 @@ const outfit = Outfit({
     variable: '--font-poppins',
 });
 
+import { Language } from '@/lib/translations';
+
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
-    const isEn = lang === 'en';
+    
+    let title = 'Mdina Tours | Bespoke Morocco Chauffeur & Private Tours';
+    let description = 'Mdina Tours provides executive private driver services, intercity airport transfers, and tailor-made Morocco tours across Rabat, Casablanca, Marrakech, and Tangier.';
+    let ogLocale = 'en_US';
 
-    const title = isEn ? 'Mdina Tours | Bespoke Morocco Chauffeur & Private Tours' : 'Mdina Tours | Chauffeur Privé & Circuits d\'Exception au Maroc';
-    const description = isEn
-        ? 'Mdina Tours provides executive private driver services, intercity airport transfers, and tailor-made Morocco tours across Rabat, Casablanca, Marrakech, and Tangier.'
-        : 'Mdina Tours propose des services de chauffeur privé haut de gamme, des navettes aéroport et des circuits sur mesure à Rabat, Casablanca, Marrakech et Tanger.';
+    if (lang === 'fr') {
+        title = 'Mdina Tours | Chauffeur Privé & Circuits d\'Exception au Maroc';
+        description = 'Mdina Tours propose des services de chauffeur privé haut de gamme, des navettes aéroport et des circuits sur mesure à Rabat, Casablanca, Marrakech et Tanger.';
+        ogLocale = 'fr_FR';
+    } else if (lang === 'es') {
+        title = 'Mdina Tours | Chófer Privado y Rutas a Medida en Marruecos';
+        description = 'Servicios de conductor privado, traslados desde el aeropuerto y rutas personalizadas en Marruecos (Casablanca, Marrakech, Rabat, Tánger y Fez).';
+        ogLocale = 'es_ES';
+    }
+
     const url = `https://mdinatours.com/${lang}`;
 
     return {
@@ -43,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'Mdina Tours Morocco',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: ogLocale,
             type: 'website',
         },
         twitter: {
@@ -64,15 +75,20 @@ export default async function LocaleLayout({
 }) {
     const { lang } = await params;
 
+    let agencyDescription = "Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat.";
+    if (lang === 'fr') {
+        agencyDescription = "Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.";
+    } else if (lang === 'es') {
+        agencyDescription = "Mdina Tours ofrece servicios de transporte privado, traslados de aeropuerto y excursiones a medida en Marruecos con conductores profesionales.";
+    }
+
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
         "name": "Mdina Tours",
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "logo": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
-        "description": lang === 'en'
-            ? "Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat."
-            : "Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.",
+        "description": agencyDescription,
         "url": `https://mdinatours.com/${lang}`,
         "telephone": "+212724114775",
         "priceRange": "$$",
@@ -108,7 +124,7 @@ export default async function LocaleLayout({
     return (
         <html lang={lang} className={`${outfit.variable}`}>
             <body>
-                <LanguageProvider initialLanguage={lang as 'en' | 'fr'}>
+                <LanguageProvider initialLanguage={lang as Language}>
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

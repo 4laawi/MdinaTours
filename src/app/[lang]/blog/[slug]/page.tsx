@@ -108,6 +108,9 @@ const standardPostSections = {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
     const { lang, slug } = await params;
+    if (lang === 'es') {
+        return { title: 'Not Found - Mdina Tours' };
+    }
     const language = (lang as Language) || 'en';
     
     // Check programmatic first
@@ -185,6 +188,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
     const { lang, slug } = await params;
+    if (lang === 'es') {
+        notFound();
+    }
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
     const t = (key: string) => {
@@ -230,7 +236,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
             notFound();
         }
 
-        const sectionsMetadata = standardPostSections[postData.id as keyof typeof standardPostSections]?.[language] || [];
+        const sectionsMetadata = standardPostSections[postData.id as keyof typeof standardPostSections]?.[language as 'en' | 'fr'] || [];
         const paragraphs = content.split('\n\n');
         
         structuredSections = paragraphs.map((p, idx) => {

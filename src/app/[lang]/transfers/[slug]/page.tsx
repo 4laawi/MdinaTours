@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
+import { APPROVED_PHASE1_ES_PATHS } from '@/lib/seo';
 import TransferBookingFlow from '@/components/TransferBookingFlow';
 import Script from 'next/script';
 
@@ -18,6 +19,10 @@ export async function generateStaticParams() {
         locales.forEach(lang => {
             paths.push({ lang, slug: trans.slug });
         });
+        // Include 'es' only for strictly approved Phase 1 transfer routes
+        if (APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${trans.slug}`)) {
+            paths.push({ lang: 'es', slug: trans.slug });
+        }
     });
     return paths;
 }
@@ -28,18 +33,28 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const trans = transfersData.find(t => t.slug === slug);
     if (!trans) return { title: 'Transfer Route Not Found - Mdina Tours' };
 
+    // Strict Phase 1 boundary check for Spanish
+    if (lang === 'es' && (!trans.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`))) {
+        return { title: 'Not Found - Mdina Tours' };
+    }
+
     const local = trans[lang as Language] || trans.en;
     const url = `https://mdinatours.com/${lang}/transfers/${slug}`;
+
+    const alternatesLanguages: Record<string, string> = {
+        'en': `https://mdinatours.com/en/transfers/${slug}`,
+        'fr': `https://mdinatours.com/fr/transfers/${slug}`,
+    };
+    if (APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`)) {
+        alternatesLanguages['es'] = `https://mdinatours.com/es/transfers/${slug}`;
+    }
 
     return {
         title: local.seoTitle,
         description: local.seoDesc,
         alternates: {
             canonical: url,
-            languages: {
-                'en': `https://mdinatours.com/en/transfers/${slug}`,
-                'fr': `https://mdinatours.com/fr/transfers/${slug}`,
-            }
+            languages: alternatesLanguages
         },
         openGraph: {
             title: local.seoTitle,
@@ -54,8 +69,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: local.title,
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
-            type: 'article',
+            locale: lang === 'fr' ? 'fr_FR' : (lang === 'es' ? 'es_ES' : 'en_US'),
+            type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
@@ -70,11 +85,17 @@ export default async function TransferLandingPage({ params }: { params: Promise<
     const { lang, slug } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
     const trans = transfersData.find(t => t.slug === slug);
     if (!trans) notFound();
 
-    const local = trans[language];
+    // Strict Phase 1 boundary check: unsupported Spanish transfers return 404
+    if (language === 'es' && (!trans.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`))) {
+        notFound();
+    }
+
+    const local = trans[language] || trans.en;
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
         return langSection[key] || key;
@@ -139,11 +160,13 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                 },
                 "author": {
                     "@type": "Person",
-                    "name": isEn ? "David K." : "Jean P."
+                    "name": isEn ? "David K." : isEs ? "Carlos M." : "Jean P."
                 },
                 "datePublished": "2026-05-01",
                 "reviewBody": isEn 
                     ? "Very smooth transfer. Punctual chauffeur, very professional driver, clean minivan. Recommended!"
+                    : isEs
+                    ? "Excelente traslado. Chófer puntual, conducción muy profesional y minivan impecable. ¡Muy recomendado!"
                     : "Transfert parfait. Chauffeur ponctuel, très professionnel, minivan propre. Recommandé !",
                 "reviewRating": {
                     "@type": "Rating",
@@ -160,14 +183,14 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Private Transfers" : "Transferts Privés",
-                "item": `https://mdinatours.com/${language}/transfers`
+                "name": isEn ? "Airport Transfers" : isEs ? "Traslados al Aeropuerto" : "Transferts Aéroport",
+                "item": `https://mdinatours.com/${language}/airport-transfers`
             },
             {
                 "@type": "ListItem",

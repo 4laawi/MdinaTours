@@ -3,8 +3,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
+import { Language } from '@/lib/translations';
+
 interface TransferOtherRoutesProps {
-    language: 'en' | 'fr';
+    language: Language;
 }
 
 export default function TransferOtherRoutes({ language }: TransferOtherRoutesProps) {

@@ -65,26 +65,41 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                             <Link href={getPath('/')}>{t('home')}</Link>
                         </li>
                         <li>
-                            <Link href={getPath('/about')}>{t('footer_our_story')}</Link>
+                            <Link href={getPath('/about')}>{language === 'es' ? 'Sobre Nosotros' : t('footer_our_story')}</Link>
                         </li>
                         <li>
-                            <Link href={getPath('/tours')}>{isEn ? 'Morocco Tours' : 'Circuits Maroc'}</Link>
+                            <Link href={language === 'es' ? '/es/tours/chefchaouen-day-trip' : getPath('/tours')}>
+                                {isEn ? 'Morocco Tours' : (language === 'es' ? 'Excursiones en Marruecos' : 'Circuits Maroc')}
+                            </Link>
                         </li>
                         <li>
-                            <Link href={getPath('/transfers')}>{isEn ? 'Morocco Transfers' : 'Transferts Maroc'}</Link>
+                            <Link href={language === 'es' ? '/es/airport-transfers' : getPath('/transfers')}>
+                                {isEn ? 'Morocco Transfers' : (language === 'es' ? 'Traslados en Marruecos' : 'Transferts Maroc')}
+                            </Link>
                         </li>
                         <li>
-                            <Link href={getPath('/private-driver')}>{isEn ? 'Private Driver' : 'Chauffeur Privé'}</Link>
+                            <Link href={language === 'es' ? '/es/private-driver-morocco' : getPath('/private-driver')}>
+                                {isEn ? 'Private Driver' : (language === 'es' ? 'Chófer Privado' : 'Chauffeur Privé')}
+                            </Link>
                         </li>
                         <li>
                             <Link href={getPath('/faq')}>{t('footer_faq')}</Link>
                         </li>
-                        <li>
-                            <Link href={getPath('/blog')}>{t('footer_blog')}</Link>
-                        </li>
-                        <li>
-                            <Link href={getPath('/partners')}>{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
-                        </li>
+                        {language !== 'es' && (
+                            <>
+                                <li>
+                                    <Link href={getPath('/blog')}>{t('footer_blog')}</Link>
+                                </li>
+                                <li>
+                                    <Link href={getPath('/partners')}>{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
+                                </li>
+                            </>
+                        )}
+                        {language === 'es' && (
+                            <li>
+                                <Link href="/es/contact">{t('contact_us')}</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
 

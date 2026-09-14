@@ -8,16 +8,23 @@ import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const isEn = lang === 'en';
+    const isEs = lang === 'es';
 
-    const title = isEn ? 'About Mdina Tours | Premier Morocco Chauffeur & Agency' : 'À Propos de Mdina Tours | Excellence du Transport Privé au Maroc';
+    const title = isEn 
+        ? 'About Mdina Tours | Premier Morocco Chauffeur & Agency' 
+        : isEs
+        ? 'Acerca de Mdina Tours | Chófer Privado y Viajes en Marruecos'
+        : 'À Propos de Mdina Tours | Excellence du Transport Privé au Maroc';
     const description = isEn
         ? 'Discover Mdina Tours, Rabat\'s premier private mobility and tour operator. We deliver luxury intercity transfers, accredited local drivers, and bespoke Moroccan itineraries.'
+        : isEs
+        ? 'Conozca Mdina Tours, agencia de movilidad privada y traslados con chófer en Marruecos. Vehículos confortables, conductores profesionales y rutas personalizadas.'
         : 'Découvrez Mdina Tours, entreprise spécialisée dans le transport privé et les circuits d\'exception basés à Rabat. Chauffeurs professionnels et véhicules de prestige.';
     const url = `https://mdinatours.com/${lang}/about`;
 
@@ -38,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'About Mdina Tours Morocco',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: lang === 'es' ? 'es_ES' : lang === 'fr' ? 'fr_FR' : 'en_US',
             type: 'website',
         },
         twitter: {
@@ -54,6 +61,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
     const { lang } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
@@ -65,9 +73,11 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
     const aboutPageJsonLd = {
         "@context": "https://schema.org",
         "@type": "AboutPage",
-        "name": isEn ? "About Mdina Tours" : "À Propos de Mdina Tours",
+        "name": isEn ? "About Mdina Tours" : isEs ? "Acerca de Mdina Tours" : "À Propos de Mdina Tours",
         "description": isEn
             ? "Learn about Mdina Tours, Morocco's leading executive private driver and luxury tour service."
+            : isEs
+            ? "Conozca Mdina Tours, referente en servicios de chófer privado y traslados ejecutivos en Marruecos."
             : "Découvrez Mdina Tours, leader des services de chauffeur privé et circuits d'exception au Maroc.",
         "url": `https://mdinatours.com/${language}/about`,
         "mainEntity": {
@@ -85,13 +95,13 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "About Us" : "À Propos",
+                "name": isEn ? "About Us" : isEs ? "Acerca de Nosotros" : "À Propos",
                 "item": `https://mdinatours.com/${language}/about`
             }
         ]
@@ -110,11 +120,11 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
             <Header />
             <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
                 <PageBanner 
-                    title={isEn ? 'About Mdina Tours' : 'À Propos de Mdina Tours'}
+                    title={isEn ? 'About Mdina Tours' : isEs ? 'Acerca de Mdina Tours' : 'À Propos de Mdina Tours'}
                     bgImage="/img/Morocco-trip-tour-hero03.webp"
                     homeLabel={t('home')}
                     homeLink={getPath('/')}
-                    currentLabel={isEn ? 'About Us' : 'À Propos'}
+                    currentLabel={isEn ? 'About Us' : isEs ? 'Acerca de Nosotros' : 'À Propos'}
                 />
 
                 {/* Narrative Description Section */}
@@ -128,15 +138,21 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                                 color: 'var(--secondary)',
                                 marginBottom: '20px'
                             }}>
-                                {isEn ? 'Who We Are' : 'Qui Sommes-Nous'}
+                                {isEn ? 'Who We Are' : isEs ? 'Quiénes Somos' : 'Qui Sommes-Nous'}
                             </h2>
                             <p style={{ fontSize: '1.05rem', color: '#555', lineHeight: 1.8, marginBottom: '20px' }}>
-                                {isEn ? "Mdina Tours is a premium digital travel agency based in Rabat, Morocco. As a lead generation and custom travel provider, we operate on a modern network-driven business model. We do not own a fleet of vehicles; instead, we have cultivated a trusted, rigorously vetted partner network of professional drivers, local official guides, and boutique riad operators across all major Moroccan provinces."
-                                     : "Mdina Tours est une agence de voyage numérique haut de gamme basée à Rabat, au Maroc. En tant que prestataire de voyages sur mesure, nous fonctionnons selon un modèle moderne de réseau. Nous ne possédons pas de flotte de véhicules ; à la place, nous collaborons avec un réseau de chauffeurs partenaires professionnels certifiés, de guides locaux officiels et de riads de charme sélectionnés."}
+                                {isEn 
+                                    ? "Mdina Tours is a premium digital travel agency based in Rabat, Morocco. As a lead generation and custom travel provider, we operate on a modern network-driven business model. We do not own a fleet of vehicles; instead, we have cultivated a trusted, rigorously vetted partner network of professional drivers, local official guides, and boutique riad operators across all major Moroccan provinces."
+                                    : isEs
+                                    ? "Mdina Tours es una agencia digital de transporte privado y excursiones con sede en Rabat, Marruecos. Trabajamos con una red rigurosamente seleccionada de chóferes profesionales certificados, guías locales oficiales y vehículos confortables en todo Marruecos."
+                                    : "Mdina Tours est une agence de voyage numérique haut de gamme basée à Rabat, au Maroc. En tant que prestataire de voyages sur mesure, nous fonctionnons selon un modèle moderne de réseau. Nous ne possédons pas de flotte de véhicules ; à la place, nous collaborons avec un réseau de chauffeurs partenaires professionnels certifiés, de guides locaux officiels et de riads de charme sélectionnés."}
                             </p>
                             <p style={{ fontSize: '1.05rem', color: '#555', lineHeight: 1.8 }}>
-                                {isEn ? "This approach allows us to deliver competitive local rates while guaranteeing the highest safety, comfort, and service standards. Our primary objective is to make planning and booking trips in Morocco simple, fast, and stress-free for international visitors from Europe and North America."
-                                     : "Cette approche nous permet de proposer des tarifs locaux compétitifs tout en garantissant des normes élevées de sécurité, de confort et de service. Notre objectif principal est de rendre la planification et la réservation de transferts et circuits au Maroc simples et fluides."}
+                                {isEn 
+                                    ? "This approach allows us to deliver competitive local rates while guaranteeing the highest safety, comfort, and service standards. Our primary objective is to make planning and booking trips in Morocco simple, fast, and stress-free for international visitors from Europe and North America."
+                                    : isEs
+                                    ? "Este modelo nos permite ofrecer tarifas locales directas y competitivas con los más altos estándares de puntualidad, seguridad y confort. Nuestro objetivo es que viajar por Marruecos sea una experiencia cómoda, segura y sin complicaciones para viajeros de España e internacionales."
+                                    : "Cette approche nous permet de proposer des tarifs locaux compétitifs tout en garantissant des normes élevées de sécurité, de confort et de service. Notre objectif principal est de rendre la planification et la réservation de transferts et circuits au Maroc simples et fluides."}
                             </p>
                         </div>
 
@@ -148,21 +164,27 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                         }}>
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '30px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.01)' }}>
                                 <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--primary)', marginBottom: '15px' }}>
-                                    {isEn ? 'Rabat Base Office' : 'Siège Principal à Rabat'}
+                                    {isEn ? 'Rabat Base Office' : isEs ? 'Coordinación Central en Rabat' : 'Siège Principal à Rabat'}
                                 </h3>
                                 <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, margin: 0 }}>
-                                    {isEn ? "Located in Rabat, Morocco's imperial administrative capital, we coordinate airport pick-ups and long-distance transfers connecting Casablanca, Tangier, Marrakech, Fes, and Chefchaouen."
-                                         : "Situés à Rabat, la capitale administrative et impériale du Maroc, nous coordonnons des transferts routiers reliant l'aéroport Mohammed V de Casablanca, Tanger, Marrakech, Fès et Chefchaouen."}
+                                    {isEn 
+                                        ? "Located in Rabat, Morocco's imperial administrative capital, we coordinate airport pick-ups and long-distance transfers connecting Casablanca, Tangier, Marrakech, Fes, and Chefchaouen."
+                                        : isEs
+                                        ? "Desde Rabat, la capital administrativa de Marruecos, coordinamos recogidas en aeropuertos y traslados interurbanos entre Casablanca, Tánger, Marrakech, Fez y Chefchaouen."
+                                        : "Situés à Rabat, la capitale administrative et impériale du Maroc, nous coordonnons des transferts routiers reliant l'aéroport Mohammed V de Casablanca, Tanger, Marrakech, Fès et Chefchaouen."}
                                 </p>
                             </div>
 
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '30px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.01)' }}>
                                 <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--primary)', marginBottom: '15px' }}>
-                                    {isEn ? 'Seamless Booking' : 'Réservation en Ligne'}
+                                    {isEn ? 'Seamless Booking' : isEs ? 'Reserva Directa y Sencilla' : 'Réservation en Ligne'}
                                 </h3>
                                 <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, margin: 0 }}>
-                                    {isEn ? "We believe in direct relationships. All our bookings are arranged via interactive website forms and direct WhatsApp chat support, ensuring you are never more than one click away from booking."
-                                         : "Nous privilégions le contact direct. Toutes nos réservations s'effectuent par formulaires interactifs et discussion en direct sur WhatsApp, sans frais administratifs."}
+                                    {isEn 
+                                        ? "We believe in direct relationships. All our bookings are arranged via interactive website forms and direct WhatsApp chat support, ensuring you are never more than one click away from booking."
+                                        : isEs
+                                        ? "Apostamos por la atención directa y personalizada. Todas las reservas se gestionan de forma rápida a través de la web o directamente por WhatsApp, sin prepagos obligatorios."
+                                        : "Nous privilégions le contact direct. Toutes nos réservations s'effectuent par formulaires interactifs et discussion en direct sur WhatsApp, sans frais administratifs."}
                                 </p>
                             </div>
                         </div>
@@ -183,11 +205,14 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                                 marginBottom: '15px',
                                 fontWeight: 300
                             }}>
-                                {isEn ? 'Ready to Experience Morocco?' : 'Prêt à Découvrir le Maroc ?'}
+                                {isEn ? 'Ready to Experience Morocco?' : isEs ? '¿Listo para Descubrir Marruecos?' : 'Prêt à Découvrir le Maroc ?'}
                             </h3>
                             <p style={{ fontSize: '1rem', color: '#ccc', maxWidth: '600px', margin: '0 auto 25px auto', lineHeight: 1.5 }}>
-                                {isEn ? "Let our travel specialists plan the perfect private transfer or guided tour. Send us a message on WhatsApp for an instant response."
-                                     : "Laissez nos spécialistes planifier votre trajet ou excursion idéale. Écrivez-nous sur WhatsApp pour une réponse rapide."}
+                                {isEn 
+                                    ? "Let our travel specialists plan the perfect private transfer or guided tour. Send us a message on WhatsApp for an instant response."
+                                    : isEs
+                                    ? "Deje que nuestro equipo organice su traslado privado o excursión a medida. Escríbanos por WhatsApp para una respuesta inmediata."
+                                    : "Laissez nos spécialistes planifier votre trajet ou excursion idéale. Écrivez-nous sur WhatsApp pour une réponse rapide."}
                             </p>
                             <a
                                 href="https://wa.me/212724114775"

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
+import { Language } from '@/lib/translations';
+import { isSpanishSupported } from '@/lib/seo';
 import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
@@ -15,10 +17,16 @@ export default function Header({ lightBg = false }: HeaderProps) {
     const router = useRouter();
     const { language, t } = useLanguage();
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     // Helper to get localized path
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => {
+        if (language === 'es' && path === '/private-driver') {
+            return '/es/private-driver-morocco';
+        }
+        return `/${language}${path === '/' ? '' : path}`;
+    };
 
     const isActive = (path: string) => {
         const localizedPath = getPath(path);
@@ -27,14 +35,22 @@ export default function Header({ lightBg = false }: HeaderProps) {
         return false;
     };
 
-    const handleLanguageSwitch = (newLang: 'en' | 'fr') => {
+    const handleLanguageSwitch = (newLang: Language) => {
         if (newLang === language) return;
 
         // Replace the language segment in the current pathname
         const segments = pathname.split('/');
-        segments[1] = newLang; // segments[0] is empty string
+        const pathWithoutLang = '/' + segments.slice(2).join('/');
+        const cleanPath = pathWithoutLang === '/' ? '' : pathWithoutLang;
+
+        if (newLang === 'es' && !isSpanishSupported(cleanPath)) {
+            router.push('/es');
+            return;
+        }
+
+        segments[1] = newLang;
         const newPath = segments.join('/');
-        router.push(newPath);
+        router.push(newPath || `/${newLang}`);
     };
 
     // Close menu when pathname changes
@@ -65,16 +81,16 @@ export default function Header({ lightBg = false }: HeaderProps) {
     // Main navigation configuration
     const mainNavItems = [
         { path: '/', label: t('home') },
-        { path: '/tours', label: isEn ? 'Tours' : 'Circuits' },
-        { path: '/transfers', label: isEn ? 'Transfers' : 'Transferts' },
-        { path: '/private-driver', label: isEn ? 'Private Driver' : 'Chauffeur Privé' },
+        { path: language === 'es' ? '/tours/chefchaouen-day-trip' : '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
+        { path: language === 'es' ? '/airport-transfers' : '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
+        { path: '/private-driver-morocco', label: isEn ? 'Private Driver' : (isEs ? 'Chófer Privado' : 'Chauffeur Privé') },
         { path: '/contact', label: t('contact_us') },
     ];
 
     const moreNavItems = [
         { path: '/faq', label: 'FAQ' },
         { path: '/blog', label: t('blog') },
-        { path: '/about', label: isEn ? 'About Us' : 'À Propos' },
+        { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos') },
     ];
 
     const allNavItems = [...mainNavItems, ...moreNavItems];
@@ -118,7 +134,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             aria-expanded={isDropdownOpen}
                         >
-                            {isEn ? 'More' : 'Plus'}
+                            {isEn ? 'More' : (isEs ? 'Más' : 'Plus')}
                             <span className={`${styles.dropdownChevron} ${isDropdownOpen ? styles.chevronOpen : ''}`}>▾</span>
                         </button>
                         {isDropdownOpen && (
@@ -150,10 +166,18 @@ export default function Header({ lightBg = false }: HeaderProps) {
                         <span className={styles.langSeparator}>/</span>
                         <button
                             onClick={() => handleLanguageSwitch('fr')}
-                            className={`${styles.langText} ${!isEn ? styles.activeLang : ''}`}
+                            className={`${styles.langText} ${language === 'fr' ? styles.activeLang : ''}`}
                             aria-label="Passer au Français"
                         >
                             FR
+                        </button>
+                        <span className={styles.langSeparator}>/</span>
+                        <button
+                            onClick={() => handleLanguageSwitch('es')}
+                            className={`${styles.langText} ${isEs ? styles.activeLang : ''}`}
+                            aria-label="Cambiar a Español"
+                        >
+                            ES
                         </button>
                     </div>
                 </div>
@@ -204,9 +228,16 @@ export default function Header({ lightBg = false }: HeaderProps) {
                         <span className={styles.langSeparator}>/</span>
                         <button
                             onClick={() => handleLanguageSwitch('fr')}
-                            className={`${styles.langText} ${!isEn ? styles.activeLang : ''}`}
+                            className={`${styles.langText} ${language === 'fr' ? styles.activeLang : ''}`}
                         >
                             FR
+                        </button>
+                        <span className={styles.langSeparator}>/</span>
+                        <button
+                            onClick={() => handleLanguageSwitch('es')}
+                            className={`${styles.langText} ${isEs ? styles.activeLang : ''}`}
+                        >
+                            ES
                         </button>
                     </div>
                 </div>

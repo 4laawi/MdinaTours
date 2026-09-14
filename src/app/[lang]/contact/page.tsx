@@ -10,16 +10,23 @@ import ContactForm from './ContactForm';
 import { translations, Language } from '@/lib/translations';
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const isEn = lang === 'en';
+    const isEs = lang === 'es';
 
-    const title = isEn ? 'Contact Us – Mdina Tours | Private Transfers & Custom Tours Morocco' : 'Contactez-nous – Mdina Tours | Transferts Privés & Circuits sur Mesure au Maroc';
+    const title = isEn 
+        ? 'Contact Us – Mdina Tours | Private Transfers & Custom Tours Morocco' 
+        : isEs
+        ? 'Contacto – Mdina Tours | Traslados Privados y Excursiones en Marruecos'
+        : 'Contactez-nous – Mdina Tours | Transferts Privés & Circuits sur Mesure au Maroc';
     const description = isEn
         ? 'Get in touch with Mdina Tours for private transfers, custom tours, and personal travel arrangements in Morocco. We are here to help you plan your perfect trip.'
+        : isEs
+        ? 'Contacte con Mdina Tours para traslados privados, excursiones a medida y servicios de chófer en Marruecos. Le ayudamos a planificar su viaje ideal.'
         : 'Contactez Mdina Tours pour des transferts privés, des circuits sur mesure et des arrangements de voyage au Maroc. Nous sommes là pour vous aider à planifier votre voyage parfait.';
     const url = `https://mdinatours.com/${lang}/contact`;
 
@@ -40,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'Contact Mdina Tours',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: lang === 'es' ? 'es_ES' : lang === 'fr' ? 'fr_FR' : 'en_US',
             type: 'website',
         },
         twitter: {
@@ -56,6 +63,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     const { lang } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
         return langSection[key] || key;
@@ -67,9 +75,11 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     const contactPageJsonLd = {
         "@context": "https://schema.org",
         "@type": "ContactPage",
-        "name": isEn ? "Contact Mdina Tours" : "Contactez Mdina Tours",
+        "name": isEn ? "Contact Mdina Tours" : isEs ? "Contacto con Mdina Tours" : "Contactez Mdina Tours",
         "description": isEn
             ? "Get in touch with Mdina Tours for executive Morocco private driver bookings and travel inquiries."
+            : isEs
+            ? "Póngase en contacto con el equipo de Mdina Tours para reservar su chófer privado en Marruecos."
             : "Contactez l'équipe de Mdina Tours pour réserver votre chauffeur privé au Maroc.",
         "url": `https://mdinatours.com/${language}/contact`,
         "mainEntity": {
@@ -92,13 +102,13 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Contact" : "Contact",
+                "name": isEn ? "Contact" : isEs ? "Contacto" : "Contact",
                 "item": `https://mdinatours.com/${language}/contact`
             }
         ]

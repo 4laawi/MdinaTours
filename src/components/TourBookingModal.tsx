@@ -16,6 +16,7 @@ interface TourBookingModalProps {
 export default function TourBookingModal({ isOpen, onClose, selectedTour }: TourBookingModalProps) {
     const { language, t } = useLanguage();
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const today = new Date().toISOString().split('T')[0];
 
     const [bookingDate, setBookingDate] = useState("");
@@ -24,7 +25,7 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
-    const [tourLanguage, setTourLanguage] = useState(isEn ? "English" : "French");
+    const [tourLanguage, setTourLanguage] = useState(isEn ? "English" : isEs ? "Spanish" : "French");
     const [notes, setNotes] = useState("");
 
     useEffect(() => {
@@ -40,6 +41,8 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
 
     if (!isOpen || !selectedTour) return null;
 
+    const localTour = selectedTour[language] || selectedTour.en;
+
     const currentPrice = (() => {
         const base = selectedTour.price;
         if (passengerCount === '1–3') return base;
@@ -49,7 +52,7 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
     })();
 
     const getWhatsAppUrl = () => {
-        const tourTitle = selectedTour[language].title;
+        const tourTitle = localTour.title;
         let message = `Hello Mdina Tours,\nI would like to book the "${tourTitle}" tour.\n\n`;
         message += `• ${t('contact_form_full_name')}: ${name}\n`;
         message += `• ${t('contact_form_phone')}: ${phone}\n`;
@@ -61,7 +64,7 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
     };
 
     const getEmailUrl = () => {
-        const tourTitle = selectedTour[language].title;
+        const tourTitle = localTour.title;
         const subject = `Private Tour Booking Request: ${tourTitle} - ${name}`;
         let body = `Hello Mdina Tours,\n\nI would like to book the following private tour:\n\n`;
         body += `Tour: ${tourTitle}\n`;
@@ -84,11 +87,11 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
                         {t('step_of').replace('%current%', modalStep.toString())}
                     </div>
                     <h2 className={styles.modalTitle}>
-                        {modalStep === 1 ? selectedTour[language].title : t('contact_details')}
+                        {modalStep === 1 ? localTour.title : t('contact_details')}
                     </h2>
                     {modalStep === 1 && (
                         <p className={styles.tourShortDesc}>
-                            {selectedTour[language].excerpt}
+                            {localTour.excerpt}
                         </p>
                     )}
                 </div>
@@ -97,8 +100,8 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
                     <>
                         <div className={styles.selectionSummary}>
                             <div className={styles.summaryItem}>
-                                <span className={styles.summaryLabel}>{isEn ? 'Duration' : 'Durée'}</span>
-                                <span className={styles.summaryValue}>{selectedTour[language].duration}</span>
+                                <span className={styles.summaryLabel}>{isEn ? 'Duration' : isEs ? 'Duración' : 'Durée'}</span>
+                                <span className={styles.summaryValue}>{localTour.duration}</span>
                             </div>
                         </div>
 

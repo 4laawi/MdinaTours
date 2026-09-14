@@ -12,7 +12,8 @@ interface TourBookingWidgetProps {
 export default function TourBookingWidget({ tour }: TourBookingWidgetProps) {
     const { language, t } = useLanguage();
     const isEn = language === 'en';
-    const local = tour[language];
+    const isEs = language === 'es';
+    const local = tour[language] || tour.en;
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
@@ -26,27 +27,27 @@ export default function TourBookingWidget({ tour }: TourBookingWidgetProps) {
             boxShadow: '0 20px 40px rgba(32,47,89,0.15)'
         }}>
             <span style={{ fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--primary)', fontWeight: 600, display: 'block', marginBottom: '8px' }}>
-                {isEn ? 'Private & Custom' : 'Privé & Sur Mesure'}
+                {isEn ? 'Private & Custom' : isEs ? 'Privado y a Medida' : 'Privé & Sur Mesure'}
             </span>
             <h3 style={{ fontSize: '1.8rem', fontWeight: 300, color: '#fff', margin: '0 0 15px 0', fontFamily: "'Cormorant Garamond', serif" }}>
-                {isEn ? 'Request Private Booking' : 'Demande d\'Excursion'}
+                {isEn ? 'Request Private Booking' : isEs ? 'Solicitar Excursión Privada' : 'Demande d\'Excursion'}
             </h3>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '20px' }}>
                 <span style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff' }}>€{tour.price}</span>
-                <span style={{ color: '#ccc', fontSize: '0.95rem' }}>/ {isEn ? 'starting price' : 'tarif de départ'}</span>
+                <span style={{ color: '#ccc', fontSize: '0.95rem' }}>/ {isEn ? 'starting price' : isEs ? 'precio de salida' : 'tarif de départ'}</span>
             </div>
 
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '30px', padding: 0 }}>
                 <li style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
-                    <span style={{ color: '#aaa' }}>{isEn ? 'Duration' : 'Durée'}:</span>
+                    <span style={{ color: '#aaa' }}>{isEn ? 'Duration' : isEs ? 'Duración' : 'Durée'}:</span>
                     <span style={{ fontWeight: 600 }}>{local.duration}</span>
                 </li>
                 <li style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
-                    <span style={{ color: '#aaa' }}>{isEn ? 'Availability' : 'Disponibilité'}:</span>
-                    <span style={{ fontWeight: 600, color: '#2ecc71' }}>{isEn ? 'Daily departures' : 'Tous les jours'}</span>
+                    <span style={{ color: '#aaa' }}>{isEn ? 'Availability' : isEs ? 'Disponibilidad' : 'Disponibilité'}:</span>
+                    <span style={{ fontWeight: 600, color: '#2ecc71' }}>{isEn ? 'Daily departures' : isEs ? 'Salidas diarias' : 'Tous les jours'}</span>
                 </li>
                 <li style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
-                    <span style={{ color: '#aaa' }}>{isEn ? 'Base Location' : 'Départ de'}:</span>
+                    <span style={{ color: '#aaa' }}>{isEn ? 'Base Location' : isEs ? 'Punto de partida' : 'Départ de'}:</span>
                     <span style={{ fontWeight: 600 }}>Rabat / Casablanca</span>
                 </li>
             </ul>

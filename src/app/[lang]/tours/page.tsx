@@ -5,6 +5,7 @@ import PageBanner from '@/components/PageBanner';
 import FloatingElements from '@/components/FloatingElements';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { toursData } from '@/lib/toursData';
 import { translations, Language } from '@/lib/translations';
@@ -15,6 +16,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') return { title: 'Not Found - Mdina Tours' };
     const isEn = lang === 'en';
 
     const title = isEn ? 'Private Morocco Tours & Custom Day Trips | Mdina Tours' : 'Circuits Privés et Excursions Sur Mesure au Maroc | Mdina Tours';
@@ -54,6 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function ToursCatalogPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') notFound();
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
     
@@ -69,14 +72,17 @@ export default async function ToursCatalogPage({ params }: { params: Promise<{ l
         "@context": "https://schema.org",
         "@type": "ItemList",
         "numberOfItems": toursData.length,
-        "itemListElement": toursData.map((tour, index) => ({
-            "@type": "ListItem",
-            "position": index + 1,
-            "url": `https://mdinatours.com/${language}/tours/${tour.slug}`,
-            "name": tour[language].title,
-            "description": tour[language].excerpt,
-            "image": `https://mdinatours.com${tour.image}`
-        }))
+        "itemListElement": toursData.map((tour, index) => {
+            const loc = tour[language] || tour.en;
+            return {
+                "@type": "ListItem",
+                "position": index + 1,
+                "url": `https://mdinatours.com/${language}/tours/${tour.slug}`,
+                "name": loc.title,
+                "description": loc.excerpt,
+                "image": `https://mdinatours.com${tour.image}`
+            };
+        })
     };
 
     const breadcrumbJsonLd = {
@@ -120,7 +126,7 @@ export default async function ToursCatalogPage({ params }: { params: Promise<{ l
                             gap: '30px'
                         }}>
                             {toursData.map((tour) => {
-                                const local = tour[language];
+                                const local = tour[language] || tour.en;
                                 return (
                                     <article key={tour.slug} style={{
                                         backgroundColor: '#fff',

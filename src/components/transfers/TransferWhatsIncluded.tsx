@@ -3,8 +3,10 @@
 import React from 'react';
 import { Signpost, Clock, Coffee, Armchair, ShieldCheck, ChatsCircle } from '@phosphor-icons/react';
 
+import { Language } from '@/lib/translations';
+
 interface TransferWhatsIncludedProps {
-    language: 'en' | 'fr';
+    language: Language;
     local: any;
 }
 

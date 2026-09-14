@@ -20,13 +20,14 @@ import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import VideoPlayer from '@/components/VideoPlayer';
 import TransferFleet from "./transfers/TransferFleet";
 import TransferOtherRoutes from "./transfers/TransferOtherRoutes";
+import { Language } from '@/lib/translations';
 
 interface TransferBookingFlowProps {
     trans: TransferData;
-    language: 'en' | 'fr';
+    language: Language;
 }
 
-const tLocal = {
+const tLocal: Record<Language, any> = {
     en: {
         lowestPrice: "Lowest Price Guarantee",
         badgeExcellence: "Badge of Excellence",
@@ -126,6 +127,56 @@ const tLocal = {
         home: "Accueil",
         transfers: "Transferts",
         whatsappMessage: "Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé : \"%title%\".\n\n• Trajet : %pickup% ⇄ %dropoff%\n• Date : %date%\n• Heure : %time%\n• Voyageurs : %travelers% (%tier%)\n• Tarif : €%price%\n\nMerci de me confirmer la disponibilité.",
+    },
+    es: {
+        lowestPrice: "Mejor precio garantizado",
+        badgeExcellence: "Distintivo de Excelencia",
+        recommended: "Recomendado por el 98% de los viajeros",
+        reviews: "opiniones",
+        share: "Compartir",
+        wishlist: "Guardar en favoritos",
+        pickupOffered: "Recogida incluida",
+        mobileTicket: "Billete electrónico",
+        duration: "aprox.",
+        languages: "Disponible en: Español, Francés, Inglés, Árabe",
+        selectOptions: "Seleccionar Opciones",
+        travelers: "Viajeros",
+        travelDate: "Fecha del viaje",
+        updateSearch: "Verificar disponibilidad",
+        reserveWhatsApp: "Reservar por WhatsApp",
+        bookAhead: "¡Reserve con antelación! Esta ruta tiene gran demanda.",
+        freeCancel: "Cancelación gratuita hasta 24h antes",
+        reserveNowPayLater: "Reserve ahora y pague después",
+        timeSlot: "Seleccione la hora de salida:",
+        pickupLocation: "Puntos de recogida",
+        pickupDetails: "Recogida personalizada en el hall de llegadas del aeropuerto, recepción de su hotel o acceso a su riad.",
+        dropoffLocation: "Punto de llegada",
+        openMaps: "Abrir en Google Maps",
+        whatsIncluded: "Qué incluye",
+        whatsNotIncluded: "No incluido",
+        overview: "Descripción",
+        travelTips: "Consejos para este trayecto",
+        fixedPricing: "Tarifas fijas",
+        sedanComfort: "Sedán Confort (1-3 PAX)",
+        minivanComfort: "Monovolumen Espacioso (4-5 PAX)",
+        largeMinivan: "Minivan para Grupos (6-7 PAX)",
+        minibus: "Minibús Ejecutivo (8-16 PAX)",
+        perGroup: "por grupo",
+        flexibleSched: "Horario flexible",
+        from: "Desde",
+        selectTime: "Elegir hora",
+        popularTimes: "Horas habituales",
+        customTime: "Hora personalizada",
+        timeLabel: "Hora",
+        selectPickupTime: "Hora de recogida",
+        aboutRoute: "Acerca de este trayecto",
+        vehicleCapacity: "Capacidad y confort de los vehículos",
+        aboutDest: "Acerca del destino",
+        popularDropoffs: "Puntos de llegada habituales",
+        details: "Detalles",
+        home: "Inicio",
+        transfers: "Traslados",
+        whatsappMessage: "Hola Mdina Tours,\nQuisiera reservar un traslado privado: \"%title%\".\n\n• Trayecto: %pickup% ⇄ %dropoff%\n• Fecha: %date%\n• Hora: %time%\n• Viajeros: %travelers% (%tier%)\n• Precio: €%price%\n\nPor favor confirmen disponibilidad.",
     }
 };
 
@@ -262,8 +313,8 @@ const getGalleryImages = (slug: string, transImage: string) => {
 
 export default function TransferBookingFlow({ trans, language }: TransferBookingFlowProps) {
     const isEn = language === 'en';
-    const local: LocalizedTransferData = trans[language];
-    const transText = tLocal[language];
+    const local: LocalizedTransferData = trans[language] || trans.en;
+    const transText = tLocal[language] || tLocal.en;
 
     // Build photo gallery array dynamically using trans.image + relevant assets
     const galleryImages = getGalleryImages(trans.slug, trans.image);
@@ -375,12 +426,15 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         setIsCalendarOpen(false);
     };
 
-    const formatReadableDate = (dateStr: string, lang: 'en' | 'fr') => {
+    const isEs = language === 'es';
+
+    const formatReadableDate = (dateStr: string, lang: Language) => {
         try {
             const parts = dateStr.split('-');
             const dateObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
             const options: Intl.DateTimeFormatOptions = { weekday: 'short', month: 'short', day: 'numeric' };
-            return dateObj.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', options);
+            const localeStr = lang === 'es' ? 'es-ES' : lang === 'fr' ? 'fr-FR' : 'en-US';
+            return dateObj.toLocaleDateString(localeStr, options);
         } catch (e) {
             return dateStr;
         }
@@ -388,9 +442,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
     const monthNamesEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const monthNamesFr = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const monthNamesEs = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     const weekdayNamesEn = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const weekdayNamesFr = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+    const weekdayNamesEs = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
     // Update calendar month/year view when the calendar is opened
     useEffect(() => {
@@ -415,8 +471,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             days.push(i);
         }
 
-        const monthName = language === 'fr' ? monthNamesFr[month] : monthNamesEn[month];
-        const weekdays = language === 'fr' ? weekdayNamesFr : weekdayNamesEn;
+        const monthName = language === 'es' ? monthNamesEs[month] : language === 'fr' ? monthNamesFr[month] : monthNamesEn[month];
+        const weekdays = language === 'es' ? weekdayNamesEs : language === 'fr' ? weekdayNamesFr : weekdayNamesEn;
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -1049,11 +1105,13 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                 fontFamily: "'Cormorant Garamond', serif",
                                 lineHeight: 1.1
                             }}>
-                                {isEn ? "Request to Book" : "Demande de Réservation"}
+                                {isEn ? "Request to Book" : isEs ? "Solicitud de Reserva" : "Demande de Réservation"}
                             </h3>
                             <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '28px', lineHeight: 1.6 }}>
                                 {isEn 
                                     ? "Almost there! Fill out your details below and our team will confirm your transfer shortly." 
+                                    : isEs
+                                    ? "¡Casi listo! Complete sus datos y nuestro equipo confirmará su traslado a la brevedad."
                                     : "Presque terminé ! Remplissez vos coordonnées et notre équipe confirmera votre transfert sous peu."}
                             </p>
 
@@ -1090,14 +1148,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
                                     <div>
                                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                            {isEn ? "Full Name *" : "Nom complet *"}
+                                            {isEn ? "Full Name *" : isEs ? "Nombre completo *" : "Nom complet *"}
                                         </label>
                                         <input
                                             type="text"
                                             required
                                             value={custName}
                                             onChange={(e) => setCustName(e.target.value)}
-                                            placeholder={isEn ? "e.g. John Doe" : "ex: Jean Dupont"}
+                                            placeholder={isEn ? "e.g. John Doe" : isEs ? "ej: Juan García" : "ex: Jean Dupont"}
                                             style={{
                                                 width: '100%',
                                                 padding: '12px 16px',
@@ -1115,14 +1173,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
                                     <div>
                                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                            {isEn ? "Email Address *" : "Adresse e-mail *"}
+                                            {isEn ? "Email Address *" : isEs ? "Correo electrónico *" : "Adresse e-mail *"}
                                         </label>
                                         <input
                                             type="email"
                                             required
                                             value={custEmail}
                                             onChange={(e) => setCustEmail(e.target.value)}
-                                            placeholder={isEn ? "your@email.com" : "votre@email.com"}
+                                            placeholder={isEn ? "your@email.com" : isEs ? "tu@email.com" : "votre@email.com"}
                                             style={{
                                                 width: '100%',
                                                 padding: '12px 16px',
@@ -1140,13 +1198,13 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
                                     <div>
                                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                            {isEn ? "Phone Number (Optional)" : "Téléphone (Optionnel)"}
+                                            {isEn ? "Phone Number (Optional)" : isEs ? "Teléfono (Opcional)" : "Téléphone (Optionnel)"}
                                         </label>
                                         <input
                                             type="tel"
                                             value={custPhone}
                                             onChange={(e) => setCustPhone(e.target.value)}
-                                            placeholder={isEn ? "+1 234 567 890" : "+33 6 12 34 56 78"}
+                                            placeholder={isEn ? "+1 234 567 890" : isEs ? "+34 612 34 56 78" : "+33 6 12 34 56 78"}
                                             style={{
                                                 width: '100%',
                                                 padding: '12px 16px',
@@ -1186,8 +1244,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                         }}
                                     >
                                         {isSubmitting 
-                                            ? (isEn ? "Sending..." : "Envoi...") 
-                                            : (isEn ? "Confirm Booking Request" : "Confirmer la demande")}
+                                            ? (isEn ? "Sending..." : isEs ? "Enviando..." : "Envoi...") 
+                                            : (isEn ? "Confirm Booking Request" : isEs ? "Confirmar solicitud de reserva" : "Confirmer la demande")}
                                         {!isSubmitting && (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M5 12h14"></path>
@@ -1196,7 +1254,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                         )}
                                     </button>
                                     <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', marginTop: '-10px' }}>
-                                        {isEn ? "No payment required now." : "Aucun paiement requis pour le moment."}
+                                        {isEn ? "No payment required now." : isEs ? "No se requiere pago por adelantado." : "Aucun paiement requis pour le moment."}
                                     </div>
                                 </form>
                             )}

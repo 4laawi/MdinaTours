@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
 import FloatingElements from '@/components/FloatingElements';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Language, translations } from '@/lib/translations';
 import Link from 'next/link';
 import PrivateDriverBookingWidget from '@/components/PrivateDriverBookingWidget';
@@ -20,6 +21,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') {
+        return { title: 'Not Found - Mdina Tours' };
+    }
     const isEn = lang === 'en';
 
     const title = isEn 
@@ -61,6 +65,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function CarWithDriver8DaysPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') {
+        notFound();
+    }
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
 

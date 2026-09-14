@@ -35,6 +35,7 @@ export interface TransferData {
     prices: { [passengers: number]: number };
     en: LocalizedTransferData;
     fr: LocalizedTransferData;
+    es?: LocalizedTransferData;
 }
 
 export const transfersData: TransferData[] = [
@@ -114,6 +115,30 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Chauffeur Privé Aéroport Casablanca CMN vers Rabat / Salé | Mdina Tours",
             seoDesc: "Service de transfert privé haut de gamme depuis l'Aéroport de Casablanca (CMN) vers Rabat. Tarif fixe garanti, accueil personnalisé et berlines/vans climatisés."
+        },
+        es: {
+            title: "Traslado Privado desde el Aeropuerto de Casablanca (CMN)",
+            tagline: "Servicio de Chófer Privado Directo a su Hotel o Riad en Rabat, Casablanca y Alrededores",
+            pickup: "Aeropuerto Internacional Mohammed V de Casablanca (CMN)",
+            dropoff: "Centro de Rabat, Salé o Casablanca",
+            distance: "120 km (a Rabat) / 35 km (al centro de Casablanca)",
+            duration: "1 hora 30 min (Rabat) / 45 min (Casablanca)",
+            capacityText: "Berlinas ejecutivas (1-3 pax) y minivans espaciosas (hasta 7 pax)",
+            highlights: [
+                "Seguimiento de Vuelo en Tiempo Real: Monitorizamos su vuelo para que su conductor le espere puntualmente en la terminal de llegadas sin recargos por retraso.",
+                "Tarifas Fijas y Claras: Precio cerrado por vehículo que incluye peajes de autopista, combustible y suplementos nocturnos.",
+                "Conductores Profesionales: Chóferes locales experimentados y amables con conocimiento de las mejores rutas de acceso a medinas y hoteles.",
+                "Vehículos Modernos y Climatizados: Flota cuidada, limpia y con seguro de transporte turístico en regla.",
+                "Servicio Puerta a Puerta: Le recogemos en la terminal y le llevamos directamente a la puerta de su hotel o riad."
+            ],
+            aboutRoute: "El trayecto desde el Aeropuerto Mohammed V de Casablanca (CMN) se realiza por autopistas modernas y seguras. Su conductor le esperará tras la recogida de equipajes con un cartel con su nombre para iniciar un viaje cómodo y directo sin esperas ni negociaciones de taxi.",
+            faqs: [
+                { q: "¿Qué ocurre si mi vuelo sufre un retraso?", a: "Hacemos seguimiento en directo de los vuelos. Su chófer adaptará la hora de llegada sin ningún cargo adicional por espera." },
+                { q: "¿Dónde me esperará el conductor en el aeropuerto?", a: "En el vestíbulo principal de llegadas, justo tras pasar el control de aduanas y recoger sus maletas, sosteniendo un cartel con su nombre." },
+                { q: "¿El precio es por persona o por vehículo?", a: "El precio indicado es por vehículo completo para su grupo e incluye peajes, combustible y maletas." }
+            ],
+            seoTitle: "Traslado Aeropuerto Casablanca (CMN) Privado | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Casablanca Mohammed V (CMN). Chófer puntual en la terminal, tarifas fijas y vehículos modernos."
         }
     },
     {
@@ -165,6 +190,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Transfert Privé Aéroport Rabat-Salé RBA | Mdina Tours",
             seoDesc: "Réservez votre navette privée de l'aéroport Rabat-Salé (RBA) vers votre hôtel. Service fiable, chauffeurs bilingues, réservation rapide."
+        },
+        es: {
+            title: "Traslado Privado desde el Aeropuerto de Rabat-Salé (RBA)",
+            tagline: "Servicio Rápido y Cómodo de Chófer Privado a su Hotel o Riad en Rabat o Salé",
+            pickup: "Aeropuerto Internacional de Rabat-Salé (RBA)",
+            dropoff: "Cualquier Hotel o Riad en Rabat o Salé",
+            distance: "15 km",
+            duration: "25-30 minutos",
+            capacityText: "Hasta 7 pasajeros con maletas en berlinas o minivans confortables",
+            highlights: [
+                "Tarifas Fijas sin Sorpresas: Precio transparente que cubre toda el área urbana de Rabat y Salé.",
+                "Recepción Personalizada: Su conductor le esperará en la salida de la terminal con un cartel con su nombre.",
+                "Vehículos Climatizados: Flota cuidada, limpia y con aire acondicionado para su total descanso.",
+                "Pago a la Llegada: Reserve fácilmente y abone el importe directamente al conductor en efectivo.",
+                "Acceso a Riads en la Medina: Coordinación con el riad para facilitarle la llegada en las puertas de acceso a la medina."
+            ],
+            aboutRoute: "El Aeropuerto de Rabat-Salé (RBA) es el acceso más directo a la capital marroquí. Con nuestro servicio de traslado privado evitará colas y complicaciones con taxis locales. Si se hospeda en la medina histórica, su conductor le dejará en la puerta más cercana y avisará a su riad.",
+            faqs: [
+                { q: "¿Puede el vehículo dejarme en la puerta de mi riad?", a: "La medina de Rabat es peatonal. Su chófer le dejará en la puerta de acceso más cercana y coordinará con su riad para asistirle con el equipaje." },
+                { q: "¿El precio es por persona o por trayecto?", a: "El precio es por vehículo completo para su grupo, no por persona." }
+            ],
+            seoTitle: "Traslado Aeropuerto Rabat-Salé (RBA) Privado | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Rabat-Salé (RBA) a su hotel o riad. Chófer profesional, tarifas fijas y sin esperas."
         }
     },
     {
@@ -267,6 +315,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Transfert Privé Rabat / Salé vers Casablanca | Mdina Tours",
             seoDesc: "Chauffeur privé entre Rabat et Casablanca. Trajets rapides, confort garanti et ponctualité pour vos rendez-vous d'affaires ou loisirs."
+        },
+        es: {
+            title: "Traslado Privado entre Rabat y Casablanca",
+            tagline: "Servicio de Transporte Privado Puerta a Puerta entre las Dos Principales Ciudades de Marruecos",
+            pickup: "Rabat o Salé (Hotel, Riad u Oficina)",
+            dropoff: "Casablanca (Hotel, Oficina, Puerto o Aeropuerto)",
+            distance: "90 km",
+            duration: "1 hora 10 minutos",
+            capacityText: "Berlinas ejecutivas y minivans para viajeros de negocios o familias",
+            highlights: [
+                "Puntualidad y Comodidad: Conexión directa por autopista entre Rabat y Casablanca.",
+                "Servicio Puerta a Puerta: Evite aglomeraciones y traslados con maletas en estaciones de tren.",
+                "Vehículos Modernos y Climatizados: Espacio tranquilo para descansar o trabajar durante el trayecto.",
+                "Conductores Profesionales: Chóferes experimentados en rutas interurbanas y accesos urbanos.",
+                "Flexibilidad de Horarios: Salida adaptada a sus necesidades o reuniones."
+            ],
+            aboutRoute: "El trayecto entre Rabat y Casablanca conecta las dos grandes urbes del país en aproximadamente una hora y diez minutos por autopista. Nuestro servicio privado le recoge directamente en su dirección de salida y le traslada a su destino sin estrés ni esperas.",
+            faqs: [
+                { q: "¿Se puede reservar ida y vuelta en el mismo día?", a: "Sí, podemos coordinar un viaje de ida y vuelta el mismo día con espera del conductor si lo necesita." },
+                { q: "¿El servicio incluye paradas en el camino?", a: "Por supuesto, puede solicitar paradas breves para descansar o tomar un café en las áreas de servicio de la autopista." }
+            ],
+            seoTitle: "Traslado Privado Casablanca a Rabat / Rabat a Casablanca | Mdina Tours",
+            seoDesc: "Reserve su transporte privado entre Rabat y Casablanca. Conductor profesional, vehículos climatizados, tarifas fijas y máxima puntualidad."
         }
     },
     {
@@ -420,6 +491,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Navette Casablanca vers Marrakech Autoroute | Mdina Tours",
             seoDesc: "Transfert privé rapide entre Casablanca et Marrakech. Véhicules récents et chauffeurs fiables pour vos déplacements personnels ou professionnels."
+        },
+        es: {
+            title: "Traslado Privado de Casablanca a Marrakech",
+            tagline: "Conexión Rápida por Autopista entre la Capital Económica y la Ciudad Roja",
+            pickup: "Casablanca (Hotel, Puerto o Aeropuerto CMN)",
+            dropoff: "Marrakech (Hotel, Riad o Aeropuerto RAK)",
+            distance: "240 km",
+            duration: "2 horas 30 minutos",
+            capacityText: "Berlinas ejecutivas y minivans espaciosas para familias o grupos",
+            highlights: [
+                "Trayecto Directo por Autopista: Conexión rápida sin paradas innecesarias salvo a petición del cliente.",
+                "Ideal para Llegadas a CMN: Conexión directa desde el aeropuerto de Casablanca directo a su riad en Marrakech.",
+                "Vehículos Modernos y Climatizados: Asientos amplios y cómodos para un viaje descansado.",
+                "Conductores Conocedores de Marrakech: Llegada y asistencia en los accesos peatonales de la medina.",
+                "Disponibilidad 24/7: Servicio adaptado a cualquier horario de vuelo diurno o nocturno."
+            ],
+            aboutRoute: "El viaje entre Casablanca y Marrakech se realiza por la autopista A3 en unas dos horas y media. Es la opción preferida por viajeros que aterrizan en el Aeropuerto Mohammed V (CMN) y quieren llegar a su hotel o riad en Marrakech sin complicaciones de trenes ni transbordos.",
+            faqs: [
+                { q: "¿Se puede solicitar recogida en el Puerto de Casablanca?", a: "Sí, coordinamos recogidas directas en la terminal del puerto para cruceristas con destino a Marrakech." },
+                { q: "¿El precio incluye los peajes de autopista?", a: "Sí, el precio cerrado por vehículo incluye combustible, peajes de autopista y maletas." }
+            ],
+            seoTitle: "Traslado Privado Casablanca a Marrakech en Coche con Conductor | Mdina Tours",
+            seoDesc: "Reserve su traslado privado de Casablanca a Marrakech por autopista. Conductor profesional, vehículos confortables y tarifas fijas garantizadas."
         }
     },
     {
@@ -930,6 +1024,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Transfert Aéroport Marrakech RAK Privé | Mdina Tours",
             seoDesc: "Réservez votre transfert privé depuis l'Aéroport de Marrakech (RAK) vers votre riad ou hôtel. Chauffeurs professionnels et tarifs fixes."
+        },
+        es: {
+            title: "Traslado Privado desde el Aeropuerto de Marrakech Menara (RAK)",
+            tagline: "Servicio Directo y Confortable de Chófer Privado a su Hotel o Riad en Marrakech",
+            pickup: "Aeropuerto Internacional de Marrakech Menara (RAK)",
+            dropoff: "Cualquier Hotel o Riad en Marrakech",
+            distance: "10 km",
+            duration: "20 minutos",
+            capacityText: "1 a 7 pasajeros con equipaje en vehículos modernos y climatizados",
+            highlights: [
+                "Seguimiento de Vuelo 24/7: Su conductor esperará aunque su vuelo sufra retraso.",
+                "Recepción con Cartel: Su chófer le esperará con su nombre en el hall de llegadas.",
+                "Precios Fijos y Transparentes: Sin suplementos nocturnos ni costes por maletas.",
+                "Llegada a Riads en la Medina: Traslado hasta la puerta de acceso más cercana y coordinación con el riad.",
+                "Vehículos Limpios y Climatizados: Máximo confort para empezar su estancia con total tranquilidad."
+            ],
+            aboutRoute: "El Aeropuerto de Marrakech Menara (RAK) se encuentra a poca distancia del centro, pero evitar regateos con taxis locales le garantizará una llegada tranquila. Nuestro chófer le estará esperando puntualmente para llevarle directo a su alojamiento.",
+            faqs: [
+                { q: "¿Puede el chófer dejarme en la puerta de mi riad en la medina?", a: "La medina histórica de Marrakech es peatonal. Su conductor le dejará en la puerta o parking más cercano y se pondrá en contacto con el personal de su riad para asistirle." },
+                { q: "¿El precio es por persona o por vehículo?", a: "Todas nuestras tarifas son precios cerrados por vehículo completo para su grupo privado." }
+            ],
+            seoTitle: "Traslado Aeropuerto Marrakech Menara (RAK) Privado | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Marrakech Menara (RAK) a su riad u hotel. Chófer puntual, tarifas fijas y vehículos climatizados."
         }
     },
     {

@@ -5,6 +5,7 @@ import FloatingElements from '@/components/FloatingElements';
 import VideoPlayer from '@/components/VideoPlayer';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { translations, Language } from '@/lib/translations';
 
 import faqStyles from '@/components/FAQ.module.css';
@@ -23,6 +24,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') {
+        return { title: 'Not Found - Mdina Tours' };
+    }
     const isEn = lang === 'en';
 
     const title = isEn ? 'Private Driver Morocco - Professional Chauffeur | Mdina Tours' : 'Chauffeur Privé Maroc - Service de Transport | Mdina Tours';
@@ -62,6 +66,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function PrivateDriverPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') {
+        notFound();
+    }
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
 

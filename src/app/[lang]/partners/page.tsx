@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Header from '@/components/Header';
 import styles from './Partners.module.css';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { translations, Language } from '@/lib/translations';
 
 // Lazy-load heavy below-fold client components
@@ -17,6 +18,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') {
+        return { title: 'Not Found - Mdina Tours' };
+    }
     const isEn = lang === 'en';
 
     const title = isEn 
@@ -58,6 +62,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function PartnersPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') {
+        notFound();
+    }
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
     const t = (key: string) => {

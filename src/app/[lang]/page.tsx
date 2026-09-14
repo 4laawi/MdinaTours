@@ -18,19 +18,26 @@ const TourGrid = dynamic(() => import('@/components/TourGrid'));
 const FloatingElements = dynamic(() => import('@/components/FloatingElements'));
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
-    const isEn = lang === 'en';
 
-    const title = isEn 
-        ? 'Mdina Tours | Executive Morocco Chauffeur & Private Tours' 
-        : 'Mdina Tours | Service de Chauffeur Privé & Excursions au Maroc';
-    const description = isEn
-        ? 'Reserve executive private driver services, airport transfers, and tailor-made Morocco travel itineraries across Rabat, Casablanca, Marrakech, and Tangier. Zero prepayment.'
-        : 'Réservez votre chauffeur privé, navettes aéroport et circuits personnalisés au Maroc. Chauffeurs d\'élite bilingues, véhicules de prestige et paiement à l\'arrivée.';
+    let title = 'Mdina Tours | Executive Morocco Chauffeur & Private Tours';
+    let description = 'Reserve executive private driver services, airport transfers, and tailor-made Morocco travel itineraries across Rabat, Casablanca, Marrakech, and Tangier.';
+    let ogLocale = 'en_US';
+
+    if (lang === 'fr') {
+        title = 'Mdina Tours | Service de Chauffeur Privé & Excursions au Maroc';
+        description = 'Réservez votre chauffeur privé, navettes aéroport et circuits personnalisés au Maroc. Chauffeurs d\'élite bilingues, véhicules de prestige et paiement à l\'arrivée.';
+        ogLocale = 'fr_FR';
+    } else if (lang === 'es') {
+        title = 'Mdina Tours | Chófer Privado y Rutas Personalizadas en Marruecos';
+        description = 'Reserve su conductor privado, traslados de aeropuerto y excursiones a medida en Marruecos (Casablanca, Marrakech, Rabat, Tánger y Fez). Pago al conductor.';
+        ogLocale = 'es_ES';
+    }
+
     const url = `https://mdinatours.com/${lang}`;
 
     return {
@@ -50,7 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'Mdina Tours Morocco Private Tours',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: ogLocale,
             type: 'website',
         },
         twitter: {
@@ -66,50 +73,61 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     const { lang } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
     const vehicles = [
         {
-            name: isEn ? "Skoda Superb" : "Skoda Superb",
-            spec: isEn ? "Premium Sedan" : "Berline Premium",
+            name: "Skoda Superb",
+            spec: isEn ? "Premium Sedan" : (isEs ? "Berlina Premium" : "Berline Premium"),
             capacity: "1-3 PAX",
             luggage: "3 Bags",
-            suitability: isEn ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or business meetings." : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
+            suitability: isEn
+                ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or business meetings."
+                : (isEs ? "Una berlina silenciosa y muy cómoda, ideal para traslados ejecutivos, parejas o viajes de trabajo." : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples."),
             price: "€20",
             image: "/cars/flotte-superb.webp"
         },
         {
-            name: isEn ? "Skoda Kodiaq" : "Skoda Kodiaq",
-            spec: isEn ? "Comfort SUV" : "SUV Grand Confort",
+            name: "Skoda Kodiaq",
+            spec: isEn ? "Comfort SUV" : (isEs ? "SUV Gran Confort" : "SUV Grand Confort"),
             capacity: "1-5 PAX",
             luggage: "4 Bags",
-            suitability: isEn ? "A premium mid-size SUV offering high ground clearance, excellent stability for mountain roads, and spacious comfort." : "Un SUV familial haut de gamme offrant une excellente garde au sol, une stabilité parfaite pour l'Atlas.",
+            suitability: isEn
+                ? "A premium mid-size SUV offering high ground clearance, excellent stability for mountain roads, and spacious comfort."
+                : (isEs ? "Un SUV espacioso con gran estabilidad en carretera y confort para rutas de montaña y familias." : "Un SUV familial haut de gamme offrant une excellente garde au sol, une stabilité parfaite pour l'Atlas."),
             price: "€22",
             image: "/cars/flotte-skoda-kodiaq.webp"
         },
         {
-            name: isEn ? "Fiat Scudo" : "Fiat Scudo",
-            spec: isEn ? "VIP Van" : "Van VIP",
+            name: "Fiat Scudo",
+            spec: isEn ? "VIP Van" : (isEs ? "Van VIP" : "Van VIP"),
             capacity: "1-6 PAX",
             luggage: "5 Bags",
-            suitability: isEn ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions." : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
+            suitability: isEn
+                ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions."
+                : (isEs ? "Monovolumen versátil y amplio. Excelente relación calidad-precio para viajes familiares y grupos reducidos." : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille."),
             price: "€25",
             image: "/cars/flotte-fiat-scudo.webp"
         },
         {
-            name: isEn ? "Mercedes Vito" : "Mercedes Vito",
-            spec: isEn ? "VIP Minivan" : "Minivan VIP",
+            name: "Mercedes Vito",
+            spec: isEn ? "VIP Minivan" : (isEs ? "Minivan VIP" : "Minivan VIP"),
             capacity: "1-7 PAX",
             luggage: "6 Bags",
-            suitability: isEn ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room." : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
+            suitability: isEn
+                ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room."
+                : (isEs ? "El estándar de referencia para viajar por Marruecos. Climatización individual y amplio maletero para equipaje." : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages."),
             price: "€28",
             image: "/cars/flotte-vito.webp"
         },
         {
-            name: isEn ? "Mercedes Sprinter" : "Mercedes Sprinter",
-            spec: isEn ? "VIP Minibus" : "Minibus Prestige",
+            name: "Mercedes Sprinter",
+            spec: isEn ? "VIP Minibus" : (isEs ? "Minibús Prestige" : "Minibus Prestige"),
             capacity: "8-16 PAX",
             luggage: "12 Bags",
-            suitability: isEn ? "A custom-configured executive minibus designed for large tour groups, corporate delegates, or multi-family excursions." : "Un minibus de prestige configuré sur mesure, conçu pour les délégations professionnelles et les grands groupes.",
+            suitability: isEn
+                ? "A custom-configured executive minibus designed for large tour groups, corporate delegates, or multi-family excursions."
+                : (isEs ? "Minibús ejecutivo de gran capacidad, diseñado para grupos numerosos, delegaciones y familias grandes." : "Un minibus de prestige configuré sur mesure, conçu pour les délégations professionnelles et les grands groupes."),
             price: "€35",
             image: "/cars/flotte-sprinter.webp"
         }
@@ -117,34 +135,34 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
     const faqList = [
         {
-            q: isEn ? "How do I book a transfer or tour with Mdina Tours?" : "Comment réserver un transfert ou un circuit ?",
+            q: isEn ? "How do I book a transfer or tour with Mdina Tours?" : (isEs ? "¿Cómo puedo reservar un traslado o excursión con Mdina Tours?" : "Comment réserver un transfert ou un circuit ?"),
             a: isEn ? "You can book directly using our website forms or click to contact us instantly on WhatsApp. We send booking confirmations in minutes."
-                    : "Vous pouvez réserver directement via nos formulaires ou en nous contactant par WhatsApp. Nous vous confirmons la réservation en quelques minutes."
+                    : (isEs ? "Puede reservar directamente a través de nuestra web o escribirnos por WhatsApp. Le confirmaremos los detalles rápidamente." : "Vous pouvez réserver directement via nos formulaires ou en nous contactant par WhatsApp. Nous vous confirmons la réservation en quelques minutes.")
         },
         {
-            q: isEn ? "Are all tours and transfers private?" : "Les trajets sont-ils partagés ou privés ?",
+            q: isEn ? "Are all tours and transfers private?" : (isEs ? "¿Los traslados y excursiones son privados o compartidos?" : "Les trajets sont-ils partagés ou privés ?"),
             a: isEn ? "Yes, all our services are 100% private. Your vehicle, driver, and guides are dedicated exclusively to your group."
-                    : "Tous nos services sont 100% privés. Le véhicule et le chauffeur sont entièrement dédiés à votre groupe."
+                    : (isEs ? "Sí, todos nuestros servicios son 100% privados. El vehículo y el conductor están asignados exclusivamente a su grupo." : "Tous nos services sont 100% privés. Le véhicule et le chauffeur sont entièrement dédiés à votre groupe.")
         },
         {
-            q: isEn ? "Do we need to pay anything upfront?" : "Doit-on payer à l'avance ?",
+            q: isEn ? "Do we need to pay anything upfront?" : (isEs ? "¿Es necesario pagar un adelanto?" : "Doit-on payer à l'avance ?"),
             a: isEn ? "No. We believe in building trust. You do not need to prepay; you pay your driver in cash (Euros or Dirhams) upon arrival or completion."
-                    : "Non. Nous croyons en une relation de confiance. Vous réglez directement le chauffeur en espèces (Euros ou Dirhams) à la fin de votre trajet."
+                    : (isEs ? "No para la mayoría de servicios estándar. Puede abonar el importe directamente al conductor en efectivo (euros o dírhams) a la llegada." : "Non. Nous croyons en une relation de confiance. Vous réglez directement le chauffeur en espèces (Euros ou Dirhams) à la fin de votre trajet.")
         },
         {
-            q: isEn ? "What languages do your drivers speak?" : "Quelles langues parlent vos chauffeurs ?",
+            q: isEn ? "What languages do your drivers speak?" : (isEs ? "¿Qué idiomas hablan los conductores?" : "Quelles langues parlent vos chauffeurs ?"),
             a: isEn ? "Our drivers are multilingual and speak English, French, and Spanish fluently to ensure a comfortable journey."
-                    : "Nos chauffeurs professionnels parlent couramment français, anglais et espagnol pour faciliter votre voyage."
+                    : (isEs ? "Nuestros conductores son multilingües y hablan español, francés e inglés para garantizar una comunicación fluida." : "Nos chauffeurs professionnels parlent couramment français, anglais et espagnol pour faciliter votre voyage.")
         },
         {
-            q: isEn ? "Can we customize the routes or add stops?" : "Peut-on faire des arrêts pendant le trajet ?",
+            q: isEn ? "Can we customize the routes or add stops?" : (isEs ? "¿Podemos personalizar las paradas durante el trayecto?" : "Peut-on faire des arrêts pendant le trajet ?"),
             a: isEn ? "Absolutely. As a custom travel agency, we encourage customization. Let your driver know if you want to stop for coffee, photos, or points of interest."
-                    : "Bien sûr. Nos transferts privés offrent une flexibilité totale. N'hésitez pas à demander à votre chauffeur des pauses photos ou café."
+                    : (isEs ? "Por supuesto. Nuestros traslados y rutas privadas permiten flexibilidad total para hacer paradas fotográficas, tomar café o descansar." : "Bien sûr. Nos transferts privés offrent une flexibilité totale. N'hésitez pas à demander à votre chauffeur des pauses photos ou café.")
         },
         {
-            q: isEn ? "Is child safety seating provided?" : "Les sièges enfants sont-ils fournis ?",
+            q: isEn ? "Is child safety seating provided?" : (isEs ? "¿Disponen de sillas infantiles para el coche?" : "Les sièges enfants sont-ils fournis ?"),
             a: isEn ? "Yes. We provide child car seats and infant seats free of charge. Please mention this requirement in the booking form notes."
-                    : "Oui. Nous mettons gratuitement à votre disposition des sièges auto et rehausseurs. Veuillez simplement l'indiquer dans votre demande."
+                    : (isEs ? "Sí, facilitamos sillas de bebé y elevadores infantiles sin coste adicional. Indíquelo al realizar su solicitud." : "Oui. Nous mettons gratuitement à votre disposition des sièges auto et rehausseurs. Veuillez simplement l'indiquer dans votre demande.")
         }
     ];
 
@@ -168,7 +186,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : (isEs ? "Inicio" : "Accueil"),
                 "item": `https://mdinatours.com/${language}`
             }
         ]

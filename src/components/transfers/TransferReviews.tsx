@@ -2,8 +2,10 @@
 
 import React from 'react';
 
+import { Language } from '@/lib/translations';
+
 interface TransferReviewsProps {
-    language: 'en' | 'fr';
+    language: Language;
 }
 
 export default function TransferReviews({ language }: TransferReviewsProps) {

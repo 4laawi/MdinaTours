@@ -7,6 +7,7 @@ import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { translations, Language } from '@/lib/translations';
 import { getProgrammaticPost, programmaticSlugs } from '@/lib/programmaticSeo';
 
@@ -16,6 +17,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') {
+        return { title: 'Not Found - Mdina Tours' };
+    }
     const isEn = lang === 'en';
 
     const title = isEn ? 'Morocco Travel Blog & Guides | Mdina Tours' : 'Blog Voyage Maroc & Conseils | Mdina Tours';
@@ -55,6 +59,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function BlogPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') {
+        notFound();
+    }
     const language = (lang as Language) || 'en';
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];

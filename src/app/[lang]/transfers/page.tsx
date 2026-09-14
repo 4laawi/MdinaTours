@@ -5,6 +5,7 @@ import TransfersHero from '@/components/TransfersHero';
 import FloatingElements from '@/components/FloatingElements';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
@@ -15,6 +16,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
+    if (lang === 'es') return { title: 'Not Found - Mdina Tours' };
     const isEn = lang === 'en';
 
     const title = isEn ? 'Private Driver & Airport Transfers Morocco | Mdina Tours' : 'Chauffeur Privé et Transfert Aéroport Maroc | Mdina Tours';
@@ -58,19 +60,19 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
     
     const hasCasablanca = normalizedSlug.includes('casablanca');
     const hasFes = normalizedSlug.includes('fes');
-    const hasMarrakech = normalizedSlug.includes('marrakech');
-    const hasAgadir = normalizedSlug.includes('agadir');
     const hasRabat = normalizedSlug.includes('rabat');
     const hasTangier = normalizedSlug.includes('tangier') || normalizedSlug.includes('tanger');
+    const hasAgadir = normalizedSlug.includes('agadir');
     const hasEssaouira = normalizedSlug.includes('essaouira');
+    const hasMarrakech = normalizedSlug.includes('marrakech');
 
     if (isAirport) {
         if (hasCasablanca) return '/img2/Airport_Casablanca_Mohammed.webp';
         if (hasRabat) return '/img2/rabat-airport.webp';
-        if (hasTangier) return '/img2/tangier_hero.webp'; // Avoid AVIF build issue
+        if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasFes) return '/img2/fes-airport.jpeg';
         if (hasAgadir) return '/img2/agadir-airport.webp';
-        if (hasMarrakech) return '/b-roll/3-Mercedes-vito-airoport.jpg';
+        return '/b-roll/3-Mercedes-vito-airoport.jpg';
     } else {
         if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasRabat) return '/img2/rabat-hassan-tour.jpg';
@@ -84,6 +86,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
 
 export default async function TransfersCatalogPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
+    if (lang === 'es') notFound();
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
 
@@ -99,14 +102,17 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
         "@context": "https://schema.org",
         "@type": "ItemList",
         "numberOfItems": transfersData.length,
-        "itemListElement": transfersData.map((trans, index) => ({
-            "@type": "ListItem",
-            "position": index + 1,
-            "url": `https://mdinatours.com/${language}/transfers/${trans.slug}`,
-            "name": trans[language].title,
-            "description": trans[language].tagline,
-            "image": `https://mdinatours.com${getTransferThumbnail(trans.slug, trans.image)}`
-        }))
+        "itemListElement": transfersData.map((trans, index) => {
+            const loc = trans[language] || trans.en;
+            return {
+                "@type": "ListItem",
+                "position": index + 1,
+                "url": `https://mdinatours.com/${language}/transfers/${trans.slug}`,
+                "name": loc.title,
+                "description": loc.tagline,
+                "image": `https://mdinatours.com${getTransferThumbnail(trans.slug, trans.image)}`
+            };
+        })
     };
 
     const breadcrumbJsonLd = {
@@ -122,7 +128,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Private Transfers" : "Transferts Privés",
+                "name": isEn ? "Transfers" : "Transferts",
                 "item": `https://mdinatours.com/${language}/transfers`
             }
         ]
@@ -131,28 +137,66 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
     return (
         <>
             <Header />
-            <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
-                <TransfersHero 
-                    title={isEn ? 'Morocco Private Transfers' : 'Transferts Privés au Maroc'}
-                    subtitle={isEn ? 'Punctual meet & greet service, fixed rates, and clean air-conditioned vehicles between all major airports and medinas.' : 'Service d\'accueil ponctuel, prix fermes sans surprise, berlines et monospaces climatisés reliant tous les aéroports.'}
-                    bgImage="/img/Morocco-trip-tour-hero04.webp"
-                    homeLabel={t('home')}
-                    homeLink={getPath('/')}
-                    currentLabel={isEn ? 'Private Transfers' : 'Transferts Privés'}
-                />
 
-                {/* Catalog Listing */}
-                <section style={{ padding: '80px 20px' }}>
-                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '25px'
+            {/* Breadcrumbs List Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
+            {/* ItemList Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+            />
+
+            <main style={{ minHeight: '80vh', backgroundColor: '#f9f9fb', padding: '60px 0 100px 0' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+                    
+                    {/* Header Title Section */}
+                    <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <span style={{ 
+                            color: 'var(--primary)', 
+                            fontWeight: 700, 
+                            fontSize: '0.9rem', 
+                            textTransform: 'uppercase', 
+                            letterSpacing: '1.5px',
+                            display: 'block',
+                            marginBottom: '10px'
                         }}>
-                            {transfersData.map((trans) => {
-                                const local = trans[language];
-                                const startingPrice = trans.prices[3] || trans.prices[4];
-                                const thumbnailUrl = getTransferThumbnail(trans.slug, trans.image);
+                            {isEn ? 'Private Intercity & Airport Routes' : 'Trajets Privés Interurbains & Aéroports'}
+                        </span>
+                        <h1 style={{ 
+                            fontSize: 'clamp(2rem, 4vw, 2.8rem)', 
+                            fontWeight: 800, 
+                            color: 'var(--secondary)',
+                            marginBottom: '15px'
+                        }}>
+                            {isEn ? 'Morocco Private Transfers & Chauffeur Services' : 'Transferts Privés & Chauffeurs au Maroc'}
+                        </h1>
+                        <p style={{ 
+                            maxWidth: '700px', 
+                            margin: '0 auto', 
+                            color: '#666', 
+                            fontSize: '1.05rem', 
+                            lineHeight: 1.6 
+                        }}>
+                            {isEn 
+                                ? 'Fixed-price point-to-point transfers between all major cities and international airports in Morocco. Modern air-conditioned fleet with professional drivers.'
+                                : 'Transferts porte-à-porte à tarif fixe entre les principales villes et aéroports du Maroc. Flotte moderne et climatisée avec chauffeurs expérimentés.'
+                            }
+                        </p>
+                    </div>
+
+                    {/* Transfers Listing Grid */}
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '25px'
+                    }}>
+                        {transfersData.map((trans) => {
+                            const local = trans[language] || trans.en;
+                            const startingPrice = trans.prices[3] || trans.prices[4];
+                            const thumbnailUrl = getTransferThumbnail(trans.slug, trans.image);
 
                                 return (
                                     <div key={trans.slug} style={{
@@ -231,19 +275,9 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                             })}
                         </div>
                     </div>
-                </section>
-            </main>
-            <Footer lang={language} />
-            <FloatingElements />
-            
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-            />
-        </>
-    );
+                </main>
+                <Footer lang={language} />
+                <FloatingElements />
+            </>
+        );
 }

@@ -30,6 +30,7 @@ export interface TourData {
     price: number;
     en: LocalizedTourData;
     fr: LocalizedTourData;
+    es?: LocalizedTourData;
 }
 
 export const toursData: TourData[] = [
@@ -209,6 +210,48 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Excursion Privée Chefchaouen depuis Rabat | Mdina Tours",
             seoDesc: "Découvrez la ville bleue de Chefchaouen lors d'une excursion d'une journée au départ de Rabat. Transport VIP et accompagnement local inclus."
+        },
+        es: {
+            title: "Excursión a Chefchaouen, la Ciudad Azul",
+            tagline: "Descubra la Perla Azul oculta en las Montañas del Rif",
+            excerpt: "Pasee por las icónicas callejuelas azules de Chefchaouen, camine hasta la Mezquita Española y disfrute de paisajes montañosos únicos.",
+            description: "Escápese a la serenidad de las montañas del Rif para visitar Chefchaouen, la famosa 'Perla Azul' de Marruecos. Fundada en 1471 como fortaleza, esta ciudad cautiva por sus casas encaladas en azul, su ambiente tranquilo y su influencia andalusí. Suba a la Mezquita Española para admirar la panorámica del valle y conozca su historia local.",
+            duration: "12-14 horas",
+            priceText: "Desde 249 € por persona",
+            highlights: [
+                "Viaje cómodo en vehículo privado a través del paisaje del Rif",
+                "Paseo por las calles y rincones azules de la medina histórica",
+                "Visita a la Kasbah y a la animada plaza Outa el-Hammam",
+                "Caminata suave hacia la Mezquita Española para ver el atardecer",
+                "Tiempo libre para descubrir artesanía local en lana, cuero y madera"
+            ],
+            itinerary: [
+                { title: "07:00 - Salida", desc: "Recogida privada en su hotel o riad en un vehículo climatizado para poner rumbo al norte." },
+                { title: "11:00 - Llegada y Exploración de la Medina", desc: "Entrada por la puerta Bab el-Ain y recorrido por las callejuelas azules y plazas tradicionales." },
+                { title: "13:00 - Almuerzo en la Plaza Outa el-Hammam", desc: "Tiempo para saborear un tajine tradicional en una terraza con vistas a la cordillera del Rif." },
+                { title: "14:30 - Manantial de Ras el-Maa y Mezquita Española", desc: "Paseo por los lavaderos de Ras el-Maa y subida panorámica de 15 minutos hasta la Mezquita Española." },
+                { title: "17:00 - Tiempo Libre y Compras", desc: "Tiempo para recorrer tiendas de artesanía, telares tradicionales y productos locales." },
+                { title: "18:30 - Regreso", desc: "Salida de Chefchaouen y trayecto de vuelta relajado en su vehículo privado." }
+            ],
+            whatsIncluded: [
+                "Vehículo privado y conductor profesional durante toda la jornada",
+                "Combustible, peajes de autopista y aparcamientos",
+                "Asistente local con conocimientos de idiomas",
+                "Recogida y regreso en su hotel"
+            ],
+            whatsExcluded: [
+                "Entrada al Museo de la Kasbah (~60 MAD)",
+                "Almuerzo y bebidas",
+                "Gastos personales y propinas"
+            ],
+            faqs: [
+                { q: "¿Es difícil la caminata hasta la Mezquita Española?", a: "No, es un sendero empedrado accesible que toma entre 15 y 20 minutos. Se recomienda llevar calzado cómodo." },
+                { q: "¿Por qué las paredes están pintadas de azul?", a: "Existen varias explicaciones: una tradición introducida por refugiados en los años 30 para evocar el cielo, y la creencia popular de que ahuyenta a los mosquitos y mantiene frescas las casas." },
+                { q: "¿Qué debo llevar para esta excursión?", a: "Cámara de fotos, calzado cómodo para caminar, gafas de sol y una chaqueta ligera, ya que el clima de montaña suele ser más fresco." },
+                { q: "¿Se puede realizar como excursión de un día?", a: "Sí, gracias al transporte privado directo es una excursión cómoda de día completo desde Rabat, Fez o Tánger." }
+            ],
+            seoTitle: "Excursión Privada a Chefchaouen desde Rabat | Mdina Tours",
+            seoDesc: "Reserve su excursión privada a la Ciudad Azul de Chefchaouen. Conductor privado en vehículo moderno, recogida en su hotel y ruta personalizada en Marruecos."
         }
     },
     {

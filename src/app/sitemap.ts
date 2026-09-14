@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { programmaticSlugs } from '@/lib/programmaticSeo';
 import { toursData } from '@/lib/toursData';
+import { isSpanishSupported } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://mdinatours.com';
-    const locales = ['en', 'fr'];
 
     const staticRoutes = [
         '',
@@ -51,74 +51,56 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const routesMap: MetadataRoute.Sitemap = [];
 
-    locales.forEach((locale) => {
-        // Add static routes
-        staticRoutes.forEach((route) => {
-            routesMap.push({
-                url: `${baseUrl}/${locale}${route}`,
-                lastModified: new Date(),
-                changeFrequency: route === '/blog' ? 'weekly' : 'monthly',
-                priority: route === '' ? 1 : 0.8,
-                alternates: {
-                    languages: {
-                        en: `${baseUrl}/en${route}`,
-                        fr: `${baseUrl}/fr${route}`,
-                        'x-default': `${baseUrl}/en${route}`,
-                    }
-                }
-            });
-        });
+    const getLanguagesMap = (path: string) => {
+        const languages: Record<string, string> = {
+            en: `${baseUrl}/en${path}`,
+            fr: `${baseUrl}/fr${path}`,
+            'x-default': `${baseUrl}/en${path}`,
+        };
+        if (isSpanishSupported(path)) {
+            languages.es = `${baseUrl}/es${path}`;
+        }
+        return languages;
+    };
 
-        // Add blog posts
-        allBlogSlugs.forEach((slug) => {
-            routesMap.push({
-                url: `${baseUrl}/${locale}/blog/${slug}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly',
-                priority: 0.8,
-                alternates: {
-                    languages: {
-                        en: `${baseUrl}/en/blog/${slug}`,
-                        fr: `${baseUrl}/fr/blog/${slug}`,
-                        'x-default': `${baseUrl}/en/blog/${slug}`,
-                    }
-                }
-            });
-        });
+    const addRoute = (
+        routePath: string,
+        changeFrequency: 'weekly' | 'monthly',
+        priority: number
+    ) => {
+        const isEsSupported = isSpanishSupported(routePath);
+        const supportedLocales = isEsSupported ? ['en', 'fr', 'es'] : ['en', 'fr'];
+        const languages = getLanguagesMap(routePath);
 
-        // Add tours
-        allTourSlugs.forEach((slug) => {
+        supportedLocales.forEach((locale) => {
             routesMap.push({
-                url: `${baseUrl}/${locale}/tours/${slug}`,
+                url: `${baseUrl}/${locale}${routePath}`,
                 lastModified: new Date(),
-                changeFrequency: 'weekly',
-                priority: 0.7,
-                alternates: {
-                    languages: {
-                        en: `${baseUrl}/en/tours/${slug}`,
-                        fr: `${baseUrl}/fr/tours/${slug}`,
-                        'x-default': `${baseUrl}/en/tours/${slug}`,
-                    }
-                }
+                changeFrequency,
+                priority,
+                alternates: { languages }
             });
         });
+    };
 
-        // Add transfers
-        allTransferSlugs.forEach((slug) => {
-            routesMap.push({
-                url: `${baseUrl}/${locale}/transfers/${slug}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly',
-                priority: 0.7,
-                alternates: {
-                    languages: {
-                        en: `${baseUrl}/en/transfers/${slug}`,
-                        fr: `${baseUrl}/fr/transfers/${slug}`,
-                        'x-default': `${baseUrl}/en/transfers/${slug}`,
-                    }
-                }
-            });
-        });
+    // Add static routes
+    staticRoutes.forEach((route) => {
+        addRoute(route, route === '/blog' ? 'weekly' : 'monthly', route === '' ? 1 : 0.8);
+    });
+
+    // Add blog posts
+    allBlogSlugs.forEach((slug) => {
+        addRoute(`/blog/${slug}`, 'weekly', 0.8);
+    });
+
+    // Add tours
+    allTourSlugs.forEach((slug) => {
+        addRoute(`/tours/${slug}`, 'weekly', 0.7);
+    });
+
+    // Add transfers
+    allTransferSlugs.forEach((slug) => {
+        addRoute(`/transfers/${slug}`, 'weekly', 0.7);
     });
 
     return routesMap;

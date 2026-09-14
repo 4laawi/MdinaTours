@@ -8,17 +8,26 @@ import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
-    const isEn = lang === 'en';
+    
+    let title = 'Airport Transfers Morocco - Fixed Price Pickups | Mdina Tours';
+    let description = 'Book secure airport transfers in Casablanca (CMN), Rabat (RBA), and Tangier (TNG). Flat rates, meet & greet arrivals, and 24/7 flight monitoring.';
+    let ogLocale = 'en_US';
 
-    const title = isEn ? 'Airport Transfers Morocco - Fixed Price Pickups | Mdina Tours' : 'Transferts Aéroport Maroc - Prix Fixes | Mdina Tours';
-    const description = isEn
-        ? 'Book secure airport transfers in Casablanca (CMN), Rabat (RBA), and Tangier (TNG). Flat rates, meet & greet arrivals, and 24/7 flight monitoring.'
-        : 'Navettes privées et transferts depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger. Suivi des vols gratuit, accueil VIP.';
+    if (lang === 'fr') {
+        title = 'Transferts Aéroport Maroc - Prix Fixes | Mdina Tours';
+        description = 'Navettes privées et transferts depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger. Suivi des vols gratuit, accueil VIP.';
+        ogLocale = 'fr_FR';
+    } else if (lang === 'es') {
+        title = 'Traslados Aeropuerto en Marruecos – Tarifas Fijas | Mdina Tours';
+        description = 'Reserve traslados privados desde los aeropuertos de Casablanca (CMN), Marrakech (RAK) y Rabat (RBA). Recepción con cartel, seguimiento de vuelos y vehículos climatizados.';
+        ogLocale = 'es_ES';
+    }
+
     const url = `https://mdinatours.com/${lang}/airport-transfers`;
 
     return {
@@ -38,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'Morocco Airport Transfers',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: ogLocale,
             type: 'website',
         },
         twitter: {
@@ -54,6 +63,7 @@ export default async function AirportTransfersPage({ params }: { params: Promise
     const { lang } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
@@ -62,13 +72,18 @@ export default async function AirportTransfersPage({ params }: { params: Promise
 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    let serviceDescription = "Stress-free pickups from Casablanca, Rabat, Marrakech, and Tangier airports.";
+    if (lang === 'fr') {
+        serviceDescription = "Navettes privées fiables à prix fixes depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger.";
+    } else if (lang === 'es') {
+        serviceDescription = "Traslados privados y puntuales desde los aeropuertos de Casablanca, Marrakech y Rabat.";
+    }
+
     const serviceJsonLd = {
         "@context": "https://schema.org",
         "@type": ["Product", "TaxiService"],
-        "name": isEn ? "Morocco Airport Transfers" : "Transferts Aéroport au Maroc",
-        "description": isEn
-            ? "Stress-free pickups from Casablanca, Rabat, Marrakech, and Tangier airports."
-            : "Navettes privées fiables à prix fixes depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger.",
+        "name": isEn ? "Morocco Airport Transfers" : (isEs ? "Traslados de Aeropuerto en Marruecos" : "Transferts Aéroport au Maroc"),
+        "description": serviceDescription,
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero09.webp",
         "url": `https://mdinatours.com/${language}/airport-transfers`,
         "provider": {
@@ -90,13 +105,13 @@ export default async function AirportTransfersPage({ params }: { params: Promise
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : (isEs ? "Inicio" : "Accueil"),
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Airport Transfers" : "Transferts Aéroport",
+                "name": isEn ? "Airport Transfers" : (isEs ? "Traslados de Aeropuerto" : "Transferts Aéroport"),
                 "item": `https://mdinatours.com/${language}/airport-transfers`
             }
         ]
@@ -115,12 +130,14 @@ export default async function AirportTransfersPage({ params }: { params: Promise
             <Header />
             <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
                 <PageBanner 
-                    title={isEn ? 'Morocco Airport Transfers' : 'Transferts Aéroport au Maroc'}
-                    subtitle={isEn ? 'Stress-free pickups from Casablanca, Rabat, Marrakech, and Tangier airports.' : 'Navettes privées fiables à prix fixes depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger.'}
+                    title={isEn ? 'Morocco Airport Transfers' : (isEs ? 'Traslados de Aeropuerto en Marruecos' : 'Transferts Aéroport au Maroc')}
+                    subtitle={isEn 
+                        ? 'Stress-free pickups from Casablanca, Rabat, Marrakech, and Tangier airports.' 
+                        : (isEs ? 'Recogidas puntuales y sin esperas en los aeropuertos de Casablanca, Marrakech y Rabat.' : 'Navettes privées fiables à prix fixes depuis les aéroports de Casablanca, Rabat, Marrakech et Tanger.')}
                     bgImage="/img/Morocco-trip-tour-hero09.webp"
                     homeLabel={t('home')}
                     homeLink={getPath('/')}
-                    currentLabel={isEn ? 'Airport Transfers' : 'Transferts Aéroport'}
+                    currentLabel={isEn ? 'Airport Transfers' : (isEs ? 'Traslados de Aeropuerto' : 'Transferts Aéroport')}
                 />
 
                 {/* Details Section */}
@@ -134,31 +151,40 @@ export default async function AirportTransfersPage({ params }: { params: Promise
                         }}>
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '30px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.01)' }}>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '12px' }}>
-                                    {isEn ? 'Meet & Greet Service' : 'Accueil Personnalisé VIP'}
+                                    {isEn ? 'Meet & Greet Service' : (isEs ? 'Recepción Personalizada' : 'Accueil Personnalisé VIP')}
                                 </h3>
                                 <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, margin: 0 }}>
-                                    {isEn ? "Your driver will monitor your flight schedule and wait at the arrivals hall with a name sign. No waiting, no queues, and no stress after landing."
-                                         : "Votre chauffeur suit l'état de votre vol en temps réel et vous attend dans le hall des arrivées avec une pancarte nominative dès votre passage de la douane."}
+                                    {isEn 
+                                        ? "Your driver will monitor your flight schedule and wait at the arrivals hall with a name sign. No waiting, no queues, and no stress after landing."
+                                        : (isEs 
+                                            ? "Su conductor monitoriza la llegada del vuelo y le espera en el hall de llegadas con un cartel con su nombre. Sin colas ni esperas."
+                                            : "Votre chauffeur suit l'état de votre vol en temps réel et vous attend dans le hall des arrivées avec une pancarte nominative dès votre passage de la douane.")}
                                 </p>
                             </div>
 
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '30px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.01)' }}>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '12px' }}>
-                                    {isEn ? 'Flight Tracking' : 'Suivi des Vols en Direct'}
+                                    {isEn ? 'Flight Tracking' : (isEs ? 'Seguimiento de Vuelos en Directo' : 'Suivi des Vols en Direct')}
                                 </h3>
                                 <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, margin: 0 }}>
-                                    {isEn ? "We monitor flight arrival coordinates to guarantee your chauffeur is on time, even if your flight is delayed or arrives early."
-                                         : "Nous suivons les arrivées d'avions en direct pour garantir la présence de votre chauffeur à l'heure exacte, même en cas de retard."}
+                                    {isEn 
+                                        ? "We monitor flight arrival coordinates to guarantee your chauffeur is on time, even if your flight is delayed or arrives early."
+                                        : (isEs 
+                                            ? "Hacemos seguimiento continuo de la hora de aterrizaje para que su chófer esté presente en el momento exacto, incluso si hay retraso."
+                                            : "Nous suivons les arrivées d'avions en direct pour garantir la présence de votre chauffeur à l'heure exacte, même en cas de retard.")}
                                 </p>
                             </div>
 
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '30px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.01)' }}>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '12px' }}>
-                                    {isEn ? 'Fixed Pricing' : 'Tarifs Forfaitaires Fixes'}
+                                    {isEn ? 'Fixed Pricing' : (isEs ? 'Tarifas Fijas y Claras' : 'Tarifs Forfaitaires Fixes')}
                                 </h3>
                                 <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, margin: 0 }}>
-                                    {isEn ? "Our prices are calculated per vehicle and include highway toll charges, fuel, and luggage. No hidden fees or night surcharges."
-                                         : "Nos tarifs sont fixés à l'avance par véhicule et comprennent les péages d'autoroute et la prise en charge des bagages, sans supplément."}
+                                    {isEn 
+                                        ? "Our prices are calculated per vehicle and include highway toll charges, fuel, and luggage. No hidden fees or night surcharges."
+                                        : (isEs 
+                                            ? "Precios cerrados por vehículo que incluyen peajes de autopista, combustible y maletas. Sin suplementos imprevistos ni sorpresas."
+                                            : "Nos tarifs sont fixés à l'avance par véhicule et comprennent les péages d'autoroute et la prise en charge des bagages, sans supplément.")}
                                 </p>
                             </div>
                         </div>
@@ -166,20 +192,32 @@ export default async function AirportTransfersPage({ params }: { params: Promise
                         {/* Route Links */}
                         <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '40px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 5px 25px rgba(0,0,0,0.02)' }}>
                             <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '25px', textAlign: 'center' }}>
-                                {isEn ? 'Top Airport Transfer Routes' : 'Principaux Transferts Aéroports'}
+                                {isEn ? 'Top Airport Transfer Routes' : (isEs ? 'Rutas Principales de Traslado de Aeropuerto' : 'Principaux Transferts Aéroports')}
                             </h2>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                                 <Link href={getPath('/transfers/casablanca-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
-                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Casablanca Airport (CMN) ⇄ Rabat or Salé</h4>
-                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>{isEn ? 'From €85 • Private Sedan or Van' : 'À partir de 85 € • Berline ou Van'}</span>
+                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>
+                                        {isEs ? 'Aeropuerto Casablanca (CMN) ⇄ Rabat o Salé' : 'Casablanca Airport (CMN) ⇄ Rabat or Salé'}
+                                    </h4>
+                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>
+                                        {isEn ? 'From €120 • Private Sedan or Van' : (isEs ? 'Desde 120 € • Berlina o Minivan Privada' : 'À partir de 120 € • Berline ou Van')}
+                                    </span>
+                                </Link>
+                                <Link href={getPath('/transfers/marrakech-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
+                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>
+                                        {isEs ? 'Aeropuerto Marrakech Menara (RAK) ⇄ Riad o Hotel' : 'Marrakech Airport (RAK) ⇄ Marrakech Medina / Hotel'}
+                                    </h4>
+                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>
+                                        {isEn ? 'From €45 • Direct Medina Transfer' : (isEs ? 'Desde 45 € • Traslado Directo a su Riad' : 'À partir de 45 € • Navette Directe Riad')}
+                                    </span>
                                 </Link>
                                 <Link href={getPath('/transfers/rabat-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
-                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Rabat-Salé Airport (RBA) ⇄ Rabat or Salé</h4>
-                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>{isEn ? 'From €30 • Fast City Shuttle' : 'À partir de 30 € • Navette Ville Rapide'}</span>
-                                </Link>
-                                <Link href={getPath('/transfers/tangier-airport-transfer')} style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s', display: 'block' }}>
-                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>Tangier Airport (TNG) ⇄ Tangier City</h4>
-                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>{isEn ? 'From €25 • Flat Rate Transfers' : 'À partir de 25 € • Navette Tarif Fixe'}</span>
+                                    <h4 style={{ margin: '0 0 5px 0', color: 'var(--primary)' }}>
+                                        {isEs ? 'Aeropuerto Rabat-Salé (RBA) ⇄ Rabat o Salé' : 'Rabat-Salé Airport (RBA) ⇄ Rabat or Salé'}
+                                    </h4>
+                                    <span style={{ fontSize: '0.85rem', color: '#888' }}>
+                                        {isEn ? 'From €45 • Fast City Shuttle' : (isEs ? 'Desde 45 € • Traslado Rápido a Ciudad' : 'À partir de 45 € • Navette Rapide')}
+                                    </span>
                                 </Link>
                             </div>
                         </div>

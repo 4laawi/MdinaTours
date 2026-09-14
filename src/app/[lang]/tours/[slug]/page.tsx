@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { toursData } from '@/lib/toursData';
 import { translations, Language } from '@/lib/translations';
+import { APPROVED_PHASE1_ES_PATHS } from '@/lib/seo';
 import TourBookingWidget from '@/components/TourBookingWidget';
 
 // Generate static routes for static HTML generation
@@ -17,6 +18,10 @@ export async function generateStaticParams() {
         locales.forEach(lang => {
             paths.push({ lang, slug: tour.slug });
         });
+        // Include 'es' only for strictly approved Phase 1 tour routes
+        if (APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${tour.slug}`)) {
+            paths.push({ lang: 'es', slug: tour.slug });
+        }
     });
     return paths;
 }
@@ -27,18 +32,28 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const tour = toursData.find(t => t.slug === slug);
     if (!tour) return { title: 'Tour Not Found - Mdina Tours' };
 
+    // Strict Phase 1 boundary check for Spanish
+    if (lang === 'es' && (!tour.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`))) {
+        return { title: 'Not Found - Mdina Tours' };
+    }
+
     const local = tour[lang as Language] || tour.en;
     const url = `https://mdinatours.com/${lang}/tours/${slug}`;
+
+    const alternatesLanguages: Record<string, string> = {
+        'en': `https://mdinatours.com/en/tours/${slug}`,
+        'fr': `https://mdinatours.com/fr/tours/${slug}`,
+    };
+    if (APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`)) {
+        alternatesLanguages['es'] = `https://mdinatours.com/es/tours/${slug}`;
+    }
 
     return {
         title: local.seoTitle,
         description: local.seoDesc,
         alternates: {
             canonical: url,
-            languages: {
-                'en': `https://mdinatours.com/en/tours/${slug}`,
-                'fr': `https://mdinatours.com/fr/tours/${slug}`,
-            }
+            languages: alternatesLanguages
         },
         openGraph: {
             title: local.seoTitle,
@@ -53,8 +68,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: local.title,
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
-            type: 'article',
+            locale: lang === 'fr' ? 'fr_FR' : (lang === 'es' ? 'es_ES' : 'en_US'),
+            type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
@@ -69,19 +84,23 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
     const { lang, slug } = await params;
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
     const tour = toursData.find(t => t.slug === slug);
     if (!tour) notFound();
 
-    const local = tour[language];
+    // Strict Phase 1 boundary check: unsupported Spanish tours return 404
+    if (language === 'es' && (!tour.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`))) {
+        notFound();
+    }
+
+    const local = tour[language] || tour.en;
     const t = (key: string) => {
         const langSection = translations[language] || translations['en'];
         return langSection[key] || key;
     };
 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
-
-
 
     // JSON-LD Structured Data for TouristTrip
     const tripJsonLd = {
@@ -132,11 +151,13 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                 },
                 "author": {
                     "@type": "Person",
-                    "name": isEn ? "Sarah L." : "Sophie D."
+                    "name": isEn ? "Sarah L." : isEs ? "Laura G." : "Sophie D."
                 },
                 "datePublished": "2026-04-12",
                 "reviewBody": isEn 
                     ? "An absolutely unforgettable experience! Our driver was professional, punctual, and very knowledgeable."
+                    : isEs
+                    ? "¡Una experiencia absolutamente inolvidable! Nuestro chófer fue muy profesional, puntual y atento."
                     : "Une expérience absolument inoubliable ! Notre chauffeur était professionnel, ponctuel et très sympathique.",
                 "reviewRating": {
                     "@type": "Rating",
@@ -153,14 +174,14 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Private Tours" : "Circuits Privés",
-                "item": `https://mdinatours.com/${language}/tours`
+                "name": isEn ? "Private Tours" : isEs ? "Excursiones" : "Circuits Privés",
+                "item": isEs ? `https://mdinatours.com/es` : `https://mdinatours.com/${language}/tours`
             },
             {
                 "@type": "ListItem",
@@ -217,7 +238,11 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                             <nav style={{ fontSize: '0.85rem', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '2px' }}>
                                 <Link href={getPath('/')} style={{ color: '#ccc', textDecoration: 'none' }}>{t('home')}</Link>
                                 <span style={{ margin: '0 10px', color: 'var(--primary)' }}>/</span>
-                                <Link href={getPath('/tours')} style={{ color: '#ccc', textDecoration: 'none' }}>{isEn ? 'Tours' : 'Circuits'}</Link>
+                                {isEs ? (
+                                    <span style={{ color: '#ccc' }}>Excursiones</span>
+                                ) : (
+                                    <Link href={getPath('/tours')} style={{ color: '#ccc', textDecoration: 'none' }}>{isEn ? 'Tours' : 'Circuits'}</Link>
+                                )}
                                 <span style={{ margin: '0 10px', color: 'var(--primary)' }}>/</span>
                                 <span style={{ color: '#fff' }}>{local.title}</span>
                             </nav>
@@ -263,7 +288,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                                     <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                         <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '20px', borderBottom: '2px solid #f0f0f0', paddingBottom: '10px' }}>
-                                            {isEn ? 'Tour Overview' : 'Aperçu du Circuit'}
+                                            {isEn ? 'Tour Overview' : isEs ? 'Descripción de la Excursión' : 'Aperçu du Circuit'}
                                         </h2>
                                         <p style={{ fontSize: '1.05rem', color: '#555', lineHeight: 1.7, margin: 0 }}>
                                             {local.description}
@@ -273,7 +298,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                                     {/* Highlights */}
                                     <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                         <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '20px', borderBottom: '2px solid #f0f0f0', paddingBottom: '10px' }}>
-                                            {isEn ? 'Tour Highlights' : 'Points Forts'}
+                                            {isEn ? 'Tour Highlights' : isEs ? 'Puntos Destacados' : 'Points Forts'}
                                         </h2>
                                         <ul style={{ margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                             {local.highlights.map((h, i) => (
@@ -293,7 +318,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                             {/* Itinerary Section */}
                             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                 <h2 style={{ fontSize: '1.8rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '35px', borderBottom: '2px solid #f0f0f0', paddingBottom: '10px' }}>
-                                    {isEn ? 'Detailed Itinerary' : 'Itinéraire Détaillé'}
+                                    {isEn ? 'Detailed Itinerary' : isEs ? 'Itinerario Detallado' : 'Itinéraire Détaillé'}
                                 </h2>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', position: 'relative', paddingLeft: '30px', borderLeft: '2px solid #eee' }}>
                                     {local.itinerary.map((step, idx) => (
@@ -329,7 +354,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                             }}>
                                 <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                     <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: '#2ecc71', marginBottom: '20px', borderBottom: '1px solid #f0f0f0', paddingBottom: '10px' }}>
-                                        {isEn ? 'What\'s Included' : 'Inclus dans le Prix'}
+                                        {isEn ? 'What\'s Included' : isEs ? 'Qué Incluye' : 'Inclus dans le Prix'}
                                     </h3>
                                     <ul style={{ margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                         {local.whatsIncluded.map((inc, i) => (
@@ -342,7 +367,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
 
                                 <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                     <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: '#e74c3c', marginBottom: '20px', borderBottom: '1px solid #f0f0f0', paddingBottom: '10px' }}>
-                                        {isEn ? 'What\'s Excluded' : 'Non Inclus'}
+                                        {isEn ? 'What\'s Excluded' : isEs ? 'No Incluido' : 'Non Inclus'}
                                     </h3>
                                     <ul style={{ margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                         {local.whatsExcluded.map((exc, i) => (
@@ -358,7 +383,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                             {local.faqs && local.faqs.length > 0 && (
                                 <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '35px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                                     <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '25px', borderBottom: '2px solid #f0f0f0', paddingBottom: '10px' }}>
-                                        {isEn ? 'Tour FAQ' : 'Questions Fréquentes'}
+                                        {isEn ? 'Tour FAQ' : isEs ? 'Preguntas Frecuentes' : 'Questions Fréquentes'}
                                     </h2>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                         {local.faqs.map((faq, i) => (

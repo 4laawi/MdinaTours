@@ -56,8 +56,10 @@ const CITIES: CityOption[] = [
     }
 ];
 
+import { Language } from '@/lib/translations';
+
 interface ChauffeurDestinationsProps {
-    lang: 'en' | 'fr';
+    lang?: Language;
     pageType: 'morocco' | 'casablanca' | 'marrakech' | '8-days' | 'fes' | 'tangier' | 'agadir' | 'rabat' | 'chefchaouen';
     upperBgColor?: string;
 }

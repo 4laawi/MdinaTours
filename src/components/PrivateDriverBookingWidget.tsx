@@ -17,8 +17,10 @@ interface VehicleOption {
     image: string;
 }
 
+import { Language } from '@/lib/translations';
+
 interface PrivateDriverBookingWidgetProps {
-    language: 'en' | 'fr';
+    language: Language;
     defaultCity: string;
     defaultDays?: number;
     is8DaysPackage?: boolean;

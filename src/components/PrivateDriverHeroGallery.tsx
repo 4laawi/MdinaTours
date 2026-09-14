@@ -3,8 +3,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 
+import { Language } from '@/lib/translations';
+
 interface PrivateDriverHeroGalleryProps {
-    language: 'en' | 'fr';
+    language: Language;
     city: string;
     title: string;
 }
