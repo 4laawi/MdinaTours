@@ -41,7 +41,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "casablanca-airport-transfer",
         image: "/Traditional.webp",
-        prices: { 3: 102, 4: 120, 5: 144, 7: 180 },
+        prices: { 3: 120, 4: 140, 5: 165, 7: 210 },
         en: {
             title: "Private Transfer from Casablanca Airport to Rabat or Salé",
             tagline: "Seamless, Premium Chauffeur Service Direct to Your Hotel or Riad",
@@ -59,7 +59,7 @@ export const transfersData: TransferData[] = [
             ],
             aboutRoute: "The route linking Casablanca Airport (CMN) to Rabat winds along the A1 coastal expressway. This modern, multi-lane highway offers a swift and safe transit through Morocco’s western corridor. Over the course of the 90-minute journey, you can connect to our onboard options, unwind in quiet comfort, and watch the changing Moroccan landscape transform from bustling industrial hubs to coastal vistas.",
             faqs: [
-                { q: "What is the cost of a private taxi from Casablanca Airport to Rabat?", a: "Our private transfer starts at a flat rate of €102 for a comfort vehicle seating up to 3 guests. The price is per vehicle, not per passenger, and includes all highway tolls, luggage handling, and taxes." },
+                { q: "What is the cost of a private taxi from Casablanca Airport to Rabat?", a: "Our private transfer starts at a flat rate of €120 for a comfort vehicle seating up to 3 guests. The price is per vehicle, not per passenger, and includes all highway tolls, luggage handling, and taxes." },
                 { q: "Is ride-sharing like Uber available at CMN Airport?", a: "Ride-sharing apps such as Uber do not operate in Morocco. While local alternatives exist, they face strict regulations and are barred from picking up passengers directly at airport terminals. Pre-booking a private chauffeur is the most reliable way to secure an immediate, authorized ride." },
                 { q: "How does flight tracking work for delays?", a: "We request your flight number during booking to track your arrival in real time. If your plane lands early or gets delayed, your driver adjusts their schedule automatically to be there right as you walk out. No waiting charges apply." },
                 { q: "Where will my driver be waiting?", a: "Once you pass through customs and collect your baggage, walk into the main arrivals hall. Your chauffeur will be standing clearly visible, holding a greeting sign with your name and our company logo." },
@@ -119,7 +119,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "rabat-airport-transfer",
         image: "/hero-landscape-1.webp",
-        prices: { 3: 36, 4: 42, 5: 54, 7: 72 },
+        prices: { 3: 45, 4: 55, 5: 70, 7: 95 },
         en: {
             title: "Rabat-Salé Airport (RBA) Private Chauffeur",
             tagline: "Quick, Stress-Free Airport Taxi to Hotels & Riads in Rabat or Salé",
@@ -170,7 +170,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "tangier-to-rabat-transfer",
         image: "/Tangier-Morocco-Photo.webp",
-        prices: { 3: 180, 4: 210, 5: 240, 7: 336 },
+        prices: { 3: 210, 4: 245, 5: 280, 7: 390 },
         en: {
             title: "Tangier to Rabat or Salé Private Expressway Transfer",
             tagline: "Comfortable City-to-City Chauffeur Travel via the Atlantic Highway",
@@ -221,7 +221,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "rabat-to-casablanca-transfer",
         image: "/hero-landscape-1.webp",
-        prices: { 3: 96, 4: 108, 5: 132, 7: 168 },
+        prices: { 3: 110, 4: 130, 5: 155, 7: 195 },
         en: {
             title: "Rabat or Salé to Casablanca Private Transfer",
             tagline: "Quick and Premium Business & Leisure Transfers between Morocco's Two Major Hubs",
@@ -272,7 +272,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "marrakech-to-essaouira-transfer",
         image: "/img2/Essaouira-maroc.jpg",
-        prices: { 3: 108, 4: 132, 5: 156, 7: 216 },
+        prices: { 3: 140, 4: 165, 5: 195, 7: 260 },
         en: {
             title: "Marrakech to Essaouira Coastal Transfer",
             tagline: "Relaxing Private Drive from the Red City to the Atlantic Wind Capital",
@@ -323,7 +323,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "fes-to-chefchaouen-transfer",
         image: "/hero-chefchaouen.webp",
-        prices: { 3: 144, 4: 168, 5: 192, 7: 264 },
+        prices: { 3: 170, 4: 195, 5: 230, 7: 310 },
         en: {
             title: "Fes to Chefchaouen Scenic Mountain Transfer",
             tagline: "Beautiful Private Ride from Morocco's Intellectual Capital to the Blue Pearl",
@@ -374,7 +374,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "casablanca-to-marrakech-transfer",
         image: "/hero-marrakech.webp",
-        prices: { 3: 192, 4: 216, 5: 252, 7: 336 },
+        prices: { 3: 220, 4: 250, 5: 290, 7: 390 },
         en: {
             title: "Casablanca to Marrakech Expressway Transfer",
             tagline: "Fast and Premium Highway Transfer between the Economic Capital and the Ochre City",
@@ -425,7 +425,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "tangier-airport-transfer",
         image: "/img2/tangier-airport.avif",
-        prices: { 3: 30, 4: 36, 5: 42, 7: 60 },
+        prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Tangier Ibn Battouta Airport Private Transfer",
             tagline: "Direct and Comfortable Taxi from Tangier TNG Airport to your Hotel",
@@ -476,7 +476,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "tangier-to-casablanca-transfer",
         image: "/Traditional.webp",
-        prices: { 3: 240, 4: 276, 5: 312, 7: 420 },
+        prices: { 3: 280, 4: 320, 5: 365, 7: 490 },
         en: {
             title: "Tangier to Casablanca Private Transfer",
             tagline: "Comfortable City-to-City Private Highway Transfer",
@@ -527,7 +527,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "tangier-to-chefchaouen-transfer",
         image: "/hero-chefchaouen.webp",
-        prices: { 3: 108, 4: 132, 5: 156, 7: 216 },
+        prices: { 3: 140, 4: 165, 5: 195, 7: 260 },
         en: {
             title: "Tangier to Chefchaouen Private Transfer",
             tagline: "Direct Private Taxi to the Blue Pearl of the Rif Mountains",
@@ -578,7 +578,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "casablanca-to-fes-transfer",
         image: "/hero-landscape-3.webp",
-        prices: { 3: 216, 4: 252, 5: 288, 7: 384 },
+        prices: { 3: 250, 4: 290, 5: 335, 7: 445 },
         en: {
             title: "Casablanca to Fes Private Transfer",
             tagline: "Comfortable Expressway Transfer Between the Economic Capital and the Imperial Heritage",
@@ -629,7 +629,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "rabat-to-marrakech-transfer",
         image: "/hero-landscape-1.webp",
-        prices: { 3: 204, 4: 228, 5: 264, 7: 360 },
+        prices: { 3: 245, 4: 275, 5: 315, 7: 425 },
         en: {
             title: "Rabat or Salé to Marrakech Private Transfer",
             tagline: "Premium Intercity Transfer from the Capital to the Red City",
@@ -680,7 +680,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "rabat-to-fes-transfer",
         image: "/hero-landscape-3.webp",
-        prices: { 3: 132, 4: 156, 5: 180, 7: 240 },
+        prices: { 3: 165, 4: 190, 5: 220, 7: 295 },
         en: {
             title: "Rabat or Salé to Fes Private Transfer",
             tagline: "Fast and Convenient Transfer Between Morocco's Historic Capital Cities",
@@ -731,7 +731,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "rabat-to-chefchaouen-transfer",
         image: "/hero-chefchaouen.webp",
-        prices: { 3: 180, 4: 210, 5: 240, 7: 336 },
+        prices: { 3: 249, 4: 289, 5: 329, 7: 429 },
         en: {
             title: "Rabat or Salé to Chefchaouen Private Transfer",
             tagline: "Direct Private Taxi to the Blue City in the Rif Mountains",
@@ -782,7 +782,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "marrakech-to-agadir-transfer",
         image: "/img2/agadir-marina.webp",
-        prices: { 3: 156, 4: 180, 5: 210, 7: 288 },
+        prices: { 3: 185, 4: 215, 5: 250, 7: 345 },
         en: {
             title: "Marrakech to Agadir Highway Transfer",
             tagline: "Premium Private Highway Transfer from the Imperial City to the Beach Resort",
@@ -833,7 +833,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "fes-to-merzouga-transfer",
         image: "/hero-sahara.webp",
-        prices: { 3: 312, 4: 360, 5: 420, 7: 540 },
+        prices: { 3: 370, 4: 425, 5: 495, 7: 640 },
         en: {
             title: "Fes to Merzouga Private Transfer",
             tagline: "Scenic Sahara Desert Long-Distance Transfer Crossing the Middle Atlas Mountains",
@@ -884,7 +884,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "marrakech-airport-transfer",
         image: "/hero-marrakech.webp",
-        prices: { 3: 30, 4: 36, 5: 42, 7: 60 },
+        prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Marrakech Menara Airport Private Transfer",
             tagline: "Direct and Comfortable Taxi from Marrakech RAK Airport to your Medina Riad",
@@ -935,7 +935,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "fes-airport-transfer",
         image: "/img2/fes-airport.jpeg",
-        prices: { 3: 30, 4: 36, 5: 42, 7: 60 },
+        prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Fes-Saïss Airport Private Transfer",
             tagline: "Stress-Free Private Transfer from FEZ Airport to your Fes Medina Riad",
@@ -986,7 +986,7 @@ export const transfersData: TransferData[] = [
     {
         slug: "agadir-airport-transfer",
         image: "/img2/agadir-airport.webp",
-        prices: { 3: 36, 4: 42, 5: 54, 7: 72 },
+        prices: { 3: 50, 4: 60, 5: 75, 7: 100 },
         en: {
             title: "Agadir Al Massira Airport Private Transfer",
             tagline: "Reliable and Comfortable Taxi from Agadir AGA Airport to your Beach Resort",

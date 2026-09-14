@@ -36,14 +36,14 @@ export const toursData: TourData[] = [
     {
         slug: "marrakech-day-trip",
         image: "/hero-marrakech.webp",
-        price: 114,
+        price: 249,
         en: {
             title: "Marrakech Day Trip",
             tagline: "Vibrant Souks, Historic Palaces, and Majestic Monuments",
             excerpt: "Immerse yourself in the bustling energy of the Red City. Discover historic palaces, botanical gardens, and the legendary Jemaa el-Fnaa square.",
             description: "Journey from Rabat or Casablanca to Marrakech, the ultimate cultural jewel of Morocco. Led by our certified local guides, this private excursion takes you through centuries of history. Experience the perfect blend of Moorish architecture, lively street performances, and artisanal shopping in the labyrinthine medina. Customize your itinerary to match your interests, whether you want to focus on historical palaces or peaceful garden retreats.",
             duration: "10-12 hours",
-            priceText: "From €114 per person",
+            priceText: "From €249 per person",
             highlights: [
                 "Private transport with a professional chauffeur from Rabat/Casablanca",
                 "Guided walking tour of the historic Marrakech Medina",
@@ -85,7 +85,7 @@ export const toursData: TourData[] = [
             excerpt: "Immergez-vous dans l'énergie débordante de la Ville Rouge. Découvrez des palais historiques, des jardins botaniques et la légendaire place Jemaa el-Fna.",
             description: "Voyagez depuis Rabat ou Casablanca vers Marrakech, le joyau culturel ultime du Maroc. Accompagné par nos guides locaux certifiés, cette excursion privée vous fait traverser des siècles d'histoire. Découvrez le mélange parfait d'architecture mauresque, de spectacles de rue animés et de shopping artisanal dans la médina labyrinthique. Personnalisez votre itinéraire selon vos envies.",
             duration: "10-12 heures",
-            priceText: "À partir de 114 € par personne",
+            priceText: "À partir de 249 € par personne",
             highlights: [
                 "Transport privé avec chauffeur professionnel depuis Rabat/Casablanca",
                 "Visite guidée à pied de la médina historique de Marrakech",
@@ -125,14 +125,14 @@ export const toursData: TourData[] = [
     {
         slug: "chefchaouen-day-trip",
         image: "/hero-chefchaouen.webp",
-        price: 132,
+        price: 249,
         en: {
             title: "Chefchaouen Blue City Tour",
             tagline: "Explore the Hidden Blue Pearl of the Rif Mountains",
             excerpt: "Wander through the photogenic, blue-washed streets of Chefchaouen, hike to the Spanish Mosque, and enjoy spectacular mountain scenery.",
             description: "Escape to the tranquil Rif Mountains and explore Chefchaouen, Morocco's famous 'Blue Pearl'. Founded in 1471, this beautiful mountain fortress is celebrated for its soothing blue-washed alleys, artistic vibe, and laid-back atmosphere. Walk up to the Spanish Mosque for a panoramic view of the entire valley and learn about the city's unique Andalusian history from a local perspective.",
             duration: "12-14 hours",
-            priceText: "From €132 per person",
+            priceText: "From €249 per person",
             highlights: [
                 "Comfortable private drive through the scenic Rif Mountain range",
                 "Stroll along the iconic blue-painted streets of the old Medina",
@@ -174,7 +174,7 @@ export const toursData: TourData[] = [
             excerpt: "Flânez dans les ruelles peintes en bleu de Chefchaouen, grimpez jusqu'à la mosquée espagnole et profitez de panoramas montagneux grandioses.",
             description: "Évadez-vous dans le calme des montagnes du Rif pour visiter Chefchaouen, la célèbre 'Perle Bleue' du Maroc. Fondée en 1471, cette forteresse montagnarde est réputée pour ses ruelles blanchies à la chaux bleue, son ambiance artistique et sa tranquillité. Montez jusqu'à la mosquée espagnole pour une vue à couper le souffle sur toute la vallée.",
             duration: "12-14 heures",
-            priceText: "À partir de 132 € par personne",
+            priceText: "À partir de 249 € par personne",
             highlights: [
                 "Trajet privé confortable à travers les paysages du Rif",
                 "Balade dans les ruelles bleues emblématiques de la médina",
@@ -203,7 +203,7 @@ export const toursData: TourData[] = [
             ],
             faqs: [
                 { q: "La marche vers la mosquée espagnole est-elle difficile ?", a: "Non, c'est un chemin pavé très accessible d'environ 15 minutes. Prévoyez de bonnes chaussures de marche." },
-                { q: "Pourquoi les murs sont-ils bleus ?", a: "Plusieurs théories existent : certains l'attribuent aux réfugiés juifs des années 1930 pour rappeler le ciel, d'autres disent que cela repousse les moustiques." },
+                { q: "Pourquoi les murs sont-ils bleus ?", a: "Plusieurs théories existent : certains l'attribuent aux réfugiés juifs des années 1930 pour rappeler le ciel, d me disent que cela repousse les moustiques." },
                 { q: "Que dois-je emporter pour cette excursion ?", a: "Prévoyez un appareil photo, de bonnes chaussures de marche, et une veste légère car l'air de la montagne peut être frais." },
                 { q: "L'excursion d'une journée est-elle faisable ?", a: "Oui, notre transport privé permet de visiter Chefchaouen confortablement depuis Fès, Rabat ou Tanger sur la journée." }
             ],
@@ -214,14 +214,14 @@ export const toursData: TourData[] = [
     {
         slug: "atlas-mountains-tour",
         image: "/hero-landscape-3.webp",
-        price: 156,
+        price: 210,
         en: {
             title: "Atlas Mountains & Ourika Valley Tour",
             tagline: "Scenic Waterfalls, Berber Villages, and Majestic Peaks",
             excerpt: "Escape the city heat. Travel to the high High Atlas peaks, hike past rushing mountain waterfalls, and share traditional mint tea with a Berber family.",
             description: "Immerse yourself in the traditional mountain culture of Morocco's High Atlas. Rushing mountain rivers, terraced agricultural plots, and red-clay villages carved into canyon walls define the Ourika Valley and Imlil region. This tour takes you off the beaten path to explore authentic Berber heritage, hike past mountain streams, and witness how locals have lived in harmony with the mountains for thousands of years.",
             duration: "8-10 hours",
-            priceText: "From €156 per person",
+            priceText: "From €210 per person",
             highlights: [
                 "Breathtaking mountain drives through the foothills of Mount Toubkal",
                 "Guided trek to the seven cooling waterfalls of Setti Fatma",
@@ -263,7 +263,7 @@ export const toursData: TourData[] = [
             excerpt: "Fuyez la chaleur des villes. Explorez les montagnes du Haut Atlas, longez les cascades sauvages et partagez un thé traditionnel dans un village berbère.",
             description: "Immergez-vous dans la vie rurale des montagnes de l'Atlas. Rivières tumultueuses, cultures en terrasses et villages de terre rouge caractérisent la vallée de l'Ourika. Cette excursion vous emmène hors des sentiers battus à la rencontre du patrimoine berbère authentique et de paysages préservés.",
             duration: "8-10 heures",
-            priceText: "À partir de 156 € par personne",
+            priceText: "À partir de 210 € par personne",
             highlights: [
                 "Routes de montagne panoramiques au pied du Mont Toubkal",
                 "Randonnée guidée vers les sept cascades de Setti Fatma",
@@ -303,14 +303,14 @@ export const toursData: TourData[] = [
     {
         slug: "agafay-desert-experience",
         image: "/b-roll/agafay.webp",
-        price: 96,
+        price: 120,
         en: {
             title: "Agafay Desert Dinner & Camel Experience",
             tagline: "Stunning Stone Dunes, Camel Rides, and Dinner Under the Stars",
             excerpt: "Discover the rocky desert of Agafay just outside Marrakech. Ride a camel at sunset and enjoy a gourmet dinner in a luxury nomadic camp.",
             description: "If you don't have time to travel all the way to the Sahara, the Agafay Desert offers the perfect stone-dune alternative. Located just 40 minutes south of Marrakech, this dry plateau features vast landscapes, white mud villages, and panoramic views of the Atlas Mountains. Enjoy a scenic camel ride at sunset and dine under a starry sky inside a luxurious desert camp with live Gnaoua music and fire shows.",
             duration: "5-6 hours",
-            priceText: "From €96 per person",
+            priceText: "From €120 per person",
             highlights: [
                 "Private round-trip transfer to the rocky Agafay Desert",
                 "Sunset camel ride wearing traditional Berber nomadic blue robes",
@@ -352,7 +352,7 @@ export const toursData: TourData[] = [
             excerpt: "Découvrez le désert de pierre d'Agafay aux portes de Marrakech. Montez à dos de chameau et savourez un dîner spectacle dans un camp de luxe.",
             description: "Si vous manquez de temps pour aller jusqu'au Sahara, le désert d'Agafay en est l'alternative parfaite. Situé à seulement 40 minutes de Marrakech, ce plateau de pierre aride offre des reliefs lunaires face à l'Atlas. Vivez une balade à dos de chameau au coucher du soleil et partagez un dîner traditionnel sous les étoiles.",
             duration: "5-6 heures",
-            priceText: "À partir de 96 € par personne",
+            priceText: "À partir de 120 € par personne",
             highlights: [
                 "Transfert privé aller-retour vers les collines d'Agafay",
                 "Balade à dos de chameau habillé en habits nomades bleus",
@@ -392,14 +392,14 @@ export const toursData: TourData[] = [
     {
         slug: "merzouga-desert-tour",
         image: "/b-roll/merzouga.webp",
-        price: 348,
+        price: 620,
         en: {
             title: "3-Day Merzouga Desert Expedition",
             tagline: "Sahara Dunes, Canyons, Kasbahs, and Nomadic Nights",
             excerpt: "Embark on the ultimate Moroccan adventure. Traverse the Atlas Mountains, explore Ait Benhaddou, and spend a night in the Erg Chebbi Sahara dunes.",
             description: "Cross the High Atlas Mountains, explore ancient mud-brick fortresses, and experience the golden sand dunes of Erg Chebbi in Merzouga. This 3-day private desert tour is designed for travelers who want to experience the deep Sahara. Sleep in a luxury desert camp, ride camels over wind-swept sand ridges, and witness the stunning starry sky of the desert night. Customize the stops along the way, including scenic lookouts in the Dades and Todra gorges.",
             duration: "3 Days / 2 Nights",
-            priceText: "From €348 per person",
+            priceText: "From €620 per person",
             highlights: [
                 "Drive through the high Tizi n'Tichka pass (2,260m) with panoramic views",
                 "Guided tour of the UNESCO World Heritage site of Ait Benhaddou",
@@ -441,7 +441,7 @@ export const toursData: TourData[] = [
             excerpt: "Partez pour l'aventure marocaine ultime. Traversez l'Atlas, explorez Aït Benhaddou et dormez au cœur des dunes dorées de l'Erg Chebbi.",
             description: "Traversez le Haut Atlas, explorez d'anciennes forteresses et découvrez les vagues de sable doré de l'Erg Chebbi à Merzouga. Ce circuit de 3 jours est le choix idéal pour vivre la magie du Sahara. Nuit en camp de luxe, balade à dos de chameau et contemplation des étoiles.",
             duration: "3 Jours / 2 Nuits",
-            priceText: "À partir de 348 € par personne",
+            priceText: "À partir de 620 € par personne",
             highlights: [
                 "Passage par le col du Tizi n'Tichka (2 260 m) avec ses panoramas grandioses",
                 "Visite guidée du Ksar d'Aït Benhaddou, classé à l'UNESCO",
@@ -481,14 +481,14 @@ export const toursData: TourData[] = [
     {
         slug: "fes-guided-tour",
         image: "/b-roll/fes.jpg",
-        price: 66,
+        price: 75,
         en: {
             title: "Fes Medina Walking Tour",
             tagline: "Step Back in Time in the World's Largest Car-Free Urban Area",
             excerpt: "Explore Fes el-Bali, the oldest cultural capital of Morocco. Walk past medieval tanneries, ancient madrassas, and historic palaces.",
             description: "With over 9,000 narrow alleys, the medieval city of Fes el-Bali is the beating heart of Moroccan craft and academic history. Led by our licensed historical guide, this walking tour brings the ancient city to life. Walk past colorful spice shops, visit the oldest working university in the world, and look out over the famous Chouara leather tanneries from a panoramic terrace.",
             duration: "5-6 hours",
-            priceText: "From €66 per group",
+            priceText: "From €75 per group",
             highlights: [
                 "Private walking tour with a licensed academic historian guide",
                 "Explore the Chouara Tanneries and watch ancient leather dyeing techniques",
@@ -530,7 +530,7 @@ export const toursData: TourData[] = [
             excerpt: "Explorez Fès el-Bali, la capitale spirituelle du Maroc. Découvrez les tanneries médiévales, les anciennes madrasas et les palais cachés.",
             description: "Avec plus de 9 000 ruelles, la cité médiévale de Fès el-Bali est le cœur battant de l'artisanat marocain. Accompagné par notre guide conférencier officiel, cette visite privée redonne vie à l'histoire. Visitez la plus ancienne université en activité au monde et admirez les célèbres tanneries Chouara.",
             duration: "5-6 heures",
-            priceText: "À partir de 66 € par groupe",
+            priceText: "À partir de 75 € par groupe",
             highlights: [
                 "Visite guidée privée avec un guide historien officiel",
                 "Découverte des tanneries Chouara et des techniques de teinture artisanales",
@@ -570,14 +570,14 @@ export const toursData: TourData[] = [
     {
         slug: "casablanca-city-tour",
         image: "/Traditional-low.webp",
-        price: 72,
+        price: 90,
         en: {
             title: "Casablanca Highlights Tour",
             tagline: "Art Deco Architecture, Modern Coastlines, and the Hassan II Mosque",
             excerpt: "Explore Morocco's economic powerhouse. Visit the architectural masterpiece of the Hassan II Mosque and stroll along the scenic Corniche.",
             description: "Casablanca is the modern, beating heart of Morocco's economic progress. Blending mid-century French Art Deco architecture with historic Moorish elements, this city features grand avenues, coastal walks, and religious landmarks. This private tour takes you inside the Hassan II Mosque—the largest functioning mosque in Africa—and showcases the iconic neighborhoods of Habous and the beachfront Corniche.",
             duration: "4-5 hours",
-            priceText: "From €72 per person",
+            priceText: "From €90 per person",
             highlights: [
                 "Guided tour inside the Hassan II Mosque, showing unique hand-crafted details",
                 "Stroll through the clean alleys of the Habous (the 'New Medina')",
@@ -616,7 +616,7 @@ export const toursData: TourData[] = [
             excerpt: "Explorez le poumon économique du Maroc. Visitez le chef-d'œuvre architectural de la mosquée Hassan II et la Corniche de Aïn Diab.",
             description: "Casablanca est le symbole de la modernité et du dynamisme marocain. Entre édifices Art Déco français et monuments mauresques, la métropole offre un contraste saisissant. Cette visite privée vous fait découvrir la mosquée Hassan II, le quartier des Habous et la Corniche.",
             duration: "4-5 heures",
-            priceText: "À partir de 72 € par personne",
+            priceText: "À partir de 90 € par personne",
             highlights: [
                 "Visite guidée intérieure de la grandiose Mosquée Hassan II",
                 "Balade dans le quartier pittoresque des Habous (la nouvelle médina)",
@@ -627,7 +627,7 @@ export const toursData: TourData[] = [
             itinerary: [
                 { title: "09h00 - Prise en Charge Privée", desc: "Votre chauffeur vous récupère à votre hôtel ou au terminal des croisières du port." },
                 { title: "09h30 - Mosquée Hassan II", desc: "Visite guidée à l'intérieur de ce monument partiellement construit sur l'océan." },
-                { title: "11h30 - Balade sur la Corniche", desc: "Parcours côtier en admirant les plages et les clubs de surf." },
+                { title: "11h30 - Balade sur la Corniche", desc: "Parcours végétalisé en admirant les plages et les clubs de surf." },
                 { title: "12h30 - Quartier des Habous", desc: "Exploration du quartier des Habous, célèbre pour ses librairies d'art et son marché aux olives." },
                 { title: "13h30 - Déjeuner de fruits de mer", desc: "Dégustez un poisson grillé dans le port de pêche avant le retour à l'hôtel." }
             ],
@@ -653,14 +653,14 @@ export const toursData: TourData[] = [
     {
         slug: "rabat-city-tour",
         image: "/Asilah.webp",
-        price: 60,
+        price: 105,
         en: {
             title: "Rabat Imperial Capital Tour",
             tagline: "Medieval Kasbahs, Royal Mausoleums, and Peaceful Coastal Walks",
             excerpt: "Explore Morocco's elegant capital city. Discover the blue-walled Kasbah of the Udayas, the ancient Hassan Tower, and historic ruins.",
             description: "As the capital city of Morocco and our official base, Rabat offers a tranquil blend of imperial history and clean, modern coastal streets. Unlike other tourist hubs, Rabat features quiet monuments, green spaces, and a peaceful coastline. On this private tour, explore the historic Kasbah of the Udayas, see the ancient Roman ruins of Chellah, and stand before the majestic Mausoleum of Mohammed V.",
             duration: "4-5 hours",
-            priceText: "From €60 per person",
+            priceText: "From €105 per person",
             highlights: [
                 "Stroll through the narrow, blue-painted alleys of the Kasbah of the Udayas",
                 "Visit the iconic Hassan Tower, the minaret of an unfinished 12th-century mosque",
@@ -699,7 +699,7 @@ export const toursData: TourData[] = [
             excerpt: "Explorez l'élégante capitale du Maroc. Découvrez la Kasbah des Oudayas aux murs bleus, la tour Hassan et la nécropole du Chellah.",
             description: "En tant que capitale du Maroc et siège officiel de notre agence, Rabat offre un cadre de visite aéré entre océan et monuments historiques. Explorez la kasbah fortifiée des Oudayas, les ruines antiques du Chellah et le somptueux mausolée Mohammed V.",
             duration: "4-5 heures",
-            priceText: "À partir de 60 € par personne",
+            priceText: "À partir de 105 € par personne",
             highlights: [
                 "Balade dans les ruelles peintes en bleu et blanc de la Kasbah des Oudayas",
                 "Visite de la Tour Hassan, vestige d'une mosquée inachevée du XIIe siècle",
