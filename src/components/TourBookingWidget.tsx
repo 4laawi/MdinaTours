@@ -47,9 +47,15 @@ export default function TourBookingWidget({ tour }: TourBookingWidgetProps) {
                     <span style={{ fontWeight: 600, color: '#2ecc71' }}>{isEn ? 'Daily departures' : isEs ? 'Salidas diarias' : 'Tous les jours'}</span>
                 </li>
                 <li style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
-                    <span style={{ color: '#aaa' }}>{isEn ? 'Base Location' : isEs ? 'Punto de partida' : 'Départ de'}:</span>
-                    <span style={{ fontWeight: 600 }}>Rabat / Casablanca</span>
+                    <span style={{ color: '#aaa' }}>{isEn ? 'Departure' : isEs ? 'Punto de partida' : 'Départ de'}:</span>
+                    <span style={{ fontWeight: 600 }}>{local.departureCity || 'Marrakech'}</span>
                 </li>
+                {local.finishCity && (
+                    <li style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
+                        <span style={{ color: '#aaa' }}>{isEn ? 'Drop-off / Finish' : isEs ? 'Finalización' : 'Fin de circuit'}:</span>
+                        <span style={{ fontWeight: 600 }}>{local.finishCity}</span>
+                    </li>
+                )}
             </ul>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

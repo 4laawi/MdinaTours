@@ -189,8 +189,8 @@ export default async function ToursCatalogPage({ params }: { params: Promise<{ l
                                                 }}>
                                                     ⏱ {local.duration}
                                                 </span>
-                                                <span style={{ fontSize: '0.9rem', color: '#777' }}>
-                                                    {isEs ? '★ 5.0 (98 valoraciones)' : '★ 5.0 (98 reviews)'}
+                                                <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500 }}>
+                                                    {isEs ? 'Excursión privada' : isEn ? 'Private Tour' : 'Excursion privée'}
                                                 </span>
                                             </div>
 

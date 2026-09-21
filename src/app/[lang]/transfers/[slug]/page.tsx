@@ -144,37 +144,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             "price": price,
             "availability": "https://schema.org/InStock",
             "url": `https://mdinatours.com/${language}/transfers/${slug}`
-        })),
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "120",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "itemReviewed": {
-                    "@type": "Product",
-                    "name": local.title
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": isEn ? "David K." : isEs ? "Carlos M." : "Jean P."
-                },
-                "datePublished": "2026-05-01",
-                "reviewBody": isEn 
-                    ? "Very smooth transfer. Punctual chauffeur, very professional driver, clean minivan. Recommended!"
-                    : isEs
-                    ? "Excelente traslado. Chófer puntual, conducción muy profesional y minivan impecable. ¡Muy recomendado!"
-                    : "Transfert parfait. Chauffeur ponctuel, très professionnel, minivan propre. Recommandé !",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5"
-                }
-            }
-        ]
+        }))
     };
 
     const breadcrumbJsonLd = {

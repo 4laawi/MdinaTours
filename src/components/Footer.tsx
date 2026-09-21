@@ -144,13 +144,13 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                         </a>
                     </div>
                     <div className={styles.paymentWrapper}>
-                        <Image
-                            src="https://marrakechcitytravel.com/wp-content/uploads/2025/08/payment.png"
-                            alt="Secured Payments"
-                            width={200}
-                            height={34}
-                            unoptimized
-                        />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: 0.85, fontSize: '0.85rem', color: '#e2e8f0', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94a3b8', width: '100%' }}>{language === 'es' ? 'Métodos de pago' : language === 'fr' ? 'Paiement sécurisé' : 'Payment & Security'}</span>
+                            <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>VISA</span>
+                            <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>Mastercard</span>
+                            <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>{language === 'es' ? 'Efectivo en mano' : language === 'fr' ? 'Espèces à l\'arrivée' : 'Cash on Arrival'}</span>
+                            <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>{language === 'es' ? 'Transferencia' : language === 'fr' ? 'Virement' : 'Bank Transfer'}</span>
+                        </div>
                     </div>
                 </div>
             </div>

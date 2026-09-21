@@ -135,37 +135,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                     "description": item.desc
                 }
             }))
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "98",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "itemReviewed": {
-                    "@type": "Product",
-                    "name": local.title
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": isEn ? "Sarah L." : isEs ? "Laura G." : "Sophie D."
-                },
-                "datePublished": "2026-04-12",
-                "reviewBody": isEn 
-                    ? "An absolutely unforgettable experience! Our driver was professional, punctual, and very knowledgeable."
-                    : isEs
-                    ? "¡Una experiencia absolutamente inolvidable! Nuestro chófer fue muy profesional, puntual y atento."
-                    : "Une expérience absolument inoubliable ! Notre chauffeur était professionnel, ponctuel et très sympathique.",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5"
-                }
-            }
-        ]
+        }
     };
 
     const breadcrumbJsonLd = {

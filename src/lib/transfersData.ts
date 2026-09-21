@@ -223,75 +223,76 @@ export const transfersData: TransferData[] = [
             title: "Tangier Ferry Port Private Transfer (Tanger Ville & Tanger Med)",
             tagline: "Dedicated Private Chauffeur Service Direct from the Ferry Terminal to your Hotel",
             pickup: "Tangier Ferry Port (Tanger Ville Port or Tanger Med)",
-            dropoff: "Tangier City, Medina, Chefchaouen, Tetouan, or Asilah",
+            dropoff: "Tangier (City Center, Hotels, Medina)",
             distance: "5 - 45 km",
             duration: "15 - 45 minutes",
             capacityText: "1 to 7 passengers with generous luggage capacity",
             highlights: [
                 "Direct meet & greet outside passenger customs at both Tanger Ville and Tanger Med terminals",
                 "Ferry arrival tracking across all operators (FRS, Balearia, AML, Trasmediterranea, GNV)",
-                "Fixed all-inclusive pricing with zero negotiation and no luggage surcharges",
+                "Fixed all-inclusive pricing with zero negotiation and no luggage surcharges (starting from €45 for Tanger Ville)",
                 "Modern air-conditioned sedans and spacious minivans for families and small groups",
                 "Direct coordination with riad hosts inside the historic Tangier Kasbah and Medina"
             ],
-            aboutRoute: "Arriving by ferry from Spain into Tangier is one of the most classic entryways into Morocco. Tanger Ville Port welcomes passenger foot traffic directly into the city from Tarifa, while Tanger Med receives car ferries from Algeciras, Motril, and Barcelona located 45 km east. Our private transfer ensures a reliable chauffeur is waiting as you disembark, whisking you directly to your accommodation without the hassle of port taxi touts.",
+            aboutRoute: "Arriving by ferry from Spain into Tangier is one of the most classic entryways into Morocco. Tanger Ville Port welcomes passenger foot traffic directly into the city from Tarifa (starting from €45), while Tanger Med receives car ferries from Algeciras, Motril, and Barcelona located 45 km east (starting from €75). Onward private transfers to Chefchaouen, Tetouan, and Asilah are also available upon request. Our private transfer ensures a reliable chauffeur is waiting as you disembark, whisking you directly to your accommodation without the hassle of port taxi touts.",
             faqs: [
-                { q: "What is the difference between Tanger Ville and Tanger Med?", a: "Tanger Ville is located in downtown Tangier and serves passenger catamarans from Tarifa (Spain). Tanger Med is a deepwater port located 45 km east of Tangier serving large car ferries from Algeciras and Barcelona. We provide private transfers from both ports." },
+                { q: "What is the difference between Tanger Ville and Tanger Med?", a: "Tanger Ville is located in downtown Tangier and serves passenger catamarans from Tarifa (Spain). Tanger Med is a deepwater port located 45 km east of Tangier serving large car ferries from Algeciras and Barcelona. We provide private transfers from both ports (from €45 for Tanger Ville, from €75 for Tanger Med)." },
                 { q: "Where will my driver meet me at the port?", a: "Your driver will be waiting immediately outside the passenger terminal exit doors after passport control and customs, holding a sign with your name." },
                 { q: "What happens if our ferry is delayed?", a: "We monitor ferry timetables and maritime traffic in the Strait of Gibraltar. Your driver automatically adjusts pickup time with no extra waiting charge." },
-                { q: "Can we transfer directly from Tangier port to Chefchaouen?", a: "Yes. Direct private transfers from Tanger Ville or Tanger Med to Chefchaouen, Tetouan, or Fes are available and very popular." }
+                { q: "Can we transfer directly from Tangier port to Chefchaouen, Tetouan, or Asilah?", a: "Yes. Direct private transfers from Tanger Ville or Tanger Med to Chefchaouen, Tetouan, Asilah, or Fes are available as separately quoted onward routes. Please request a custom quote during booking." }
             ],
             seoTitle: "Tangier Ferry Port Private Transfer (Tanger Ville & Med) | Mdina Tours",
-            seoDesc: "Book a private transfer from Tangier Ferry Ports (Tanger Ville & Tanger Med). Meet & greet at ferry arrivals, fixed rates, and direct riad drop-off."
+            seoDesc: "Book a private transfer from Tangier Ferry Ports (Tanger Ville & Tanger Med) to Tangier city. Meet & greet at arrivals, fixed rates from €45, and riad drop-off."
         },
         fr: {
             title: "Transfert Privé Port de Tanger (Tanger Ville et Tanger Med)",
             tagline: "Service de Chauffeur Privé Direct dès la Sortie du Ferry vers votre Hôtel ou Riad",
             pickup: "Port de Tanger (Port de Tanger Ville ou Port Tanger Med)",
-            dropoff: "Tanger (Centre, Médina, Hôtels), Chefchaouen, Tétouan ou Asilah",
+            dropoff: "Tanger (Centre-ville, Hôtels, Médina)",
             distance: "5 - 45 km",
             duration: "15 - 45 minutes",
             capacityText: "1 à 7 passagers avec grand coffre pour bagages",
             highlights: [
                 "Accueil personnalisé à la sortie des passagers à Tanger Ville et Tanger Med",
                 "Suivi en direct des arrivées de ferries (FRS, Balearia, AML, GNV, Trasmediterranea)",
-                "Tarifs fixes transparents sans négociation ni supplément bagages",
+                "Tarifs fixes transparents sans négociation ni supplément bagages (à partir de 45 € pour Tanger Ville)",
                 "Véhicules récents et climatisés adaptés aux familles et petits groupes",
                 "Coordination avec votre riad dans la Kasbah ou la médina de Tanger"
             ],
-            aboutRoute: "L'arrivée en ferry depuis l'Espagne est une traversée emblématique. Que vous arriviez à Tanger Ville (ferry rapide depuis Tarifa) ou à Tanger Med (ferries depuis Algésiras), notre chauffeur privé vous accueille dès le débarquement pour vous conduire à destination en toute sérénité.",
+            aboutRoute: "L'arrivée en ferry depuis l'Espagne est une traversée emblématique. Que vous arriviez à Tanger Ville (ferry rapide depuis Tarifa, à partir de 45 €) ou à Tanger Med (ferries depuis Algésiras à 45 km, à partir de 75 €), notre chauffeur privé vous accueille dès le débarquement. Des liaisons directes vers Chefchaouen, Tétouan et Asilah sont également disponibles sur devis personnalisé.",
             faqs: [
-                { q: "Quelle est la différence entre Tanger Ville et Tanger Med ?", a: "Le port de Tanger Ville se situe au centre-ville de Tanger (liaison Tarifa). Tanger Med est situé à 45 km à l'est (liaisons Algésiras/Barcelone). Nous assurons les transferts depuis ces deux ports." },
+                { q: "Quelle est la différence entre Tanger Ville et Tanger Med ?", a: "Le port de Tanger Ville se situe au centre-ville de Tanger (liaison Tarifa). Tanger Med est situé à 45 km à l'est (liaisons Algésiras/Barcelone). Nous assurons les transferts depuis ces deux ports (dès 45 € pour Tanger Ville, dès 75 € pour Tanger Med)." },
                 { q: "Où m'attend le chauffeur au port ?", a: "Votre chauffeur vous attend dès la sortie du terminal passagers après la douane, muni d'une pancarte à votre nom." },
-                { q: "Que se passe-t-il en cas de retard du bateau ?", a: "Nous suivons les horaires maritimes en temps réel. Le chauffeur s'adapte sans aucun frais d'attente supplémentaire." }
+                { q: "Que se passe-t-il en cas de retard du bateau ?", a: "Nous suivons les horaires maritimes en temps réel. Le chauffeur s'adapte sans aucun frais d'attente supplémentaire." },
+                { q: "Peut-on réserver un transfert direct du port vers Chefchaouen, Tétouan ou Asilah ?", a: "Oui, nous proposons des transferts privés directs depuis Tanger Ville ou Tanger Med vers Chefchaouen, Tétouan, Asilah ou Fès sur devis personnalisé." }
             ],
             seoTitle: "Transfert Port de Tanger Ville & Tanger Med Privé | Mdina Tours",
-            seoDesc: "Réservez votre navette privée depuis les ports de Tanger Ville et Tanger Med. Accueil personnalisé au débarquement du ferry et tarifs fixes."
+            seoDesc: "Réservez votre navette privée depuis les ports de Tanger Ville et Tanger Med vers Tanger. Accueil personnalisé au débarquement et tarifs fixes dès 45 €."
         },
         es: {
             title: "Traslado Privado Puerto de Tánger Ville y Tánger Med",
             tagline: "Servicio de Chófer Privado desde las Terminales de Ferry de Tánger hacia su Hotel o Riad",
             pickup: "Puerto de Tánger Ville o Puerto Tánger Med (Terminal de Ferries)",
-            dropoff: "Tánger (Centro, Medina, Hoteles), Chefchaouen, Tetuán o Asilah",
+            dropoff: "Tánger (Centro, Hoteles, Médina)",
             distance: "5 - 45 km",
             duration: "15 - 45 minutos",
             capacityText: "De 1 a 7 pasajeros con amplio espacio para equipaje",
             highlights: [
                 "Punto de encuentro directo en la salida de pasajeros de Tanger Ville (ferry desde Tarifa) y Tanger Med (ferry desde Algeciras)",
                 "Seguimiento en tiempo real de la llegada de su ferry (FRS, Balearia, Africa Morocco Link, Trasmediterranea, GNV)",
-                "Precios fijos garantizados sin regateos ni cargos sorpresa por equipaje",
+                "Precios fijos garantizados sin regateos ni cargos sorpresa (tarifa desde 45 € para Tanger Ville a Tánger ciudad)",
                 "Vehículos modernos con aire acondicionado y espacio para equipaje familiar",
                 "Coordinación directa y asistencia para el acceso a riads en la medina o Kasbah de Tánger"
             ],
-            aboutRoute: "Llegar en ferry desde España es una de las entradas más populares a Marruecos. El Puerto de Tanger Ville recibe los catamaranes rápidos de pasajeros directos desde Tarifa al centro de la ciudad, mientras que Tanger Med recibe los ferries desde Algeciras a 45 km al este. Nuestro servicio de traslado privado le asegura que un chófer profesional le esté esperando a la salida del barco para llevarle cómodamente a su hotel o destino.",
+            aboutRoute: "Llegar en ferry desde España es una de las entradas más populares a Marruecos. El Puerto de Tanger Ville recibe los catamaranes rápidos de pasajeros directos desde Tarifa al centro de la ciudad (a partir de 45 €), mientras que Tanger Med recibe los ferries desde Algeciras a 45 km al este (a partir de 75 €). Los traslados directos hacia Chefchaouen, Tetuán y Asilah están disponibles bajo presupuesto personalizado. Nuestro servicio de traslado privado le asegura que un chófer profesional le esté esperando a la salida del barco para llevarle cómodamente a su destino sin esperas ni regateos.",
             faqs: [
-                { q: "¿Cuál es la diferencia entre el Puerto de Tanger Ville y Tanger Med?", a: "Tanger Ville se ubica en el centro de Tánger y recibe ferries rápidos de pasajeros desde Tarifa. Tanger Med se encuentra a unos 45 km al este y recibe ferries de pasajeros y vehículos procedentes de Algeciras y Barcelona. Ofrecemos traslados privados desde ambos puertos." },
+                { q: "¿Cuál es la diferencia entre el Puerto de Tanger Ville y Tanger Med?", a: "Tanger Ville se ubica en el centro de Tánger y recibe ferries rápidos de pasajeros desde Tarifa (traslado local desde 45 €). Tanger Med se encuentra a unos 45 km al este y recibe ferries de pasajeros y vehículos procedentes de Algeciras y Barcelona (traslado a Tánger desde 75 €). Ofrecemos traslados privados desde ambos puertos." },
                 { q: "¿Dónde me esperará el conductor en el puerto?", a: "A la salida de la terminal de pasajeros, tras pasar aduanas y pasaportes, su chófer le estará esperando con un cartel con su nombre." },
                 { q: "¿Qué ocurre si el ferry sufre un retraso por el estado del mar?", a: "Monitoreamos las llegadas de los barcos en el Estrecho de Gibraltar. Su conductor se adaptará a la hora real de desembarque sin ningún coste adicional." },
-                { q: "¿Puedo reservar un traslado directo desde el puerto de Tánger a Chefchaouen?", a: "Sí, realizamos traslados directos desde Tanger Ville o Tanger Med hacia Chefchaouen, Tetuán, Asilah o Fez." }
+                { q: "¿Puedo reservar un traslado directo desde el puerto de Tánger a Chefchaouen, Tetuán o Asilah?", a: "Sí, realizamos traslados privados directos desde Tanger Ville o Tanger Med hacia Chefchaouen, Tetuán, Asilah o Fez como rutas adicionales con presupuesto personalizado." }
             ],
             seoTitle: "Traslado Privado Puerto de Tánger Ville y Tánger Med | Mdina Tours",
-            seoDesc: "Reserve su traslado privado desde los puertos de Tánger Ville (Tarifa) y Tánger Med (Algeciras). Conductor profesional esperándole a la salida del ferry. Tarifas fijas."
+            seoDesc: "Reserve su traslado privado desde los puertos de Tánger Ville y Tánger Med a Tánger centro. Conductor profesional esperándole al desembarcar. Tarifas fijas desde 45 €."
         }
     },
     {

@@ -58,10 +58,9 @@ export default function TourGrid() {
                                             </svg>
                                             {local.duration}
                                         </span>
-                                        <div className={styles.ratingStars}>
-                                            <span className={styles.star}>★</span>
-                                            <span className={styles.ratingValue}>5.0 (98)</span>
-                                        </div>
+                                        <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                            {language === 'es' ? 'Privado' : language === 'fr' ? 'Privé' : 'Private'}
+                                        </span>
                                     </div>
 
                                     <h3 className={styles.title}>{local.title}</h3>
