@@ -9,7 +9,7 @@ interface LocationComboboxProps {
     onChange: (val: string, isCustom?: boolean) => void;
     placeholder?: string;
     label?: string;
-    language?: 'en' | 'fr';
+    language?: 'en' | 'fr' | 'es';
     icon?: React.ReactNode;
     className?: string;
     onFocus?: () => void;
@@ -26,6 +26,7 @@ export default function LocationCombobox({
     onFocus
 }: LocationComboboxProps) {
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState(value);
     const [activeIndex, setActiveIndex] = useState(-1);
@@ -236,10 +237,10 @@ export default function LocationCombobox({
                         >
                             <span className={styles.optionIcon}>✨</span>
                             <span className={styles.optionText}>
-                                {isEn ? `Request custom route for "${query}"` : `Devis sur-mesure pour "${query}"`}
+                                {isEs ? `Solicitar ruta personalizada para "${query}"` : isEn ? `Request custom route for "${query}"` : `Devis sur-mesure pour "${query}"`}
                             </span>
                             <span className={styles.customBadge}>
-                                {isEn ? "Custom" : "Sur-mesure"}
+                                {isEs ? "A medida" : isEn ? "Custom" : "Sur-mesure"}
                             </span>
                         </button>
                     )}

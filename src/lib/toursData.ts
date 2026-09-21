@@ -121,6 +121,48 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Excursion Privée à Marrakech depuis Rabat | Mdina Tours",
             seoDesc: "Explorez Marrakech lors d'une excursion privée exclusive depuis Rabat. Transport haut de gamme, guide officiel, Palais Bahia et Jardin Majorelle inclus."
+        },
+        es: {
+            title: "Excursión privada a Marrakech desde Casablanca",
+            tagline: "Palacios Históricos, Zocos Vibrantes y la Legendaria Plaza Jemaa el-Fna",
+            excerpt: "Sumérjase en la energía de la Ciudad Roja. Descubra palacios históricos, jardines botánicos y el ambiente único de la plaza Jemaa el-Fna.",
+            description: "Viaje desde Casablanca hasta Marrakech, la joya cultural más fascinante de Marruecos. Acompañado por un guía local oficial de habla hispana, esta excursión privada le llevará a través de siglos de historia andalusí y bereber. Disfrute de la arquitectura morisca del Palacio Bahía, el encanto del Jardín Majorelle y la vida artesanal de la medina. Itinerario 100% privado y flexible adaptado a su ritmo.",
+            duration: "10-12 horas",
+            priceText: "Desde 249 € por persona",
+            highlights: [
+                "Transporte privado de ida y vuelta en vehículo climatizado desde Casablanca",
+                "Visita guiada a pie por la medina histórica con guía oficial",
+                "Entrada y visita al emblemático Palacio Bahía y la mezquita Koutoubia",
+                "Exploración del Jardín Majorelle y el entorno del Museo Yves Saint Laurent",
+                "Inmersión en el ambiente nocturno de la plaza Jemaa el-Fna al atardecer"
+            ],
+            itinerary: [
+                { title: "07:30 - Recogida en Casablanca", desc: "Recogida privada en su hotel o riad en Casablanca en vehículo premium con conductor profesional." },
+                { title: "10:30 - Llegada y Visita Guiada de la Medina", desc: "Encuentro con su guía oficial local y recorrido por el Palacio Bahía, los zocos artesanales y el exterior de la mezquita Koutoubia." },
+                { title: "13:00 - Almuerzo Tradicional en Riad", desc: "Tiempo libre para disfrutar de un auténtico tajine o cuscús marroquí en el patio interior de un riad tradicional." },
+                { title: "14:30 - Jardín Majorelle", desc: "Paseo entre plantas exóticas, cactus y la célebre villa azul cobalto que enamoró a Yves Saint Laurent." },
+                { title: "16:30 - Plaza Jemaa el-Fna y Zocos", desc: "Tiempo para recorrer los puestos de especias, babuchas, faroles y vivir la magia de la plaza al caer la tarde." },
+                { title: "18:30 - Regreso a Casablanca", desc: "Regreso cómodo por autopista directa hacia su hotel en Casablanca." }
+            ],
+            whatsIncluded: [
+                "Transporte privado de ida y vuelta en vehículo moderno con chófer profesional",
+                "Combustible, peajes de autopista y aparcamientos",
+                "Guía local oficial en Marrakech (3 horas)",
+                "Agua mineral embotellada durante el trayecto"
+            ],
+            whatsExcluded: [
+                "Entradas a monumentos (Palacio Bahía ~70 MAD, Jardín Majorelle ~150 MAD)",
+                "Almuerzo y bebidas personales",
+                "Propinas para el chófer y el guía"
+            ],
+            faqs: [
+                { q: "¿Es posible salir desde Rabat?", a: "Sí, podemos organizar la salida desde Rabat mediante cotización personalizada con un pequeño ajuste de tiempo de trayecto." },
+                { q: "¿El guía habla español?", a: "Sí, asignamos guías oficiales locales acreditados con perfecto dominio del español para que disfrute de la historia sin barreras de idioma." },
+                { q: "¿Qué ropa se recomienda llevar?", a: "Calzado cómodo para caminar por la medina y ropa respetuosa que cubra hombros y rodillas al visitar monumentos históricos." },
+                { q: "¿Se puede personalizar el horario de salida?", a: "Por supuesto. Al tratarse de una excursión 100% privada, puede ajustar la hora de recogida según su preferencia." }
+            ],
+            seoTitle: "Excursión Privada a Marrakech desde Casablanca | Mdina Tours",
+            seoDesc: "Descubra Marrakech en una excursión privada de un día desde Casablanca. Chófer privado, guía oficial en español, Palacio Bahía y Jardín Majorelle."
         }
     },
     {
@@ -341,6 +383,47 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Excursion Privée dans l'Atlas et l'Ourika | Mdina Tours",
             seoDesc: "Visitez le Haut Atlas et la vallée de l'Ourika. Découvrez l'authenticité des villages berbères et les magnifiques cascades de Setti Fatma."
+        },
+        es: {
+            title: "Excursión al Valle de Ourika y al Alto Atlas desde Marrakech",
+            tagline: "Cascadas de Setti Fatma, Pueblos Bereberes y Cumbres del Atlas",
+            excerpt: "Escape del bullicio de Marrakech. Explore los valles verdes del Alto Atlas, camine junto a cascadas y comparta un té con una familia bereber.",
+            description: "Descubra la autenticidad y los paisajes del Alto Atlas marroquí en una excursión privada desde Marrakech. Recorra el pintoresco Valle de Ourika con sus ríos de montaña, huertos en terrazas y aldeas de adobe rojizo construidas en la roca. Conozca el proceso artesanal del aceite de argán en una cooperativa femenina, comparta pan recién horneado y té a la menta con una familia local y disfrute de una caminata guiada hacia las cascadas de Setti Fatma.",
+            duration: "8-10 horas",
+            priceText: "Desde 210 € por persona",
+            highlights: [
+                "Trayecto panorámico en vehículo privado por las estribaciones del monte Toubkal",
+                "Caminata guiada con guía de montaña local hasta las cascadas de Setti Fatma",
+                "Cruce de puentes colgantes tradicionales de madera sobre el río Ourika",
+                "Visita a una casa bereber tradicional para degustar té a la menta y pan casero",
+                "Parada en una cooperativa femenina certificada de aceite de argán"
+            ],
+            itinerary: [
+                { title: "08:30 - Recogida en Marrakech", desc: "Recogida privada en su hotel o riad en Marrakech rumbo al sur hacia la cordillera del Alto Atlas." },
+                { title: "10:00 - Cooperativa de Aceite de Argán", desc: "Demostración en directo de la extracción tradicional de argán culinario y cosmético por mujeres bereberes." },
+                { title: "11:30 - Encuentro en Pueblo Bereber", desc: "Visita a una aldea de montaña tradicional y bienvenida hospitalaria con té marroquí." },
+                { title: "13:00 - Almuerzo junto al Río", desc: "Almuerzo típico con tajines cocinados al carbón servidos en terrazas al borde del río Ourika." },
+                { title: "14:30 - Ruta a las Cascadas de Setti Fatma", desc: "Caminata guiada a pie por senderos de roca para explorar los saltos de agua y pozas de montaña." },
+                { title: "17:00 - Regreso a Marrakech", desc: "Descenso del valle y traslado cómodo de vuelta a su alojamiento en Marrakech." }
+            ],
+            whatsIncluded: [
+                "Vehículo moderno climatizado con conductor profesional privado",
+                "Guía de montaña local oficial en Setti Fatma",
+                "Visita a casa bereber con té y degustación",
+                "Agua mineral embotellada"
+            ],
+            whatsExcluded: [
+                "Almuerzo y bebidas personales",
+                "Propinas para el guía y el chófer",
+                "Paseo opcional en dromedario (~100 MAD)"
+            ],
+            faqs: [
+                { q: "¿Es exigente la caminata por las cascadas?", a: "El primer tramo es accesible para la mayoría de viajeros con calzado deportivo adecuado. Si prefiere no caminar, puede relajarse plácidamente en las cafeterías junto al río." },
+                { q: "¿Hay opciones de comida vegetariana?", a: "Sí, los restaurantes del valle preparan excelentes tajines de verduras frescas de la huerta local." },
+                { q: "¿Se puede realizar con niños?", a: "Sí, es una excursión muy recomendada para familias por el contacto con la naturaleza y la cultura local." }
+            ],
+            seoTitle: "Excursión al Valle de Ourika y Alto Atlas desde Marrakech | Mdina Tours",
+            seoDesc: "Descubra el Alto Atlas y el Valle de Ourika desde Marrakech. Cascadas de Setti Fatma, pueblos bereberes, guía local y transporte privado."
         }
     },
     {
@@ -430,6 +513,48 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Dîner Spectacle au Désert d'Agafay depuis Marrakech | Mdina Tours",
             seoDesc: "Réservez une soirée magique dans le désert d'Agafay. Balade à dos de chameau, dîner traditionnel de luxe et animations Gnaoua."
+        },
+        es: {
+            title: "Cena y paseo en camello por el desierto de Agafay",
+            tagline: "Colinas de Piedra, Paseo en Dromedario al Atardecer y Cena bajo las Estrellas",
+            excerpt: "Descubra el desierto rocoso de Agafay a las afueras de Marrakech. Paseo en dromedario al atardecer y cena tradicional en un campamento nómada de lujo.",
+            description: "A solo 40 minutos de Marrakech, el desierto de piedra de Agafay es el escenario ideal para vivir la magia del desierto sin largos trayectos. Sus colinas áridas ofrecen vistas panorámicas frente a las cumbres del Atlas. Disfrute de un paseo en dromedario ataviado con túnicas nómadas tradicionales al atardecer y deguste una cena marroquí de tres platos bajo las estrellas con música gnawa y espectáculo de fuego.",
+            duration: "5-6 horas",
+            priceText: "Desde 120 € por persona",
+            highlights: [
+                "Traslado privado de ida y vuelta en vehículo climatizado desde su hotel en Marrakech",
+                "Paseo en dromedario de 1 hora al atardecer con indumentaria nómada tradicional",
+                "Té de bienvenida con pastas marroquíes en campamento bereber de lujo",
+                "Cena gourmet marroquí completa con ensaladas frescas, tajine de cordero o ternera y postre",
+                "Música gnawa en directo y espectáculo de bailarines con fuego junto a la hoguera"
+            ],
+            itinerary: [
+                { title: "16:00 - Recogida en Marrakech", desc: "Recogida privada en su hotel o riad en vehículo moderno con conductor profesional." },
+                { title: "16:50 - Llegada y Paseo en Dromedario", desc: "Subida al dromedario y recorrido guiado por las colinas áridas durante la hora dorada." },
+                { title: "18:15 - Puesta de Sol y Té de Bienvenida", desc: "Observación de la puesta de sol tras las montañas del Atlas desde una cresta panorámica." },
+                { title: "19:30 - Cena en Carpa Nómada", desc: "Cena tradicional marroquí servida bajo la iluminación tenue de faroles en carpas de lujo." },
+                { title: "21:00 - Espectáculo y Música junto al Fuego", desc: "Música tradicional bereber y espectáculo de fuego alrededor de la hoguera central bajo las estrellas." },
+                { title: "22:00 - Regreso a Marrakech", desc: "Traslado privado de vuelta a su hotel o riad en Marrakech." }
+            ],
+            whatsIncluded: [
+                "Transporte privado de ida y vuelta con conductor dedicado",
+                "Paseo en dromedario de 1 hora al atardecer",
+                "Cena completa de 3 platos en campamento de categoría superior",
+                "Espectáculo de fuego y actuaciones musicales"
+            ],
+            whatsExcluded: [
+                "Bebidas alcohólicas (disponibles en el campamento)",
+                "Propinas para el personal y los guías",
+                "Alquiler opcional de quads o buggies"
+            ],
+            faqs: [
+                { q: "¿Agafay es un desierto de arena?", a: "No, Agafay es un desierto de piedra y colinas arcillosas (reg). Presenta el mismo paisaje ondulado y desértico que las dunas, pero sobre suelo firme y rocoso frente al Atlas." },
+                { q: "¿Tienen menú vegetariano o sin gluten?", a: "Sí, el campamento elabora opciones vegetarianas, veganas y sin gluten con aviso previo al reservar." },
+                { q: "¿Qué ropa conviene llevar?", a: "Ropa cómoda, calzado cerrado, gafas de sol y una chaqueta o jersey para la noche, ya que en el desierto la temperatura desciende notablemente tras la puesta de sol." },
+                { q: "¿Es una actividad adecuada para niños?", a: "¡Totalmente! A los niños les encanta el paseo en dromedario y el espectáculo de fuego junto a la hoguera." }
+            ],
+            seoTitle: "Cena y Paseo en Camello en el Desierto de Agafay | Mdina Tours",
+            seoDesc: "Excursión privada al desierto de Agafay desde Marrakech. Paseo en dromedario al atardecer, cena tradicional en campamento de lujo y espectáculo de fuego."
         }
     },
     {
@@ -519,6 +644,48 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Circuit Privé 3 Jours Désert Merzouga | Mdina Tours",
             seoDesc: "Vivez l'expérience unique du Sahara à l'Erg Chebbi. Circuit privé de 3 jours avec guide, hébergements de charme et randonnée d'une nuit en bivouac."
+        },
+        es: {
+            title: "Circuito Privado de 3 Días al Desierto de Merzouga desde Marrakech",
+            tagline: "Dunas de Erg Chebbi, Gargantas del Todra, Kasbahs y Noche en Campamento de Lujo",
+            excerpt: "Descubre la gran aventura del Sáhara marroquí. Cruza el Alto Atlas, visita la Kasbah Ait Ben Hadu y duerme en un campamento de lujo bajo las estrellas en Merzouga.",
+            description: "Cruza el puerto de Tizi n'Tichka en el Alto Atlas, explora fortalezas históricas de adobe y admira las doradas dunas de Erg Chebbi en Merzouga. Este circuito privado de 3 días y 2 noches está diseñado para viajeros que buscan vivir la auténtica magia del desierto del Sáhara con la máxima comodidad. Disfruta de un paseo en dromedario al atardecer, cena tradicional bereber junto a la hoguera y duerme en una jaima de lujo con baño privado. El itinerario es 100% personalizable y ofrece la opción de finalizar en Fez o regresar a Marrakech.",
+            duration: "3 Días / 2 Noches",
+            priceText: "Desde 620 € por persona",
+            highlights: [
+                "Cruce del puerto de montaña Tizi n'Tichka (2.260 m) con vistas panorámicas",
+                "Visita guiada del Ksar de Ait Ben Hadu, Patrimonio de la Humanidad por la UNESCO",
+                "Paseo por las imponentes paredes rocosas de las Gargantas del Todra",
+                "Paseo en dromedario entre las dunas doradas de Erg Chebbi al atardecer y amanecer",
+                "Noche inolvidable bajo las estrellas en un campamento de jaimas de lujo"
+            ],
+            itinerary: [
+                { title: "Día 1 – Marrakech a Gargantas del Dades", desc: "Salida desde Marrakech cruzando el Alto Atlas. Visita guiada a la Kasbah Ait Ben Hadu, paso por Ouarzazate y el Valle de las Rosas. Noche y cena en un hotel con encanto en el Valle del Dades." },
+                { title: "Día 2 – Valle del Dades a Erg Chebbi (Merzouga)", desc: "Paseo por los desfiladeros del Todra. Continuación por Erfoud hasta las dunas de Merzouga. Paseo en dromedario para contemplar el atardecer, cena bereber y noche en campamento de lujo." },
+                { title: "Día 3 – Merzouga a Marrakech o Fez", desc: "Amanecer sobre las dunas y desayuno. Regreso en dromedario o 4x4 y traslado privado de vuelta a Marrakech o continuación directa hacia Fez según su preferencia." }
+            ],
+            whatsIncluded: [
+                "Vehículo privado con aire acondicionado y chófer profesional durante los 3 días",
+                "Combustible, peajes y dietas del conductor",
+                "1 noche en hotel del Valle del Dades (media pensión: cena y desayuno)",
+                "1 noche en campamento de lujo en Merzouga (jaima privada con baño, cena y desayuno)",
+                "Paseo en dromedario al atardecer y amanecer en Merzouga",
+                "Guía local en la Kasbah de Ait Ben Hadu"
+            ],
+            whatsExcluded: [
+                "Almuerzos y bebidas",
+                "Entradas a monumentos o estudios de cine de Ouarzazate",
+                "Propinas para chófer, guías y personal del campamento"
+            ],
+            faqs: [
+                { q: "¿Es un tour privado?", a: "Sí, el vehículo y el chófer están reservados en exclusiva para su grupo, permitiéndoles detenerse cuando lo deseen para tomar fotos o descansar." },
+                { q: "¿Se puede terminar el tour en Fez en lugar de Marrakech?", a: "Sí. Podemos adaptar el itinerario para comenzar en Marrakech y finalizar en Fez el Día 3, una opción muy recomendada para no repetir trayecto." },
+                { q: "¿Los campamentos del desierto son cómodos?", a: "Totalmente. Seleccionamos campamentos de lujo equipados con camas reales, baño privado dentro de la jaima y duchas con agua caliente." },
+                { q: "¿Hace frío por la noche en el Sáhara?", a: "Depende de la temporada. En invierno las temperaturas nocturnas pueden rondar los 0 °C, mientras que en verano son templadas. Las jaimas disponen de mantas gruesas y calefacción." },
+                { q: "¿Se puede ir al campamento en 4x4 en lugar de dromedario?", a: "Sí. Si prefiere no montar en dromedario, organizamos el traslado directo en vehículo 4x4 hasta su campamento de lujo." }
+            ],
+            seoTitle: "Circuito Privado 3 Días Desierto Merzouga desde Marrakech | Mdina Tours",
+            seoDesc: "Circuito privado de 3 días al desierto de Merzouga (Erg Chebbi) desde Marrakech. Incluye Ait Ben Hadu, paseo en dromedario y campamento de lujo. Final en Marrakech o Fez."
         }
     },
     {

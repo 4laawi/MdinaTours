@@ -216,6 +216,85 @@ export const transfersData: TransferData[] = [
         }
     },
     {
+        slug: "tangier-port-transfer",
+        image: "/Tangier-Morocco-Photo.webp",
+        prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
+        en: {
+            title: "Tangier Ferry Port Private Transfer (Tanger Ville & Tanger Med)",
+            tagline: "Dedicated Private Chauffeur Service Direct from the Ferry Terminal to your Hotel",
+            pickup: "Tangier Ferry Port (Tanger Ville Port or Tanger Med)",
+            dropoff: "Tangier City, Medina, Chefchaouen, Tetouan, or Asilah",
+            distance: "5 - 45 km",
+            duration: "15 - 45 minutes",
+            capacityText: "1 to 7 passengers with generous luggage capacity",
+            highlights: [
+                "Direct meet & greet outside passenger customs at both Tanger Ville and Tanger Med terminals",
+                "Ferry arrival tracking across all operators (FRS, Balearia, AML, Trasmediterranea, GNV)",
+                "Fixed all-inclusive pricing with zero negotiation and no luggage surcharges",
+                "Modern air-conditioned sedans and spacious minivans for families and small groups",
+                "Direct coordination with riad hosts inside the historic Tangier Kasbah and Medina"
+            ],
+            aboutRoute: "Arriving by ferry from Spain into Tangier is one of the most classic entryways into Morocco. Tanger Ville Port welcomes passenger foot traffic directly into the city from Tarifa, while Tanger Med receives car ferries from Algeciras, Motril, and Barcelona located 45 km east. Our private transfer ensures a reliable chauffeur is waiting as you disembark, whisking you directly to your accommodation without the hassle of port taxi touts.",
+            faqs: [
+                { q: "What is the difference between Tanger Ville and Tanger Med?", a: "Tanger Ville is located in downtown Tangier and serves passenger catamarans from Tarifa (Spain). Tanger Med is a deepwater port located 45 km east of Tangier serving large car ferries from Algeciras and Barcelona. We provide private transfers from both ports." },
+                { q: "Where will my driver meet me at the port?", a: "Your driver will be waiting immediately outside the passenger terminal exit doors after passport control and customs, holding a sign with your name." },
+                { q: "What happens if our ferry is delayed?", a: "We monitor ferry timetables and maritime traffic in the Strait of Gibraltar. Your driver automatically adjusts pickup time with no extra waiting charge." },
+                { q: "Can we transfer directly from Tangier port to Chefchaouen?", a: "Yes. Direct private transfers from Tanger Ville or Tanger Med to Chefchaouen, Tetouan, or Fes are available and very popular." }
+            ],
+            seoTitle: "Tangier Ferry Port Private Transfer (Tanger Ville & Med) | Mdina Tours",
+            seoDesc: "Book a private transfer from Tangier Ferry Ports (Tanger Ville & Tanger Med). Meet & greet at ferry arrivals, fixed rates, and direct riad drop-off."
+        },
+        fr: {
+            title: "Transfert Privé Port de Tanger (Tanger Ville et Tanger Med)",
+            tagline: "Service de Chauffeur Privé Direct dès la Sortie du Ferry vers votre Hôtel ou Riad",
+            pickup: "Port de Tanger (Port de Tanger Ville ou Port Tanger Med)",
+            dropoff: "Tanger (Centre, Médina, Hôtels), Chefchaouen, Tétouan ou Asilah",
+            distance: "5 - 45 km",
+            duration: "15 - 45 minutes",
+            capacityText: "1 à 7 passagers avec grand coffre pour bagages",
+            highlights: [
+                "Accueil personnalisé à la sortie des passagers à Tanger Ville et Tanger Med",
+                "Suivi en direct des arrivées de ferries (FRS, Balearia, AML, GNV, Trasmediterranea)",
+                "Tarifs fixes transparents sans négociation ni supplément bagages",
+                "Véhicules récents et climatisés adaptés aux familles et petits groupes",
+                "Coordination avec votre riad dans la Kasbah ou la médina de Tanger"
+            ],
+            aboutRoute: "L'arrivée en ferry depuis l'Espagne est une traversée emblématique. Que vous arriviez à Tanger Ville (ferry rapide depuis Tarifa) ou à Tanger Med (ferries depuis Algésiras), notre chauffeur privé vous accueille dès le débarquement pour vous conduire à destination en toute sérénité.",
+            faqs: [
+                { q: "Quelle est la différence entre Tanger Ville et Tanger Med ?", a: "Le port de Tanger Ville se situe au centre-ville de Tanger (liaison Tarifa). Tanger Med est situé à 45 km à l'est (liaisons Algésiras/Barcelone). Nous assurons les transferts depuis ces deux ports." },
+                { q: "Où m'attend le chauffeur au port ?", a: "Votre chauffeur vous attend dès la sortie du terminal passagers après la douane, muni d'une pancarte à votre nom." },
+                { q: "Que se passe-t-il en cas de retard du bateau ?", a: "Nous suivons les horaires maritimes en temps réel. Le chauffeur s'adapte sans aucun frais d'attente supplémentaire." }
+            ],
+            seoTitle: "Transfert Port de Tanger Ville & Tanger Med Privé | Mdina Tours",
+            seoDesc: "Réservez votre navette privée depuis les ports de Tanger Ville et Tanger Med. Accueil personnalisé au débarquement du ferry et tarifs fixes."
+        },
+        es: {
+            title: "Traslado Privado Puerto de Tánger Ville y Tánger Med",
+            tagline: "Servicio de Chófer Privado desde las Terminales de Ferry de Tánger hacia su Hotel o Riad",
+            pickup: "Puerto de Tánger Ville o Puerto Tánger Med (Terminal de Ferries)",
+            dropoff: "Tánger (Centro, Medina, Hoteles), Chefchaouen, Tetuán o Asilah",
+            distance: "5 - 45 km",
+            duration: "15 - 45 minutos",
+            capacityText: "De 1 a 7 pasajeros con amplio espacio para equipaje",
+            highlights: [
+                "Punto de encuentro directo en la salida de pasajeros de Tanger Ville (ferry desde Tarifa) y Tanger Med (ferry desde Algeciras)",
+                "Seguimiento en tiempo real de la llegada de su ferry (FRS, Balearia, Africa Morocco Link, Trasmediterranea, GNV)",
+                "Precios fijos garantizados sin regateos ni cargos sorpresa por equipaje",
+                "Vehículos modernos con aire acondicionado y espacio para equipaje familiar",
+                "Coordinación directa y asistencia para el acceso a riads en la medina o Kasbah de Tánger"
+            ],
+            aboutRoute: "Llegar en ferry desde España es una de las entradas más populares a Marruecos. El Puerto de Tanger Ville recibe los catamaranes rápidos de pasajeros directos desde Tarifa al centro de la ciudad, mientras que Tanger Med recibe los ferries desde Algeciras a 45 km al este. Nuestro servicio de traslado privado le asegura que un chófer profesional le esté esperando a la salida del barco para llevarle cómodamente a su hotel o destino.",
+            faqs: [
+                { q: "¿Cuál es la diferencia entre el Puerto de Tanger Ville y Tanger Med?", a: "Tanger Ville se ubica en el centro de Tánger y recibe ferries rápidos de pasajeros desde Tarifa. Tanger Med se encuentra a unos 45 km al este y recibe ferries de pasajeros y vehículos procedentes de Algeciras y Barcelona. Ofrecemos traslados privados desde ambos puertos." },
+                { q: "¿Dónde me esperará el conductor en el puerto?", a: "A la salida de la terminal de pasajeros, tras pasar aduanas y pasaportes, su chófer le estará esperando con un cartel con su nombre." },
+                { q: "¿Qué ocurre si el ferry sufre un retraso por el estado del mar?", a: "Monitoreamos las llegadas de los barcos en el Estrecho de Gibraltar. Su conductor se adaptará a la hora real de desembarque sin ningún coste adicional." },
+                { q: "¿Puedo reservar un traslado directo desde el puerto de Tánger a Chefchaouen?", a: "Sí, realizamos traslados directos desde Tanger Ville o Tanger Med hacia Chefchaouen, Tetuán, Asilah o Fez." }
+            ],
+            seoTitle: "Traslado Privado Puerto de Tánger Ville y Tánger Med | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde los puertos de Tánger Ville (Tarifa) y Tánger Med (Algeciras). Conductor profesional esperándole a la salida del ferry. Tarifas fijas."
+        }
+    },
+    {
         slug: "tangier-to-rabat-transfer",
         image: "/Tangier-Morocco-Photo.webp",
         prices: { 3: 210, 4: 245, 5: 280, 7: 390 },
@@ -389,6 +468,30 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Navette Privée Marrakech Essaouira | Mdina Tours",
             seoDesc: "Réservez votre transfert privé de Marrakech à Essaouira. Voyage sécurisé, chèvres sur les arganiers et dépôt direct à votre hôtel."
+        },
+        es: {
+            title: "Traslado Privado de Marrakech a Essaouira",
+            tagline: "Viaje Cómodo y Directo desde la Ciudad Roja hasta la Costa Atlántica",
+            pickup: "Marrakech (Hotel, Riad o Aeropuerto RAK)",
+            dropoff: "Essaouira (Hotel, Riad o Puerto)",
+            distance: "180 km",
+            duration: "2 horas 45 minutos",
+            capacityText: "De 1 a 7 pasajeros con amplio espacio para equipaje y tablas de surf",
+            highlights: [
+                "Parada fotográfica en ruta para ver las famosas cabras subidas a los árboles de argán",
+                "Transición paisajística desde las llanuras secas de Chichaoua hasta los bosques de argán",
+                "Servicio puerta a puerta directo hasta las puertas de la medina de Essaouira",
+                "Vehículos modernos, limpios, no fumadores y con aire acondicionado",
+                "Visita opcional a una cooperativa tradicional de aceite de argán certificado"
+            ],
+            aboutRoute: "El trayecto que conecta Marrakech con Essaouira transcurre por una cómoda carretera nacional a través de las llanuras y bosques de argán. Nuestro servicio de traslado privado le ofrece viajar a su propio ritmo sin el estrés de los autobuses públicos, con paradas panorámicas a su elección y asistencia con el equipaje en su llegada a Essaouira.",
+            faqs: [
+                { q: "¿Veremos las famosas cabras trepadoras en los árboles de argán?", a: "Sí, esta ruta atraviesa el hábitat natural del argán. Si están activas, su conductor se detendrá para que puedan tomar fotos." },
+                { q: "¿El precio incluye todos los gastos?", a: "Sí, la tarifa es fija e incluye combustible, conductor profesional e impuestos locales, sin cargos sorpresa." },
+                { q: "¿Se pueden transportar tablas de surf o equipaje voluminoso?", a: "Nuestras furgonetas disponen de maleteros amplios para tablas de surf o palos de golf. Indíquelo al hacer la reserva." }
+            ],
+            seoTitle: "Traslado Privado Marrakech a Essaouira en Taxi y Van | Mdina Tours",
+            seoDesc: "Reserve su traslado privado de Marrakech a Essaouira. Viaje cómodo en coche o van con chófer profesional, parada para ver las cabras en los arganes y tarifa fija."
         }
     },
     {
@@ -440,6 +543,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Chauffeur Privé Fès vers Chefchaouen | Mdina Tours",
             seoDesc: "Réservez votre taxi privé de Fès à Chefchaouen. Voyagez en toute sécurité à travers les montagnes du Rif dans nos vans spacieux."
+        },
+        es: {
+            title: "Traslado Privado de Fez a Chefchaouen",
+            tagline: "Ruta Panorámica de Montaña desde la Capital Cultural a la Perla Azul",
+            pickup: "Fez (Hotel, Riad o Aeropuerto FEZ)",
+            dropoff: "Chefchaouen (Hotel o Riad)",
+            distance: "200 km",
+            duration: "3 horas 30 minutos",
+            capacityText: "De 1 a 7 pasajeros con conductores expertos en rutas de montaña",
+            highlights: [
+                "Ruta panorámica a través de los valles y paisajes del Rif",
+                "Conducción suave y segura en carreteras de montaña para el máximo confort",
+                "Parada fotográfica con vistas panorámicas al embalse de Sidi Chahed",
+                "Vehículos modernos con aire acondicionado diseñados para desniveles",
+                "Coordinación directa para la llegada a su riad en Chefchaouen"
+            ],
+            aboutRoute: "Al no existir conexión de tren entre Fez y Chefchaouen, el transporte privado es la opción más rápida, cómoda y segura. Nuestros chóferes conocen a la perfección las carreteras del Rif para garantizar un trayecto relajante y agradable.",
+            faqs: [
+                { q: "¿Cómo es la carretera de Fez a Chefchaouen?", a: "Es una carretera de montaña con curvas y hermosos paisajes. Nuestros conductores conducen con prudencia y a velocidad moderada para evitar cualquier mareo." },
+                { q: "¿Podemos hacer una parada en las ruinas romanas de Volubilis?", a: "Sí, podemos organizar un desvío personalizado para visitar las ruinas de Volubilis y la ciudad santa de Moulay Idriss. Consúltenos para añadir esta parada." }
+            ],
+            seoTitle: "Traslado Privado Fez a Chefchaouen en Taxi y Minivan | Mdina Tours",
+            seoDesc: "Reserve su traslado privado de Fez a Chefchaouen. Conducción segura por las montañas del Rif, vehículos confortables climatizados y tarifa fija garantizada."
         }
     },
     {
@@ -565,6 +691,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Transfert Aéroport Tanger TNG Privé | Mdina Tours",
             seoDesc: "Réservez votre taxi privé depuis l'Aéroport de Tanger (TNG) vers le centre-ville, le port ou l'hôtel Hilton Houara. Prix fixes garantis."
+        },
+        es: {
+            title: "Traslado Privado Aeropuerto de Tánger Ibn Battouta",
+            tagline: "Taxi Privado Cómodo y Directo desde el Aeropuerto TNG a su Hotel o Riad",
+            pickup: "Aeropuerto Internacional de Tánger Ibn Battouta (TNG)",
+            dropoff: "Tánger (Centro, Medina, Puerto o Hoteles de la Bahía)",
+            distance: "15 km",
+            duration: "20-25 minutos",
+            capacityText: "De 1 a 7 pasajeros con equipaje incluido",
+            highlights: [
+                "Seguimiento en tiempo real de su vuelo: chófer puntual a la salida del terminal",
+                "Servicio de bienvenida Meet & Greet con cartel personalizado en llegadas",
+                "Tarifas fijas transparentes sin suplementos nocturnos ni cargos ocultos",
+                "Vehículos confortables con aire acondicionado evitando colas de taxis locales",
+                "Coordinación directa con riads dentro de la histórica Kasbah de Tánger"
+            ],
+            aboutRoute: "El aeropuerto Ibn Battouta (TNG) es la principal puerta de entrada al norte de Marruecos. Evite regateos y largas esperas de taxi reservando su traslado privado con un chófer profesional esperándole a su llegada.",
+            faqs: [
+                { q: "¿Se puede reservar un traslado directo del aeropuerto de Tánger a Chefchaouen?", a: "Sí, ofrecemos traslados directos desde el aeropuerto TNG hacia Chefchaouen, Tetuán, Asilah o Rabat." },
+                { q: "¿Hay suplemento por llegadas nocturnas?", a: "No, nuestras tarifas son fijas las 24 horas del día sin ningún recargo por horario nocturno." }
+            ],
+            seoTitle: "Traslado Aeropuerto de Tánger Ibn Battouta TNG Privado | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Tánger (TNG) al centro, puerto o medina. Chófer esperándole con cartel, seguimiento de vuelo y precio fijo."
         }
     },
     {
@@ -667,6 +816,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Chauffeur Privé Tanger vers Chefchaouen | Mdina Tours",
             seoDesc: "Réservez votre transfert privé de Tanger à Chefchaouen. Voyage confortable et sécurisé à travers les montagnes du Rif."
+        },
+        es: {
+            title: "Traslado Privado de Tánger a Chefchaouen",
+            tagline: "Conexión Directa y Cómoda hacia la Perla Azul de las Montañas del Rif",
+            pickup: "Tánger (Hotel, Puerto de Ferry o Aeropuerto TNG)",
+            dropoff: "Chefchaouen (Hotel o Riad)",
+            distance: "120 km",
+            duration: "2 horas 15 minutos",
+            capacityText: "De 1 a 7 pasajeros con equipaje en vehículos modernos climatizados",
+            highlights: [
+                "La conexión más rápida y cómoda a Chefchaouen desde el puerto o aeropuerto de Tánger",
+                "Chóferes expertos en las carreteras del Rif con conducción suave",
+                "Paradas fotográficas panorámicas en miradores naturales de montaña",
+                "Tarifas fijas garantizadas sin cargos sorpresa por maletas",
+                "Contacto directo con el personal de su riad en la medina de Chefchaouen"
+            ],
+            aboutRoute: "Chefchaouen se encuentra en el corazón de las montañas del Rif. Un traslado privado desde Tánger es la mejor forma de llegar, ahorrándole horas respecto al transporte público y adaptándose al horario exacto de su llegada en ferry o avión.",
+            faqs: [
+                { q: "¿Dónde me dejará el conductor en Chefchaouen?", a: "La medina de Chefchaouen es peatonal. Su chófer le dejará en la puerta de acceso más cercana (como Bab el Ain o Plaza Mohammed V) y avisará a su riad para asistirle con las maletas." },
+                { q: "¿Se puede hacer una parada en Tetuán?", a: "Sí, podemos hacer una parada para visitar la medina de Tetuán, Patrimonio de la Humanidad. Indíquelo al reservar." }
+            ],
+            seoTitle: "Traslado Privado Tánger a Chefchaouen en Taxi y Van | Mdina Tours",
+            seoDesc: "Reserve su traslado privado de Tánger a Chefchaouen desde el puerto, aeropuerto o su hotel. Ruta segura por el Rif, vehículos climatizados y precio cerrado."
         }
     },
     {
@@ -1098,6 +1270,29 @@ export const transfersData: TransferData[] = [
             ],
             seoTitle: "Transfert Aéroport Fès Saïss FEZ Privé | Mdina Tours",
             seoDesc: "Réservez votre transfert privé de l'Aéroport de Fès-Saïss (FEZ) vers votre hôtel ou Riad. Accueil VIP, tarif fixe garanti et chauffeur bilingue."
+        },
+        es: {
+            title: "Traslado Privado Aeropuerto de Fez Saïss",
+            tagline: "Servicio de Taxi Privado Directo desde el Aeropuerto FEZ hasta su Riad en la Medina",
+            pickup: "Aeropuerto Internacional de Fez-Saïss (FEZ)",
+            dropoff: "Cualquier Hotel o Riad en Fez",
+            distance: "15 km",
+            duration: "25 minutos",
+            capacityText: "De 1 a 7 pasajeros con equipaje en vehículos climatizados",
+            highlights: [
+                "Servicio Meet & Greet con cartel nominativo en el hall de llegadas",
+                "Seguimiento de vuelo: el chófer se adapta automáticamente a retrasos",
+                "Tarifas claras y fijas sin suplementos por equipaje o nocturnidad",
+                "Llegada coordinada a la puerta peatonal más cercana a su riad",
+                "Vans y coches confortables con chóferes bilingües profesionales"
+            ],
+            aboutRoute: "El Aeropuerto de Fez-Saïss (FEZ) se encuentra a 15 km de la medina. La medina de Fez el-Bali es completamente peatonal, por lo que nuestro servicio coordina el punto de llegada exacto con su riad para una bienvenida impecable.",
+            faqs: [
+                { q: "¿Cómo se realiza la llegada a un riad dentro de la medina peatonal?", a: "El conductor le dejará en la puerta accesible más próxima (por ejemplo Bab Boujloud o Bab Rcif) y coordinará con el personal de su riad para que salgan a recibirle." },
+                { q: "¿El precio cambia por la noche?", a: "No, nuestras tarifas son fijas las 24 horas del día, independientemente de la hora de aterrizaje." }
+            ],
+            seoTitle: "Traslado Aeropuerto Fez Saïss FEZ Privado | Mdina Tours",
+            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Fez-Saïss (FEZ) hasta su riad u hotel. Conductor con cartel de bienvenida, seguimiento de vuelo y precio fijo."
         }
     },
     {

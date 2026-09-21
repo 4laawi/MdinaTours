@@ -89,11 +89,11 @@ export default function TransfersHero({
 
     const handleSearch = () => {
         if (!pickup.trim() || !dropoff.trim()) {
-            setSearchResult({ error: language === 'en' ? "Please enter both pickup and drop-off locations." : "Veuillez préciser les lieux de départ et d'arrivée." });
+            setSearchResult({ error: language === 'es' ? "Por favor, indique los lugares de recogida y destino." : language === 'en' ? "Please enter both pickup and drop-off locations." : "Veuillez préciser les lieux de départ et d'arrivée." });
             return;
         }
         if (pickup.trim().toLowerCase() === dropoff.trim().toLowerCase()) {
-            setSearchResult({ error: language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
+            setSearchResult({ error: language === 'es' ? "El lugar de recogida y de destino no pueden ser iguales." : language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
             return;
         }
         
@@ -105,21 +105,32 @@ export default function TransfersHero({
     const currentPrice = isCustomRoute ? null : getRoutePrice(pickup, dropoff, passengers);
 
     const getWhatsAppUrl = () => {
-        let message = `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
+        const greeting = language === 'es' 
+            ? `Hola Mdina Tours,\nMe gustaría solicitar un traslado privado.\n\n`
+            : language === 'fr'
+            ? `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé.\n\n`
+            : `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
+        let message = greeting;
         message += `• ${t('contact_form_full_name')}: ${name}\n`;
         message += `• ${t('contact_form_phone')}: ${phone}\n`;
         message += `• ${t('precise_location')}: ${preciseLocation}\n`;
         if (showFlightField && flightNumber) {
             message += `• ${t('flight_number')}: ${flightNumber}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
-        message += `\nDetails:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
+        const combinedDate = date ? `${date} ${hour}` : (language === 'es' ? 'Flexible' : language === 'fr' ? 'Flexible' : 'Flexible');
+        const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
+        message += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(message)}`;
     };
 
     const getEmailUrl = () => {
-        const subject = `Private Transfer Inquiry - ${name}`;
-        let body = `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
+        const subject = language === 'es' ? `Solicitud de Traslado Privado - ${name}` : language === 'fr' ? `Demande de Transfert Privé - ${name}` : `Private Transfer Inquiry - ${name}`;
+        const greeting = language === 'es'
+            ? `Hola Mdina Tours,\n\nMe gustaría solicitar el siguiente traslado privado:\n\n`
+            : language === 'fr'
+            ? `Bonjour Mdina Tours,\n\nJe souhaite réserver le transfert privé suivant :\n\n`
+            : `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
+        let body = greeting;
         body += `${t('contact_form_full_name')}: ${name}\n`;
         body += `${t('contact_form_phone')}: ${phone}\n`;
         body += `${t('precise_location')}: ${preciseLocation}\n`;
@@ -127,7 +138,8 @@ export default function TransfersHero({
             body += `${t('flight_number')}: ${flightNumber}\n`;
         }
         const combinedDate = date ? `${date} ${hour}` : 'Flexible';
-        body += `\nDetails:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
+        const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
+        body += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `mailto:booking@mdinatours.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -175,7 +187,7 @@ export default function TransfersHero({
                                                 setIsCustomPickup(!!isCustom);
                                                 setSearchResult(null);
                                             }}
-                                            language={language as 'en' | 'fr'}
+                                            language={language as 'en' | 'fr' | 'es'}
                                             placeholder={t('pickup')}
                                         />
                                     </div>
@@ -196,7 +208,7 @@ export default function TransfersHero({
                                                 setIsCustomDropoff(!!isCustom);
                                                 setSearchResult(null);
                                             }}
-                                            language={language as 'en' | 'fr'}
+                                            language={language as 'en' | 'fr' | 'es'}
                                             placeholder={t('dropoff')}
                                         />
                                     </div>
@@ -263,7 +275,7 @@ export default function TransfersHero({
                                 </svg>
                             </div>
                             <span className={styles.trustpilotScoreText}>
-                                {language === 'en' ? "TrustScore 4.8 | 347 reviews" : "TrustScore 4.8 | 347 avis"}
+                                {language === 'es' ? "TrustScore 4.8 | 347 opiniones" : language === 'en' ? "TrustScore 4.8 | 347 reviews" : "TrustScore 4.8 | 347 avis"}
                             </span>
                         </a>
 
@@ -361,7 +373,7 @@ export default function TransfersHero({
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : (language === 'es' ? 'Presupuesto a medida' : language === 'fr' ? 'Devis sur-mesure' : 'Custom Quote')}</span>
                                     </div>
                                     <button className={styles.continueBtn} onClick={() => setModalStep(2)}>
                                         {t('continue')} →
@@ -418,7 +430,7 @@ export default function TransfersHero({
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : (language === 'es' ? 'Presupuesto a medida' : language === 'fr' ? 'Devis sur-mesure' : 'Custom Quote')}</span>
                                     </div>
 
                                     <div className={styles.ctaGroup}>

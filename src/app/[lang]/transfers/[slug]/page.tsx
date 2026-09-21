@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
-import { APPROVED_PHASE1_ES_PATHS } from '@/lib/seo';
+import { isSpanishSupported } from '@/lib/seo';
 import TransferBookingFlow from '@/components/TransferBookingFlow';
 import Script from 'next/script';
 
@@ -19,8 +19,8 @@ export async function generateStaticParams() {
         locales.forEach(lang => {
             paths.push({ lang, slug: trans.slug });
         });
-        // Include 'es' only for strictly approved Phase 1 transfer routes
-        if (APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${trans.slug}`)) {
+        // Include 'es' only for strictly approved Spanish transfer routes
+        if (isSpanishSupported(`/transfers/${trans.slug}`)) {
             paths.push({ lang: 'es', slug: trans.slug });
         }
     });
@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const trans = transfersData.find(t => t.slug === slug);
     if (!trans) return { title: 'Transfer Route Not Found - Mdina Tours' };
 
-    // Strict Phase 1 boundary check for Spanish
-    if (lang === 'es' && (!trans.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`))) {
+    // Strict boundary check for Spanish
+    if (lang === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${slug}`))) {
         return { title: 'Not Found - Mdina Tours' };
     }
 
@@ -44,8 +44,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const alternatesLanguages: Record<string, string> = {
         'en': `https://mdinatours.com/en/transfers/${slug}`,
         'fr': `https://mdinatours.com/fr/transfers/${slug}`,
+        'x-default': `https://mdinatours.com/en/transfers/${slug}`,
     };
-    if (APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`)) {
+    if (isSpanishSupported(`/transfers/${slug}`)) {
         alternatesLanguages['es'] = `https://mdinatours.com/es/transfers/${slug}`;
     }
 
@@ -90,8 +91,8 @@ export default async function TransferLandingPage({ params }: { params: Promise<
     const trans = transfersData.find(t => t.slug === slug);
     if (!trans) notFound();
 
-    // Strict Phase 1 boundary check: unsupported Spanish transfers return 404
-    if (language === 'es' && (!trans.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/transfers/${slug}`))) {
+    // Strict boundary check: unsupported Spanish transfers return 404
+    if (language === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${slug}`))) {
         notFound();
     }
 

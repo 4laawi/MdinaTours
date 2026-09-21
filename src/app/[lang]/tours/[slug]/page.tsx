@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { toursData } from '@/lib/toursData';
 import { translations, Language } from '@/lib/translations';
-import { APPROVED_PHASE1_ES_PATHS } from '@/lib/seo';
+import { isSpanishSupported } from '@/lib/seo';
 import TourBookingWidget from '@/components/TourBookingWidget';
 
 // Generate static routes for static HTML generation
@@ -18,8 +18,8 @@ export async function generateStaticParams() {
         locales.forEach(lang => {
             paths.push({ lang, slug: tour.slug });
         });
-        // Include 'es' only for strictly approved Phase 1 tour routes
-        if (APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${tour.slug}`)) {
+        // Include 'es' only for strictly approved Spanish tour routes
+        if (isSpanishSupported(`/tours/${tour.slug}`)) {
             paths.push({ lang: 'es', slug: tour.slug });
         }
     });
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const tour = toursData.find(t => t.slug === slug);
     if (!tour) return { title: 'Tour Not Found - Mdina Tours' };
 
-    // Strict Phase 1 boundary check for Spanish
-    if (lang === 'es' && (!tour.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`))) {
+    // Strict boundary check for Spanish
+    if (lang === 'es' && (!tour.es || !isSpanishSupported(`/tours/${slug}`))) {
         return { title: 'Not Found - Mdina Tours' };
     }
 
@@ -43,8 +43,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const alternatesLanguages: Record<string, string> = {
         'en': `https://mdinatours.com/en/tours/${slug}`,
         'fr': `https://mdinatours.com/fr/tours/${slug}`,
+        'x-default': `https://mdinatours.com/en/tours/${slug}`,
     };
-    if (APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`)) {
+    if (isSpanishSupported(`/tours/${slug}`)) {
         alternatesLanguages['es'] = `https://mdinatours.com/es/tours/${slug}`;
     }
 
@@ -89,8 +90,8 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
     const tour = toursData.find(t => t.slug === slug);
     if (!tour) notFound();
 
-    // Strict Phase 1 boundary check: unsupported Spanish tours return 404
-    if (language === 'es' && (!tour.es || !APPROVED_PHASE1_ES_PATHS.has(`/es/tours/${slug}`))) {
+    // Strict boundary check: unsupported Spanish tours return 404
+    if (language === 'es' && (!tour.es || !isSpanishSupported(`/tours/${slug}`))) {
         notFound();
     }
 

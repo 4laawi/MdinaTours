@@ -81,8 +81,8 @@ export default function Header({ lightBg = false }: HeaderProps) {
     // Main navigation configuration
     const mainNavItems = [
         { path: '/', label: t('home') },
-        { path: language === 'es' ? '/tours/chefchaouen-day-trip' : '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
-        { path: language === 'es' ? '/airport-transfers' : '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
+        { path: '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
+        { path: '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
         { path: '/private-driver-morocco', label: isEn ? 'Private Driver' : (isEs ? 'Chófer Privado' : 'Chauffeur Privé') },
         { path: '/contact', label: t('contact_us') },
     ];

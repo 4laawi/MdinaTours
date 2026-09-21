@@ -1,4 +1,4 @@
-import { getAlternates } from '@/lib/seo';
+import { APPROVED_ES_PATHS, getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TransfersHero from '@/components/TransfersHero';
@@ -11,18 +11,26 @@ import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
-    if (lang === 'es') return { title: 'Not Found - Mdina Tours' };
+    const isEs = lang === 'es';
     const isEn = lang === 'en';
 
-    const title = isEn ? 'Private Driver & Airport Transfers Morocco | Mdina Tours' : 'Chauffeur Privé et Transfert Aéroport Maroc | Mdina Tours';
-    const description = isEn
+    const title = isEs
+        ? 'Traslados Privados y Chófer en Marruecos | Mdina Tours'
+        : isEn
+        ? 'Private Driver & Airport Transfers Morocco | Mdina Tours'
+        : 'Chauffeur Privé et Transfert Aéroport Maroc | Mdina Tours';
+
+    const description = isEs
+        ? 'Reserve traslados privados fiables en Marruecos. Tarifas fijas garantizadas, vehículos modernos con aire acondicionado y chóferes profesionales entre Tánger, Marrakech, Casablanca y Fez.'
+        : isEn
         ? 'Book reliable private transfers and driver services in Morocco. Fixed fares, modern air-conditioned vans, and professional drivers between Rabat, Casablanca, and Marrakech.'
         : 'Réservez des transferts privés fiables au Maroc. Prix fixes, chauffeurs professionnels bilingues entre Rabat, Casablanca, Marrakech et Tanger.';
+
     const url = `https://mdinatours.com/${lang}/transfers`;
 
     return {
@@ -42,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
                     alt: 'Morocco Private Transfers Mdina Tours',
                 },
             ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
+            locale: lang === 'es' ? 'es_ES' : lang === 'fr' ? 'fr_FR' : 'en_US',
             type: 'website',
         },
         twitter: {
@@ -86,8 +94,8 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
 
 export default async function TransfersCatalogPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
-    if (lang === 'es') notFound();
     const language = (lang as Language) || 'en';
+    const isEs = language === 'es';
     const isEn = language === 'en';
 
     const t = (key: string) => {
@@ -97,12 +105,17 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
 
     const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
 
+    // Filter transfers strictly using approved paths for Spanish
+    const displayedTransfers = isEs
+        ? transfersData.filter(trans => APPROVED_ES_PATHS.has(`/transfers/${trans.slug}`))
+        : transfersData;
+
     // ItemList Schema
     const itemListJsonLd = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "numberOfItems": transfersData.length,
-        "itemListElement": transfersData.map((trans, index) => {
+        "numberOfItems": displayedTransfers.length,
+        "itemListElement": displayedTransfers.map((trans, index) => {
             const loc = trans[language] || trans.en;
             return {
                 "@type": "ListItem",
@@ -122,13 +135,13 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": isEn ? "Home" : "Accueil",
+                "name": isEs ? "Inicio" : isEn ? "Home" : "Accueil",
                 "item": `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Transfers" : "Transferts",
+                "name": isEs ? "Traslados" : isEn ? "Transfers" : "Transferts",
                 "item": `https://mdinatours.com/${language}/transfers`
             }
         ]
@@ -151,12 +164,12 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
 
             <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
                 <TransfersHero 
-                    title={isEn ? 'Morocco Private Transfers' : 'Transferts Privés au Maroc'}
-                    subtitle={isEn ? 'Punctual meet & greet service, fixed rates, and clean air-conditioned vehicles between all major airports and medinas.' : 'Service d\'accueil ponctuel, prix fermes sans surprise, berlines et monospaces climatisés reliant tous les aéroports.'}
+                    title={isEs ? 'Traslados Privados en Marruecos' : isEn ? 'Morocco Private Transfers' : 'Transferts Privés au Maroc'}
+                    subtitle={isEs ? 'Servicio de chófer puntual con cartel de bienvenida, tarifas fijas y vehículos modernos climatizados en aeropuertos, puertos y medinas.' : isEn ? 'Punctual meet & greet service, fixed rates, and clean air-conditioned vehicles between all major airports and medinas.' : 'Service d\'accueil ponctuel, prix fermes sans surprise, berlines et monospaces climatisés reliant tous les aéroports.'}
                     bgImage="/img/Morocco-trip-tour-hero04.webp"
                     homeLabel={t('home')}
                     homeLink={getPath('/')}
-                    currentLabel={isEn ? 'Private Transfers' : 'Transferts Privés'}
+                    currentLabel={isEs ? 'Traslados Privados' : isEn ? 'Private Transfers' : 'Transferts Privés'}
                 />
 
                 {/* Catalog Listing */}
@@ -167,7 +180,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                             flexDirection: 'column',
                             gap: '25px'
                         }}>
-                            {transfersData.map((trans) => {
+                            {displayedTransfers.map((trans) => {
                                 const local = trans[language] || trans.en;
                                 const startingPrice = trans.prices[3] || trans.prices[4];
                                 const thumbnailUrl = getTransferThumbnail(trans.slug, trans.image);
@@ -202,7 +215,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                                     {local.title}
                                                 </h2>
                                                 <p style={{ fontSize: '0.85rem', color: '#777', margin: 0 }}>
-                                                    {isEn ? 'Route: ' : 'Trajet: '} {local.pickup} ⇄ {local.dropoff}
+                                                    {isEs ? 'Ruta: ' : isEn ? 'Route: ' : 'Trajet: '} {local.pickup} ⇄ {local.dropoff}
                                                 </p>
                                             </div>
                                         </div>
@@ -210,11 +223,11 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                         {/* Metas (Distance / Duration) */}
                                         <div style={{ display: 'flex', gap: '30px', justifyContent: 'space-around', padding: '10px 0' }}>
                                             <div style={{ textAlign: 'center' }}>
-                                                <span style={{ fontSize: '0.8rem', color: '#999', display: 'block', textTransform: 'uppercase' }}>{isEn ? 'Distance' : 'Distance'}</span>
+                                                <span style={{ fontSize: '0.8rem', color: '#999', display: 'block', textTransform: 'uppercase' }}>{isEs ? 'Distancia' : isEn ? 'Distance' : 'Distance'}</span>
                                                 <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--secondary)' }}>{local.distance}</span>
                                             </div>
                                             <div style={{ textAlign: 'center' }}>
-                                                <span style={{ fontSize: '0.8rem', color: '#999', display: 'block', textTransform: 'uppercase' }}>{isEn ? 'Duration' : 'Durée'}</span>
+                                                <span style={{ fontSize: '0.8rem', color: '#999', display: 'block', textTransform: 'uppercase' }}>{isEs ? 'Duración' : isEn ? 'Duration' : 'Durée'}</span>
                                                 <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--secondary)' }}>{local.duration}</span>
                                             </div>
                                         </div>
@@ -240,13 +253,51 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                                     flex: 1
                                                 }}
                                             >
-                                                {isEn ? 'View Route →' : 'Voir Trajet →'}
+                                                {isEs ? 'Ver Trayecto →' : isEn ? 'View Route →' : 'Voir Trajet →'}
                                             </Link>
                                         </div>
 
                                     </div>
                                 );
                             })}
+
+                            {/* Fallback Custom Quote Banner for Spanish / all users */}
+                            {isEs && (
+                                <div style={{
+                                    marginTop: '20px',
+                                    padding: '30px',
+                                    borderRadius: '16px',
+                                    backgroundColor: '#fff',
+                                    border: '2px dashed var(--primary)',
+                                    textAlign: 'center'
+                                }}>
+                                    <h3 style={{ fontSize: '1.25rem', color: 'var(--accent)', margin: '0 0 8px 0', fontWeight: 700 }}>
+                                        ¿No encuentras tu ruta o destino deseado?
+                                    </h3>
+                                    <p style={{ color: '#666', fontSize: '0.95rem', margin: '0 auto 20px auto', maxWidth: '600px', lineHeight: 1.5 }}>
+                                        Organizamos traslados privados a cualquier punto de Marruecos con vehículos climatizados, tarifas fijas y chófer profesional.
+                                    </p>
+                                    <a
+                                        href="https://wa.me/212724114775?text=Hola%20Mdina%20Tours,%20me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20para%20una%20ruta%20personalizada."
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                            backgroundColor: '#25D366',
+                                            color: '#fff',
+                                            padding: '12px 28px',
+                                            borderRadius: '8px',
+                                            fontWeight: 600,
+                                            fontSize: '0.95rem',
+                                            textDecoration: 'none'
+                                        }}
+                                    >
+                                        Solicitar presupuesto por WhatsApp →
+                                    </a>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </section>
