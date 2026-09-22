@@ -6,7 +6,7 @@ import styles from './Contact.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 
 const ContactForm: React.FC = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [messageStatus, setMessageStatus] = useState<{ type: 'success' | 'error' | null, text: string | null }>({
         type: null,
@@ -41,6 +41,7 @@ const ContactForm: React.FC = () => {
 
     return (
         <form ref={formRef} className={styles.contactForm} onSubmit={handleSubmit}>
+            <input type="hidden" name="language" value={language} />
             <div className={styles.formGroup}>
                 <label htmlFor="name">{t('contact_form_full_name')}</label>
                 <input type="text" name="name" id="name" placeholder={t('contact_form_name_placeholder')} required />

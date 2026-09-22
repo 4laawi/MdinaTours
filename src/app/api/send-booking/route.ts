@@ -61,8 +61,8 @@ export async function POST(req: Request) {
         `;
 
         const { data, error } = await resend.emails.send({
-            from: 'Mdina Tours Booking <onboarding@resend.dev>', // Resend requires verified domain or onboarding address for testing
-            to: 'Contact@MdinaTours.com',
+            from: 'Mdina Tours <booking@mdinatours.com>',
+            to: 'booking@mdinatours.com',
             replyTo: email,
             subject: `New Booking Request – ${routeName}`,
             html: htmlContent,
