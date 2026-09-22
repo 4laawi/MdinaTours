@@ -642,6 +642,9 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                                             src={v.image} 
                                             alt={v.name} 
                                             className="fleet-img"
+                                            width={400}
+                                            height={240}
+                                            loading="lazy"
                                         />
                                         <span 
                                             className="fleet-pill fleet-pill-left"

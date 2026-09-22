@@ -1,15 +1,35 @@
 import { getAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
-import { Outfit } from 'next/font/google';
+import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ReactDOM from 'react-dom';
 
 const outfit = Outfit({
-    weight: ['400', '500', '600', '700', '800'],
+    weight: ['300', '400', '500', '600', '700', '800'],
     subsets: ['latin'],
     display: 'swap',
-    variable: '--font-poppins',
+    variable: '--font-outfit',
+});
+
+const cormorant = Cormorant_Garamond({
+    weight: ['300', '400', '500', '600', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-cormorant',
+});
+
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-inter',
+});
+
+const greatVibes = Great_Vibes({
+    weight: ['400'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-great-vibes',
 });
 
 import { Language } from '@/lib/translations';
@@ -115,14 +135,11 @@ export default async function LocaleLayout({
         }
     };
 
-    // Preconnect to Google Fonts origin to reduce font load latency
-    ReactDOM.preconnect('https://fonts.googleapis.com');
-    ReactDOM.preconnect('https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
     // Preload the hero image (LCP candidate) for both locales
     ReactDOM.preload('/img/Morocco-trip-tour-hero01.webp', { as: 'image', fetchPriority: 'high' });
 
     return (
-        <html lang={lang} className={`${outfit.variable}`}>
+        <html lang={lang} className={`${outfit.variable} ${cormorant.variable} ${inter.variable} ${greatVibes.variable}`}>
             <body>
                 <LanguageProvider initialLanguage={lang as Language}>
                     <script

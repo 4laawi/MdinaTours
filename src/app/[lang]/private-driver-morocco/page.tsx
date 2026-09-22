@@ -618,8 +618,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
                         {/* Badges / Accreditations */}
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap', opacity: 0.8 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" style={{ height: '35px', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" style={{ height: '35px', objectFit: 'contain' }} />
+                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={140} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
+                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={150} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </section>
@@ -680,12 +680,12 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                     </h3>
                                     <ul style={{ padding: 0, margin: '0 0 20px 0', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
                                         <li>
-                                            👉 <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                             👉 <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
                                                 {isEn ? "8-Day Morocco Tour Package" : "Forfait Chauffeur 8 Jours"}
                                             </Link>
                                         </li>
                                         <li>
-                                            👉 <Link href={getPath('/chauffeur-dispo-morocco')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                             👉 <Link href={getPath('/chauffeur-dispo-morocco')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
                                                 {isEn ? "Understanding 'Chauffeur Dispo'" : "Guide Pratique : Chauffeur Dispo"}
                                             </Link>
                                         </li>
@@ -720,6 +720,9 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                                     src={card.image} 
                                                     alt={card.title} 
                                                     className="private-driver-route-img"
+                                                    width={380}
+                                                    height={220}
+                                                    loading="lazy"
                                                 />
                                                 <div className="private-driver-route-price-badge">
                                                     {card.price}
@@ -732,6 +735,9 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                                 src={card.image} 
                                                 alt={card.title} 
                                                 className="private-driver-route-img"
+                                                width={380}
+                                                height={220}
+                                                loading="lazy"
                                             />
                                             <div className="private-driver-route-price-badge">
                                                 {card.price}

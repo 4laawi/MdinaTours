@@ -582,8 +582,8 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
 
                         {/* Badges / Accreditations */}
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap', opacity: 0.8 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" style={{ height: '35px', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" style={{ height: '35px', objectFit: 'contain' }} />
+                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={140} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
+                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={150} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </section>
@@ -613,6 +613,9 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
                                                     src={card.image} 
                                                     alt={card.title} 
                                                     className="private-driver-route-img"
+                                                    width={380}
+                                                    height={220}
+                                                    loading="lazy"
                                                 />
                                                 <div className="private-driver-route-price-badge">
                                                     {card.price}
@@ -625,6 +628,9 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
                                                 src={card.image} 
                                                 alt={card.title} 
                                                 className="private-driver-route-img"
+                                                width={380}
+                                                height={220}
+                                                loading="lazy"
                                             />
                                             <div className="private-driver-route-price-badge">
                                                 {card.price}

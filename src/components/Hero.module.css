@@ -19,6 +19,7 @@
     transition: opacity 1.5s ease-in-out;
     z-index: 0;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .bgImageContainer.active {
@@ -26,9 +27,16 @@
     z-index: 2;
 }
 
-.bgImageContainer.prev {
-    opacity: 1;
+.bgImageContainer.outgoing {
+    opacity: 0;
     z-index: 1;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.bgImageContainer.preload {
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .heroBg {
@@ -39,11 +47,22 @@
     height: 100%;
     object-fit: cover;
     transform-origin: center center;
+    will-change: transform;
 }
 
-.bgImageContainer.active .heroBg,
-.bgImageContainer.prev .heroBg {
-    animation: kenBurnsZoom 20s linear forwards;
+@media (min-width: 769px) {
+    .bgImageContainer.active .heroBg {
+        animation: kenBurnsZoom 20s linear forwards;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bgImageContainer {
+        transition: none !important;
+    }
+    .bgImageContainer.active .heroBg {
+        animation: none !important;
+    }
 }
 
 @keyframes kenBurnsZoom {

@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Optimize barrel imports — eliminates 200-800ms cold start cost per library
   experimental: {
-    optimizePackageImports: ["lucide-react", "react-icons"],
+    optimizePackageImports: ["lucide-react", "react-icons", "@phosphor-icons/react"],
   },
 
   // Image optimization: serve AVIF + WebP automatically
@@ -19,23 +19,6 @@ const nextConfig: NextConfig = {
 
   // Enable Turbopack configuration to silence Webpack warning in dev mode
   turbopack: {},
-
-  // Combine CSS files into a single styles chunk to prevent render-blocking separate requests
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      config.optimization.splitChunks.cacheGroups = {
-        ...config.optimization.splitChunks.cacheGroups,
-        styles: {
-          name: "styles",
-          test: /\.(css|scss|sass)$/,
-          chunks: "all",
-          enforce: true,
-          priority: 200,
-        },
-      };
-    }
-    return config;
-  },
 
   // Security + performance headers
   async headers() {

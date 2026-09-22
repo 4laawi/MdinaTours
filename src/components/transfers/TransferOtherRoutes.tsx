@@ -427,6 +427,9 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                                             src={route.image} 
                                             alt={route.title} 
                                             className="route-img"
+                                            width={380}
+                                            height={220}
+                                            loading="lazy"
                                         />
                                         <div style={{
                                             position: 'absolute',

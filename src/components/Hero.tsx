@@ -29,7 +29,85 @@ export default function Hero(props: { imageUrl?: string }) {
     const [dropoff, setDropoff] = useState<string>("Casablanca");
     const [isCustomPickup, setIsCustomPickup] = useState(false);
     const [isCustomDropoff, setIsCustomDropoff] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    // Use props.imageUrl as the first image if provided
+    const displayImages = props.imageUrl
+        ? [props.imageUrl, ...BACKGROUND_IMAGES.filter(img => img !== props.imageUrl)]
+        : BACKGROUND_IMAGES;
+
+    const [activeSlide, setActiveSlide] = useState(0);
+    const [outgoingSlide, setOutgoingSlide] = useState<number | null>(null);
+    const [nextSlide, setNextSlide] = useState(1);
+    const [nextReady, setNextReady] = useState(false);
+
+    const activeSlideRef = useRef(activeSlide);
+    activeSlideRef.current = activeSlide;
+
+    const nextSlideRef = useRef(nextSlide);
+    nextSlideRef.current = nextSlide;
+
+    const nextReadyRef = useRef(nextReady);
+    nextReadyRef.current = nextReady;
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        let pollTimer: NodeJS.Timeout;
+        let unmountTimer: NodeJS.Timeout;
+        let isMounted = true;
+
+        const triggerTransition = () => {
+            const currentActive = activeSlideRef.current;
+            const incoming = nextSlideRef.current;
+
+            // 1. Move current active to outgoing (starts crossfade fade-out)
+            setOutgoingSlide(currentActive);
+            // 2. Set incoming as new active (fades in)
+            setActiveSlide(incoming);
+            // 3. Prepare next slide for eager background loading
+            const following = (incoming + 1) % displayImages.length;
+            setNextSlide(following);
+            setNextReady(false);
+
+            // 4. After crossfade transition (1500ms), unmount outgoing slide
+            unmountTimer = setTimeout(() => {
+                if (!isMounted) return;
+                setOutgoingSlide(null);
+            }, 1500);
+        };
+
+        const scheduleNextCycle = () => {
+            timer = setTimeout(() => {
+                if (!isMounted) return;
+                if (nextReadyRef.current) {
+                    triggerTransition();
+                    scheduleNextCycle();
+                } else {
+                    // Delay transition if next image is not ready yet
+                    const waitForLoad = () => {
+                        pollTimer = setTimeout(() => {
+                            if (!isMounted) return;
+                            if (nextReadyRef.current) {
+                                triggerTransition();
+                                scheduleNextCycle();
+                            } else {
+                                waitForLoad();
+                            }
+                        }, 300);
+                    };
+                    waitForLoad();
+                }
+            }, 8500);
+        };
+
+        scheduleNextCycle();
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timer);
+            clearTimeout(pollTimer);
+            clearTimeout(unmountTimer);
+        };
+    }, [displayImages.length]);
+
     const [date, setDate] = useState("");
     const [hour, setHour] = useState("12:00");
     const [passengers, setPassengers] = useState(4);
@@ -54,20 +132,6 @@ export default function Hero(props: { imageUrl?: string }) {
 
     const isAirport = (loc: string) => loc.toLowerCase().includes('airport');
     const showFlightField = isAirport(pickup) || isAirport(dropoff);
-
-    // Use props.imageUrl as the first image if provided
-    const displayImages = props.imageUrl
-        ? [props.imageUrl, ...BACKGROUND_IMAGES.filter(img => img !== props.imageUrl)]
-        : BACKGROUND_IMAGES;
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % displayImages.length);
-        }, 8500);
-        return () => clearInterval(interval);
-    }, [displayImages.length]);
-
-    const prevImageIndex = (currentImageIndex - 1 + displayImages.length) % displayImages.length;
 
     const HOURS = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
@@ -146,27 +210,47 @@ export default function Hero(props: { imageUrl?: string }) {
 
     return (
         <section id="hero" className={styles.heroSection}>
-            {displayImages.map((src, index) => {
-                let statusClass = '';
-                if (index === currentImageIndex) statusClass = styles.active;
-                else if (index === prevImageIndex) statusClass = styles.prev;
+            {/* 1. Active Slide */}
+            <div key={`active-${activeSlide}-${displayImages[activeSlide]}`} className={`${styles.bgImageContainer} ${styles.active}`}>
+                <Image
+                    src={displayImages[activeSlide]}
+                    alt="Mdina Tours Morocco"
+                    fill
+                    className={styles.heroBg}
+                    priority={activeSlide === 0}
+                    sizes="100vw"
+                />
+            </div>
 
-                const isFirst = index === 0;
+            {/* 2. Outgoing Slide (during 1.5s crossfade) */}
+            {outgoingSlide !== null && (
+                <div key={`outgoing-${outgoingSlide}-${displayImages[outgoingSlide]}`} className={`${styles.bgImageContainer} ${styles.outgoing}`}>
+                    <Image
+                        src={displayImages[outgoingSlide]}
+                        alt="Mdina Tours Morocco"
+                        fill
+                        className={styles.heroBg}
+                        priority={false}
+                        sizes="100vw"
+                    />
+                </div>
+            )}
 
-                return (
-                    <div key={src} className={`${styles.bgImageContainer} ${statusClass}`}>
-                        <Image
-                            src={src}
-                            alt="Mdina Tours Background"
-                            fill
-                            className={styles.heroBg}
-                            priority={isFirst}
-                            loading={isFirst ? undefined : 'lazy'}
-                            sizes="100vw"
-                        />
-                    </div>
-                );
-            })}
+            {/* 3. Next Slide (preloaded in background with opacity: 0) */}
+            {nextSlide !== activeSlide && nextSlide !== outgoingSlide && (
+                <div key={`preload-${nextSlide}-${displayImages[nextSlide]}`} className={`${styles.bgImageContainer} ${styles.preload}`}>
+                    <Image
+                        src={displayImages[nextSlide]}
+                        alt=""
+                        aria-hidden="true"
+                        fill
+                        className={styles.heroBg}
+                        priority={false}
+                        sizes="100vw"
+                        onLoad={() => setNextReady(true)}
+                    />
+                </div>
+            )}
 
             <div className={styles.overlay} />
 

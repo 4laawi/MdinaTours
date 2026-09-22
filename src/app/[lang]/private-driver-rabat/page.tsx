@@ -480,8 +480,8 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                         </div>
 
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap', opacity: 0.8 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" style={{ height: '35px', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" style={{ height: '35px', objectFit: 'contain' }} />
+                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={140} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
+                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={150} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </section>
@@ -510,6 +510,9 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                                                     src={card.image} 
                                                     alt={card.title} 
                                                     className="private-driver-route-img"
+                                                    width={380}
+                                                    height={220}
+                                                    loading="lazy"
                                                 />
                                                 <div className="private-driver-route-price-badge">
                                                     {card.price}
@@ -522,6 +525,9 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                                                 src={card.image} 
                                                 alt={card.title} 
                                                 className="private-driver-route-img"
+                                                width={380}
+                                                height={220}
+                                                loading="lazy"
                                             />
                                             <div className="private-driver-route-price-badge">
                                                 {card.price}

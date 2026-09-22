@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css?family=DM+Sans:400,400i,500,500i,700,700i&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
-
 :root {
+  --font-poppins: var(--font-outfit);
   --primary: #dc834e;
   --primary-hover: #9e5d36;
   --secondary: #202f59;
@@ -27,7 +23,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Outfit', var(--font-poppins), sans-serif;
+  font-family: var(--font-outfit), var(--font-poppins), system-ui, -apple-system, sans-serif;
   color: var(--text);
   background-color: var(--bg-color);
   line-height: 1.6;
@@ -99,7 +95,7 @@ button {
 .section-subtitle {
   text-align: center;
   color: var(--primary);
-  font-family: 'Great Vibes', cursive, var(--font-poppins);
+  font-family: var(--font-great-vibes), 'Great Vibes', cursive, var(--font-outfit), sans-serif;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
   font-weight: 400;
@@ -186,7 +182,7 @@ body.modal-open {
 } 
 
 .title-gla { 
-    font-family: 'Cormorant Garamond', serif; 
+    font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif; 
     font-size: clamp(2.25rem, 7vw, 5.5rem); 
     font-weight: 300; 
     line-height: 1.05; 
@@ -203,7 +199,7 @@ body.modal-open {
 } 
 
 .subtitle-ktg { 
-    font-family: 'Cormorant Garamond', serif; 
+    font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif; 
     font-size: clamp(1.1rem, 2vw, 1.4rem); 
     font-style: italic; 
     color: rgba(255,255,255,.6); 
@@ -1375,37 +1371,6 @@ body.modal-open {
     text-underline-offset: 2px;
 }
 
-/* Custom Competitor Font and Utility CSS */
-@font-face { 
-  font-family:matterFont;
-  src:url(https://daytrip.com/_next/static/media/Matter_Regular-s.p.11iog1fsrjj2k.woff2?dpl=prd-b9b51f5a)format("woff2");
-  font-display:swap;
-  font-weight:400;
-  font-style:normal;
-} 
-@font-face { 
-  font-family:matterFont;
-  src:url(https://daytrip.com/_next/static/media/Matter_Medium-s.p.00kilgo.dul~2.woff2?dpl=prd-b9b51f5a)format("woff2");
-  font-display:swap;
-  font-weight:500;
-  font-style:normal;
-} 
-@font-face { 
-  font-family:matterFont;
-  src:url(https://daytrip.com/_next/static/media/Matter_SemiBold-s.p.0dz_nxbywzhd2.woff2?dpl=prd-b9b51f5a)format("woff2");
-  font-display:swap;
-  font-weight:600;
-  font-style:normal;
-} 
-@font-face { 
-  font-family:matterFont Fallback;
-  src:local(Arial);
-  ascent-override:87.09%;
-  descent-override:18.3%;
-  line-gap-override:0.0%;
-  size-adjust:103.8%;
-} 
-
 .transfer-page-wrapper { 
     --font-sizes-d14:  .875rem;  
     --spacing-d0:  0;  
@@ -1658,14 +1623,14 @@ body.modal-open {
     color: var(--secondary); /* #202f59 */
     margin-bottom: 6px;
     line-height: 1.3;
-    font-family: "'Inter', sans-serif";
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 .feature-desc {
     font-size: 0.78rem;
     color: #666666;
     line-height: 1.4;
-    font-family: "'Inter', sans-serif";
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
     margin: 0;
 }
 
