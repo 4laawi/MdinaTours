@@ -6,7 +6,7 @@ import styles from './Partners.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 
 const PartnersForm: React.FC = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [fileName, setFileName] = useState<string | null>(null);
     const [fileError, setFileError] = useState<string | null>(null);
@@ -81,6 +81,7 @@ const PartnersForm: React.FC = () => {
 
     return (
         <form ref={formRef} className={styles.partnersForm} onSubmit={handleSubmit}>
+            <input type="hidden" name="language" value={language} />
             <div className={styles.formIconWrapper}>
                 <svg viewBox="0 0 80 80" fill="none" className={styles.formIconSvg} aria-hidden="true">
                     <circle cx="40" cy="40" r="30" stroke="currentColor" strokeWidth="1.5" />

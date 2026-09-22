@@ -646,9 +646,18 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    bookingType: 'transfer',
+                    language: language,
                     name: custName,
                     email: custEmail,
                     phone: custPhone,
+                    service: isEn ? "Private Transfer" : isEs ? "Traslado Privado" : "Transfert Privé",
+                    route: `${local.pickup} ⇄ ${local.dropoff}`,
+                    travelDate: travelDate,
+                    pickupTime: pickupTime,
+                    travelers: `${travelers} (${getTierLabel(selectedTier)})`,
+                    vehicleCategory: getTierLabel(selectedTier),
+                    estimatedPrice: currentPrice ? `€${currentPrice}` : undefined,
                     message: custMessage,
                     routeName: local.title
                 })

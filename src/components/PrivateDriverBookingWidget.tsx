@@ -483,9 +483,23 @@ export default function PrivateDriverBookingWidget({
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
+                            bookingType: 'private-driver',
+                            language: language,
                             name: custName,
                             email: custEmail,
                             phone: custPhone,
+                            service: hireType === 'hourly'
+                                ? (isEn ? "Private Driver — Hourly Hire" : "Chauffeur Privé — Location Horaire")
+                                : (isEn ? "Private Driver — Daily Hire" : "Chauffeur Privé — Location Journalière"),
+                            startCity,
+                            travelDate,
+                            duration: `${duration} ${hireType === 'hourly' ? (isEn ? 'Hour(s)' : 'Heure(s)') : (isEn ? 'Day(s)' : 'Jour(s)')}`,
+                            vehicleCategory: `${vehicleName} (${capacityText})`,
+                            travelType: hireType === 'daily' 
+                                ? (routeLocationType === 'same' ? (isEn ? 'Same city & nearby areas' : 'Même ville & environs') : (isEn ? 'Multiple cities' : 'Plusieurs villes')) 
+                                : undefined,
+                            travelPlan: (hireType === 'daily' && routeLocationType === 'multi' && travelPlan) ? travelPlan : undefined,
+                            estimatedPrice: (hireType === 'daily' && routeLocationType === 'multi' && travelPlan) ? (isEn ? 'To be confirmed' : 'À confirmer') : `€${currentPrice}`,
                             message: emailMsg,
                             routeName: isEn ? "Private Driver Booking" : "Réservation Chauffeur Privé"
                         })

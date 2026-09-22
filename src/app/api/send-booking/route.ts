@@ -1,15 +1,36 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { renderMdinaEmail, getEmailTranslations, EmailField, EmailSection } from '@/lib/emailTemplate';
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { name, email, phone, message, routeName } = body;
+        const { 
+            bookingType,
+            language = 'en',
+            name, 
+            email, 
+            phone, 
+            service,
+            startCity,
+            route,
+            travelDate,
+            pickupTime,
+            duration,
+            travelers,
+            vehicleCategory,
+            travelType,
+            travelPlan,
+            estimatedPrice,
+            message, 
+            routeName,
+            details
+        } = body;
 
         // Basic validation
-        if (!name || !email || !message || !routeName) {
+        if (!name || !email) {
             return NextResponse.json(
-                { error: 'Missing required fields' },
+                { error: 'Missing required fields (name, email)' },
                 { status: 400 }
             );
         }
@@ -23,49 +44,157 @@ export async function POST(req: Request) {
             );
         }
 
-        const resend = new Resend(apiKey);
+        const cleanLang = String(language || 'en').toLowerCase().slice(0, 2);
+        const t = getEmailTranslations(cleanLang);
 
-        // Professional HTML Email Template
-        const htmlContent = `
-            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);">
-                <div style="background-color: #202f59; color: #ffffff; padding: 24px; text-align: center;">
-                    <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px;">New Booking Request</h2>
-                    <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">Route: ${routeName}</p>
-                </div>
-                <div style="padding: 30px;">
-                    <p style="margin-top: 0; font-size: 16px; color: #4a5568;">You have received a new private transfer booking request from the Mdina Tours website.</p>
-                    
-                    <h3 style="font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: #202f59; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">Customer Information</h3>
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
-                        <tr>
-                            <td style="padding: 10px 0; font-weight: 600; width: 120px; color: #4a5568; border-bottom: 1px solid #edf2f7;">Name:</td>
-                            <td style="padding: 10px 0; color: #1a202c; border-bottom: 1px solid #edf2f7;">${name}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px 0; font-weight: 600; color: #4a5568; border-bottom: 1px solid #edf2f7;">Email:</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #edf2f7;"><a href="mailto:${email}" style="color: #f25c05; text-decoration: none; font-weight: 500;">${email}</a></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px 0; font-weight: 600; color: #4a5568; border-bottom: 1px solid #edf2f7;">Phone:</td>
-                            <td style="padding: 10px 0; color: #1a202c; border-bottom: 1px solid #edf2f7;">${phone || 'Not provided'}</td>
-                        </tr>
-                    </table>
-                    
-                    <h3 style="font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: #202f59; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">Booking & Transfer Details</h3>
-                    <div style="background-color: #f7fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #f25c05; white-space: pre-wrap; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; color: #2d3748; margin-top: 10px;">${message}</div>
-                </div>
-                <div style="background-color: #f7fafc; padding: 20px; text-align: center; font-size: 13px; color: #718096; border-top: 1px solid #edf2f7;">
-                    This email was sent automatically from the Mdina Tours Website Booking System.
-                </div>
-            </div>
-        `;
+        // Detect booking type if not explicitly supplied
+        let determinedType = bookingType;
+        if (!determinedType) {
+            const combinedString = `${routeName || ''} ${message || ''}`.toLowerCase();
+            if (combinedString.includes('private driver') || combinedString.includes('chauffeur')) {
+                determinedType = 'private-driver';
+            } else if (combinedString.includes('transfer') || combinedString.includes('trajet') || combinedString.includes('traslado')) {
+                determinedType = 'transfer';
+            } else if (combinedString.includes('tour') || combinedString.includes('excursion')) {
+                determinedType = 'tour';
+            } else {
+                determinedType = 'general';
+            }
+        }
+
+        // Determine title
+        let title = t.requestTitles.generalBooking;
+        let sectionTitle = t.tripDetails;
+
+        if (determinedType === 'private-driver') {
+            title = t.requestTitles.privateDriver;
+            sectionTitle = t.tripDetails;
+        } else if (determinedType === 'transfer') {
+            title = t.requestTitles.transfer;
+            sectionTitle = t.transferDetails;
+        } else if (determinedType === 'tour') {
+            title = t.requestTitles.tour;
+            sectionTitle = t.tripDetails;
+        } else if (determinedType === 'quote') {
+            title = t.requestTitles.quote;
+            sectionTitle = t.tripDetails;
+        }
+
+        // Merge flat properties and nested details object
+        const mergedService = service || details?.service || (determinedType === 'private-driver' ? (details?.hireType === 'daily' ? 'Private Driver — Daily Hire' : 'Private Driver — Hourly Hire') : (routeName && !routeName.toLowerCase().includes('booking') ? routeName : undefined));
+        const mergedStartCity = startCity || details?.startCity;
+        const mergedRoute = route || details?.route || (routeName && !routeName.toLowerCase().includes('booking') && determinedType === 'transfer' ? routeName : undefined);
+        const mergedTravelDate = travelDate || details?.travelDate;
+        const mergedPickupTime = pickupTime || details?.pickupTime;
+        const mergedDuration = duration || details?.duration;
+        const mergedTravelers = travelers || details?.travelers;
+        const mergedVehicle = vehicleCategory || details?.vehicleCategory || details?.vehicleTier;
+        const mergedTravelType = travelType || details?.travelType;
+        const mergedTravelPlan = travelPlan || details?.travelPlan;
+        const mergedPrice = estimatedPrice || details?.estimatedPrice || details?.price;
+
+        // Build Trip / Transfer Fields
+        const tripFields: EmailField[] = [];
+
+        if (mergedService) {
+            tripFields.push({ label: t.labels.service, value: mergedService });
+        }
+        if (mergedRoute) {
+            tripFields.push({ label: t.labels.route, value: mergedRoute });
+        }
+        if (mergedStartCity) {
+            tripFields.push({ label: t.labels.startCity, value: mergedStartCity });
+        }
+        if (mergedTravelDate) {
+            tripFields.push({ label: t.labels.travelDate, value: mergedTravelDate });
+        }
+        if (mergedPickupTime) {
+            tripFields.push({ label: t.labels.pickupTime, value: mergedPickupTime });
+        }
+        if (mergedDuration) {
+            tripFields.push({ label: t.labels.duration, value: mergedDuration });
+        }
+        if (mergedTravelers) {
+            tripFields.push({ label: t.labels.travelers, value: String(mergedTravelers) });
+        }
+        if (mergedVehicle) {
+            tripFields.push({ label: t.labels.vehicleCategory, value: mergedVehicle });
+        }
+        if (mergedTravelType) {
+            tripFields.push({ label: t.labels.travelType, value: mergedTravelType });
+        }
+        if (mergedPrice) {
+            tripFields.push({ label: t.labels.estimatedPrice, value: mergedPrice });
+        }
+
+        // If no explicit structured fields were provided, parse bullet points from message if possible
+        let customerCustomMessage = '';
+        if (tripFields.length === 0 && message) {
+            const lines = message.split('\n');
+            const unparsedLines: string[] = [];
+            for (const rawLine of lines) {
+                const line = rawLine.trim();
+                if (!line) continue;
+                
+                // Match lines like "• Start City: Marrakech" or "Route: Casablanca -> Rabat"
+                const cleaned = line.replace(/^[•\-\*]\s*/, '');
+                const colonIdx = cleaned.indexOf(':');
+                if (colonIdx > 0 && colonIdx < 30) {
+                    const label = cleaned.slice(0, colonIdx).trim();
+                    const val = cleaned.slice(colonIdx + 1).trim();
+                    if (label && val) {
+                        tripFields.push({ label, value: val });
+                        continue;
+                    }
+                }
+                unparsedLines.push(rawLine);
+            }
+            customerCustomMessage = unparsedLines.join('\n').trim();
+        } else if (message) {
+            // Check if message is identical to generated bullet points or contains custom notes
+            if (!message.startsWith('Requesting Private Driver') && 
+                !message.startsWith('Demande de Chauffeur') && 
+                !message.startsWith('Route:') && 
+                !message.startsWith('Trajet:')) {
+                customerCustomMessage = message.trim();
+            }
+        }
+
+        const sections: EmailSection[] = [];
+
+        if (tripFields.length > 0 || mergedTravelPlan) {
+            sections.push({
+                title: sectionTitle,
+                fields: tripFields.length > 0 ? tripFields : undefined,
+                calloutText: mergedTravelPlan ? `${t.labels.travelPlan}: ${mergedTravelPlan}` : undefined,
+            });
+        }
+
+        const emailData = renderMdinaEmail({
+            language: cleanLang,
+            title,
+            customerDetailsTitle: t.yourDetails,
+            customerDetails: [
+                { label: t.name, value: name },
+                { label: t.email, value: email, type: 'email' },
+                ...(phone ? [{ label: t.phone, value: phone, type: 'tel' as const }] : []),
+            ],
+            sections: sections.length > 0 ? sections : undefined,
+            message: customerCustomMessage ? {
+                title: t.yourMessage,
+                text: customerCustomMessage,
+            } : undefined,
+        });
+
+        const resend = new Resend(apiKey);
 
         const { data, error } = await resend.emails.send({
             from: 'Mdina Tours <booking@mdinatours.com>',
             to: 'booking@mdinatours.com',
             replyTo: email,
-            subject: `New Booking Request – ${routeName}`,
-            html: htmlContent,
+            subject: emailData.subject,
+            html: emailData.html,
+            text: emailData.text,
         });
 
         if (error) {
