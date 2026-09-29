@@ -70,7 +70,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     };
 
     // Helper to get localized path
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     const contactPageJsonLd = {
         "@context": "https://schema.org",
@@ -103,7 +103,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

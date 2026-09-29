@@ -101,7 +101,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     // JSON-LD Structured Data for TouristTrip
     const tripJsonLd = {
@@ -146,7 +146,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

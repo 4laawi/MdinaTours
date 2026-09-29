@@ -77,7 +77,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     const getWhatsAppUrl = (msg?: string) => {
         const defaultMsg = `Hello Mdina Tours,\nI would like to inquire about booking a private driver/chauffeur service in Morocco.`;
@@ -308,7 +308,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

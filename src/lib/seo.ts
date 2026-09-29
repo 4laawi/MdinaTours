@@ -45,19 +45,24 @@ export function getAlternates(lang: string, pathWithoutLang: string = '') {
         ? (pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`) 
         : '';
     const baseUrl = 'https://mdinatours.com';
+    const isHome = cleanPath === '' || cleanPath === '/';
 
     const languages: Record<string, string> = {
-        'en': `${baseUrl}/en${cleanPath}`,
-        'fr': `${baseUrl}/fr${cleanPath}`,
-        'x-default': `${baseUrl}/en${cleanPath}`,
+        'en': isHome ? `${baseUrl}/` : `${baseUrl}/en${cleanPath}`,
+        'fr': isHome ? `${baseUrl}/fr` : `${baseUrl}/fr${cleanPath}`,
+        'x-default': isHome ? `${baseUrl}/` : `${baseUrl}/en${cleanPath}`,
     };
 
     if (isSpanishSupported(cleanPath)) {
-        languages['es'] = `${baseUrl}/es${cleanPath}`;
+        languages['es'] = isHome ? `${baseUrl}/es` : `${baseUrl}/es${cleanPath}`;
     }
 
+    const canonical = isHome
+        ? (lang === 'en' ? `${baseUrl}/` : `${baseUrl}/${lang}`)
+        : `${baseUrl}/${lang}${cleanPath}`;
+
     return {
-        canonical: `${baseUrl}/${lang}${cleanPath}`,
+        canonical,
         languages,
     };
 }

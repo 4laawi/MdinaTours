@@ -68,7 +68,7 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     // Detailed structured FAQs grouped by categories
     const categories = [
@@ -304,7 +304,7 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

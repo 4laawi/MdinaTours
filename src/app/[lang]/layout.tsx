@@ -4,6 +4,7 @@ import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ReactDOM from 'react-dom';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const outfit = Outfit({
     weight: ['300', '400', '500', '600', '700', '800'],
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         ogLocale = 'es_ES';
     }
 
-    const url = `https://mdinatours.com/${lang}`;
+    const url = lang === 'en' ? 'https://mdinatours.com/' : `https://mdinatours.com/${lang}`;
 
     return {
         title,
@@ -109,7 +110,7 @@ export default async function LocaleLayout({
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "logo": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "description": agencyDescription,
-        "url": `https://mdinatours.com/${lang}`,
+        "url": lang === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${lang}`,
         "telephone": "+212724114775",
         "priceRange": "$$",
         "address": {
@@ -149,6 +150,7 @@ export default async function LocaleLayout({
                     {children}
                 </LanguageProvider>
             </body>
+            <GoogleAnalytics gaId="G-58G6F3HW5G" />
         </html>
     );
 }

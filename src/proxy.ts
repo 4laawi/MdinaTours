@@ -6,6 +6,40 @@ const defaultLocale = 'en';
 
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
+    const host = request.headers.get('host') || '';
+
+    // Handle www to non-www redirect directly with 1 hop
+    if (host.startsWith('www.mdinatours.com')) {
+        const canonicalUrl = new URL(request.url);
+        canonicalUrl.host = 'mdinatours.com';
+        canonicalUrl.port = '';
+        canonicalUrl.protocol = 'https:';
+
+        if (pathname === '/en' || pathname === '/en/' || pathname === '/') {
+            canonicalUrl.pathname = '/';
+            return NextResponse.redirect(canonicalUrl, 308);
+        }
+
+        const missingLocale = locales.every(
+            (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+        );
+        if (missingLocale) {
+            canonicalUrl.pathname = `/${defaultLocale}${pathname}`;
+            return NextResponse.redirect(canonicalUrl, 308);
+        }
+
+        return NextResponse.redirect(canonicalUrl, 308);
+    }
+
+    // Old English homepage /en or /en/ -> permanently redirect directly to /
+    if (pathname === '/en' || pathname === '/en/') {
+        return NextResponse.redirect(new URL('/', request.url), 308);
+    }
+
+    // Root homepage / -> directly render English homepage via internal rewrite
+    if (pathname === '/') {
+        return NextResponse.rewrite(new URL(`/${defaultLocale}`, request.url));
+    }
 
     // Check if the pathname is missing a locale
     const pathnameIsMissingLocale = locales.every(
@@ -14,8 +48,6 @@ export function proxy(request: NextRequest) {
 
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
-        // Here you can also detect the browser's language preference
-        // and redirect to the corresponding locale instead of always 'en'
         return NextResponse.redirect(
             new URL(`/${defaultLocale}${pathname}`, request.url),
             308

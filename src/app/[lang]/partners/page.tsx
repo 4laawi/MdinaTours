@@ -84,7 +84,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

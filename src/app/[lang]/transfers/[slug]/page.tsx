@@ -102,7 +102,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     // WhatsApp Booking Link Builder
     const getWhatsAppUrl = (pCount: number, price: number) => {
@@ -155,7 +155,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

@@ -52,13 +52,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const routesMap: MetadataRoute.Sitemap = [];
 
     const getLanguagesMap = (path: string) => {
+        const isHome = path === '' || path === '/';
         const languages: Record<string, string> = {
-            en: `${baseUrl}/en${path}`,
-            fr: `${baseUrl}/fr${path}`,
-            'x-default': `${baseUrl}/en${path}`,
+            en: isHome ? `${baseUrl}/` : `${baseUrl}/en${path}`,
+            fr: isHome ? `${baseUrl}/fr` : `${baseUrl}/fr${path}`,
+            'x-default': isHome ? `${baseUrl}/` : `${baseUrl}/en${path}`,
         };
         if (isSpanishSupported(path)) {
-            languages.es = `${baseUrl}/es${path}`;
+            languages.es = isHome ? `${baseUrl}/es` : `${baseUrl}/es${path}`;
         }
         return languages;
     };
@@ -71,10 +72,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const isEsSupported = isSpanishSupported(routePath);
         const supportedLocales = isEsSupported ? ['en', 'fr', 'es'] : ['en', 'fr'];
         const languages = getLanguagesMap(routePath);
+        const isHome = routePath === '' || routePath === '/';
 
         supportedLocales.forEach((locale) => {
+            const url = isHome && locale === 'en'
+                ? `${baseUrl}/`
+                : `${baseUrl}/${locale}${routePath}`;
+
             routesMap.push({
-                url: `${baseUrl}/${locale}${routePath}`,
+                url,
                 lastModified: new Date(),
                 changeFrequency,
                 priority,

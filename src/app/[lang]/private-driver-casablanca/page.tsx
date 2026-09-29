@@ -81,7 +81,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     const getWhatsAppUrl = (msg: string) => {
         return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
@@ -354,7 +354,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

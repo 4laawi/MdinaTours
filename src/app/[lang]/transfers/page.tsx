@@ -103,7 +103,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     // Filter transfers strictly using approved paths for Spanish
     const displayedTransfers = isEs
@@ -136,7 +136,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEs ? "Inicio" : isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

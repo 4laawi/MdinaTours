@@ -13,7 +13,7 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
     const currentYear = new Date().getFullYear();
 
     // Helper to get localized path
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     return (
         <footer className={styles.footer}>

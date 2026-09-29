@@ -25,18 +25,36 @@ export default function Header({ lightBg = false }: HeaderProps) {
         if (language === 'es' && path === '/private-driver') {
             return '/es/private-driver-morocco';
         }
+        if (language === 'en' && path === '/') {
+            return '/';
+        }
         return `/${language}${path === '/' ? '' : path}`;
     };
 
     const isActive = (path: string) => {
         const localizedPath = getPath(path);
-        if (path === '/' && (pathname === `/${language}` || pathname === `/${language}/`)) return true;
+        if (path === '/') {
+            if (language === 'en') {
+                return pathname === '/' || pathname === '/en' || pathname === '/en/';
+            }
+            return pathname === `/${language}` || pathname === `/${language}/`;
+        }
         if (path !== '/' && pathname.startsWith(localizedPath)) return true;
         return false;
     };
 
     const handleLanguageSwitch = (newLang: Language) => {
         if (newLang === language) return;
+
+        const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/en/' || pathname === '/fr' || pathname === '/fr/' || pathname === '/es' || pathname === '/es/';
+        if (isHomePage) {
+            if (newLang === 'en') {
+                router.push('/');
+            } else {
+                router.push(`/${newLang}`);
+            }
+            return;
+        }
 
         // Replace the language segment in the current pathname
         const segments = pathname.split('/');
@@ -48,9 +66,11 @@ export default function Header({ lightBg = false }: HeaderProps) {
             return;
         }
 
-        segments[1] = newLang;
-        const newPath = segments.join('/');
-        router.push(newPath || `/${newLang}`);
+        if (newLang === 'en') {
+            router.push(`/en${cleanPath}`);
+        } else {
+            router.push(`/${newLang}${cleanPath}`);
+        }
     };
 
     // Close menu when pathname changes

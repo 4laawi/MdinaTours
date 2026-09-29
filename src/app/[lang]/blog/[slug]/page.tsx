@@ -318,7 +318,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
     relatedGalleryImages = relatedGalleryImages.slice(0, 6);
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     // WhatsApp Booking Link Builder
     const getWhatsAppUrl = (type: string, link: string) => {
@@ -349,7 +349,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
@@ -378,7 +378,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         "author": {
             "@type": "Organization",
             "name": "Mdina Tours",
-            "url": `https://mdinatours.com/${language}`
+            "url": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
         },
         "publisher": {
             "@type": "Organization",

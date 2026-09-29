@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         ogLocale = 'es_ES';
     }
 
-    const url = `https://mdinatours.com/${lang}`;
+    const url = lang === 'en' ? 'https://mdinatours.com/' : `https://mdinatours.com/${lang}`;
 
     return {
         title,
@@ -187,7 +187,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : (isEs ? "Inicio" : "Accueil"),
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             }
         ]
     };

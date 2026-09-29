@@ -68,7 +68,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     const blogPosts = [
         {
@@ -193,7 +193,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",

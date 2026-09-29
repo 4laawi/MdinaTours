@@ -68,7 +68,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
         return langSection[key] || key;
     };
 
-    const getPath = (path: string) => `/${language}${path === '/' ? '' : path}`;
+    const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
     const aboutPageJsonLd = {
         "@context": "https://schema.org",
@@ -83,7 +83,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
         "mainEntity": {
             "@type": "TravelAgency",
             "name": "Mdina Tours",
-            "url": `https://mdinatours.com/${language}`,
+            "url": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`,
             "telephone": "+212724114775"
         }
     };
@@ -96,7 +96,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                 "@type": "ListItem",
                 "position": 1,
                 "name": isEn ? "Home" : isEs ? "Inicio" : "Accueil",
-                "item": `https://mdinatours.com/${language}`
+                "item": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`
             },
             {
                 "@type": "ListItem",
