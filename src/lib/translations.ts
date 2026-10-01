@@ -7,7 +7,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'contact': 'CONTACT',
         'contact_us': 'CONTACT US',
         'plan_trip': 'VIP MOROCCO CHAUFFEUR & TRANSFERS',
-        'hero_title': "Bespoke Morocco Chauffeur & Private Driver Services",
+        'hero_title': "Premium Morocco Chauffeur & Private Driver Services",
         'hero_subtitle': 'Experience stress-free intercity transfers, airport pickups, and tailored Morocco excursions with executive drivers.',
         'trust_microcopy': 'Pay cash upon arrival · Free cancellation up to 24h',
         'book_driver': 'Reserve Your Private Chauffeur',

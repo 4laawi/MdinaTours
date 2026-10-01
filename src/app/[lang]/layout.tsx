@@ -42,7 +42,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     
-    let title = 'Mdina Tours | Bespoke Morocco Chauffeur & Private Tours';
+    let title = 'Mdina Tours | Premium Morocco Chauffeur & Private Tours';
     let description = 'Mdina Tours provides executive private driver services, intercity airport transfers, and tailor-made Morocco tours across Rabat, Casablanca, Marrakech, and Tangier.';
     let ogLocale = 'en_US';
 
