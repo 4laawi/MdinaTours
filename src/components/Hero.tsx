@@ -165,11 +165,11 @@ export default function Hero(props: { imageUrl?: string }) {
 
     const handleSearch = () => {
         if (!pickup.trim() || !dropoff.trim()) {
-            setSearchResult({ error: language === 'en' ? "Please enter both pickup and drop-off locations." : "Veuillez préciser les lieux de départ et d'arrivée." });
+            setSearchResult({ error: language === 'es' ? "Por favor, indique los lugares de recogida y destino." : language === 'en' ? "Please enter both pickup and drop-off locations." : "Veuillez préciser les lieux de départ et d'arrivée." });
             return;
         }
         if (pickup.trim().toLowerCase() === dropoff.trim().toLowerCase()) {
-            setSearchResult({ error: language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
+            setSearchResult({ error: language === 'es' ? "El lugar de recogida y de destino no pueden ser iguales." : language === 'en' ? "Pickup and Drop-off locations cannot be the same." : "Les lieux de départ et d'arrivée doivent être différents." });
             return;
         }
         
@@ -182,7 +182,12 @@ export default function Hero(props: { imageUrl?: string }) {
     const currentPrice = isCustomRoute ? null : getRoutePrice(pickup, dropoff, passengers);
 
     const getWhatsAppUrl = () => {
-        let message = `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
+        const greeting = language === 'es'
+            ? `Hola Mdina Tours,\nMe gustaría solicitar un traslado privado.\n\n`
+            : language === 'fr'
+            ? `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé.\n\n`
+            : `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
+        let message = greeting;
         message += `• ${t('contact_form_full_name')}: ${name}\n`;
         message += `• ${t('contact_form_phone')}: ${phone}\n`;
         message += `• ${t('precise_location')}: ${preciseLocation}\n`;
@@ -190,13 +195,19 @@ export default function Hero(props: { imageUrl?: string }) {
             message += `• ${t('flight_number')}: ${flightNumber}\n`;
         }
         const combinedDate = date ? `${date} ${hour}` : 'Flexible';
-        message += `\nDetails:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
+        const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
+        message += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(message)}`;
     };
 
     const getEmailUrl = () => {
-        const subject = `Private Transfer Inquiry - ${name}`;
-        let body = `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
+        const subject = language === 'es' ? `Solicitud de Traslado Privado - ${name}` : language === 'fr' ? `Demande de Transfert Privé - ${name}` : `Private Transfer Inquiry - ${name}`;
+        const greeting = language === 'es'
+            ? `Hola Mdina Tours,\n\nMe gustaría solicitar el siguiente traslado privado:\n\n`
+            : language === 'fr'
+            ? `Bonjour Mdina Tours,\n\nJe souhaite réserver le transfert privé suivant :\n\n`
+            : `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
+        let body = greeting;
         body += `${t('contact_form_full_name')}: ${name}\n`;
         body += `${t('contact_form_phone')}: ${phone}\n`;
         body += `${t('precise_location')}: ${preciseLocation}\n`;
@@ -204,7 +215,8 @@ export default function Hero(props: { imageUrl?: string }) {
             body += `${t('flight_number')}: ${flightNumber}\n`;
         }
         const combinedDate = date ? `${date} ${hour}` : 'Flexible';
-        body += `\nDetails:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : 'Custom Quote Request'}`;
+        const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
+        body += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `mailto:booking@mdinatours.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -461,7 +473,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : (language === 'es' ? 'Presupuesto a medida' : language === 'fr' ? 'Devis sur-mesure' : 'Custom Quote')}</span>
                                     </div>
                                     <button className={styles.continueBtn} onClick={() => setModalStep(2)}>
                                         {t('continue')} →
@@ -518,7 +530,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                 <div className={styles.modalFooter}>
                                     <div className={styles.priceContainer}>
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
-                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : 'Custom Quote'}</span>
+                                        <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : (language === 'es' ? 'Presupuesto a medida' : language === 'fr' ? 'Devis sur-mesure' : 'Custom Quote')}</span>
                                     </div>
 
                                     <div className={styles.ctaGroup}>
@@ -544,7 +556,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                                                 </svg>
-                                                Call
+                                                {language === 'es' ? 'Llamar' : language === 'fr' ? 'Appeler' : 'Call'}
                                             </a>
                                         </div>
                                         <button className={styles.backBtn} onClick={() => setModalStep(1)}>
