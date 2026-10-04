@@ -22,13 +22,14 @@ interface PrivateDriverFleetProps {
 export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider = false }: PrivateDriverFleetProps) {
     const isEn = lang === 'en';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const hasInitialScrolledRef = useRef(false);
+    const isProgrammaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [activeIndex, setActiveIndex] = useState(vehicles && vehicles.length > 1 ? 1 : 0);
-
-    if (!vehicles || vehicles.length === 0) return null;
 
     useEffect(() => {
         const container = scrollContainerRef.current;
-        if (!container) return;
+        if (!container || !vehicles || vehicles.length === 0) return;
 
         const observerOptions = {
             root: container,
@@ -37,6 +38,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         };
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            if (isProgrammaticScrollRef.current) return;
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const cardIndex = Array.from(container.children).indexOf(entry.target);
@@ -57,7 +59,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         return () => {
             observer.disconnect();
         };
-    }, [vehicles]);
+    }, [vehicles?.length]);
 
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
         if (!scrollContainerRef.current) return;
@@ -68,6 +70,12 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             const cardWidth = cardElement.clientWidth;
             const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
             
+            isProgrammaticScrollRef.current = true;
+            if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+            scrollTimeoutRef.current = setTimeout(() => {
+                isProgrammaticScrollRef.current = false;
+            }, 600);
+
             container.scrollTo({
                 left: targetLeft,
                 behavior
@@ -76,13 +84,16 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         }
     };
 
-    // Scroll to the next index (1) on mount/load so it starts scrolled once
+    // Scroll to the next index (1) ONLY ONCE on initial mount so it starts scrolled once
     useEffect(() => {
+        if (hasInitialScrolledRef.current || !vehicles || vehicles.length === 0) return;
+        hasInitialScrolledRef.current = true;
+        const defaultIndex = vehicles.length > 1 ? 1 : 0;
         const timer = setTimeout(() => {
-            scrollToIndex(vehicles.length > 1 ? 1 : 0, 'auto');
+            scrollToIndex(defaultIndex, 'auto');
         }, 150); // slight delay to ensure layout has completed rendering
         return () => clearTimeout(timer);
-    }, [vehicles]);
+    }, [vehicles?.length]);
 
     const scrollPrev = () => {
         if (activeIndex > 0) {

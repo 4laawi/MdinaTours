@@ -34,7 +34,7 @@ export default function TransfersHero({
     const [isCustomDropoff, setIsCustomDropoff] = useState(false);
     const [date, setDate] = useState("");
     const [hour, setHour] = useState("12:00");
-    const [passengers, setPassengers] = useState(4);
+    const [passengers, setPassengers] = useState(3);
     const [searchResult, setSearchResult] = useState<{ price?: string, error?: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalStep, setModalStep] = useState(1);

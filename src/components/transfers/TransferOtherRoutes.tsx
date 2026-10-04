@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 
 import { Language } from '@/lib/translations';
@@ -12,16 +12,19 @@ interface TransferOtherRoutesProps {
 export default function TransferOtherRoutes({ language }: TransferOtherRoutesProps) {
     const isEn = language === 'en';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const hasInitialScrolledRef = useRef(false);
+    const isProgrammaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [activeIndex, setActiveIndex] = useState(1);
     const [isHovered, setIsHovered] = useState(false);
 
-    const routes = [
+    const routes = useMemo(() => [
         {
             title: "Casablanca Airport ⇄ Rabat",
             desc: isEn 
                 ? "Direct highway transfer from CMN airport to your Rabat hotel or embassy."
                 : "Transfert direct par autoroute de l'aéroport CMN à votre hôtel ou ambassade à Rabat.",
-            price: "€102",
+            price: "€120",
             image: "/img2/Airport_Casablanca_Mohammed.webp",
             slug: "casablanca-airport-transfer"
         },
@@ -30,7 +33,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Travel from the Red City to the Atlantic coast with photo stops to see tree-climbing goats."
                 : "Voyagez de la Ville Rouge à la côte atlantique avec arrêt photo pour voir les chèvres.",
-            price: "€108",
+            price: "€140",
             image: "/img2/Essaouira-maroc.jpg",
             slug: "marrakech-to-essaouira-transfer"
         },
@@ -39,7 +42,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Scenic private transport through the Rif Mountains to the beautiful Blue Pearl."
                 : "Transport privé panoramique à travers le Rif jusqu'à la magnifique Perle Bleue.",
-            price: "€144",
+            price: "€170",
             image: "/hero-chefchaouen.webp",
             slug: "fes-to-chefchaouen-transfer"
         },
@@ -48,7 +51,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Fast southern expressway transfer between Casablanca CMN and Marrakech medina."
                 : "Transfert rapide par l'autoroute du Sud entre Casablanca CMN et la médina de Marrakech.",
-            price: "€192",
+            price: "€220",
             image: "/hero-marrakech.webp",
             slug: "casablanca-to-marrakech-transfer"
         },
@@ -57,7 +60,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Scenic mountain transfer from Tangier port or airport to the Blue City."
                 : "Transfert de montagne panoramique du port ou de l'aéroport de Tanger à la Ville Bleue.",
-            price: "€108",
+            price: "€140",
             image: "/hero-chefchaouen.webp",
             slug: "tangier-to-chefchaouen-transfer"
         },
@@ -66,7 +69,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Convenient intercity transfer between the administrative capital and Casablanca."
                 : "Transfert interville pratique entre la capitale administrative et Casablanca.",
-            price: "€96",
+            price: "€110",
             image: "/hero-landscape-1.webp",
             slug: "rabat-to-casablanca-transfer"
         },
@@ -75,7 +78,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Relaxing highway transfer to the premier seaside resort town of Agadir."
                 : "Transfert relaxant par l'autoroute vers la célèbre station balnéaire d'Agadir.",
-            price: "€156",
+            price: "€185",
             image: "/img2/agadir-marina.webp",
             slug: "marrakech-to-agadir-transfer"
         },
@@ -84,11 +87,11 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             desc: isEn 
                 ? "Comfortable expressway transfer connecting the northern port city of Tangier to Rabat."
                 : "Transfert confortable par l'autoroute reliant la ville portuaire de Tanger à Rabat.",
-            price: "€180",
+            price: "€210",
             image: "/Tangier-Morocco-Photo.webp",
             slug: "tangier-to-rabat-transfer"
         }
-    ];
+    ], [isEn]);
 
     useEffect(() => {
         const container = scrollContainerRef.current;
@@ -101,6 +104,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         };
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            if (isProgrammaticScrollRef.current) return;
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const cardIndex = Array.from(container.children).indexOf(entry.target);
@@ -120,7 +124,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         return () => {
             observer.disconnect();
         };
-    }, [routes.length]);
+    }, [routes]);
 
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
         if (!scrollContainerRef.current) return;
@@ -131,6 +135,12 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             const cardWidth = cardElement.clientWidth;
             const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
             
+            isProgrammaticScrollRef.current = true;
+            if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+            scrollTimeoutRef.current = setTimeout(() => {
+                isProgrammaticScrollRef.current = false;
+            }, 600);
+
             container.scrollTo({
                 left: targetLeft,
                 behavior
@@ -139,9 +149,10 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         }
     };
 
-    // Scroll to the second card (index 1) on mount so it's centered initially
+    // Scroll to the second card (index 1) ONLY ONCE on mount so it's centered initially
     useEffect(() => {
-        if (routes.length === 0) return;
+        if (hasInitialScrolledRef.current || routes.length === 0) return;
+        hasInitialScrolledRef.current = true;
         const timer = setTimeout(() => {
             scrollToIndex(routes.length > 1 ? 1 : 0, 'auto');
         }, 150);

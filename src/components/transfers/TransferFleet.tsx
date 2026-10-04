@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Users, Briefcase, Wind, Check } from "@phosphor-icons/react";
 
 interface Vehicle {
@@ -24,66 +24,70 @@ interface TransferFleetProps {
 export default function TransferFleet({ prices, lang, local }: TransferFleetProps) {
     const isEn = lang === 'en';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const hasInitialScrolledRef = useRef(false);
+    const isProgrammaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const vehiclesList = [
-        {
-            name: "Skoda Superb",
-            spec: isEn ? "Premium Sedan" : "Berline Premium",
-            capacity: "1-3 PAX",
-            luggage: "3 Bags",
-            suitability: isEn 
-                ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or solo travelers." 
-                : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
-            price: prices[3] ? `€${prices[3]}` : null,
-            image: "/cars/flotte-superb.webp"
-        },
-        ...(prices[4] ? [{
-            name: "Skoda Kodiaq",
-            spec: isEn ? "Comfort SUV" : "SUV Grand Confort",
-            capacity: "1-5 PAX",
-            luggage: "4 Bags",
-            suitability: isEn 
-                ? "A premium mid-size SUV offering high ground clearance, excellent stability, and spacious comfort." 
-                : "Un SUV familial haut de gamme offrant une excellente garde au sol et une stabilité parfaite.",
-            price: `€${prices[4]}`,
-            image: "/cars/flotte-skoda-kodiaq.webp"
-        }] : []),
-        ...(prices[5] ? [{
-            name: "Fiat Scudo",
-            spec: isEn ? "VIP Van" : "Van VIP",
-            capacity: "1-6 PAX",
-            luggage: "5 Bags",
-            suitability: isEn 
-                ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions." 
-                : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
-            price: `€${prices[5]}`,
-            image: "/cars/flotte-fiat-scudo.webp"
-        }] : []),
-        {
-            name: "Mercedes Vito",
-            spec: isEn ? "VIP Minivan" : "Minivan VIP",
-            capacity: "1-7 PAX",
-            luggage: "6 Bags",
-            suitability: isEn 
-                ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room." 
-                : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
-            price: prices[7] ? `€${prices[7]}` : null,
-            image: "/cars/flotte-vito.webp"
-        },
-        {
-            name: "Mercedes Sprinter",
-            spec: isEn ? "VIP Minibus" : "Minibus Prestige",
-            capacity: "8-16 PAX",
-            luggage: "12 Bags",
-            suitability: isEn 
-                ? "A custom-configured executive minibus designed for large tour groups or multi-family excursions." 
-                : "Un minibus de prestige configuré sur mesure, conçu pour les grands groupes et familles.",
-            price: isEn ? "Custom quote" : "Devis personnalisé",
-            image: "/cars/flotte-sprinter.webp"
-        }
-    ];
-
-    const vehicles = vehiclesList.filter(v => v.price !== null) as Vehicle[];
+    const vehicles = useMemo(() => {
+        const vehiclesList = [
+            {
+                name: "Skoda Superb",
+                spec: isEn ? "Premium Sedan" : "Berline Premium",
+                capacity: "1-3 PAX",
+                luggage: "3 Bags",
+                suitability: isEn 
+                    ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or solo travelers." 
+                    : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
+                price: prices[3] ? `€${prices[3]}` : null,
+                image: "/cars/flotte-superb.webp"
+            },
+            ...(prices[4] ? [{
+                name: "Skoda Kodiaq",
+                spec: isEn ? "Comfort SUV" : "SUV Grand Confort",
+                capacity: "1-5 PAX",
+                luggage: "4 Bags",
+                suitability: isEn 
+                    ? "A premium mid-size SUV offering high ground clearance, excellent stability, and spacious comfort." 
+                    : "Un SUV familial haut de gamme offrant une excellente garde au sol et une stabilité parfaite.",
+                price: `€${prices[4]}`,
+                image: "/cars/flotte-skoda-kodiaq.webp"
+            }] : []),
+            ...(prices[5] ? [{
+                name: "Fiat Scudo",
+                spec: isEn ? "VIP Van" : "Van VIP",
+                capacity: "1-6 PAX",
+                luggage: "5 Bags",
+                suitability: isEn 
+                    ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions." 
+                    : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
+                price: `€${prices[5]}`,
+                image: "/cars/flotte-fiat-scudo.webp"
+            }] : []),
+            {
+                name: "Mercedes Vito",
+                spec: isEn ? "VIP Minivan" : "Minivan VIP",
+                capacity: "1-7 PAX",
+                luggage: "6 Bags",
+                suitability: isEn 
+                    ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room." 
+                    : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
+                price: prices[7] ? `€${prices[7]}` : null,
+                image: "/cars/flotte-vito.webp"
+            },
+            {
+                name: "Mercedes Sprinter",
+                spec: isEn ? "VIP Minibus" : "Minibus Prestige",
+                capacity: "8-16 PAX",
+                luggage: "12 Bags",
+                suitability: isEn 
+                    ? "A custom-configured executive minibus designed for large tour groups or multi-family excursions." 
+                    : "Un minibus de prestige configuré sur mesure, conçu pour les grands groupes et familles.",
+                price: isEn ? "Custom quote" : "Devis personnalisé",
+                image: "/cars/flotte-sprinter.webp"
+            }
+        ];
+        return vehiclesList.filter(v => v.price !== null) as Vehicle[];
+    }, [prices, isEn]);
 
     const [activeIndex, setActiveIndex] = useState(vehicles && vehicles.length > 1 ? 1 : 0);
 
@@ -98,6 +102,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
         };
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            if (isProgrammaticScrollRef.current) return;
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const cardIndex = Array.from(container.children).indexOf(entry.target);
@@ -129,6 +134,12 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
             const cardWidth = cardElement.clientWidth;
             const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
             
+            isProgrammaticScrollRef.current = true;
+            if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+            scrollTimeoutRef.current = setTimeout(() => {
+                isProgrammaticScrollRef.current = false;
+            }, 600);
+
             container.scrollTo({
                 left: targetLeft,
                 behavior
@@ -137,14 +148,16 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
         }
     };
 
-    // Scroll to the next index (1) on mount/load so it starts scrolled once
+    // Scroll to the next index (1) ONLY ONCE on initial mount so it starts centered nicely
     useEffect(() => {
-        if (vehicles.length === 0) return;
+        if (hasInitialScrolledRef.current || vehicles.length === 0) return;
+        hasInitialScrolledRef.current = true;
+        const defaultIndex = vehicles.length > 1 ? 1 : 0;
         const timer = setTimeout(() => {
-            scrollToIndex(vehicles.length > 1 ? 1 : 0, 'auto');
+            scrollToIndex(defaultIndex, 'auto');
         }, 150); // slight delay to ensure layout has completed rendering
         return () => clearTimeout(timer);
-    }, [vehicles]);
+    }, [vehicles.length]);
 
     const scrollPrev = () => {
         if (activeIndex > 0) {

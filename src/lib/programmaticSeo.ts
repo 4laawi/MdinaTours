@@ -81,18 +81,18 @@ const citiesData: Record<string, { en: string; fr: string; attractionsEn: string
 };
 
 const routesData: Record<string, { distance: string; duration: string; privatePrice: number; train: boolean }> = {
-    "tangier-to-rabat": { distance: "250 km", duration: "2h 45m", privatePrice: 150, train: true },
-    "tangier-to-casablanca": { distance: "340 km", duration: "3h 30m", privatePrice: 200, train: true },
-    "tangier-to-chefchaouen": { distance: "120 km", duration: "2h 15m", privatePrice: 90, train: false },
-    "casablanca-to-marrakech": { distance: "240 km", duration: "2h 30m", privatePrice: 160, train: true },
-    "casablanca-to-fes": { distance: "300 km", duration: "3h 15m", privatePrice: 180, train: true },
-    "rabat-to-marrakech": { distance: "325 km", duration: "3h 15m", privatePrice: 170, train: true },
-    "rabat-to-fes": { distance: "200 km", duration: "2h 10m", privatePrice: 110, train: true },
-    "rabat-to-chefchaouen": { distance: "250 km", duration: "4h 00m", privatePrice: 150, train: false },
-    "marrakech-to-essaouira": { distance: "180 km", duration: "2h 45m", privatePrice: 90, train: false },
-    "marrakech-to-agadir": { distance: "250 km", duration: "3h 00m", privatePrice: 130, train: false },
-    "fes-to-chefchaouen": { distance: "200 km", duration: "3h 30m", privatePrice: 120, train: false },
-    "fes-to-merzouga": { distance: "460 km", duration: "7h 30m", privatePrice: 260, train: false }
+    "tangier-to-rabat": { distance: "250 km", duration: "2h 45m", privatePrice: 210, train: true },
+    "tangier-to-casablanca": { distance: "340 km", duration: "3h 30m", privatePrice: 280, train: true },
+    "tangier-to-chefchaouen": { distance: "120 km", duration: "2h 15m", privatePrice: 140, train: false },
+    "casablanca-to-marrakech": { distance: "240 km", duration: "2h 30m", privatePrice: 220, train: true },
+    "casablanca-to-fes": { distance: "300 km", duration: "3h 15m", privatePrice: 250, train: true },
+    "rabat-to-marrakech": { distance: "325 km", duration: "3h 15m", privatePrice: 245, train: true },
+    "rabat-to-fes": { distance: "200 km", duration: "2h 10m", privatePrice: 165, train: true },
+    "rabat-to-chefchaouen": { distance: "250 km", duration: "4h 00m", privatePrice: 249, train: false },
+    "marrakech-to-essaouira": { distance: "180 km", duration: "2h 45m", privatePrice: 140, train: false },
+    "marrakech-to-agadir": { distance: "250 km", duration: "3h 00m", privatePrice: 185, train: false },
+    "fes-to-chefchaouen": { distance: "200 km", duration: "3h 30m", privatePrice: 170, train: false },
+    "fes-to-merzouga": { distance: "460 km", duration: "7h 30m", privatePrice: 370, train: false }
 };
 
 export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPost | null {

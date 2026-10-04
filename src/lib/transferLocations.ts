@@ -61,36 +61,39 @@ const setPricing = (loc1: string, loc2: string, prices: Prices) => {
 // ----------------------------------------------------
 
 // Local Airport Transfers
-setPricing("Rabat Airport", "Rabat", { 3: 36, 4: 42, 5: 54, 7: 72 });
-setPricing("Casablanca Airport", "Casablanca", { 3: 48, 4: 54, 5: 66, 7: 84 });
-setPricing("Tangier Airport", "Tangier", { 3: 30, 4: 36, 5: 42, 7: 60 });
-setPricing("Marrakech Airport", "Marrakech", { 3: 24, 4: 30, 5: 36, 7: 54 });
-setPricing("Fes Airport", "Fes", { 3: 30, 4: 36, 5: 42, 7: 60 });
-setPricing("Agadir Airport", "Agadir", { 3: 36, 4: 42, 5: 54, 7: 72 });
-setPricing("Agadir Airport", "Taghazout", { 3: 48, 4: 54, 5: 66, 7: 84 });
+setPricing("Rabat Airport", "Rabat", { 3: 45, 4: 55, 5: 70, 7: 95 });
+setPricing("Rabat Airport", "Salé", { 3: 45, 4: 55, 5: 70, 7: 95 });
+setPricing("Casablanca Airport", "Casablanca", { 3: 50, 4: 60, 5: 75, 7: 100 });
+setPricing("Tangier Airport", "Tangier", { 3: 45, 4: 55, 5: 65, 7: 90 });
+setPricing("Tangier", "Tangier Port", { 3: 45, 4: 55, 5: 65, 7: 90 });
+setPricing("Marrakech Airport", "Marrakech", { 3: 45, 4: 55, 5: 65, 7: 90 });
+setPricing("Fes Airport", "Fes", { 3: 45, 4: 55, 5: 65, 7: 90 });
+setPricing("Agadir Airport", "Agadir", { 3: 50, 4: 60, 5: 75, 7: 100 });
+setPricing("Agadir Airport", "Taghazout", { 3: 65, 4: 75, 5: 90, 7: 120 });
 
 // Intercity & Regional Transfers
-setPricing("Rabat", "Casablanca", { 3: 96, 4: 108, 5: 132, 7: 168 });
-setPricing("Rabat", "Casablanca Airport", { 3: 102, 4: 120, 5: 144, 7: 180 });
-setPricing("Rabat Airport", "Casablanca", { 3: 102, 4: 120, 5: 144, 7: 180 });
-setPricing("Tangier", "Rabat", { 3: 180, 4: 210, 5: 240, 7: 336 });
-setPricing("Tangier Airport", "Rabat", { 3: 192, 4: 216, 5: 252, 7: 348 });
-setPricing("Marrakech", "Essaouira", { 3: 108, 4: 132, 5: 156, 7: 216 });
-setPricing("Fes", "Chefchaouen", { 3: 144, 4: 168, 5: 192, 7: 264 });
-setPricing("Casablanca", "Marrakech", { 3: 192, 4: 216, 5: 252, 7: 336 });
-setPricing("Casablanca Airport", "Marrakech", { 3: 192, 4: 216, 5: 252, 7: 336 });
-setPricing("Rabat", "Chefchaouen", { 3: 168, 4: 192, 5: 216, 7: 300 });
-setPricing("Casablanca", "Fes", { 3: 216, 4: 252, 5: 288, 7: 384 });
-setPricing("Tangier", "Casablanca", { 3: 240, 4: 276, 5: 312, 7: 420 });
-setPricing("Tangier", "Chefchaouen", { 3: 108, 4: 132, 5: 156, 7: 216 });
-setPricing("Rabat", "Marrakech", { 3: 204, 4: 228, 5: 264, 7: 360 });
-setPricing("Rabat", "Fes", { 3: 132, 4: 156, 5: 180, 7: 240 });
-setPricing("Marrakech", "Agadir", { 3: 156, 4: 180, 5: 210, 7: 288 });
-setPricing("Fes", "Merzouga", { 3: 312, 4: 360, 5: 420, 7: 540 });
-setPricing("Tangier", "Asilah", { 3: 48, 4: 60, 5: 72, 7: 96 });
-setPricing("Tangier", "Tetouan", { 3: 72, 4: 84, 5: 96, 7: 132 });
-setPricing("Marrakech", "Ouarzazate", { 3: 180, 4: 210, 5: 240, 7: 320 });
-setPricing("Agadir", "Taghazout", { 3: 36, 4: 42, 5: 54, 7: 72 });
+setPricing("Rabat", "Casablanca", { 3: 110, 4: 130, 5: 155, 7: 195 });
+setPricing("Rabat", "Casablanca Airport", { 3: 120, 4: 140, 5: 165, 7: 210 });
+setPricing("Rabat Airport", "Casablanca", { 3: 120, 4: 140, 5: 165, 7: 210 });
+setPricing("Tangier", "Rabat", { 3: 210, 4: 245, 5: 280, 7: 390 });
+setPricing("Tangier Airport", "Rabat", { 3: 210, 4: 245, 5: 280, 7: 390 });
+setPricing("Marrakech", "Essaouira", { 3: 140, 4: 165, 5: 195, 7: 260 });
+setPricing("Fes", "Chefchaouen", { 3: 170, 4: 195, 5: 230, 7: 310 });
+setPricing("Casablanca", "Marrakech", { 3: 220, 4: 250, 5: 290, 7: 390 });
+setPricing("Casablanca Airport", "Marrakech", { 3: 220, 4: 250, 5: 290, 7: 390 });
+setPricing("Rabat", "Chefchaouen", { 3: 249, 4: 289, 5: 329, 7: 429 });
+setPricing("Casablanca", "Fes", { 3: 250, 4: 290, 5: 335, 7: 445 });
+setPricing("Tangier", "Casablanca", { 3: 280, 4: 320, 5: 365, 7: 490 });
+setPricing("Tangier", "Chefchaouen", { 3: 140, 4: 165, 5: 195, 7: 260 });
+setPricing("Tangier Airport", "Chefchaouen", { 3: 140, 4: 165, 5: 195, 7: 260 });
+setPricing("Rabat", "Marrakech", { 3: 245, 4: 275, 5: 315, 7: 425 });
+setPricing("Rabat", "Fes", { 3: 165, 4: 190, 5: 220, 7: 295 });
+setPricing("Marrakech", "Agadir", { 3: 185, 4: 215, 5: 250, 7: 345 });
+setPricing("Fes", "Merzouga", { 3: 370, 4: 425, 5: 495, 7: 640 });
+setPricing("Tangier", "Asilah", { 3: 65, 4: 75, 5: 90, 7: 120 });
+setPricing("Tangier", "Tetouan", { 3: 85, 4: 100, 5: 115, 7: 150 });
+setPricing("Marrakech", "Ouarzazate", { 3: 220, 4: 250, 5: 290, 7: 390 });
+setPricing("Agadir", "Taghazout", { 3: 45, 4: 55, 5: 65, 7: 90 });
 
 /**
  * Retrieves the price for a given route and passenger count.
@@ -136,11 +139,11 @@ export function getRoutePrice(pickup: string, dropoff: string, passengers: numbe
         (nPickup.includes("Agadir") && nDropoff.includes("Agadir"))
     );
 
-    let baseSedanPrice = 144; // Default intercity base price
+    let baseSedanPrice = 150; // Default intercity base price
     if (airportCityMatch) {
-        baseSedanPrice = 36; // Local airport transfer base
+        baseSedanPrice = 45; // Local airport transfer base
     } else if (isAirportTransfer) {
-        baseSedanPrice = 120; // Intercity airport transfer base
+        baseSedanPrice = 130; // Intercity airport transfer base
     }
 
     // Scale price by passenger group size
@@ -156,8 +159,8 @@ export function getRoutePrice(pickup: string, dropoff: string, passengers: numbe
     };
 
     const rawPrice = passengerMultipliers[passengers] || baseSedanPrice * 1.5;
-    // Round cleanly to nearest multiple of 6 (e.g. 36, 42, 48, 144, 180, etc.)
-    const roundedPrice = Math.round(rawPrice / 6) * 6;
+    // Round cleanly to nearest multiple of 5
+    const roundedPrice = Math.round(rawPrice / 5) * 5;
     
-    return Math.max(24, roundedPrice);
+    return Math.max(30, roundedPrice);
 }
