@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-
 import { Language } from '@/lib/translations';
 
 interface PrivateDriverHeroGalleryProps {
@@ -13,33 +12,34 @@ interface PrivateDriverHeroGalleryProps {
 
 export default function PrivateDriverHeroGallery({ language, city, title }: PrivateDriverHeroGalleryProps) {
     const isEn = language === 'en';
+    const isEs = language === 'es';
     
-    const getGalleryImages = () => {
-        return [
-            '/img3/mdinatours-drivers-cars.webp',
-            '/img3/tourists-happy-private-driver-casablanca.webp',
-            '/img3/vito-mercedes-closeup.webp',
-            '/img2/private-vito-vans-3.webp',
-            '/img3/happy-tourists-in-casabalanca.webp',
-            '/img3/two-big-van.webp',
-            '/img2/private-chauffeur-maroc.webp',
-            '/img2/private-van-at-hotel.webp'
-        ];
-    };
+    const galleryImages = [
+        '/b-roll/vitooo.webp',
+        '/a-mdiinatours/Fourgon Mercedes devant une entrée marocaine ornée.webp',
+        '/a-mdiinatours/luxury-private-driver-mrocco-private-jet.webp',
+        '/a-mdiinatours/Chauffeur en costume devant des Mercedes noires.webp',
+        '/img3/vito-mercedes-closeup.webp',
+        '/img3/tourists-happy-private-driver-casablanca.webp',
+        '/a-mdiinatours/Selfie joyeuse en voiture en famille.webp',
+        '/a-mdiinatours/private-driver-vito-morocco.webp',
+        '/a-mdiinatours/happy-mdinatours-client.webp',
+        '/a-mdiinatours/Sourire devant le van Mercedes.webp',
+        '/a-mdiinatours/fiat-scudo-9-places-mdinatours.webp'
+    ];
 
-    const galleryImages = getGalleryImages();
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const dragStartX = useRef(0);
 
-    // Auto-scroll loop
+    // Auto-scroll loop (slow, non-distracting)
     useEffect(() => {
         const interval = setInterval(() => {
             if (!isDragging) {
                 setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
             }
-        }, 4000);
+        }, 5000);
         return () => clearInterval(interval);
     }, [galleryImages.length, isDragging]);
 
@@ -59,39 +59,13 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
         if (!isDragging) return;
         setIsDragging(false);
 
-        const threshold = 50; // Swipe threshold in pixels
+        const threshold = 50;
         if (dragOffset < -threshold) {
             setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? prev : prev + 1));
         } else if (dragOffset > threshold) {
             setActiveImageIndex((prev) => (prev === 0 ? prev : prev - 1));
         }
         setDragOffset(0);
-    };
-
-    const onTouchStart = (e: React.TouchEvent) => handleDragStart(e.touches[0].clientX);
-    const onTouchMove = (e: React.TouchEvent) => handleDragMove(e.touches[0].clientX);
-    const onTouchEnd = () => handleDragEnd();
-
-    const onMouseDown = (e: React.MouseEvent) => {
-        e.preventDefault();
-        handleDragStart(e.clientX);
-    };
-    const onMouseMove = (e: React.MouseEvent) => handleDragMove(e.clientX);
-    const onMouseUp = () => handleDragEnd();
-    const onMouseLeave = () => {
-        if (isDragging) handleDragEnd();
-    };
-
-    const handleShare = () => {
-        if (navigator.share) {
-            navigator.share({
-                title: title,
-                url: window.location.href,
-            }).catch(() => {});
-        } else {
-            navigator.clipboard.writeText(window.location.href);
-            alert(isEn ? "Link copied to clipboard!" : "Lien copié dans le presse-papiers !");
-        }
     };
 
     const trackStyle: React.CSSProperties = {
@@ -103,112 +77,187 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
         cursor: isDragging ? 'grabbing' : 'grab',
     };
 
+    const t = {
+        driverBenefit: isEn ? "Professional private driver" : (isEs ? "Conductor privado profesional" : "Chauffeur privé professionnel"),
+        pickupBenefit: isEn ? "Flexible pickup & stops" : (isEs ? "Recogida y paradas flexibles" : "Prise en charge & arrêts libres"),
+        payBenefit: isEn ? "Pay after each travel day (Cash/Card)" : (isEs ? "Pago al final de cada día (Efectivo/Tarjeta)" : "Paiement en fin de journée (Espèces/Carte)"),
+    };
+
     return (
-        <>
-        <div className="gallery-layout">
-            {/* Main Active Image Display */}
-            <div 
-                className="gallery-main-image"
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
-                onMouseDown={onMouseDown}
-                onMouseMove={onMouseMove}
-                onMouseUp={onMouseUp}
-                onMouseLeave={onMouseLeave}
-            >
-                <div className="gallery-slider-viewport">
-                    <div className="gallery-slider-track" style={trackStyle}>
-                        {galleryImages.map((img, idx) => (
-                            <div key={idx} className="gallery-slide-item">
-                                <Image
-                                    src={img}
-                                    alt={`${title} view ${idx + 1}`}
-                                    fill
-                                    priority={idx === 0}
-                                    style={{ objectFit: 'cover' }}
-                                    sizes="(max-width: 768px) 100vw, 800px"
-                                />
-                            </div>
-                        ))}
+        <div className="hero-gallery-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%' }}>
+            <div className="gallery-layout" style={{ margin: 0 }}>
+                {/* Main Large Dominant Image */}
+                <div 
+                    className="gallery-main-image"
+                    onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
+                    onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
+                    onTouchEnd={handleDragEnd}
+                    onMouseDown={(e) => { e.preventDefault(); handleDragStart(e.clientX); }}
+                    onMouseMove={(e) => handleDragMove(e.clientX)}
+                    onMouseUp={handleDragEnd}
+                    onMouseLeave={() => { if (isDragging) handleDragEnd(); }}
+                    style={{ borderRadius: '14px', overflow: 'hidden' }}
+                >
+                    <div className="gallery-slider-viewport">
+                        <div className="gallery-slider-track" style={trackStyle}>
+                            {galleryImages.map((img, idx) => (
+                                <div key={idx} className="gallery-slide-item">
+                                    <Image
+                                        src={img}
+                                        alt={`${title} view ${idx + 1}`}
+                                        fill
+                                        priority={idx === 0}
+                                        style={{ objectFit: 'cover' }}
+                                        sizes="(max-width: 768px) 100vw, 750px"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Navigation arrows */}
+                    <button
+                        type="button"
+                        onClick={() => setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))}
+                        className="gallery-arrow-btn"
+                        style={{ left: '12px', width: '34px', height: '34px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.92)', color: '#111', fontSize: '18px', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+                    >
+                        ‹
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))}
+                        className="gallery-arrow-btn"
+                        style={{ right: '12px', width: '34px', height: '34px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.92)', color: '#111', fontSize: '18px', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+                    >
+                        ›
+                    </button>
+
+                    {/* Image Counter Badge */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '12px',
+                        right: '12px',
+                        backgroundColor: 'rgba(15, 23, 42, 0.7)',
+                        color: '#FFFFFF',
+                        fontSize: '11.5px',
+                        fontWeight: 600,
+                        padding: '3px 9px',
+                        borderRadius: '12px',
+                        backdropFilter: 'blur(4px)',
+                        zIndex: 2,
+                        pointerEvents: 'none'
+                    }}>
+                        {activeImageIndex + 1} / {galleryImages.length}
                     </div>
                 </div>
 
-                {/* Navigation arrows */}
-                <button
-                    onClick={() => setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))}
-                    className="gallery-arrow-btn"
-                    style={{ left: '15px' }}
-                >
-                    ‹
-                </button>
-                <button
-                    onClick={() => setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))}
-                    className="gallery-arrow-btn"
-                    style={{ right: '15px' }}
-                >
-                    ›
-                </button>
+                {/* Clean Fixed 5-Column Thumbnails Grid */}
+                <div className="gallery-thumbnails-grid" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(5, 1fr)',
+                    gap: '8px',
+                    marginTop: '10px',
+                    width: '100%',
+                    boxSizing: 'border-box'
+                }}>
+                    {galleryImages.slice(0, 5).map((img, idx) => {
+                        const isSelected = idx === 4 ? activeImageIndex >= 4 : activeImageIndex === idx;
+                        const displayImg = idx === 4 && activeImageIndex >= 4 ? galleryImages[activeImageIndex] : img;
+                        const remainingCount = galleryImages.length - 4;
 
-                {/* Dot Indicators */}
-                <div className="gallery-dots-container">
-                    {galleryImages.map((_, idx) => (
-                        <button
-                            key={idx}
-                            type="button"
-                            onClick={() => setActiveImageIndex(idx)}
-                            className={`gallery-dot ${activeImageIndex === idx ? 'active' : ''}`}
-                            aria-label={`Go to slide ${idx + 1}`}
-                        />
-                    ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', gap: '10px' }}>
-                    <button 
-                        onClick={handleShare}
-                        style={{
-                            backgroundColor: '#fff',
-                            color: '#333',
-                            padding: '8px 15px',
-                            borderRadius: '20px',
-                            fontSize: '0.8rem',
-                            fontWeight: 600,
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '5px',
-                            border: 'none',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186.008-.004a2.25 2.25 0 0 1 2.24-.026l7.85 4.186a2.25 2.25 0 1 1-.356 1.17l-7.85-4.186a2.25 2.25 0 0 1-2.092-1.172Zm0-2.186.008.004a2.25 2.25 0 0 0 2.24.026l7.85-4.186a2.25 2.25 0 1 0-.356-1.17l-7.85 4.186a2.25 2.25 0 0 0-2.092 1.172Z" />
-                        </svg>
-                        {isEn ? "Share" : "Partager"}
-                    </button>
+                        return (
+                            <div 
+                                key={idx}
+                                className="gallery-thumb-item"
+                                onClick={() => {
+                                    if (idx === 4) {
+                                        if (activeImageIndex < 4) {
+                                            setActiveImageIndex(4);
+                                        } else {
+                                            setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 4 : prev + 1));
+                                        }
+                                    } else {
+                                        setActiveImageIndex(idx);
+                                    }
+                                }}
+                                style={{
+                                    position: 'relative',
+                                    height: '70px',
+                                    borderRadius: '8px',
+                                    overflow: 'hidden',
+                                    cursor: 'pointer',
+                                    border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
+                                    boxSizing: 'border-box',
+                                    transition: 'border-color 0.15s ease, transform 0.1s ease'
+                                }}
+                            >
+                                <Image
+                                    src={displayImg}
+                                    alt={`${title} thumbnail ${idx + 1}`}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                    sizes="120px"
+                                />
+                                {idx === 4 && remainingCount > 1 && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: isSelected ? 'rgba(15, 23, 42, 0.45)' : 'rgba(15, 23, 42, 0.65)',
+                                        color: '#FFFFFF',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '12.5px',
+                                        fontWeight: 700,
+                                        backdropFilter: 'blur(1px)',
+                                        transition: 'background-color 0.15s ease'
+                                    }}>
+                                        <span>+{remainingCount}</span>
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Thumbnails List at the bottom */}
-            <div className="gallery-thumbnails">
-                {galleryImages.map((img, idx) => (
-                    <div 
-                        key={idx}
-                        onClick={() => setActiveImageIndex(idx)}
-                        className={`gallery-thumbnail-item ${activeImageIndex === idx ? 'active' : ''}`}
-                    >
-                        <Image
-                            src={img}
-                            alt={`${title} view ${idx + 1}`}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                            sizes="100px"
-                        />
-                    </div>
-                ))}
+            {/* Travel-Product Benefits Row directly underneath gallery */}
+            <div className="driver-benefit-chips" style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '16px',
+                padding: '12px 14px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '10px',
+                border: '1px solid #EAEAEA',
+                fontSize: '12.5px',
+                color: '#334155',
+                fontWeight: 500
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <span>{t.driverBenefit}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
+                    </svg>
+                    <span>{t.pickupBenefit}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="20" height="14" x="2" y="5" rx="2" />
+                        <line x1="2" x2="22" y1="10" y2="10" />
+                    </svg>
+                    <span>{t.payBenefit}</span>
+                </div>
             </div>
         </div>
-        </>
     );
 }

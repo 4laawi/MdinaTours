@@ -1,10 +1,16 @@
 import { getAlternates } from '@/lib/seo';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ReactDOM from 'react-dom';
 import { GoogleAnalytics } from '@next/third-parties/google';
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+};
 
 const outfit = Outfit({
     weight: ['300', '400', '500', '600', '700', '800'],

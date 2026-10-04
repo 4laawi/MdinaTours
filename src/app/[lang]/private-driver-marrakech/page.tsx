@@ -420,35 +420,32 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
                         {textMarrakech.h1}
                     </h1>
 
-                    {/* Ratings */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.1rem' }}>
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    {/* Compact Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
+                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
+                            <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '0.9rem' }}>
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <span style={{ fontSize: '0.8rem', color: '#1E293B', fontWeight: 600 }}>
+                                144 {isEn ? "Reviews" : "Avis"}
+                            </span>
                         </div>
-                        <span style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}>
-                            144 {isEn ? "Reviews" : "Avis"}
-                        </span>
-                    </div>
 
-                    {/* Excellence Badge */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', padding: '5px 10px', borderRadius: '6px' }}>
                             <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#92400e' }}>
+                                {isEn ? "Badge of Excellence" : "Badge d'Excellence"}
+                            </span>
                         </div>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
-                            {isEn ? "Badge of Excellence" : "Badge d'Excellence"}
-                        </span>
-                    </div>
 
-                    {/* Reserve Now & Lowest Price Row */}
-                    <div className="guarantees-row" style={{ display: 'flex', flexWrap: 'nowrap', gap: '8px', fontSize: '0.75rem', marginBottom: '20px', width: '100%', overflowX: 'auto' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', padding: '6px 10px', borderRadius: '12px', whiteSpace: 'nowrap' }}>
+                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
                             <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
-                            <span style={{ fontWeight: 500 }}>{isEn ? "Reserve Now Pay later" : "Réservez maintenant, payez plus tard"}</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{isEn ? "Reserve Now Pay later" : "Réservez maintenant, payez plus tard"}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', padding: '6px 10px', borderRadius: '12px', whiteSpace: 'nowrap' }}>
+
+                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
                             <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
-                            <span style={{ fontWeight: 500 }}>{isEn ? "Lowest price guaranteed" : "Meilleur prix garanti"}</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{isEn ? "Lowest price guaranteed" : "Meilleur prix garanti"}</span>
                         </div>
                     </div>
 

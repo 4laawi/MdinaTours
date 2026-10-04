@@ -1,111 +1,92 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { TbBus, TbCarSuvFilled } from "react-icons/tb";
-import { FaCarSide, FaVanShuttle } from "react-icons/fa6";
-
-interface VehicleOption {
-    nameEn: string;
-    nameFr: string;
-    spec: string;
-    capacityEn: string;
-    capacityFr: string;
-    luggage: string;
-    pricePerDay: number;
-    price8Days?: number;
-    pricePerHour: number;
-    image: string;
-}
-
+import React, { useState, useEffect } from 'react';
 import { Language } from '@/lib/translations';
+
+export type ServiceType = 'hourly' | 'full-day' | 'multi-day';
+export type VehicleType = 'comfort' | 'vito';
 
 interface PrivateDriverBookingWidgetProps {
     language: Language;
-    defaultCity: string;
+    defaultCity?: string;
     defaultDays?: number;
     is8DaysPackage?: boolean;
 }
 
-const VEHICLES: VehicleOption[] = [
-    {
-        nameEn: "Comfort SUV",
-        nameFr: "SUV Grand Confort",
-        spec: "Toyota Prado / Volkswagen Touareg",
-        capacityEn: "1-4 passengers",
-        capacityFr: "1-4 passagers",
-        luggage: "4 Bags",
-        pricePerDay: 132,
-        price8Days: 936,
-        pricePerHour: 22,
-        image: "/img/Morocco-trip-tour-hero08.webp"
-    },
-    {
-        nameEn: "VIP Minivan",
-        nameFr: "Minivan VIP",
-        spec: "Mercedes-Benz Vito / V-Class",
-        capacityEn: "1-8 passengers",
-        capacityFr: "1-8 passagers",
-        luggage: "8 Bags",
-        pricePerDay: 144,
-        price8Days: 1020,
-        pricePerHour: 28,
-        image: "/img2/private-vito-vans-3.webp"
-    },
-    {
-        nameEn: "VIP Minibus",
-        nameFr: "Minibus Executive Sprinter",
-        spec: "Mercedes-Benz Sprinter",
-        capacityEn: "8-16 passengers",
-        capacityFr: "8-16 passagers",
-        luggage: "16 Bags",
-        pricePerDay: 216,
-        price8Days: 1536,
-        pricePerHour: 35,
-        image: "/b-roll/3-Mercedes-vito-airoport.jpg"
-    }
+const MOROCCO_CITIES = [
+    { value: "Casablanca", en: "Casablanca", fr: "Casablanca", es: "Casablanca" },
+    { value: "Marrakech", en: "Marrakech", fr: "Marrakech", es: "Marrakech" },
+    { value: "Rabat", en: "Rabat", fr: "Rabat", es: "Rabat" },
+    { value: "Tangier", en: "Tangier", fr: "Tanger", es: "Tánger" },
+    { value: "Fes", en: "Fes", fr: "Fès", es: "Fez" },
+    { value: "Agadir", en: "Agadir", fr: "Agadir", es: "Agadir" },
+    { value: "Chefchaouen", en: "Chefchaouen", fr: "Chefchaouen", es: "Chefchaouen" },
+    { value: "Essaouira", en: "Essaouira", fr: "Essaouira", es: "Esauira" },
+    { value: "Ouarzazate", en: "Ouarzazate", fr: "Ouarzazate", es: "Uarzazat" },
+    { value: "Merzouga", en: "Merzouga / Desert", fr: "Merzouga / Désert", es: "Merzouga / Desierto" },
+    { value: "Meknes", en: "Meknes", fr: "Meknès", es: "Mequinez" },
+    { value: "Salé", en: "Salé", fr: "Salé", es: "Salé" },
+    { value: "Tetouan", en: "Tetouan", fr: "Tétouan", es: "Tetuán" },
+    { value: "Other", en: "Other / Custom", fr: "Autre / Sur mesure", es: "Otra ciudad / A medida" }
 ];
-
 
 export default function PrivateDriverBookingWidget({
     language,
-    defaultCity,
+    defaultCity = "",
     defaultDays = 1,
     is8DaysPackage = false
 }: PrivateDriverBookingWidgetProps) {
     const isEn = language === 'en';
+    const isEs = language === 'es';
 
-    // State inputs
-    const [startCity, setStartCity] = useState("");
-    const [hireType, setHireType] = useState<'hourly' | 'daily'>('hourly');
-    const [travelPlan, setTravelPlan] = useState("");
-    const [duration, setDuration] = useState(defaultDays);
+    const isCityKnown = Boolean(defaultCity && defaultCity.toLowerCase() !== "morocco");
+
+    // Service Tab State
+    const [serviceType, setServiceType] = useState<ServiceType>(
+        is8DaysPackage ? 'multi-day' : 'hourly'
+    );
+    const [startCity, setStartCity] = useState(defaultCity && defaultCity.toLowerCase() !== "morocco" ? defaultCity : "Casablanca");
+    
+    // Progressive Disclosure State (Stage 1 vs Stage 2)
+    const [showVehicles, setShowVehicles] = useState(false);
+
+    // Vehicle Selection: 'comfort' (€25/h) or 'vito' (€35/h)
+    const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('comfort');
+
+    // Dates
     const [travelDate, setTravelDate] = useState(() => {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         return tomorrow.toISOString().split('T')[0];
     });
-    const [selectedVehicleIdx, setSelectedVehicleIdx] = useState(1); // default VIP Minivan
-    
-    // Progressive modal state variables
-    const [activeModalType, setActiveModalType] = useState<'whatsapp' | 'email' | null>(null);
-    const [progressiveStep, setProgressiveStep] = useState<'route-selection' | 'travel-plan' | 'contact-details' | 'success' | null>(null);
-    const [routeLocationType, setRouteLocationType] = useState<'same' | 'multi' | null>(null);
 
-    // Modal states
+    const [endDate, setEndDate] = useState(() => {
+        const d = new Date();
+        d.setDate(d.getDate() + (is8DaysPackage ? 8 : (defaultDays > 1 ? defaultDays : 5)));
+        return d.toISOString().split('T')[0];
+    });
+
+    const [hours, setHours] = useState(4);
+    const [passengers, setPassengers] = useState(2);
+    const [routePlan, setRoutePlan] = useState("");
+    const [itinerary, setItinerary] = useState("");
+
+    // Email Modal State
+    const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const [custName, setCustName] = useState('');
     const [custEmail, setCustEmail] = useState('');
     const [custPhone, setCustPhone] = useState('');
+    const [custNotes, setCustNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     useEffect(() => {
-        // Hydrate from localStorage on client-side mount
         const storedCity = localStorage.getItem('mdina_tours_private_driver_start_city');
-        if (storedCity) {
+        if (storedCity && !isCityKnown) {
             setStartCity(storedCity);
         }
-    }, []);
+    }, [isCityKnown]);
 
     useEffect(() => {
         const handleSetCity = (e: Event) => {
@@ -125,1145 +106,1262 @@ export default function PrivateDriverBookingWidget({
         };
     }, []);
 
-    const vehicle = VEHICLES[selectedVehicleIdx];
-    const vehicleName = isEn ? vehicle.nameEn : vehicle.nameFr;
-    const capacityText = isEn ? vehicle.capacityEn : vehicle.capacityFr;
+    // Pricing rates (EUR)
+    const hourlyRate = selectedVehicle === 'vito' ? 35 : 25;
+    const estimatedTotal = hourlyRate * hours;
 
-    // Calculate Price dynamically
-    const calculatePrice = () => {
-        if (hireType === 'hourly') {
-            return vehicle.pricePerHour * duration;
-        }
-        if (is8DaysPackage && duration === 8) {
-            return vehicle.price8Days || (vehicle.pricePerDay * 8);
-        }
-        // Apply slight discount for longer durations (> 4 days)
-        let rate = vehicle.pricePerDay;
-        if (duration >= 5) {
-            rate = Math.round(rate * 0.95); // 5% discount
-        }
-        return rate * duration;
-    };
-
-    const currentPrice = calculatePrice();
-
-    const getVehicleIcon = (idx: number) => {
-        switch (idx) {
-            case 0: return <TbCarSuvFilled style={{ fontSize: '20px' }} />;
-            case 1: return <FaVanShuttle style={{ fontSize: '18px' }} />;
-            case 2: return <TbBus style={{ fontSize: '20px' }} />;
-            default: return null;
+    // Formatting date helper
+    const formatDateFriendly = (dateStr: string) => {
+        if (!dateStr) return '';
+        try {
+            const dateObj = new Date(dateStr + 'T00:00:00');
+            const locale = isEn ? 'en-US' : (isEs ? 'es-ES' : 'fr-FR');
+            return dateObj.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+        } catch {
+            return dateStr;
         }
     };
 
-    // WhatsApp Message Builder
-    const getWhatsAppUrlFor = (
-        hType: 'hourly' | 'daily', 
-        rType: 'same' | 'multi' | null, 
-        tPlan: string
-    ) => {
-        let msg = '';
-        if (hType === 'hourly') {
-            msg = isEn
-                ? `Hello Mdina Tours,\nI would like to book a private driver service (Hourly Hire).\n\n• Start City: ${startCity}\n• Date: ${travelDate}\n• Duration: ${duration} Hour(s)\n• Vehicle: ${vehicleName} (${capacityText})`
-                : `Bonjour Mdina Tours,\nJe souhaite réserver un service de chauffeur privé (Location Horaire).\n\n• Ville de départ: ${startCity}\n• Date: ${travelDate}\n• Durée: ${duration} Heure(s)\n• Véhicule: ${vehicleName} (${capacityText})`;
-            msg += isEn ? `\n• Est. Price: €${currentPrice}` : `\n• Tarif Est.: €${currentPrice}`;
-        } else {
-            // Daily hire
-            msg = isEn
-                ? `Hello Mdina Tours,\nI would like to book a private driver service (Daily Hire).\n\n• Start City: ${startCity}\n• Date: ${travelDate}\n• Duration: ${duration} Day(s)\n• Vehicle: ${vehicleName} (${capacityText})\n• Travel Type: ${rType === 'same' ? 'Same city & nearby areas' : 'Multiple cities'}`
-                : `Bonjour Mdina Tours,\nJe souhaite réserver un service de chauffeur privé (Location Journalière).\n\n• Ville de départ: ${startCity}\n• Date: ${travelDate}\n• Durée: ${duration} Jour(s)\n• Véhicule: ${vehicleName} (${capacityText})\n• Type de voyage: ${rType === 'same' ? 'Même ville & environs' : 'Plusieurs villes'}`;
-            
-            if (rType === 'multi' && tPlan) {
-                msg += isEn ? `\n• Travel Plan: ${tPlan}` : `\n• Itinéraire: ${tPlan}`;
-                msg += isEn ? `\n• Est. Price: To be confirmed` : `\n• Tarif Est.: À confirmer`;
+    const formatDateShort = (dateStr: string) => {
+        if (!dateStr) return '';
+        try {
+            const dateObj = new Date(dateStr + 'T00:00:00');
+            const locale = isEn ? 'en-US' : (isEs ? 'es-ES' : 'fr-FR');
+            return dateObj.toLocaleDateString(locale, { day: 'numeric', month: 'short' });
+        } catch {
+            return dateStr;
+        }
+    };
+
+    // Dictionary
+    const t = {
+        tabHourly: isEn ? "Hourly" : (isEs ? "Por Horas" : "À l'Heure"),
+        tabFullDay: isEn ? "Full Day" : (isEs ? "Día Completo" : "Journée"),
+        tabMultiDay: isEn ? "Multi-Day" : (isEs ? "Varios Días" : "Multi-Jours"),
+        fromPrefix: isEn ? "From" : (isEs ? "Desde" : "À partir de"),
+        perHour: isEn ? "/ hour" : (isEs ? "/ hora" : "/ heure"),
+        customQuoteHeader: isEn ? "Custom Quote" : (isEs ? "Presupuesto a Medida" : "Devis sur Mesure"),
+        customQuoteSub: isEn ? "Based on your itinerary" : (isEs ? "Según su itinerario" : "Selon votre itinéraire"),
+        estimatedTotalLabel: isEn ? "Estimated total" : (isEs ? "Total estimado" : "Total estimé"),
+        cityLabel: isEn ? "City" : (isEs ? "Ciudad" : "Ville"),
+        dateLabel: isEn ? "Date" : (isEs ? "Fecha" : "Date"),
+        startDateLabel: isEn ? "Start Date" : (isEs ? "Fecha Inicio" : "Date Début"),
+        endDateLabel: isEn ? "End Date" : (isEs ? "Fecha Fin" : "Date Fin"),
+        durationLabel: isEn ? "Duration" : (isEs ? "Duración" : "Durée"),
+        passengersLabel: isEn ? "Passengers" : (isEs ? "Pasajeros" : "Passagers"),
+        chooseRide: isEn ? "Choose your ride" : (isEs ? "Elija su vehículo" : "Choisissez votre véhicule"),
+        comfortTitle: isEn ? "Comfort" : (isEs ? "Confort" : "Confort"),
+        comfortDesc: isEn ? "Sedan or compact SUV" : (isEs ? "Sedán o SUV confortable" : "Berline ou SUV confortable"),
+        vitoTitle: "Mercedes Vito",
+        vitoDesc: isEn ? "Spacious premium van · Extra luggage & space" : (isEs ? "Van espaciosa premium · Espacio y confort" : "Van haut de gamme spacieux · Grand confort"),
+        popularBadge: isEn ? "Popular" : (isEs ? "Popular" : "Populaire"),
+        seeAvailableVehicles: isEn ? "See available vehicles" : (isEs ? "Ver vehículos disponibles" : "Voir les véhicules disponibles"),
+        ctaReserveWhatsApp: isEn ? "Reserve on WhatsApp" : (isEs ? "Reservar por WhatsApp" : "Réserver sur WhatsApp"),
+        ctaFullDay: isEn ? "Request a Quote" : (isEs ? "Solicitar Presupuesto" : "Demander un Devis"),
+        ctaMultiDay: isEn ? "Send My Itinerary" : (isEs ? "Enviar mi Itinerario" : "Envoyer mon Itinéraire"),
+        subCtaReassurance: isEn ? "No card required · Pay on the day" : (isEs ? "Sin tarjeta · Pague el día del viaje" : "Sans carte bancaire · Paiement sur place"),
+        subCtaMultiDay: isEn ? "Continue on WhatsApp · Fast response" : (isEs ? "Continuar en WhatsApp · Respuesta rápida" : "Continuer sur WhatsApp · Réponse rapide"),
+        reassurance1: isEn ? "Free cancellation up to 24 hours before pickup" : (isEs ? "Cancelación gratuita hasta 24 horas antes del viaje" : "Annulation gratuite jusqu'à 24h avant la prise en charge"),
+        reassurance2: isEn ? "Pay on the day — cash or card" : (isEs ? "Pague el día del viaje — efectivo o tarjeta" : "Paiement le jour même — espèces ou carte"),
+        secondaryEmailLink: isEn ? "Prefer email? Send inquiry →" : (isEs ? "¿Prefiere por email? Enviar consulta →" : "Vous préférez par e-mail ? Demander par e-mail →"),
+        hourUnit: isEn ? "hours" : (isEs ? "horas" : "heures"),
+        optionalPlacesLabel: isEn ? "Optional itinerary / places" : (isEs ? "Itinerario / lugares (Opcional)" : "Itinéraire / arrêts (Optionnel)"),
+        optionalPlacesPlaceholder: isEn ? "e.g. City tour, Ourika Valley, restaurant stops" : (isEs ? "ej: Visita de la ciudad, Ourika, paradas..." : "ex : Visite de ville, Vallée de l'Ourika, arrêts..."),
+        itineraryLabel: isEn ? "Itinerary / cities" : (isEs ? "Itinerario / ciudades" : "Itinéraire / villes"),
+        itineraryPlaceholder: isEn ? "e.g. Casablanca → Chefchaouen → Fes → Merzouga → Marrakech" : (isEs ? "ej: Casablanca → Chefchaouen → Fez → Merzouga → Marrakech" : "ex : Casablanca → Chefchaouen → Fès → Merzouga → Marrakech"),
+        modalTitle: isEn ? "Request Private Chauffeur" : (isEs ? "Solicitar Conductor Privado" : "Demande de Chauffeur Privé"),
+        modalSubtitle: isEn ? "Enter your contact details and we'll reply promptly." : (isEs ? "Introduzca sus datos y le responderemos enseguida." : "Entrez vos coordonnées et nous vous répondrons rapidement."),
+        nameLabel: isEn ? "Full Name *" : (isEs ? "Nombre Completo *" : "Nom Complet *"),
+        emailLabel: isEn ? "Email Address *" : (isEs ? "Correo Electrónico *" : "Adresse E-mail *"),
+        phoneLabel: isEn ? "Phone / WhatsApp" : (isEs ? "Teléfono / WhatsApp" : "Téléphone / WhatsApp"),
+        notesLabel: isEn ? "Additional Notes" : (isEs ? "Notas Adicionales" : "Notes Additionnelles"),
+        sendBtn: isEn ? "Submit Request" : (isEs ? "Enviar Solicitud" : "Envoyer la Demande"),
+        sendingBtn: isEn ? "Submitting..." : (isEs ? "Enviando..." : "Envoi..."),
+        modalSuccessTitle: isEn ? "Request Received!" : (isEs ? "¡Solicitud Recibida!" : "Demande Reçue !"),
+        modalSuccessMsg: isEn ? "Thank you! We will get in touch with your quote shortly." : (isEs ? "¡Gracias! Nos pondremos en contacto muy pronto." : "Merci ! Nous vous contacterons très vite avec votre devis."),
+        alertCity: isEn ? "Please select a starting city." : (isEs ? "Por favor elija una ciudad de salida." : "Veuillez choisir une ville de départ."),
+        capacityWarningComfort: isEn
+            ? "Comfort vehicles fit up to 4 guests. For 5–7 guests, please select Mercedes Vito."
+            : (isEs ? "Vehículo Confort admite hasta 4 personas. Para 5–7 personas, elija Mercedes Vito." : "Le véhicule Confort accueille jusqu'à 4 passagers. Pour 5 à 7 passagers, choisissez le Mercedes Vito."),
+        capacityWarningMinibus: isEn
+            ? "For groups of 8+ guests, executive minibus transport is available. Contact us on WhatsApp."
+            : (isEs ? "Para grupos de más de 7 personas, disponemos de minibús. Contáctenos por WhatsApp." : "Pour les groupes de plus de 7 passagers, des minibus sont disponibles. Contactez-nous sur WhatsApp.")
+    };
+
+    const vehicleNameFormatted = selectedVehicle === 'vito' ? 'Mercedes Vito' : 'Comfort';
+
+    // WhatsApp Message Generator
+    const getWhatsAppUrl = () => {
+        const phoneNumber = "212724114775";
+        let message = "";
+
+        const friendlyDate = formatDateFriendly(travelDate);
+        const friendlyEndDate = formatDateFriendly(endDate);
+        const cityName = startCity || "Casablanca";
+
+        if (serviceType === 'hourly') {
+            if (isEs) {
+                message = `Hola, me gustaría reservar un conductor privado en ${cityName}.\n\nFecha: ${friendlyDate}\nDuración: ${hours} ${hours === 1 ? 'hora' : 'horas'}\nPasajeros: ${passengers}\nVehículo: ${vehicleNameFormatted}\nPrecio estimado: ${estimatedTotal}€\n\nPor favor confirmen disponibilidad.`;
+            } else if (!isEn) {
+                message = `Bonjour, je souhaite réserver un chauffeur privé à ${cityName}.\n\nDate : ${friendlyDate}\nDurée : ${hours} ${hours === 1 ? 'heure' : 'heures'}\nPassagers : ${passengers}\nVéhicule : ${vehicleNameFormatted}\nPrix estimé : ${estimatedTotal}€\n\nMerci de me confirmer la disponibilité.`;
             } else {
-                msg += isEn ? `\n• Est. Price: €${currentPrice}` : `\n• Tarif Est.: €${currentPrice}`;
+                message = `Hi, I'd like to reserve a private driver in ${cityName}.\n\nDate: ${friendlyDate}\nDuration: ${hours} ${hours === 1 ? 'hour' : 'hours'}\nGuests: ${passengers}\nVehicle: ${vehicleNameFormatted}\nEstimated price: €${estimatedTotal}\n\nPlease confirm availability.`;
+            }
+        } else if (serviceType === 'full-day') {
+            if (isEs) {
+                message = `Hola, me gustaría reservar un conductor privado de día completo en ${cityName}.\n\nFecha: ${friendlyDate}\nDuración: Día completo\nPasajeros: ${passengers}\nVehículo: ${vehicleNameFormatted}${routePlan ? `\nItinerario previsto: ${routePlan}` : ''}\n\nPor favor confirmen disponibilidad y presupuesto.`;
+            } else if (!isEn) {
+                message = `Bonjour, je souhaite réserver un chauffeur privé pour la journée à ${cityName}.\n\nDate : ${friendlyDate}\nDurée : Journée complète\nPassagers : ${passengers}\nVéhicule : ${vehicleNameFormatted}${routePlan ? `\nItinéraire prévu : ${routePlan}` : ''}\n\nMerci de me confirmer la disponibilité et le tarif.`;
+            } else {
+                message = `Hi, I'd like to reserve a full-day private driver in ${cityName}.\n\nDate: ${friendlyDate}\nDuration: Full Day\nGuests: ${passengers}\nVehicle: ${vehicleNameFormatted}${routePlan ? `\nPlanned itinerary: ${routePlan}` : ''}\n\nPlease confirm availability and quote.`;
+            }
+        } else {
+            // Multi-Day / Itinerary
+            if (isEs) {
+                message = `Hola, me gustaría reservar un conductor privado para un itinerario en Marruecos.\n\nCiudad de salida: ${cityName}\nFechas: ${friendlyDate} – ${friendlyEndDate}\nPasajeros: ${passengers}${itinerary ? `\nItinerario: ${itinerary}` : ''}\n\nPor favor confirmen disponibilidad y presupuesto.`;
+            } else if (!isEn) {
+                message = `Bonjour, je souhaite réserver un chauffeur privé pour un circuit au Maroc.\n\nVille de départ : ${cityName}\nDates : ${friendlyDate} au ${friendlyEndDate}\nPassagers : ${passengers}${itinerary ? `\nItinéraire : ${itinerary}` : ''}\n\nMerci de me confirmer la disponibilité et le devis.`;
+            } else {
+                message = `Hi, I'd like to reserve a private driver for a Morocco itinerary.\n\nStarting city: ${cityName}\nDates: ${friendlyDate} – ${friendlyEndDate}\nGuests: ${passengers}${itinerary ? `\nItinerary: ${itinerary}` : ''}\n\nPlease confirm availability and quote.`;
             }
         }
-        
-        msg += isEn ? `\n\nPlease let me know availability.` : `\n\nMerci de me confirmer la disponibilité.`;
-        return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
+
+        return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     };
 
-    const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handlePrimaryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (!startCity) {
-            alert(isEn ? "Please select a starting city first." : "Veuillez d'abord choisir une ville de départ.");
             e.preventDefault();
+            alert(t.alertCity);
             return;
         }
-        if (hireType === 'daily') {
-            e.preventDefault();
-            setActiveModalType('whatsapp');
-            setProgressiveStep('route-selection');
-            setRouteLocationType(null);
-            setTravelPlan('');
-            setSuccessMessage('');
-            setErrorMessage('');
+    };
+
+    const handleEmailModalSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        const serviceTitle = serviceType === 'hourly' 
+            ? `Private Driver (Hourly - ${vehicleNameFormatted})` 
+            : (serviceType === 'full-day' ? `Private Driver (Full Day - ${vehicleNameFormatted})` : "Private Driver (Multi-Day Itinerary)");
+
+        const customMessage = `Service: ${serviceTitle}\nVehicle: ${serviceType !== 'multi-day' ? vehicleNameFormatted : 'Custom Itinerary'}\nCity: ${startCity}\nDates: ${serviceType === 'multi-day' ? `${travelDate} to ${endDate}` : travelDate}\nDuration: ${serviceType === 'hourly' ? `${hours} Hours` : (serviceType === 'full-day' ? '1 Day' : 'Multi-Day')}\nPassengers: ${passengers}\n${serviceType === 'full-day' && routePlan ? `Planned Places: ${routePlan}\n` : ''}${serviceType === 'multi-day' && itinerary ? `Itinerary: ${itinerary}\n` : ''}${custNotes ? `Client Notes: ${custNotes}` : ''}`;
+
+        try {
+            const res = await fetch('/api/send-booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    bookingType: 'private-driver',
+                    language: language,
+                    name: custName,
+                    email: custEmail,
+                    phone: custPhone,
+                    service: serviceTitle,
+                    startCity: startCity,
+                    travelDate: travelDate,
+                    duration: serviceType === 'hourly' ? `${hours} Hours` : (serviceType === 'full-day' ? '1 Day' : 'Multi-Day'),
+                    travelers: passengers,
+                    vehicleCategory: serviceType !== 'multi-day' ? vehicleNameFormatted : undefined,
+                    travelPlan: serviceType === 'multi-day' ? itinerary : (serviceType === 'full-day' ? routePlan : undefined),
+                    estimatedPrice: serviceType === 'hourly' ? `€${estimatedTotal}` : 'Custom Quote',
+                    message: customMessage,
+                    routeName: "Private Driver Booking Request"
+                })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setSubmitSuccess(true);
+                setTimeout(() => {
+                    setIsEmailModalOpen(false);
+                    setSubmitSuccess(false);
+                    setCustName('');
+                    setCustEmail('');
+                    setCustPhone('');
+                    setCustNotes('');
+                }, 3000);
+            } else {
+                setSubmitError(data.error || "Submission failed. Please try again.");
+            }
+        } catch {
+            setSubmitError("Network error. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
-    const handleEmailClick = () => {
-        if (!startCity) {
-            alert(isEn ? "Please select a starting city first." : "Veuillez d'abord choisir une ville de départ.");
-            return;
-        }
-        setActiveModalType('email');
-        if (hireType === 'daily') {
-            setProgressiveStep('route-selection');
-            setRouteLocationType(null);
-            setTravelPlan('');
-        } else {
-            setProgressiveStep('contact-details');
-        }
-        setSuccessMessage('');
-        setErrorMessage('');
-        setCustName('');
-        setCustEmail('');
-        setCustPhone('');
-    };
-
-    const renderModalContent = () => {
-        const isWhatsApp = activeModalType === 'whatsapp';
-
-        if (progressiveStep === 'route-selection') {
-            return (
-                <div>
-                    <h3 style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)',
-                        marginBottom: '12px',
-                        fontFamily: "'Cormorant Garamond', serif",
-                        lineHeight: 1.2
-                    }}>
-                        {isEn ? "Tell us your travel plan" : "Planifiez votre itinéraire"}
-                    </h3>
-                    <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '24px', lineHeight: 1.5 }}>
-                        {isEn 
-                            ? "Will you stay in the same area or visit multiple cities?" 
-                            : "Allez-vous rester dans la même zone ou visiter plusieurs villes ?"}
-                    </p>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
-                        <div 
-                            onClick={() => setRouteLocationType('same')}
-                            style={{
-                                border: routeLocationType === 'same' ? '2.5px solid var(--primary)' : '1.5px solid #e2e8f0',
-                                borderRadius: '12px',
-                                padding: '14px 16px',
-                                cursor: 'pointer',
-                                backgroundColor: routeLocationType === 'same' ? 'rgba(220, 131, 78, 0.03)' : '#fff',
-                                transition: 'all 0.2s',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '12px'
-                            }}
-                        >
-                            <div style={{
-                                width: '16px',
-                                height: '16px',
-                                borderRadius: '50%',
-                                border: routeLocationType === 'same' ? '5px solid var(--primary)' : '1.5px solid #cbd5e1',
-                                backgroundColor: '#fff',
-                                flexShrink: 0,
-                                boxSizing: 'border-box'
-                            }} />
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--secondary)' }}>
-                                    {isEn ? "Yes, same city & nearby areas" : "Oui, même ville & environs"}
-                                </span>
-                                <span style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
-                                    {isEn ? "Chauffeur services within starting city" : "Service de chauffeur dans la ville de départ"}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div 
-                            onClick={() => setRouteLocationType('multi')}
-                            style={{
-                                border: routeLocationType === 'multi' ? '2.5px solid var(--primary)' : '1.5px solid #e2e8f0',
-                                borderRadius: '12px',
-                                padding: '14px 16px',
-                                cursor: 'pointer',
-                                backgroundColor: routeLocationType === 'multi' ? 'rgba(220, 131, 78, 0.03)' : '#fff',
-                                transition: 'all 0.2s',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '12px'
-                            }}
-                        >
-                            <div style={{
-                                width: '16px',
-                                height: '16px',
-                                borderRadius: '50%',
-                                border: routeLocationType === 'multi' ? '5px solid var(--primary)' : '1.5px solid #cbd5e1',
-                                backgroundColor: '#fff',
-                                flexShrink: 0,
-                                boxSizing: 'border-box'
-                            }} />
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--secondary)' }}>
-                                    {isEn ? "No, I'll visit multiple cities" : "Non, je visiterai plusieurs villes"}
-                                </span>
-                                <span style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
-                                    {isEn ? "Road trips & custom multi-city itineraries" : "Road trips & itinéraires multi-villes sur mesure"}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={() => {
-                            if (!routeLocationType) {
-                                alert(isEn ? "Please select an option to continue." : "Veuillez sélectionner une option pour continuer.");
-                                return;
-                            }
-                            if (routeLocationType === 'multi') {
-                                setProgressiveStep('travel-plan');
-                            } else {
-                                if (isWhatsApp) {
-                                    setProgressiveStep('success');
-                                    const url = getWhatsAppUrlFor('daily', 'same', '');
-                                    setTimeout(() => {
-                                        window.open(url, '_blank');
-                                        setActiveModalType(null);
-                                    }, 2000);
-                                } else {
-                                    setProgressiveStep('contact-details');
-                                }
-                            }
-                        }}
-                        style={{
-                            backgroundColor: 'var(--primary)',
-                            color: '#fff',
-                            width: '100%',
-                            padding: '14px',
-                            borderRadius: '10px',
-                            fontWeight: 700,
-                            fontSize: '15px',
-                            border: 'none',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background-color 0.2s',
-                            fontFamily: 'inherit'
-                        }}
-                    >
-                        {isEn ? "Continue" : "Continuer"}
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </div>
-            );
-        }
-
-        if (progressiveStep === 'travel-plan') {
-            return (
-                <div>
-                    <h3 style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)',
-                        marginBottom: '12px',
-                        fontFamily: "'Cormorant Garamond', serif",
-                        lineHeight: 1.2
-                    }}>
-                        {isEn ? "Tell us your travel plan" : "Itinéraire du voyage"}
-                    </h3>
-                    <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '20px', lineHeight: 1.5 }}>
-                        {isEn 
-                            ? "Where are you planning to go?" 
-                            : "Où prévoyez-vous d'aller ?"}
-                    </p>
-
-                    <div style={{ marginBottom: '20px' }}>
-                        <textarea
-                            required
-                            value={travelPlan}
-                            onChange={(e) => setTravelPlan(e.target.value)}
-                            placeholder={isEn ? "e.g. Marrakech → Atlas Mountains → Essaouira → Casablanca" : "ex: Marrakech → Atlas → Essaouira → Casablanca"}
-                            rows={4}
-                            style={{
-                                width: '100%',
-                                padding: '14px',
-                                borderRadius: '10px',
-                                border: '1.5px solid #cbd5e1',
-                                fontSize: '14px',
-                                outline: 'none',
-                                color: '#222',
-                                backgroundColor: '#fff',
-                                resize: 'vertical',
-                                boxSizing: 'border-box',
-                                fontFamily: 'inherit',
-                                lineHeight: 1.5
-                            }}
-                        />
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={() => {
-                            if (!travelPlan.trim()) {
-                                alert(isEn ? "Please describe your travel plan to continue." : "Veuillez décrire votre itinéraire pour continuer.");
-                                return;
-                            }
-                            if (isWhatsApp) {
-                                setProgressiveStep('success');
-                                const url = getWhatsAppUrlFor('daily', 'multi', travelPlan);
-                                setTimeout(() => {
-                                    window.open(url, '_blank');
-                                    setActiveModalType(null);
-                                }, 2000);
-                            } else {
-                                setProgressiveStep('contact-details');
-                            }
-                        }}
-                        style={{
-                            backgroundColor: 'var(--primary)',
-                            color: '#fff',
-                            width: '100%',
-                            padding: '14px',
-                            borderRadius: '10px',
-                            fontWeight: 700,
-                            fontSize: '15px',
-                            border: 'none',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background-color 0.2s',
-                            fontFamily: 'inherit'
-                        }}
-                    >
-                        {isWhatsApp ? (isEn ? "Continue →" : "Continuer →") : (isEn ? "Continue" : "Continuer")}
-                        {!isWhatsApp && (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                        )}
-                    </button>
-                </div>
-            );
-        }
-
-        if (progressiveStep === 'contact-details') {
-            const handleEmailFormSubmit = async (e: React.FormEvent) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                setSuccessMessage('');
-                setErrorMessage('');
-
-                let emailMsg = '';
-                if (hireType === 'hourly') {
-                    emailMsg = isEn
-                        ? `Requesting Private Driver (Hourly Hire):\n• Start City: ${startCity}\n• Travel Date: ${travelDate}\n• Hours: ${duration}\n• Vehicle Tier: ${vehicleName}\n• Est. Price: €${currentPrice}`
-                        : `Demande de Chauffeur Privé (Location Horaire):\n• Ville de départ: ${startCity}\n• Date du voyage: ${travelDate}\n• Heures: ${duration}\n• Véhicule: ${vehicleName}\n• Tarif Est.: €${currentPrice}`;
-                } else {
-                    emailMsg = isEn
-                        ? `Requesting Private Driver (Daily Hire):\n• Start City: ${startCity}\n• Travel Date: ${travelDate}\n• Days: ${duration}\n• Vehicle Tier: ${vehicleName}\n• Travel Type: ${routeLocationType === 'same' ? 'Same city & nearby areas' : 'Multiple cities'}`
-                        : `Demande de Chauffeur Privé (Location Journalière):\n• Ville de départ: ${startCity}\n• Date du voyage: ${travelDate}\n• Jours: ${duration}\n• Véhicule: ${vehicleName}\n• Type de voyage: ${routeLocationType === 'same' ? 'Même ville & environs' : 'Plusieurs villes'}`;
-                    
-                    if (routeLocationType === 'multi' && travelPlan) {
-                        emailMsg += isEn ? `\n• Travel Plan: ${travelPlan}\n• Est. Price: To be confirmed` : `\n• Itinéraire: ${travelPlan}\n• Tarif Est.: À confirmer`;
-                    } else {
-                        emailMsg += isEn ? `\n• Est. Price: €${currentPrice}` : `\n• Tarif Est.: €${currentPrice}`;
-                    }
-                }
-
-                try {
-                    const res = await fetch('/api/send-booking', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            bookingType: 'private-driver',
-                            language: language,
-                            name: custName,
-                            email: custEmail,
-                            phone: custPhone,
-                            service: hireType === 'hourly'
-                                ? (isEn ? "Private Driver — Hourly Hire" : "Chauffeur Privé — Location Horaire")
-                                : (isEn ? "Private Driver — Daily Hire" : "Chauffeur Privé — Location Journalière"),
-                            startCity,
-                            travelDate,
-                            duration: `${duration} ${hireType === 'hourly' ? (isEn ? 'Hour(s)' : 'Heure(s)') : (isEn ? 'Day(s)' : 'Jour(s)')}`,
-                            vehicleCategory: `${vehicleName} (${capacityText})`,
-                            travelType: hireType === 'daily' 
-                                ? (routeLocationType === 'same' ? (isEn ? 'Same city & nearby areas' : 'Même ville & environs') : (isEn ? 'Multiple cities' : 'Plusieurs villes')) 
-                                : undefined,
-                            travelPlan: (hireType === 'daily' && routeLocationType === 'multi' && travelPlan) ? travelPlan : undefined,
-                            estimatedPrice: (hireType === 'daily' && routeLocationType === 'multi' && travelPlan) ? (isEn ? 'To be confirmed' : 'À confirmer') : `€${currentPrice}`,
-                            message: emailMsg,
-                            routeName: isEn ? "Private Driver Booking" : "Réservation Chauffeur Privé"
-                        })
-                    });
-
-                    const data = await res.json();
-                    if (res.ok && data.success) {
-                        setSuccessMessage(isEn ? "Request sent! We will text reply as soon as possible." : "Demande envoyée ! Nous vous répondrons par SMS/e-mail dès que possible.");
-                        setCustName('');
-                        setCustEmail('');
-                        setCustPhone('');
-                        setProgressiveStep('success');
-                        setTimeout(() => {
-                            setActiveModalType(null);
-                            setSuccessMessage('');
-                        }, 3500);
-                    } else {
-                        setErrorMessage(data.error || (isEn ? "Something went wrong. Please try again." : "Une erreur est survenue. Veuillez réessayer."));
-                    }
-                } catch (err) {
-                    setErrorMessage(isEn ? "Network error. Please try again." : "Erreur réseau. Veuillez réessayer.");
-                } finally {
-                    setIsSubmitting(false);
-                }
-            };
-
-            return (
-                <div>
-                    <h3 style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)',
-                        marginBottom: '10px',
-                        fontFamily: "'Cormorant Garamond', serif",
-                        lineHeight: 1.1
-                    }}>
-                        {isEn ? "Request to Book" : "Demande de Réservation"}
-                    </h3>
-                    <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '24px', lineHeight: 1.5 }}>
-                        {isEn 
-                            ? "Almost there! Fill out your details below and our team will confirm your chauffeur service shortly." 
-                            : "Presque terminé ! Remplissez vos coordonnées et notre équipe confirmera votre chauffeur sous peu."}
-                    </p>
-
-                    <form onSubmit={handleEmailFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        {errorMessage && (
-                            <div style={{
-                                backgroundColor: '#fef2f2',
-                                border: '1px solid #fecaca',
-                                color: '#991b1b',
-                                padding: '12px',
-                                borderRadius: '12px',
-                                fontSize: '0.9rem',
-                                fontWeight: 500
-                            }}>
-                                {errorMessage}
-                            </div>
-                        )}
-
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                {isEn ? "Full Name *" : "Nom complet *"}
-                            </label>
-                            <input
-                                type="text"
-                                required
-                                value={custName}
-                                onChange={(e) => setCustName(e.target.value)}
-                                placeholder={isEn ? "e.g. John Doe" : "ex: Jean Dupont"}
-                                style={{
-                                    width: '100%',
-                                    padding: '12px 16px',
-                                    borderRadius: '10px',
-                                    border: '1.5px solid #e2e8f0',
-                                    fontSize: '1rem',
-                                    outline: 'none',
-                                    backgroundColor: '#f8fafc',
-                                    boxSizing: 'border-box'
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                {isEn ? "Email Address *" : "Adresse e-mail *"}
-                            </label>
-                            <input
-                                type="email"
-                                required
-                                value={custEmail}
-                                onChange={(e) => setCustEmail(e.target.value)}
-                                placeholder={isEn ? "your@email.com" : "votre@email.com"}
-                                style={{
-                                    width: '100%',
-                                    padding: '12px 16px',
-                                    borderRadius: '10px',
-                                    border: '1.5px solid #e2e8f0',
-                                    fontSize: '1rem',
-                                    outline: 'none',
-                                    backgroundColor: '#f8fafc',
-                                    boxSizing: 'border-box'
-                                }}
-                            />
-                        </div>
-
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#475569', marginBottom: '8px', letterSpacing: '0.5px' }}>
-                                {isEn ? "Phone Number (Optional)" : "Téléphone (Optionnel)"}
-                            </label>
-                            <input
-                                type="tel"
-                                value={custPhone}
-                                onChange={(e) => setCustPhone(e.target.value)}
-                                placeholder={isEn ? "+1 234 567 890" : "+33 6 12 34 56 78"}
-                                style={{
-                                    width: '100%',
-                                    padding: '12px 16px',
-                                    borderRadius: '10px',
-                                    border: '1.5px solid #e2e8f0',
-                                    fontSize: '1rem',
-                                    outline: 'none',
-                                    backgroundColor: '#f8fafc',
-                                    boxSizing: 'border-box'
-                                }}
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            style={{
-                                backgroundColor: 'var(--primary)',
-                                color: '#fff',
-                                padding: '14px',
-                                borderRadius: '10px',
-                                fontWeight: 700,
-                                fontSize: '1.05rem',
-                                border: 'none',
-                                cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                                opacity: isSubmitting ? 0.7 : 1,
-                                transition: 'background-color 0.2s',
-                                marginTop: '10px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                gap: '8px',
-                                width: '100%',
-                                fontFamily: 'inherit'
-                            }}
-                        >
-                            {isSubmitting 
-                                ? (isEn ? "Sending..." : "Envoi...") 
-                                : (isEn ? "Confirm Request" : "Confirmer la demande")}
-                            {!isSubmitting && (
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M5 12h14"></path>
-                                    <path d="m12 5 7 7-7 7"></path>
-                                </svg>
-                            )}
-                        </button>
-                    </form>
-                </div>
-            );
-        }
-
-        if (progressiveStep === 'success') {
-            return (
-                <div style={{ textAlign: 'center', padding: '24px 0' }}>
-                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>⏳</div>
-                    <h3 style={{
-                        fontSize: '1.6rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)',
-                        marginBottom: '12px',
-                        fontFamily: "'Cormorant Garamond', serif"
-                    }}>
-                        {isEn ? "Under Review" : "En cours d'examen"}
-                    </h3>
-                    <p style={{ fontSize: '1rem', color: '#64748b', lineHeight: 1.6, marginBottom: '0px' }}>
-                        {isWhatsApp ? (
-                            isEn 
-                                ? "Redirecting you to WhatsApp... We will text reply as soon as possible." 
-                                : "Redirection vers WhatsApp... Nous vous répondrons dès que possible."
-                        ) : (
-                            successMessage || (isEn 
-                                ? "We have received your booking details. We will review and text reply as soon as possible."
-                                : "Nous avons bien reçu votre demande. Nous l'examinerons et vous répondrons dès que possible.")
-                        )}
-                    </p>
-                </div>
-            );
-        }
-
-        return null;
-    };
+    // Capacity warning checks
+    const showComfortWarning = (serviceType === 'hourly' || serviceType === 'full-day') && selectedVehicle === 'comfort' && passengers > 4 && passengers <= 7;
+    const showMinibusWarning = (serviceType === 'hourly' || serviceType === 'full-day') && passengers >= 8;
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', boxSizing: 'border-box' }}>
             <style>{`
-                .booking-date-duration-row {
-                    display: grid;
-                    grid-template-columns: 1.2fr 0.8fr;
-                    gap: 10px;
+                .competitor-card-wrapper {
+                    background-color: #FFFFFF;
+                    border-radius: 14px;
+                    border: 1px solid #E2E8F0;
+                    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+                    width: 100%;
+                    padding: 20px 22px;
+                    box-sizing: border-box;
+                    font-family: inherit;
                 }
-                @media (max-width: 500px) {
-                    .booking-date-duration-row {
-                        grid-template-columns: 1fr;
-                        gap: 12px;
+                .service-pill-tab {
+                    flex: 1;
+                    padding: 7px 4px;
+                    border-radius: 6px;
+                    border: none;
+                    font-size: 12px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.15s ease;
+                    font-family: inherit;
+                    text-align: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .clean-form-grid {
+                    border: 1px solid #E2E8F0;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background-color: #FAFAFA;
+                }
+                .clean-grid-row-2 {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    border-bottom: 1px solid #E2E8F0;
+                }
+                .clean-grid-row-2:last-child {
+                    border-bottom: none;
+                }
+                .clean-grid-row-1 {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    border-bottom: 1px solid #E2E8F0;
+                }
+                .clean-grid-row-1:last-child {
+                    border-bottom: none;
+                }
+                .clean-grid-cell {
+                    padding: 8px 12px;
+                    box-sizing: border-box;
+                    background-color: #FFFFFF;
+                    position: relative;
+                }
+                .clean-grid-cell:first-child:not(:only-child) {
+                    border-right: 1px solid #E2E8F0;
+                }
+                .clean-grid-cell label {
+                    display: block;
+                    font-size: 10px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                    color: #64748B;
+                    margin-bottom: 2px;
+                }
+                .clean-grid-cell select,
+                .clean-grid-cell input {
+                    width: 100%;
+                    height: 28px;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                    color: #0F172A;
+                    font-size: 13.5px;
+                    font-weight: 600;
+                    padding: 0;
+                    margin: 0;
+                    font-family: inherit;
+                    box-sizing: border-box;
+                }
+                .clean-grid-cell select {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    cursor: pointer;
+                    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 4 3 3 3-3'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: right 2px center;
+                    background-size: 10px;
+                    padding-right: 16px;
+                }
+                .vehicle-card-btn {
+                    width: 100%;
+                    padding: 10px 12px;
+                    border-radius: 8px;
+                    border: 1px solid #E2E8F0;
+                    background-color: #FFFFFF;
+                    cursor: pointer;
+                    text-align: left;
+                    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+                    box-sizing: border-box;
+                    font-family: inherit;
+                    outline: none;
+                }
+                .vehicle-card-btn:hover:not(:disabled) {
+                    border-color: #CBD5E1;
+                }
+                .vehicle-card-btn:focus-visible {
+                    outline: 2px solid #00805A;
+                    outline-offset: 1px;
+                }
+                .vehicle-card-selected {
+                    border-color: #00805A !important;
+                    background-color: #F8FAF9 !important;
+                }
+                .vehicle-reveal-wrapper {
+                    animation: vehicleFadeIn 0.22s ease-out;
+                }
+                @keyframes vehicleFadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-4px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
                     }
                 }
-                .booking-select-input {
+                .dominant-primary-btn {
+                    background-color: #00805A;
+                    color: #FFFFFF;
+                    padding: 13px 18px;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    font-size: 14.5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    text-decoration: none;
+                    border: none;
+                    cursor: pointer;
+                    transition: background-color 0.15s ease, transform 0.12s ease;
+                    font-family: inherit;
                     width: 100%;
-                    height: 46px;
                     box-sizing: border-box;
-                    min-width: 0;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    appearance: none;
-                    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23717171' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 5 3 3 3-3'/%3E%3C/svg%3E");
-                    background-repeat: no-repeat;
-                    background-position: right 14px center;
-                    background-size: 14px;
-                    padding: 0 36px 0 12px !important;
                 }
-                .booking-date-input {
-                    width: 100%;
-                    height: 46px;
-                    box-sizing: border-box;
-                    min-width: 0;
-                    padding: 0 12px !important;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    appearance: none;
-                    line-height: 43px;
+                .dominant-primary-btn:hover {
+                    background-color: #006D4D;
+                    transform: translateY(-1px);
+                }
+                .dominant-primary-btn:active {
+                    transform: scale(0.99);
+                }
+                @media (max-width: 768px) {
+                    .competitor-card-wrapper {
+                        padding: 14px 12px;
+                        border-radius: 12px;
+                    }
+                    .service-pill-tab {
+                        font-size: 11.5px;
+                        padding: 6px 2px;
+                    }
+                    .clean-grid-cell {
+                        padding: 6px 10px;
+                    }
+                    .clean-grid-cell select,
+                    .clean-grid-cell input {
+                        font-size: 13px;
+                        height: 26px;
+                    }
+                    .dominant-primary-btn {
+                        padding: 12px 14px;
+                        font-size: 14px;
+                    }
                 }
             `}</style>
-            <div style={{
-                backgroundColor: '#fff',
-                borderRadius: '16px',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06)',
-                width: '100%',
-                padding: '24px',
-                boxSizing: 'border-box'
-            }}>
-                {/* Top trust bar */}
-                <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'flex-start', 
-                    gap: '10px', 
-                    backgroundColor: '#EAF3DE', 
-                    borderRadius: '8px', 
-                    padding: '12px 14px', 
-                    marginBottom: '20px' 
-                }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B6D11" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        <path d="m9 11 2 2 4-4" />
-                    </svg>
-                    <span style={{ fontSize: '12.5px', color: '#3B6D11', fontWeight: 500, lineHeight: '1.4' }}>
-                        {isEn ? "Free Reservation — No credit card required. Pay on arrival." : "Réservation gratuite — Sans carte bancaire. Payez à l'arrivée."}
-                    </span>
-                </div>
 
-                {/* Form selectors */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {/* Hire Type Selector */}
-                    <div>
-                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
-                            {isEn ? "Hire Type" : "Type de location"}
-                        </label>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            backgroundColor: '#f8fafc',
-                            padding: '4px',
-                            borderRadius: '10px',
-                            border: '1.5px solid #cbd5e1'
-                        }}>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setHireType('hourly');
-                                    setDuration(4);
-                                }}
-                                style={{
-                                    padding: '8px 12px',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    fontSize: '13px',
-                                    fontWeight: 700,
-                                    cursor: 'pointer',
-                                    backgroundColor: hireType === 'hourly' ? '#fff' : 'transparent',
-                                    color: hireType === 'hourly' ? 'var(--secondary)' : '#64748b',
-                                    boxShadow: hireType === 'hourly' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-                                    transition: 'all 0.2s',
-                                    fontFamily: 'inherit'
-                                }}
-                            >
-                                {isEn ? "Hourly" : "Horaire"}
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setHireType('daily');
-                                    setDuration(1);
-                                }}
-                                style={{
-                                    padding: '8px 12px',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    fontSize: '13px',
-                                    fontWeight: 700,
-                                    cursor: 'pointer',
-                                    backgroundColor: hireType === 'daily' ? '#fff' : 'transparent',
-                                    color: hireType === 'daily' ? 'var(--secondary)' : '#64748b',
-                                    boxShadow: hireType === 'daily' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-                                    transition: 'all 0.2s',
-                                    fontFamily: 'inherit'
-                                }}
-                            >
-                                {isEn ? "Daily" : "Journalier"}
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Start City */}
-                    <div>
-                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
-                            {isEn ? "Starting City" : "Ville de départ"}
-                        </label>
-                        <select 
-                            value={startCity}
-                            onChange={(e) => {
-                                const city = e.target.value;
-                                setStartCity(city);
-                                if (city) {
-                                    localStorage.setItem('mdina_tours_private_driver_start_city', city);
-                                } else {
-                                    localStorage.removeItem('mdina_tours_private_driver_start_city');
-                                }
-                            }}
-                            className="booking-select-input"
-                            style={{
-                                borderRadius: '10px',
-                                border: '1.5px solid #cbd5e1',
-                                fontSize: '14px',
-                                outline: 'none',
-                                color: startCity ? '#222' : '#717171',
-                                backgroundColor: '#fff',
-                                fontWeight: 600
-                            }}
-                        >
-                            <option value="" disabled hidden>{isEn ? "choose city" : "choisir la ville"}</option>
-                            <option value="Agadir">Agadir</option>
-                            <option value="Casablanca">Casablanca</option>
-                            <option value="Chefchaouen">Chefchaouen</option>
-                            <option value="Dakhla">Dakhla</option>
-                            <option value="Essaouira">Essaouira</option>
-                            <option value="Fes">Fes / Fès</option>
-                            <option value="Ifrane">Ifrane</option>
-                            <option value="Marrakech">Marrakech</option>
-                            <option value="Meknes">Meknes</option>
-                            <option value="Merzouga">Merzouga</option>
-                            <option value="Ouarzazate">Ouarzazate</option>
-                            <option value="Rabat">Rabat</option>
-                            <option value="Salé">Salé</option>
-                            <option value="Tangier">Tangier / Tanger</option>
-                            <option value="Tetouan">Tetouan</option>
-                            <option value="Other">{isEn ? "Other / Custom" : "Autre / Sur mesure"}</option>
-                        </select>
-                    </div>
-
-                    {/* Date and Duration Row */}
-                    <div className="booking-date-duration-row">
-                        <div>
-                            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
-                                {isEn ? "Start Date" : "Date de début"}
-                            </label>
-                            <input 
-                                type="date"
-                                value={travelDate}
-                                min={new Date().toISOString().split('T')[0]}
-                                onChange={(e) => setTravelDate(e.target.value)}
-                                className="booking-date-input"
-                                style={{
-                                    borderRadius: '10px',
-                                    border: '1.5px solid #cbd5e1',
-                                    fontSize: '14px',
-                                    outline: 'none',
-                                    color: '#222',
-                                    fontWeight: 600,
-                                    backgroundColor: '#fff'
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
-                                {hireType === 'hourly' ? (isEn ? "Hours" : "Heures") : (isEn ? "Duration" : "Durée")}
-                            </label>
-                            <select 
-                                value={duration}
-                                onChange={(e) => setDuration(parseInt(e.target.value))}
-                                className="booking-select-input"
-                                style={{
-                                    borderRadius: '10px',
-                                    border: '1.5px solid #cbd5e1',
-                                    fontSize: '14px',
-                                    outline: 'none',
-                                    color: '#222',
-                                    backgroundColor: '#fff',
-                                    fontWeight: 600
-                                }}
-                            >
-                                {hireType === 'hourly' ? (
-                                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(hour => (
-                                        <option key={hour} value={hour}>
-                                            {hour} {hour === 1 ? (isEn ? "Hour" : "Heure") : (isEn ? "Hours" : "Heures")}
-                                        </option>
-                                    ))
-                                ) : (
-                                    Array.from({ length: 30 }, (_, i) => i + 1).map(day => (
-                                        <option key={day} value={day}>
-                                            {day} {day === 1 ? (isEn ? "Day" : "Jour") : (isEn ? "Days" : "Jours")}
-                                        </option>
-                                    ))
-                                )}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Animated expandable content container */}
-                <div style={{
-                    maxHeight: startCity ? '2000px' : '0px',
-                    opacity: startCity ? 1 : 0,
-                    overflow: 'hidden',
-                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                    pointerEvents: startCity ? 'auto' : 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                    marginTop: startCity ? '16px' : '0px'
-                }}>
-                    {/* Price Display */}
-                    <div>
-                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                            <span style={{ fontSize: '16px', fontWeight: 600, color: '#717171' }}>
-                                {isEn ? "From" : "Dès"}
+            <div className="competitor-card-wrapper">
+                {/* Header Price / Mode Line */}
+                <div style={{ marginBottom: '14px' }}>
+                    {serviceType === 'hourly' ? (
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                            <span style={{ fontSize: '15px', color: '#64748B', fontWeight: 600, marginRight: '1px' }}>
+                                {t.fromPrefix}
                             </span>
-                            <span style={{ fontSize: '36px', fontWeight: 700, color: 'var(--accent)', lineHeight: '1.2' }}>
-                                €{currentPrice}
+                            <span style={{ fontSize: '26px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                                {isEn || isEs ? '€25' : '25€'}
                             </span>
-                            <span style={{ fontSize: '14px', color: '#717171', fontWeight: 500 }}>
-                                {hireType === 'hourly' 
-                                    ? (isEn ? `for ${duration} Hour(s)` : `pour ${duration} Heure(s)`)
-                                    : (isEn ? `for ${duration} Day(s)` : `pour ${duration} Jour(s)`)}
+                            <span style={{ fontSize: '13.5px', color: '#64748B', fontWeight: 600 }}>
+                                {t.perHour}
                             </span>
                         </div>
-                        <div style={{ color: '#717171', fontSize: '13px', marginTop: '4px' }}>
-                            {hireType === 'hourly'
-                                ? (isEn ? "Includes vehicle, professional driver, fuel & insurance." : "Comprend véhicule, chauffeur professionnel, carburant & assurance.")
-                                : (isEn ? "Includes vehicle, driver dispo, tolls, fuel & driver boarding." : "Comprend véhicule, disposition chauffeur, péages, carburant & hébergement chauffeur.")}
-                        </div>
-                    </div>
-
-                    {/* Vehicle Selection */}
-                    <div>
-                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', marginBottom: '6px' }}>
-                            {isEn ? "Vehicle Comfort Tier" : "Type de Véhicule"}
-                        </label>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {VEHICLES.map((v, index) => {
-                                const isSelected = selectedVehicleIdx === index;
-                                const name = isEn ? v.nameEn : v.nameFr;
-                                const rate = hireType === 'hourly' ? v.pricePerHour : (is8DaysPackage && duration === 8 ? v.price8Days : v.pricePerDay);
-                                const capacity = isEn ? v.capacityEn : v.capacityFr;
-
-                                return (
-                                    <div 
-                                        key={index}
-                                        onClick={() => setSelectedVehicleIdx(index)}
-                                        style={{
-                                            border: isSelected ? '2px solid var(--primary)' : '1px solid #cbd5e1',
-                                            borderRadius: '10px',
-                                            padding: '6px 10px',
-                                            cursor: 'pointer',
-                                            backgroundColor: isSelected ? 'rgba(220, 131, 78, 0.03)' : '#fff',
-                                            transition: 'all 0.2s',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center'
-                                        }}
-                                    >
-                                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                width: '30px',
-                                                height: '30px',
-                                                borderRadius: '8px',
-                                                backgroundColor: isSelected ? 'rgba(220, 131, 78, 0.1)' : '#f8fafc',
-                                                color: isSelected ? 'var(--primary)' : '#64748b',
-                                                flexShrink: 0
-                                            }}>
-                                                {getVehicleIcon(index)}
-                                            </div>
-                                            <div>
-                                                <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--secondary)' }}>
-                                                    {name}
-                                                </div>
-                                                <div style={{ fontSize: '10.5px', color: '#777', marginTop: '1px' }}>
-                                                    {capacity}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style={{ textAlign: 'right' }}>
-                                            <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--primary)' }}>
-                                                {isEn ? "From " : "Dès "}€{rate}
-                                            </div>
-                                            <div style={{ fontSize: '9.5px', color: '#777' }}>
-                                                {hireType === 'hourly' ? (isEn ? "/ hr" : "/ h") : (isEn ? "/ day" : "/ jour")}
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* CTAs */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <a 
-                            href={hireType === 'hourly' ? getWhatsAppUrlFor('hourly', null, '') : '#'}
-                            onClick={handleWhatsAppClick}
-                            target={hireType === 'hourly' ? "_blank" : undefined}
-                            rel={hireType === 'hourly' ? "noopener noreferrer" : undefined}
-                            style={{
-                                backgroundColor: '#25D366',
-                                color: '#fff',
-                                padding: '14px 20px',
-                                borderRadius: '8px',
-                                textAlign: 'center',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '10px',
-                                textDecoration: 'none',
-                                transition: 'background-color 0.2s, transform 0.2s'
-                            }}
-                        >
-                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.949h.004c4.368 0 7.927-3.561 7.928-7.928a7.89 7.89 0 0 0-2.325-5.695M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.618-4.934c-.198-.099-1.17-.578-1.353-.646-.182-.068-.315-.099-.448.099-.133.197-.513.646-.629.775-.115.13-.232.146-.43.047-.197-.099-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.09-.088.198-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.448-1.078-.613-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                            </svg>
-                            {isEn ? "Book via WhatsApp" : "Réserver via WhatsApp"}
-                        </a>
-
-                        <button
-                            type="button"
-                            onClick={handleEmailClick}
-                            style={{
-                                border: '1.5px solid #222222',
-                                color: '#222222',
-                                backgroundColor: 'transparent',
-                                padding: '14px 20px',
-                                borderRadius: '8px',
-                                textAlign: 'center',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '8px',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s',
-                                width: '100%',
-                                boxSizing: 'border-box',
-                                fontFamily: 'inherit'
-                            }}
-                        >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </svg>
-                            {isEn ? "Request Booking by Email" : "Réserver par Email"}
-                        </button>
-                    </div>
-
-                    {/* Perks Box (Viator / Airbnb Style) */}
-                    {!startCity && (
-                        <div style={{
-                            backgroundColor: '#FAF8F5',
-                            borderRadius: '12px',
-                            padding: '16px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '16px',
-                            border: '1px solid #e2e8f0',
-                            marginTop: '20px'
-                        }}>
-                            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                                <div style={{
-                                    backgroundColor: 'var(--primary)',
-                                    borderRadius: '50%',
-                                    width: '20px',
-                                    height: '20px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexShrink: 0,
-                                    marginTop: '2px'
-                                }}>
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="4">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
+                    ) : (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div>
+                                <div style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                                    {t.customQuoteHeader}
                                 </div>
-                                <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
-                                    <span style={{ textDecoration: 'underline', fontWeight: 700 }}>
-                                        {isEn ? "No prepayment needed" : "Aucun prépaiement"}
-                                    </span>
-                                    <>
-                                        {" "}
-                                        {isEn 
-                                            ? "— Pay cash or card to your driver. Free cancellation or changes anytime before departure." 
-                                            : "— Payez en espèces ou par carte au chauffeur. Annulation ou modification gratuite à tout moment avant le départ."}
-                                    </>
-                                </span>
-                            </div>
-                            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                                <div style={{
-                                    backgroundColor: 'var(--primary)',
-                                    borderRadius: '50%',
-                                    width: '20px',
-                                    height: '20px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexShrink: 0,
-                                    marginTop: '2px'
-                                }}>
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="4">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
+                                <div style={{ fontSize: '12px', color: '#64748B', marginTop: '2px' }}>
+                                    {t.customQuoteSub}
                                 </div>
-                                <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
-                                    <span style={{ textDecoration: 'underline', fontWeight: 700 }}>
-                                        {isEn ? "Reserve Now and Pay Later" : "Réservez maintenant et payez plus tard"}
-                                    </span>
-                                    <>
-                                        {" "}
-                                        – {isEn ? "Secure your spot while staying flexible" : "Garantissez votre place tout en restant flexible"}
-                                    </>
-                                </span>
                             </div>
                         </div>
                     )}
                 </div>
-            </div>
 
-            {/* Book Ahead Info Card */}
-            {!startCity && (
+                {/* Service Segment Tabs */}
                 <div style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '16px',
-                    backgroundColor: '#fff',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
-                    width: '100%',
-                    padding: '16px',
-                    boxSizing: 'border-box'
+                    backgroundColor: '#F1F5F9',
+                    padding: '3px',
+                    borderRadius: '8px',
+                    marginBottom: '14px',
+                    gap: '2px'
                 }}>
+                    <button
+                        type="button"
+                        className="service-pill-tab"
+                        onClick={() => {
+                            setServiceType('hourly');
+                        }}
+                        style={{
+                            backgroundColor: serviceType === 'hourly' ? '#FFFFFF' : 'transparent',
+                            color: serviceType === 'hourly' ? '#0F172A' : '#64748B',
+                            boxShadow: serviceType === 'hourly' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                        }}
+                    >
+                        {t.tabHourly}
+                    </button>
+                    <button
+                        type="button"
+                        className="service-pill-tab"
+                        onClick={() => {
+                            setServiceType('full-day');
+                        }}
+                        style={{
+                            backgroundColor: serviceType === 'full-day' ? '#FFFFFF' : 'transparent',
+                            color: serviceType === 'full-day' ? '#0F172A' : '#64748B',
+                            boxShadow: serviceType === 'full-day' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                        }}
+                    >
+                        {t.tabFullDay}
+                    </button>
+                    <button
+                        type="button"
+                        className="service-pill-tab"
+                        onClick={() => {
+                            setServiceType('multi-day');
+                        }}
+                        style={{
+                            backgroundColor: serviceType === 'multi-day' ? '#FFFFFF' : 'transparent',
+                            color: serviceType === 'multi-day' ? '#0F172A' : '#64748B',
+                            boxShadow: serviceType === 'multi-day' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                        }}
+                    >
+                        {t.tabMultiDay}
+                    </button>
+                </div>
+
+                {/* Clean Grouped Inputs Box */}
+                <div className="clean-form-grid" style={{ marginBottom: '12px' }}>
+                    
+                    {/* HOURLY FORM */}
+                    {serviceType === 'hourly' && (
+                        <>
+                            {isCityKnown ? (
+                                <>
+                                    <div className="clean-grid-row-2">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-date">{t.dateLabel}</label>
+                                            <input
+                                                id="hourly-date"
+                                                type="date"
+                                                value={travelDate}
+                                                min={new Date().toISOString().split('T')[0]}
+                                                onChange={(e) => setTravelDate(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-passengers">{t.passengersLabel}</label>
+                                            <select
+                                                id="hourly-passengers"
+                                                value={passengers}
+                                                onChange={(e) => {
+                                                    const p = parseInt(e.target.value);
+                                                    setPassengers(p);
+                                                    if (p > 4 && selectedVehicle === 'comfort') {
+                                                        setSelectedVehicle('vito');
+                                                    }
+                                                }}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                    <option key={p} value={p}>
+                                                        {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="clean-grid-row-1">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-duration">{t.durationLabel}</label>
+                                            <select
+                                                id="hourly-duration"
+                                                value={hours}
+                                                onChange={(e) => setHours(parseInt(e.target.value))}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12].map((h) => (
+                                                    <option key={h} value={h}>
+                                                        {h} {t.hourUnit}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="clean-grid-row-2">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-city">{t.cityLabel}</label>
+                                            <select
+                                                id="hourly-city"
+                                                value={startCity}
+                                                onChange={(e) => {
+                                                    setStartCity(e.target.value);
+                                                    localStorage.setItem('mdina_tours_private_driver_start_city', e.target.value);
+                                                }}
+                                            >
+                                                {MOROCCO_CITIES.map((c) => (
+                                                    <option key={c.value} value={c.value}>
+                                                        {isEn ? c.en : (isEs ? c.es : c.fr)}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-date">{t.dateLabel}</label>
+                                            <input
+                                                id="hourly-date"
+                                                type="date"
+                                                value={travelDate}
+                                                min={new Date().toISOString().split('T')[0]}
+                                                onChange={(e) => setTravelDate(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="clean-grid-row-2">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-duration">{t.durationLabel}</label>
+                                            <select
+                                                id="hourly-duration"
+                                                value={hours}
+                                                onChange={(e) => setHours(parseInt(e.target.value))}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12].map((h) => (
+                                                    <option key={h} value={h}>
+                                                        {h} {t.hourUnit}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="hourly-passengers">{t.passengersLabel}</label>
+                                            <select
+                                                id="hourly-passengers"
+                                                value={passengers}
+                                                onChange={(e) => {
+                                                    const p = parseInt(e.target.value);
+                                                    setPassengers(p);
+                                                    if (p > 4 && selectedVehicle === 'comfort') {
+                                                        setSelectedVehicle('vito');
+                                                    }
+                                                }}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                    <option key={p} value={p}>
+                                                        {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {/* FULL DAY FORM */}
+                    {serviceType === 'full-day' && (
+                        <>
+                            {isCityKnown ? (
+                                <>
+                                    <div className="clean-grid-row-2">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="fullday-date">{t.dateLabel}</label>
+                                            <input
+                                                id="fullday-date"
+                                                type="date"
+                                                value={travelDate}
+                                                min={new Date().toISOString().split('T')[0]}
+                                                onChange={(e) => setTravelDate(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="fullday-passengers">{t.passengersLabel}</label>
+                                            <select
+                                                id="fullday-passengers"
+                                                value={passengers}
+                                                onChange={(e) => {
+                                                    const p = parseInt(e.target.value);
+                                                    setPassengers(p);
+                                                    if (p > 4 && selectedVehicle === 'comfort') {
+                                                        setSelectedVehicle('vito');
+                                                    }
+                                                }}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                    <option key={p} value={p}>
+                                                        {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="clean-grid-row-2">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="fullday-city">{t.cityLabel}</label>
+                                            <select
+                                                id="fullday-city"
+                                                value={startCity}
+                                                onChange={(e) => {
+                                                    setStartCity(e.target.value);
+                                                    localStorage.setItem('mdina_tours_private_driver_start_city', e.target.value);
+                                                }}
+                                            >
+                                                {MOROCCO_CITIES.map((c) => (
+                                                    <option key={c.value} value={c.value}>
+                                                        {isEn ? c.en : (isEs ? c.es : c.fr)}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="fullday-date">{t.dateLabel}</label>
+                                            <input
+                                                id="fullday-date"
+                                                type="date"
+                                                value={travelDate}
+                                                min={new Date().toISOString().split('T')[0]}
+                                                onChange={(e) => setTravelDate(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="clean-grid-row-1">
+                                        <div className="clean-grid-cell">
+                                            <label htmlFor="fullday-passengers">{t.passengersLabel}</label>
+                                            <select
+                                                id="fullday-passengers"
+                                                value={passengers}
+                                                onChange={(e) => {
+                                                    const p = parseInt(e.target.value);
+                                                    setPassengers(p);
+                                                    if (p > 4 && selectedVehicle === 'comfort') {
+                                                        setSelectedVehicle('vito');
+                                                    }
+                                                }}
+                                            >
+                                                {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                    <option key={p} value={p}>
+                                                        {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            <div style={{ padding: '8px 12px', backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0' }}>
+                                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: '#64748B', marginBottom: '2px' }}>
+                                    {t.optionalPlacesLabel}
+                                </label>
+                                <input
+                                    type="text"
+                                    value={routePlan}
+                                    onChange={(e) => setRoutePlan(e.target.value)}
+                                    placeholder={t.optionalPlacesPlaceholder}
+                                    style={{
+                                        width: '100%',
+                                        height: '28px',
+                                        border: 'none',
+                                        outline: 'none',
+                                        backgroundColor: 'transparent',
+                                        color: '#0F172A',
+                                        fontSize: '13px',
+                                        fontWeight: 500,
+                                        padding: 0
+                                    }}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {/* MULTI-DAY FORM */}
+                    {serviceType === 'multi-day' && (
+                        <>
+                            <div className="clean-grid-row-2">
+                                <div className="clean-grid-cell">
+                                    <label htmlFor="multiday-start">{t.startDateLabel}</label>
+                                    <input
+                                        id="multiday-start"
+                                        type="date"
+                                        value={travelDate}
+                                        min={new Date().toISOString().split('T')[0]}
+                                        onChange={(e) => {
+                                            const newStart = e.target.value;
+                                            setTravelDate(newStart);
+                                            if (endDate < newStart) {
+                                                const d = new Date(newStart);
+                                                d.setDate(d.getDate() + 3);
+                                                setEndDate(d.toISOString().split('T')[0]);
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="clean-grid-cell">
+                                    <label htmlFor="multiday-end">{t.endDateLabel}</label>
+                                    <input
+                                        id="multiday-end"
+                                        type="date"
+                                        value={endDate}
+                                        min={travelDate}
+                                        onChange={(e) => setEndDate(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {isCityKnown ? (
+                                <div className="clean-grid-row-1">
+                                    <div className="clean-grid-cell">
+                                        <label htmlFor="multiday-passengers">{t.passengersLabel}</label>
+                                        <select
+                                            id="multiday-passengers"
+                                            value={passengers}
+                                            onChange={(e) => setPassengers(parseInt(e.target.value))}
+                                        >
+                                            {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                <option key={p} value={p}>
+                                                    {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="clean-grid-row-2">
+                                    <div className="clean-grid-cell">
+                                        <label htmlFor="multiday-city">{t.cityLabel}</label>
+                                        <select
+                                            id="multiday-city"
+                                            value={startCity}
+                                            onChange={(e) => {
+                                                setStartCity(e.target.value);
+                                                localStorage.setItem('mdina_tours_private_driver_start_city', e.target.value);
+                                            }}
+                                        >
+                                            {MOROCCO_CITIES.map((c) => (
+                                                <option key={c.value} value={c.value}>
+                                                    {isEn ? c.en : (isEs ? c.es : c.fr)}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className="clean-grid-cell">
+                                        <label htmlFor="multiday-passengers">{t.passengersLabel}</label>
+                                        <select
+                                            id="multiday-passengers"
+                                            value={passengers}
+                                            onChange={(e) => setPassengers(parseInt(e.target.value))}
+                                        >
+                                            {[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16].map((p) => (
+                                                <option key={p} value={p}>
+                                                    {p} {p === 1 ? (isEn ? "Guest" : (isEs ? "Viajero" : "Passager")) : (isEn ? "Guests" : (isEs ? "Viajeros" : "Passagers"))}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            )}
+                            <div style={{ padding: '8px 12px', backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0' }}>
+                                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: '#64748B', marginBottom: '2px' }}>
+                                    {t.itineraryLabel}
+                                </label>
+                                <textarea
+                                    value={itinerary}
+                                    onChange={(e) => setItinerary(e.target.value)}
+                                    placeholder={t.itineraryPlaceholder}
+                                    rows={2}
+                                    style={{
+                                        width: '100%',
+                                        border: 'none',
+                                        outline: 'none',
+                                        backgroundColor: 'transparent',
+                                        color: '#0F172A',
+                                        fontSize: '12.5px',
+                                        fontWeight: 500,
+                                        padding: 0,
+                                        resize: 'vertical',
+                                        fontFamily: 'inherit',
+                                        lineHeight: 1.4
+                                    }}
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
+
+                {/* Capacity Advisory Banner */}
+                {showComfortWarning && (
                     <div style={{
-                        backgroundColor: '#FFF3EC',
-                        borderRadius: '12px',
-                        width: '48px',
-                        height: '48px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0
+                        padding: '6px 10px',
+                        backgroundColor: '#FEF9C3',
+                        border: '1px solid #FDE047',
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        color: '#854D0E',
+                        marginBottom: '10px',
+                        lineHeight: 1.35
                     }}>
-                        <img
-                            src="/img/fire.webp"
-                            alt=""
-                            aria-hidden="true"
-                            width="32"
-                            height="32"
-                        />
+                        ℹ️ {t.capacityWarningComfort}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                        <span style={{ fontSize: '15px', fontWeight: 700, color: '#222' }}>
-                            {isEn ? "Highly Popular Service!" : "Service Très Demandé !"}
+                )}
+
+                {showMinibusWarning && (
+                    <div style={{
+                        padding: '6px 10px',
+                        backgroundColor: '#EFF6FF',
+                        border: '1px solid #BFDBFE',
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        color: '#1E40AF',
+                        marginBottom: '10px',
+                        lineHeight: 1.35
+                    }}>
+                        ℹ️ {t.capacityWarningMinibus}
+                    </div>
+                )}
+
+                {/* STAGE 2: VEHICLE SELECTION (Revealed after clicking 'See available vehicles' for Hourly / Full-Day) */}
+                {showVehicles && (serviceType === 'hourly' || serviceType === 'full-day') && (
+                    <div className="vehicle-reveal-wrapper" style={{ marginTop: '14px', marginBottom: '14px' }}>
+                        <div style={{
+                            fontSize: '12px',
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.04em',
+                            color: '#64748B',
+                            marginBottom: '8px'
+                        }}>
+                            {t.chooseRide}
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            {/* Vehicle Option 1: Comfort */}
+                            <button
+                                type="button"
+                                role="radio"
+                                aria-checked={selectedVehicle === 'comfort'}
+                                onClick={() => {
+                                    if (passengers > 4) {
+                                        alert(t.capacityWarningComfort);
+                                        return;
+                                    }
+                                    setSelectedVehicle('comfort');
+                                }}
+                                disabled={passengers > 4}
+                                className={`vehicle-card-btn ${selectedVehicle === 'comfort' ? 'vehicle-card-selected' : ''}`}
+                                style={{
+                                    opacity: passengers > 4 ? 0.6 : 1,
+                                    cursor: passengers > 4 ? 'not-allowed' : 'pointer'
+                                }}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                                    <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#0F172A' }}>
+                                        {t.comfortTitle}
+                                    </span>
+                                    {serviceType === 'hourly' && (
+                                        <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#0F172A' }}>
+                                            {isEn || isEs ? '€25/h' : '25€/h'}
+                                        </span>
+                                    )}
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginTop: '2px' }}>
+                                    <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
+                                        {t.comfortDesc}
+                                    </span>
+                                </div>
+                            </button>
+
+                            {/* Vehicle Option 2: Mercedes Vito */}
+                            <button
+                                type="button"
+                                role="radio"
+                                aria-checked={selectedVehicle === 'vito'}
+                                onClick={() => setSelectedVehicle('vito')}
+                                className={`vehicle-card-btn ${selectedVehicle === 'vito' ? 'vehicle-card-selected' : ''}`}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                                        <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#0F172A' }}>
+                                            {t.vitoTitle}
+                                        </span>
+                                        <span style={{
+                                            backgroundColor: '#FEF3C7',
+                                            color: '#92400E',
+                                            fontSize: '10.5px',
+                                            fontWeight: 700,
+                                            padding: '1px 7px',
+                                            borderRadius: '10px',
+                                            letterSpacing: '0.01em',
+                                            lineHeight: 1.3
+                                        }}>
+                                            {t.popularBadge}
+                                        </span>
+                                    </div>
+                                    {serviceType === 'hourly' && (
+                                        <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#0F172A' }}>
+                                            {isEn || isEs ? '€35/h' : '35€/h'}
+                                        </span>
+                                    )}
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginTop: '2px' }}>
+                                    <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
+                                        {t.vitoDesc}
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+
+                        {/* Estimated Total Section (Hourly Only) */}
+                        {serviceType === 'hourly' && (
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'baseline',
+                                marginTop: '14px',
+                                padding: '0 2px'
+                            }}>
+                                <div>
+                                    <span style={{ fontSize: '13px', color: '#64748B', fontWeight: 500 }}>
+                                        {t.estimatedTotalLabel}:
+                                    </span>
+                                    <div style={{ fontSize: '11.5px', color: '#94A3B8', fontWeight: 500, marginTop: '1px' }}>
+                                        {hours} {hours === 1 ? (isEn ? 'hr' : 'h') : (isEn ? 'hrs' : 'h')} × {isEn || isEs ? `€${hourlyRate}/h` : `${hourlyRate}€/h`}
+                                    </div>
+                                </div>
+                                <span style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em' }}>
+                                    {isEn || isEs ? `€${estimatedTotal}` : `${estimatedTotal}€`}
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Primary CTA Area */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: showVehicles ? '0' : '6px' }}>
+                    {serviceType === 'multi-day' ? (
+                        <a
+                            href={getWhatsAppUrl()}
+                            onClick={handlePrimaryClick}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="dominant-primary-btn"
+                        >
+                            <span>{t.ctaMultiDay}</span>
+                        </a>
+                    ) : !showVehicles ? (
+                        <button
+                            type="button"
+                            onClick={() => setShowVehicles(true)}
+                            className="dominant-primary-btn"
+                        >
+                            <span>{t.seeAvailableVehicles}</span>
+                        </button>
+                    ) : (
+                        <a
+                            href={getWhatsAppUrl()}
+                            onClick={handlePrimaryClick}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="dominant-primary-btn"
+                        >
+                            <span>
+                                {serviceType === 'hourly' ? t.ctaReserveWhatsApp : t.ctaFullDay}
+                            </span>
+                        </a>
+                    )}
+
+                    <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '2px' }}>
+                        {serviceType === 'multi-day' ? t.subCtaMultiDay : t.subCtaReassurance}
+                    </div>
+                </div>
+
+                {/* Reassurance Box */}
+                <div style={{
+                    backgroundColor: '#F2F9F5',
+                    borderRadius: '8px',
+                    padding: '12px 14px',
+                    marginTop: '14px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    border: '1px solid #D6EFE1'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span style={{ fontSize: '12px', color: '#0F172A', fontWeight: 600, lineHeight: 1.35 }}>
+                            {t.reassurance1}
                         </span>
-                        <span style={{ fontSize: '13px', color: '#666', fontWeight: 500, lineHeight: '1.4' }}>
-                            {isEn ? "Secure your private driver early. Standard reservation lead time is 2-4 weeks." : "Réservez votre chauffeur privé à l'avance. Délai moyen constaté de 2 à 4 semaines."}
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span style={{ fontSize: '12px', color: '#0F172A', fontWeight: 600, lineHeight: 1.35 }}>
+                            {t.reassurance2}
                         </span>
                     </div>
                 </div>
-            )}
 
-            {/* Progressive Modal */}
-            {activeModalType !== null && (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 99999,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                    backdropFilter: 'blur(6px)',
-                    padding: '20px'
-                }} onClick={() => setActiveModalType(null)}>
-                    <div style={{
-                        backgroundColor: '#fff',
-                        borderRadius: '24px',
-                        width: '100%',
-                        maxWidth: '460px',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
-                        overflow: 'hidden',
-                        position: 'relative'
-                    }} onClick={(e) => e.stopPropagation()}>
-                        <div style={{ padding: '32px' }}>
-                            {/* Close Button */}
-                            <button
-                                type="button"
-                                onClick={() => setActiveModalType(null)}
-                                style={{
-                                    position: 'absolute',
-                                    top: '20px',
-                                    right: '20px',
-                                    background: '#f1f5f9',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: '36px',
-                                    height: '36px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '1.2rem',
-                                    cursor: 'pointer',
-                                    color: '#64748b',
-                                    transition: 'all 0.2s ease',
-                                }}
-                            >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </button>
+                {/* Secondary Subtle Email Link */}
+                <div style={{ textAlign: 'center', marginTop: '12px' }}>
+                    <button
+                        type="button"
+                        onClick={() => setIsEmailModalOpen(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#64748B',
+                            fontSize: '12px',
+                            fontWeight: 500,
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                            padding: 0
+                        }}
+                    >
+                        {t.secondaryEmailLink}
+                    </button>
+                </div>
+            </div>
 
-                            {renderModalContent()}
-                        </div>
+            {/* Email Modal Dialog */}
+            {isEmailModalOpen && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 99999,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(15, 23, 42, 0.6)',
+                        backdropFilter: 'blur(4px)',
+                        padding: '16px'
+                    }}
+                    onClick={() => setIsEmailModalOpen(false)}
+                >
+                    <div
+                        style={{
+                            backgroundColor: '#FFFFFF',
+                            borderRadius: '14px',
+                            border: '1px solid #E2E8F0',
+                            width: '100%',
+                            maxWidth: '460px',
+                            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+                            padding: '24px',
+                            position: 'relative',
+                            boxSizing: 'border-box'
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Close button */}
+                        <button
+                            type="button"
+                            onClick={() => setIsEmailModalOpen(false)}
+                            style={{
+                                position: 'absolute',
+                                top: '16px',
+                                right: '16px',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: '#64748B',
+                                padding: '4px'
+                            }}
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+
+                        {submitSuccess ? (
+                            <div style={{ textAlign: 'center', padding: '16px 0' }}>
+                                <div style={{ fontSize: '36px', marginBottom: '10px' }}>✓</div>
+                                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0' }}>
+                                    {t.modalSuccessTitle}
+                                </h3>
+                                <p style={{ fontSize: '13.5px', color: '#64748B', lineHeight: '1.45', margin: 0 }}>
+                                    {t.modalSuccessMsg}
+                                </p>
+                            </div>
+                        ) : (
+                            <div>
+                                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', margin: '0 0 4px 0' }}>
+                                    {t.modalTitle}
+                                </h3>
+                                <p style={{ fontSize: '12.5px', color: '#64748B', margin: '0 0 16px 0', lineHeight: '1.4' }}>
+                                    {t.modalSubtitle}
+                                </p>
+
+                                {/* Trip Summary Pill */}
+                                <div style={{
+                                    backgroundColor: '#F8FAFC',
+                                    borderRadius: '8px',
+                                    border: '1px solid #E2E8F0',
+                                    padding: '10px 12px',
+                                    fontSize: '12px',
+                                    color: '#334155',
+                                    marginBottom: '16px',
+                                    lineHeight: '1.4'
+                                }}>
+                                    <strong>{isEn ? "Trip:" : (isEs ? "Viaje:" : "Trajet :")}</strong> {startCity} • {serviceType === 'multi-day' ? `${formatDateShort(travelDate)} → ${formatDateShort(endDate)}` : formatDateFriendly(travelDate)} • {serviceType !== 'multi-day' ? vehicleNameFormatted : 'Multi-Day'} ({passengers} {passengers === 1 ? 'Guest' : 'Guests'})
+                                </div>
+
+                                {submitError && (
+                                    <div style={{
+                                        backgroundColor: '#FEF2F2',
+                                        color: '#991B1B',
+                                        padding: '10px 12px',
+                                        borderRadius: '8px',
+                                        fontSize: '12.5px',
+                                        marginBottom: '12px'
+                                    }}>
+                                        {submitError}
+                                    </div>
+                                )}
+
+                                <form onSubmit={handleEmailModalSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', marginBottom: '4px' }}>
+                                            {t.nameLabel}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={custName}
+                                            onChange={(e) => setCustName(e.target.value)}
+                                            placeholder={isEn ? "e.g. John Doe" : "ex: Jean Dupont"}
+                                            style={{
+                                                width: '100%',
+                                                height: '40px',
+                                                borderRadius: '8px',
+                                                border: '1px solid #CBD5E1',
+                                                padding: '0 12px',
+                                                fontSize: '13.5px',
+                                                outline: 'none',
+                                                boxSizing: 'border-box'
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', marginBottom: '4px' }}>
+                                            {t.emailLabel}
+                                        </label>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={custEmail}
+                                            onChange={(e) => setCustEmail(e.target.value)}
+                                            placeholder="name@email.com"
+                                            style={{
+                                                width: '100%',
+                                                height: '40px',
+                                                borderRadius: '8px',
+                                                border: '1px solid #CBD5E1',
+                                                padding: '0 12px',
+                                                fontSize: '13.5px',
+                                                outline: 'none',
+                                                boxSizing: 'border-box'
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', marginBottom: '4px' }}>
+                                            {t.phoneLabel}
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            value={custPhone}
+                                            onChange={(e) => setCustPhone(e.target.value)}
+                                            placeholder="+1 555 123 4567"
+                                            style={{
+                                                width: '100%',
+                                                height: '40px',
+                                                borderRadius: '8px',
+                                                border: '1px solid #CBD5E1',
+                                                padding: '0 12px',
+                                                fontSize: '13.5px',
+                                                outline: 'none',
+                                                boxSizing: 'border-box'
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', marginBottom: '4px' }}>
+                                            {t.notesLabel}
+                                        </label>
+                                        <textarea
+                                            value={custNotes}
+                                            onChange={(e) => setCustNotes(e.target.value)}
+                                            placeholder={isEn ? "Specific stops, flight details, or child seats..." : "Arrêts spécifiques, bagages..."}
+                                            rows={2}
+                                            style={{
+                                                width: '100%',
+                                                borderRadius: '8px',
+                                                border: '1px solid #CBD5E1',
+                                                padding: '8px 12px',
+                                                fontSize: '13px',
+                                                outline: 'none',
+                                                boxSizing: 'border-box',
+                                                fontFamily: 'inherit',
+                                                resize: 'vertical'
+                                            }}
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="dominant-primary-btn"
+                                        style={{ marginTop: '6px' }}
+                                    >
+                                        {isSubmitting ? t.sendingBtn : t.sendBtn}
+                                    </button>
+                                </form>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
         </div>
     );
 }
+

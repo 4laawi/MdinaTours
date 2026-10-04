@@ -7,14 +7,49 @@ interface PrivateDriverInclusionsProps {
 export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusionsProps) {
     const isEn = lang === 'en';
 
+    const isEs = lang === 'es';
+
     const items = [
-        isEn ? "Fixed price agreed upfront — no meter, no surprises" : "Tarif fixe convenu à l'avance — pas de compteur, pas de surprise",
-        isEn ? "Flight tracking on all airport pickups" : "Suivi des vols sur toutes les prises en charge à l'aéroport",
-        isEn ? "Driver contacts you 30 min before arrival" : "Le chauffeur vous contacte 30 min avant son arrivée",
-        isEn ? "Bottled water and phone charger in every vehicle" : "Bouteille d'eau et chargeur de téléphone dans chaque véhicule",
-        isEn ? "Free waiting time: 60 min for flights, 15 min for other pickups" : "Temps d'attente gratuit : 60 min pour les vols, 15 min pour les autres trajets",
-        isEn ? "English and French-speaking drivers" : "Chauffeurs parlant français et anglais",
-        isEn ? "Free cancellation up to 24 hours before your trip" : "Annulation gratuite jusqu'à 24 heures avant votre trajet"
+        isEn 
+            ? "Fixed price agreed upfront — fuel, tolls, and operating expenses included" 
+            : (isEs 
+                ? "Precio cerrado por adelantado — combustible, peajes y gastos incluidos" 
+                : "Tarif fixe convenu à l'avance — carburant, péages et frais inclus"),
+        isEn 
+            ? "Pay after each travel day (EUR, USD, MAD via cash or card)" 
+            : (isEs 
+                ? "Pago al final de cada jornada (EUR, USD, MAD en efectivo o tarjeta)" 
+                : "Paiement en fin de journée (EUR, USD, MAD en espèces ou carte)"),
+        isEn 
+            ? "Flexible stops for photos, coffee, lunch, and comfort breaks" 
+            : (isEs 
+                ? "Paradas flexibles para fotos, café, almuerzo y descansos" 
+                : "Arrêts libres pour photos, café, déjeuner et pauses confort"),
+        isEn 
+            ? "Nearest vehicle-accessible pickup & drop-off for medina riads" 
+            : (isEs 
+                ? "Acceso al punto más cercano para riads y alojamientos en medina" 
+                : "Prise en charge au point le plus proche pour les riads en médina"),
+        isEn 
+            ? "Driver assistance with luggage at every stop" 
+            : (isEs 
+                ? "Asistencia del conductor con el equipaje en cada parada" 
+                : "Aide du chauffeur avec vos bagages à chaque étape"),
+        isEn 
+            ? "Professional English and French-speaking drivers" 
+            : (isEs 
+                ? "Conductores profesionales con idiomas (inglés y francés)" 
+                : "Chauffeurs professionnels parlant français et anglais"),
+        isEn 
+            ? "Licensed tour guides available on request for city monument visits" 
+            : (isEs 
+                ? "Guías oficiales disponibles bajo petición para visitas a monumentos" 
+                : "Guides officiels disponibles sur demande pour les visites de monuments"),
+        isEn 
+            ? "Free cancellation up to 24 hours before your trip" 
+            : (isEs 
+                ? "Cancelación gratuita hasta 24 horas antes del viaje" 
+                : "Annulation gratuite jusqu'à 24 heures avant le départ")
     ];
 
     return (
@@ -33,21 +68,21 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
                         margin: 0,
                         fontFamily: 'var(--font-poppins), sans-serif',
                     }}>
-                        {isEn ? "Every booking includes" : "Chaque réservation comprend"}
+                        {isEn ? "What's included in your booking" : (isEs ? "Qué incluye su reserva" : "Ce qui est inclus dans votre réservation")}
                     </h2>
                 </div>
 
-                <div style={{ 
+                <div className="inclusions-grid" style={{ 
                     display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-                    gap: '20px 40px',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
+                    gap: '16px 30px',
                     marginBottom: '40px'
                 }}>
                     {items.map((item, idx) => (
                         <div key={idx} style={{ 
                             display: 'flex', 
                             gap: '12px', 
-                            fontSize: '1rem', 
+                            fontSize: '0.95rem', 
                             color: '#334155', 
                             lineHeight: 1.5,
                             alignItems: 'flex-start',
@@ -78,8 +113,10 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
                         fontStyle: 'italic'
                     }}>
                         {isEn 
-                            ? "We never charge extra for luggage, tolls, or delayed flights." 
-                            : "Nous ne facturons jamais de supplément pour les bagages, les péages ou les retards de vol."}
+                            ? "Multi-day journeys include all driver accommodation and operating expenses in the agreed quote." 
+                            : (isEs 
+                                ? "Las rutas de varios días incluyen los gastos y alojamiento del conductor en el presupuesto acordado." 
+                                : "Les circuits sur plusieurs jours incluent tous les frais et l'hébergement du chauffeur dans le tarif convenu.")}
                     </p>
                 </div>
             </div>

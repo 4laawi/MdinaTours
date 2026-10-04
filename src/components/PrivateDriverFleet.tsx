@@ -5,11 +5,11 @@ import { Users, Briefcase, Wind, Check } from "@phosphor-icons/react";
 
 interface Vehicle {
     name: string;
-    spec: string;
-    capacity: string;
-    luggage: string;
-    suitability: string;
-    price: string;
+    spec?: string;
+    capacity?: string;
+    luggage?: string;
+    suitability?: string;
+    price?: string;
     image: string;
 }
 
@@ -110,13 +110,6 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
     const canScrollLeft = activeIndex > 0;
     const canScrollRight = activeIndex < vehicles.length - 1;
 
-    const getWhatsAppUrl = (vName: string) => {
-        const baseMsg = isEn 
-            ? `Hello Mdina Tours, I would like to book a private driver dispo service with the "${vName}" vehicle.`
-            : `Bonjour Mdina Tours, je souhaite réserver un service de chauffeur privé avec le véhicule "${vName}".`;
-        return `https://wa.me/212724114775?text=${encodeURIComponent(baseMsg)}`;
-    };
-
     const getVehicleMetadata = (name: string) => {
         const n = name.toLowerCase();
         if (n.includes("superb")) {
@@ -139,7 +132,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         } else if (n.includes("scudo")) {
             return {
-                tierBadge: isEn ? "VIP Van" : "Van VIP",
+                tierBadge: isEn ? "Spacious Van" : "Van Spacieux",
                 bg: "#ecfdf5",
                 color: "#065f46",
                 pax: "1–6",
@@ -169,28 +162,50 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             tierBadge: isEn ? "Premium Fleet" : "Flotte Premium",
             bg: "#f3f4f6",
             color: "#374151",
-            pax: "1-4",
+            pax: "1–4",
             bags: "4",
             isVito: false
         };
     };
 
-    const getOnboardFeatures = (vName: string) => {
-        const nameLower = vName.toLowerCase();
-        const common = [
-            isEn ? "Dual-zone Air Conditioning" : "Climatisation Bizone",
-            isEn ? "Professional Multilingual Chauffeur" : "Chauffeur Professionnel Bilingue",
-            isEn ? "Complimentary Luggage Assistance" : "Aide aux Bagages Offerte",
-            isEn ? "Bottled Mineral Water Included" : "Bouteilles d'Eau Minérale Incluses"
-        ];
-        if (nameLower.includes("superb") || nameLower.includes("kodiaq")) {
-            return [...common, isEn ? "USB Chargers & Premium Comfort" : "Chargeurs USB & Grand Confort"];
+    const getVehicleDesc = (name: string, fallbackDesc?: string) => {
+        const n = name.toLowerCase();
+        if (n.includes("superb")) {
+            return isEn 
+                ? "Comfortable sedan for 1–2 passengers with luggage, ideal for city travel and business trips."
+                : "Berline confortable pour 1 à 2 passagers avec bagages, idéale pour les déplacements urbains et professionnels.";
         }
-        if (nameLower.includes("vito") || nameLower.includes("sprinter")) {
-            return [...common, isEn ? "Extra Legroom & High Capacity Charging" : "Espace Jambes & Prises de Recharge Rapide"];
+        if (n.includes("kodiaq")) {
+            return isEn 
+                ? "Spacious SUV with higher clearance, well suited for 1–3 passengers on regional routes."
+                : "SUV spacieux avec garde au sol surélevée, adapté pour 1 à 3 passagers sur les routes régionales.";
         }
-        return common;
+        if (n.includes("scudo")) {
+            return isEn 
+                ? "Spacious van for families and small groups with generous luggage capacity."
+                : "Van spacieux pour familles et petits groupes avec une grande capacité de bagages.";
+        }
+        if (n.includes("vito")) {
+            return isEn 
+                ? "Spacious cabin with extra luggage capacity, recommended for groups and longer multi-day journeys."
+                : "Cabine spacieuse avec grand coffre à bagages, recommandée pour les groupes et les circuits sur plusieurs jours.";
+        }
+        if (n.includes("sprinter")) {
+            return isEn 
+                ? "Executive minibus configured for large tour groups, corporate delegations, and extended family travel."
+                : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.";
+        }
+        return fallbackDesc || "";
     };
+
+    const getOnboardFeatures = () => {
+        return [
+            isEn ? "Air conditioning" : "Climatisation",
+            isEn ? "Professional chauffeur" : "Chauffeur professionnel",
+            isEn ? "Luggage assistance" : "Aide aux bagages"
+        ];
+    };
+
     return (
         <section style={{ 
             padding: showBottomDivider ? '140px 20px 140px 20px' : '140px 20px 80px 20px', 
@@ -422,13 +437,13 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         color: #fff;
                     }
                     .fleet-body {
-                        padding: 20px;
+                        padding: 22px 20px;
                         display: flex;
                         flex-direction: column;
                         flex-grow: 1;
                     }
                     .fleet-name {
-                        font-size: 1.5rem;
+                        font-size: 1.45rem;
                         font-weight: 600;
                         color: #1B2D4F;
                         margin: 0 0 4px 0;
@@ -443,7 +458,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         display: flex;
                         flex-wrap: wrap;
                         gap: 6px;
-                        margin-bottom: 12px;
+                        margin-bottom: 14px;
                     }
                     .fleet-spec-pill {
                         background-color: #f9fafb;
@@ -458,19 +473,19 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         font-weight: 500;
                     }
                     .fleet-desc {
-                        font-size: 0.8rem;
+                        font-size: 0.82rem;
                         color: #4b5563;
-                        line-height: 1.4;
-                        margin: 0 0 12px 0;
+                        line-height: 1.45;
+                        margin: 0 0 14px 0;
                     }
                     .fleet-features {
                         display: flex;
                         flex-direction: column;
-                        gap: 4px;
-                        margin-bottom: 16px;
+                        gap: 6px;
+                        margin-top: auto;
                     }
                     .fleet-feature-item {
-                        font-size: 0.75rem;
+                        font-size: 0.78rem;
                         color: #4b5563;
                         display: flex;
                         align-items: center;
@@ -480,77 +495,36 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         color: var(--primary);
                         font-weight: bold;
                     }
-                    .fleet-bottom {
-                        margin-top: auto;
-                    }
-                    .fleet-price-row {
-                        display: flex;
-                        align-items: baseline;
-                        gap: 4px;
-                        margin-bottom: 12px;
-                    }
-                    .fleet-price {
-                        font-size: 1.875rem;
-                        font-weight: 700;
-                        color: #1B2D4F;
-                    }
-                    .fleet-price-suffix {
-                        font-size: 0.72rem;
-                        color: #8892b0;
-                        font-weight: 500;
-                        margin-left: 2px;
-                    }
-                    .btn-outline {
-                        display: block;
-                        width: 100%;
-                        background-color: transparent;
-                        color: var(--primary);
+                    .fleet-shared-cta-btn {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--primary);
+                        color: #fff;
                         border: 1.5px solid var(--primary);
-                        padding: 11px 16px;
+                        padding: 13px 32px;
                         border-radius: 9999px;
                         font-weight: 600;
-                        font-size: 0.875rem;
+                        font-size: 0.95rem;
                         text-align: center;
                         text-decoration: none;
                         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
                         cursor: pointer;
-                        box-sizing: border-box;
+                        box-shadow: 0 4px 14px rgba(220, 131, 78, 0.25);
                     }
-                    .btn-outline:hover {
-                        background-color: var(--primary);
-                        color: #fff;
-                        box-shadow: 0 4px 12px rgba(220, 131, 78, 0.2);
-                    }
-                    .btn-vito {
-                        display: block;
-                        width: 100%;
-                        background-color: var(--primary);
-                        color: #fff;
-                        border: 1.5px solid var(--primary);
-                        padding: 11px 16px;
-                        border-radius: 9999px;
-                        font-weight: 600;
-                        font-size: 0.875rem;
-                        text-align: center;
-                        text-decoration: none;
-                        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                        cursor: pointer;
-                        box-sizing: border-box;
-                        box-shadow: 0 4px 12px rgba(220, 131, 78, 0.15);
-                    }
-                    .btn-vito:hover {
+                    .fleet-shared-cta-btn:hover {
                         background-color: #c96f3c;
                         border-color: #c96f3c;
                         color: #fff;
-                        box-shadow: 0 6px 16px rgba(220, 131, 78, 0.3);
-                        transform: translateY(-1px);
+                        box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
+                        transform: translateY(-2px);
                     }
                 `}</style>
 
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '45px' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-                        {isEn ? "OUR PREMIUM FLEET & TIERS" : "NOTRE FLOTTE PREMIUM & TIERS"}
+                        {isEn ? "OUR FLEET" : "NOTRE FLOTTE"}
                     </span>
                     <h2 style={{ 
                         fontSize: '2.1rem', 
@@ -560,12 +534,12 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         fontFamily: 'var(--font-poppins), sans-serif',
                         textWrap: 'balance'
                     }}>
-                        {isEn ? "Select Your Chauffeur Vehicle" : "Choisissez Votre Véhicule de Chauffeur"}
+                        {isEn ? "Our Private Driver Fleet" : "Notre Flotte de Chauffeurs Privés"}
                     </h2>
-                    <p style={{ color: '#666', marginTop: '10px', fontSize: '1.02rem' }}>
+                    <p style={{ color: '#666', marginTop: '10px', fontSize: '1.02rem', maxWidth: '650px', margin: '10px auto 0 auto' }}>
                         {isEn 
-                            ? "Meticulously maintained, fully licensed vehicles to match your group size and travel style."
-                            : "Des véhicules parfaitement entretenus et agréés pour répondre à la taille de votre groupe."}
+                            ? "Comfortable vehicles for couples, families and groups across Morocco."
+                            : "Des véhicules confortables pour les couples, les familles et les groupes à travers le Maroc."}
                     </p>
                 </div>
 
@@ -587,8 +561,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         {vehicles.map((v, idx) => {
                             const meta = getVehicleMetadata(v.name);
                             const isVito = meta.isVito;
-                            const priceNum = parseInt(v.price.replace(/[^0-9]/g, '')) || 0;
-                            const isEightDays = priceNum > 300;
+                            const description = getVehicleDesc(v.name, v.suitability);
 
                             return (
                                 <div key={idx} className={`fleet-card ${isVito ? 'vito-card' : ''} ${activeIndex === idx ? 'active-card' : ''}`}>
@@ -618,15 +591,15 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                                     {/* Card Body */}
                                     <div className="fleet-body">
                                         <h3 className="fleet-name">{v.name}</h3>
-                                        <div className="fleet-subtitle">{v.spec}</div>
+                                        <div className="fleet-subtitle">{meta.tierBadge}</div>
 
                                         {/* Specs Pills */}
                                         <div className="fleet-specs">
                                             <div className="fleet-spec-pill">
-                                                <Users size={14} /> <strong>{meta.pax} PAX</strong>
+                                                <Users size={14} /> <strong>{meta.pax} {isEn ? "passengers" : "passagers"}</strong>
                                             </div>
                                             <div className="fleet-spec-pill">
-                                                <Briefcase size={14} /> <strong>{meta.bags} {isEn ? (parseInt(meta.bags) > 1 ? "Bags" : "Bag") : (parseInt(meta.bags) > 1 ? "Bagages" : "Bagage")}</strong>
+                                                <Briefcase size={14} /> <strong>{meta.bags} {isEn ? (parseInt(meta.bags) > 1 ? "bags" : "bag") : (parseInt(meta.bags) > 1 ? "bagages" : "bagage")}</strong>
                                             </div>
                                             <div className="fleet-spec-pill">
                                                 <Wind size={14} /> <strong>A/C</strong>
@@ -634,38 +607,16 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                                         </div>
 
                                         {/* Description */}
-                                        <p className="fleet-desc">{v.suitability}</p>
+                                        <p className="fleet-desc">{description}</p>
 
-                                        {/* Checklist (only top 3 to keep height reasonable) */}
+                                        {/* Benefits / Checklist */}
                                         <div className="fleet-features">
-                                            {getOnboardFeatures(v.name).slice(0, 3).map((feat, fidx) => (
+                                            {getOnboardFeatures().map((feat, fidx) => (
                                                 <div key={fidx} className="fleet-feature-item">
                                                     <Check size={14} weight="bold" className="fleet-feature-check" />
                                                     <span>{feat}</span>
                                                 </div>
                                             ))}
-                                        </div>
-
-                                        {/* Bottom Info and Button */}
-                                        <div className="fleet-bottom">
-                                            <div className="fleet-price-row">
-                                                <span className="fleet-price">{v.price}</span>
-                                                <span className="fleet-price-suffix">
-                                                    {isEightDays 
-                                                        ? `· ${isEn ? "8-Day All-Inclusive" : "8 Jours Tout-Inclus"}`
-                                                        : `/ ${isEn ? "hour" : "heure"} · ${isEn ? "All-Inclusive" : "Tout-Inclus"}`
-                                                    }
-                                                </span>
-                                            </div>
-
-                                            <a
-                                                href={getWhatsAppUrl(v.name)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={isVito ? "btn-vito" : "btn-outline"}
-                                            >
-                                                {isEn ? "Book on WhatsApp" : "Réserver sur WhatsApp"}
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -696,6 +647,37 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                             aria-label={isEn ? `Go to vehicle ${idx + 1}` : `Aller au véhicule ${idx + 1}`}
                         />
                     ))}
+                </div>
+
+                {/* Shared CTA & Subtle Disclaimer */}
+                <div style={{ textAlign: 'center', marginTop: '32px' }}>
+                    <a
+                        href="#booking"
+                        onClick={(e) => {
+                            const el = document.getElementById('booking');
+                            if (el) {
+                                e.preventDefault();
+                                el.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="fleet-shared-cta-btn"
+                    >
+                        {isEn ? "Check availability" : "Vérifier la disponibilité"}
+                    </a>
+                    <p style={{
+                        fontSize: '0.82rem',
+                        color: '#6b7280',
+                        marginTop: '14px',
+                        lineHeight: 1.5,
+                        maxWidth: '560px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        padding: '0 16px'
+                    }}>
+                        {isEn 
+                            ? "Vehicle models may vary based on availability. An equivalent or higher-category vehicle may be provided."
+                            : "Les modèles de véhicules peuvent varier selon la disponibilité. Un véhicule équivalent ou de catégorie supérieure sera fourni."}
+                    </p>
                 </div>
             </div>
 

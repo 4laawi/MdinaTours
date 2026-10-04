@@ -23,17 +23,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     
-    let title = 'Private Driver Morocco – Flexible Car with Driver Service | Mdina Tours';
-    let description = 'Rent a car with a private driver in Morocco. Premium sedans, SUVs, and minivans with English-speaking local chauffeurs (Dispo Chauffeur) for customizable multi-day trips and airport transfers.';
+    let title = 'Private Driver Morocco – Professional Chauffeur Service | Mdina Tours';
+    let description = 'Hire a professional private driver in Morocco for flexible city travel, day trips, and custom multi-day tours. Transparent daily rates and experienced local drivers.';
     let ogLocale = 'en_US';
 
     if (lang === 'fr') {
-        title = 'Chauffeur Privé Maroc – Location de Voiture avec Chauffeur | Mdina Tours';
-        description = 'Louez un véhicule avec chauffeur privé au Maroc. Berlines, SUV et vans confortables avec chauffeurs locaux bilingues (Disposition Chauffeur) pour vos circuits touristiques sur mesure.';
+        title = 'Chauffeur Privé Maroc – Service de Transport Professionnel | Mdina Tours';
+        description = 'Louez un véhicule avec chauffeur privé au Maroc pour vos déplacements urbains, excursions et circuits sur mesure. Tarifs clairs et chauffeurs expérimentés.';
         ogLocale = 'fr_FR';
     } else if (lang === 'es') {
         title = 'Conductor Privado en Marruecos – Coche con Chófer | Mdina Tours';
-        description = 'Alquiler de coche con conductor privado en Marruecos. Berlinas, SUV y minivans con chófer profesional para traslados y rutas a medida por todo el país.';
+        description = 'Alquiler de vehículo con conductor privado en Marruecos para traslados, excursiones y rutas personalizadas. Precios transparentes y conductores profesionales.';
         ogLocale = 'es_ES';
     }
 
@@ -87,63 +87,65 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
     const textMorocco = {
         h1: isEn 
-            ? "Private Driver in Morocco – National Chauffeur Service" 
-            : (isEs ? "Conductor Privado en Marruecos – Servicio de Chófer Nacional" : "Chauffeur Privé au Maroc – Location de Voiture avec Chauffeur"),
+            ? "Private Driver in Morocco" 
+            : (isEs ? "Conductor Privado en Marruecos" : "Chauffeur Privé au Maroc"),
         subtitle: isEn 
-            ? "Discover the magic of Morocco with a certified, English-speaking driver at your full disposal. Flexible itineraries, fixed daily dispo rates, and zero travel stress."
-            : (isEs ? "Descubra Marruecos con un conductor profesional a su entera disposición. Itinerarios flexibles, tarifas claras y máxima tranquilidad durante todo su viaje." : "Découvrez la magie du Maroc avec un chauffeur privé bilingue agréé à votre entière disposition. Itinéraires 100% libres, tarifs clairs et aucun stress de voyage."),
-        bannerLabel: isEn ? "Morocco Chauffeur" : (isEs ? "Chófer Marruecos" : "Chauffeur Maroc"),
+            ? "Hourly, full-day, and multi-day private transportation with a professional driver across Morocco. Transparent pricing with flexible stops."
+            : (isEs 
+                ? "Transporte privado por horas, día completo o varios días con conductor profesional en Marruecos. Tarifas claras y paradas flexibles." 
+                : "Transport privé à l'heure, à la journée ou sur plusieurs jours avec chauffeur professionnel au Maroc. Tarifs transparents et arrêts libres."),
+        bannerLabel: isEn ? "Private Driver Morocco" : (isEs ? "Conductor Privado Marruecos" : "Chauffeur Privé Maroc"),
         whatsappHeroMsg: isEn 
-            ? "Hello Mdina Tours, I would like to book a private driver dispo service in Morocco."
-            : (isEs ? "Hola Mdina Tours, deseo reservar un conductor privado a disposición en Marruecos." : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé à disposition au Maroc."),
+            ? "Hello Mdina Tours, I would like to book a private driver service in Morocco."
+            : (isEs ? "Hola Mdina Tours, deseo reservar un conductor privado en Marruecos." : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé au Maroc."),
         introTitle: isEn 
-            ? "Morocco Chauffeur Network: Ultimate Travel Freedom" 
-            : (isEs ? "Conductor Privado en Marruecos: Total Libertad para Viajar" : "Chauffeur Privé au Maroc : La Liberté de Voyage Absolue"),
+            ? "Morocco Private Driver Network" 
+            : (isEs ? "Servicio de Conductor Privado en Marruecos" : "Réseau de Chauffeurs Privés au Maroc"),
         introP1: isEn
-            ? "Exploring Morocco's imperial cities, ancient clay kasbahs, high mountain passes, and desert dunes is a lifetime adventure. However, navigating the local highway traffic, narrow medina gates, and public train schedules can be demanding. Our national private driver network—known locally as \"Dispo Chauffeur\"—offers a premium, flexible alternative. Rent a modern, air-conditioned vehicle with a certified, English-speaking local chauffeur on standby exclusively for your schedule."
+            ? "Exploring Morocco's imperial cities, Atlas mountains, coastal towns, and desert regions is best enjoyed at your own pace. Our private driver service provides a modern vehicle with a professional local driver dedicated to your schedule."
             : (isEs 
-                ? "Recorrer las ciudades imperiales, las kasbahs del sur, las montañas del Atlas y las dunas del Sáhara es una experiencia inolvidable. Para evitar el estrés del tráfico local, accesos a medinas y horarios de transporte público, nuestro servicio de conductor privado le ofrece la alternativa perfecta: un vehículo moderno con chófer profesional a su entera disposición."
-                : "Découvrir les médinas médiévales, les kasbahs du Sud, les cols de l'Atlas et le désert du Sahara est une aventure unique. Cependant, conduire sur les routes locales ou dépendre des horaires de trains peut s'avérer contraignant. Notre réseau national de chauffeurs privés — connu sous le nom de « Dispo Chauffeur » — vous propose la formule idéale : la location d'un véhicule récent avec chauffeur bilingue dédié."),
+                ? "Recorrer las ciudades imperiales, las montañas del Atlas, la costa y el desierto se disfruta mejor a su propio ritmo. Nuestro servicio le ofrece un vehículo moderno con conductor profesional dedicado a su itinerario."
+                : "Découvrir les médinas impériales, les routes de l'Atlas, les villes côtières et le désert se fait au mieux à votre rythme. Notre service met à votre disposition un véhicule récent avec un chauffeur professionnel dédié."),
         introP2: isEn
-            ? "Unlike fixed-route transfers or rigid group excursions, our dispo service places you in complete control. You set the departure times, decide where to stop for lunch or photography, and customize stops in real time. Our professional drivers act as expert local navigators, ensuring safe driving on mountain roads, smooth hotel drop-offs, and knowledgeable cultural tips."
+            ? "Unlike rigid group tours, you set the departure times, request photo stops, and enjoy flexible meals along the way. Your driver assists with luggage, navigates regional roads safely, and provides practical local recommendations."
             : (isEs 
-                ? "A diferencia de las excursiones cerradas en grupo, nuestro servicio le da control total sobre su tiempo: elija la hora de salida, decida dónde parar a comer o tomar fotos y adapte el recorrido en tiempo real. Nuestros chóferes conocen las carreteras, parkings y accesos para que viaje cómodo y seguro."
-                : "Contrairement aux trajets directs ou aux excursions en groupe figées, notre service de disposition vous offre une autonomie totale. Vous fixez l'heure de départ, choisissez vos arrêts restos ou photos, et adaptez le programme au jour le jour. Nos chauffeurs professionnels chevronnés gèrent les routes sinueuses et les parkings de médinas en toute sécurité."),
-        regionalHubsTitle: isEn ? "Our Regional Disposition Hubs" : (isEs ? "Nuestras Bases Principales" : "Nos Centres de Disposition Régionaux"),
+                ? "A diferencia de las excursiones rígidas en grupo, usted elige las horas de salida, paradas fotográficas y almuerzos en el camino. Su conductor le ayuda con el equipaje y cuida de su seguridad en carretera."
+                : "Contrairement aux circuits figés, vous fixez les horaires, profitez d'arrêts photos et déjeunez selon vos envies. Votre chauffeur vous aide avec les bagages et assure une conduite sereine sur toutes les routes."),
+        regionalHubsTitle: isEn ? "Our Regional Service Hubs" : (isEs ? "Nuestras Bases Principales" : "Nos Centres de Service Régionaux"),
         regionalHubsDesc: isEn 
-            ? "We offer specialized local chauffeurs and specialized vehicle dispo in Morocco's key destinations. Select a hub below for local day trips or start a grand multi-day tour:"
-            : (isEs ? "Disponemos de conductores y vehículos en los principales puntos de Marruecos para excursiones o rutas de varios días:" : "Nous proposons des chauffeurs locaux spécialisés et des flottes dispo dans les destinations clés du Maroc. Sélectionnez une agence locale pour vos excursions ou grands circuits :"),
-        howItWorksTitle: isEn ? "How Chauffeur Disposition Works" : (isEs ? "Cómo Funciona el Servicio de Chófer a Disposición" : "Comment fonctionne la disposition de chauffeur"),
+            ? "We provide experienced local drivers and comfortable vehicles across Morocco's primary destinations:"
+            : (isEs ? "Disponemos de conductores profesionales y vehículos cómodos en los principales destinos de Marruecos:" : "Nous mettons à disposition des chauffeurs professionnels et des véhicules récents dans les principales villes du Maroc :"),
+        howItWorksTitle: isEn ? "How the Private Driver Service Works" : (isEs ? "Cómo Funciona el Servicio de Conductor Privado" : "Comment fonctionne le service chauffeur privé"),
         step1Title: isEn ? "1. Select Vehicle & Start Point" : (isEs ? "1. Elija Vehículo y Punto de Salida" : "1. Choisissez le véhicule et le départ"),
         step1Desc: isEn 
-            ? "Choose your starting city (Casablanca, Marrakech, Tangier, Rabat) and pick a vehicle matching your group and luggage."
-            : (isEs ? "Seleccione su ciudad de partida (Casablanca, Marrakech, Tánger, Rabat) y el vehículo adecuado para su grupo." : "Sélectionnez votre ville de départ (Casablanca, Marrakech, Tanger, Rabat) et choisissez le véhicule adapté à votre groupe."),
-        step2Title: isEn ? "2. Design Your Custom Route" : (isEs ? "2. Diseñe su Itinerario a Medida" : "2. Dessinez votre itinéraire"),
+            ? "Choose your starting city (Casablanca, Marrakech, Tangier, Rabat, Fes) and select a vehicle suited to your group size and luggage."
+            : (isEs ? "Seleccione su ciudad de inicio (Casablanca, Marrakech, Tánger, Rabat, Fez) y el vehículo adecuado para su grupo y equipaje." : "Sélectionnez votre ville de départ (Casablanca, Marrakech, Tanger, Rabat, Fès) et choisissez le véhicule adapté à votre groupe et bagages."),
+        step2Title: isEn ? "2. Share Your Planned Route" : (isEs ? "2. Indique su Itinerario Previsto" : "2. Indiquez votre itinéraire prévu"),
         step2Desc: isEn 
-            ? "Map out your desired stops or consult with our travel specialists to plan a seamless multi-city road trip."
-            : (isEs ? "Defina sus paradas deseadas o solicite ayuda a nuestro equipo para organizar una ruta fluida." : "Déterminez vos étapes ou concevez un itinéraire fluide d'une ville à l'autre avec l'aide de nos spécialistes."),
-        step3Title: isEn ? "3. Professional Chauffeur Assigned" : (isEs ? "3. Asignación de Conductor Profesional" : "3. Votre chauffeur est affecté"),
+            ? "Share your desired stops for a day trip or full multi-day itinerary so we can provide a complete, transparent quotation upfront."
+            : (isEs ? "Indique sus paradas deseadas para una excursión o ruta de varios días para recibir un presupuesto cerrado sin sorpresas." : "Indiquez vos étapes pour une journée ou un circuit complet afin de recevoir un tarif clair et convenu à l'avance."),
+        step3Title: isEn ? "3. Professional Driver Briefed" : (isEs ? "3. Conductor Profesional Asignado" : "3. Votre chauffeur est briefé"),
         step3Desc: isEn 
-            ? "A licensed, English-speaking driver is assigned to your trip, serving as your standby assistant throughout."
-            : (isEs ? "Le asignamos un conductor cualificado que estará pendiente de sus traslados durante todo el recorrido." : "Un chauffeur agréé bilingue vous est attribué, vous accompagnant en attente tout au long de votre parcours."),
-        step4Title: isEn ? "4. Travel with Full Flexibility" : (isEs ? "4. Viaje con Máxima Flexibilidad" : "4. Voyagez en toute flexibilité"),
+            ? "A licensed, English or French-speaking driver is assigned to your journey, coordinating pickup and luggage assistance."
+            : (isEs ? "Se le asigna un conductor profesional con idiomas que coordinará su recogida y asistencia con el equipaje." : "Un chauffeur agréé bilingue vous est attribué, assurant votre prise en charge et l'aide aux bagages."),
+        step4Title: isEn ? "4. Travel with Complete Flexibility" : (isEs ? "4. Viaje con Total Flexibilidad" : "4. Voyagez en toute flexibilité"),
         step4Desc: isEn 
-            ? "Explore monuments, dine, or shop without stress. Your standby driver coordinates all pickups on WhatsApp."
-            : (isEs ? "Visite monumentos, almuerce y disfrute a su ritmo mientras su chófer coordina cada recogida por WhatsApp." : "Visitez, mangez et flânez sans stress. Votre chauffeur reste à proximité et se coordonne avec vous via WhatsApp."),
-        useCasesTitle: isEn ? "Popular Morocco Private Driver Itineraries" : (isEs ? "Ejemplos de Rutas con Conductor en Marruecos" : "Exemples d'itinéraires et cas d'usage au Maroc"),
-        pricingTitle: isEn ? "Morocco Chauffeur Pricing Guide" : (isEs ? "Orientación de Tarifas de Chófer" : "Grille tarifaire - Chauffeur au Maroc"),
+            ? "Enjoy your journey with flexible stops for coffee, photos, and meals. Pay conveniently after each travel day."
+            : (isEs ? "Disfrute de su viaje con paradas para café, fotos y comida. Abone cómodamente al final de cada día." : "Profitez de votre trajet avec des arrêts libres pour photos et repas. Réglez simplement en fin de journée."),
+        useCasesTitle: isEn ? "Popular Morocco Private Driver Itineraries" : (isEs ? "Rutas Populares con Conductor en Marruecos" : "Exemples d'itinéraires populaires au Maroc"),
+        pricingTitle: isEn ? "Morocco Private Driver Pricing Guide" : (isEs ? "Orientación de Tarifas de Conductor Privado" : "Grille tarifaire - Chauffeur au Maroc"),
         pricingSubtitle: isEn 
-            ? "Transparent flat-rate dispo pricing with no hidden charges. Book now, pay cash directly to the driver."
-            : (isEs ? "Tarifas transparentes por vehículo y día. Reserve con facilidad y abone al conductor en efectivo." : "Des tarifs transparents tout compris. Réservez aujourd'hui et payez en espèces directement au chauffeur."),
-        reviewsTitle: isEn ? "What Travelers Say About Our Morocco Chauffeurs" : (isEs ? "Opiniones de Viajeros sobre Nuestros Conductores" : "Avis de nos voyageurs sur notre service au Maroc"),
+            ? "Transparent rates with fuel, tolls, and operating expenses included for agreed routes. Pay after each travel day in cash or card."
+            : (isEs ? "Precios transparentes con combustible, peajes y gastos incluidos para la ruta acordada. Pago al final de cada día en efectivo o tarjeta." : "Tarifs clairs incluant carburant, péages et frais pour l'itinéraire convenu. Paiement en fin de journée en espèces ou carte."),
+        reviewsTitle: isEn ? "What Travelers Say About Our Service" : (isEs ? "Opiniones de Viajeros sobre Nuestro Servicio" : "Avis de nos voyageurs sur notre service"),
         reviewsSubtitle: isEn 
-            ? "Verified reviews from clients who toured Morocco's imperial cities and deserts with our network."
-            : (isEs ? "Comentarios de clientes que han recorrido ciudades imperiales y rutas en Marruecos con nosotros." : "Découvrez les avis de voyageurs ayant fait confiance à notre réseau de chauffeurs au Maroc."),
+            ? "Verified feedback from travelers who explored Morocco with our private drivers."
+            : (isEs ? "Comentarios verificados de viajeros que han recorrido Marruecos con nuestros conductores." : "Retours d'expérience de voyageurs ayant visité le Maroc avec nos chauffeurs privés."),
         finalCtaTitle: isEn ? "Book Your Private Driver in Morocco" : (isEs ? "Reserve su Conductor Privado en Marruecos" : "Réservez votre Chauffeur Privé au Maroc"),
         finalCtaSubtitle: isEn 
-            ? "Ready to travel Morocco with complete peace of mind? Contact us on WhatsApp and get your driver dispo confirmed today!"
-            : (isEs ? "¿Listo para recorrer Marruecos con total confort? Contáctenos por WhatsApp y confirme su conductor privado." : "Prêt à explorer le Maroc l'esprit tranquille ? Contactez-nous sur WhatsApp et confirmez votre chauffeur dès aujourd'hui !"),
-        faqTitle: isEn ? "Morocco Private Driver FAQs" : (isEs ? "Preguntas Frecuentes sobre el Servicio de Chófer" : "Questions Fréquentes - Chauffeur au Maroc")
+            ? "Ready to travel Morocco comfortably with a dedicated driver? Contact us on WhatsApp for a quick, transparent quote!"
+            : (isEs ? "¿Desea recorrer Marruecos con conductor privado? Escríbanos por WhatsApp para recibir un presupuesto rápido y transparente." : "Prêt à voyager au Maroc avec un chauffeur dédié ? Écrivez-nous sur WhatsApp pour un devis rapide et clair !"),
+        faqTitle: isEn ? "Frequently Asked Questions" : (isEs ? "Preguntas Frecuentes" : "Questions Fréquentes")
     };
 
     const vehicles = [
@@ -153,8 +155,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             capacity: "1-3 PAX",
             luggage: "3 Bags",
             suitability: isEn 
-                ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or business meetings."
-                : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
+                ? "Comfortable sedan for 1–2 passengers with luggage, ideal for city travel and business trips."
+                : "Berline confortable pour 1 à 2 passagers avec bagages, idéale pour les déplacements urbains et professionnels.",
             price: "€20",
             image: "/cars/flotte-superb.webp"
         },
@@ -164,8 +166,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             capacity: "1-5 PAX",
             luggage: "4 Bags",
             suitability: isEn 
-                ? "A premium mid-size SUV offering high ground clearance, excellent stability for mountain roads, and spacious comfort."
-                : "Un SUV familial haut de gamme offrant une excellente garde au sol, une stabilité parfaite pour l'Atlas.",
+                ? "Spacious SUV with higher clearance, well suited for 1–3 passengers on regional routes."
+                : "SUV spacieux avec garde au sol surélevée, adapté pour 1 à 3 passagers sur les routes régionales.",
             price: "€22",
             image: "/cars/flotte-skoda-kodiaq.webp"
         },
@@ -175,8 +177,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             capacity: "1-6 PAX",
             luggage: "5 Bags",
             suitability: isEn 
-                ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions."
-                : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
+                ? "Spacious van for families and small groups with generous luggage capacity."
+                : "Van spacieux pour familles et petits groupes avec une grande capacité de bagages.",
             price: "€25",
             image: "/cars/flotte-fiat-scudo.webp"
         },
@@ -186,8 +188,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             capacity: "1-7 PAX",
             luggage: "6 Bags",
             suitability: isEn 
-                ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room."
-                : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
+                ? "Spacious cabin with extra luggage capacity, recommended for groups and longer multi-day journeys."
+                : "Cabine spacieuse avec grand coffre à bagages, recommandée pour les groupes et les circuits sur plusieurs jours.",
             price: "€28",
             image: "/cars/flotte-vito.webp"
         },
@@ -197,8 +199,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             capacity: "8-16 PAX",
             luggage: "12 Bags",
             suitability: isEn 
-                ? "A custom-configured executive minibus designed for large tour groups, corporate delegates, or multi-family excursions."
-                : "Un minibus de prestige configuré sur mesure, conçu pour les délégations professionnelles et les grands groupes.",
+                ? "Executive minibus configured for large tour groups, corporate delegations, and extended family travel."
+                : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.",
             price: "€35",
             image: "/cars/flotte-sprinter.webp"
         }
@@ -206,10 +208,10 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
     const itineraries = [
         {
-            title: isEn ? "Airport & City Transfers" : (isEs ? "Traslados de Aeropuerto y Ciudad" : "Transferts Aéroport & Ville"),
+            title: isEn ? "Airport & Intercity Transfers" : (isEs ? "Traslados de Aeropuerto e Interurbanos" : "Transferts Aéroport & Interurbains"),
             desc: isEn 
-                ? "Rabat, Casablanca, Marrakech — we get you there without the stress."
-                : (isEs ? "Casablanca, Marrakech, Rabat — traslados directos y puntuales sin estrés." : "Rabat, Casablanca, Marrakech — voyagez l'esprit tranquille."),
+                ? "Direct, comfortable transportation between Casablanca, Rabat, Marrakech, Tangier, and Fes."
+                : (isEs ? "Transporte directo y cómodo entre Casablanca, Rabat, Marrakech, Tánger y Fez." : "Liaisons confortables entre Casablanca, Rabat, Marrakech, Tanger et Fès."),
             price: isEn ? "From €45" : (isEs ? "Desde 45 €" : "À partir de 45 €"),
             cta: isEn ? "View Transfers" : (isEs ? "Ver Traslados" : "Voir les transferts"),
             image: "/img2/vito-aeroport.jpg",
@@ -218,8 +220,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
         {
             title: isEn ? "Excursion to Chefchaouen" : (isEs ? "Excursión a Chefchaouen" : "Excursion à Chefchaouen"),
             desc: isEn 
-                ? "Chefchaouen, Rif Mountains — one private car, your own pace, no group rush."
-                : (isEs ? "Chefchaouen y montañas del Rif en vehículo privado a su propio ritmo." : "Chefchaouen et les montagnes du Rif — voiture privée, à votre rythme, sans la cohue."),
+                ? "Explore Chefchaouen and the Rif Mountains at your own pace with a dedicated private vehicle."
+                : (isEs ? "Visite Chefchaouen y el Rif a su propio ritmo con un vehículo privado dedicado." : "Visite de Chefchaouen et du Rif à votre rythme avec un véhicule dédié."),
             price: isEn ? "From €249" : (isEs ? "Desde 249 €" : "À partir de 249 €"),
             cta: isEn ? "View Tour" : (isEs ? "Ver Excursión" : "Voir l'excursion"),
             image: "/hero-chefchaouen.webp",
@@ -228,8 +230,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
         {
             title: isEn ? "VIP & Corporate Travel" : (isEs ? "Viajes VIP y Corporativos" : "Voyages VIP & Affaires"),
             desc: isEn 
-                ? "Executive pickups, event transfers, roadshows — suited chauffeur, on time."
-                : (isEs ? "Recogidas ejecutivas, congresos y eventos con chófer formal y puntual." : "Accueil VIP, transferts d'événements, roadshows — chauffeur en costume, à l'heure."),
+                ? "Executive pickups, business meetings, and roadshows with punctual, well-presented drivers."
+                : (isEs ? "Traslados ejecutivos, congresos y reuniones de negocios con conductores puntuales y profesionales." : "Déplacements d'affaires, réunions et événements avec des chauffeurs ponctuels et discrets."),
             price: isEn ? "Custom quote" : (isEs ? "Solicitar presupuesto" : "Devis personnalisé"),
             cta: isEn ? "Get a quote" : (isEs ? "Solicitar presupuesto" : "Demander un devis"),
             image: "/img2/premium-chauffeur.jpg",
@@ -240,66 +242,66 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
     const reviews = [
         {
             quote: isEn ? (
-                <>Our driver was waiting at arrivals with a sign before we even cleared customs. Spotless car, cold water, and he knew every shortcut in Casablanca. <strong style={{ fontWeight: 800 }}>Absolutely seamless.</strong></>
+                <>Our driver was waiting at arrivals with a clear name sign. Clean car, cold water, and smooth navigation through Casablanca. <strong style={{ fontWeight: 800 }}>Punctual and professional.</strong></>
             ) : (isEs ? (
-                <>El conductor nos esperaba en llegadas con un cartel. Coche impecable, agua fresca y conocía perfectamente cada acceso en Casablanca. <strong style={{ fontWeight: 800 }}>Servicio impecable.</strong></>
+                <>El conductor nos esperaba en llegadas con un cartel claro. Coche limpio, agua fresca y conducción impecable por Casablanca. <strong style={{ fontWeight: 800 }}>Puntual y muy profesional.</strong></>
             ) : (
-                <>Notre chauffeur nous attendait aux arrivées avec une pancarte avant même notre passage en douane. Voiture impeccable, eau fraîche et il connaissait tous les raccourcis à Casablanca. <strong style={{ fontWeight: 800 }}>Absolument parfait.</strong></>
+                <>Notre chauffeur nous attendait aux arrivées avec une pancarte claire. Voiture impeccable, eau fraîche et trajet fluide à Casablanca. <strong style={{ fontWeight: 800 }}>Punctuel et professionnel.</strong></>
             )),
             author: "Sophie R.",
             flag: "🇫🇷"
         },
         {
             quote: isEn ? (
-                <>Flight was delayed by 2 hours. I messaged on WhatsApp and they just said &apos;no problem, we&apos;re tracking your flight.&apos; No extra charge. <strong style={{ fontWeight: 800 }}>That kind of service is rare anywhere.</strong></>
+                <>Flight was delayed by 2 hours. I messaged on WhatsApp and they confirmed they were tracking the flight at no extra charge. <strong style={{ fontWeight: 800 }}>Excellent communication.</strong></>
             ) : (isEs ? (
-                <>El vuelo se retrasó 2 horas. Avisé por WhatsApp y respondieron de inmediato que estaban siguiendo el vuelo. Sin cargos extra. <strong style={{ fontWeight: 800 }}>Atención excelente y muy profesional.</strong></>
+                <>El vuelo se retrasó 2 horas. Avisé por WhatsApp y confirmaron el seguimiento sin coste adicional. <strong style={{ fontWeight: 800 }}>Comunicación excelente.</strong></>
             ) : (
-                <>Vol retardé de 2 heures. J&apos;ai envoyé un message sur WhatsApp et ils ont simplement répondu &apos;pas de problème, nous suivons votre vol.&apos; Sans frais supplémentaires. <strong style={{ fontWeight: 800 }}>Ce genre de service est rare.</strong></>
+                <>Vol retardé de 2 heures. J&apos;ai prévenu sur WhatsApp et ils ont suivi le vol sans aucun supplément. <strong style={{ fontWeight: 800 }}>Excellente communication.</strong></>
             )),
             author: "James K.",
             flag: "🇬🇧"
         },
         {
             quote: isEn ? (
-                <>Booked a full-day tour to Chefchaouen for 4 people. The driver was a <strong style={{ fontWeight: 800 }}>genuine local expert</strong> — not just a driver. Best day of our trip.</>
+                <>Booked a full-day trip to Chefchaouen for 4 people. The driver drove carefully through the mountain roads and gave us great lunch recommendations. <strong style={{ fontWeight: 800 }}>A wonderful day.</strong></>
             ) : (isEs ? (
-                <>Reservamos una excursión a Chefchaouen para 4 personas. El conductor fue un <strong style={{ fontWeight: 800 }}>auténtico experto local</strong> y muy atento en todo momento. El mejor día de nuestro viaje.</>
+                <>Reservamos una excursión de un día a Chefchaouen para 4 personas. Conducción muy segura en montaña y buenas recomendaciones para comer. <strong style={{ fontWeight: 800 }}>Un gran día.</strong></>
             ) : (
-                <>Réservation d&apos;une excursion d&apos;une journée à Chefchaouen pour 4 personnes. Le chauffeur était un <strong style={{ fontWeight: 800 }}>véritable expert local</strong> — pas seulement un conducteur. Le meilleur jour de notre voyage.</>
+                <>Excursion d&apos;une journée à Chefchaouen pour 4 personnes. Conduite très sûre dans la montagne et excellents conseils de restaurants. <strong style={{ fontWeight: 800 }}>Très belle journée.</strong></>
             )),
             author: "Laila M.",
             flag: "🇩🇪"
         },
         {
             quote: isEn ? (
-                <>We used the dispo service for 3 days in Marrakech and Rabat for our business meetings. <strong style={{ fontWeight: 800 }}>Impeccable timing</strong>, extremely professional driver who helped us coordinate schedules, and a pristine Mercedes Vito.</>
+                <>Used the private driver for 3 days in Marrakech and Rabat for corporate meetings. <strong style={{ fontWeight: 800 }}>Punctual at every stop</strong>, pristine Mercedes Vito, and very polite driver.</>
             ) : (isEs ? (
-                <>Contratamos el servicio de chófer durante 3 días para visitas en Marrakech y Rabat. <strong style={{ fontWeight: 800 }}>Puntualidad absoluta</strong>, vehículo Mercedes Vito impecable y trato excelente.</>
+                <>Contratamos conductor 3 días en Marrakech y Rabat para reuniones de trabajo. <strong style={{ fontWeight: 800 }}>Puntualidad total</strong>, vehículo impecable y trato educado.</>
             ) : (
-                <>Nous avons utilisé le service dispo pendant 3 jours à Marrakech et Rabat pour nos réunions d&apos;affaires. <strong style={{ fontWeight: 800 }}>Timing impeccable</strong>, chauffeur extrêmement professionnel et van Mercedes Vito impeccable.</>
+                <>Chauffeur privé pendant 3 jours à Marrakech et Rabat pour des rendez-vous pro. <strong style={{ fontWeight: 800 }}>Ponctualité irréprochable</strong>, van Mercedes Vito propre et chauffeur discret.</>
             )),
             author: "David W.",
             flag: "🇺🇸"
         },
         {
             quote: isEn ? (
-                <>Perfect service from start to finish! Our driver took us to the Atlas Mountains and back. He was polite, attentive, and <strong style={{ fontWeight: 800 }}>drove very safely</strong>. The luxury SUV was clean and spacious.</>
+                <>Our driver took us through the Atlas Mountains. He was courteous, attentive, and <strong style={{ fontWeight: 800 }}>drove very safely on mountain passes</strong>. Clean and comfortable SUV.</>
             ) : (isEs ? (
-                <>¡Servicio de diez! Nuestro conductor nos llevó por el Atlas con una <strong style={{ fontWeight: 800 }}>conducción muy segura</strong>. Muy educado, atento y el vehículo amplio y limpio.</>
+                <>El conductor nos llevó por el Atlas. Muy atento, educado y con una <strong style={{ fontWeight: 800 }}>conducción muy segura en curvas</strong>. SUV limpio y confortable.</>
             ) : (
-                <>Service parfait de bout en bout ! Notre chauffeur nous a conduits dans les montagnes de l&apos;Atlas. Poli, attentionné et <strong style={{ fontWeight: 800 }}>conduite très sûre</strong>. Le SUV de luxe était propre et spacieux.</>
+                <>Trajet dans les montagnes de l&apos;Atlas. Chauffeur courtois, attentionné et <strong style={{ fontWeight: 800 }}>conduite très prudente sur les cols</strong>. SUV propre et confortable.</>
             )),
             author: "Elena P.",
             flag: "🇪🇸"
         },
         {
             quote: isEn ? (
-                <>Having a driver on standby made our family vacation <strong style={{ fontWeight: 800 }}>so relaxing</strong>. No waiting for taxis, no getting lost. Our driver was incredibly patient with the kids.</>
+                <>Having a driver on standby made our family vacation relaxing. The driver helped with luggage at each stop and accommodated our children&apos;s schedule. <strong style={{ fontWeight: 800 }}>Stress-free travel.</strong></>
             ) : (isEs ? (
-                <>Tener un conductor a disposición hizo que nuestro viaje en familia fuera <strong style={{ fontWeight: 800 }}>súper relajado</strong>. Sin regateos ni prisas, con paciencia infinita con los niños.</>
+                <>Tener un conductor a disposición hizo el viaje familiar muy tranquilo. Nos ayudó con el equipaje y se adaptó a los niños. <strong style={{ fontWeight: 800 }}>Total tranquilidad.</strong></>
             ) : (
-                <>Avoir un chauffeur à disposition a rendu nos vacances en famille <strong style={{ fontWeight: 800 }}>tellement reposantes</strong>. Pas d&apos;attente pour les taxis, pas de risque de se perdre. Chauffeur très patient.</>
+                <>Voyage en famille très reposant. Le chauffeur nous a aidés avec les bagages et s&apos;est adapté à notre rythme. <strong style={{ fontWeight: 800 }}>Voyage sans stress.</strong></>
             )),
             author: "Marc-Antoine L.",
             flag: "🇨🇦"
@@ -309,63 +311,63 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
     const faqs = [
         {
             q: isEn 
-                ? "What is a private driver (\"dispo chauffeur\") in Morocco?" 
-                : (isEs ? "¿Qué es el servicio de conductor privado o chófer a disposición?" : "Qu'est-ce qu'un service de chauffeur privé (« dispo chauffeur ») au Maroc ?"),
+                ? "What is a private driver service in Morocco?" 
+                : (isEs ? "¿En qué consiste el servicio de conductor privado en Marruecos?" : "Qu'est-ce qu'un service de chauffeur privé au Maroc ?"),
             a: isEn 
-                ? "A dispo chauffeur is a vehicle hired with a professional driver at your full disposal. Unlike a point-to-point transfer, there is no fixed route. The driver remains standby at your location, ready to take you to any destination within the agreed hours and area."
+                ? "A private driver service provides a dedicated vehicle and professional driver exclusively for your schedule. You travel at your own pace with flexibility for photo stops, coffee, meals, and comfort breaks. Our drivers focus on safe transportation and practical local advice. If you wish to have a licensed historical guide for monument and medina tours, this can be arranged separately for an affordable fee."
                 : (isEs 
-                    ? "Es el alquiler de un vehículo con conductor profesional a su entera disposición. No hay una ruta fija: el chófer le espera en cada parada y le traslada según sus horarios y preferencias dentro del tiempo contratado."
-                    : "La formule « dispo chauffeur » désigne la location d'un véhicule avec chauffeur à votre entière disposition. Il n'y a pas d'itinéraire fixe : le chauffeur vous attend à chaque arrêt et vous emmène là où vous le souhaitez durant les heures réservées.")
+                    ? "Es el alquiler de un vehículo con conductor profesional dedicado exclusivamente a su itinerario. Viaja a su propio ritmo con libertad para paradas de fotos, café y comidas. El conductor se encarga del transporte seguro y recomendaciones prácticas. Si desea un guía oficial para visitas culturales a monumentos o medinas, puede solicitarse por separado."
+                    : "La formule chauffeur privé met à votre disposition un véhicule avec chauffeur dédié à votre programme. Vous voyagez à votre rythme avec des arrêts libres pour photos, pauses et repas. Nos chauffeurs assurent une conduite sûre et des conseils pratiques. Si vous souhaitez un guide officiel agréé pour les visites de monuments et médinas, il peut être réservé séparément.")
         },
         {
             q: isEn 
-                ? "Do drivers speak English and French?" 
-                : (isEs ? "¿Los conductores hablan español?" : "Les chauffeurs parlent-ils anglais et français ?"),
+                ? "How do medina riad pickups and drop-offs work?" 
+                : (isEs ? "¿Cómo se realizan las recogidas en riads dentro de la medina?" : "Comment se passent les prises en charge aux riads dans les médinas ?"),
             a: isEn 
-                ? "Yes. All our designated dispo drivers speak fluent English and French. Many also speak basic Spanish. They are highly experienced in tourist transport and local guiding tips."
+                ? "Many riads inside Moroccan medinas cannot be reached directly by car due to narrow pedestrian lanes. In these cases, your driver will get as close as reasonably possible using the nearest vehicle-accessible point and assist you with your luggage."
                 : (isEs 
-                    ? "Nuestros conductores hablan español, francés e inglés. Tienen amplia experiencia en turismo y conocen a la perfección las rutas y consejos locales."
-                    : "Oui. Tous nos chauffeurs affectés au service touristique parlent couramment français et anglais. Ils ont une grande expérience du guidage et de l'accueil international.")
+                    ? "Muchos riads en las medinas marroquíes están en calles peatonales no accesibles en coche. En estos casos, su conductor le acercará al punto accesible más próximo y le ayudará con el equipaje."
+                    : "Certains riads au cœur des médinas ne sont pas accessibles directement en voiture. Dans ce cas, votre chauffeur vous dépose au point carrossable le plus proche et vous aide avec vos bagages.")
         },
         {
             q: isEn 
-                ? "Is fuel, highway tolls, and parking included?" 
-                : (isEs ? "¿Están incluidos el combustible, peajes y aparcamientos?" : "Le carburant, les péages et les frais de parking sont-ils inclus ?"),
+                ? "Is fuel, highway tolls, and operating expenses included in the price?" 
+                : (isEs ? "¿Están incluidos el combustible, peajes y gastos de viaje?" : "Le carburant, les péages et les frais de route sont-ils inclus ?"),
             a: isEn 
-                ? "Yes. All our daily rates include fuel, highway toll charges, parking fees, and the driver's professional fees. There are no hidden or surprise surcharges."
+                ? "Yes. For your agreed itinerary, all standard operating expenses—including fuel, highway tolls, normal parking fees, and the driver's required travel expenses—are fully included in your quotation with no hidden costs."
                 : (isEs 
-                    ? "Sí. Todas nuestras tarifas cerradas incluyen combustible, peajes de autopista y gastos del conductor. Sin costes sorpresa."
-                    : "Oui. Tous nos tarifs à la journée incluent le carburant, les frais de péage autoroutier, les parkings ainsi que la rémunération du chauffeur. Pas de mauvaise surprise à la fin.")
+                    ? "Sí. Para la ruta acordada, todos los costes operativos habituales —combustible, peajes de autopista, aparcamientos y gastos del conductor— están incluidos en el presupuesto acordado sin cargos sorpresa."
+                    : "Oui. Pour l'itinéraire convenu, tous les frais opérationnels — carburant, péages d'autoroute, parkings et frais de route du chauffeur — sont intégralement inclus dans le tarif sans frais cachés.")
         },
         {
             q: isEn 
-                ? "Can I change the itinerary during the day?" 
-                : (isEs ? "¿Puedo modificar la ruta durante la jornada?" : "Puis-je modifier mon itinéraire au cours de la journée ?"),
+                ? "Can I make stops or adjust the route during the journey?" 
+                : (isEs ? "¿Puedo hacer paradas o modificar el recorrido durante el día?" : "Puis-je faire des arrêts ou ajustements d'itinéraire en cours de route ?"),
             a: isEn 
-                ? "Absolutely. Full flexibility is the core benefit of this service. You can add extra stops, change your destination, or cut your sightseeing short. Simply communicate your wishes to your driver."
+                ? "Yes. For city travel and day trips, you can freely request stops for photos, coffee, lunch, or comfort breaks. For significant route modifications involving additional cities or longer driving distances, we will clearly communicate any adjusted rate in advance."
                 : (isEs 
-                    ? "Totalmente. La flexibilidad es la gran ventaja de este servicio. Puede añadir paradas, detenerse a comer donde prefiera o adelantar salidas según sus deseos."
-                    : "Tout à fait. La flexibilité est l'atout majeur de notre formule. Vous pouvez modifier votre programme, ajouter des visites ou écourter une excursion selon vos envies en le signalant directement à votre chauffeur.")
+                    ? "Sí. En excursiones y servicios locales puede solicitar paradas para fotos, café, comidas o descanso. Si solicita cambios importantes de ruta o ciudades adicionales que aumenten el kilometraje, se le informará previamente de cualquier ajuste de tarifa."
+                    : "Oui. Pour les trajets locaux et excursions, vous pouvez demander des arrêts photos, café, déjeuner ou repos. Si vous demandez des changements majeurs impliquant des villes supplémentaires ou une distance accrue, un ajustement tarifaire sera communiqué en amont.")
         },
         {
             q: isEn 
-                ? "Is the driver's accommodation included in multi-day dispo bookings?" 
-                : (isEs ? "¿Está incluido el alojamiento del conductor en rutas de varios días?" : "Le logement du chauffeur est-il inclus dans les réservations dispo sur plusieurs jours ?"),
+                ? "How and when do I pay for the service?" 
+                : (isEs ? "¿Cómo y cuándo se realiza el pago del servicio?" : "Comment et quand s'effectue le paiement ?"),
             a: isEn 
-                ? "Yes. For multi-day bookings where the driver must stay overnight outside their home base, the driver's accommodation and meal fees are fully covered in our flat rate."
+                ? "Payment is made after each travel day. We accept cash or card in EUR, USD, or Moroccan Dirhams (MAD). You will know your exact agreed rate before the service begins."
                 : (isEs 
-                    ? "Sí. En los circuitos de varios días fuera de la ciudad base, los gastos de manutención y alojamiento del conductor están incluidos en el presupuesto."
-                    : "Oui. Pour les prestations sur plusieurs jours hors de la ville de départ, les frais de repas et d'hébergement du chauffeur sont entièrement pris en charge dans notre forfait.")
+                    ? "El pago se realiza al final de cada jornada de viaje. Aceptamos efectivo o tarjeta en EUR, USD o Dirhams marroquíes (MAD). Conocerá su tarifa acordada antes de comenzar el servicio."
+                    : "Le paiement s'effectue à la fin de chaque journée de voyage. Nous acceptons les espèces ou la carte en EUR, USD ou Dirhams marocains (MAD). Le tarif convenu est connu avant le début de la prestation.")
         },
         {
             q: isEn 
-                ? "What is the difference between a transfer and a private driver dispo?" 
-                : (isEs ? "¿Qué diferencia hay entre un traslado y un chófer a disposición?" : "Quelle est la différence entre un transfert simple et un chauffeur privé à disposition ?"),
+                ? "Are the driver's hotel and meals included on multi-day tours?" 
+                : (isEs ? "¿Están incluidos el alojamiento y comidas del conductor en rutas de varios días?" : "Le logement et les repas du chauffeur sont-ils inclus pour les circuits multi-jours ?"),
             a: isEn 
-                ? "A transfer is a direct, point-to-point trip (e.g., Marrakech Airport to a Gueliz hotel) with no additional stops. A private driver dispo is an hourly or daily booking where the driver stays with you, facilitating multiple stops and flexible waits."
+                ? "Yes. On multi-day journeys outside their home base, the driver's lodging and meals are fully covered by Mdina Tours in your agreed rate. You are never asked to pay for the driver's accommodation separately."
                 : (isEs 
-                    ? "Un traslado es un viaje directo de un punto A a un punto B (ej. Aeropuerto a su hotel). El chófer a disposición es una reserva por día completo donde el vehículo le acompaña en todas sus visitas y esperas."
-                    : "Un transfert est un trajet direct d'un point A à un point B (ex: Aéroport de Marrakech vers un hôtel au Guéliz). La formule dispo chauffeur est une location à la journée où le véhicule reste avec vous pour enchaîner plusieurs visites et escales.")
+                    ? "Sí. En los viajes de varios días fuera de la ciudad base, los gastos de alojamiento y comidas del conductor corren a cargo de Mdina Tours dentro del presupuesto acordado. El cliente no tiene que pagar el hotel del conductor."
+                    : "Oui. Pour les circuits de plusieurs jours hors de la ville de départ, l'hébergement et les repas du chauffeur sont entièrement pris en charge par Mdina Tours dans le tarif convenu. Vous n'avez aucun frais d'hôtel à régler pour le chauffeur.")
         }
     ];
 
@@ -468,24 +470,37 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         {textMorocco.h1}
                     </h1>
 
-                    {/* Ratings & Badges */}
-                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', fontSize: '0.85rem', marginBottom: '20px' }}>
-                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
+                    {/* Concise Subheadline */}
+                    <p style={{
+                        fontSize: 'clamp(0.95rem, 2vw, 1.075rem)',
+                        color: '#475569',
+                        margin: '0 0 16px 0',
+                        lineHeight: '1.55',
+                        maxWidth: '850px'
+                    }}>
+                        {textMorocco.subtitle}
+                    </p>
+
+                    {/* Verified Ratings & Operational Trust Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.825rem', marginBottom: '20px' }}>
+                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
                             <span className="star-icon" style={{ color: '#f59e0b' }}>★</span>
-                            <span style={{ fontWeight: 700 }}>5.0</span>
-                            <span style={{ color: '#717171', fontWeight: 500 }}>({isEn ? "110 reviews" : "110 avis"})</span>
+                            <span style={{ fontWeight: 700, color: '#1E293B' }}>4.9</span>
+                            <span style={{ color: '#64748B', fontWeight: 500 }}>
+                                {isEn ? "(120+ verified bookings)" : (isEs ? "(120+ reservas verificadas)" : "(120+ réservations vérifiées)")}
+                            </span>
                         </div>
-                        <div className="recommended-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
-                            <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
-                            <span>{isEn ? "Recommended by 98% of travelers" : "Recommandé par 98% des voyageurs"}</span>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '5px 10px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <span>{isEn ? "Pay after each travel day · Cash or Card" : (isEs ? "Pago al final del día · Efectivo o tarjeta" : "Paiement en fin de journée · Espèces ou carte")}</span>
                         </div>
-                        <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
-                            <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>🏆</span>
-                            <span>{isEn ? "Badge of Excellence" : "Badge d'Excellence"}</span>
-                        </div>
-                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px' }}>
-                            <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
-                            <span>{isEn ? "Lowest Price Guarantee" : "Meilleur prix garanti"}</span>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px', color: '#334155', fontWeight: 500 }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span>{isEn ? "Professional licensed drivers" : (isEs ? "Conductores profesionales autorizados" : "Chauffeurs professionnels agréés")}</span>
                         </div>
                     </div>
                 </div>
@@ -538,7 +553,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                             marginBottom: '30px',
                             fontFamily: 'var(--font-poppins), sans-serif'
                         }}>
-                            {isEn ? "What riding with us feels like" : "L'expérience à bord avec nous"}
+                            {isEn ? "What riding with us feels like" : (isEs ? "La experiencia a bordo" : "L'expérience à bord avec nous")}
                         </h2>
                         
                         <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
@@ -556,7 +571,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                             fontFamily: 'var(--font-poppins), sans-serif',
                             fontStyle: 'italic'
                         }}>
-                            {isEn ? "Every transfer. Every time. No surprises." : "Chaque transfert. À chaque fois. Sans surprise."}
+                            {isEn ? "Real roads, well-maintained vehicles, and experienced local drivers." : (isEs ? "Vehículos cuidados y conductores locales con experiencia." : "Véhicules soignés et chauffeurs locaux expérimentés.")}
                         </p>
                     </div>
                 </section>
