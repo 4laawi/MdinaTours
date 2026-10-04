@@ -12,62 +12,106 @@ export default function TransferHeroGallery(props: any) {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
 
-  const handleDragStart = (clientX: number) => {
-    setIsDragging(true);
-    dragStartX.current = clientX;
-    setDragOffset(0);
-  };
+  // Touch gesture disambiguation refs
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchDirection = useRef<'horizontal' | 'vertical' | null>(null);
+  const isTouchActive = useRef(false);
 
-  const handleDragMove = (clientX: number) => {
-    if (!isDragging) return;
-    const currentOffset = clientX - dragStartX.current;
-    setDragOffset(currentOffset);
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-
-    const threshold = 50; // Swipe threshold in pixels
-    if (dragOffset < -threshold) {
-      // Swipe left -> next image
-      setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? prev : prev + 1));
-    } else if (dragOffset > threshold) {
-      // Swipe right -> prev image
-      setActiveImageIndex((prev: number) => (prev === 0 ? prev : prev - 1));
-    }
-    setDragOffset(0);
-  };
+  // Mouse drag refs
+  const isMouseDown = useRef(false);
+  const mouseStartX = useRef(0);
 
   // Touch handlers
   const onTouchStart = (e: React.TouchEvent) => {
-    handleDragStart(e.touches[0].clientX);
+    if (e.touches.length !== 1) return;
+    isTouchActive.current = true;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchDirection.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    handleDragMove(e.touches[0].clientX);
+    if (!isTouchActive.current || e.touches.length !== 1) return;
+
+    if (touchDirection.current === 'vertical') {
+      return;
+    }
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = currentX - touchStartX.current;
+    const deltaY = currentY - touchStartY.current;
+
+    if (touchDirection.current === null) {
+      if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+        if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+          touchDirection.current = 'horizontal';
+          setIsDragging(true);
+        } else {
+          touchDirection.current = 'vertical';
+          setIsDragging(false);
+          return;
+        }
+      }
+    }
+
+    if (touchDirection.current === 'horizontal') {
+      setDragOffset(deltaX);
+    }
   };
 
   const onTouchEnd = () => {
-    handleDragEnd();
+    if (!isTouchActive.current) return;
+    isTouchActive.current = false;
+
+    if (touchDirection.current === 'horizontal') {
+      const threshold = 40;
+      if (dragOffset < -threshold) {
+        setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+      } else if (dragOffset > threshold) {
+        setActiveImageIndex((prev: number) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+      }
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
+    touchDirection.current = null;
   };
 
   // Mouse handlers
   const onMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    handleDragStart(e.clientX);
+    isMouseDown.current = true;
+    mouseStartX.current = e.clientX;
+    setIsDragging(true);
+    setDragOffset(0);
   };
 
   const onMouseMove = (e: React.MouseEvent) => {
-    handleDragMove(e.clientX);
+    if (!isMouseDown.current) return;
+    const currentOffset = e.clientX - mouseStartX.current;
+    setDragOffset(currentOffset);
   };
 
   const onMouseUp = () => {
-    handleDragEnd();
+    if (!isMouseDown.current) return;
+    isMouseDown.current = false;
+    setIsDragging(false);
+
+    const threshold = 40;
+    if (dragOffset < -threshold) {
+      setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+    } else if (dragOffset > threshold) {
+      setActiveImageIndex((prev: number) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+    }
+    setDragOffset(0);
   };
 
   const onMouseLeave = () => {
-    if (isDragging) handleDragEnd();
+    if (isMouseDown.current) onMouseUp();
   };
 
   const trackStyle: React.CSSProperties = {
@@ -108,13 +152,16 @@ export default function TransferHeroGallery(props: any) {
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onTouchCancel={onTouchEnd}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseLeave}
+          style={{ touchAction: 'pan-y' }}
         >
           <div 
             className="gallery-slider-viewport"
+            style={{ touchAction: 'pan-y' }}
           >
             <div className="gallery-slider-track" style={trackStyle}>
               {galleryImages.map((img: any, idx: number) => (

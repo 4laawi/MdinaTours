@@ -31,39 +31,116 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
-    const dragStartX = useRef(0);
+    
+    // Touch gesture disambiguation refs
+    const touchStartX = useRef(0);
+    const touchStartY = useRef(0);
+    const touchDirection = useRef<'horizontal' | 'vertical' | null>(null);
+    const isTouchActive = useRef(false);
+
+    // Mouse drag refs
+    const isMouseDown = useRef(false);
+    const mouseStartX = useRef(0);
 
     // Auto-scroll loop (slow, non-distracting)
     useEffect(() => {
         const interval = setInterval(() => {
-            if (!isDragging) {
+            if (!isDragging && !isTouchActive.current) {
                 setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
             }
         }, 5000);
         return () => clearInterval(interval);
     }, [galleryImages.length, isDragging]);
 
-    const handleDragStart = (clientX: number) => {
-        setIsDragging(true);
-        dragStartX.current = clientX;
+    // Touch Handlers with Intent Disambiguation
+    const handleTouchStart = (e: React.TouchEvent) => {
+        if (e.touches.length !== 1) return;
+        isTouchActive.current = true;
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+        touchDirection.current = null;
+        setIsDragging(false);
         setDragOffset(0);
     };
 
-    const handleDragMove = (clientX: number) => {
-        if (!isDragging) return;
-        const currentOffset = clientX - dragStartX.current;
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (!isTouchActive.current || e.touches.length !== 1) return;
+
+        // If locked to vertical, don't interfere with page scrolling
+        if (touchDirection.current === 'vertical') {
+            return;
+        }
+
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const deltaX = currentX - touchStartX.current;
+        const deltaY = currentY - touchStartY.current;
+
+        // Disambiguate scroll intent once user moves > 6px
+        if (touchDirection.current === null) {
+            if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+                if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+                    // User is swiping the carousel horizontally!
+                    touchDirection.current = 'horizontal';
+                    setIsDragging(true);
+                } else {
+                    // User is scrolling the page vertically!
+                    touchDirection.current = 'vertical';
+                    setIsDragging(false);
+                    return;
+                }
+            }
+        }
+
+        if (touchDirection.current === 'horizontal') {
+            // Apply slight resistance at ends if desired, or smooth 1:1 drag
+            setDragOffset(deltaX);
+        }
+    };
+
+    const handleTouchEnd = () => {
+        if (!isTouchActive.current) return;
+        isTouchActive.current = false;
+
+        if (touchDirection.current === 'horizontal') {
+            const threshold = 40;
+            if (dragOffset < -threshold) {
+                setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+            } else if (dragOffset > threshold) {
+                setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+            }
+        }
+
+        setIsDragging(false);
+        setDragOffset(0);
+        touchDirection.current = null;
+    };
+
+    // Desktop Mouse Handlers
+    const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
+        isMouseDown.current = true;
+        mouseStartX.current = e.clientX;
+        setIsDragging(true);
+        setDragOffset(0);
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isMouseDown.current) return;
+        const currentOffset = e.clientX - mouseStartX.current;
         setDragOffset(currentOffset);
     };
 
-    const handleDragEnd = () => {
-        if (!isDragging) return;
+    const handleMouseUp = () => {
+        if (!isMouseDown.current) return;
+        isMouseDown.current = false;
         setIsDragging(false);
 
-        const threshold = 50;
+        const threshold = 40;
         if (dragOffset < -threshold) {
-            setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? prev : prev + 1));
+            setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
         } else if (dragOffset > threshold) {
-            setActiveImageIndex((prev) => (prev === 0 ? prev : prev - 1));
+            setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
         }
         setDragOffset(0);
     };
@@ -89,16 +166,17 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
                 {/* Main Large Dominant Image */}
                 <div 
                     className="gallery-main-image"
-                    onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
-                    onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
-                    onTouchEnd={handleDragEnd}
-                    onMouseDown={(e) => { e.preventDefault(); handleDragStart(e.clientX); }}
-                    onMouseMove={(e) => handleDragMove(e.clientX)}
-                    onMouseUp={handleDragEnd}
-                    onMouseLeave={() => { if (isDragging) handleDragEnd(); }}
-                    style={{ borderRadius: '14px', overflow: 'hidden' }}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                    onTouchCancel={handleTouchEnd}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={() => { if (isMouseDown.current) handleMouseUp(); }}
+                    style={{ borderRadius: '14px', overflow: 'hidden', touchAction: 'pan-y' }}
                 >
-                    <div className="gallery-slider-viewport">
+                    <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
                         <div className="gallery-slider-track" style={trackStyle}>
                             {galleryImages.map((img, idx) => (
                                 <div key={idx} className="gallery-slide-item">

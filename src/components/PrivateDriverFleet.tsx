@@ -256,6 +256,8 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         padding: 24px 4px 32px 4px;
                         margin: 0;
                         scrollbar-width: none;
+                        touch-action: pan-x pan-y;
+                        overscroll-behavior-x: contain;
                     }
                     .fleet-grid::-webkit-scrollbar {
                         display: none;

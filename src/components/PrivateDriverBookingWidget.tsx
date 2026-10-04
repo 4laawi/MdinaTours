@@ -972,16 +972,13 @@ export default function PrivateDriverBookingWidget({
                                 aria-checked={selectedVehicle === 'comfort'}
                                 onClick={() => {
                                     if (passengers > 4) {
-                                        alert(t.capacityWarningComfort);
-                                        return;
+                                        setPassengers(4);
                                     }
                                     setSelectedVehicle('comfort');
                                 }}
-                                disabled={passengers > 4}
                                 className={`vehicle-card-btn ${selectedVehicle === 'comfort' ? 'vehicle-card-selected' : ''}`}
                                 style={{
-                                    opacity: passengers > 4 ? 0.6 : 1,
-                                    cursor: passengers > 4 ? 'not-allowed' : 'pointer'
+                                    cursor: 'pointer'
                                 }}
                             >
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
@@ -1008,6 +1005,9 @@ export default function PrivateDriverBookingWidget({
                                 aria-checked={selectedVehicle === 'vito'}
                                 onClick={() => setSelectedVehicle('vito')}
                                 className={`vehicle-card-btn ${selectedVehicle === 'vito' ? 'vehicle-card-selected' : ''}`}
+                                style={{
+                                    cursor: 'pointer'
+                                }}
                             >
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
