@@ -844,7 +844,7 @@ body.modal-open {
 
 @media (max-width: 767px) {
     main {
-        padding-top: 64px !important;
+        padding-top: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: hidden !important;

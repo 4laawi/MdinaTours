@@ -126,7 +126,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             <path d="M25 10 C18 10 15 18 15 25 L15 40 L35 40 L35 25 C35 18 32 10 25 10 Z" fill="#dc834e" opacity="0.15" />
                             <polygon points="25,20 28,26 34,26 29,30 31,36 25,32 19,36 21,30 16,26 22,26" fill="#dc834e" />
                         </g>
-                        <text x="65" y="38" fontFamily="'Cormorant Garamond', serif" fontSize="26" fontWeight="bold" fill="#202f59" letterSpacing="1">Mdina</text>
+                        <text x="65" y="38" fontFamily="'Cormorant Garamond', serif" fontSize="26" fontWeight="bold" fill="#202f59" className={styles.logoTextMain} letterSpacing="1">Mdina</text>
                         <text x="65" y="58" fontFamily="'Inter', sans-serif" fontSize="12" fontWeight="600" fill="#dc834e" letterSpacing="4.5">TOURS</text>
                     </svg>
                 </Link>
