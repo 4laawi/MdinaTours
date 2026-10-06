@@ -88,9 +88,21 @@ export default function Header({ lightBg = false }: HeaderProps) {
             document.body.style.overflow = 'unset';
             document.body.classList.remove('mobile-menu-open');
         }
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setIsMenuOpen(false);
+            }
+        };
+
+        if (isMenuOpen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
         return () => {
             document.body.style.overflow = 'unset';
             document.body.classList.remove('mobile-menu-open');
+            window.removeEventListener('keydown', handleKeyDown);
         };
     }, [isMenuOpen]);
 
@@ -98,22 +110,22 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    // Main navigation configuration
-    const mainNavItems = [
+    const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
+
+    // Primary mobile navigation items
+    const primaryNavItems = [
         { path: '/', label: t('home') },
         { path: '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
         { path: '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
         { path: '/private-driver-morocco', label: isEn ? 'Private Driver' : (isEs ? 'Chófer Privado' : 'Chauffeur Privé') },
-        { path: '/contact', label: t('contact_us') },
     ];
 
     const moreNavItems = [
+        { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos') },
         { path: '/faq', label: 'FAQ' },
         ...(language === 'es' ? [] : [{ path: '/blog', label: t('blog') }]),
-        { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos') },
     ];
 
-    const allNavItems = [...mainNavItems, ...moreNavItems];
     const isMoreActive = moreNavItems.some((item) => isActive(item.path));
 
     return (
@@ -133,7 +145,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
                 {/* Desktop Nav */}
                 <nav className={styles.navPill}>
-                    {mainNavItems.map((item) => (
+                    {primaryNavItems.map((item) => (
                         <Link
                             key={item.path}
                             href={getPath(item.path)}
@@ -142,6 +154,12 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             {item.label}
                         </Link>
                     ))}
+                    <Link
+                        href={getPath('/contact')}
+                        className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
+                    >
+                        {t('contact_us')}
+                    </Link>
 
                     {/* More Dropdown */}
                     <div
@@ -206,7 +224,8 @@ export default function Header({ lightBg = false }: HeaderProps) {
                     <button
                         className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerActive : ''}`}
                         onClick={toggleMenu}
-                        aria-label="Toggle navigation menu"
+                        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                        aria-expanded={isMenuOpen}
                     >
                         <span className={styles.hamburgerLine}></span>
                         <span className={styles.hamburgerLine}></span>
@@ -216,19 +235,88 @@ export default function Header({ lightBg = false }: HeaderProps) {
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}>
+            <div 
+                className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile Navigation"
+            >
                 <div className={styles.mobileMenuContent}>
-                    <nav className={styles.mobileNav}>
-                        {allNavItems.map((item) => (
+                    {/* Top Language Switcher: Visible, accessible, safe from phone bottom buttons */}
+                    <div className={styles.mobileLangSwitcher} role="group" aria-label="Select Language">
+                        <button
+                            onClick={() => handleLanguageSwitch('en')}
+                            className={`${styles.mobileLangBtn} ${isEn ? styles.mobileActiveLang : ''}`}
+                            aria-label="Switch to English"
+                            aria-pressed={isEn}
+                        >
+                            EN
+                        </button>
+                        <span className={styles.mobileLangSeparator}>/</span>
+                        <button
+                            onClick={() => handleLanguageSwitch('fr')}
+                            className={`${styles.mobileLangBtn} ${language === 'fr' ? styles.mobileActiveLang : ''}`}
+                            aria-label="Passer au Français"
+                            aria-pressed={language === 'fr'}
+                        >
+                            FR
+                        </button>
+                        <span className={styles.mobileLangSeparator}>/</span>
+                        <button
+                            onClick={() => handleLanguageSwitch('es')}
+                            className={`${styles.mobileLangBtn} ${isEs ? styles.mobileActiveLang : ''}`}
+                            aria-label="Cambiar a Español"
+                            aria-pressed={isEs}
+                        >
+                            ES
+                        </button>
+                    </div>
+
+                    {/* Centered Navigation Links with exact design & feel */}
+                    <nav className={styles.mobileNav} aria-label="Mobile Navigation Links">
+                        {primaryNavItems.map((item) => (
                             <Link
                                 key={`mobile-${item.path}`}
                                 href={getPath(item.path)}
                                 className={`${styles.mobileNavLink} ${isActive(item.path) ? styles.mobileActive : ''}`}
                                 onClick={() => setIsMenuOpen(false)}
+                                aria-current={isActive(item.path) ? 'page' : undefined}
                             >
                                 {item.label}
                             </Link>
                         ))}
+
+                        {/* Grouped Secondary Links: Clean expandable MORE group */}
+                        <div className={styles.mobileMoreGroup}>
+                            <button
+                                type="button"
+                                className={`${styles.mobileNavLink} ${styles.mobileMoreTrigger} ${isMoreActive ? styles.mobileActive : ''}`}
+                                onClick={() => setIsMobileMoreOpen(!isMobileMoreOpen)}
+                                aria-expanded={isMobileMoreOpen}
+                            >
+                                <span>{isEn ? 'MORE' : (isEs ? 'MÁS' : 'PLUS')}</span>
+                                <span className={`${styles.mobileMoreChevron} ${isMobileMoreOpen ? styles.moreChevronOpen : ''}`}>
+                                    ▾
+                                </span>
+                            </button>
+
+                            {isMobileMoreOpen && (
+                                <div className={styles.mobileMoreSubmenu}>
+                                    {moreNavItems.map((item) => (
+                                        <Link
+                                            key={`mobile-more-${item.path}`}
+                                            href={getPath(item.path)}
+                                            className={`${styles.mobileSubLink} ${isActive(item.path) ? styles.mobileSubActive : ''}`}
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* White Contact Us Pill Button */}
                         <Link
                             href={getPath('/contact')}
                             className={styles.mobileContactBtn}
@@ -237,29 +325,6 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             {t('contact_us')}
                         </Link>
                     </nav>
-
-                    <div className={styles.mobileLangSwitcher}>
-                        <button
-                            onClick={() => handleLanguageSwitch('en')}
-                            className={`${styles.langText} ${isEn ? styles.activeLang : ''}`}
-                        >
-                            EN
-                        </button>
-                        <span className={styles.langSeparator}>/</span>
-                        <button
-                            onClick={() => handleLanguageSwitch('fr')}
-                            className={`${styles.langText} ${language === 'fr' ? styles.activeLang : ''}`}
-                        >
-                            FR
-                        </button>
-                        <span className={styles.langSeparator}>/</span>
-                        <button
-                            onClick={() => handleLanguageSwitch('es')}
-                            className={`${styles.langText} ${isEs ? styles.activeLang : ''}`}
-                        >
-                            ES
-                        </button>
-                    </div>
                 </div>
             </div>
         </header>

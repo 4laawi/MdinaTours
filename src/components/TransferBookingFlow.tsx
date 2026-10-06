@@ -867,6 +867,20 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         }
     };
 
+    const [showStickyBar, setShowStickyBar] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 400) {
+                setShowStickyBar(true);
+            } else {
+                setShowStickyBar(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const timeSlots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"];
 
     const currentPrice = trans.prices[selectedTier] || trans.prices[3];
@@ -890,12 +904,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             <div className="transfer-desktop-flow">
                 {/* Top Breadcrumb & Title */}
                 <div className="breadcrumbs-title-container" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 20px 20px' }}>
-                    <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '6px', fontSize: '0.65rem', color: '#666', marginBottom: '8px' }}>
-                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.home}</Link>
-                        <span style={{ color: '#ccc' }}>›</span>
-                        <Link href={isEn ? "/en/transfers" : "/fr/transfers"} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.transfers}</Link>
-                        <span style={{ color: '#ccc' }}>›</span>
-                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{local.title}</span>
+                    <nav className="breadcrumb-nav" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', color: '#64748b', marginBottom: '10px' }}>
+                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.home}</Link>
+                        <span style={{ color: '#cbd5e1' }}>›</span>
+                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.transfers}</Link>
+                        <span style={{ color: '#cbd5e1' }}>›</span>
+                        <span style={{ color: 'var(--accent)', fontWeight: 600, maxWidth: '280px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', verticalAlign: 'bottom' }}>
+                            {local.pickup} ⇄ {local.dropoff}
+                        </span>
                     </nav>
 
                     <h1 style={{
@@ -909,32 +925,42 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                         {local.title}
                     </h1>
 
-                    {/* Compact Ratings & Badges Row */}
-                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
-                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
-                            <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '0.9rem' }}>
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                            <span style={{ fontSize: '0.8rem', color: '#1E293B', fontWeight: 600 }}>
-                                {trans.slug === "casablanca-airport-transfer" ? "120" : "35"} {transText.reviews}
-                            </span>
+                    {/* Ratings */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.05rem' }}>
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>
+                        <a 
+                            href="#reviews" 
+                            style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline', cursor: 'pointer' }}
+                        >
+                            {trans.slug === "casablanca-airport-transfer" ? "120" : "48"} {isEn ? "reviews" : (language === 'es' ? "opiniones" : "avis")}
+                        </a>
+                    </div>
 
-                        <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', padding: '5px 10px', borderRadius: '6px' }}>
+                    {/* Excellence Badge */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
-                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#92400e' }}>
-                                {transText.badgeExcellence}
-                            </span>
                         </div>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
+                            {isEn ? "Badge of Excellence" : (language === 'es' ? "Distintivo de Excelencia" : "Badge d'Excellence")}
+                        </span>
+                    </div>
 
-                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
-                            <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
-                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{transText.reserveNowPayLater}</span>
+                    {/* Operational Trust Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '16px' }}>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '5px 10px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <span>{isEn ? "Pay upon arrival · Cash or card" : (language === 'es' ? "Pago a la llegada · Efectivo o tarjeta" : "Paiement à l'arrivée · Espèces ou carte")}</span>
                         </div>
-
-                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
-                            <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
-                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{transText.lowestPrice}</span>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px', color: '#334155', fontWeight: 500 }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span>{isEn ? "Professional licensed drivers" : (language === 'es' ? "Conductores profesionales con licencia" : "Chauffeurs professionnels agréés")}</span>
                         </div>
                     </div>
                 </div>
@@ -978,73 +1004,85 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             {/* MOBILE VIEW (< 768px): Strict 7-Step High-Conversion Hierarchy */}
             {/* ========================================================================= */}
             <div className="transfer-mobile-flow" style={{ maxWidth: '100%', margin: '0 auto', padding: '0 16px 20px 16px' }}>
-                {/* 1. order-1: Breadcrumbs, Page Title, and Subtitle */}
+                {/* 1. order-1: Breadcrumbs, Page Title */}
                 <div style={{ marginBottom: '10px' }}>
-                    <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '6px', fontSize: '0.65rem', color: '#666', marginBottom: '8px' }}>
-                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.home}</Link>
-                        <span style={{ color: '#ccc' }}>›</span>
-                        <Link href={isEn ? "/en/transfers" : "/fr/transfers"} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.transfers}</Link>
-                        <span style={{ color: '#ccc' }}>›</span>
-                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{local.title}</span>
+                    <nav className="breadcrumb-nav" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.72rem', color: '#64748b', marginBottom: '8px' }}>
+                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#64748b', textDecoration: 'none' }}>{transText.home}</Link>
+                        <span style={{ color: '#cbd5e1' }}>›</span>
+                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} style={{ color: '#64748b', textDecoration: 'none' }}>{transText.transfers}</Link>
+                        <span style={{ color: '#cbd5e1' }}>›</span>
+                        <span style={{ color: 'var(--accent)', fontWeight: 600, maxWidth: '180px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', verticalAlign: 'bottom' }}>
+                            {local.pickup} ⇄ {local.dropoff}
+                        </span>
                     </nav>
 
                     <h1 style={{
                         fontSize: 'clamp(1.35rem, 5vw, 1.65rem)',
                         fontWeight: 700,
                         color: 'var(--secondary)',
-                        margin: '0 0 6px 0',
+                        margin: '0 0 8px 0',
                         lineHeight: '1.25',
                         fontFamily: "var(--font-poppins), sans-serif",
                     }}>
                         {local.title}
                     </h1>
-                </div>
 
-                {/* 2. order-2: Reviews (Stars) & Trust Badges */}
-                <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', fontSize: '0.75rem', marginBottom: '14px' }}>
-                    <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '4px 8px', borderRadius: '6px' }}>
-                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '0.85rem' }}>
+                    {/* Ratings */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1rem' }}>
                             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: '#1E293B', fontWeight: 600 }}>
-                            {trans.slug === "casablanca-airport-transfer" ? "120" : "35"} {transText.reviews}
+                        <a 
+                            href="#reviews"
+                            style={{ fontSize: '0.8rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}
+                        >
+                            {trans.slug === "casablanca-airport-transfer" ? "120" : "48"} {isEn ? "reviews" : (language === 'es' ? "opiniones" : "avis")}
+                        </a>
+                    </div>
+
+                    {/* Excellence Badge */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ color: '#d97706', fontSize: '0.75rem' }}>🏆</span>
+                        </div>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#333' }}>
+                            {isEn ? "Badge of Excellence" : (language === 'es' ? "Distintivo de Excelencia" : "Badge d'Excellence")}
                         </span>
                     </div>
 
-                    <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', padding: '4px 8px', borderRadius: '6px' }}>
-                        <span style={{ color: '#d97706', fontSize: '0.75rem' }}>🏆</span>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#92400e' }}>
-                            {transText.badgeExcellence}
-                        </span>
-                    </div>
-
-                    <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '4px 8px', borderRadius: '6px' }}>
-                        <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#334155' }}>{transText.reserveNowPayLater}</span>
-                    </div>
-
-                    <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '4px 8px', borderRadius: '6px' }}>
-                        <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#334155' }}>{transText.lowestPrice}</span>
+                    {/* Operational Trust Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', fontSize: '0.75rem', marginBottom: '16px' }}>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '4px 8px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <span>{isEn ? "Pay upon arrival · Cash or card" : (language === 'es' ? "Pago a la llegada · Efectivo o tarjeta" : "Paiement à l'arrivée · Espèces ou carte")}</span>
+                        </div>
+                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '4px 8px', borderRadius: '6px', color: '#334155', fontWeight: 500 }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span>{isEn ? "Professional licensed drivers" : (language === 'es' ? "Conductores profesionales con licencia" : "Chauffeurs professionnels agréés")}</span>
+                        </div>
                     </div>
                 </div>
 
-                {/* 3 & 4. order-3 & order-4: The Image Carousel + Quick Features list */}
+                {/* 2. Image Carousel */}
                 <div id="booking" style={{ width: '100%', marginBottom: '18px' }}>
                     <TransferHeroGallery {...propsObj} />
                 </div>
 
-                {/* 5. order-5: The main Booking Card */}
+                {/* 3. The main Booking Card */}
                 <div style={{ width: '100%', marginBottom: '24px' }}>
                     <TransferBookingWidget {...propsObj} />
                 </div>
 
-                {/* 6. order-6: The Tripadvisor/Trustpilot social proof block */}
+                {/* 4. The Tripadvisor/Trustpilot social proof block */}
                 <div style={{ width: '100%', marginBottom: '28px' }}>
                     <TransferWebRatings {...propsObj} />
                 </div>
 
-                {/* 7. order-7 and beyond: Meeting & Pickup Details, Meta Section, and Vehicle Tiers */}
+                {/* 5. Meeting & Pickup Details, Meta Section, and Vehicle Tiers */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
                     <TransferMeetingInfo {...propsObj} />
                     <TransferMetaSection {...propsObj} />
@@ -1340,21 +1378,28 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 </div>
             )}
 
-            {/* Mobile Sticky Bottom Floating Booking Bar (Visible on mobile screens < 768px) */}
+            {/* Mobile Sticky Bottom Floating Booking Bar (Visible on mobile screens < 768px only when scrolled down) */}
             <div className="mobile-sticky-bottom-bar" style={{
                 position: 'fixed',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'rgba(255, 255, 255, 0.96)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 borderTop: '1px solid #E2E8F0',
                 padding: '12px 16px',
-                boxShadow: '0 -4px 20px rgba(0,0,0,0.1)',
+                boxShadow: '0 -4px 20px rgba(0,0,0,0.08)',
                 zIndex: 9990,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
+                opacity: showStickyBar ? 1 : 0,
+                pointerEvents: showStickyBar ? 'auto' : 'none',
+                visibility: showStickyBar ? 'visible' : 'hidden',
+                transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s'
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
