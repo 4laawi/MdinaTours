@@ -497,7 +497,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "fes-to-chefchaouen-transfer",
-        image: "/hero-chefchaouen.webp",
+        image: "/img2/fes_gate.jpg",
         prices: { 3: 170, 4: 195, 5: 230, 7: 310 },
         en: {
             title: "Fes to Chefchaouen Scenic Mountain Transfer",
@@ -571,7 +571,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-marrakech-transfer",
-        image: "/hero-marrakech.webp",
+        image: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
         prices: { 3: 220, 4: 250, 5: 290, 7: 390 },
         en: {
             title: "Casablanca to Marrakech Expressway Transfer",
@@ -770,7 +770,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "tangier-to-chefchaouen-transfer",
-        image: "/hero-chefchaouen.webp",
+        image: "/img2/tangier-mdina.jpg",
         prices: { 3: 140, 4: 165, 5: 195, 7: 260 },
         en: {
             title: "Tangier to Chefchaouen Private Transfer",
@@ -844,7 +844,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-fes-transfer",
-        image: "/hero-landscape-3.webp",
+        image: "/img2/casablanca_MOSQUE.webp",
         prices: { 3: 250, 4: 290, 5: 335, 7: 445 },
         en: {
             title: "Casablanca to Fes Private Transfer",
@@ -895,7 +895,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-to-marrakech-transfer",
-        image: "/hero-landscape-1.webp",
+        image: "/img2/rabat-hassan-tour.jpg",
         prices: { 3: 245, 4: 275, 5: 315, 7: 425 },
         en: {
             title: "Rabat or Salé to Marrakech Private Transfer",
@@ -946,7 +946,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-to-fes-transfer",
-        image: "/hero-landscape-3.webp",
+        image: "/img2/rabat-hassan-tour.jpg",
         prices: { 3: 165, 4: 190, 5: 220, 7: 295 },
         en: {
             title: "Rabat or Salé to Fes Private Transfer",
@@ -997,7 +997,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-to-chefchaouen-transfer",
-        image: "/hero-chefchaouen.webp",
+        image: "/img2/rabat-hassan-tour.jpg",
         prices: { 3: 249, 4: 289, 5: 329, 7: 429 },
         en: {
             title: "Rabat or Salé to Chefchaouen Private Transfer",
@@ -1048,7 +1048,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "marrakech-to-agadir-transfer",
-        image: "/img2/agadir-marina.webp",
+        image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
         prices: { 3: 185, 4: 215, 5: 250, 7: 345 },
         en: {
             title: "Marrakech to Agadir Highway Transfer",
@@ -1099,7 +1099,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "fes-to-merzouga-transfer",
-        image: "/hero-sahara.webp",
+        image: "/b-roll/activity-sahara-camel-riding-broll.webp",
         prices: { 3: 370, 4: 425, 5: 495, 7: 640 },
         en: {
             title: "Fes to Merzouga Private Transfer",
@@ -1150,7 +1150,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "marrakech-airport-transfer",
-        image: "/hero-marrakech.webp",
+        image: "/img3/aeroport-marrakech-menara.webp",
         prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Marrakech Menara Airport Private Transfer",

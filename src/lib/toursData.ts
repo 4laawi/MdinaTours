@@ -811,6 +811,50 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Visite Guidée Privée Médina de Fès | Mdina Tours",
             seoDesc: "Explorez Fès el-Bali en compagnie d'un guide officiel agréé. Découvrez Chouara, Al-Qarawiyyin et les trésors de l'architecture mérinide."
+        },
+        es: {
+            title: "Visita Guiada de la Medina de Fez",
+            tagline: "Un Viaje en el Tiempo en la Mayor Zona Peatonal del Mundo",
+            excerpt: "Explore Fez el-Bali, la capital espiritual de Marruecos. Descubra las tenerías medievales, madrazas históricas y palacios ocultos.",
+            description: "Con más de 9.000 callejuelas, la medina medieval de Fez el-Bali es el corazón de la artesanía y la historia académica marroquí. Acompañado por un guía historiador oficial, esta visita a pie da vida a siglos de cultura viva. Visite la universidad en activo más antigua del mundo y admire las famosas tenerías de Chouara desde una terraza panorámica.",
+            duration: "5-6 horas",
+            priceText: "Desde 75 € por grupo",
+            departureCity: "Fez",
+            finishCity: "Fez",
+            highlights: [
+                "Visita a pie privada con un guía historiador oficial con licencia",
+                "Descubra las tenerías de Chouara y los métodos tradicionales de curtido",
+                "Visita a la histórica Universidad Al-Qarawiyyin, fundada en el 859 d.C.",
+                "Admire la emblemática puerta azul de Bab Boujloud",
+                "Recorrido por los gremios de artesanos tradicionales (cobre, madera, telares)"
+            ],
+            itinerary: [
+                { title: "09:00 - Encuentro en Bab Boujloud", desc: "Encuentro con su guía frente a la Puerta Azul y explicación histórica de los orígenes de Fez." },
+                { title: "10:00 - Madrazas y Escuelas Históricas", desc: "Visita de la madraza Bou Inania, cumbre de la arquitectura meriní tallada en madera de cedro." },
+                { title: "11:30 - Mirador de las Tenerías de Chouara", desc: "Subida a una terraza panorámica para observar las cubas de tinte tradicionales." },
+                { title: "13:00 - Almuerzo en Palacio Tradicional", desc: "Parada en un palacio restaurado del siglo XIV para degustar la gastronomía fassi." },
+                { title: "14:30 - Zocos y Gremios de Artesanos", desc: "Paseo por los barrios de orfebres, ebanistas y tejedores viendo a los maestros artesanos trabajar." },
+                { title: "16:00 - Barrio Judío (Mellah) y Palacio Real", desc: "Final de la visita frente a las puertas doradas del Palacio Real y paseo por el Mellah." }
+            ],
+            whatsIncluded: [
+                "Guía local oficial acreditado (5 horas)",
+                "Recogida en su riad u hotel dentro de la medina",
+                "Consejos de compra honestos sin comisiones comerciales",
+                "Agua mineral embotellada"
+            ],
+            whatsExcluded: [
+                "Entradas a monumentos históricos (~20-40 MAD por sitio)",
+                "Almuerzo y bebidas personales",
+                "Propinas para el guía"
+            ],
+            faqs: [
+                { q: "¿La visita se realiza a pie o en coche?", a: "La visita es íntegramente a pie. La medina de Fez es totalmente peatonal y no permite el acceso a vehículos." },
+                { q: "¿Cómo se gestiona el comercio en los zocos?", a: "Contar con un guía oficial garantiza un paseo tranquilo, evitando presiones comerciales y negociando precios justos." },
+                { q: "¿Es posible personalizar el itinerario?", a: "Sí. Al tratarse de una visita privada, puede solicitar a su guía profundizar en monumentos o talleres específicos." },
+                { q: "¿Qué vestimenta es recomendable?", a: "Calzado cómodo para caminar. Se recomienda ropa respetuosa que cubra hombros y rodillas." }
+            ],
+            seoTitle: "Visita Guiada Privada Medina de Fez | Mdina Tours",
+            seoDesc: "Descubra Fez el-Bali con un guía privado oficial. Conozca las tenerías de Chouara, Bab Boujloud y la Universidad Al-Qarawiyyin."
         }
     },
     {
@@ -898,6 +942,47 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Visite Privée Casablanca Mosquée Hassan II | Mdina Tours",
             seoDesc: "Découvrez les incontournables de Casablanca avec un chauffeur privé dédié. Visitez la mosquée Hassan II et le quartier historique des Habous."
+        },
+        es: {
+            title: "Visita Destacada de Casablanca",
+            tagline: "Arquitectura Art Déco, Costa Atlántica y la Mezquita Hassan II",
+            excerpt: "Explore el motor económico de Marruecos. Conozca la majestuosa Mezquita Hassan II y la Corniche frente al océano.",
+            description: "Casablanca es el dinamismo y la modernidad de Marruecos. Combinando la arquitectura Art Déco de mediados de siglo con elementos hispanomusulmanes, la ciudad destaca por sus amplias avenidas y costa atlántica. Esta visita privada le muestra la mezquita Hassan II, el barrio de Habous y la Corniche.",
+            duration: "4-5 horas",
+            priceText: "Desde 90 € por persona",
+            departureCity: "Casablanca",
+            finishCity: "Casablanca",
+            highlights: [
+                "Visita guiada por el interior de la grandiosa Mezquita Hassan II",
+                "Paseo por el encantador barrio de Habous (la nueva medina)",
+                "Recorrido panorámico por la Corniche de Aïn Diab frente al mar",
+                "Visita a la Plaza Mohammed V y sus edificios Art Déco",
+                "Parada exterior en la histórica Iglesia del Sagrado Corazón"
+            ],
+            itinerary: [
+                { title: "09:00 - Recogida Privada", desc: "Recogida en su hotel o terminal de cruceros del puerto de Casablanca por su chófer." },
+                { title: "09:30 - Mezquita Hassan II", desc: "Visita guiada por el interior de este monumento edificado sobre el océano Atlántico." },
+                { title: "11:30 - Paseo por la Corniche", desc: "Trayecto costero contemplando las playas, cafeterías y clubes marítimos." },
+                { title: "12:30 - Exploración del Barrio de Habous", desc: "Paseo por las librerías, pastelerías tradicionales y el zoco de aceitunas de Habous." },
+                { title: "13:30 - Almuerzo Marinero", desc: "Degustación de marisco y pescado fresco en un restaurante local antes del regreso." }
+            ],
+            whatsIncluded: [
+                "Transporte privado con conductor profesional dedicado",
+                "Combustible, peajes de autopista y aparcamientos",
+                "Recogida y regreso en hotel o puerto de cruceros",
+                "Agua mineral embotellada"
+            ],
+            whatsExcluded: [
+                "Entrada a la mezquita Hassan II (~140 MAD)",
+                "Almuerzo y gastos personales",
+                "Propinas para el chófer"
+            ],
+            faqs: [
+                { q: "¿La mezquita Hassan II está abierta a no musulmanes?", a: "Sí, es una de las pocas mezquitas en Marruecos abierta a visitantes de cualquier credo mediante visitas guiadas oficiales." },
+                { q: "¿Se puede empezar la visita desde el puerto de cruceros?", a: "Sí, realizamos recogidas directas en la terminal de cruceros de Casablanca ajustándonos al horario de atraque." }
+            ],
+            seoTitle: "Visita Guiada Privada Casablanca y Mezquita Hassan II | Mdina Tours",
+            seoDesc: "Reserve su visita privada por Casablanca con chófer exclusivo. Descubra la Mezquita Hassan II, Habous y la Corniche."
         }
     },
     {
@@ -985,6 +1070,47 @@ export const toursData: TourData[] = [
             ],
             seoTitle: "Visite Guidée Privée Rabat Impériale | Mdina Tours",
             seoDesc: "Explorez les richesses historiques de Rabat avec notre guide agréé. Kasbah des Oudayas, Tour Hassan et Chellah au programme."
+        },
+        es: {
+            title: "Visita de la Capital Imperial de Rabat",
+            tagline: "Kasbahs Medievales, Mausoleos Reales y Paseos Costeros",
+            excerpt: "Explore la elegante capital de Marruecos. Descubra la Kasbah de los Udayas de tonos azules, la Torre Hasán y las ruinas de Chellah.",
+            description: "Como capital de Marruecos y sede central de Mdina Tours, Rabat ofrece una combinación perfecta entre historia imperial y avenidas costeras tranquilas. Descubra la Kasbah de los Udayas frente al Atlántico, los vestigios romanos de Chellah y el majestuoso Mausoleo de Mohammed V.",
+            duration: "4-5 horas",
+            priceText: "Desde 105 € por persona",
+            departureCity: "Rabat",
+            finishCity: "Rabat",
+            highlights: [
+                "Paseo por las estrechas calles encaladas en azul de la Kasbah de los Udayas",
+                "Visita a la emblemática Torre Hasán, alminar de una mezquita almohade del siglo XII",
+                "Visita al Mausoleo de Mohammed V, custodiado por la Guardia Real",
+                "Exploración de la necrópolis arqueológica de Chellah entre ruinas romanas y cigüeñas",
+                "Paseo relajante por la marina del río Bouregreg"
+            ],
+            itinerary: [
+                { title: "09:00 - Salida Privada", desc: "Recogida en su hotel o riad en Rabat por su chófer privado." },
+                { title: "09:30 - Kasbah de los Udayas y Jardín Andalusí", desc: "Paseo por la fortaleza medieval tomando té con pastas en el Café Maure con vistas al río." },
+                { title: "11:00 - Torre Hasán y Mausoleo Real", desc: "Contemple el alminar de arenisca roja y el sepulcro de mármol tallado." },
+                { title: "12:30 - Necrópolis de Chellah", desc: "Descubra las ruinas romanas de Sala Colonia y los jardines medievales habitados por cigüeñas." },
+                { title: "13:30 - Almuerzo Marinero", desc: "Pescado fresco a la brasa junto a la marina antes del regreso." }
+            ],
+            whatsIncluded: [
+                "Vehículo privado y chófer en Rabat",
+                "Combustible, peajes y estacionamiento",
+                "Guía local oficial acreditado (3 horas)",
+                "Agua mineral embotellada"
+            ],
+            whatsExcluded: [
+                "Entradas a monumentos (Chellah: ~70 MAD)",
+                "Almuerzo y bebidas",
+                "Propinas para guía y chófer"
+            ],
+            faqs: [
+                { q: "¿Rabat es una ciudad muy masificada?", a: "No, Rabat es una capital muy tranquila y despejada, perfecta para pasear sin las aglomeraciones de otras grandes ciudades." },
+                { q: "¿Se puede reservar esta excursión con salida desde Casablanca?", a: "Sí, podemos coordinar el traslado privado de ida y vuelta desde Casablanca bajo petición." }
+            ],
+            seoTitle: "Visita Guiada Privada Rabat Imperial | Mdina Tours",
+            seoDesc: "Descubra la capital imperial de Rabat con guía oficial. Kasbah de los Udayas, Torre Hasán y Chellah."
         }
     }
 ];

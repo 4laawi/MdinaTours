@@ -86,7 +86,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
         if (hasRabat) return '/img2/rabat-hassan-tour.jpg';
         if (hasCasablanca) return '/img2/casablanca_MOSQUE.webp';
         if (hasFes) return '/img2/fes_gate.jpg';
-        if (hasMarrakech) return '/hero-marrakech.webp'; // Avoid Tourists-in-marrakech.avif issue
+        if (hasMarrakech) return '/a-mdiinatours/selman-marrakech-mdinatours.webp';
         if (hasEssaouira) return '/img2/Essaouira-maroc.jpg';
     }
     return transImage;

@@ -16,15 +16,15 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     
     const galleryImages = [
         '/b-roll/vitooo.webp',
-        '/a-mdiinatours/Fourgon Mercedes devant une entrée marocaine ornée.webp',
+        '/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp',
         '/a-mdiinatours/luxury-private-driver-mrocco-private-jet.webp',
-        '/a-mdiinatours/Chauffeur en costume devant des Mercedes noires.webp',
+        '/a-mdiinatours/chauffeur-costume-mercedes-noires.webp',
         '/img3/vito-mercedes-closeup.webp',
         '/img3/tourists-happy-private-driver-casablanca.webp',
-        '/a-mdiinatours/Selfie joyeuse en voiture en famille.webp',
+        '/a-mdiinatours/selfie-joyeux-voiture-famille.webp',
         '/a-mdiinatours/private-driver-vito-morocco.webp',
         '/a-mdiinatours/happy-mdinatours-client.webp',
-        '/a-mdiinatours/Sourire devant le van Mercedes.webp',
+        '/a-mdiinatours/sourire-devant-van-mercedes.webp',
         '/a-mdiinatours/fiat-scudo-9-places-mdinatours.webp'
     ];
 

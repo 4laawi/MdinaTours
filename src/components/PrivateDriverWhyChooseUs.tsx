@@ -19,7 +19,7 @@ function AnimatedNumber({
     prefix = "",
     decimals = 0
 }: AnimatedNumberProps) {
-    const [count, setCount] = useState(start);
+    const [count, setCount] = useState(end);
     const [hasAnimated, setHasAnimated] = useState(false);
     const elementRef = useRef<HTMLSpanElement>(null);
 
@@ -50,6 +50,8 @@ function AnimatedNumber({
         if (!hasAnimated) return;
 
         let startTime: number | null = null;
+        let animationFrameId: number;
+
         const animate = (timestamp: number) => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
@@ -61,17 +63,25 @@ function AnimatedNumber({
             setCount(currentVal);
 
             if (progress < 1) {
-                requestAnimationFrame(animate);
+                animationFrameId = requestAnimationFrame(animate);
             } else {
                 setCount(end);
             }
         };
 
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+        };
     }, [hasAnimated, start, end, duration]);
 
+    const formattedFinal = `${prefix}${decimals === 0 ? end : end.toFixed(decimals)}${suffix}`;
+
     return (
-        <span ref={elementRef}>
+        <span ref={elementRef} aria-label={formattedFinal}>
             {prefix}
             {decimals === 0 ? Math.round(count) : count.toFixed(decimals)}
             {suffix}
@@ -81,11 +91,18 @@ function AnimatedNumber({
 
 interface PrivateDriverWhyChooseUsProps {
     lang: string;
+    topFill?: string;
+    bottomFill?: string;
 }
 
-export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChooseUsProps) {
+export default function PrivateDriverWhyChooseUs({ 
+    lang, 
+    topFill = "#ffffff", 
+    bottomFill = "#ffffff" 
+}: PrivateDriverWhyChooseUsProps) {
     const isEn = lang === 'en';
-    const title = isEn ? "Why Choose Mdina Tours?" : "Pourquoi Choisir Mdina Tours ?";
+    const isEs = lang === 'es';
+    const title = isEn ? "Why Choose Mdina Tours?" : (isEs ? "¿Por qué elegir Mdina Tours?" : "Pourquoi Choisir Mdina Tours ?");
 
     return (
         <section style={{ 
@@ -116,7 +133,8 @@ export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChoos
                 >
                     <path
                         d="M0,0 Q600,120 1200,0 L1200,0 L0,0 Z"
-                        fill="var(--bg-color)"
+                        fill={topFill}
+                        suppressHydrationWarning
                     ></path>
                 </svg>
             </div>
@@ -168,7 +186,7 @@ export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChoos
                             fontFamily: 'var(--font-poppins), sans-serif',
                             textWrap: 'balance'
                         }}>
-                            {isEn ? "Private transfers completed" : "Transferts privés effectués"}
+                            {isEn ? "Private transfers completed" : (isEs ? "Traslados privados completados" : "Transferts privés effectués")}
                         </span>
                     </div>
 
@@ -199,7 +217,7 @@ export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChoos
                             fontFamily: 'var(--font-poppins), sans-serif',
                             textWrap: 'balance'
                         }}>
-                            {isEn ? "Average rating across all bookings" : "Note moyenne sur toutes les réservations"}
+                            {isEn ? "Average rating across all bookings" : (isEs ? "Puntuación media en todas las reservas" : "Note moyenne sur toutes les réservations")}
                         </span>
                     </div>
 
@@ -230,7 +248,7 @@ export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChoos
                             fontFamily: 'var(--font-poppins), sans-serif',
                             textWrap: 'balance'
                         }}>
-                            {isEn ? "Hidden fees, ever" : "Aucun frais caché, jamais"}
+                            {isEn ? "Hidden fees, ever" : (isEs ? "Sin cargos ocultos, nunca" : "Aucun frais caché, jamais")}
                         </span>
                     </div>
                 </div>
@@ -258,7 +276,8 @@ export default function PrivateDriverWhyChooseUs({ lang }: PrivateDriverWhyChoos
                 >
                     <path
                         d="M0,120 Q600,0 1200,120 L1200,120 L0,120 Z"
-                        fill="#ffffff"
+                        fill={bottomFill}
+                        suppressHydrationWarning
                     ></path>
                 </svg>
             </div>

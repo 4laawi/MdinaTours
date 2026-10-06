@@ -13,11 +13,14 @@ interface WhatTravelersSayProps {
 
 export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: WhatTravelersSayProps) {
     const isEn = lang === 'en';
+    const isEs = lang === 'es';
 
     const reviews: Review[] = [
         {
             quote: isEn ? (
                 <>Our driver was waiting at arrivals with a sign before we even cleared customs. Spotless car, cold water, and he knew every shortcut in Casablanca. <strong style={{ fontWeight: 800 }}>Absolutely seamless.</strong></>
+            ) : isEs ? (
+                <>Nuestro conductor nos esperaba en llegadas con un cartel antes incluso de pasar la aduana. Coche impecable, agua fresca y conocía cada atajo en Casablanca. <strong style={{ fontWeight: 800 }}>Absolutamente impecable.</strong></>
             ) : (
                 <>Notre chauffeur nous attendait aux arrivées avec une pancarte avant même notre passage en douane. Voiture impeccable, eau fraîche et il connaissait tous les raccourcis à Casablanca. <strong style={{ fontWeight: 800 }}>Absolument parfait.</strong></>
             ),
@@ -27,6 +30,8 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
         {
             quote: isEn ? (
                 <>Flight was delayed by 2 hours. I messaged on WhatsApp and they just said &apos;no problem, we&apos;re tracking your flight.&apos; No extra charge. <strong style={{ fontWeight: 800 }}>That kind of service is rare anywhere.</strong></>
+            ) : isEs ? (
+                <>El vuelo se retrasó 2 horas. Les escribí por WhatsApp y respondieron enseguida &apos;sin problema, seguimos su vuelo en directo.&apos; Sin coste extra. <strong style={{ fontWeight: 800 }}>Un servicio excepcional.</strong></>
             ) : (
                 <>Vol retardé de 2 heures. J&apos;ai envoyé un message sur WhatsApp et ils ont simplement répondu &apos;pas de problème, nous suivons votre vol.&apos; Sans frais supplémentaires. <strong style={{ fontWeight: 800 }}>Ce genre de service est rare.</strong></>
             ),
@@ -36,6 +41,8 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
         {
             quote: isEn ? (
                 <>Booked a full-day tour to Chefchaouen for 4 people. The driver was a <strong style={{ fontWeight: 800 }}>genuine local expert</strong> — not just a driver. Best day of our trip.</>
+            ) : isEs ? (
+                <>Reservamos una excursión de un día a Chefchaouen para 4 personas. El chófer era un <strong style={{ fontWeight: 800 }}>auténtico experto local</strong> — no solo un conductor. El mejor día de nuestro viaje.</>
             ) : (
                 <>Réservation d&apos;une excursion d&apos;une journée à Chefchaouen pour 4 personnes. Le chauffeur était un <strong style={{ fontWeight: 800 }}>véritable expert local</strong> — pas seulement un conducteur. Le meilleur jour de notre voyage.</>
             ),
@@ -45,6 +52,8 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
         {
             quote: isEn ? (
                 <>We used the dispo service for 3 days in Marrakech and Rabat for our business meetings. <strong style={{ fontWeight: 800 }}>Impeccable timing</strong>, extremely professional driver who helped us coordinate schedules, and a pristine Mercedes Vito.</>
+            ) : isEs ? (
+                <>Utilizamos el servicio de chófer a disposición durante 3 días en Marrakech y Rabat para reuniones de trabajo. <strong style={{ fontWeight: 800 }}>Puntualidad impecable</strong>, conductor muy profesional y una Mercedes Vito en perfecto estado.</>
             ) : (
                 <>Nous avons utilisé le service dispo pendant 3 jours à Marrakech et Rabat pour nos réunions d&apos;affaires. <strong style={{ fontWeight: 800 }}>Timing impeccable</strong>, chauffeur extrêmement professionnel et van Mercedes Vito impeccable.</>
             ),
@@ -54,6 +63,8 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
         {
             quote: isEn ? (
                 <>Perfect service from start to finish! Our driver took us to the Atlas Mountains and back. He was polite, attentive, and <strong style={{ fontWeight: 800 }}>drove very safely</strong>. The luxury SUV was clean and spacious.</>
+            ) : isEs ? (
+                <>¡Servicio perfecto de principio a fin! Nuestro conductor nos llevó a las montañas del Atlas y de vuelta. Educado, atento y con una <strong style={{ fontWeight: 800 }}>conducción muy segura</strong>. El SUV de lujo estaba impecable y espacioso.</>
             ) : (
                 <>Service parfait de bout en bout ! Notre chauffeur nous a conduits dans les montagnes de l&apos;Atlas. Poli, attentionné et <strong style={{ fontWeight: 800 }}>conduite très sûre</strong>. Le SUV de luxe était propre et spacieux.</>
             ),
@@ -63,6 +74,8 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
         {
             quote: isEn ? (
                 <>Having a driver on standby made our family vacation <strong style={{ fontWeight: 800 }}>so relaxing</strong>. No waiting for taxis, no getting lost. Our driver was incredibly patient with the kids.</>
+            ) : isEs ? (
+                <>Tener un conductor a nuestra disposición hizo que las vacaciones familiares fueran <strong style={{ fontWeight: 800 }}>muy relajantes</strong>. Sin esperas de taxis ni perderse. El chófer tuvo una paciencia increíble con los niños.</>
             ) : (
                 <>Avoir un chauffeur à disposition a rendu nos vacances en famille <strong style={{ fontWeight: 800 }}>tellement reposantes</strong>. Pas d&apos;attente pour les taxis, pas de risque de se perdre. Chauffeur très patient.</>
             ),
@@ -81,10 +94,10 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
             <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                 <div className="testimonials-section-header">
                     <h2 className="testimonials-section-title" style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
-                        {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
+                        {isEn ? "What travelers say" : (isEs ? "Opiniones de nuestros viajeros" : "Ce que disent nos voyageurs")}
                     </h2>
                     <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                        {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                        {isEn ? "4.9★ average across 120+ bookings" : (isEs ? "Puntuación media de 4,9★ en más de 120 reservas" : "Moyenne de 4,9★ sur plus de 120 réservations")}
                     </p>
                 </div>
 

@@ -277,7 +277,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/Asilah_water.webp", tag: "Asilah Coast", alt: "Asilah ocean walls", keywords: ["asilah"] },
         { src: "/img/Essaouira.webp", tag: "Essaouira Port", alt: "Essaouira coast", keywords: ["essaouira"] },
         { src: "/img2/Essaouira-maroc.jpg", tag: "Essaouira Medina", alt: "Walled town of Essaouira", keywords: ["essaouira"] },
-        { src: "/img2/agadir-marina.jpg", tag: "Agadir Marina", alt: "Agadir port view", keywords: ["agadir"] },
+        { src: "/a-mdiinatours/selman-marrakech-mdinatours.webp", tag: "Agadir Marina", alt: "Agadir port view", keywords: ["agadir"] },
         { src: "/img2/agadir-airport.webp", tag: "Agadir Airport", alt: "Agadir Airport Terminal", keywords: ["agadir", "airport", "transfer"] },
         { src: "/img/Ait Benhaddou.jpg", tag: "Aït Benhaddou", alt: "Ait Benhaddou Kasbah", keywords: ["ait-benhaddou", "ouarzazate"] },
         { src: "/img/ouzoud waterfalls.jpg", tag: "Ouzoud Waterfalls", alt: "Ouzoud Waterfalls", keywords: ["ouzoud", "waterfalls"] },

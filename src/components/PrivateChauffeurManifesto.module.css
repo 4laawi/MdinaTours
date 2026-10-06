@@ -1,0 +1,150 @@
+.manifestoSection {
+  padding: 100px 20px;
+  background-color: #fbf8f3;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(32, 47, 89, 0.06);
+}
+
+.innerContainer {
+  max-width: 1160px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.headerBlock {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 48px auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--secondary);
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+  text-wrap: balance;
+}
+
+.dividerLine {
+  width: 60px;
+  height: 2px;
+  background: var(--primary);
+  margin: 0 auto 36px auto;
+  opacity: 0.8;
+}
+
+.proseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 980px;
+  margin: 0 auto 44px auto;
+}
+
+.proseColumn {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.65;
+  color: #384252;
+  font-weight: 400;
+  margin: 0;
+}
+
+.proseColumn strong {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.linkInline {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.linkInline:hover {
+  color: var(--primary);
+}
+
+.ctaWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  background-color: var(--secondary);
+  color: #ffffff;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(32, 47, 89, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctaLink:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 131, 78, 0.3);
+}
+
+.ctaArrow {
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.ctaLink:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .manifestoSection {
+    padding: 70px 20px;
+  }
+
+  .proseGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 0;
+  }
+
+  .ctaWrapper {
+    margin-top: 32px;
+  }
+
+  .ctaLink {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+}

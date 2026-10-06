@@ -3,17 +3,17 @@ import Image from 'next/image';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TransferWebRatings(props: any) {
-  const { isEn } = props;
+  const { isEn, isEs } = props;
 
   return (
     <div className="web-ratings-card">
         <div className="web-ratings-flex">
             <div className="web-ratings-info">
                 <p className="web-ratings-title">
-                    {isEn ? "Rated across the web" : "Reconnu sur le web"}
+                    {isEn ? "Rated across the web" : isEs ? "Reconocido en la web" : "Reconnu sur le web"}
                 </p>
                 <p className="web-ratings-subtitle">
-                    {isEn ? "Independent traveler feedback" : "Avis de voyageurs indépendants"}
+                    {isEn ? "Independent traveler feedback" : isEs ? "Opiniones de viajeros independientes" : "Avis de voyageurs indépendants"}
                 </p>
             </div>
             <div className="web-ratings-badges">

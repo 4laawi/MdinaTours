@@ -2,7 +2,6 @@ import { getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
-import VideoPlayer from '@/components/VideoPlayer';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -16,7 +15,8 @@ import PrivateDriverMetaSection from '@/components/PrivateDriverMetaSection';
 import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
-import ChauffeurDestinations from '@/components/ChauffeurDestinations';
+import ProfessionalDriverSection from '@/components/ProfessionalDriverSection';
+import ModernCTA from '@/components/ModernCTA';
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }];
@@ -98,22 +98,8 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
         introP2: isEn
             ? "Our service covers all major Moroccan cities. You get a clean, air-conditioned vehicle along with a bilingual driver who assists with luggage and navigates regional roads safely."
             : "Notre réseau couvre toutes les grandes villes du Maroc. Vous bénéficiez d'un véhicule récent et climatisé avec un chauffeur bilingue qui vous aide avec vos bagages et assure une conduite sereine.",
-        howItWorksTitle: isEn ? "How the Private Driver Service Works" : "Comment fonctionne le service",
-        step1Title: isEn ? "1. Select Vehicle & Start Point" : "1. Choisissez le véhicule et le point de départ",
-        step1Desc: isEn ? "Choose your starting city (Casablanca, Marrakech, Rabat, Tangier, Fes) and pick a vehicle matching your group and luggage." : "Indiquez votre ville de départ (Casablanca, Marrakech, Rabat, Tanger, Fès) et sélectionnez le véhicule adapté à votre groupe.",
-        step2Title: isEn ? "2. Define Duration & Route" : "2. Définissez la durée et l'itinéraire",
-        step2Desc: isEn ? "Share your planned stops for a day trip or multi-day road trip so we can provide a complete, transparent quote upfront." : "Indiquez vos étapes pour une journée ou un circuit afin d'obtenir un devis clair et complet.",
-        step3Title: isEn ? "3. Professional Driver Assigned" : "3. Votre chauffeur est affecté",
-        step3Desc: isEn ? "We assign a licensed, English or French-speaking driver briefed on your planned schedule and route." : "Nous affectons un chauffeur agréé bilingue, briefé sur votre itinéraire et vos horaires.",
-        step4Title: isEn ? "4. Travel with Complete Peace of Mind" : "4. Voyagez en toute sérénité",
-        step4Desc: isEn ? "Enjoy your journey. Pay conveniently after each travel day in cash or card (EUR, USD, MAD)." : "Profitez de votre séjour. Réglez en fin de journée en espèces ou carte (EUR, USD, MAD).",
         vehiclesTitle: isEn ? "Our Vehicle Fleet" : "Notre flotte de véhicules",
         vehiclesSubtitle: isEn ? "Clean, air-conditioned passenger transport vehicles" : "Des véhicules récents, climatisés et parfaitement entretenus",
-        useCasesTitle: isEn ? "Popular Itineraries & Day Trips" : "Exemples d'itinéraires et excursions",
-        pricingTitle: isEn ? "Private Driver Pricing Guide" : "Grille tarifaire - Chauffeur Privé",
-        pricingSubtitle: isEn ? "Transparent flat pricing with fuel, tolls, and operating expenses included. Pay after each travel day." : "Des tarifs transparents tout compris (carburant, péages et frais inclus). Paiement en fin de journée.",
-        reviewsTitle: isEn ? "What Travelers Say About Our Service" : "Avis de nos voyageurs sur notre service",
-        reviewsSubtitle: isEn ? "Verified reviews highlighting punctuality, safe driving, and local route expertise." : "Découvrez les avis de clients sur le professionnalisme et la ponctualité de nos chauffeurs.",
         finalCtaTitle: isEn ? "Book Your Private Driver in Morocco" : "Réservez votre Chauffeur Privé au Maroc",
         finalCtaSubtitle: isEn ? "Ready to travel with a dedicated driver for your business trip or custom tour? Chat with us on WhatsApp for a quick quote!" : "Prêt à réserver un véhicule avec chauffeur pour vos réunions ou votre circuit ? Écrivez-nous sur WhatsApp pour un devis rapide !",
         faqTitle: isEn ? "Private Driver Morocco FAQs" : "Questions Fréquentes - Chauffeur Privé au Maroc",
@@ -168,96 +154,6 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
             suitability: isEn ? "Executive minibus configured for large tour groups, corporate delegations, and extended family travel." : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.",
             price: "€35",
             image: "/cars/flotte-sprinter.webp"
-        }
-    ];
-
-    const itineraries = [
-        {
-            title: isEn ? "Airport & Intercity Transfers" : "Transferts Aéroport & Interurbains",
-            desc: isEn 
-                ? "Rabat, Casablanca, Marrakech, Tangier, Fes — direct, comfortable journeys."
-                : "Rabat, Casablanca, Marrakech, Tanger, Fès — liaisons directes et confortables.",
-            price: isEn ? "From €45" : "À partir de 45 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
-            image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
-        },
-        {
-            title: isEn ? "Imperial Cities Day Tour" : "Excursion Villes Impériales",
-            desc: isEn 
-                ? "Fes, Meknes, Volubilis — one private car, your own pace, flexible stops."
-                : "Fès, Meknès, Volubilis — voiture privée, à votre rythme, arrêts libres.",
-            price: isEn ? "From €180" : "À partir de 180 €",
-            cta: isEn ? "View Tours" : "Voir les circuits",
-            image: "/img2/fes_gate.jpg",
-            href: "/tours",
-        },
-        {
-            title: isEn ? "VIP & Corporate Travel" : "Voyages VIP & Affaires",
-            desc: isEn 
-                ? "Executive pickups, meetings, roadshows — well-presented driver, on time."
-                : "Accueil VIP, réunions, roadshows — chauffeur ponctuel et discret.",
-            price: isEn ? "Custom quote" : "Devis personnalisé",
-            cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/img2/premium-chauffeur.jpg",
-            msg: "Hello Mdina Tours, I would like to get a quote for VIP & Corporate Travel."
-        }
-    ];
-
-    const reviews = [
-        {
-            quote: isEn ? (
-                <>Our driver was waiting at arrivals with a clear name sign. Clean car, cold water, and smooth driving through Casablanca. <strong style={{ fontWeight: 800 }}>Punctual and professional.</strong></>
-            ) : (
-                <>Notre chauffeur nous attendait aux arrivées avec une pancarte claire. Voiture impeccable, eau fraîche et conduite fluide à Casablanca. <strong style={{ fontWeight: 800 }}>Ponctuel et professionnel.</strong></>
-            ),
-            author: "Sophie R.",
-            flag: "🇫🇷"
-        },
-        {
-            quote: isEn ? (
-                <>Flight was delayed by 2 hours. I messaged on WhatsApp and they confirmed they were tracking the flight at no extra charge. <strong style={{ fontWeight: 800 }}>Excellent communication.</strong></>
-            ) : (
-                <>Vol retardé de 2 heures. J&apos;ai prévenu sur WhatsApp et ils ont suivi le vol sans aucun supplément. <strong style={{ fontWeight: 800 }}>Excellente communication.</strong></>
-            ),
-            author: "James K.",
-            flag: "🇬🇧"
-        },
-        {
-            quote: isEn ? (
-                <>Booked a full-day trip to Chefchaouen for 4 people. The driver drove carefully through the mountain roads and gave us great lunch recommendations. <strong style={{ fontWeight: 800 }}>A wonderful day.</strong></>
-            ) : (
-                <>Excursion d&apos;une journée à Chefchaouen pour 4 personnes. Conduite très sûre dans la montagne et excellents conseils de restaurants. <strong style={{ fontWeight: 800 }}>Très belle journée.</strong></>
-            ),
-            author: "Laila M.",
-            flag: "🇩🇪"
-        },
-        {
-            quote: isEn ? (
-                <>Used the private driver for 3 days in Marrakech and Rabat for corporate meetings. <strong style={{ fontWeight: 800 }}>Punctual at every stop</strong>, pristine Mercedes Vito, and very polite driver.</>
-            ) : (
-                <>Chauffeur privé pendant 3 jours à Marrakech et Rabat pour des rendez-vous pro. <strong style={{ fontWeight: 800 }}>Ponctualité irréprochable</strong>, van Mercedes Vito propre et chauffeur discret.</>
-            ),
-            author: "David W.",
-            flag: "🇺🇸"
-        },
-        {
-            quote: isEn ? (
-                <>Our driver took us through the Atlas Mountains. He was courteous, attentive, and <strong style={{ fontWeight: 800 }}>drove very safely on mountain passes</strong>. Clean and comfortable SUV.</>
-            ) : (
-                <>Trajet dans les montagnes de l&apos;Atlas. Chauffeur courtois, attentionné et <strong style={{ fontWeight: 800 }}>conduite très prudente sur les cols</strong>. SUV propre et confortable.</>
-            ),
-            author: "Elena P.",
-            flag: "🇪🇸"
-        },
-        {
-            quote: isEn ? (
-                <>Having a driver on standby made our family vacation relaxing. The driver helped with luggage at each stop and accommodated our children&apos;s schedule. <strong style={{ fontWeight: 800 }}>Stress-free travel.</strong></>
-            ) : (
-                <>Voyage en famille très reposant. Le chauffeur nous a aidés avec les bagages et s&apos;est adapté à notre rythme. <strong style={{ fontWeight: 800 }}>Voyage sans stress.</strong></>
-            ),
-            author: "Marc-Antoine L.",
-            flag: "🇨🇦"
         }
     ];
 
@@ -368,15 +264,28 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                         {textPrivate.h1}
                     </h1>
 
-                    {/* Compact Badges Row */}
-                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.825rem', marginBottom: '14px' }}>
-                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
-                            <span className="star-icon" style={{ color: '#f59e0b' }}>★</span>
-                            <span style={{ fontWeight: 700, color: '#1E293B' }}>4.9</span>
-                            <span style={{ color: '#64748B', fontWeight: 500 }}>
-                                {isEn ? "(120+ verified bookings)" : "(120+ réservations vérifiées)"}
-                            </span>
+                    {/* Ratings */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.1rem' }}>
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>
+                        <span style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}>
+                            120 {isEn ? "reviews" : "avis"}
+                        </span>
+                    </div>
+
+                    {/* Excellence Badge */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
+                        </div>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
+                            {isEn ? "Badge of Excellence" : "Badge d'Excellence"}
+                        </span>
+                    </div>
+
+                    {/* Operational Trust Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
                         <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '5px 10px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="20 6 9 17 4 12" />
@@ -428,221 +337,43 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                     </div>
                 </section>
 
-                <PrivateDriverWhyChooseUs lang={language} />
+                {/* 2. Trust Bar (500+ transfers, 4.9 rating, 0€ hidden fees) */}
+                <PrivateDriverWhyChooseUs lang={language} topFill="var(--bg-color)" bottomFill="var(--bg-color)" />
 
-                {/* Experience Video Section */}
-                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
-                    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-                        <h2 style={{ 
-                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
-                            fontWeight: 700, 
-                            color: 'var(--secondary)', 
-                            marginBottom: '30px',
-                            fontFamily: 'var(--font-poppins), sans-serif'
-                        }}>
-                            {isEn ? "What riding with us feels like" : "L'expérience à bord avec nous"}
-                        </h2>
-                        
-                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
-                            <VideoPlayer 
-                                src="/img/mercedes-benz-vito-mdinatours.mp4#t=0,54" 
-                                style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
-                            />
-                        </div>
-
-                        <p style={{ 
-                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', 
-                            fontWeight: 500, 
-                            color: '#555',
-                            margin: '15px 0 0 0',
-                            fontFamily: 'var(--font-poppins), sans-serif',
-                            fontStyle: 'italic'
-                        }}>
-                            {isEn ? "Every transfer. Every time. No surprises." : "Chaque transfert. À chaque fois. Sans surprise."}
-                        </p>
-                    </div>
-                </section>
-
-                {/* Trust / Reviews Section */}
-                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
-                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div className="testimonials-section-header">
-                            <h2 className="testimonials-section-title" style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
-                                {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
-                            </h2>
-                            <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
-                            </p>
-                        </div>
-
-                        <div className="testimonials-carousel-container">
-                            <div className="testimonials-marquee-track">
-                                {/* First set */}
-                                {reviews.map((rev, idx) => (
-                                    <div key={`rev-1-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card">
-                                        <div>
-                                            <div className="testimonial-stars-container">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                            </div>
-                                            <p className="testimonial-quote-text">
-                                                &ldquo;{rev.quote}&rdquo;
-                                            </p>
-                                        </div>
-                                        <div className="testimonial-author-container">
-                                            <span className="testimonial-author-name">{rev.author}</span>
-                                            <span className="testimonial-author-country">
-                                                {rev.flag}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
-                                {/* Duplicate set for loop */}
-                                {reviews.map((rev, idx) => (
-                                    <div key={`rev-2-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card" aria-hidden="true">
-                                        <div>
-                                            <div className="testimonial-stars-container">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                            </div>
-                                            <p className="testimonial-quote-text">
-                                                &ldquo;{rev.quote}&rdquo;
-                                            </p>
-                                        </div>
-                                        <div className="testimonial-author-container">
-                                            <span className="testimonial-author-name">{rev.author}</span>
-                                            <span className="testimonial-author-country">
-                                                {rev.flag}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Badges / Accreditations */}
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap', opacity: 0.8 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={140} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={150} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
-                        </div>
-                    </div>
-                </section>
-
+                {/* 3. Our Private Driver Fleet */}
                 <PrivateDriverFleet vehicles={vehicles} lang={language} />
 
+                {/* 4. What's Included in your Private Driver */}
                 <PrivateDriverInclusions lang={language} />
 
-                {/* Use Cases / Itineraries (SEO Gold Section) */}
-                <section style={{ padding: '80px 20px', backgroundColor: 'var(--bg-color)', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                            <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-                                {isEn ? "Chauffeur dispo Routes" : "Trajets Chauffeur Dispo"}
-                            </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
-                                {textPrivate.useCasesTitle}
-                            </h2>
-                        </div>
-                        <div className="private-driver-routes-grid">
-                            {itineraries.map((card, idx) => (
-                                <div key={idx} className="private-driver-route-card">
-                                    {card.href ? (
-                                        <Link href={getPath(card.href)} className="private-driver-route-img-link">
-                                            <div className="private-driver-route-img-container">
-                                                <img 
-                                                    src={card.image} 
-                                                    alt={card.title} 
-                                                    className="private-driver-route-img"
-                                                    width={380}
-                                                    height={220}
-                                                    loading="lazy"
-                                                />
-                                                <div className="private-driver-route-price-badge">
-                                                    {card.price}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ) : (
-                                        <div className="private-driver-route-img-container">
-                                            <img 
-                                                src={card.image} 
-                                                alt={card.title} 
-                                                className="private-driver-route-img"
-                                                width={380}
-                                                height={220}
-                                                loading="lazy"
-                                            />
-                                            <div className="private-driver-route-price-badge">
-                                                {card.price}
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className="private-driver-route-content">
-                                        <h3 className="private-driver-route-title">
-                                            {card.href ? (
-                                                <Link href={getPath(card.href)} style={{ color: 'inherit' }}>
-                                                    {card.title}
-                                                </Link>
-                                            ) : (
-                                                card.title
-                                            )}
-                                        </h3>
-                                        <p className="private-driver-route-desc">
-                                            {card.desc}
-                                        </p>
-                                        {card.href ? (
-                                            <Link 
-                                                href={getPath(card.href)}
-                                                className="private-driver-route-cta private-driver-route-cta-link"
-                                            >
-                                                {card.cta}
-                                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                                                </svg>
-                                            </Link>
-                                        ) : (
-                                            <a 
-                                                href={getWhatsAppUrl(card.msg!)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="private-driver-route-cta"
-                                            >
-                                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z"/>
-                                                </svg>
-                                                {card.cta}
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                {/* 5. The Professional Driver Section */}
+                <ProfessionalDriverSection lang={language} backgroundColor="var(--bg-color)" />
 
-                {/* Features & FAQ Section */}
-                <section className={faqStyles.faqSection} id="faq">
-
+                {/* 6. FAQ Accordion */}
+                <section className={faqStyles.faqSection} id="faq" style={{ backgroundColor: '#ffffff', padding: '70px 20px 80px 20px' }}>
                     <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '45px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Got Questions?" : "Des Questions ?"}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
+                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: "var(--font-poppins), sans-serif" }}>
                                 {textPrivate.faqTitle}
                             </h2>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                             {faqs.map((faq, idx) => (
                                 <details key={idx} style={{
                                     backgroundColor: '#fff',
-                                    border: '1px solid rgba(0, 0, 0, 0.05)',
+                                    border: '1px solid rgba(0, 0, 0, 0.07)',
                                     borderRadius: '12px',
-                                    overflow: 'hidden'
+                                    overflow: 'hidden',
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
                                 }} className="faq-details">
                                     <summary style={{
-                                        padding: '20px 25px',
+                                        padding: '18px 22px',
                                         fontWeight: 700,
-                                        fontSize: '1.05rem',
+                                        fontSize: '1.02rem',
                                         color: 'var(--secondary)',
                                         cursor: 'pointer',
                                         userSelect: 'none',
@@ -652,9 +383,9 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                                         alignItems: 'center'
                                     }}>
                                         <span>{faq.q}</span>
-                                        <span style={{ color: 'var(--primary)', fontSize: '1.2rem' }}>+</span>
+                                        <span style={{ color: 'var(--primary)', fontSize: '1.2rem', fontWeight: 400 }}>+</span>
                                     </summary>
-                                    <div style={{ padding: '0 25px 20px 25px', color: '#555', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                                    <div style={{ padding: '0 22px 18px 22px', color: '#555', fontSize: '0.92rem', lineHeight: 1.65 }}>
                                         {faq.a}
                                     </div>
                                 </details>
@@ -663,25 +394,34 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                     </div>
                 </section>
 
-                <ChauffeurDestinations lang={language} pageType="morocco" />
+                {/* 7. Final Bottom CTA */}
+                <section style={{ padding: '60px 20px 70px 20px', backgroundColor: 'var(--bg-color)' }}>
+                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        <ModernCTA 
+                            text={textPrivate.finalCtaTitle}
+                            subtext={textPrivate.finalCtaSubtitle}
+                            buttonText={isEn ? "Inquire on WhatsApp" : "Réserver sur WhatsApp"}
+                            actionType="whatsapp"
+                            whatsappUrl={getWhatsAppUrl()}
+                        />
 
-                {/* Bottom Internal Linking / Navigation Bar */}
-                <section style={{ padding: '40px 20px', backgroundColor: 'var(--bg-color)' }}>
-                    <div style={{ maxWidth: '1150px', margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
-                            <div style={{ fontSize: '0.9rem', color: '#555', display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', backgroundColor: '#fff', padding: '12px 20px', borderRadius: '12px', border: '1px solid #eee' }}>
-                                <span>👉 {isEn ? "Chauffeur Hubs:" : "Centres de Chauffeurs :"}</span>
-                                <Link href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
+                        {/* Discreet SEO Hub Links */}
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+                            <div style={{ fontSize: '0.82rem', color: '#64748b', display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', backgroundColor: '#ffffff', padding: '10px 18px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+                                <span style={{ fontWeight: 600 }}>{isEn ? "Chauffeur Hubs:" : "Centres de Chauffeurs :"}</span>
+                                <Link href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', fontWeight: 500, textDecoration: 'underline' }}>
                                     {isEn ? "Morocco (National)" : "Maroc (National)"}
                                 </Link>
-                                <span>|</span>
-                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                    {isEn ? "Marrakech Chauffeur" : "Chauffeur Marrakech"}
+                                <span>·</span>
+                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 500, textDecoration: 'underline' }}>
+                                    {isEn ? "Marrakech" : "Marrakech"}
                                 </Link>
-                                <span>|</span>
-                                <Link href={getPath('/private-driver-casablanca')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                    {isEn ? "Casablanca Chauffeur" : "Chauffeur Casablanca"}
+                                <span>·</span>
+                                <Link href={getPath('/private-driver-casablanca')} style={{ color: 'var(--primary)', fontWeight: 500, textDecoration: 'underline' }}>
+                                    {isEn ? "Casablanca" : "Casablanca"}
                                 </Link>
                             </div>
+                        </div>
                     </div>
                 </section>
             </main>

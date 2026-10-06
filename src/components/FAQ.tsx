@@ -1,6 +1,5 @@
 import { translations, Language } from '@/lib/translations';
 import styles from './FAQ.module.css';
-import Features from './Features';
 
 export default function FAQ({ lang = 'en' }: { lang?: Language }) {
     const t = (key: string) => {
@@ -10,34 +9,33 @@ export default function FAQ({ lang = 'en' }: { lang?: Language }) {
 
     const faqs = [
         {
-            question: t('faq_1_q') || "How far in advance should I book a tour in Morocco?",
-            answer: t('faq_1_a') || "We recommend booking at least 2-4 weeks in advance, especially during peak seasons (Spring and Autumn), to ensure the availability of our best drivers and guides."
+            question: t('faq_1_q') || "Are all transportation services 100% private?",
+            answer: t('faq_1_a') || "Yes, all our services are 100% private. Your vehicle and dedicated driver are reserved exclusively for your party with complete schedule flexibility."
         },
         {
-            question: t('faq_2_q') || "What payment methods do you accept?",
-            answer: t('faq_2_a') || "You can pay securely via credit card online, or pay your driver directly in cash (Euros or Dirhams) upon arrival. No upfront deposit is required for most day trips."
+            question: t('faq_2_q') || "Is my driver also a tour guide?",
+            answer: t('faq_2_a') || "Your driver's primary role is private transportation, safe driving, and road logistics. Drivers are happy to share practical local recommendations and suggest scenic stops along the way. If you wish to have a licensed official guide for historical monuments or medina walking tours, we can arrange one separately upon request."
         },
         {
-            question: t('faq_3_q') || "What is your cancellation policy?",
-            answer: t('faq_3_a') || "We offer a flexible cancellation policy. You can cancel free of charge up to 48 hours before your scheduled tour or transfer."
+            question: t('faq_3_q') || "How do airport, hotel, and medina riad pickups work?",
+            answer: t('faq_3_a') || "For airport arrivals, your driver greets you at the terminal exit with a name sign and live flight tracking. For hotels, pickup is directly at the entrance. For medina riads located in pedestrian zones, your driver coordinates the nearest vehicle-accessible point and assists you with your luggage."
         },
         {
-            question: t('faq_4_q') || "Is Morocco safe for tourists?",
-            answer: t('faq_4_a') || "Yes, Morocco is very safe for tourists, including solo and female travelers. Our private drivers and official guides ensure you have a secure, hassle-free experience."
+            question: t('faq_4_q') || "What is included in quoted transportation pricing?",
+            answer: t('faq_4_a') || "All quoted rates include the dedicated vehicle, professional driver, fuel, highway tolls, parking fees, and driver expenses on multi-day journeys. There are zero hidden fees. Major route or itinerary changes requested during travel may adjust the quote."
         },
         {
-            question: t('faq_5_q') || "What is the best time to visit Morocco?",
-            answer: t('faq_5_a') || "The best times to visit are during Spring (March to May) and Autumn (September to November) when the weather is warm and pleasant across the country."
+            question: t('faq_5_q') || "When and how do we pay for our journey?",
+            answer: t('faq_5_a') || "Payment is made after each travel day in cash or by card (EUR, USD, or MAD). No upfront deposit is required for standard private transfers and daily transportation."
         },
         {
-            question: t('faq_6_q') || "Do people speak English in Morocco?",
-            answer: t('faq_6_a') || "While Arabic and French are the main languages, English is widely spoken in tourist areas. All our private drivers and guides speak fluent English."
+            question: t('faq_6_q') || "Can we customize our route or make spontaneous stops?",
+            answer: t('faq_6_a') || "Yes. Complete schedule flexibility is a core benefit of private transportation. You are free to ask your driver for coffee, lunch, comfort breaks, or scenic photo stops along the way at your own pace."
         }
     ];
 
     return (
         <section className={styles.faqSection} id="faq">
-            <Features lang={lang} />
             <div className="container">
                 <div className={styles.intro}>
                     <div className="section-subtitle">{t('faq_subtitle')}</div>

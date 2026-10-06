@@ -1,84 +1,144 @@
 .servicesSection {
-    padding: 80px 0;
+    padding: 80px 0 60px 0;
     background-color: var(--bg-color);
-    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .servicesIntro {
-    margin-bottom: 50px;
+    text-align: center;
+    margin-bottom: 45px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subtitle {
+    color: var(--primary);
+    font-family: 'Great Vibes', cursive, var(--font-poppins);
+    font-size: 2rem;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+.description {
+    color: #64748b;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-top: 10px;
 }
 
 .servicesGrid {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 0 10px;
 }
 
 .serviceCard {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    width: 190px;
-    transition: transform 0.3s ease;
+    text-decoration: none;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.35s ease;
+    height: 100%;
 }
 
 .serviceCard:hover {
-    transform: translateY(-10px);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(32, 47, 89, 0.09);
+    border-color: rgba(220, 131, 78, 0.35);
 }
 
 .imageWrapper {
-    width: 190px;
-    height: 270px;
-    border-radius: 95px;
-    overflow: hidden;
+    width: 100%;
+    height: 190px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0px;
+    overflow: hidden;
+    background-color: #f1ede8;
 }
 
 .serviceImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .serviceCard:hover .serviceImage {
-    transform: scale(1.1);
+    transform: scale(1.06);
 }
 
-.iconWrapper {
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border-radius: 50%;
+.cardBody {
+    padding: 22px 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-    margin-top: -30px;
-    margin-bottom: 15px;
+    flex-direction: column;
+    flex: 1;
+    text-align: left;
+}
+
+.serviceTag {
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--primary);
-    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: inline-block;
 }
 
 .serviceTitle {
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--accent);
-    font-size: 1.1rem;
+    margin-bottom: 8px;
+    line-height: 1.35;
+}
+
+.serviceDesc {
+    font-size: 0.88rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin-bottom: 16px;
+    flex: 1;
+}
+
+.ctaRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: gap 0.2s ease;
+}
+
+.serviceCard:hover .ctaRow {
+    gap: 10px;
+}
+
+@media (max-width: 1024px) {
+    .servicesGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
 }
 
 @media (max-width: 768px) {
     .servicesSection {
-        padding: 40px 0;
+        padding: 50px 0 40px 0;
     }
 
     .servicesIntro {
         margin-bottom: 25px;
+    }
+
+    .subtitle {
+        font-size: 1.7rem;
     }
 
     .servicesGrid {
@@ -88,43 +148,24 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
-        scrollbar-width: none; /* Hide default scrollbar on Firefox */
+        scrollbar-width: none;
         gap: 16px;
         padding: 10px 20px 25px 20px;
         margin: 0 -20px;
         scroll-padding: 0 20px;
-        justify-content: flex-start;
     }
 
     .servicesGrid::-webkit-scrollbar {
-        display: none; /* Hide scrollbar on Chrome, Safari, Opera */
+        display: none;
     }
 
     .serviceCard {
-        flex: 0 0 150px;
-        width: 150px;
+        flex: 0 0 270px;
+        width: 270px;
         scroll-snap-align: start;
     }
 
     .imageWrapper {
-        width: 100%;
-        max-width: 150px;
-        height: auto;
-        aspect-ratio: 190 / 270;
-        border-radius: 75px;
-        margin: 0 auto;
-    }
-
-    .serviceTitle {
-        font-size: 0.85rem;
-        margin-top: 5px;
-        line-height: 1.3;
-    }
-
-    .iconWrapper {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-        margin-top: -20px;
+        height: 160px;
     }
 }

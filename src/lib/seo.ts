@@ -29,6 +29,7 @@ export const APPROVED_ES_PATHS = new Set([
     '/contact',
     '/faq',
     '/about',
+    '/car-with-driver-morocco-8-days',
 ]);
 
 export const APPROVED_PHASE1_ES_PATHS = APPROVED_ES_PATHS;

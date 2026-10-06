@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://mdinatours.com/img2/agadir-marina.jpg',
+                    url: 'https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp',
                     width: 1200,
                     height: 630,
                     alt: 'Private Driver Agadir Mdina Tours',
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://mdinatours.com/img2/agadir-marina.jpg'],
+            images: ['https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp'],
         },
     };
 }
@@ -169,7 +169,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                 : "Traversée des contreforts de l'Atlas vers Paradise Valley, puis visite de la station de surf de Taghazout.",
             price: isEn ? "From €120" : "À partir de 120 €",
             cta: isEn ? "View Tours" : "Voir les circuits",
-            image: "/img2/agadir-marina.jpg",
+            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
             href: "/tours",
         },
         {
@@ -179,7 +179,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                 : "Voyagez confortablement sur l'autoroute depuis la côte jusqu'à la ville rouge de Marrakech.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/hero-marrakech.webp",
+            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
             msg: "Hello Mdina Tours, I would like to get a quote for a private transfer/driver from Agadir to Marrakech."
         }
     ];
@@ -243,12 +243,12 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Agadir" : "Service de Chauffeur Privé et Disposition Agadir",
         "description": textAgadir.subtitle,
-        "image": "https://mdinatours.com/img2/agadir-marina.jpg",
+        "image": "https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp",
         "url": `https://mdinatours.com/${language}/private-driver-agadir`,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/img2/agadir-marina.jpg",
+            "image": "https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {

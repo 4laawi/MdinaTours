@@ -25,7 +25,7 @@
     position: relative;
     transform: translateX(-50%);
     width: calc(100% + 1.3px);
-    fill: #fcf9f6;
+    fill: #ffffff;
     /* Matches the background of the previous section */
 }
 

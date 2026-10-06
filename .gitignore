@@ -40,15 +40,25 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# IDE, assistant, and temporary tool folders
+# IDE, assistant, agent rules, and temporary tool folders
 .cursor/
 .gemini/
 .claude/
 .impeccable/
+.antigravity/
+.agents/
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+DESIGN.md
+PRODUCT.md
+PRIVATE_DRIVER_SERVICE_TRUTH.md
 temp_ast/
+scratch/
 
 # Scratch files and backups
 move_navbar*.js
 split.js
 scratch_css.txt
 *.bak
+

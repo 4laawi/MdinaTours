@@ -1,11 +1,10 @@
 .faqSection {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 140px 0;
-    background: linear-gradient(to bottom, #fcfcfc 0%, #f3efea 150px, #f3efea 100%);
-    background-color: #f3efea;
+    padding: 90px 0 100px 0;
+    background-color: var(--bg-color);
     color: var(--accent);
     position: relative;
     overflow: hidden;

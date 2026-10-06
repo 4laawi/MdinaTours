@@ -20,7 +20,7 @@ export default function Destinations({ lang = 'en' }: { lang?: Language }) {
                 >
                     <path
                         d="M0,0 Q600,120 1200,0 L1200,0 L0,0 Z"
-                        fill="#ffffff"
+                        fill="#fcf9f6"
                     ></path>
                 </svg>
             </div>
@@ -31,8 +31,8 @@ export default function Destinations({ lang = 'en' }: { lang?: Language }) {
                     <h2 className="section-title" dangerouslySetInnerHTML={{ __html: t('dest_title').replace('\n', '<br />') }}></h2>
                     <p className={styles.description} dangerouslySetInnerHTML={{ __html: t('dest_desc').replace('\n', '<br />') }}></p>
                     <div className={styles.action}>
-                        <Link href={`/${lang}/blog`} className="btn-primary">
-                            {t('explore_blog')} <span className={styles.arrow}>→</span>
+                        <Link href={lang === 'es' ? '/es/tours' : `/${lang}/blog`} className="btn-primary">
+                            {lang === 'es' ? 'Explorar Excursiones' : t('explore_blog')} <span className={styles.arrow}>→</span>
                         </Link>
                     </div>
                 </div>

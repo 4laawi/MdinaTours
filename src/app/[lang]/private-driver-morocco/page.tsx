@@ -157,7 +157,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             suitability: isEn 
                 ? "Comfortable sedan for 1–2 passengers with luggage, ideal for city travel and business trips."
                 : "Berline confortable pour 1 à 2 passagers avec bagages, idéale pour les déplacements urbains et professionnels.",
-            price: "€20",
+            price: "€25",
             image: "/cars/flotte-superb.webp"
         },
         {
@@ -168,7 +168,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             suitability: isEn 
                 ? "Spacious SUV with higher clearance, well suited for 1–3 passengers on regional routes."
                 : "SUV spacieux avec garde au sol surélevée, adapté pour 1 à 3 passagers sur les routes régionales.",
-            price: "€22",
+            price: "€25",
             image: "/cars/flotte-skoda-kodiaq.webp"
         },
         {
@@ -190,7 +190,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             suitability: isEn 
                 ? "Spacious cabin with extra luggage capacity, recommended for groups and longer multi-day journeys."
                 : "Cabine spacieuse avec grand coffre à bagages, recommandée pour les groupes et les circuits sur plusieurs jours.",
-            price: "€28",
+            price: "€35",
             image: "/cars/flotte-vito.webp"
         },
         {
@@ -201,7 +201,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             suitability: isEn 
                 ? "Executive minibus configured for large tour groups, corporate delegations, and extended family travel."
                 : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.",
-            price: "€35",
+            price: "€50",
             image: "/cars/flotte-sprinter.webp"
         }
     ];
@@ -314,30 +314,50 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 ? "What is a private driver service in Morocco?" 
                 : (isEs ? "¿En qué consiste el servicio de conductor privado en Marruecos?" : "Qu'est-ce qu'un service de chauffeur privé au Maroc ?"),
             a: isEn 
-                ? "A private driver service provides a dedicated vehicle and professional driver exclusively for your schedule. You travel at your own pace with flexibility for photo stops, coffee, meals, and comfort breaks. Our drivers focus on safe transportation and practical local advice. If you wish to have a licensed historical guide for monument and medina tours, this can be arranged separately for an affordable fee."
+                ? "A private driver service provides a modern vehicle and dedicated professional driver exclusively for your schedule. You travel at your own pace with flexibility for photo stops, coffee, meals, and comfort breaks. Your driver manages all road travel, route navigation, and luggage assistance."
                 : (isEs 
-                    ? "Es el alquiler de un vehículo con conductor profesional dedicado exclusivamente a su itinerario. Viaja a su propio ritmo con libertad para paradas de fotos, café y comidas. El conductor se encarga del transporte seguro y recomendaciones prácticas. Si desea un guía oficial para visitas culturales a monumentos o medinas, puede solicitarse por separado."
-                    : "La formule chauffeur privé met à votre disposition un véhicule avec chauffeur dédié à votre programme. Vous voyagez à votre rythme avec des arrêts libres pour photos, pauses et repas. Nos chauffeurs assurent une conduite sûre et des conseils pratiques. Si vous souhaitez un guide officiel agréé pour les visites de monuments et médinas, il peut être réservé séparément.")
+                    ? "Es el alquiler de un vehículo con conductor profesional dedicado exclusivamente a su itinerario. Viaja a su propio ritmo con libertad para paradas de fotos, café y comidas. Su chófer se encarga de la conducción segura y la asistencia de equipaje."
+                    : "La formule chauffeur privé met à votre disposition un véhicule récent avec chauffeur professionnel dédié à votre programme. Vous voyagez à votre rythme avec des arrêts libres pour photos et repas. Votre chauffeur assure une conduite sereine et l'aide aux bagages.")
+        },
+        {
+            q: isEn 
+                ? "Is my driver also a tour guide?" 
+                : (isEs ? "¿El conductor es también un guía turístico oficial?" : "Mon chauffeur est-il également guide touristique ?"),
+            a: isEn 
+                ? "Your driver's primary role is private transportation, road safety, and travel logistics. Drivers are happy to share practical local recommendations and suggest scenic stops along the way. If you would like a licensed historical guide for monument or medina walking tours, we can arrange one separately upon request."
+                : (isEs 
+                    ? "La función principal del conductor es el transporte privado seguro y la logística en carretera. Su chófer le orientará con gusto con consejos prácticos y paradas escénicas. Si desea un guía oficial autorizado para visitas a monumentos o paseos por la medina, podemos gestionarlo por separado bajo petición."
+                    : "Le rôle principal de votre chauffeur est d'assurer un transport privé sécurisé et ponctuel. Il partage volontiers ses recommandations pratiques et arrêts panoramiques. Si vous désirez un guide officiel agréé pour les visites de monuments ou de médinas, nous pouvons le réserver séparément sur demande.")
+        },
+        {
+            q: isEn 
+                ? "What factors affect a custom multi-day quote?" 
+                : (isEs ? "¿Qué factores influyen en el presupuesto de varios días?" : "Quels facteurs influencent le tarif d'un circuit multi-jours ?"),
+            a: isEn 
+                ? "Custom pricing depends on your travel dates, total driving distance/route, vehicle category (sedan, SUV, VIP van, or minibus), number of travel days, group size, and luggage volume. All agreed quotes include fuel, tolls, and driver operating expenses with zero hidden fees."
+                : (isEs 
+                    ? "El precio personalizado depende de las fechas de viaje, distancia y ruta total, categoría del vehículo (berlina, SUV, van VIP o minibús), días de viaje, tamaño del grupo y volumen de equipaje. Todos los presupuestos acordados incluyen combustible, peajes y gastos del conductor."
+                    : "Le tarif sur mesure dépend de vos dates, de l'itinéraire et kilométrage, de la catégorie du véhicule (berline, SUV, van VIP ou minibus), du nombre de jours de voyage et du volume de bagages. Le tarif convenu inclut carburant, péages et frais de route du chauffeur sans frais cachés.")
         },
         {
             q: isEn 
                 ? "How do medina riad pickups and drop-offs work?" 
                 : (isEs ? "¿Cómo se realizan las recogidas en riads dentro de la medina?" : "Comment se passent les prises en charge aux riads dans les médinas ?"),
             a: isEn 
-                ? "Many riads inside Moroccan medinas cannot be reached directly by car due to narrow pedestrian lanes. In these cases, your driver will get as close as reasonably possible using the nearest vehicle-accessible point and assist you with your luggage."
+                ? "Many riads inside Moroccan medinas cannot be reached directly by car due to pedestrian-only alleys. In these situations, your driver will get as close as reasonably possible using the nearest vehicle-accessible point and assist you with your luggage."
                 : (isEs 
-                    ? "Muchos riads en las medinas marroquíes están en calles peatonales no accesibles en coche. En estos casos, su conductor le acercará al punto accesible más próximo y le ayudará con el equipaje."
+                    ? "Muchos riads en las medinas marroquíes están en callejones peatonales no accesibles en coche. En estos casos, su conductor le acercará al punto accesible más próximo y le ayudará con el equipaje."
                     : "Certains riads au cœur des médinas ne sont pas accessibles directement en voiture. Dans ce cas, votre chauffeur vous dépose au point carrossable le plus proche et vous aide avec vos bagages.")
         },
         {
             q: isEn 
-                ? "Is fuel, highway tolls, and operating expenses included in the price?" 
+                ? "What is included in quoted transportation pricing?" 
                 : (isEs ? "¿Están incluidos el combustible, peajes y gastos de viaje?" : "Le carburant, les péages et les frais de route sont-ils inclus ?"),
             a: isEn 
-                ? "Yes. For your agreed itinerary, all standard operating expenses—including fuel, highway tolls, normal parking fees, and the driver's required travel expenses—are fully included in your quotation with no hidden costs."
+                ? "Yes. For your agreed itinerary, all standard operating expenses—including vehicle, dedicated driver, fuel, highway tolls, normal parking fees, and driver lodging/meals on multi-day journeys—are fully included in your quotation. Major route changes may affect the quote."
                 : (isEs 
-                    ? "Sí. Para la ruta acordada, todos los costes operativos habituales —combustible, peajes de autopista, aparcamientos y gastos del conductor— están incluidos en el presupuesto acordado sin cargos sorpresa."
-                    : "Oui. Pour l'itinéraire convenu, tous les frais opérationnels — carburant, péages d'autoroute, parkings et frais de route du chauffeur — sont intégralement inclus dans le tarif sans frais cachés.")
+                    ? "Sí. Para la ruta acordada, todos los costes operativos habituales —vehículo, chófer, combustible, peajes de autopista, aparcamientos y alojamiento/dietas del conductor en rutas de varios días— están incluidos en el presupuesto acordado. Modificaciones importantes de ruta pueden ajustar la tarifa."
+                    : "Oui. Pour l'itinéraire convenu, tous les frais opérationnels — véhicule, chauffeur dédié, carburant, péages d'autoroute, parkings et hébergement/repas du chauffeur sur plusieurs jours — sont intégralement inclus dans le tarif sans frais cachés. Des modifications majeures d'itinéraire peuvent ajuster le tarif.")
         },
         {
             q: isEn 
@@ -354,20 +374,10 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 ? "How and when do I pay for the service?" 
                 : (isEs ? "¿Cómo y cuándo se realiza el pago del servicio?" : "Comment et quand s'effectue le paiement ?"),
             a: isEn 
-                ? "Payment is made after each travel day. We accept cash or card in EUR, USD, or Moroccan Dirhams (MAD). You will know your exact agreed rate before the service begins."
+                ? "Payment is made after each travel day in cash or card in EUR, USD, or Moroccan Dirhams (MAD). You will know your exact agreed rate before the service begins with zero advance deposit."
                 : (isEs 
-                    ? "El pago se realiza al final de cada jornada de viaje. Aceptamos efectivo o tarjeta en EUR, USD o Dirhams marroquíes (MAD). Conocerá su tarifa acordada antes de comenzar el servicio."
-                    : "Le paiement s'effectue à la fin de chaque journée de voyage. Nous acceptons les espèces ou la carte en EUR, USD ou Dirhams marocains (MAD). Le tarif convenu est connu avant le début de la prestation.")
-        },
-        {
-            q: isEn 
-                ? "Are the driver's hotel and meals included on multi-day tours?" 
-                : (isEs ? "¿Están incluidos el alojamiento y comidas del conductor en rutas de varios días?" : "Le logement et les repas du chauffeur sont-ils inclus pour les circuits multi-jours ?"),
-            a: isEn 
-                ? "Yes. On multi-day journeys outside their home base, the driver's lodging and meals are fully covered by Mdina Tours in your agreed rate. You are never asked to pay for the driver's accommodation separately."
-                : (isEs 
-                    ? "Sí. En los viajes de varios días fuera de la ciudad base, los gastos de alojamiento y comidas del conductor corren a cargo de Mdina Tours dentro del presupuesto acordado. El cliente no tiene que pagar el hotel del conductor."
-                    : "Oui. Pour les circuits de plusieurs jours hors de la ville de départ, l'hébergement et les repas du chauffeur sont entièrement pris en charge par Mdina Tours dans le tarif convenu. Vous n'avez aucun frais d'hôtel à régler pour le chauffeur.")
+                    ? "El pago se realiza al final de cada jornada de viaje. Aceptamos efectivo o tarjeta en EUR, USD o Dirhams marroquíes (MAD). Conocerá su tarifa acordada antes de comenzar el servicio sin necesidad de prepago."
+                    : "Le paiement s'effectue à la fin de chaque journée de voyage. Nous acceptons les espèces ou la carte en EUR, USD ou Dirhams marocains (MAD). Le tarif convenu est connu avant le début de la prestation, sans acompte préalable.")
         }
     ];
 
@@ -481,15 +491,28 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         {textMorocco.subtitle}
                     </p>
 
-                    {/* Verified Ratings & Operational Trust Row */}
-                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.825rem', marginBottom: '20px' }}>
-                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
-                            <span className="star-icon" style={{ color: '#f59e0b' }}>★</span>
-                            <span style={{ fontWeight: 700, color: '#1E293B' }}>4.9</span>
-                            <span style={{ color: '#64748B', fontWeight: 500 }}>
-                                {isEn ? "(120+ verified bookings)" : (isEs ? "(120+ reservas verificadas)" : "(120+ réservations vérifiées)")}
-                            </span>
+                    {/* Ratings */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.1rem' }}>
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>
+                        <span style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}>
+                            120 {isEn ? "reviews" : (isEs ? "opiniones" : "avis")}
+                        </span>
+                    </div>
+
+                    {/* Excellence Badge */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
+                        </div>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
+                            {isEn ? "Badge of Excellence" : (isEs ? "Distintivo de Excelencia" : "Badge d'Excellence")}
+                        </span>
+                    </div>
+
+                    {/* Operational Trust Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
                         <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '5px 10px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="20 6 9 17 4 12" />
@@ -642,6 +665,94 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 <PrivateDriverFleet vehicles={vehicles} lang={language} />
 
                 <PrivateDriverInclusions lang={language} />
+
+                {/* What Affects Your Custom Quote Section */}
+                <section style={{ padding: '70px 20px', backgroundColor: 'var(--bg-color)', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+                            <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+                                {isEn ? "Pricing Transparency" : (isEs ? "Precios Transparentes" : "Transparence Tarifaire")}
+                            </span>
+                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
+                                {isEn ? "What Affects Your Custom Quote" : (isEs ? "Factores que Influyen en su Presupuesto" : "Ce qui Détermine Votre Devis Sur Mesure")}
+                            </h2>
+                            <p style={{ color: '#64748b', fontSize: '0.98rem', maxWidth: '680px', margin: '10px auto 0 auto', lineHeight: 1.55 }}>
+                                {isEn 
+                                    ? "Because every road trip is organized around your personal itinerary, we calculate an exact fixed price based on your trip details:"
+                                    : (isEs 
+                                        ? "Dado que organizamos el transporte en torno a su ruta específica, calculamos un precio cerrado basado en sus detalles de viaje:" 
+                                        : "Chaque voyage étant organisé sur mesure autour de votre itinéraire, nous établissons un tarif clair et convenu selon vos paramètres :")}
+                            </p>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '18px', marginBottom: '28px' }}>
+                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>📅</div>
+                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                    {isEn ? "Dates & Season" : (isEs ? "Fechas y Temporada" : "Dates & Période")}
+                                </h3>
+                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                    {isEn 
+                                        ? "Travel dates and seasonal vehicle availability across regional hubs." 
+                                        : (isEs ? "Fechas de viaje y disponibilidad según temporada en cada ciudad base." : "Dates de séjour et disponibilité selon la saison dans chaque ville.")}
+                                </p>
+                            </div>
+
+                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>🗺️</div>
+                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                    {isEn ? "Route & Distance" : (isEs ? "Ruta y Distancia" : "Itinéraire & Distance")}
+                                </h3>
+                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                    {isEn 
+                                        ? "Total driving mileage, highway tolls, and regional mountain or desert stages." 
+                                        : (isEs ? "Kilometraje total, peajes de autopista y etapas por montaña o desierto." : "Kilométrage total, péages d'autoroute et étapes de montagne ou désert.")}
+                                </p>
+                            </div>
+
+                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>🚐</div>
+                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                    {isEn ? "Vehicle Category" : (isEs ? "Categoría del Vehículo" : "Modèle de Véhicule")}
+                                </h3>
+                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                    {isEn 
+                                        ? "Sedan, comfort SUV, VIP van, or minibus selected for your party and luggage." 
+                                        : (isEs ? "Berlina, SUV, van VIP o minibús elegido para su grupo y equipaje." : "Berline, SUV, van VIP ou minibus adapté à votre groupe et bagages.")}
+                                </p>
+                            </div>
+
+                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>⏱️</div>
+                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                    {isEn ? "Duration & Scope" : (isEs ? "Duración y Servicios" : "Durée & Disponibilité")}
+                                </h3>
+                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                    {isEn 
+                                        ? "Number of travel days, standby hours, and overnight stops outside home base." 
+                                        : (isEs ? "Días de viaje, horas a disposición y pernoctaciones fuera de la base." : "Nombre de jours, heures à disposition et nuitées hors de la ville de départ.")}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style={{
+                            backgroundColor: '#ffffff',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '12px',
+                            padding: '14px 20px',
+                            textAlign: 'center',
+                            fontSize: '0.88rem',
+                            color: '#475569',
+                            fontWeight: 500
+                        }}>
+                            🔒 {isEn 
+                                ? "No hidden charges: fuel, tolls, and driver operating expenses are included in your agreed rate. Pay after each travel day."
+                                : (isEs 
+                                    ? "Sin suplementos sorpresa: combustible, peajes y gastos del conductor están incluidos en su tarifa. Pago al final de cada jornada."
+                                    : "Sans frais cachés : carburant, péages et frais du chauffeur sont inclus dans votre devis. Paiement à la fin de chaque journée.")}
+                        </div>
+                    </div>
+                </section>
 
                 {/* Regional Hubs Section (Contextual Internal Links) */}
                 <section style={{ padding: '60px 20px', backgroundColor: '#fff', borderTop: '1px solid rgba(0,0,0,0.05)' }}>

@@ -1,7 +1,7 @@
 "use client";
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Users, Briefcase, Wind, Check } from "@phosphor-icons/react";
+import { translations, Language } from '@/lib/translations';
 
 interface Vehicle {
     name: string;
@@ -21,11 +21,72 @@ interface PrivateDriverFleetProps {
 
 export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider = false }: PrivateDriverFleetProps) {
     const isEn = lang === 'en';
+    const isEs = lang === 'es';
+    const t = (key: string) => {
+        const langSection = translations[lang as Language] || translations['en'];
+        return langSection[key] || key;
+    };
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const hasInitialScrolledRef = useRef(false);
-    const isProgrammaticScrollRef = useRef(false);
+    const isProgrammaticScrollRef = useRef(true);
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [activeIndex, setActiveIndex] = useState(vehicles && vehicles.length > 1 ? 1 : 0);
+
+    // Initial positioning to index 1 (+1) showing 3 cars immediately
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container || !vehicles || vehicles.length === 0) return;
+
+        const defaultIndex = vehicles.length > 1 ? 1 : 0;
+        isProgrammaticScrollRef.current = true;
+
+        const applyPosition = () => {
+            if (!scrollContainerRef.current) return;
+            const grid = scrollContainerRef.current;
+            const cardElement = grid.children[defaultIndex] as HTMLElement;
+            if (cardElement) {
+                const containerWidth = grid.clientWidth;
+                const cardWidth = cardElement.clientWidth;
+                const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
+                grid.scrollLeft = targetLeft;
+            }
+        };
+
+        // Execute immediately
+        applyPosition();
+
+        // Frame-level updates to ensure exact scroll after layout & font/asset measurement
+        const raf1 = requestAnimationFrame(applyPosition);
+        const raf2 = requestAnimationFrame(() => {
+            requestAnimationFrame(applyPosition);
+        });
+
+        const timer = setTimeout(() => {
+            applyPosition();
+            isProgrammaticScrollRef.current = false;
+        }, 350);
+
+        const handleResize = () => {
+            if (!scrollContainerRef.current) return;
+            const grid = scrollContainerRef.current;
+            const currentCard = grid.children[activeIndex] as HTMLElement;
+            if (currentCard) {
+                const containerWidth = grid.clientWidth;
+                const cardWidth = currentCard.clientWidth;
+                const targetLeft = currentCard.offsetLeft - (containerWidth - cardWidth) / 2;
+                grid.scrollLeft = targetLeft;
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            cancelAnimationFrame(raf1);
+            cancelAnimationFrame(raf2);
+            clearTimeout(timer);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [vehicles?.length]);
 
     useEffect(() => {
         const container = scrollContainerRef.current;
@@ -33,7 +94,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
 
         const observerOptions = {
             root: container,
-            rootMargin: '0px -40% 0px -40%', // Observe when the card occupies the middle area
+            rootMargin: '0px -35% 0px -35%',
             threshold: 0
         };
 
@@ -84,17 +145,6 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         }
     };
 
-    // Scroll to the next index (1) ONLY ONCE on initial mount so it starts scrolled once
-    useEffect(() => {
-        if (hasInitialScrolledRef.current || !vehicles || vehicles.length === 0) return;
-        hasInitialScrolledRef.current = true;
-        const defaultIndex = vehicles.length > 1 ? 1 : 0;
-        const timer = setTimeout(() => {
-            scrollToIndex(defaultIndex, 'auto');
-        }, 150); // slight delay to ensure layout has completed rendering
-        return () => clearTimeout(timer);
-    }, [vehicles?.length]);
-
     const scrollPrev = () => {
         if (activeIndex > 0) {
             scrollToIndex(activeIndex - 1);
@@ -114,7 +164,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         const n = name.toLowerCase();
         if (n.includes("superb")) {
             return {
-                tierBadge: isEn ? "Premium Sedan" : "Berline Premium",
+                tierBadge: isEn ? "Premium Sedan" : (isEs ? "Berlina Premium" : "Berline Premium"),
                 bg: "#f3e8ff",
                 color: "#6b21a8",
                 pax: "1–3",
@@ -123,7 +173,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         } else if (n.includes("kodiaq")) {
             return {
-                tierBadge: isEn ? "Comfort SUV" : "SUV Grand Confort",
+                tierBadge: isEn ? "Comfort SUV" : (isEs ? "SUV Gran Confort" : "SUV Grand Confort"),
                 bg: "#e0f2fe",
                 color: "#0369a1",
                 pax: "1–5",
@@ -132,7 +182,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         } else if (n.includes("scudo")) {
             return {
-                tierBadge: isEn ? "Spacious Van" : "Van Spacieux",
+                tierBadge: isEn ? "Spacious Van" : (isEs ? "Van Espaciosa" : "Van Spacieux"),
                 bg: "#ecfdf5",
                 color: "#065f46",
                 pax: "1–6",
@@ -141,7 +191,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         } else if (n.includes("vito")) {
             return {
-                tierBadge: isEn ? "VIP Minivan" : "Minivan VIP",
+                tierBadge: isEn ? "VIP Minivan" : (isEs ? "Minivan VIP" : "Minivan VIP"),
                 bg: "#fff7ed",
                 color: "#c2410c",
                 pax: "1–7",
@@ -150,7 +200,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         } else if (n.includes("sprinter")) {
             return {
-                tierBadge: isEn ? "VIP Minibus" : "Minibus VIP",
+                tierBadge: isEn ? "VIP Minibus" : (isEs ? "Minibús Prestige" : "Minibus VIP"),
                 bg: "#fee2e2",
                 color: "#991b1b",
                 pax: "8–16",
@@ -159,7 +209,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
             };
         }
         return {
-            tierBadge: isEn ? "Premium Fleet" : "Flotte Premium",
+            tierBadge: isEn ? "Premium Fleet" : (isEs ? "Flota Premium" : "Flotte Premium"),
             bg: "#f3f4f6",
             color: "#374151",
             pax: "1–4",
@@ -173,79 +223,62 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
         if (n.includes("superb")) {
             return isEn 
                 ? "Comfortable sedan for 1–2 passengers with luggage, ideal for city travel and business trips."
-                : "Berline confortable pour 1 à 2 passagers avec bagages, idéale pour les déplacements urbains et professionnels.";
+                : (isEs 
+                    ? "Berlina confortable para 1 o 2 pasajeros con equipaje, ideal para viajes urbanos y de negocios." 
+                    : "Berline confortable pour 1 à 2 passagers avec bagages, idéale pour les déplacements urbains et professionnels.");
         }
         if (n.includes("kodiaq")) {
             return isEn 
                 ? "Spacious SUV with higher clearance, well suited for 1–3 passengers on regional routes."
-                : "SUV spacieux avec garde au sol surélevée, adapté pour 1 à 3 passagers sur les routes régionales.";
+                : (isEs 
+                    ? "SUV espacioso con gran estabilidad en carretera, ideal para 1 a 3 pasajeros en rutas regionales." 
+                    : "SUV spacieux avec garde au sol surélevée, adapté pour 1 à 3 passagers sur les routes régionales.");
         }
         if (n.includes("scudo")) {
             return isEn 
                 ? "Spacious van for families and small groups with generous luggage capacity."
-                : "Van spacieux pour familles et petits groupes avec une grande capacité de bagages.";
+                : (isEs 
+                    ? "Van amplia para familias y grupos pequeños con gran capacidad para equipaje." 
+                    : "Van spacieux pour familles et petits groupes avec une grande capacité de bagages.");
         }
         if (n.includes("vito")) {
             return isEn 
                 ? "Spacious cabin with extra luggage capacity, recommended for groups and longer multi-day journeys."
-                : "Cabine spacieuse avec grand coffre à bagages, recommandée pour les groupes et les circuits sur plusieurs jours.";
+                : (isEs 
+                    ? "Cabina espaciosa con amplio maletero, recomendada para grupos y rutas de varios días." 
+                    : "Cabine spacieuse avec grand coffre à bagages, recommandée pour les groupes et les circuits sur plusieurs jours.");
         }
         if (n.includes("sprinter")) {
             return isEn 
                 ? "Executive minibus configured for large tour groups, corporate delegations, and extended family travel."
-                : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.";
+                : (isEs 
+                    ? "Minibús ejecutivo configurado para grupos grandes, delegaciones de empresa y viajes familiares." 
+                    : "Minibus de prestige configuré pour les grands groupes, délégations d'affaires et voyages en famille.");
         }
         return fallbackDesc || "";
     };
 
     const getOnboardFeatures = () => {
         return [
-            isEn ? "Air conditioning" : "Climatisation",
-            isEn ? "Professional chauffeur" : "Chauffeur professionnel",
-            isEn ? "Luggage assistance" : "Aide aux bagages"
+            isEn ? "Air conditioning" : (isEs ? "Aire acondicionado" : "Climatisation"),
+            isEn ? "Professional chauffeur" : (isEs ? "Chófer profesional" : "Chauffeur professionnel"),
+            isEn ? "Luggage assistance" : (isEs ? "Ayuda con el equipaje" : "Aide aux bagages")
         ];
     };
 
     return (
         <section style={{ 
-            padding: showBottomDivider ? '140px 20px 140px 20px' : '140px 20px 80px 20px', 
+            padding: '90px 20px', 
             backgroundColor: 'var(--bg-color)', 
             borderTop: 'none',
             position: 'relative',
             overflow: 'hidden'
         }} id="fleet">
-            {/* Top Shape Divider */}
-            <div style={{
-                position: 'absolute',
-                top: '-1px',
-                left: 0,
-                width: '100%',
-                overflow: 'hidden',
-                lineHeight: 0,
-                zIndex: 1,
-                pointerEvents: 'none'
-            }}>
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{
-                    position: 'relative',
-                    display: 'block',
-                    width: 'calc(100% + 1.3px)',
-                    height: '80px'
-                }}>
-                    <path 
-                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                        opacity="0.5"
-                    />
-                    <path 
-                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                    />
-                </svg>
-            </div>
 
             <div style={{ maxWidth: '1150px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
                 <style>{`
                     .fleet-grid {
+                        position: relative;
                         display: flex;
                         gap: 24px;
                         width: 100%;
@@ -304,8 +337,8 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         border-color: #e5e7eb;
                     }
                     .fleet-card.active-card:hover {
-                        transform: translateY(-4px) scale(1.03);
-                        box-shadow: 0 25px 30px -5px rgba(27, 45, 79, 0.12), 0 12px 15px -5px rgba(27, 45, 79, 0.05);
+                        transform: scale(1.03);
+                        box-shadow: 0 20px 25px -5px rgba(27, 45, 79, 0.08), 0 10px 10px -5px rgba(27, 45, 79, 0.03);
                     }
                     .vito-card {
                         border: 1.5px solid var(--primary) !important;
@@ -314,7 +347,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         box-shadow: 0 20px 25px -5px rgba(220, 131, 78, 0.12), 0 10px 10px -5px rgba(220, 131, 78, 0.06) !important;
                     }
                     .vito-card.active-card:hover {
-                        box-shadow: 0 25px 30px -5px rgba(220, 131, 78, 0.18), 0 12px 15px -5px rgba(220, 131, 78, 0.09) !important;
+                        box-shadow: 0 20px 25px -5px rgba(220, 131, 78, 0.12), 0 10px 10px -5px rgba(220, 131, 78, 0.06) !important;
                     }
                     
                     @media (prefers-reduced-motion: reduce) {
@@ -514,11 +547,63 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         cursor: pointer;
                         box-shadow: 0 4px 14px rgba(220, 131, 78, 0.25);
                     }
+                    .fleet-card-cta-btn {
+                        width: 100%;
+                        margin-top: 18px;
+                        padding: 11px 16px;
+                        background-color: #f8fafc;
+                        border: 1.5px solid #e2e8f0;
+                        border-radius: 12px;
+                        color: #1B2D4F;
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        font-family: inherit;
+                    }
+                    .fleet-card-cta-btn:hover {
+                        background-color: var(--primary);
+                        border-color: var(--primary);
+                        color: #ffffff;
+                        box-shadow: 0 4px 14px rgba(220, 131, 78, 0.3);
+                        transform: translateY(-1px);
+                    }
+                    .active-card .fleet-card-cta-btn {
+                        background-color: var(--primary);
+                        border-color: var(--primary);
+                        color: #ffffff;
+                        box-shadow: 0 4px 14px rgba(220, 131, 78, 0.25);
+                    }
+                    .active-card .fleet-card-cta-btn:hover {
+                        background-color: #c96f3c;
+                        border-color: #c96f3c;
+                    }
+                    .fleet-shared-cta-btn {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--primary);
+                        color: #fff;
+                        border: 1.5px solid var(--primary);
+                        padding: 14px 36px;
+                        border-radius: 9999px;
+                        font-weight: 700;
+                        font-size: 1rem;
+                        text-align: center;
+                        text-decoration: none;
+                        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                        cursor: pointer;
+                        box-shadow: 0 6px 18px rgba(220, 131, 78, 0.3);
+                    }
                     .fleet-shared-cta-btn:hover {
                         background-color: #c96f3c;
                         border-color: #c96f3c;
                         color: #fff;
-                        box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
+                        box-shadow: 0 8px 24px rgba(220, 131, 78, 0.4);
                         transform: translateY(-2px);
                     }
                 `}</style>
@@ -526,7 +611,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '45px' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-                        {isEn ? "OUR FLEET" : "NOTRE FLOTTE"}
+                        {isEn ? "OUR FLEET" : (isEs ? "NUESTRA FLOTA" : "NOTRE FLOTTE")}
                     </span>
                     <h2 style={{ 
                         fontSize: '2.1rem', 
@@ -536,12 +621,14 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         fontFamily: 'var(--font-poppins), sans-serif',
                         textWrap: 'balance'
                     }}>
-                        {isEn ? "Our Private Driver Fleet" : "Notre Flotte de Chauffeurs Privés"}
+                        {isEn ? "Our Private Driver Fleet" : (isEs ? "Nuestra Flota de Chófer Privado" : "Notre Flotte de Chauffeurs Privés")}
                     </h2>
                     <p style={{ color: '#666', marginTop: '10px', fontSize: '1.02rem', maxWidth: '650px', margin: '10px auto 0 auto' }}>
                         {isEn 
                             ? "Comfortable vehicles for couples, families and groups across Morocco."
-                            : "Des véhicules confortables pour les couples, les familles et les groupes à travers le Maroc."}
+                            : (isEs 
+                                ? "Vehículos confortables para parejas, familias y grupos en todo Marruecos." 
+                                : "Des véhicules confortables pour les couples, les familles et les groupes à travers le Maroc.")}
                     </p>
                 </div>
 
@@ -552,7 +639,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         onClick={scrollPrev} 
                         disabled={!canScrollLeft}
                         className="carousel-btn carousel-btn-left"
-                        aria-label={isEn ? "Previous vehicles" : "Véhicules précédents"}
+                        aria-label={isEn ? "Previous vehicles" : (isEs ? "Vehículos anteriores" : "Véhicules précédents")}
                     >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M15 18l-6-6 6-6" />
@@ -585,7 +672,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                                         </span>
                                         {isVito && (
                                             <span className="fleet-pill fleet-pill-right">
-                                                {isEn ? "Most Popular" : "Plus Populaire"}
+                                                {isEn ? "Most Popular" : (isEs ? "Más Popular" : "Plus Populaire")}
                                             </span>
                                         )}
                                     </div>
@@ -598,10 +685,10 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                                         {/* Specs Pills */}
                                         <div className="fleet-specs">
                                             <div className="fleet-spec-pill">
-                                                <Users size={14} /> <strong>{meta.pax} {isEn ? "passengers" : "passagers"}</strong>
+                                                <Users size={14} /> <strong>{meta.pax} {isEn ? "passengers" : (isEs ? "pasajeros" : "passagers")}</strong>
                                             </div>
                                             <div className="fleet-spec-pill">
-                                                <Briefcase size={14} /> <strong>{meta.bags} {isEn ? (parseInt(meta.bags) > 1 ? "bags" : "bag") : (parseInt(meta.bags) > 1 ? "bagages" : "bagage")}</strong>
+                                                <Briefcase size={14} /> <strong>{meta.bags} {isEn ? (parseInt(meta.bags) > 1 ? "bags" : "bag") : (isEs ? (parseInt(meta.bags) > 1 ? "maletas" : "maleta") : (parseInt(meta.bags) > 1 ? "bagages" : "bagage"))}</strong>
                                             </div>
                                             <div className="fleet-spec-pill">
                                                 <Wind size={14} /> <strong>A/C</strong>
@@ -631,7 +718,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                         onClick={scrollNext} 
                         disabled={!canScrollRight}
                         className="carousel-btn carousel-btn-right"
-                        aria-label={isEn ? "Next vehicles" : "Véhicules suivants"}
+                        aria-label={isEn ? "Next vehicles" : (isEs ? "Vehículos siguientes" : "Véhicules suivants")}
                     >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M9 18l6-6-6-6" />
@@ -646,73 +733,74 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                             key={idx}
                             onClick={() => scrollToIndex(idx)}
                             className={`carousel-dot ${activeIndex === idx ? 'active' : ''}`}
-                            aria-label={isEn ? `Go to vehicle ${idx + 1}` : `Aller au véhicule ${idx + 1}`}
+                            aria-label={isEn ? `Go to vehicle ${idx + 1}` : (isEs ? `Ir al vehículo ${idx + 1}` : `Aller au véhicule ${idx + 1}`)}
                         />
                     ))}
                 </div>
 
-                {/* Shared CTA & Subtle Disclaimer */}
-                <div style={{ textAlign: 'center', marginTop: '32px' }}>
-                    <a
-                        href="#booking"
-                        onClick={(e) => {
-                            const el = document.getElementById('booking');
-                            if (el) {
-                                e.preventDefault();
-                                el.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }}
-                        className="fleet-shared-cta-btn"
-                    >
-                        {isEn ? "Check availability" : "Vérifier la disponibilité"}
-                    </a>
+                {/* Shared Universal CTA & Recommendation Helper */}
+                <div style={{ textAlign: 'center', marginTop: '36px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+                    {/* Main Dynamic Universal CTA Button on TOP */}
+                    <div>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                const currentVehicle = vehicles[activeIndex] || vehicles[0];
+                                if (typeof window !== 'undefined' && currentVehicle) {
+                                    const meta = getVehicleMetadata(currentVehicle.name);
+                                    const event = new CustomEvent('select-private-vehicle', {
+                                        detail: { name: currentVehicle.name, pax: meta.pax, isVito: meta.isVito }
+                                    });
+                                    window.dispatchEvent(event);
+                                }
+                            }}
+                            className="fleet-shared-cta-btn"
+                        >
+                            {(() => {
+                                const activeCarName = vehicles[activeIndex]?.name || vehicles[0]?.name || "";
+                                if (isEn) return activeCarName ? `Check availability — ${activeCarName}` : "Check availability";
+                                if (isEs) return activeCarName ? `Consultar disponibilidad — ${activeCarName}` : "Consultar disponibilidad";
+                                return activeCarName ? `Vérifier la disponibilité — ${activeCarName}` : "Vérifier la disponibilité";
+                            })()}
+                        </button>
+                    </div>
+
+                    {/* Recommendation Helper Badge BELOW Button */}
+                    <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid rgba(0,0,0,0.08)',
+                        borderRadius: '100px',
+                        padding: '10px 22px',
+                        fontSize: '0.88rem',
+                        fontWeight: 600,
+                        color: 'var(--secondary)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                        maxWidth: '92%'
+                    }}>
+                        <span style={{ color: 'var(--primary)', fontSize: '1.05rem' }}>💡</span>
+                        <span>{t('fleet_matching_help')}</span>
+                    </div>
+
+                    {/* Disclaimer Note */}
                     <p style={{
                         fontSize: '0.82rem',
                         color: '#6b7280',
-                        marginTop: '14px',
+                        marginTop: '0px',
                         lineHeight: 1.5,
                         maxWidth: '560px',
-                        marginLeft: 'auto',
-                        marginRight: 'auto',
                         padding: '0 16px'
                     }}>
                         {isEn 
                             ? "Vehicle models may vary based on availability. An equivalent or higher-category vehicle may be provided."
-                            : "Les modèles de véhicules peuvent varier selon la disponibilité. Un véhicule équivalent ou de catégorie supérieure sera fourni."}
+                            : (isEs ? "Los modelos de vehículo pueden variar según disponibilidad. Se proporcionará un vehículo equivalente o superior." : "Les modèles de véhicules peuvent varier selon la disponibilité. Un véhicule équivalent ou de catégorie supérieure sera fourni.")}
                     </p>
                 </div>
             </div>
 
-            {showBottomDivider && (
-                <div style={{
-                    position: 'absolute',
-                    bottom: '-1px',
-                    left: 0,
-                    width: '100%',
-                    overflow: 'hidden',
-                    lineHeight: 0,
-                    zIndex: 1,
-                    pointerEvents: 'none'
-                }}>
-                    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{
-                        position: 'relative',
-                        display: 'block',
-                        width: 'calc(100% + 1.3px)',
-                        height: '80px',
-                        transform: 'rotate(180deg)'
-                    }}>
-                        <path 
-                            d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
-                            fill="#ffffff"
-                            opacity="0.5"
-                        />
-                        <path 
-                            d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
-                            fill="#ffffff"
-                        />
-                    </svg>
-                </div>
-            )}
         </section>
     );
 }

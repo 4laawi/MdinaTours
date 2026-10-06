@@ -11,47 +11,50 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
 
     const getPath = (path: string) => `/${lang}${path === '/' ? '' : path}`;
 
+    const isEn = lang === 'en';
+    const isEs = lang === 'es';
+
     const dayTrips = [
         {
             id: 1,
             title: t('activity_1_title'),
             description: t('activity_1_desc'),
             image: '/camel_riding.png',
-            duration: '2-3 Hours',
+            duration: isEn ? '2-3 Hours' : (isEs ? '2-3 Horas' : '2-3 Heures'),
             rating: 5.0,
             reviews: 148,
             price: '31',
-            badge: 'Most Popular'
+            badge: isEn ? 'Most Popular' : (isEs ? 'Más Popular' : 'Plus Populaire')
         },
         {
             id: 2,
             title: t('activity_2_title'),
             description: t('activity_2_desc'),
             image: '/quad_biking.png',
-            duration: '2 Hours',
+            duration: isEn ? '2 Hours' : (isEs ? '2 Horas' : '2 Heures'),
             rating: 4.9,
             reviews: 96,
             price: '56',
-            badge: 'Top Choice'
+            badge: isEn ? 'Top Choice' : (isEs ? 'Recomendado' : 'Coup de Cœur')
         },
         {
             id: 3,
             title: t('activity_3_title'),
             description: t('activity_3_desc'),
             image: '/medina.jpg',
-            duration: '2-4 Hours',
+            duration: isEn ? '2-4 Hours' : (isEs ? '2-4 Horas' : '2-4 Heures'),
             rating: 5.0,
             reviews: 84,
             price: '37',
-            badge: 'Cultural Heritage'
+            badge: isEn ? 'Cultural Heritage' : (isEs ? 'Patrimonio Cultural' : 'Patrimoine Culturel')
         }
     ];
 
     return (
         <section id="activities" className={styles.tourGridSection} style={{
-            backgroundColor: '#ffffff',
-            paddingTop: '120px',
-            paddingBottom: '120px'
+            backgroundColor: 'var(--bg-color)',
+            paddingTop: '90px',
+            paddingBottom: '90px'
         }}>
             <div className="container">
                 <div className={styles.intro}>

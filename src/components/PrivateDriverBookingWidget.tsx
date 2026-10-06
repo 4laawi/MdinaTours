@@ -50,6 +50,9 @@ export default function PrivateDriverBookingWidget({
     // Progressive Disclosure State (Stage 1 vs Stage 2)
     const [showVehicles, setShowVehicles] = useState(false);
 
+    // Selected Custom Vehicle Name (e.g. from Fleet section selection)
+    const [selectedVehicleCustomName, setSelectedVehicleCustomName] = useState<string | null>(null);
+
     // Vehicle Selection: 'comfort' (€25/h) or 'vito' (€35/h)
     const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('comfort');
 
@@ -106,6 +109,39 @@ export default function PrivateDriverBookingWidget({
         };
     }, []);
 
+    useEffect(() => {
+        const handleSelectVehicle = (e: Event) => {
+            const customEvent = e as CustomEvent<{ name?: string; pax?: string; isVito?: boolean }>;
+            if (customEvent.detail && customEvent.detail.name) {
+                const name = customEvent.detail.name;
+                setSelectedVehicleCustomName(name);
+                setShowVehicles(true);
+
+                const lowerName = name.toLowerCase();
+                if (lowerName.includes('vito') || lowerName.includes('sprinter') || lowerName.includes('scudo')) {
+                    setSelectedVehicle('vito');
+                } else {
+                    setSelectedVehicle('comfort');
+                }
+
+                if (lowerName.includes('sprinter')) {
+                    setPassengers(8);
+                } else if (lowerName.includes('vito') || lowerName.includes('scudo')) {
+                    setPassengers((prev) => (prev < 5 ? 5 : prev));
+                }
+
+                const bookingElement = document.getElementById('booking');
+                if (bookingElement) {
+                    bookingElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        };
+        window.addEventListener('select-private-vehicle', handleSelectVehicle as EventListener);
+        return () => {
+            window.removeEventListener('select-private-vehicle', handleSelectVehicle as EventListener);
+        };
+    }, []);
+
     // Pricing rates (EUR)
     const hourlyRate = selectedVehicle === 'vito' ? 35 : 25;
     const estimatedTotal = hourlyRate * hours;
@@ -155,13 +191,13 @@ export default function PrivateDriverBookingWidget({
         vitoTitle: "Mercedes Vito",
         vitoDesc: isEn ? "Spacious premium van · Extra luggage & space" : (isEs ? "Van espaciosa premium · Espacio y confort" : "Van haut de gamme spacieux · Grand confort"),
         popularBadge: isEn ? "Popular" : (isEs ? "Popular" : "Populaire"),
-        seeAvailableVehicles: isEn ? "See available vehicles" : (isEs ? "Ver vehículos disponibles" : "Voir les véhicules disponibles"),
+        seeAvailableVehicles: isEn ? "Check Availability" : (isEs ? "Verificar disponibilidad" : "Vérifier la disponibilité"),
         ctaReserveWhatsApp: isEn ? "Reserve on WhatsApp" : (isEs ? "Reservar por WhatsApp" : "Réserver sur WhatsApp"),
         ctaFullDay: isEn ? "Request a Quote" : (isEs ? "Solicitar Presupuesto" : "Demander un Devis"),
         ctaMultiDay: isEn ? "Send My Itinerary" : (isEs ? "Enviar mi Itinerario" : "Envoyer mon Itinéraire"),
         subCtaReassurance: isEn ? "No card required · Pay on the day" : (isEs ? "Sin tarjeta · Pague el día del viaje" : "Sans carte bancaire · Paiement sur place"),
         subCtaMultiDay: isEn ? "Continue on WhatsApp · Fast response" : (isEs ? "Continuar en WhatsApp · Respuesta rápida" : "Continuer sur WhatsApp · Réponse rapide"),
-        reassurance1: isEn ? "Free cancellation up to 24 hours before pickup" : (isEs ? "Cancelación gratuita hasta 24 horas antes del viaje" : "Annulation gratuite jusqu'à 24h avant la prise en charge"),
+        reassurance1: isEn ? "Free cancellation · 24+ hours' notice appreciated" : (isEs ? "Cancelación gratuita · Se agradece aviso con 24h+" : "Annulation gratuite · Préavis de 24h+ apprécié"),
         reassurance2: isEn ? "Pay on the day — cash or card" : (isEs ? "Pague el día del viaje — efectivo o tarjeta" : "Paiement le jour même — espèces ou carte"),
         secondaryEmailLink: isEn ? "Prefer email? Send inquiry →" : (isEs ? "¿Prefiere por email? Enviar consulta →" : "Vous préférez par e-mail ? Demander par e-mail →"),
         hourUnit: isEn ? "hours" : (isEs ? "horas" : "heures"),
@@ -188,7 +224,9 @@ export default function PrivateDriverBookingWidget({
             : (isEs ? "Para grupos de más de 7 personas, disponemos de minibús. Contáctenos por WhatsApp." : "Pour les groupes de plus de 7 passagers, des minibus sont disponibles. Contactez-nous sur WhatsApp.")
     };
 
-    const vehicleNameFormatted = selectedVehicle === 'vito' ? 'Mercedes Vito' : 'Comfort';
+    const vehicleNameFormatted = selectedVehicleCustomName
+        ? selectedVehicleCustomName
+        : (selectedVehicle === 'vito' ? 'Mercedes Vito' : (isEn ? 'Comfort Sedan/SUV' : 'Berline/SUV Confort'));
 
     // WhatsApp Message Generator
     const getWhatsAppUrl = () => {
@@ -478,6 +516,58 @@ export default function PrivateDriverBookingWidget({
             `}</style>
 
             <div className="competitor-card-wrapper">
+                {/* Pre-selected Vehicle Banner (When chosen from Fleet section) */}
+                {selectedVehicleCustomName && (
+                    <div style={{
+                        backgroundColor: '#F0FDF4',
+                        border: '1px solid #BBF7D0',
+                        borderRadius: '8px',
+                        padding: '9px 12px',
+                        marginBottom: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        fontSize: '12.5px',
+                        color: '#166534',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                            <span style={{
+                                backgroundColor: '#22C55E',
+                                color: '#FFFFFF',
+                                borderRadius: '50%',
+                                width: '16px',
+                                height: '16px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '10px',
+                                fontWeight: 'bold'
+                            }}>✓</span>
+                            <span>
+                                {isEn ? "Selected:" : (isEs ? "Seleccionado:" : "Sélectionné :")}{" "}
+                                <strong style={{ color: '#0F172A' }}>{selectedVehicleCustomName}</strong>
+                            </span>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setSelectedVehicleCustomName(null)}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                color: '#15803D',
+                                fontSize: '11.5px',
+                                fontWeight: 600,
+                                textDecoration: 'underline',
+                                cursor: 'pointer',
+                                padding: 0
+                            }}
+                        >
+                            {isEn ? "Change" : (isEs ? "Cambiar" : "Changer")}
+                        </button>
+                    </div>
+                )}
+
                 {/* Header Price / Mode Line */}
                 <div style={{ marginBottom: '14px' }}>
                     {serviceType === 'hourly' ? (

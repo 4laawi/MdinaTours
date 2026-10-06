@@ -1059,9 +1059,31 @@ body.modal-open {
 .mobile-booking-widget {
     display: none;
 }
+.mobile-sticky-bottom-bar {
+    display: none;
+}
+.transfer-desktop-flow {
+    display: block;
+}
+.transfer-mobile-flow {
+    display: none;
+}
 
 /* Mobile overrides for sections and elements */
 @media (max-width: 767px) {
+    .transfer-desktop-flow {
+        display: none !important;
+    }
+    .transfer-mobile-flow {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .mobile-sticky-bottom-bar {
+        display: flex !important;
+    }
     .transfer-page-wrapper h2, 
     .transfer-page-wrapper h3 {
         font-size: clamp(18px, 5vw, 24px) !important;

@@ -162,7 +162,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         { src: "/img2/Asilah-Morocco.jpg", alt: "Whitewashed streets of Asilah medina", tag: "Asilah" },
         { src: "/img2/Asilah_water.webp", alt: "Coast walls of ocean-side Asilah", tag: "Asilah" },
         { src: "/img2/Marrakech_atlas.jpg", alt: "Panoramic view of Atlas mountains from Marrakech", tag: "Atlas" },
-        { src: "/img2/agadir-marina.jpg", alt: "Modern Agadir Marina and yachts", tag: "Agadir" },
+        { src: "/a-mdiinatours/selman-marrakech-mdinatours.webp", alt: "Modern Agadir Marina and yachts", tag: "Agadir" },
         { src: "/img2/casablanca_MOSQUE.webp", alt: "Stunning Hassan II Mosque Casablanca", tag: "Casablanca" },
         { src: "/img2/fes_gate.jpg", alt: "Golden gates of Fes Royal Palace", tag: "Fes" },
         { src: "/img2/rabat-hassan-tour.jpg", alt: "Iconic Hassan Tower in Rabat capital", tag: "Rabat" },

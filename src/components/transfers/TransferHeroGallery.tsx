@@ -1,16 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TransferHeroGallery(props: any) {
-  const { isEn, local, transText, galleryImages, activeImageIndex, setActiveImageIndex, travelers, setTravelers, travelDate, setTravelDate, pickupTime, setPickupTime, isModalOpen, setIsModalOpen, custName, setCustName, custEmail, setCustEmail, custPhone, setCustPhone, custMessage, setCustMessage, isSubmitting, setIsSubmitting, successMessage, setSuccessMessage, errorMessage, setErrorMessage, searchState, setSearchState, showBookingCTAs, setShowBookingCTAs, optionsRef, handleSearchClick, isCalendarOpen, setIsCalendarOpen, isTravelersOpen, setIsTravelersOpen, calendarMonth, setCalendarMonth, calendarYear, setCalendarYear, getDaysInMonth, getFirstDayOfMonth, handlePrevMonth, handleNextMonth, handleDateSelect, formatReadableDate, monthNamesEn, monthNamesFr, weekdayNamesEn, weekdayNamesFr, renderMonth, handleOpenModal, handleSubmit, selectedTier, setSelectedTier, isTimePickerOpen, setIsTimePickerOpen, timePickerRef, getTierLabel, getTierVehicleInfo, getUrgencyDetails, getCancellationDeadline, getWhatsAppUrlForTier, handleShare, timeSlots, currentPrice, urgency, isPast, trans, language } = props;
-
-  const minCapacity = trans?.prices ? Math.min(...Object.keys(trans.prices).map(Number)) : 3;
-  const startingPrice = trans?.prices ? trans.prices[minCapacity] : 49;
+  const { isEn, local, transText, galleryImages, activeImageIndex, setActiveImageIndex, handleShare, trans, language } = props;
+  const isEs = language === 'es';
 
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartX = useRef(0);
 
   // Touch gesture disambiguation refs
   const touchStartX = useRef(0);
@@ -22,7 +19,17 @@ export default function TransferHeroGallery(props: any) {
   const isMouseDown = useRef(false);
   const mouseStartX = useRef(0);
 
-  // Touch handlers
+  // Auto-scroll loop (slow, non-distracting)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isDragging && !isTouchActive.current) {
+        setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [galleryImages.length, isDragging, setActiveImageIndex]);
+
+  // Touch Handlers with Intent Disambiguation
   const onTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length !== 1) return;
     isTouchActive.current = true;
@@ -35,10 +42,7 @@ export default function TransferHeroGallery(props: any) {
 
   const onTouchMove = (e: React.TouchEvent) => {
     if (!isTouchActive.current || e.touches.length !== 1) return;
-
-    if (touchDirection.current === 'vertical') {
-      return;
-    }
+    if (touchDirection.current === 'vertical') return;
 
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
@@ -81,7 +85,6 @@ export default function TransferHeroGallery(props: any) {
     touchDirection.current = null;
   };
 
-  // Mouse handlers
   const onMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
     isMouseDown.current = true;
@@ -110,10 +113,6 @@ export default function TransferHeroGallery(props: any) {
     setDragOffset(0);
   };
 
-  const onMouseLeave = () => {
-    if (isMouseDown.current) onMouseUp();
-  };
-
   const trackStyle: React.CSSProperties = {
     display: 'flex',
     width: '100%',
@@ -123,29 +122,15 @@ export default function TransferHeroGallery(props: any) {
     cursor: isDragging ? 'grabbing' : 'grab',
   };
 
-  return (
-    <>
-      {/* Premium Gallery Layout */}
-      <div className="gallery-layout">
-        {/* Vertical Thumbnails List - hidden or horizontal on mobile */}
-        <div className="gallery-thumbnails">
-          {galleryImages.map((img: any, idx: number) => (
-            <div 
-              key={idx}
-              onClick={() => setActiveImageIndex(idx)}
-              className={`gallery-thumbnail-item ${activeImageIndex === idx ? 'active' : ''}`}
-            >
-              <Image
-                src={img}
-                alt={`${local.title} view ${idx + 1}`}
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="100px"
-              />
-            </div>
-          ))}
-        </div>
+  const tChips = {
+    driverBenefit: isEn ? "Professional private driver" : (isEs ? "Conductor privado profesional" : "Chauffeur privé professionnel"),
+    pickupBenefit: isEn ? "Door-to-door pickup included" : (isEs ? "Recogida puerta a puerta incluida" : "Prise en charge porte à porte"),
+    payBenefit: isEn ? "No prepayment needed (Pay Cash/Card)" : (isEs ? "Sin pago por adelantado (Efectivo/Tarjeta)" : "Paiement le jour même (Espèces/Carte)"),
+  };
 
+  return (
+    <div className="hero-gallery-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%' }}>
+      <div className="gallery-layout" style={{ margin: 0 }}>
         {/* Main Active Image Display */}
         <div 
           className="gallery-main-image"
@@ -156,13 +141,10 @@ export default function TransferHeroGallery(props: any) {
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          style={{ touchAction: 'pan-y' }}
+          onMouseLeave={() => { if (isMouseDown.current) onMouseUp(); }}
+          style={{ borderRadius: '14px', overflow: 'hidden', touchAction: 'pan-y' }}
         >
-          <div 
-            className="gallery-slider-viewport"
-            style={{ touchAction: 'pan-y' }}
-          >
+          <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
             <div className="gallery-slider-track" style={trackStyle}>
               {galleryImages.map((img: any, idx: number) => (
                 <div key={idx} className="gallery-slide-item">
@@ -172,7 +154,7 @@ export default function TransferHeroGallery(props: any) {
                     fill
                     priority={idx === 0}
                     style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, 800px"
+                    sizes="(max-width: 768px) 100vw, 750px"
                   />
                 </div>
               ))}
@@ -181,36 +163,44 @@ export default function TransferHeroGallery(props: any) {
 
           {/* Prev/Next navigation overlay buttons */}
           <button
+            type="button"
             onClick={() => setActiveImageIndex((prev: number) => (prev === 0 ? galleryImages.length - 1 : prev - 1))}
             className="gallery-arrow-btn"
-            style={{ left: '15px' }}
+            style={{ left: '12px', width: '34px', height: '34px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.92)', color: '#111', fontSize: '18px', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
           >
             ‹
           </button>
           <button
+            type="button"
             onClick={() => setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1))}
             className="gallery-arrow-btn"
-            style={{ right: '15px' }}
+            style={{ right: '12px', width: '34px', height: '34px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.92)', color: '#111', fontSize: '18px', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
           >
             ›
           </button>
 
-          {/* Dot Indicators for Carousel */}
-          <div className="gallery-dots-container">
-            {galleryImages.map((_: any, idx: number) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setActiveImageIndex(idx)}
-                className={`gallery-dot ${activeImageIndex === idx ? 'active' : ''}`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
+          {/* Image Counter Badge */}
+          <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            right: '12px',
+            backgroundColor: 'rgba(15, 23, 42, 0.7)',
+            color: '#FFFFFF',
+            fontSize: '11.5px',
+            fontWeight: 600,
+            padding: '3px 9px',
+            borderRadius: '12px',
+            backdropFilter: 'blur(4px)',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}>
+            {activeImageIndex + 1} / {galleryImages.length}
           </div>
 
           {/* Action Buttons overlay */}
-          <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', gap: '10px' }}>
+          <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', gap: '10px', zIndex: 3 }}>
             <button 
+              type="button"
               onClick={handleShare}
               style={{
                 backgroundColor: '#fff',
@@ -234,7 +224,114 @@ export default function TransferHeroGallery(props: any) {
             </button>
           </div>
         </div>
+
+        {/* Clean Fixed 5-Column Thumbnails Grid */}
+        <div className="gallery-thumbnails-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: '8px',
+          marginTop: '10px',
+          width: '100%',
+          boxSizing: 'border-box'
+        }}>
+          {galleryImages.slice(0, 5).map((img: string, idx: number) => {
+            const isSelected = idx === 4 ? activeImageIndex >= 4 : activeImageIndex === idx;
+            const displayImg = idx === 4 && activeImageIndex >= 4 ? galleryImages[activeImageIndex] : img;
+            const remainingCount = galleryImages.length - 4;
+
+            return (
+              <div 
+                key={idx}
+                className="gallery-thumb-item"
+                onClick={() => {
+                  if (idx === 4) {
+                    if (activeImageIndex < 4) {
+                      setActiveImageIndex(4);
+                    } else {
+                      setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 4 : prev + 1));
+                    }
+                  } else {
+                    setActiveImageIndex(idx);
+                  }
+                }}
+                style={{
+                  position: 'relative',
+                  height: '70px',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
+                  boxSizing: 'border-box',
+                  transition: 'border-color 0.15s ease, transform 0.1s ease'
+                }}
+              >
+                <Image
+                  src={displayImg}
+                  alt={`${local.title} thumbnail ${idx + 1}`}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="120px"
+                />
+                {idx === 4 && remainingCount > 1 && (
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundColor: isSelected ? 'rgba(15, 23, 42, 0.45)' : 'rgba(15, 23, 42, 0.65)',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12.5px',
+                    fontWeight: 700,
+                    backdropFilter: 'blur(1px)',
+                    transition: 'background-color 0.15s ease'
+                  }}>
+                    <span>+{remainingCount}</span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </>
+
+      {/* Travel-Product Benefits Row directly underneath gallery */}
+      <div className="driver-benefit-chips" style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '16px',
+        padding: '12px 14px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '10px',
+        border: '1px solid #EAEAEA',
+        fontSize: '12.5px',
+        color: '#334155',
+        fontWeight: 500
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          <span>{tChips.driverBenefit}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="10" r="3" />
+            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
+          </svg>
+          <span>{tChips.pickupBenefit}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="20" height="14" x="2" y="5" rx="2" />
+            <line x1="2" x2="22" y1="10" y2="10" />
+          </svg>
+          <span>{tChips.payBenefit}</span>
+        </div>
+      </div>
+    </div>
   );
 }
+

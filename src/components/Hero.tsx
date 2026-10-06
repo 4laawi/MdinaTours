@@ -194,9 +194,12 @@ export default function Hero(props: { imageUrl?: string }) {
         if (showFlightField && flightNumber) {
             message += `• ${t('flight_number')}: ${flightNumber}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
+        const combinedDate = date 
+            ? `${date} ${language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`}` 
+            : (language === 'es' ? 'Flexible' : language === 'fr' ? 'Flexible' : 'Flexible');
         const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
-        message += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
+        const detailsHeader = language === 'es' ? 'Detalles' : language === 'fr' ? 'Détails' : 'Details';
+        message += `\n${detailsHeader}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(message)}`;
     };
 
@@ -214,9 +217,12 @@ export default function Hero(props: { imageUrl?: string }) {
         if (showFlightField && flightNumber) {
             body += `${t('flight_number')}: ${flightNumber}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
+        const combinedDate = date 
+            ? `${date} ${language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`}` 
+            : (language === 'es' ? 'Flexible' : language === 'fr' ? 'Flexible' : 'Flexible');
         const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
-        body += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
+        const detailsHeader = language === 'es' ? 'Detalles' : language === 'fr' ? 'Détails' : 'Details';
+        body += `\n${detailsHeader}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `mailto:booking@mdinatours.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -290,7 +296,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                         setIsCustomPickup(!!isCustom);
                                         setSearchResult(null);
                                     }}
-                                    language={language as 'en' | 'fr'}
+                                    language={language as 'en' | 'fr' | 'es'}
                                     placeholder={t('pickup')}
                                 />
                             </div>
@@ -311,7 +317,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                         setIsCustomDropoff(!!isCustom);
                                         setSearchResult(null);
                                     }}
-                                    language={language as 'en' | 'fr'}
+                                    language={language as 'en' | 'fr' | 'es'}
                                     placeholder={t('dropoff')}
                                 />
                             </div>
@@ -379,7 +385,7 @@ export default function Hero(props: { imageUrl?: string }) {
                 >
                     <path
                         d="M0,0 Q600,120 1200,0 L1200,120 L0,120 Z"
-                        fill="#fcf9f6"
+                        fill="#ffffff"
                     ></path>
                 </svg>
             </div>
@@ -447,7 +453,9 @@ export default function Hero(props: { imageUrl?: string }) {
                                             >
                                                 <Calendar size={18} className={styles.summaryIcon} />
                                                 <span className={styles.dateTimeText}>
-                                                    {date ? `${date} at ${hour}` : t('not_selected')}
+                                                    {date 
+                                                        ? `${date} ${language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`}` 
+                                                        : t('not_selected')}
                                                 </span>
                                                 <PencilSimple size={14} className={styles.editIcon} />
                                             </div>

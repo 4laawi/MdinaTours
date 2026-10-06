@@ -426,7 +426,7 @@ export default function TransferBookingWidget(props: any) {
                       }}
                       className="search-sidebar-btn"
                   >
-                      {isEn ? "Search" : "Rechercher"}
+                      {isEn ? "Check Availability" : (language === 'es' ? "Verificar disponibilidad" : "Vérifier la disponibilité")}
                   </button>
               )}
 

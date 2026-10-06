@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 
 import { Language } from '@/lib/translations';
+import styles from './TransferOtherRoutes.module.css';
 
 interface TransferOtherRoutesProps {
     language: Language;
@@ -11,18 +12,24 @@ interface TransferOtherRoutesProps {
 
 export default function TransferOtherRoutes({ language }: TransferOtherRoutesProps) {
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
     const hasInitialScrolledRef = useRef(false);
+    const hasRevealScrolledRef = useRef(false);
     const isProgrammaticScrollRef = useRef(false);
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [isInView, setIsInView] = useState(false);
 
     const routes = useMemo(() => [
         {
             title: "Casablanca Airport ⇄ Rabat",
             desc: isEn 
                 ? "Direct highway transfer from CMN airport to your Rabat hotel or embassy."
+                : isEs
+                ? "Traslado directo por autopista desde el aeropuerto CMN a su hotel o estancia en Rabat."
                 : "Transfert direct par autoroute de l'aéroport CMN à votre hôtel ou ambassade à Rabat.",
             price: "€120",
             image: "/img2/Airport_Casablanca_Mohammed.webp",
@@ -32,6 +39,8 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             title: "Marrakech ⇄ Essaouira",
             desc: isEn 
                 ? "Travel from the Red City to the Atlantic coast with photo stops to see tree-climbing goats."
+                : isEs
+                ? "Viaje desde la Ciudad Roja hasta la costa atlántica con paradas fotográficas."
                 : "Voyagez de la Ville Rouge à la côte atlantique avec arrêt photo pour voir les chèvres.",
             price: "€140",
             image: "/img2/Essaouira-maroc.jpg",
@@ -41,89 +50,113 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
             title: "Fes ⇄ Chefchaouen",
             desc: isEn 
                 ? "Scenic private transport through the Rif Mountains to the beautiful Blue Pearl."
+                : isEs
+                ? "Transporte privado panorámico por las montañas del Rif hasta la Perla Azul."
                 : "Transport privé panoramique à travers le Rif jusqu'à la magnifique Perle Bleue.",
             price: "€170",
-            image: "/hero-chefchaouen.webp",
+            image: "/img2/fes_gate.jpg",
             slug: "fes-to-chefchaouen-transfer"
         },
         {
             title: "Casablanca ⇄ Marrakech",
             desc: isEn 
                 ? "Fast southern expressway transfer between Casablanca CMN and Marrakech medina."
+                : isEs
+                ? "Traslado rápido por autopista entre Casablanca CMN y la medina de Marrakech."
                 : "Transfert rapide par l'autoroute du Sud entre Casablanca CMN et la médina de Marrakech.",
             price: "€220",
-            image: "/hero-marrakech.webp",
+            image: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
             slug: "casablanca-to-marrakech-transfer"
         },
         {
             title: "Tangier ⇄ Chefchaouen",
             desc: isEn 
                 ? "Scenic mountain transfer from Tangier port or airport to the Blue City."
+                : isEs
+                ? "Traslado de montaña desde el puerto o aeropuerto de Tánger a la Ciudad Azul."
                 : "Transfert de montagne panoramique du port ou de l'aéroport de Tanger à la Ville Bleue.",
             price: "€140",
-            image: "/hero-chefchaouen.webp",
+            image: "/img2/tangier-mdina.jpg",
             slug: "tangier-to-chefchaouen-transfer"
         },
         {
             title: "Rabat ⇄ Casablanca",
             desc: isEn 
                 ? "Convenient intercity transfer between the administrative capital and Casablanca."
+                : isEs
+                ? "Cómodo traslado interurbano entre la capital administrativa y Casablanca."
                 : "Transfert interville pratique entre la capitale administrative et Casablanca.",
             price: "€110",
-            image: "/hero-landscape-1.webp",
+            image: "/img2/rabat-hassan-tour.jpg",
             slug: "rabat-to-casablanca-transfer"
         },
         {
             title: "Marrakech ⇄ Agadir",
             desc: isEn 
                 ? "Relaxing highway transfer to the premier seaside resort town of Agadir."
+                : isEs
+                ? "Traslado relajante por autopista hacia la ciudad costera de Agadir."
                 : "Transfert relaxant par l'autoroute vers la célèbre station balnéaire d'Agadir.",
             price: "€185",
-            image: "/img2/agadir-marina.webp",
+            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
             slug: "marrakech-to-agadir-transfer"
         },
         {
             title: "Tangier ⇄ Rabat",
             desc: isEn 
                 ? "Comfortable expressway transfer connecting the northern port city of Tangier to Rabat."
+                : isEs
+                ? "Traslado cómodo por autopista conectando la ciudad portuaria de Tánger con Rabat."
                 : "Transfert confortable par l'autoroute reliant la ville portuaire de Tanger à Rabat.",
             price: "€210",
             image: "/Tangier-Morocco-Photo.webp",
             slug: "tangier-to-rabat-transfer"
         }
-    ], [isEn]);
+    ], [isEn, isEs]);
 
+    // Observe section visibility so autoplay and reveal scroll only run when user is looking at this section
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsInView(entry.isIntersecting);
+            },
+            { threshold: 0.2 }
+        );
+
+        observer.observe(section);
+        return () => observer.disconnect();
+    }, []);
+
+    // Observe scroll position to update active dot indicator when user scrolls manually
     useEffect(() => {
         const container = scrollContainerRef.current;
-        if (!container || routes.length === 0) return;
+        if (!container) return;
 
-        const observerOptions = {
-            root: container,
-            rootMargin: '0px -40% 0px -40%', // Observe when the card occupies the middle area
-            threshold: 0
-        };
-
-        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        const handleScroll = () => {
             if (isProgrammaticScrollRef.current) return;
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const cardIndex = Array.from(container.children).indexOf(entry.target);
-                    if (cardIndex !== -1) {
-                        setActiveIndex(cardIndex);
-                    }
+            const scrollLeft = container.scrollLeft;
+            const children = Array.from(container.children) as HTMLElement[];
+            if (children.length === 0) return;
+
+            let closestIndex = 0;
+            let minDistance = Infinity;
+
+            children.forEach((child, idx) => {
+                const distance = Math.abs(child.offsetLeft - scrollLeft);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = idx;
                 }
             });
+
+            setActiveIndex(closestIndex);
         };
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        
-        Array.from(container.children).forEach(child => {
-            observer.observe(child);
-        });
-
-        return () => {
-            observer.disconnect();
-        };
+        container.addEventListener('scroll', handleScroll, { passive: true });
+        return () => container.removeEventListener('scroll', handleScroll);
     }, [routes]);
 
     const scrollToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
@@ -131,9 +164,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         const container = scrollContainerRef.current;
         const cardElement = container.children[index] as HTMLElement;
         if (cardElement) {
-            const containerWidth = container.clientWidth;
-            const cardWidth = cardElement.clientWidth;
-            const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
+            const targetLeft = cardElement.offsetLeft;
             
             isProgrammaticScrollRef.current = true;
             if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
@@ -149,19 +180,32 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         }
     };
 
-    // Scroll to the second card (index 1) ONLY ONCE on mount so it's centered initially
+    // Scroll to the first card (index 0) ONLY ONCE on mount so it reliably appears at the beginning
     useEffect(() => {
         if (hasInitialScrolledRef.current || routes.length === 0) return;
         hasInitialScrolledRef.current = true;
         const timer = setTimeout(() => {
-            scrollToIndex(routes.length > 1 ? 1 : 0, 'auto');
-        }, 150);
+            scrollToIndex(0, 'auto');
+        }, 100);
         return () => clearTimeout(timer);
     }, [routes.length]);
 
-    // Autoplay timer: triggers once every 5 seconds, pauses when hovered
+    // On scroll reveal: automatically scroll +1 index once the section is revealed into view
     useEffect(() => {
-        if (routes.length <= 1 || isHovered) return;
+        if (!isInView || hasRevealScrolledRef.current || isHovered || routes.length <= 1) return;
+
+        hasRevealScrolledRef.current = true;
+        const revealTimer = setTimeout(() => {
+            scrollToIndex(1, 'smooth');
+        }, 700);
+
+        return () => clearTimeout(revealTimer);
+    }, [isInView, isHovered, routes.length]);
+
+    // Autoplay timer: triggers once every 5 seconds only when in viewport, pauses when hovered
+    useEffect(() => {
+        if (routes.length <= 1 || isHovered || !isInView) return;
+        if (!hasRevealScrolledRef.current) return;
 
         const timer = setTimeout(() => {
             const nextIndex = activeIndex < routes.length - 1 ? activeIndex + 1 : 0;
@@ -169,7 +213,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         }, 5000);
 
         return () => clearTimeout(timer);
-    }, [activeIndex, isHovered, routes.length]);
+    }, [activeIndex, isHovered, isInView, routes.length]);
 
     const scrollPrev = () => {
         if (activeIndex > 0) {
@@ -190,213 +234,26 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
     const getPath = (slug: string) => `/${language}/transfers/${slug}`;
 
     return (
-        <section style={{ 
-            padding: '140px 20px 140px 20px', 
-            backgroundColor: 'var(--bg-color)', 
-            borderTop: 'none',
-            position: 'relative',
-            overflow: 'hidden'
-        }} id="popular-routes">
-            
-            {/* Top Shape Divider */}
-            <div style={{
-                position: 'absolute',
-                top: '-1px',
-                left: 0,
-                width: '100%',
-                overflow: 'hidden',
-                lineHeight: 0,
-                zIndex: 1,
-                pointerEvents: 'none'
-            }}>
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{
-                    position: 'relative',
-                    display: 'block',
-                    width: 'calc(100% + 1.3px)',
-                    height: '80px'
-                }}>
-                    <path 
-                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                        opacity="0.5"
-                    />
-                    <path 
-                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                    />
-                </svg>
-            </div>
+        <section 
+            ref={sectionRef}
+            style={{ 
+                padding: '90px 20px', 
+                backgroundColor: '#ffffff', 
+                borderTop: 'none',
+                position: 'relative',
+                overflow: 'hidden'
+            }} 
+            id="popular-routes"
+        >
 
-            <div style={{ maxWidth: '1150px', margin: '0 auto', position: 'relative', zIndex: 2 }}
+            <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}
                  onMouseEnter={() => setIsHovered(true)}
                  onMouseLeave={() => setIsHovered(false)}
             >
-                <style>{`
-                    .routes-carousel-grid {
-                        display: flex;
-                        gap: 24px;
-                        width: 100%;
-                        overflow-x: auto;
-                        scroll-snap-type: x mandatory;
-                        scroll-behavior: smooth;
-                        -webkit-overflow-scrolling: touch;
-                        padding: 24px 4px 32px 4px;
-                        margin: 0;
-                        scrollbar-width: none;
-                    }
-                    .routes-carousel-grid::-webkit-scrollbar {
-                        display: none;
-                    }
-                    @media (min-width: 769px) {
-                        .routes-carousel-grid {
-                            padding-left: calc(50% - 175px);
-                            padding-right: calc(50% - 175px);
-                        }
-                    }
-                    @media (max-width: 768px) {
-                        .routes-carousel-grid {
-                            padding-left: calc(50% - 145px); /* mobile card is 290px wide */
-                            padding-right: calc(50% - 145px);
-                        }
-                    }
-                    .route-card {
-                        background-color: #fff;
-                        border-radius: 20px;
-                        border: 1px solid #f3f4f6;
-                        overflow: hidden;
-                        display: flex;
-                        flex-direction: column;
-                        height: auto;
-                        flex: 0 0 350px;
-                        scroll-snap-align: center;
-                        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                                    opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                                    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                                    border-color 0.4s ease;
-                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-                        opacity: 0.8;
-                        transform: scale(0.96);
-                    }
-                    @media (max-width: 768px) {
-                        .route-card {
-                            flex: 0 0 290px;
-                        }
-                    }
-                    .route-card.active-card {
-                        opacity: 1;
-                        transform: scale(1.03);
-                        box-shadow: 0 20px 25px -5px rgba(27, 45, 79, 0.08), 0 10px 10px -5px rgba(27, 45, 79, 0.03);
-                        border-color: #e5e7eb;
-                    }
-                    .route-card.active-card:hover {
-                        transform: translateY(-4px) scale(1.03);
-                        box-shadow: 0 25px 30px -5px rgba(27, 45, 79, 0.12), 0 12px 15px -5px rgba(27, 45, 79, 0.05);
-                    }
-                    
-                    @media (prefers-reduced-motion: reduce) {
-                        .route-card {
-                            transition: none !important;
-                            transform: none !important;
-                            opacity: 1 !important;
-                        }
-                        .route-card.active-card {
-                            transform: none !important;
-                        }
-                        .route-card.active-card:hover {
-                            transform: none !important;
-                        }
-                    }
-                    
-                    /* Carousel controls */
-                    .carousel-btn {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        width: 44px;
-                        height: 44px;
-                        border-radius: 50%;
-                        background-color: #fff;
-                        border: 1px solid #e5e5e5;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        z-index: 10;
-                        transition: all 0.2s ease;
-                        color: var(--secondary);
-                        padding: 0;
-                    }
-                    .carousel-btn:hover:not(:disabled) {
-                        background-color: #f9fafb;
-                        border-color: #d1d5db;
-                        transform: translateY(-50%) scale(1.05);
-                    }
-                    .carousel-btn:disabled {
-                        opacity: 0.3;
-                        cursor: not-allowed;
-                    }
-                    .carousel-btn-left {
-                        left: -22px;
-                    }
-                    .carousel-btn-right {
-                        right: -22px;
-                    }
-                    @media (max-width: 1200px) {
-                        .carousel-btn-left {
-                            left: -10px;
-                        }
-                        .carousel-btn-right {
-                            right: -10px;
-                        }
-                    }
-                    @media (max-width: 1024px) {
-                        .carousel-btn {
-                            display: none;
-                        }
-                    }
-                    .carousel-dots {
-                        display: flex;
-                        justify-content: center;
-                        gap: 8px;
-                        margin-top: 24px;
-                    }
-                    .carousel-dot {
-                        width: 10px;
-                        height: 10px;
-                        border-radius: 50%;
-                        background-color: #e5e7eb;
-                        border: none;
-                        cursor: pointer;
-                        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                        padding: 0;
-                    }
-                    .carousel-dot.active {
-                        background-color: var(--primary);
-                        width: 28px;
-                        border-radius: 5px;
-                    }
-                    .route-img-container {
-                        position: relative;
-                        width: 100%;
-                        height: 180px;
-                        overflow: hidden;
-                    }
-                    .route-img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        transition: transform 0.3s ease;
-                    }
-                    .route-card:hover .route-img {
-                        transform: scale(1.05);
-                    }
-                `}</style>
-
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '45px' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-                        {isEn ? "Explore Other Routes" : "Explorer d'Autres Trajets"}
+                        {isEn ? "Explore Other Routes" : isEs ? "Explorar Otras Rutas" : "Explorer d'Autres Trajets"}
                     </span>
                     <h2 style={{ 
                         fontSize: '2.1rem', 
@@ -406,38 +263,40 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                         fontFamily: 'var(--font-poppins), sans-serif',
                         textWrap: 'balance'
                     }}>
-                        {isEn ? "Popular Private Transfer Routes" : "Trajets de Transfert Privé Populaires"}
+                        {isEn ? "Popular Private Transfer Routes" : isEs ? "Rutas de Traslado Privado Populares" : "Trajets de Transfert Privé Populaires"}
                     </h2>
                     <p style={{ color: '#666', marginTop: '10px', fontSize: '1.02rem' }}>
                         {isEn 
                             ? "Fixed-rate intercity routes with meet & greet and 24/7 support."
+                            : isEs
+                            ? "Rutas interurbanas con tarifa fija garantizada, asistencia y bienvenida 24/7."
                             : "Trajets intervilles à tarif fixe avec accueil personnalisé et assistance 24/7."}
                     </p>
                 </div>
 
                 {/* Carousel Container */}
-                <div className="routes-carousel-wrapper" style={{ position: 'relative' }}>
+                <div style={{ position: 'relative' }}>
                     {/* Previous Button */}
                     <button 
                         onClick={scrollPrev} 
                         disabled={!canScrollLeft}
-                        className="carousel-btn carousel-btn-left"
-                        aria-label={isEn ? "Previous routes" : "Trajets précédents"}
+                        className={`${styles.carouselBtn} ${styles.carouselBtnLeft}`}
+                        aria-label={isEn ? "Previous routes" : isEs ? "Rutas anteriores" : "Trajets précédents"}
                     >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M15 18l-6-6 6-6" />
                         </svg>
                     </button>
 
-                    <div className="routes-carousel-grid" ref={scrollContainerRef}>
+                    <div className={styles.routesCarouselGrid} ref={scrollContainerRef}>
                         {routes.map((route, idx) => (
-                            <div key={idx} className={`route-card ${activeIndex === idx ? 'active-card' : ''}`}>
+                            <div key={idx} className={styles.routeCard}>
                                 <Link href={getPath(route.slug)} className="private-driver-route-img-link" style={{ display: 'block', position: 'relative' }}>
-                                    <div className="route-img-container">
+                                    <div className={styles.routeImgContainer}>
                                         <img 
                                             src={route.image} 
                                             alt={route.title} 
-                                            className="route-img"
+                                            className={styles.routeImg}
                                             width={380}
                                             height={220}
                                             loading="lazy"
@@ -454,7 +313,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                                             fontWeight: 700,
                                             zIndex: 2
                                         }}>
-                                            {isEn ? "From" : "Dès"} {route.price}
+                                            {isEn ? "From" : isEs ? "Desde" : "Dès"} {route.price}
                                         </div>
                                     </div>
                                 </Link>
@@ -481,7 +340,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                                             marginTop: '10px'
                                         }}
                                     >
-                                        {isEn ? "View Route" : "Voir le trajet"}
+                                        {isEn ? "View Route" : isEs ? "Ver Ruta" : "Voir le trajet"}
                                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                                             <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
                                         </svg>
@@ -495,8 +354,8 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                     <button 
                         onClick={scrollNext} 
                         disabled={!canScrollRight}
-                        className="carousel-btn carousel-btn-right"
-                        aria-label={isEn ? "Next routes" : "Trajets suivants"}
+                        className={`${styles.carouselBtn} ${styles.carouselBtnRight}`}
+                        aria-label={isEn ? "Next routes" : isEs ? "Rutas siguientes" : "Trajets suivants"}
                     >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M9 18l6-6-6-6" />
@@ -505,46 +364,62 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                 </div>
 
                 {/* Dot Indicators */}
-                <div className="carousel-dots">
+                <div className={styles.carouselDots}>
                     {routes.map((_, idx) => (
                         <button
                             key={idx}
                             onClick={() => scrollToIndex(idx)}
-                            className={`carousel-dot ${activeIndex === idx ? 'active' : ''}`}
-                            aria-label={isEn ? `Go to route ${idx + 1}` : `Aller au trajet ${idx + 1}`}
+                            className={`${styles.carouselDot} ${activeIndex === idx ? styles.active : ''}`}
+                            aria-label={isEn ? `Go to route ${idx + 1}` : isEs ? `Ir a ruta ${idx + 1}` : `Aller au trajet ${idx + 1}`}
                         />
                     ))}
                 </div>
-            </div>
 
-            {/* Bottom Shape Divider */}
-            <div style={{
-                position: 'absolute',
-                bottom: '-1px',
-                left: 0,
-                width: '100%',
-                overflow: 'hidden',
-                lineHeight: 0,
-                zIndex: 1,
-                pointerEvents: 'none'
-            }}>
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{
-                    position: 'relative',
-                    display: 'block',
-                    width: 'calc(100% + 1.3px)',
-                    height: '80px',
-                    transform: 'rotate(180deg)'
+                {/* Subtle Cross-Sell Note */}
+                <div style={{
+                    marginTop: '36px',
+                    textAlign: 'center',
+                    padding: '16px 24px',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '14px',
+                    border: '1px solid rgba(220, 131, 78, 0.25)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
+                    gap: '12px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
                 }}>
-                    <path 
-                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                        opacity="0.5"
-                    />
-                    <path 
-                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
-                        fill="#ffffff"
-                    />
-                </svg>
+                    <span style={{ fontSize: '0.92rem', color: '#475569', fontWeight: 500 }}>
+                        {isEn 
+                            ? "Traveling elsewhere in Morocco? We can quote your remaining transfers together."
+                            : isEs 
+                            ? "¿Viaja a otros destinos en Marruecos? Podemos presupuestar todos sus traslados conjuntamente."
+                            : "Vous voyagez ailleurs au Maroc ? Nous pouvons chiffrer l'ensemble de vos transferts ensemble."}
+                    </span>
+                    <a
+                        href={`https://wa.me/212724114775?text=${encodeURIComponent(
+                            isEn
+                                ? "Hello Mdina Tours, I would like a custom quote for multiple transfer routes across Morocco."
+                                : isEs
+                                ? "Hola Mdina Tours, me gustaría solicitar presupuesto conjunto para varios traslados en Marruecos."
+                                : "Bonjour Mdina Tours, je souhaite un devis combiné pour plusieurs transferts au Maroc."
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            color: 'var(--primary)',
+                            fontWeight: 700,
+                            fontSize: '0.9rem',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            textDecoration: 'none'
+                        }}
+                    >
+                        <span>{isEn ? "Quote Multi-Route Plan →" : isEs ? "Solicitar Multi-Ruta →" : "Devis Multi-Trajets →"}</span>
+                    </a>
+                </div>
             </div>
         </section>
     );

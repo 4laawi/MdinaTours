@@ -225,7 +225,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasFes) {
             images.push('/img2/fes_gate.jpg');
         } else if (hasMarrakech) {
-            images.push('/hero-marrakech.webp'); // Avoid Tourists-in-marrakech.avif issue
+            images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
         } else {
             images.push(transImage);
         }
@@ -247,8 +247,8 @@ const getGalleryImages = (slug: string, transImage: string) => {
                 images.push('/img3/aeroport-marrakech-menara.webp');
             }
         } else {
-            if (!images.includes('/hero-marrakech.webp')) {
-                images.push('/hero-marrakech.webp');
+            if (!images.includes('/a-mdiinatours/selman-marrakech-mdinatours.webp')) {
+                images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
             }
         }
     }
@@ -258,8 +258,8 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (hasMerzouga && !images.includes('/b-roll/activity-sahara-camel-riding-broll.webp')) {
         images.push('/b-roll/activity-sahara-camel-riding-broll.webp');
     }
-    if (hasAgadir && !images.includes('/img2/agadir-marina.jpg')) {
-        images.push('/img2/agadir-marina.jpg');
+    if (hasAgadir && !images.includes('/a-mdiinatours/selman-marrakech-mdinatours.webp')) {
+        images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
     }
     if (hasRabat && !isAirport && !images.includes('/img2/rabat-hassan-tour.jpg')) {
         images.push('/img2/rabat-hassan-tour.jpg');
@@ -884,102 +884,173 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     return (
         <div style={{ backgroundColor: 'var(--bg-color)', color: 'var(--accent)', fontFamily: "'Inter', sans-serif", width: '100%', maxWidth: '100%', overflowX: 'hidden', paddingBottom: '80px' }} className="transfer-page-wrapper">
             
-            {/* Top Breadcrumb & Title */}
-            <div className="breadcrumbs-title-container" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 20px 20px' }}>
-                <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '6px', fontSize: '0.65rem', color: '#666', marginBottom: '8px' }}>
-                    <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.home}</Link>
-                    <span style={{ color: '#ccc' }}>›</span>
-                    <Link href={isEn ? "/en/transfers" : "/fr/transfers"} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.transfers}</Link>
-                    <span style={{ color: '#ccc' }}>›</span>
-                    <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{local.title}</span>
-                </nav>
+            {/* ========================================================================= */}
+            {/* DESKTOP VIEW (>= 768px): 100% Intact 2-Column Grid & Sticky Booking Sidebar */}
+            {/* ========================================================================= */}
+            <div className="transfer-desktop-flow">
+                {/* Top Breadcrumb & Title */}
+                <div className="breadcrumbs-title-container" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 20px 20px' }}>
+                    <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '6px', fontSize: '0.65rem', color: '#666', marginBottom: '8px' }}>
+                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.home}</Link>
+                        <span style={{ color: '#ccc' }}>›</span>
+                        <Link href={isEn ? "/en/transfers" : "/fr/transfers"} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.transfers}</Link>
+                        <span style={{ color: '#ccc' }}>›</span>
+                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{local.title}</span>
+                    </nav>
 
-                <h1 style={{
-                    fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)',
-                    fontWeight: 700,
-                    color: 'var(--secondary)',
-                    margin: '0 0 10px 0',
-                    lineHeight: '1.2',
-                    fontFamily: "var(--font-poppins), sans-serif",
-                }}>
-                    {local.title}
-                </h1>
+                    <h1 style={{
+                        fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)',
+                        fontWeight: 700,
+                        color: 'var(--secondary)',
+                        margin: '0 0 10px 0',
+                        lineHeight: '1.2',
+                        fontFamily: "var(--font-poppins), sans-serif",
+                    }}>
+                        {local.title}
+                    </h1>
 
-                {/* Ratings */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                    <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.1rem' }}>
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    {/* Compact Ratings & Badges Row */}
+                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
+                        <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px' }}>
+                            <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '0.9rem' }}>
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <span style={{ fontSize: '0.8rem', color: '#1E293B', fontWeight: 600 }}>
+                                {trans.slug === "casablanca-airport-transfer" ? "120" : "35"} {transText.reviews}
+                            </span>
+                        </div>
+
+                        <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '5px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', padding: '5px 10px', borderRadius: '6px' }}>
+                            <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#92400e' }}>
+                                {transText.badgeExcellence}
+                            </span>
+                        </div>
+
+                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
+                            <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{transText.reserveNowPayLater}</span>
+                        </div>
+
+                        <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '5px 10px', borderRadius: '6px' }}>
+                            <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#334155' }}>{transText.lowestPrice}</span>
+                        </div>
                     </div>
-                    <span style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}>
-                        {trans.slug === "casablanca-airport-transfer" ? "120" : "35"} {transText.reviews}
-                    </span>
                 </div>
 
-                {/* Excellence Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                    <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
-                    </div>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
-                        {transText.badgeExcellence}
-                    </span>
-                </div>
+                {/* Main Visual and Booking Section */}
+                <section id="booking-desktop" className="main-booking-section" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }} className="grid-responsive-layout">
+                        
+                        {/* Left Column: Gallery, details and itinerary options */}
+                        <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
+                            <TransferHeroGallery {...propsObj} />
+                            <TransferMetaSection {...propsObj} />
+                            <TransferMeetingInfo {...propsObj} />
+                            <TransferVehicleTiers {...propsObj} />
+                        </div>
 
-                {/* Reserve Now & Lowest Price Row */}
-                <div className="guarantees-row" style={{ display: 'flex', flexWrap: 'nowrap', gap: '8px', fontSize: '0.75rem', marginBottom: '20px', width: '100%', overflowX: 'auto' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', padding: '6px 10px', borderRadius: '12px', whiteSpace: 'nowrap' }}>
-                        <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
-                        <span style={{ fontWeight: 500 }}>{transText.reserveNowPayLater}</span>
+                        {/* Right Column: Sticky Booking Selector Box */}
+                        <div style={{ 
+                            position: 'sticky', 
+                            top: '100px', 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gap: '16px',
+                            maxWidth: '480px',
+                            width: '100%',
+                            height: 'fit-content',
+                            zIndex: 10
+                        }} className="booking-widget-sticky-wrapper">
+                            <TransferBookingWidget {...propsObj} />
+                        </div>
+
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', padding: '6px 10px', borderRadius: '12px', whiteSpace: 'nowrap' }}>
-                        <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
-                        <span style={{ fontWeight: 500 }}>{transText.lowestPrice}</span>
+                    
+                    <div style={{ marginTop: '40px' }}>
+                        <TransferWebRatings {...propsObj} />
                     </div>
-                </div>
+                </section>
             </div>
 
-            {/* Main Visual and Booking Section */}
-            <section id="booking" className="main-booking-section" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }} className="grid-responsive-layout">
-                    
-                    {/* Left Column: Gallery, details and itinerary options */}
-                    <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
-                        <TransferHeroGallery {...propsObj} />
-                        
-                        <div className="mobile-booking-widget" style={{ marginTop: '20px' }}>
-                            <TransferBookingWidget {...propsObj} />
-                        </div>
+            {/* ========================================================================= */}
+            {/* MOBILE VIEW (< 768px): Strict 7-Step High-Conversion Hierarchy */}
+            {/* ========================================================================= */}
+            <div className="transfer-mobile-flow" style={{ maxWidth: '100%', margin: '0 auto', padding: '0 16px 20px 16px' }}>
+                {/* 1. order-1: Breadcrumbs, Page Title, and Subtitle */}
+                <div style={{ marginBottom: '10px' }}>
+                    <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '6px', fontSize: '0.65rem', color: '#666', marginBottom: '8px' }}>
+                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.home}</Link>
+                        <span style={{ color: '#ccc' }}>›</span>
+                        <Link href={isEn ? "/en/transfers" : "/fr/transfers"} style={{ color: '#666', transition: 'color 0.2s' }}>{transText.transfers}</Link>
+                        <span style={{ color: '#ccc' }}>›</span>
+                        <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{local.title}</span>
+                    </nav>
 
-                        <TransferMetaSection {...propsObj} />
-                        <TransferMeetingInfo {...propsObj} />
-                        
-                        {/* Interactive Tiers (Selection Flow) remains here in Left Column */}
-                        <TransferVehicleTiers {...propsObj} />
-                    </div>
-
-                    {/* Right Column: Sticky Booking Selector Box */}
-                    <div style={{ 
-                        position: 'sticky', 
-                        top: '100px', 
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        gap: '16px',
-                        maxWidth: '480px',
-                        width: '100%',
-                        height: 'fit-content',
-                        zIndex: 10
-                    }} className="booking-widget-sticky-wrapper">
-                        <div className="desktop-booking-widget">
-                            <TransferBookingWidget {...propsObj} />
-                        </div>
-                    </div>
-
+                    <h1 style={{
+                        fontSize: 'clamp(1.35rem, 5vw, 1.65rem)',
+                        fontWeight: 700,
+                        color: 'var(--secondary)',
+                        margin: '0 0 6px 0',
+                        lineHeight: '1.25',
+                        fontFamily: "var(--font-poppins), sans-serif",
+                    }}>
+                        {local.title}
+                    </h1>
                 </div>
-                
-                <div style={{ marginTop: '40px' }}>
+
+                {/* 2. order-2: Reviews (Stars) & Trust Badges */}
+                <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', fontSize: '0.75rem', marginBottom: '14px' }}>
+                    <div className="rating-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '4px 8px', borderRadius: '6px' }}>
+                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '0.85rem' }}>
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <span style={{ fontSize: '0.75rem', color: '#1E293B', fontWeight: 600 }}>
+                            {trans.slug === "casablanca-airport-transfer" ? "120" : "35"} {transText.reviews}
+                        </span>
+                    </div>
+
+                    <div className="excellence-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', padding: '4px 8px', borderRadius: '6px' }}>
+                        <span style={{ color: '#d97706', fontSize: '0.75rem' }}>🏆</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#92400e' }}>
+                            {transText.badgeExcellence}
+                        </span>
+                    </div>
+
+                    <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '4px 8px', borderRadius: '6px' }}>
+                        <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#334155' }}>{transText.reserveNowPayLater}</span>
+                    </div>
+
+                    <div className="guarantee-pill" style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', padding: '4px 8px', borderRadius: '6px' }}>
+                        <span style={{ color: '#64748b', fontWeight: 'bold' }}>🏷️</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#334155' }}>{transText.lowestPrice}</span>
+                    </div>
+                </div>
+
+                {/* 3 & 4. order-3 & order-4: The Image Carousel + Quick Features list */}
+                <div id="booking" style={{ width: '100%', marginBottom: '18px' }}>
+                    <TransferHeroGallery {...propsObj} />
+                </div>
+
+                {/* 5. order-5: The main Booking Card */}
+                <div style={{ width: '100%', marginBottom: '24px' }}>
+                    <TransferBookingWidget {...propsObj} />
+                </div>
+
+                {/* 6. order-6: The Tripadvisor/Trustpilot social proof block */}
+                <div style={{ width: '100%', marginBottom: '28px' }}>
                     <TransferWebRatings {...propsObj} />
                 </div>
-            </section>
+
+                {/* 7. order-7 and beyond: Meeting & Pickup Details, Meta Section, and Vehicle Tiers */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+                    <TransferMeetingInfo {...propsObj} />
+                    <TransferMetaSection {...propsObj} />
+                    <TransferVehicleTiers {...propsObj} />
+                </div>
+            </div>
 
             {/* Why Choose Us Section */}
             <PrivateDriverWhyChooseUs lang={language} />
@@ -1268,6 +1339,67 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     </div>
                 </div>
             )}
+
+            {/* Mobile Sticky Bottom Floating Booking Bar (Visible on mobile screens < 768px) */}
+            <div className="mobile-sticky-bottom-bar" style={{
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: '#FFFFFF',
+                borderTop: '1px solid #E2E8F0',
+                padding: '12px 16px',
+                boxShadow: '0 -4px 20px rgba(0,0,0,0.1)',
+                zIndex: 9990,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                boxSizing: 'border-box'
+            }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                        {isEn ? "From" : isEs ? "Desde" : "À partir de"}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                        <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--accent, #0f172a)' }}>
+                            €{currentPrice}
+                        </span>
+                        <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
+                            / {isEn ? "vehicle" : isEs ? "vehículo" : "véhicule"}
+                        </span>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    onClick={() => {
+                        const bookingEl = document.getElementById('booking');
+                        if (bookingEl) {
+                            bookingEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
+                    style={{
+                        backgroundColor: '#25D366',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        borderRadius: '10px',
+                        padding: '12px 20px',
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(37, 211, 102, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                    }}
+                >
+                    <span>{isEn ? "Check Availability" : isEs ? "Ver disponibilidad" : "Voir disponibilité"}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     );
 }
+

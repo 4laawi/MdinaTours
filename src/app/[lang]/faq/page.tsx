@@ -82,10 +82,16 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
                             : "Vous pouvez réserver par nos formulaires ou en écrivant à notre équipe sur WhatsApp. Nous confirmons vos détails, le type de véhicule, l'heure de prise en charge et vous envoyons une confirmation."
                 },
                 {
-                    q: isEn ? "Do I need to pay in advance?" : isEs ? "¿Tengo que pagar por adelantado?" : "Dois-je payer à l'avance ?",
-                    a: isEn ? "No prepayments are required. We believe in building trust with travelers. You pay your driver directly in cash (Euros, US Dollars, or Moroccan Dirhams) at the end of your transfer or tour."
-                            : isEs ? "No se requiere pago por adelantado. Confiamos en nuestros viajeros. Paga directamente a su chófer en efectivo (euros, dólares o dirhams marroquíes) al finalizar el servicio."
-                            : "Aucun prépaiement n'est requis. Nous faisons confiance à nos voyageurs. Vous réglez directement le chauffeur en espèces (Euros, Dollars ou Dirhams) à la fin de la prestation."
+                    q: isEn ? "Do I need to pay a deposit to book?" : isEs ? "¿Tengo que pagar un depósito para reservar?" : "Dois-je payer un acompte pour réserver ?",
+                    a: isEn ? "No. You pay at the end of each day of travel, once you've been picked up and are enjoying the service. We think trust should be earned, not demanded up front."
+                            : isEs ? "No se requiere depósito previo. Paga al final de cada día de viaje, una vez en ruta con su conductor. Creemos que la confianza se demuestra con hechos."
+                            : "Non. Vous payez à la fin de chaque journée de voyage, une fois pris en charge et en route avec votre chauffeur. La confiance se mérite."
+                },
+                {
+                    q: isEn ? "Are your drivers licensed professionals?" : isEs ? "¿Los conductores son profesionales autorizados?" : "Vos chauffeurs sont-ils des professionnels agréés ?",
+                    a: isEn ? "Yes. We work with professional drivers who are experienced, trustworthy, and committed to your comfort and safety."
+                            : isEs ? "Sí. Trabajamos exclusivamente con conductores profesionales autorizados, experimentados y comprometidos con su seguridad y confort."
+                            : "Oui. Nous collaborons uniquement avec des chauffeurs professionnels agréés, expérimentés et dévoués à votre confort et sécurité."
                 },
                 {
                     q: isEn ? "What is your cancellation policy?" : isEs ? "¿Cuál es la política de cancelación?" : "Quelle est votre politique d'annulation ?",

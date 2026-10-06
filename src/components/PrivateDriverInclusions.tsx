@@ -46,10 +46,10 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
                 ? "Guías oficiales disponibles bajo petición para visitas a monumentos" 
                 : "Guides officiels disponibles sur demande pour les visites de monuments"),
         isEn 
-            ? "Free cancellation up to 24 hours before your trip" 
+            ? "Free cancellation · 24+ hours' notice appreciated" 
             : (isEs 
-                ? "Cancelación gratuita hasta 24 horas antes del viaje" 
-                : "Annulation gratuite jusqu'à 24 heures avant le départ")
+                ? "Cancelación gratuita · Se agradece aviso con 24h+" 
+                : "Annulation gratuite · Préavis de 24h+ apprécié")
     ];
 
     return (
@@ -104,19 +104,19 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
                     ))}
                 </div>
 
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>
                     <p style={{ 
-                        fontSize: '0.95rem', 
+                        fontSize: '0.92rem', 
                         color: '#64748b', 
                         margin: 0,
                         fontWeight: 500,
-                        fontStyle: 'italic'
+                        lineHeight: 1.6
                     }}>
                         {isEn 
-                            ? "Multi-day journeys include all driver accommodation and operating expenses in the agreed quote." 
+                            ? "Quoted transportation pricing includes fuel, highway tolls, parking, and driver operating/lodging expenses on multi-day journeys. Major route or itinerary changes requested during travel may affect the quote." 
                             : (isEs 
-                                ? "Las rutas de varios días incluyen los gastos y alojamiento del conductor en el presupuesto acordado." 
-                                : "Les circuits sur plusieurs jours incluent tous les frais et l'hébergement du chauffeur dans le tarif convenu.")}
+                                ? "Las tarifas acordadas incluyen combustible, peajes de autopista, aparcamientos y gastos de viaje/alojamiento del conductor en rutas de varios días. Modificaciones importantes de ruta solicitadas en destino pueden ajustar el presupuesto." 
+                                : "Les tarifs convenus incluent le carburant, les péages, les parkings et les frais de route/hébergement du chauffeur sur plusieurs jours. Des modifications majeures d'itinéraire en cours de voyage peuvent faire l'objet d'un ajustement.")}
                     </p>
                 </div>
             </div>

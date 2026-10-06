@@ -91,7 +91,7 @@ export default function TourGrid() {
                                         </div>
                                         <div className={styles.actionsBlock}>
                                             <Link href={getPath(`/tours/${tour.slug}`)} className={styles.bookBtn}>
-                                                {isEn ? 'View Tour' : 'Voir le Circuit'}
+                                                {isEn ? 'View Tour' : (language === 'es' ? 'Ver Excursión' : 'Voir le Circuit')}
                                             </Link>
                                         </div>
                                     </div>
