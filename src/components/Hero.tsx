@@ -26,8 +26,8 @@ const BACKGROUND_IMAGES = [
 export default function Hero(props: { imageUrl?: string }) {
     const { t, language } = useLanguage();
     const today = new Date().toISOString().split('T')[0];
-    const [pickup, setPickup] = useState<string>("Rabat");
-    const [dropoff, setDropoff] = useState<string>("Casablanca");
+    const [pickup, setPickup] = useState<string>("Marrakech Airport");
+    const [dropoff, setDropoff] = useState<string>("Essaouira");
     const [isCustomPickup, setIsCustomPickup] = useState(false);
     const [isCustomDropoff, setIsCustomDropoff] = useState(false);
     // Use props.imageUrl as the first image if provided
