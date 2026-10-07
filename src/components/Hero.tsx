@@ -287,69 +287,30 @@ export default function Hero(props: { imageUrl?: string }) {
         <section id="hero" className={styles.heroSection}>
             {/* 1. Active Slide */}
             <div key={`active-${activeSlide}-${displayImages[activeSlide].desktop}`} className={`${styles.bgImageContainer} ${styles.active}`}>
-                <Image
-                    src={displayImages[activeSlide].desktop}
-                    alt="Mdina Tours Morocco"
-                    fill
-                    className={`${styles.heroBg} ${styles.desktopOnly}`}
-                    priority={activeSlide === 0}
-                    sizes="100vw"
-                />
-                <Image
-                    src={displayImages[activeSlide].mobile}
-                    alt="Mdina Tours Morocco"
-                    fill
-                    className={`${styles.heroBg} ${styles.mobileOnly}`}
-                    priority={activeSlide === 0}
-                    sizes="100vw"
-                />
+                {renderHeroImage(displayImages[activeSlide].desktop, displayImages[activeSlide].mobile, true, activeSlide === 0)}
             </div>
 
             {/* 2. Outgoing Slide (during 1.5s crossfade) */}
             {outgoingSlide !== null && (
                 <div key={`outgoing-${outgoingSlide}-${displayImages[outgoingSlide].desktop}`} className={`${styles.bgImageContainer} ${styles.outgoing}`}>
-                    <Image
-                        src={displayImages[outgoingSlide].desktop}
-                        alt="Mdina Tours Morocco"
-                        fill
-                        className={`${styles.heroBg} ${styles.desktopOnly}`}
-                        priority={false}
-                        sizes="100vw"
-                    />
-                    <Image
-                        src={displayImages[outgoingSlide].mobile}
-                        alt="Mdina Tours Morocco"
-                        fill
-                        className={`${styles.heroBg} ${styles.mobileOnly}`}
-                        priority={false}
-                        sizes="100vw"
-                    />
+                    {renderHeroImage(displayImages[outgoingSlide].desktop, displayImages[outgoingSlide].mobile, false, false)}
                 </div>
             )}
 
             {/* 3. Next Slide (preloaded in background with opacity: 0) */}
             {nextSlide !== activeSlide && nextSlide !== outgoingSlide && (
                 <div key={`preload-${nextSlide}-${displayImages[nextSlide].desktop}`} className={`${styles.bgImageContainer} ${styles.preload}`}>
-                    <Image
-                        src={displayImages[nextSlide].desktop}
-                        alt=""
-                        aria-hidden="true"
-                        fill
-                        className={`${styles.heroBg} ${styles.desktopOnly}`}
-                        priority={false}
-                        sizes="100vw"
-                        onLoad={() => setNextReady(true)}
-                    />
-                    <Image
-                        src={displayImages[nextSlide].mobile}
-                        alt=""
-                        aria-hidden="true"
-                        fill
-                        className={`${styles.heroBg} ${styles.mobileOnly}`}
-                        priority={false}
-                        sizes="100vw"
-                        onLoad={() => setNextReady(true)}
-                    />
+                    <picture>
+                        <source media="(min-width: 769px)" srcSet={require('next/image').getImageProps({ src: displayImages[nextSlide].desktop, alt: '', fill: true, sizes: '100vw' }).props.srcSet} />
+                        <source media="(max-width: 768px)" srcSet={require('next/image').getImageProps({ src: displayImages[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' }).props.srcSet} />
+                        <img
+                            {...require('next/image').getImageProps({ src: displayImages[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' }).props}
+                            className={styles.heroBg}
+                            loading="lazy"
+                            aria-hidden="true"
+                            onLoad={() => setNextReady(true)}
+                        />
+                    </picture>
                 </div>
             )}
 
