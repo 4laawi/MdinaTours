@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { trackLeadConversion } from '@/lib/tracking';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TransferBookingWidget(props: any) {
@@ -41,6 +42,7 @@ export default function TransferBookingWidget(props: any) {
     getTierLabel
   } = props;
 
+  const isEs = language === 'es';
   const displayPrice = currentPrice;
   const getCustomizedWhatsAppUrl = () => getWhatsAppUrlForTier(selectedTier);
 
@@ -133,7 +135,7 @@ export default function TransferBookingWidget(props: any) {
                       }}
                   >
                       <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', letterSpacing: '0.05em', marginBottom: '2px' }}>
-                          {isEn ? "Date" : "Date"}
+                          {isEn ? "Date" : (isEs ? "Fecha" : "Date")}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                           <span style={{ fontSize: '14px', fontWeight: 600, color: '#222' }}>
@@ -161,7 +163,7 @@ export default function TransferBookingWidget(props: any) {
                       }}
                   >
                       <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', color: '#717171', letterSpacing: '0.05em', marginBottom: '2px' }}>
-                          {isEn ? "Traveler" : "Voyageurs"}
+                          {isEn ? "Traveler" : (isEs ? "Viajeros" : "Voyageurs")}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -200,7 +202,7 @@ export default function TransferBookingWidget(props: any) {
                       gap: '16px'
                   }} className="calendar-popover">
                       <div className="mobile-sheet-header" style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px solid #e2e8f0' }}>
-                          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>{isEn ? "Select date" : "Sélectionner la date"}</h3>
+                          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>{isEn ? "Select date" : (isEs ? "Seleccionar fecha" : "Sélectionner la date")}</h3>
                           <button type="button" onClick={(e) => { e.stopPropagation(); setIsCalendarOpen(false); }} style={{ background: '#f1f5f9', border: 'none', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                           </button>
@@ -238,7 +240,7 @@ export default function TransferBookingWidget(props: any) {
                       overflowY: 'auto'
                   }} className="travelers-popover">
                       <div className="mobile-sheet-header" style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid #e2e8f0' }}>
-                          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>{isEn ? "Select travelers" : "Sélectionner les voyageurs"}</h3>
+                          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>{isEn ? "Select travelers" : (isEs ? "Seleccionar viajeros" : "Sélectionner les voyageurs")}</h3>
                           <button type="button" onClick={(e) => { e.stopPropagation(); setIsTravelersOpen(false); }} style={{ background: '#f1f5f9', border: 'none', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                           </button>
@@ -266,7 +268,7 @@ export default function TransferBookingWidget(props: any) {
                               className="traveler-option"
                           >
                               <span>
-                                  {num} {num === 1 ? (isEn ? 'traveler' : 'voyageur') : (isEn ? 'travelers' : 'voyageurs')}
+                                  {num} {num === 1 ? (isEn ? 'traveler' : (isEs ? 'viajero' : 'voyageur')) : (isEn ? 'travelers' : (isEs ? 'viajeros' : 'voyageurs'))}
                               </span>
                               {travelers === num && (
                                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ color: 'var(--primary)' }}>
@@ -331,7 +333,7 @@ export default function TransferBookingWidget(props: any) {
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-spin">
                           <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="8" />
                       </svg>
-                      {isEn ? "Searching..." : "Recherche en cours..."}
+                      {isEn ? "Searching..." : (isEs ? "Buscando..." : "Recherche en cours...")}
                   </button>
               )}
 
@@ -359,7 +361,7 @@ export default function TransferBookingWidget(props: any) {
                               }}
                               className="check-availability-btn"
                           >
-                              {isEn ? "Check Availability" : "Vérifier la disponibilité"}
+                              {isEn ? "Check Availability" : (isEs ? "Verificar disponibilidad" : "Vérifier la disponibilité")}
                           </button>
                       ) : (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', animation: 'fadeIn 0.3s ease-out' }}>
@@ -385,7 +387,7 @@ export default function TransferBookingWidget(props: any) {
                                       }}
                                       className="update-search-btn"
                                   >
-                                      {isEn ? "Update search" : "Mettre à jour la recherche"}
+                                      {isEn ? "Update search" : (isEs ? "Actualizar búsqueda" : "Mettre à jour la recherche")}
                                   </button>
                               )}
                               {/* Primary CTA (WhatsApp) */}
@@ -393,6 +395,7 @@ export default function TransferBookingWidget(props: any) {
                                   href={getCustomizedWhatsAppUrl()}
                                   target="_blank"
                                   rel="noopener noreferrer"
+                                  onClick={() => trackLeadConversion('transfer_sidebar_whatsapp', { travelers, travelDate, price: displayPrice })}
                                   style={{
                                       backgroundColor: '#25D366',
                                       color: '#fff',
@@ -445,7 +448,7 @@ export default function TransferBookingWidget(props: any) {
                                       <rect width="20" height="16" x="2" y="4" rx="2" />
                                       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                                   </svg>
-                                  {isEn ? "Book via Email" : "Réserver par Email"}
+                                  {isEn ? "Book via Email" : (isEs ? "Reservar por Email" : "Réserver par Email")}
                               </button>
                           </div>
                       )}
@@ -479,11 +482,11 @@ export default function TransferBookingWidget(props: any) {
                               <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
                                   {urgency.isNonRefundable ? (
                                       <>
-                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "No prepayment needed" : "Aucun prépaiement"}</span> {isEn ? "— Pay cash or card to your driver. Free cancellation or changes anytime before departure." : "— Payez en espèces ou par carte au chauffeur. Annulation ou modification gratuite à tout moment avant le départ."}
+                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "No prepayment needed" : (isEs ? "Sin prepago necesario" : "Aucun prépaiement")}</span> {isEn ? "— Pay cash or card to your driver. Free cancellation or changes anytime before departure." : (isEs ? "— Paga en efectivo o tarjeta a tu conductor. Cancelación o cambios gratuitos en cualquier momento antes de la salida." : "— Payez en espèces ou par carte au chauffeur. Annulation ou modification gratuite à tout moment avant le départ.")}
                                       </>
                                   ) : (
                                       <>
-                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Free cancellation" : "Annulation gratuite"}</span> {isEn ? "up to 24 hours before the experience starts (local time)" : "jusqu'à 24 heures avant le début de l'expérience (heure locale)"}
+                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Free cancellation" : (isEs ? "Cancelación gratuita" : "Annulation gratuite")}</span> {isEn ? "up to 24 hours before the experience starts (local time)" : (isEs ? "hasta 24 horas antes del inicio del traslado (hora local)" : "jusqu'à 24 heures avant le début de l'expérience (heure locale)")}
                                       </>
                                   )}
                               </span>
@@ -505,7 +508,7 @@ export default function TransferBookingWidget(props: any) {
                                   </svg>
                               </div>
                               <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
-                                  <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Reserve Now and Pay Later" : "Réservez maintenant et payez plus tard"}</span> – {isEn ? "Secure your spot while staying flexible" : "Garantissez votre place tout en restant flexible"}
+                                  <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Reserve Now and Pay Later" : (isEs ? "Reserva ahora y paga después" : "Réservez maintenant et payez plus tard")}</span> – {isEn ? "Secure your spot while staying flexible" : (isEs ? "Asegura tu plaza manteniendo flexibilidad" : "Garantissez votre place tout en restant flexible")}
                               </span>
                           </div>
                       </div>
@@ -547,10 +550,10 @@ export default function TransferBookingWidget(props: any) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
               <span style={{ fontSize: '15px', fontWeight: 700, color: '#222' }}>
-                  {isEn ? "Book ahead!" : "Réservez à l'avance !"}
+                  {isEn ? "Book ahead!" : (isEs ? "¡Reserva con antelación!" : "Réservez à l'avance !")}
               </span>
               <span style={{ fontSize: '13px', color: '#666', fontWeight: 500, lineHeight: '1.4' }}>
-                  {isEn ? "On average, this is booked 30 days in advance." : "En moyenne, ce trajet est réservé 30 jours à l'avance."}
+                  {isEn ? "On average, this is booked 30 days in advance." : (isEs ? "De media, este traslado se reserva con 30 días de antelación." : "En moyenne, ce trajet est réservé 30 jours à l'avance.")}
               </span>
           </div>
       </div>

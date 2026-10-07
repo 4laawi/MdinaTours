@@ -8,6 +8,7 @@ import styles from './TransfersHero.module.css';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
 import { LOCATIONS, getRoutePrice } from '@/lib/transferLocations';
 import LocationCombobox from '@/components/LocationCombobox';
+import { trackLeadConversion } from '@/lib/tracking';
 
 interface TransfersHeroProps {
     title: string;
@@ -111,35 +112,39 @@ export default function TransfersHero({
             ? `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé.\n\n`
             : `Hello Mdina Tours,\nI would like to book a private transfer.\n\n`;
         let message = greeting;
-        message += `• ${t('contact_form_full_name')}: ${name}\n`;
-        message += `• ${t('contact_form_phone')}: ${phone}\n`;
-        message += `• ${t('precise_location')}: ${preciseLocation}\n`;
-        if (showFlightField && flightNumber) {
-            message += `• ${t('flight_number')}: ${flightNumber}\n`;
+        if (name.trim()) message += `• ${t('contact_form_full_name')}: ${name.trim()}\n`;
+        if (phone.trim()) message += `• ${t('contact_form_phone')}: ${phone.trim()}\n`;
+        if (preciseLocation.trim()) message += `• ${t('precise_location')}: ${preciseLocation.trim()}\n`;
+        if (showFlightField && flightNumber.trim()) {
+            message += `• ${t('flight_number')}: ${flightNumber.trim()}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : (language === 'es' ? 'Flexible' : language === 'fr' ? 'Flexible' : 'Flexible');
+        const timeFormatted = language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`;
+        const combinedDate = date ? `${date} ${timeFormatted}` : 'Flexible';
         const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
-        message += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
+        const detailsHeader = language === 'es' ? 'Detalles' : language === 'fr' ? 'Détails' : 'Details';
+        message += `\n${detailsHeader}:\n• ${t('pickup')}: ${pickup}\n• ${t('dropoff')}: ${dropoff}\n• ${t('date')}: ${combinedDate}\n• ${t('num_passengers')}: ${passengers}\n• ${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(message)}`;
     };
 
     const getEmailUrl = () => {
-        const subject = language === 'es' ? `Solicitud de Traslado Privado - ${name}` : language === 'fr' ? `Demande de Transfert Privé - ${name}` : `Private Transfer Inquiry - ${name}`;
+        const subject = language === 'es' ? `Solicitud de Traslado Privado - ${name || 'Cliente'}` : language === 'fr' ? `Demande de Transfert Privé - ${name || 'Client'}` : `Private Transfer Inquiry - ${name || 'Customer'}`;
         const greeting = language === 'es'
             ? `Hola Mdina Tours,\n\nMe gustaría solicitar el siguiente traslado privado:\n\n`
             : language === 'fr'
             ? `Bonjour Mdina Tours,\n\nJe souhaite réserver le transfert privé suivant :\n\n`
             : `Hello Mdina Tours,\n\nI would like to book the following private transfer:\n\n`;
         let body = greeting;
-        body += `${t('contact_form_full_name')}: ${name}\n`;
-        body += `${t('contact_form_phone')}: ${phone}\n`;
-        body += `${t('precise_location')}: ${preciseLocation}\n`;
-        if (showFlightField && flightNumber) {
-            body += `${t('flight_number')}: ${flightNumber}\n`;
+        if (name.trim()) body += `${t('contact_form_full_name')}: ${name.trim()}\n`;
+        if (phone.trim()) body += `${t('contact_form_phone')}: ${phone.trim()}\n`;
+        if (preciseLocation.trim()) body += `${t('precise_location')}: ${preciseLocation.trim()}\n`;
+        if (showFlightField && flightNumber.trim()) {
+            body += `${t('flight_number')}: ${flightNumber.trim()}\n`;
         }
-        const combinedDate = date ? `${date} ${hour}` : 'Flexible';
+        const timeFormatted = language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`;
+        const combinedDate = date ? `${date} ${timeFormatted}` : 'Flexible';
         const quoteLabel = language === 'es' ? 'Solicitud de presupuesto a medida' : language === 'fr' ? 'Demande de devis sur-mesure' : 'Custom Quote Request';
-        body += `\n${language === 'es' ? 'Detalles' : 'Details'}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
+        const detailsHeader = language === 'es' ? 'Detalles' : language === 'fr' ? 'Détails' : 'Details';
+        body += `\n${detailsHeader}:\n${t('pickup')}: ${pickup}\n${t('dropoff')}: ${dropoff}\n${t('date')}: ${combinedDate}\n${t('num_passengers')}: ${passengers}\n${t('trip_price')}: ${currentPrice ? `${currentPrice}€` : quoteLabel}`;
         return `mailto:booking@mdinatours.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -347,7 +352,9 @@ export default function TransfersHero({
                                             >
                                                 <Calendar size={18} className={styles.summaryIcon} />
                                                 <span className={styles.dateTimeText}>
-                                                    {date ? `${date} at ${hour}` : t('not_selected')}
+                                                    {date 
+                                                        ? `${date} ${language === 'es' ? `a las ${hour}` : language === 'fr' ? `à ${hour}` : `at ${hour}`}` 
+                                                        : t('not_selected')}
                                                 </span>
                                                 <PencilSimple size={14} className={styles.editIcon} />
                                             </div>
@@ -435,7 +442,18 @@ export default function TransfersHero({
 
                                     <div className={styles.ctaGroup}>
                                         <div className={styles.whatsappContainer}>
-                                            <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className={styles.primaryCta}>
+                                            <a 
+                                                href={getWhatsAppUrl()} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className={styles.primaryCta}
+                                                onClick={() => trackLeadConversion('transfers_hero_modal_whatsapp', {
+                                                    pickup,
+                                                    dropoff,
+                                                    passengers,
+                                                    price: currentPrice
+                                                })}
+                                            >
                                                 <span>{t('book_now')} via WhatsApp</span>
                                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.408.001 12.045a11.811 11.811 0 001.592 5.925L0 24l6.103-1.594a11.832 11.832 0 005.94 1.592h.005c6.637 0 12.05-5.408 12.054-12.045a11.8 11.8 0 00-3.536-8.509" />
@@ -445,14 +463,30 @@ export default function TransfersHero({
                                         </div>
 
                                         <div className={styles.secondaryCtas}>
-                                            <a href={getEmailUrl()} className={`${styles.secondaryCta} ${styles.emailCta}`}>
+                                            <a 
+                                                href={getEmailUrl()} 
+                                                className={`${styles.secondaryCta} ${styles.emailCta}`}
+                                                onClick={() => trackLeadConversion('transfers_hero_modal_email', {
+                                                    pickup,
+                                                    dropoff,
+                                                    passengers,
+                                                    price: currentPrice
+                                                })}
+                                            >
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                                     <polyline points="22,6 12,13 2,6"></polyline>
                                                 </svg>
                                                 Email
                                             </a>
-                                            <a href="tel:+212724114775" className={`${styles.secondaryCta} ${styles.callCta}`}>
+                                            <a 
+                                                href="tel:+212724114775" 
+                                                className={`${styles.secondaryCta} ${styles.callCta}`}
+                                                onClick={() => trackLeadConversion('transfers_hero_modal_call', {
+                                                    pickup,
+                                                    dropoff
+                                                })}
+                                            >
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                                                 </svg>

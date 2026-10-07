@@ -1,9 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import { trackLeadConversion } from '@/lib/tracking';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TransferVehicleTiers(props: any) {
   const { isEn, local, transText, galleryImages, activeImageIndex, setActiveImageIndex, travelers, setTravelers, travelDate, setTravelDate, pickupTime, setPickupTime, isModalOpen, setIsModalOpen, custName, setCustName, custEmail, setCustEmail, custPhone, setCustPhone, custMessage, setCustMessage, isSubmitting, setIsSubmitting, successMessage, setSuccessMessage, errorMessage, setErrorMessage, searchState, setSearchState, showBookingCTAs, setShowBookingCTAs, optionsRef, handleSearchClick, isCalendarOpen, setIsCalendarOpen, isTravelersOpen, setIsTravelersOpen, calendarMonth, setCalendarMonth, calendarYear, setCalendarYear, getDaysInMonth, getFirstDayOfMonth, handlePrevMonth, handleNextMonth, handleDateSelect, formatReadableDate, monthNamesEn, monthNamesFr, weekdayNamesEn, weekdayNamesFr, renderMonth, handleOpenModal, handleSubmit, selectedTier, setSelectedTier, isTimePickerOpen, setIsTimePickerOpen, timePickerRef, getTierLabel, getTierVehicleInfo, getUrgencyDetails, getCancellationDeadline, getWhatsAppUrlForTier, handleShare, timeSlots, currentPrice, urgency, isPast, trans, language } = props;
+
+  const isEs = language === 'es';
 
   return (
     <>
@@ -26,9 +29,9 @@ export default function TransferVehicleTiers(props: any) {
                                     minHeight: '1.2em' 
                                 }}>
                                     {searchState === 'searching' 
-                                        ? (isEn ? "Checking Availability..." : "Vérification de la disponibilité...") 
+                                        ? (isEn ? "Checking Availability..." : (isEs ? "Comprobando disponibilidad..." : "Vérification de la disponibilité...")) 
                                         : searchState === 'initial'
-                                            ? (isEn ? "Pricing Tiers" : "Grille tarifaire")
+                                            ? (isEn ? "Pricing Tiers" : (isEs ? "Tarifas por vehículo" : "Grille tarifaire"))
                                             : transText.selectOptions
                                     }
                                 </h2>
@@ -162,7 +165,7 @@ export default function TransferVehicleTiers(props: any) {
                                                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
                                                         <span style={{ fontSize: '20px', fontWeight: 600, color: '#222222', fontFamily: "var(--font-poppins), sans-serif" }}>€{String(price)}</span>
                                                         <span style={{ fontSize: '12px', color: '#6a6a6a', display: 'block', marginTop: '2px', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                            {isEn ? `per group (up to ${displayLimit})` : `par groupe (jusqu'à ${displayLimit})`}
+                                                            {isEn ? `per group (up to ${displayLimit})` : (isEs ? `por grupo (hasta ${displayLimit})` : `par groupe (jusqu'à ${displayLimit})`)}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -231,7 +234,7 @@ export default function TransferVehicleTiers(props: any) {
                                                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
                                                         <span style={{ fontSize: '20px', fontWeight: 600, color: '#222222', fontFamily: "var(--font-poppins), sans-serif" }}>€{String(price)}</span>
                                                         <span style={{ fontSize: '12px', color: '#6a6a6a', display: 'block', marginTop: '2px', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                            {isEn ? `per group (up to ${displayLimit})` : `par groupe (jusqu'à ${displayLimit})`}
+                                                            {isEn ? `per group (up to ${displayLimit})` : (isEs ? `por grupo (hasta ${displayLimit})` : `par groupe (jusqu'à ${displayLimit})`)}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -298,7 +301,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                     <polyline points="20 6 9 17 4 12" />
                                                                 </svg>
                                                                 <span style={{ fontSize: '13.5px', color: '#222222', fontWeight: 500, lineHeight: '1.4', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                                    {isEn ? "Free cancellation — reserve now, pay nothing" : "Annulation gratuite — réservez maintenant, ne payez rien"}
+                                                                    {isEn ? "Free cancellation — reserve now, pay nothing" : (isEs ? "Cancelación gratuita — reserva ahora, no pagues nada" : "Annulation gratuite — réservez maintenant, ne payez rien")}
                                                                 </span>
                                                             </div>
                                                             <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
@@ -306,7 +309,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                     <polyline points="20 6 9 17 4 12" />
                                                                 </svg>
                                                                 <span style={{ fontSize: '13.5px', color: '#222222', fontWeight: 500, lineHeight: '1.4', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                                    {isEn ? "Reserve Now & Pay Later to secure your spot" : "Réservez maintenant & payez plus tard pour garantir votre place"}
+                                                                    {isEn ? "Reserve Now & Pay Later to secure your spot" : (isEs ? "Reserva ahora y paga después para asegurar tu plaza" : "Réservez maintenant & payez plus tard pour garantir votre place")}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -352,7 +355,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                         <div className="option-time-picker-dropdown">
                                                                             <div>
                                                                                 <h5 style={{ fontSize: '0.82rem', fontWeight: 600, color: '#222222', marginBottom: '8px', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                                                    {isEn ? "Popular Times" : "Heures populaires"}
+                                                                                    {isEn ? "Popular Times" : (isEs ? "Horas populares" : "Heures populaires")}
                                                                                 </h5>
                                                                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                                                                                     {timeSlots.map((time: string) => (
@@ -383,15 +386,15 @@ export default function TransferVehicleTiers(props: any) {
                                                                             </div>
                                                                             <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '12px' }}>
                                                                                 <h5 style={{ fontSize: '0.82rem', fontWeight: 600, color: '#222222', marginBottom: '8px', fontFamily: "var(--font-poppins), sans-serif" }}>
-                                                                                    {isEn ? "Custom Time" : "Heure personnalisée"}
+                                                                                    {isEn ? "Custom Time" : (isEs ? "Hora personalizada" : "Heure personnalisée")}
                                                                                 </h5>
                                                                                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                                                                                     <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                                                        <label style={{ fontSize: '10px', fontWeight: 600, color: '#6a6a6a', fontFamily: "var(--font-poppins), sans-serif", marginBottom: '3px' }}>Hours</label>
+                                                                                        <label style={{ fontSize: '10px', fontWeight: 600, color: '#6a6a6a', fontFamily: "var(--font-poppins), sans-serif", marginBottom: '3px' }}>{isEn ? "Hours" : (isEs ? "Horas" : "Heures")}</label>
                                                                                         <select
                                                                                             value={hourPart}
                                                                                             onChange={(e) => {
-                                                                                                  setPickupTime(`${e.target.value}:${minutePart}`);
+                                                                                                setPickupTime(`${e.target.value}:${minutePart}`);
                                                                                             }}
                                                                                             style={{
                                                                                                 padding: '8px',
@@ -410,7 +413,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                                     </div>
                                                                                     <span style={{ fontWeight: 700, color: '#666', marginTop: '12px' }}>:</span>
                                                                                     <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                                                        <label style={{ fontSize: '10px', fontWeight: 600, color: '#6a6a6a', fontFamily: "var(--font-poppins), sans-serif", marginBottom: '3px' }}>Mins</label>
+                                                                                        <label style={{ fontSize: '10px', fontWeight: 600, color: '#6a6a6a', fontFamily: "var(--font-poppins), sans-serif", marginBottom: '3px' }}>{isEn ? "Mins" : (isEs ? "Min" : "Mins")}</label>
                                                                                         <select
                                                                                             value={minutePart}
                                                                                             onChange={(e) => {
@@ -445,6 +448,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                 href={getWhatsAppUrlForTier(tierLimit)}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
+                                                                onClick={() => trackLeadConversion('transfer_tier_whatsapp', { tier: tierLimit, travelers, travelDate, pickupTime })}
                                                                 style={{
                                                                     backgroundColor: '#25D366',
                                                                     color: '#fff',
@@ -494,7 +498,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                     <rect width="20" height="16" x="2" y="4" rx="2" />
                                                                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                                                                 </svg>
-                                                                {isEn ? "Book via Email" : "Réserver par Email"}
+                                                                {isEn ? "Book via Email" : (isEs ? "Reservar por Email" : "Réserver par Email")}
                                                             </button>
                                                         </div>
                                                     </div>

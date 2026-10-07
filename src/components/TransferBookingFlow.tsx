@@ -21,6 +21,7 @@ import VideoPlayer from '@/components/VideoPlayer';
 import TransferFleet from "./transfers/TransferFleet";
 import TransferOtherRoutes from "./transfers/TransferOtherRoutes";
 import { Language } from '@/lib/translations';
+import { trackLeadConversion } from '@/lib/tracking';
 
 interface TransferBookingFlowProps {
     trans: TransferData;
@@ -310,6 +311,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
 
 export default function TransferBookingFlow({ trans, language }: TransferBookingFlowProps) {
     const isEn = language === 'en';
+    const isEs = language === 'es';
     const local: LocalizedTransferData = trans[language] || trans.en;
     const transText = tLocal[language] || tLocal.en;
 
@@ -344,6 +346,17 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+    }, [isModalOpen]);
 
     // Availability search states
     const [searchState, setSearchState] = useState<'initial' | 'searching' | 'searched'>('initial');
@@ -422,8 +435,6 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         setTravelDate(`${yyyy}-${mm}-${dd}`);
         setIsCalendarOpen(false);
     };
-
-    const isEs = language === 'es';
 
     const formatReadableDate = (dateStr: string, lang: Language) => {
         try {
@@ -628,6 +639,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         const vehicle = getTierLabel(selectedTier);
         const msg = isEn 
             ? `Route: ${local.pickup} ⇄ ${local.dropoff}\nVehicle: ${vehicle}\nTravel Date: ${travelDate}\nNumber of Travelers: ${travelers}\nPickup Time: ${pickupTime}`
+            : isEs
+            ? `Trayecto: ${local.pickup} ⇄ ${local.dropoff}\nVehículo: ${vehicle}\nFecha del viaje: ${travelDate}\nNúmero de viajeros: ${travelers}\nHora de recogida: ${pickupTime}`
             : `Trajet: ${local.pickup} ⇄ ${local.dropoff}\nVéhicule: ${vehicle}\nDate du voyage: ${travelDate}\nNombre de voyageurs: ${travelers}\nHeure de départ: ${pickupTime}`;
         setCustMessage(msg);
         setIsModalOpen(true);
@@ -665,7 +678,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
             const data = await res.json();
             if (res.ok && data.success) {
-                setSuccessMessage(isEn ? "Request sent! We'll confirm your booking within 2 hours." : "Demande envoyée ! Nous confirmerons votre réservation dans les 2 heures.");
+                trackLeadConversion('transfer_email_booking', {
+                    name: custName,
+                    route: `${local.pickup} ⇄ ${local.dropoff}`,
+                    travelDate,
+                    pickupTime,
+                    travelers
+                });
+                setSuccessMessage(isEn ? "Request sent! We'll confirm your booking within 2 hours." : isEs ? "¡Solicitud enviada! Confirmaremos su reserva en un plazo de 2 horas." : "Demande envoyée ! Nous confirmerons votre réservation dans les 2 heures.");
                 setCustName('');
                 setCustEmail('');
                 setCustPhone('');
@@ -675,10 +695,10 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     setSuccessMessage('');
                 }, 2500);
             } else {
-                setErrorMessage(data.error || (isEn ? "Something went wrong. Please try again." : "Une erreur est survenue. Veuillez réessayer."));
+                setErrorMessage(data.error || (isEn ? "Something went wrong. Please try again." : isEs ? "Ocurrió un error. Por favor inténtelo de nuevo." : "Une erreur est survenue. Veuillez réessayer."));
             }
         } catch (err) {
-            setErrorMessage(isEn ? "Network error. Please try again." : "Erreur réseau. Veuillez réessayer.");
+            setErrorMessage(isEn ? "Network error. Please try again." : isEs ? "Error de conexión. Por favor inténtelo de nuevo." : "Erreur réseau. Veuillez réessayer.");
         } finally {
             setIsSubmitting(false);
         }
@@ -716,6 +736,10 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             if (tierLimit <= 3) return "Max 3 passengers vehicle";
             if (tierLimit <= 5) return "Max 5 passengers van";
             return "Max 8 passengers van";
+        } else if (isEs) {
+            if (tierLimit <= 3) return "Vehículo Máx 3 pasajeros";
+            if (tierLimit <= 5) return "Van Máx 5 pasajeros";
+            return "Van Máx 8 pasajeros";
         } else {
             if (tierLimit <= 3) return "Véhicule Max 3 passagers";
             if (tierLimit <= 5) return "Van Max 5 passagers";
@@ -728,6 +752,10 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             if (tierLimit <= 3) return "Max 3 passengers vehicle • Pickup included";
             if (tierLimit <= 5) return "Max 5 passengers van • Pickup included";
             return "Max 8 passengers van • Pickup included";
+        } else if (isEs) {
+            if (tierLimit <= 3) return "Vehículo Máx 3 pasajeros • Recogida incluida";
+            if (tierLimit <= 5) return "Van Máx 5 pasajeros • Recogida incluida";
+            return "Van Máx 8 pasajeros • Recogida incluida";
         } else {
             if (tierLimit <= 3) return "Véhicule Max 3 passagers • Prise en charge incluse";
             if (tierLimit <= 5) return "Van Max 5 passagers • Prise en charge incluse";
@@ -755,21 +783,29 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 if (hoursLeft >= 24) {
                     urgencyText = isEn
                         ? `Book ahead! This route is highly popular. Secure your spot soon.`
+                        : isEs
+                        ? `¡Reserve con antelación! Esta ruta es muy solicitada. Asegure su plaza pronto.`
                         : `Réservez à l'avance ! Ce trajet est très demandé. Garantissez votre place bientôt.`;
                 } else if (hoursLeft < 5) {
                     const displayHours = hoursLeft === 0 ? "<1" : hoursLeft;
                     urgencyText = isEn
                         ? `${displayHours}h left to book. The tour operator will stop accepting bookings for your date soon.`
+                        : isEs
+                        ? `Quedan ${displayHours}h para reservar. Se cerrarán las reservas para su fecha en breve.`
                         : `${displayHours}h restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
                 } else {
                     urgencyText = isEn
                         ? `${hoursLeft} hours left to book. The tour operator will stop accepting bookings for your date soon.`
+                        : isEs
+                        ? `Quedan ${hoursLeft} horas para reservar. Se cerrarán las reservas para su fecha en breve.`
                         : `${hoursLeft} heures restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
                 }
             } else {
                 isClosed = true;
                 urgencyText = isEn
                     ? "Last-minute booking: Online booking window is closed. Please book directly via WhatsApp for quick confirmation."
+                    : isEs
+                    ? "Reserva de última hora: Las reservas online están cerradas. Reserve por WhatsApp para confirmación inmediata."
                     : "Réservation de dernière minute : Les réservations en ligne sont fermées. Veuillez réserver par WhatsApp pour confirmation rapide.";
             }
             
@@ -780,10 +816,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             if (isNonRefundable) {
                 cancellationText = isEn
                     ? "Non-refundable - The free cancellation window has closed for this date."
+                    : isEs
+                    ? "No reembolsable - El periodo de cancelación gratuita ha finalizado para esta fecha."
                     : "Non remboursable - La période d'annulation gratuite est dépassée pour cette date.";
             } else {
                 cancellationText = isEn
                     ? "Free cancellation up to 24 hours in advance. Reserve Now & Pay Later."
+                    : isEs
+                    ? "Cancelación gratuita hasta 24h antes. Reserve ahora y pague después."
                     : "Annulation gratuite jusqu'à 24h à l'avance. Réservez maintenant & payez plus tard.";
             }
             
@@ -799,6 +839,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             return {
                 urgencyText: isEn 
                     ? "Book ahead! This route is highly popular." 
+                    : isEs
+                    ? "¡Reserve con antelación! Esta ruta es muy solicitada."
                     : "Réservez à l'avance ! Ce trajet est très demandé.",
                 isUrgent: false,
                 isClosed: false,
@@ -806,6 +848,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 isNonRefundable: false,
                 cancellationText: isEn
                     ? "Free cancellation up to 24 hours in advance."
+                    : isEs
+                    ? "Cancelación gratuita hasta 24h antes."
                     : "Annulation gratuite jusqu'à 24h à l'avance."
             };
         }
@@ -863,7 +907,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             }).catch(() => {});
         } else {
             navigator.clipboard.writeText(window.location.href);
-            alert(isEn ? "Link copied to clipboard!" : "Lien copié dans le presse-papiers !");
+            alert(isEn ? "Link copied to clipboard!" : isEs ? "¡Enlace copiado al portapapeles!" : "Lien copié dans le presse-papiers !");
         }
     };
 
@@ -1181,8 +1225,9 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                         borderRadius: '24px',
                         width: '100%',
                         maxWidth: '460px',
+                        maxHeight: '90vh',
+                        overflowY: 'auto',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
-                        overflow: 'hidden',
                         position: 'relative'
                     }} onClick={(e) => e.stopPropagation()}>
                         <div style={{ padding: '32px' }}>

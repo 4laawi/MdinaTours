@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Language } from '@/lib/translations';
+import { trackLeadConversion } from '@/lib/tracking';
 
 export type ServiceType = 'hourly' | 'full-day' | 'multi-day';
 export type VehicleType = 'comfort' | 'vito';
@@ -83,6 +84,17 @@ export default function PrivateDriverBookingWidget({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState('');
+
+    useEffect(() => {
+        if (isEmailModalOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+    }, [isEmailModalOpen]);
 
     useEffect(() => {
         const storedCity = localStorage.getItem('mdina_tours_private_driver_start_city');
@@ -273,6 +285,14 @@ export default function PrivateDriverBookingWidget({
             alert(t.alertCity);
             return;
         }
+        trackLeadConversion('private_driver_whatsapp', {
+            city: startCity,
+            serviceType,
+            passengers,
+            travelDate,
+            vehicle: vehicleNameFormatted,
+            estimatedPrice: serviceType === 'hourly' ? estimatedTotal : undefined
+        });
     };
 
     const handleEmailModalSubmit = async (e: React.FormEvent) => {
@@ -311,6 +331,13 @@ export default function PrivateDriverBookingWidget({
 
             const data = await res.json();
             if (res.ok && data.success) {
+                trackLeadConversion('private_driver_email_booking', {
+                    name: custName,
+                    city: startCity,
+                    serviceType,
+                    passengers,
+                    travelDate
+                });
                 setSubmitSuccess(true);
                 setTimeout(() => {
                     setIsEmailModalOpen(false);
@@ -1271,6 +1298,8 @@ export default function PrivateDriverBookingWidget({
                             border: '1px solid #E2E8F0',
                             width: '100%',
                             maxWidth: '460px',
+                            maxHeight: '90vh',
+                            overflowY: 'auto',
                             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
                             padding: '24px',
                             position: 'relative',
@@ -1329,7 +1358,7 @@ export default function PrivateDriverBookingWidget({
                                     marginBottom: '16px',
                                     lineHeight: '1.4'
                                 }}>
-                                    <strong>{isEn ? "Trip:" : (isEs ? "Viaje:" : "Trajet :")}</strong> {startCity} • {serviceType === 'multi-day' ? `${formatDateShort(travelDate)} → ${formatDateShort(endDate)}` : formatDateFriendly(travelDate)} • {serviceType !== 'multi-day' ? vehicleNameFormatted : 'Multi-Day'} ({passengers} {passengers === 1 ? 'Guest' : 'Guests'})
+                                    <strong>{isEn ? "Trip:" : (isEs ? "Viaje:" : "Trajet :")}</strong> {startCity} • {serviceType === 'multi-day' ? `${formatDateShort(travelDate)} → ${formatDateShort(endDate)}` : formatDateFriendly(travelDate)} • {serviceType !== 'multi-day' ? vehicleNameFormatted : 'Multi-Day'} ({passengers} {passengers === 1 ? (isEn ? 'Guest' : (isEs ? 'viajero' : 'voyageur')) : (isEn ? 'Guests' : (isEs ? 'viajeros' : 'voyageurs'))})
                                 </div>
 
                                 {submitError && (
@@ -1355,7 +1384,7 @@ export default function PrivateDriverBookingWidget({
                                             required
                                             value={custName}
                                             onChange={(e) => setCustName(e.target.value)}
-                                            placeholder={isEn ? "e.g. John Doe" : "ex: Jean Dupont"}
+                                            placeholder={isEn ? "e.g. John Doe" : (isEs ? "ej: Juan García" : "ex: Jean Dupont")}
                                             style={{
                                                 width: '100%',
                                                 height: '40px',
@@ -1400,7 +1429,7 @@ export default function PrivateDriverBookingWidget({
                                             type="tel"
                                             value={custPhone}
                                             onChange={(e) => setCustPhone(e.target.value)}
-                                            placeholder="+1 555 123 4567"
+                                            placeholder={isEn ? "+1 555 123 4567" : (isEs ? "+34 612 34 56 78" : "+33 6 12 34 56 78")}
                                             style={{
                                                 width: '100%',
                                                 height: '40px',
@@ -1421,7 +1450,7 @@ export default function PrivateDriverBookingWidget({
                                         <textarea
                                             value={custNotes}
                                             onChange={(e) => setCustNotes(e.target.value)}
-                                            placeholder={isEn ? "Specific stops, flight details, or child seats..." : "Arrêts spécifiques, bagages..."}
+                                            placeholder={isEn ? "Specific stops, flight details, or child seats..." : (isEs ? "Paradas específicas, detalles de vuelo o sillas para niños..." : "Arrêts spécifiques, bagages...")}
                                             rows={2}
                                             style={{
                                                 width: '100%',

@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { translations, Language } from '@/lib/translations';
 
 import faqStyles from '@/components/FAQ.module.css';
@@ -19,13 +19,17 @@ import ProfessionalDriverSection from '@/components/ProfessionalDriverSection';
 import ModernCTA from '@/components/ModernCTA';
 
 export async function generateStaticParams() {
-    return [{ lang: 'en' }, { lang: 'fr' }];
+    return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     if (lang === 'es') {
-        return { title: 'Not Found - Mdina Tours' };
+        return {
+            title: 'Conductor Privado en Marruecos – Coche con Chófer | Mdina Tours',
+            description: 'Alquiler de vehículo con conductor privado en Marruecos para traslados, excursiones y rutas personalizadas. Precios transparentes y conductores profesionales.',
+            alternates: getAlternates(lang, '/private-driver-morocco'),
+        };
     }
     const isEn = lang === 'en';
 
@@ -67,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function PrivateDriverPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     if (lang === 'es') {
-        notFound();
+        permanentRedirect('/es/private-driver-morocco');
     }
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
