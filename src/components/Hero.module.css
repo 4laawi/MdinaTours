@@ -51,10 +51,8 @@
     will-change: transform;
 }
 
-@media (min-width: 769px) {
-    .bgImageContainer.active .heroBg {
-        animation: kenBurnsZoom 20s linear forwards;
-    }
+.bgImageContainer.active .heroBg {
+    animation: kenBurnsZoom 20s linear forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1345,4 +1343,22 @@
     display: block;
     width: calc(100% + 1.3px);
     height: 60px;
+}
+
+/* Device specific images */
+.desktopOnly {
+    display: block;
+}
+
+.mobileOnly {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .desktopOnly {
+        display: none !important;
+    }
+    .mobileOnly {
+        display: block !important;
+    }
 }

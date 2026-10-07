@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import ReactDOM from 'react-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './Hero.module.css';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
@@ -250,24 +249,6 @@ export default function Hero(props: { imageUrl?: string }) {
         const commonProps = { alt: 'Mdina Tours Morocco', fill: true, sizes: '100vw', priority: isPriority };
         const { props: { srcSet: desktopSrcSet, ...restDesktop } } = require('next/image').getImageProps({ ...commonProps, src: desktopSrc });
         const { props: { srcSet: mobileSrcSet, ...restMobile } } = require('next/image').getImageProps({ ...commonProps, src: mobileSrc });
-
-        if (isPriority) {
-            ReactDOM.preload(restDesktop.src as string, {
-                as: 'image',
-                imageSrcSet: desktopSrcSet,
-                imageSizes: commonProps.sizes,
-                fetchPriority: 'high',
-                media: '(min-width: 769px)',
-            });
-
-            ReactDOM.preload(restMobile.src as string, {
-                as: 'image',
-                imageSrcSet: mobileSrcSet,
-                imageSizes: commonProps.sizes,
-                fetchPriority: 'high',
-                media: '(max-width: 768px)',
-            });
-        }
 
         return (
             <picture>

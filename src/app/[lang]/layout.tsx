@@ -145,8 +145,8 @@ export default async function LocaleLayout({
         }
     };
 
-    // Preload the hero image (LCP candidate) for both locales
-    ReactDOM.preload('/img/Morocco-trip-tour-hero01.webp', { as: 'image', fetchPriority: 'high' });
+    // Preload the hero image (LCP candidate) is handled via art direction in Hero component
+    ReactDOM.preconnect('https://tangier-trip.com', { crossOrigin: 'anonymous' });
 
     return (
         <html lang={lang} className={`${outfit.variable} ${cormorant.variable} ${inter.variable} ${greatVibes.variable}`}>
