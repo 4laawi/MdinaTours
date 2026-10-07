@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TransfersHero from '@/components/TransfersHero';
 import FloatingElements from '@/components/FloatingElements';
+import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -277,10 +278,9 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                     <p style={{ color: '#666', fontSize: '0.95rem', margin: '0 auto 20px auto', maxWidth: '600px', lineHeight: 1.5 }}>
                                         Organizamos traslados privados a cualquier punto de Marruecos con vehículos climatizados, tarifas fijas y chófer profesional.
                                     </p>
-                                    <a
+                                    <TrackedWhatsAppLink
                                         href="https://wa.me/212724114775?text=Hola%20Mdina%20Tours,%20me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20para%20una%20ruta%20personalizada."
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        source="catalog_footer_whatsapp"
                                         style={{
                                             display: 'inline-flex',
                                             alignItems: 'center',
@@ -295,7 +295,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                         }}
                                     >
                                         Solicitar presupuesto por WhatsApp →
-                                    </a>
+                                    </TrackedWhatsAppLink>
                                 </div>
                             )}
                         </div>

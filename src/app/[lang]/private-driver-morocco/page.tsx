@@ -8,6 +8,7 @@ import { Language, translations } from '@/lib/translations';
 import Link from 'next/link';
 import faqStyles from '@/components/FAQ.module.css';
 import PrivateDriverBookingWidget from '@/components/PrivateDriverBookingWidget';
+import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 import TransferWebRatings from '@/components/transfers/TransferWebRatings';
 import PrivateDriverHeroGallery from '@/components/PrivateDriverHeroGallery';
 import PrivateDriverMetaSection from '@/components/PrivateDriverMetaSection';
@@ -894,17 +895,16 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                                 </svg>
                                             </Link>
                                         ) : (
-                                            <a 
+                                            <TrackedWhatsAppLink 
                                                 href={getWhatsAppUrl(card.msg!)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                source="private_driver_route_card"
                                                 className="private-driver-route-cta"
                                             >
                                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                                                     <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z"/>
                                                 </svg>
                                                 {card.cta}
-                                            </a>
+                                            </TrackedWhatsAppLink>
                                         )}
                                     </div>
                                 </div>

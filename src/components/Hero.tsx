@@ -549,7 +549,7 @@ export default function Hero(props: { imageUrl?: string }) {
                                                 target="_blank" 
                                                 rel="noopener noreferrer" 
                                                 className={styles.primaryCta}
-                                                onClick={() => trackLeadConversion('hero_modal_whatsapp', {
+                                                onClick={() => trackLeadConversion('homepage_hero_whatsapp', {
                                                     pickup,
                                                     dropoff,
                                                     passengers,

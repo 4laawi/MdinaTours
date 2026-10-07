@@ -14,6 +14,7 @@ interface Vehicle {
 }
 
 import { Language } from '@/lib/translations';
+import { trackLeadConversion } from '@/lib/tracking';
 
 interface TransferFleetProps {
     prices: { [passengers: number]: number };
@@ -719,6 +720,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className={isVito ? "btn-vito" : "btn-outline"}
+                                                onClick={() => trackLeadConversion('transfer_vehicle_tier_whatsapp', { vehicle: v.name, price: v.price })}
                                             >
                                                 {isEn ? "Book on WhatsApp" : "Réserver sur WhatsApp"}
                                             </a>

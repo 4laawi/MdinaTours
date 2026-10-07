@@ -1,3 +1,4 @@
+import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
 import { getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -848,10 +849,9 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                             {content.ctaText}
                         </p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', marginTop: '8px' }}>
-                            <a
+                            <TrackedWhatsAppLink
                                 href="https://wa.me/212724114775"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                source="catalog_footer_whatsapp"
                                 style={{
                                     backgroundColor: '#25D366',
                                     color: '#ffffff',
@@ -869,7 +869,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                             >
                                 <span>💬</span>
                                 <span>{content.ctaBtn}</span>
-                            </a>
+                            </TrackedWhatsAppLink>
                             <Link
                                 href={isEs ? getPath('/airport-transfers') : getPath('/transfers')}
                                 style={{

@@ -285,7 +285,7 @@ export default function PrivateDriverBookingWidget({
             alert(t.alertCity);
             return;
         }
-        trackLeadConversion('private_driver_whatsapp', {
+        trackLeadConversion('private_driver_booking_widget', {
             city: startCity,
             serviceType,
             passengers,

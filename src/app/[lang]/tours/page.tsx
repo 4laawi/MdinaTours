@@ -1,3 +1,4 @@
+import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
 import { APPROVED_ES_PATHS, getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -251,10 +252,9 @@ export default async function ToursCatalogPage({ params }: { params: Promise<{ l
                                 <p style={{ color: '#666', fontSize: '0.95rem', margin: '0 auto 20px auto', maxWidth: '600px', lineHeight: 1.5 }}>
                                     Diseñamos viajes privados a medida por todo Marruecos (ciudades imperiales, desierto del Sáhara y costa atlántica) adaptados a sus fechas y número de viajeros.
                                 </p>
-                                <a
+                                <TrackedWhatsAppLink
                                     href="https://wa.me/212724114775?text=Hola%20Mdina%20Tours,%20me%20gustar%C3%ADa%20solicitar%20un%20itinerario%20a%20medida."
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    source="catalog_footer_whatsapp"
                                     style={{
                                         display: 'inline-flex',
                                         alignItems: 'center',
@@ -269,7 +269,7 @@ export default async function ToursCatalogPage({ params }: { params: Promise<{ l
                                     }}
                                 >
                                     Consultar por WhatsApp →
-                                </a>
+                                </TrackedWhatsAppLink>
                             </div>
                         )}
                     </div>

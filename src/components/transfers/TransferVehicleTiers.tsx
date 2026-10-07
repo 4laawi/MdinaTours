@@ -448,7 +448,7 @@ export default function TransferVehicleTiers(props: any) {
                                                                 href={getWhatsAppUrlForTier(tierLimit)}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                onClick={() => trackLeadConversion('transfer_tier_whatsapp', { tier: tierLimit, travelers, travelDate, pickupTime })}
+                                                                onClick={() => trackLeadConversion('transfer_vehicle_tier_whatsapp', { tier: tierLimit, travelers, travelDate, pickupTime })}
                                                                 style={{
                                                                     backgroundColor: '#25D366',
                                                                     color: '#fff',

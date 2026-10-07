@@ -1,3 +1,4 @@
+import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
 import { getAlternates } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';

@@ -9,6 +9,7 @@ export function initCampaignTracking(): void {
             const val = params.get(key);
             if (val) {
                 sessionStorage.setItem(`mdina_${key}`, val);
+                try { localStorage.setItem(`mdina_${key}`, val); } catch {}
             }
         });
     } catch {
@@ -20,9 +21,9 @@ export function trackLeadConversion(source: string, details?: Record<string, any
     if (typeof window === 'undefined') return;
 
     try {
-        const gclid = sessionStorage.getItem('mdina_gclid') || '';
-        const utmCampaign = sessionStorage.getItem('mdina_utm_campaign') || '';
-        const utmSource = sessionStorage.getItem('mdina_utm_source') || '';
+        const gclid = sessionStorage.getItem('mdina_gclid') || localStorage.getItem('mdina_gclid') || '';
+        const utmCampaign = sessionStorage.getItem('mdina_utm_campaign') || localStorage.getItem('mdina_utm_campaign') || '';
+        const utmSource = sessionStorage.getItem('mdina_utm_source') || localStorage.getItem('mdina_utm_source') || '';
 
         // 1. Google Tag Manager dataLayer event
         const dataLayer = (window as unknown as { dataLayer?: Record<string, any>[] }).dataLayer;

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { translations, Language } from '@/lib/translations';
+import { trackLeadConversion } from '@/lib/tracking';
 import { Users, Heart, Compass, MapTrifold, WhatsappLogo, ArrowRight, CheckCircle } from '@phosphor-icons/react';
 
 interface MultiDayHomepageSectionProps {
@@ -239,6 +240,7 @@ export default function MultiDayHomepageSection({ lang }: MultiDayHomepageSectio
                         href={`https://wa.me/212724114775?text=${waMessage}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackLeadConversion('private_driver_route_card')}
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',

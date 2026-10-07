@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 
 import { Language } from '@/lib/translations';
+import { trackLeadConversion } from '@/lib/tracking';
 import styles from './TransferOtherRoutes.module.css';
 
 interface TransferOtherRoutesProps {
@@ -407,6 +408,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackLeadConversion('catalog_footer_whatsapp')}
                         style={{
                             color: 'var(--primary)',
                             fontWeight: 700,

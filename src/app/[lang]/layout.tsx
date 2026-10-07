@@ -93,6 +93,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     };
 }
 
+import { Suspense } from 'react';
 import CampaignTracker from '@/components/CampaignTracker';
 
 export default async function LocaleLayout({
@@ -151,7 +152,9 @@ export default async function LocaleLayout({
         <html lang={lang} className={`${outfit.variable} ${cormorant.variable} ${inter.variable} ${greatVibes.variable}`}>
             <body>
                 <LanguageProvider initialLanguage={lang as Language}>
-                    <CampaignTracker />
+                    <Suspense fallback={null}>
+                        <CampaignTracker />
+                    </Suspense>
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
