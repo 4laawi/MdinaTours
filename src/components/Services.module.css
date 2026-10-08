@@ -130,15 +130,15 @@
 
 @media (max-width: 768px) {
     .servicesSection {
-        padding: 50px 0 40px 0;
+        padding: 42px 0 32px 0;
     }
 
     .servicesIntro {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
     }
 
     .subtitle {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
     }
 
     .servicesGrid {

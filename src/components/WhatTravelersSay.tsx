@@ -86,7 +86,7 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
 
     return (
         <section style={{ 
-            padding: '80px 20px', 
+            padding: 'clamp(42px, 6vw, 80px) 16px', 
             backgroundColor, 
             borderTop: 'none',
             position: 'relative'

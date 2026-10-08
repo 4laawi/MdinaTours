@@ -53,13 +53,13 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
     return (
         <section id="activities" className={styles.tourGridSection} style={{
             backgroundColor: 'var(--bg-color)',
-            paddingTop: '90px',
-            paddingBottom: '90px'
+            paddingTop: 'clamp(44px, 6vw, 90px)',
+            paddingBottom: 'clamp(40px, 6vw, 90px)'
         }}>
             <div className="container">
                 <div className={styles.intro}>
                     <div className={styles.subtitle}>{t('daytrips_subtitle')}</div>
-                    <h2 className="section-title" style={{ fontSize: '2.8rem' }}>{t('daytrips_title')}</h2>
+                    <h2 className="section-title" style={{ fontSize: 'clamp(1.7rem, 5vw, 2.8rem)' }}>{t('daytrips_title')}</h2>
                     <p className={styles.description}>
                         {t('daytrips_desc')}
                     </p>

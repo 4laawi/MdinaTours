@@ -64,10 +64,36 @@
 }
 
 @media (max-width: 768px) {
+    .tourGridSection {
+        padding: 44px 0 36px 0;
+    }
+
+    .intro {
+        margin-bottom: 24px;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
     .grid {
         grid-template-columns: 1fr;
         max-width: 450px;
         margin: 0 auto;
+        gap: 20px;
+    }
+
+    .imageWrapper {
+        height: 210px;
+    }
+
+    .content {
+        padding: 20px 18px;
     }
 }
 

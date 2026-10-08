@@ -147,8 +147,8 @@ export default function Features({ lang = 'en' }: { lang?: Language }) {
         <div className={styles.featuresWrapper}>
             <div className={styles.container}>
                 <div className={styles.featuresHeader}>
-                    <div className="section-subtitle">{t('features_subtitle')}</div>
-                    <h2 className="section-title">{t('features_title')}</h2>
+                    <div className={`section-subtitle ${styles.subtitle}`}>{t('features_subtitle')}</div>
+                    <h2 className={`section-title ${styles.mainTitle}`}>{t('features_title')}</h2>
                 </div>
                 <div className={styles.featuresGrid}>
                     {features.map((feature, index) => (

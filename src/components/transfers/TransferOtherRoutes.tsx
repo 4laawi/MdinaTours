@@ -237,13 +237,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
     return (
         <section 
             ref={sectionRef}
-            style={{ 
-                padding: '90px 20px', 
-                backgroundColor: '#ffffff', 
-                borderTop: 'none',
-                position: 'relative',
-                overflow: 'hidden'
-            }} 
+            className={styles.routesSection}
             id="popular-routes"
         >
 
@@ -252,7 +246,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                  onMouseLeave={() => setIsHovered(false)}
             >
                 {/* Header */}
-                <div style={{ textAlign: 'center', marginBottom: '45px' }}>
+                <div className={styles.routesHeader}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                         {isEn ? "Explore Other Routes" : isEs ? "Explorar Otras Rutas" : "Explorer d'Autres Trajets"}
                     </span>

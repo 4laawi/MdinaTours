@@ -2121,10 +2121,18 @@ body.modal-open {
 
 @media (max-width: 767px) {
     .testimonial-marquee-card {
-        width: 320px;
+        width: 290px;
+        padding: 22px 18px;
+    }
+    .testimonial-quote-text {
+        font-size: 0.95rem;
+        margin-bottom: 16px;
+    }
+    .testimonials-carousel-container {
+        padding: 14px 0;
     }
     .testimonials-carousel-container::before,
     .testimonials-carousel-container::after {
-        width: 60px;
+        width: 45px;
     }
 }

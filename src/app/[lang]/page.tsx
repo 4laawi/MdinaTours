@@ -261,19 +261,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 <PrivateDriverWhyChooseUs lang={language} topFill="#ffffff" bottomFill="#ffffff" />
 
                 {/* 4. What Riding With Us Feels Like (Real Transport Experience Video) */}
-                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
+                <section style={{ padding: 'clamp(36px, 6vw, 75px) 16px', backgroundColor: '#fff', borderTop: 'none' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
                         <h2 style={{ 
-                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
+                            fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', 
                             fontWeight: 700, 
                             color: 'var(--secondary)', 
-                            marginBottom: '30px',
+                            marginBottom: 'clamp(14px, 3vw, 26px)',
                             fontFamily: 'var(--font-poppins), sans-serif'
                         }}>
                             {isEn ? "What riding with us feels like" : (isEs ? "La experiencia a bordo" : "L'expérience à bord avec nous")}
                         </h2>
                         
-                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
+                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '14px' }}>
                             <VideoPlayer 
                                 src="/img/tours-mdina-tours-morocco.mp4" 
                                 style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}

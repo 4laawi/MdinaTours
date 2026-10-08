@@ -267,16 +267,24 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
     };
 
     return (
-        <section style={{ 
-            padding: '90px 20px', 
-            backgroundColor: 'var(--bg-color)', 
-            borderTop: 'none',
-            position: 'relative',
-            overflow: 'hidden'
-        }} id="fleet">
+        <section className="fleet-section" id="fleet">
 
             <div style={{ maxWidth: '1150px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
                 <style>{`
+                    .fleet-section {
+                        padding: 90px 20px;
+                        background-color: var(--bg-color);
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    @media (max-width: 768px) {
+                        .fleet-section {
+                            padding: 44px 14px 36px 14px !important;
+                        }
+                        .fleet-header {
+                            margin-bottom: 20px !important;
+                        }
+                    }
                     .fleet-grid {
                         position: relative;
                         display: flex;
@@ -609,7 +617,7 @@ export default function PrivateDriverFleet({ vehicles, lang, showBottomDivider =
                 `}</style>
 
                 {/* Header */}
-                <div style={{ textAlign: 'center', marginBottom: '45px' }}>
+                <div className="fleet-header" style={{ textAlign: 'center', marginBottom: '45px' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                         {isEn ? "OUR FLEET" : (isEs ? "NUESTRA FLOTA" : "NOTRE FLOTTE")}
                     </span>

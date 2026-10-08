@@ -172,3 +172,26 @@
 .routeCard:hover .routeImg {
     transform: scale(1.05);
 }
+
+.routesSection {
+    padding: 85px 20px;
+    background-color: #ffffff;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.routesHeader {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+@media (max-width: 768px) {
+    .routesSection {
+        padding: 44px 14px 36px 14px;
+    }
+
+    .routesHeader {
+        margin-bottom: 20px;
+    }
+}
