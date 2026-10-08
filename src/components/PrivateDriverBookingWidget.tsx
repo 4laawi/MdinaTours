@@ -207,7 +207,7 @@ export default function PrivateDriverBookingWidget({
         ctaReserveWhatsApp: isEn ? "Reserve on WhatsApp" : (isEs ? "Reservar por WhatsApp" : "Réserver sur WhatsApp"),
         ctaFullDay: isEn ? "Request a Quote" : (isEs ? "Solicitar Presupuesto" : "Demander un Devis"),
         ctaMultiDay: isEn ? "Send My Itinerary" : (isEs ? "Enviar mi Itinerario" : "Envoyer mon Itinéraire"),
-        subCtaReassurance: isEn ? "No card required · Pay on the day" : (isEs ? "Sin tarjeta · Pague el día del viaje" : "Sans carte bancaire · Paiement sur place"),
+        subCtaReassurance: isEn ? "No deposit · Pay after each day (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago al final del día (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement en fin de journée (espèces ou carte) · Annulation gratuite"),
         subCtaMultiDay: isEn ? "Continue on WhatsApp · Fast response" : (isEs ? "Continuar en WhatsApp · Respuesta rápida" : "Continuer sur WhatsApp · Réponse rapide"),
         reassurance1: isEn ? "Free cancellation · 24+ hours' notice appreciated" : (isEs ? "Cancelación gratuita · Se agradece aviso con 24h+" : "Annulation gratuite · Préavis de 24h+ apprécié"),
         reassurance2: isEn ? "Pay on the day — cash or card" : (isEs ? "Pague el día del viaje — efectivo o tarjeta" : "Paiement le jour même — espèces ou carte"),
@@ -1217,37 +1217,8 @@ export default function PrivateDriverBookingWidget({
                         </a>
                     )}
 
-                    <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '2px' }}>
-                        {serviceType === 'multi-day' ? t.subCtaMultiDay : t.subCtaReassurance}
-                    </div>
-                </div>
-
-                {/* Reassurance Box */}
-                <div style={{
-                    backgroundColor: '#F2F9F5',
-                    borderRadius: '8px',
-                    padding: '12px 14px',
-                    marginTop: '14px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '8px',
-                    border: '1px solid #D6EFE1'
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span style={{ fontSize: '12px', color: '#0F172A', fontWeight: 600, lineHeight: 1.35 }}>
-                            {t.reassurance1}
-                        </span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span style={{ fontSize: '12px', color: '#0F172A', fontWeight: 600, lineHeight: 1.35 }}>
-                            {t.reassurance2}
-                        </span>
+                    <div style={{ textAlign: 'center', fontSize: '12px', color: '#64748B', fontWeight: 500, marginTop: '4px' }}>
+                        {t.subCtaReassurance}
                     </div>
                 </div>
 

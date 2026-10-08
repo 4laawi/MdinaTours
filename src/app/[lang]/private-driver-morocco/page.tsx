@@ -16,6 +16,7 @@ import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
 import ChauffeurDestinations from '@/components/ChauffeurDestinations';
+import PrivateDriverStickyBar from '@/components/PrivateDriverStickyBar';
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
@@ -91,10 +92,10 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             ? "Private Driver in Morocco" 
             : (isEs ? "Conductor Privado en Marruecos" : "Chauffeur Privé au Maroc"),
         subtitle: isEn 
-            ? "Hourly, full-day, and multi-day private transportation with a professional driver across Morocco. Transparent pricing with flexible stops."
+            ? "Professional private driver service across Morocco with transparent fixed pricing."
             : (isEs 
-                ? "Transporte privado por horas, día completo o varios días con conductor profesional en Marruecos. Tarifas claras y paradas flexibles." 
-                : "Transport privé à l'heure, à la journée ou sur plusieurs jours avec chauffeur professionnel au Maroc. Tarifs transparents et arrêts libres."),
+                ? "Servicio de conductor privado en Marruecos con tarifas fijas y transparentes." 
+                : "Service de chauffeur privé au Maroc avec tarifs clairs et transparents."),
         bannerLabel: isEn ? "Private Driver Morocco" : (isEs ? "Conductor Privado Marruecos" : "Chauffeur Privé Maroc"),
         whatsappHeroMsg: isEn 
             ? "Hello Mdina Tours, I would like to book a private driver service in Morocco."
@@ -492,39 +493,37 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         {textMorocco.subtitle}
                     </p>
 
-                    {/* Ratings */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                        <div style={{ display: 'flex', gap: '2px', color: '#f59e0b', fontSize: '1.1rem' }}>
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    {/* Compact Social Proof Row */}
+                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '0.875rem', marginBottom: '16px', color: '#475569' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                                {[1, 2, 3, 4].map((i) => (
+                                    <svg key={i} width="17" height="17" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                    </svg>
+                                ))}
+                                <svg width="17" height="17" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
+                                    <defs>
+                                        <linearGradient id="heroStarHalfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="50%" stopColor="#f59e0b" />
+                                            <stop offset="50%" stopColor="#cbd5e1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#heroStarHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                            </div>
+                            <span style={{ fontWeight: 700, color: '#0F172A', marginLeft: '1px' }}>4.9</span>
                         </div>
-                        <span style={{ fontSize: '0.85rem', color: '#555', fontWeight: 500, textDecoration: 'underline' }}>
+                        <span style={{ color: '#94A3B8' }}>·</span>
+                        <a href="#testimonials" style={{ color: '#475569', textDecoration: 'underline', textUnderlineOffset: '2px', fontWeight: 500 }}>
                             120 {isEn ? "reviews" : (isEs ? "opiniones" : "avis")}
-                        </span>
-                    </div>
-
-                    {/* Excellence Badge */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                        <div style={{ backgroundColor: '#fef3c7', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <span style={{ color: '#d97706', fontSize: '0.8rem' }}>🏆</span>
-                        </div>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#333' }}>
-                            {isEn ? "Badge of Excellence" : (isEs ? "Distintivo de Excelencia" : "Badge d'Excellence")}
-                        </span>
-                    </div>
-
-                    {/* Operational Trust Badges Row */}
-                    <div className="ratings-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontSize: '0.8rem', marginBottom: '14px' }}>
-                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#EDF3EC', border: '1px solid #CDE1CC', padding: '5px 10px', borderRadius: '6px', color: '#255D28', fontWeight: 600 }}>
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>{isEn ? "Pay after each travel day · Cash or Card" : (isEs ? "Pago al final del día · Efectivo o tarjeta" : "Paiement en fin de journée · Espèces ou carte")}</span>
-                        </div>
-                        <div className="trust-pill" style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '5px 10px', borderRadius: '6px', color: '#334155', fontWeight: 500 }}>
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            </svg>
-                            <span>{isEn ? "Professional licensed drivers" : (isEs ? "Conductores profesionales autorizados" : "Chauffeurs professionnels agréés")}</span>
+                        </a>
+                        <span style={{ color: '#94A3B8' }}>·</span>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', backgroundColor: '#FEF3C7', padding: '2px 8px', borderRadius: '12px' }}>
+                            <span style={{ fontSize: '0.8rem' }}>🏆</span>
+                            <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#92400E' }}>
+                                {isEn ? "Badge of Excellence" : (isEs ? "Distintivo de Excelencia" : "Badge d'Excellence")}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -559,9 +558,6 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                 <PrivateDriverBookingWidget language={language} defaultCity="Morocco" defaultDays={1} />
                             </div>
                         </div>
-                    </div>
-                    <div style={{ marginTop: '40px' }}>
-                        <TransferWebRatings isEn={isEn} />
                     </div>
                 </section>
 
@@ -600,8 +596,13 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                     </div>
                 </section>
 
+                {/* Independent Ratings Across the Web */}
+                <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px 0 20px' }}>
+                    <TransferWebRatings isEn={isEn} isEs={isEs} />
+                </div>
+
                 {/* Trust / Reviews Section */}
-                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
+                <section id="testimonials" style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                         <div className="testimonials-section-header">
                             <h2 className="testimonials-section-title" style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
@@ -618,8 +619,15 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                 {reviews.map((rev, idx) => (
                                     <div key={`rev-1-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card">
                                         <div>
-                                            <div className="testimonial-stars-container">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginBottom: '16px' }}>
+                                                {[1, 2, 3, 4].map((s) => (
+                                                    <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                                    </svg>
+                                                ))}
+                                                <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
+                                                    <path fill="url(#heroStarHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                                </svg>
                                             </div>
                                             <p className="testimonial-quote-text">
                                                 &ldquo;{rev.quote}&rdquo;
@@ -637,8 +645,15 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                 {reviews.map((rev, idx) => (
                                     <div key={`rev-2-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card" aria-hidden="true">
                                         <div>
-                                            <div className="testimonial-stars-container">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginBottom: '16px' }}>
+                                                {[1, 2, 3, 4].map((s) => (
+                                                    <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                                    </svg>
+                                                ))}
+                                                <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
+                                                    <path fill="url(#heroStarHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                                </svg>
                                             </div>
                                             <p className="testimonial-quote-text">
                                                 &ldquo;{rev.quote}&rdquo;
@@ -961,6 +976,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 <ChauffeurDestinations lang={language} pageType="morocco" />
             </main>
             <Footer lang={language} />
+            <PrivateDriverStickyBar language={language} />
             <FloatingElements />
         </>
     );

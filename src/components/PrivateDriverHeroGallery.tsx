@@ -154,12 +154,6 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
         cursor: isDragging ? 'grabbing' : 'grab',
     };
 
-    const t = {
-        driverBenefit: isEn ? "Professional private driver" : (isEs ? "Conductor privado profesional" : "Chauffeur privé professionnel"),
-        pickupBenefit: isEn ? "Flexible pickup & stops" : (isEs ? "Recogida y paradas flexibles" : "Prise en charge & arrêts libres"),
-        payBenefit: isEn ? "Pay after each travel day (Cash/Card)" : (isEs ? "Pago al final de cada día (Efectivo/Tarjeta)" : "Paiement en fin de journée (Espèces/Carte)"),
-    };
-
     return (
         <div className="hero-gallery-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%' }}>
             <div className="gallery-layout" style={{ margin: 0 }}>
@@ -298,42 +292,6 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
                             </div>
                         );
                     })}
-                </div>
-            </div>
-
-            {/* Travel-Product Benefits Row directly underneath gallery */}
-            <div className="driver-benefit-chips" style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '16px',
-                padding: '12px 14px',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '10px',
-                border: '1px solid #EAEAEA',
-                fontSize: '12.5px',
-                color: '#334155',
-                fontWeight: 500
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    <span>{t.driverBenefit}</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="10" r="3" />
-                        <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
-                    </svg>
-                    <span>{t.pickupBenefit}</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00805A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect width="20" height="14" x="2" y="5" rx="2" />
-                        <line x1="2" x2="22" y1="10" y2="10" />
-                    </svg>
-                    <span>{t.payBenefit}</span>
                 </div>
             </div>
         </div>

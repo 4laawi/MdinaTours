@@ -136,21 +136,20 @@
         left: auto !important;
         right: 16px !important;
         bottom: 24px !important;
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 1.5rem !important;
-        z-index: 99 !important;
-    }
-    .whatsappFloat svg {
-        width: 24px !important;
-        height: 24px !important;
-    }
-    .scrollToTop {
-        right: 16px !important;
-        bottom: 80px !important;
         width: 44px !important;
         height: 44px !important;
-        font-size: 1.3rem !important;
-        z-index: 99 !important;
+        font-size: 1.4rem !important;
+        z-index: 1000 !important;
+        transition: bottom 0.25s ease, transform 0.2s ease, opacity 0.3s ease !important;
+    }
+    .whatsappFloat svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+    :global(body.sticky-bar-active) .whatsappFloat {
+        bottom: 74px !important;
+    }
+    .scrollToTop {
+        display: none !important;
     }
 }
