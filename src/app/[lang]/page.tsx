@@ -1,5 +1,6 @@
 import { getAlternates } from '@/lib/seo';
 import dynamic from 'next/dynamic';
+import ReactDOM from 'react-dom';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
@@ -216,6 +217,26 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             }
         ]
     };
+
+    // Server-side preload for LCP Hero image (avoids waiting for Client Component hydration)
+    const commonProps = { alt: 'Mdina Tours Morocco', fill: true, sizes: '100vw', priority: true };
+    const { props: { srcSet: desktopSrcSet, ...restDesktop } } = require('next/image').getImageProps({ ...commonProps, src: "/img/Morocco-trip-tour-hero01.webp" });
+    const { props: { srcSet: mobileSrcSet, ...restMobile } } = require('next/image').getImageProps({ ...commonProps, src: "/img/private-driver-morocco-hero01.webp" });
+
+    ReactDOM.preload(restDesktop.src as string, {
+        as: 'image',
+        imageSrcSet: desktopSrcSet,
+        imageSizes: commonProps.sizes,
+        fetchPriority: 'high',
+        media: '(min-width: 769px)',
+    });
+    ReactDOM.preload(restMobile.src as string, {
+        as: 'image',
+        imageSrcSet: mobileSrcSet,
+        imageSizes: commonProps.sizes,
+        fetchPriority: 'high',
+        media: '(max-width: 768px)',
+    });
 
     return (
         <>

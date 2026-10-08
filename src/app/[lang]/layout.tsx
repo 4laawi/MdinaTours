@@ -13,14 +13,14 @@ export const viewport: Viewport = {
 };
 
 const outfit = Outfit({
-    weight: ['300', '400', '500', '600', '700', '800'],
+    weight: ['400', '600', '700'],
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-outfit',
 });
 
 const cormorant = Cormorant_Garamond({
-    weight: ['300', '400', '500', '600', '700'],
+    weight: ['400', '600', '700'],
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-cormorant',
