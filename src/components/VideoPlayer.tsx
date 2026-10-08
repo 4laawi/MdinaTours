@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 interface VideoPlayerProps {
     src: string;
+    poster?: string;
     style?: React.CSSProperties;
     controls?: boolean;
     autoPlay?: boolean;
@@ -15,19 +16,49 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({
     src,
+    poster = '/cars/flotte-vito.webp',
     style,
     controls = true,
     autoPlay = true,
     muted = true,
     loop = true,
     playsInline = true,
-    maxDuration = 54
+    maxDuration
 }: VideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [shouldLoad, setShouldLoad] = useState(false);
+
+    // Remove media fragment from src if it is passed with #t=... to prevent browser decoding issues
+    const cleanSrc = src.split('#')[0];
 
     useEffect(() => {
         const video = videoRef.current;
-        if (video) {
+        if (!video) return;
+
+        if (typeof IntersectionObserver !== 'undefined') {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setShouldLoad(true);
+                    } else if (shouldLoad && !video.paused) {
+                        // Pause video when scrolled out of view to save battery and main-thread CPU
+                        video.pause();
+                    }
+                },
+                { rootMargin: '300px' }
+            );
+
+            observer.observe(video);
+            return () => observer.disconnect();
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            setShouldLoad(true);
+        }
+    }, [shouldLoad]);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (video && shouldLoad) {
             // Explicitly set muted property to bypass React's muted attribute hydration issues
             if (muted) {
                 video.muted = true;
@@ -38,24 +69,23 @@ export default function VideoPlayer({
                 });
             }
         }
-    }, [autoPlay, muted, src]);
+    }, [shouldLoad, autoPlay, muted, src]);
 
     const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
         const video = e.currentTarget;
-        if (video.currentTime >= maxDuration) {
+        if (maxDuration && video.currentTime >= maxDuration) {
             video.currentTime = 0;
             // Re-trigger play just in case the browser pauses it
             video.play().catch(() => {});
         }
     };
 
-    // Remove media fragment from src if it is passed with #t=... to prevent browser decoding issues
-    const cleanSrc = src.split('#')[0];
-
     return (
         <video
             ref={videoRef}
-            src={cleanSrc}
+            src={shouldLoad ? cleanSrc : undefined}
+            poster={poster}
+            preload="none"
             controls={controls}
             autoPlay={autoPlay}
             muted={muted}

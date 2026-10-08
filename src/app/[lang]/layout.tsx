@@ -4,7 +4,7 @@ import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google
 import '../globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ReactDOM from 'react-dom';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -161,8 +161,25 @@ export default async function LocaleLayout({
                     />
                     {children}
                 </LanguageProvider>
+                <Script
+                    strategy="lazyOnload"
+                    src="https://www.googletagmanager.com/gtag/js?id=G-58G6F3HW5G"
+                />
+                <Script
+                    id="ga-init"
+                    strategy="lazyOnload"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-58G6F3HW5G', {
+                                page_path: window.location.pathname,
+                            });
+                        `,
+                    }}
+                />
             </body>
-            <GoogleAnalytics gaId="G-58G6F3HW5G" />
         </html>
     );
 }

@@ -1152,7 +1152,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     
                     <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
                         <VideoPlayer 
-                            src="/img/mercedes-benz-vito-mdinatours.mp4#t=0,54" 
+                            src="/img/tours-mdina-tours-morocco.mp4" 
                             style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
                         />
                     </div>

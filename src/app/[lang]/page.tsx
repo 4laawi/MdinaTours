@@ -12,8 +12,6 @@ import TailoredTransportGallery from '@/components/TailoredTransportGallery';
 import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import FAQ from '@/components/FAQ';
 import DayTrips from '@/components/DayTrips';
-import Destinations from '@/components/Destinations';
-import MdinaToursSection from '@/components/MdinaToursSection';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import { Language } from '@/lib/translations';
@@ -21,7 +19,9 @@ import WhatTravelersSay from '@/components/WhatTravelersSay';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import VideoPlayer from '@/components/VideoPlayer';
 
-// Client components with state/interactive elements
+// Below-the-fold & client components dynamically loaded to avoid critical render-blocking CSS/JS
+const Destinations = dynamic(() => import('@/components/Destinations'));
+const MdinaToursSection = dynamic(() => import('@/components/MdinaToursSection'));
 const TourGrid = dynamic(() => import('@/components/TourGrid'));
 const FloatingElements = dynamic(() => import('@/components/FloatingElements'));
 
@@ -274,7 +274,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                         
                         <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
                             <VideoPlayer 
-                                src="/img/mercedes-benz-vito-mdinatours.mp4#t=0,54" 
+                                src="/img/tours-mdina-tours-morocco.mp4" 
                                 style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
                             />
                         </div>

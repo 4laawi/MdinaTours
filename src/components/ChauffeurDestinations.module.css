@@ -4,7 +4,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.82)), url('/service_other.png');
+    background-image: linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.82)), url('/service_other.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
