@@ -64,6 +64,7 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
 
     return (
         <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }} id="testimonials">
+            <div id="reviews" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
             <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                 <div className="testimonials-section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
@@ -90,8 +91,21 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
                         {reviews.map((rev, idx) => (
                             <div key={`rev-1-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card">
                                 <div>
-                                    <div className="testimonial-stars-container">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginBottom: '16px' }}>
+                                        {[1, 2, 3, 4].map((s) => (
+                                            <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        ))}
+                                        <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
+                                            <defs>
+                                                <linearGradient id="transferRevHalfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="50%" stopColor="#f59e0b" />
+                                                    <stop offset="50%" stopColor="#cbd5e1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path fill="url(#transferRevHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                        </svg>
                                     </div>
                                     <p className="testimonial-quote-text">
                                         &ldquo;{rev.quote}&rdquo;
@@ -109,8 +123,15 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
                         {reviews.map((rev, idx) => (
                             <div key={`rev-2-${idx}`} className="testimonial-high-contrast-card testimonial-marquee-card" aria-hidden="true">
                                 <div>
-                                    <div className="testimonial-stars-container">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginBottom: '16px' }}>
+                                        {[1, 2, 3, 4].map((s) => (
+                                            <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        ))}
+                                        <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
+                                            <path fill="url(#transferRevHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                        </svg>
                                     </div>
                                     <p className="testimonial-quote-text">
                                         &ldquo;{rev.quote}&rdquo;

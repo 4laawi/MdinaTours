@@ -176,6 +176,7 @@ export default async function LocaleLayout({
                             gtag('config', 'G-58G6F3HW5G', {
                                 page_path: window.location.pathname,
                             });
+                            gtag('config', 'AW-862828202');
                         `,
                     }}
                 />

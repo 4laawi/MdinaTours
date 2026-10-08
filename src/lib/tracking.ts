@@ -41,7 +41,8 @@ export function trackLeadConversion(source: string, details?: Record<string, unk
         // 2. Google Analytics 4 / Google Ads gtag event
         const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
         if (typeof gtag === 'function') {
-            gtag('event', 'generate_lead', {
+            gtag('event', 'conversion', {
+                send_to: 'AW-862828202/iVgWCJ3Ct5UdEKrttpsD',
                 event_category: 'engagement',
                 event_label: source,
                 value: details?.price || 0,

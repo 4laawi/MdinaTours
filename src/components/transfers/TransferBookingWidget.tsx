@@ -61,25 +61,6 @@ export default function TransferBookingWidget(props: any) {
           overflow: 'visible'
       }} className="booking-widget-sidebar">
           
-          {/* Top trust bar */}
-          <div style={{ 
-              display: 'flex', 
-              alignItems: 'flex-start', 
-              gap: '10px', 
-              backgroundColor: '#EAF3DE', 
-              borderRadius: '8px', 
-              padding: '12px 14px', 
-              marginBottom: '20px' 
-          }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B6D11" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <path d="m9 11 2 2 4-4" />
-              </svg>
-              <span style={{ fontSize: '12.5px', color: '#3B6D11', fontWeight: 500, lineHeight: '1.4' }}>
-                  {isEn ? "No payment now — you pay on arrival, cash or card." : (language === 'es' ? "Sin pago por adelantado — paga a la llegada, efectivo o tarjeta." : "Aucun paiement requis maintenant — vous payez à l'arrivée en espèces ou carte.")}
-              </span>
-          </div>
-          
           {/* Price */}
           <div style={{ marginBottom: '24px' }}>
               <div style={{ fontSize: '36px', fontWeight: 700, color: 'var(--secondary, #063c33)', lineHeight: '1.2' }}>
@@ -285,7 +266,8 @@ export default function TransferBookingWidget(props: any) {
           {/* Availability Booking Flow Buttons (Airbnb Style) */}
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%', boxSizing: 'border-box' }}>
               {searchState === 'initial' && (
-                  <button
+                  <>
+                      <button
                       type="button"
                       onClick={handleSearchClick}
                       style={{
@@ -306,6 +288,10 @@ export default function TransferBookingWidget(props: any) {
                   >
                       {isEn ? "Check Availability" : (language === 'es' ? "Verificar disponibilidad" : "Vérifier la disponibilité")}
                   </button>
+                  <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '8px' }}>
+                      {isEn ? "No deposit · Pay upon arrival (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago a la llegada (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement à l'arrivée (espèces ou carte) · Annulation gratuite")}
+                  </div>
+              </>
               )}
 
               {searchState === 'searching' && (
@@ -452,65 +438,9 @@ export default function TransferBookingWidget(props: any) {
                               </button>
                           </div>
                       )}
-                      {/* Perks Box (Viator / Airbnb Style) */}
-                      <div style={{
-                          backgroundColor: 'var(--cream)',
-                          borderRadius: '12px',
-                          padding: '16px',
-                          marginTop: '8px',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '16px',
-                          border: '1px solid var(--border)'
-                      }}>
-                          <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                              <div style={{
-                                  backgroundColor: 'var(--primary)',
-                                  borderRadius: '50%',
-                                  width: '20px',
-                                  height: '20px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  flexShrink: 0,
-                                  marginTop: '2px'
-                              }}>
-                                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="4">
-                                      <polyline points="20 6 9 17 4 12" />
-                                  </svg>
-                              </div>
-                              <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
-                                  {urgency.isNonRefundable ? (
-                                      <>
-                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "No prepayment needed" : (isEs ? "Sin prepago necesario" : "Aucun prépaiement")}</span> {isEn ? "— Pay cash or card to your driver. Free cancellation or changes anytime before departure." : (isEs ? "— Paga en efectivo o tarjeta a tu conductor. Cancelación o cambios gratuitos en cualquier momento antes de la salida." : "— Payez en espèces ou par carte au chauffeur. Annulation ou modification gratuite à tout moment avant le départ.")}
-                                      </>
-                                  ) : (
-                                      <>
-                                          <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Free cancellation" : (isEs ? "Cancelación gratuita" : "Annulation gratuite")}</span> {isEn ? "up to 24 hours before the experience starts (local time)" : (isEs ? "hasta 24 horas antes del inicio del traslado (hora local)" : "jusqu'à 24 heures avant le début de l'expérience (heure locale)")}
-                                      </>
-                                  )}
-                              </span>
-                          </div>
-                          <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                              <div style={{
-                                  backgroundColor: 'var(--primary)',
-                                  borderRadius: '50%',
-                                  width: '20px',
-                                  height: '20px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  flexShrink: 0,
-                                  marginTop: '2px'
-                              }}>
-                                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="4">
-                                      <polyline points="20 6 9 17 4 12" />
-                                  </svg>
-                              </div>
-                              <span style={{ fontSize: '13px', color: 'var(--accent)', fontWeight: 500, lineHeight: '1.4' }}>
-                                  <span style={{ textDecoration: 'underline', fontWeight: 700 }}>{isEn ? "Reserve Now and Pay Later" : (isEs ? "Reserva ahora y paga después" : "Réservez maintenant et payez plus tard")}</span> – {isEn ? "Secure your spot while staying flexible" : (isEs ? "Asegura tu plaza manteniendo flexibilidad" : "Garantissez votre place tout en restant flexible")}
-                              </span>
-                          </div>
+                      {/* Single Trust Line */}
+                      <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '10px' }}>
+                          {isEn ? "No deposit · Pay upon arrival (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago a la llegada (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement à l'arrivée (espèces ou carte) · Annulation gratuite")}
                       </div>
                   </div>
               )}
