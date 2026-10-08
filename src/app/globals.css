@@ -1802,6 +1802,55 @@ body.modal-open {
     margin-top: 30px;
 }
 
+@media (max-width: 639px) {
+    .private-driver-routes-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 14px;
+        margin-top: 18px;
+        padding: 4px 16px 20px 16px;
+        margin-left: -16px;
+        margin-right: -16px;
+        touch-action: pan-x pan-y;
+    }
+    .private-driver-routes-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .private-driver-route-card {
+        flex: 0 0 84%;
+        min-width: 270px;
+        max-width: 310px;
+        scroll-snap-align: center;
+        height: auto;
+    }
+    .private-driver-route-img-container {
+        height: 175px !important;
+    }
+    .private-driver-route-content {
+        padding: 16px 14px !important;
+    }
+    .private-driver-route-title {
+        font-size: 1.05rem !important;
+        margin-bottom: 6px !important;
+    }
+    .private-driver-route-desc {
+        font-size: 0.84rem !important;
+        margin-bottom: 14px !important;
+        line-height: 1.45 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .private-driver-route-cta {
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
 @media (min-width: 640px) {
     .private-driver-routes-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2120,19 +2169,133 @@ body.modal-open {
 }
 
 @media (max-width: 767px) {
+    .testimonials-section-header {
+        margin-bottom: 18px !important;
+    }
+    .testimonials-section-title {
+        font-size: 1.55rem !important;
+        margin-bottom: 6px !important;
+    }
+    .testimonials-section-rating-text {
+        font-size: 0.88rem !important;
+    }
     .testimonial-marquee-card {
-        width: 290px;
-        padding: 22px 18px;
+        width: 280px;
+        padding: 18px 16px;
     }
     .testimonial-quote-text {
-        font-size: 0.95rem;
-        margin-bottom: 16px;
+        font-size: 0.88rem;
+        margin-bottom: 12px;
+        line-height: 1.45;
     }
     .testimonials-carousel-container {
-        padding: 14px 0;
+        padding: 10px 0;
     }
     .testimonials-carousel-container::before,
     .testimonials-carousel-container::after {
-        width: 45px;
+        width: 30px;
+    }
+}
+
+/* Private Driver Page Responsive Layout Utilities */
+.pdm-section-video {
+    padding: 70px 20px;
+    background-color: #fff;
+    border-top: none;
+}
+.pdm-section-testimonials {
+    padding: 70px 20px;
+    background-color: #fff;
+    border-top: none;
+}
+.pdm-section-pricing-factors {
+    padding: 65px 20px;
+    background-color: var(--bg-color);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.pdm-section-hubs {
+    padding: 60px 20px;
+    background-color: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.pdm-section-routes {
+    padding: 70px 20px;
+    background-color: var(--bg-color);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.pdm-section-faq {
+    padding: 70px 20px 80px 20px;
+    background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .pdm-section-video {
+        padding: 34px 16px 28px 16px !important;
+    }
+    .pdm-section-video h2 {
+        margin-bottom: 16px !important;
+    }
+    .pdm-section-testimonials {
+        padding: 34px 16px 30px 16px !important;
+    }
+    .pdm-section-pricing-factors {
+        padding: 34px 14px 30px 14px !important;
+    }
+    .pdm-pricing-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+    .pdm-pricing-card {
+        padding: 14px 10px !important;
+        border-radius: 12px !important;
+    }
+    .pdm-pricing-card h3 {
+        font-size: 0.9rem !important;
+        margin-bottom: 4px !important;
+    }
+    .pdm-pricing-card p {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+    }
+    .pdm-pricing-pill {
+        padding: 10px 14px !important;
+        font-size: 0.8rem !important;
+    }
+    .pdm-section-hubs {
+        padding: 34px 14px 30px 14px !important;
+    }
+    .pdm-hubs-grid {
+        gap: 12px !important;
+    }
+    .pdm-hub-card {
+        padding: 16px 14px !important;
+        border-radius: 14px !important;
+    }
+    .pdm-hub-card h3 {
+        font-size: 1.05rem !important;
+        margin-bottom: 6px !important;
+    }
+    .pdm-hub-card p {
+        font-size: 0.84rem !important;
+        line-height: 1.45 !important;
+        margin-bottom: 12px !important;
+    }
+    .pdm-hub-card ul {
+        gap: 6px !important;
+        margin-bottom: 12px !important;
+        font-size: 0.84rem !important;
+    }
+    .pdm-section-routes {
+        padding: 34px 14px 30px 14px !important;
+    }
+    .pdm-section-faq {
+        padding: 36px 14px 40px 14px !important;
+    }
+    .pdm-section-header {
+        margin-bottom: 18px !important;
+    }
+    .pdm-section-header h2 {
+        margin-top: 4px !important;
     }
 }

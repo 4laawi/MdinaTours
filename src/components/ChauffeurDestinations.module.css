@@ -214,17 +214,86 @@
 
 @media (max-width: 768px) {
     .destinationsSection {
-        padding: 100px 0;
+        padding: 54px 0 44px 0;
+    }
+
+    .content {
+        padding: 0 16px;
+    }
+
+    .subtitle {
+        font-size: 0.78rem;
+        margin-bottom: 8px;
+        letter-spacing: 2px;
+    }
+
+    .title {
+        font-size: clamp(1.4rem, 4.5vw, 1.85rem) !important;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        padding: 0 8px;
     }
 
     .grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 22px;
+    }
+
+    .card {
+        padding: 12px 10px;
+        min-height: auto;
+        border-radius: 12px;
+    }
+
+    .cardHeader {
+        margin-bottom: 6px;
+    }
+
+    .cardTitle {
+        font-size: 0.95rem;
+        gap: 6px;
+    }
+
+    .pinIcon {
+        width: 17px;
+        height: 17px;
+    }
+
+    .badgeSelected {
+        font-size: 0.65rem;
+        padding: 2px 7px;
+    }
+
+    .cardDesc {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .cardAction {
+        margin-top: 8px;
+        padding-top: 6px;
+        font-size: 0.74rem;
     }
 
     .waveDivider svg,
     .waveDividerTop svg {
-        height: 60px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 360px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 }
 

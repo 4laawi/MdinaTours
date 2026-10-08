@@ -78,8 +78,8 @@ export default function ProfessionalDriverSection({
 
     return (
         <section
+            className="pro-driver-section"
             style={{
-                padding: '70px 20px',
                 backgroundColor,
                 borderTop: '1px solid rgba(0, 0, 0, 0.05)',
                 borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
@@ -87,13 +87,82 @@ export default function ProfessionalDriverSection({
             }}
             id="professional-driver"
         >
+            <style>{`
+                .pro-driver-section {
+                    padding: 70px 20px;
+                }
+                .pro-driver-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                    gap: 40px;
+                    align-items: center;
+                }
+                .pro-driver-img-box {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    min-height: 360px;
+                    aspect-ratio: 4/3;
+                }
+                .pro-driver-features-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    gap: 14px;
+                    margin-top: 8px;
+                }
+                .pro-driver-feature-card {
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    padding: 14px 16px;
+                    border: 1px solid rgba(0, 0, 0, 0.06);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+                }
+                @media (max-width: 768px) {
+                    .pro-driver-section {
+                        padding: 34px 14px 30px 14px !important;
+                    }
+                    .pro-driver-grid {
+                        gap: 20px !important;
+                    }
+                    .pro-driver-img-box {
+                        min-height: 220px !important;
+                        max-height: 250px !important;
+                        aspect-ratio: 16/9 !important;
+                    }
+                    .pro-driver-badge {
+                        padding: 8px 12px !important;
+                        bottom: 10px !important;
+                        left: 10px !important;
+                        right: 10px !important;
+                    }
+                    .pro-driver-features-grid {
+                        grid-template-columns: repeat(2, 1fr) !important;
+                        gap: 8px !important;
+                        margin-top: 4px !important;
+                    }
+                    .pro-driver-feature-card {
+                        padding: 10px 10px !important;
+                        gap: 4px !important;
+                        border-radius: 10px !important;
+                    }
+                    .pro-driver-feature-card h3 {
+                        font-size: 0.82rem !important;
+                    }
+                    .pro-driver-feature-card p {
+                        font-size: 0.74rem !important;
+                        line-height: 1.35 !important;
+                    }
+                    .pro-driver-narrative p {
+                        font-size: 0.86rem !important;
+                        line-height: 1.48 !important;
+                    }
+                }
+            `}</style>
             <div style={{ maxWidth: '1150px', margin: '0 auto' }}>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: '40px',
-                    alignItems: 'center'
-                }}>
+                <div className="pro-driver-grid">
                     {/* Left Column: Chauffeur Image with Floating Trust Badge */}
                     <div style={{
                         position: 'relative',
@@ -103,7 +172,7 @@ export default function ProfessionalDriverSection({
                         border: '1px solid rgba(0, 0, 0, 0.06)',
                         maxHeight: '520px'
                     }}>
-                        <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '360px', aspectRatio: '4/3' }}>
+                        <div className="pro-driver-img-box">
                             <Image
                                 src="/a-mdiinatours/chauffeur-costume-mercedes-noires.webp"
                                 alt={content.title}
@@ -120,7 +189,7 @@ export default function ProfessionalDriverSection({
                             }} />
 
                             {/* Trust Badge Pill Overlay */}
-                            <div style={{
+                            <div className="pro-driver-badge" style={{
                                 position: 'absolute',
                                 bottom: '18px',
                                 left: '18px',
@@ -163,7 +232,7 @@ export default function ProfessionalDriverSection({
                     </div>
 
                     {/* Right Column: Editorial Value Narrative & 4 Highlights */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <div className="pro-driver-narrative" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                         <div>
                             <span style={{
                                 fontSize: '0.82rem',
@@ -172,12 +241,12 @@ export default function ProfessionalDriverSection({
                                 letterSpacing: '1.5px',
                                 textTransform: 'uppercase',
                                 display: 'block',
-                                marginBottom: '6px'
+                                marginBottom: '4px'
                             }}>
                                 {content.eyebrow}
                             </span>
                             <h2 style={{
-                                fontSize: 'clamp(1.7rem, 3.2vw, 2.2rem)',
+                                fontSize: 'clamp(1.4rem, 3.2vw, 2.2rem)',
                                 fontWeight: 700,
                                 color: 'var(--secondary)',
                                 margin: 0,
@@ -188,42 +257,28 @@ export default function ProfessionalDriverSection({
                             </h2>
                         </div>
 
-                        <p style={{ fontSize: '0.96rem', color: '#475569', lineHeight: 1.6, margin: 0 }}>
+                        <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: 1.55, margin: 0 }}>
                             {content.p1}
                         </p>
 
-                        <p style={{ fontSize: '0.96rem', color: '#475569', lineHeight: 1.6, margin: 0 }}>
+                        <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: 1.55, margin: 0 }}>
                             {content.p2}
                         </p>
 
                         {/* 4 Feature Badges Grid */}
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                            gap: '14px',
-                            marginTop: '8px'
-                        }}>
+                        <div className="pro-driver-features-grid">
                             {content.features.map((feat, idx) => (
                                 <div
                                     key={idx}
-                                    style={{
-                                        backgroundColor: '#ffffff',
-                                        borderRadius: '12px',
-                                        padding: '14px 16px',
-                                        border: '1px solid rgba(0, 0, 0, 0.06)',
-                                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '6px'
-                                    }}
+                                    className="pro-driver-feature-card"
                                 >
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                         {feat.icon}
-                                        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>
+                                        <h3 style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>
                                             {feat.title}
                                         </h3>
                                     </div>
-                                    <p style={{ fontSize: '0.82rem', color: '#64748b', lineHeight: 1.45, margin: 0 }}>
+                                    <p style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.4, margin: 0 }}>
                                         {feat.desc}
                                     </p>
                                 </div>

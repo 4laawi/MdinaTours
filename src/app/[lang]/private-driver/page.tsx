@@ -337,7 +337,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                             </div>
                         </div>
                     </div>
-                    <div style={{ marginTop: '40px' }}>
+                    <div style={{ marginTop: '24px' }}>
                         <TransferWebRatings isEn={isEn} />
                     </div>
                 </section>
@@ -355,18 +355,18 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                 <ProfessionalDriverSection lang={language} backgroundColor="var(--bg-color)" />
 
                 {/* 6. FAQ Accordion */}
-                <section className={faqStyles.faqSection} id="faq" style={{ backgroundColor: '#ffffff', padding: '70px 20px 80px 20px' }}>
+                <section className="pdm-section-faq" id="faq">
                     <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-                        <div style={{ textAlign: 'center', marginBottom: '45px' }}>
+                        <div className="pdm-section-header" style={{ textAlign: 'center', marginBottom: '32px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Got Questions?" : "Des Questions ?"}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: "var(--font-poppins), sans-serif" }}>
+                            <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: "var(--font-poppins), sans-serif" }}>
                                 {textPrivate.faqTitle}
                             </h2>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {faqs.map((faq, idx) => (
                                 <details key={idx} style={{
                                     backgroundColor: '#fff',
@@ -376,9 +376,9 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                                     boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
                                 }} className="faq-details">
                                     <summary style={{
-                                        padding: '18px 22px',
+                                        padding: '16px 20px',
                                         fontWeight: 700,
-                                        fontSize: '1.02rem',
+                                        fontSize: '1rem',
                                         color: 'var(--secondary)',
                                         cursor: 'pointer',
                                         userSelect: 'none',
@@ -390,7 +390,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                                         <span>{faq.q}</span>
                                         <span style={{ color: 'var(--primary)', fontSize: '1.2rem', fontWeight: 400 }}>+</span>
                                     </summary>
-                                    <div style={{ padding: '0 22px 18px 22px', color: '#555', fontSize: '0.92rem', lineHeight: 1.65 }}>
+                                    <div style={{ padding: '0 20px 16px 20px', color: '#555', fontSize: '0.9rem', lineHeight: 1.55 }}>
                                         {faq.a}
                                     </div>
                                 </details>
@@ -400,7 +400,7 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                 </section>
 
                 {/* 7. Final Bottom CTA */}
-                <section style={{ padding: '60px 20px 70px 20px', backgroundColor: 'var(--bg-color)' }}>
+                <section style={{ padding: '40px 16px 50px 16px', backgroundColor: 'var(--bg-color)' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                         <ModernCTA 
                             text={textPrivate.finalCtaTitle}
@@ -411,8 +411,8 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                         />
 
                         {/* Discreet SEO Hub Links */}
-                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-                            <div style={{ fontSize: '0.82rem', color: '#64748b', display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', backgroundColor: '#ffffff', padding: '10px 18px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                            <div style={{ fontSize: '0.82rem', color: '#64748b', display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', backgroundColor: '#ffffff', padding: '10px 16px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
                                 <span style={{ fontWeight: 600 }}>{isEn ? "Chauffeur Hubs:" : "Centres de Chauffeurs :"}</span>
                                 <Link href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', fontWeight: 500, textDecoration: 'underline' }}>
                                     {isEn ? "Morocco (National)" : "Maroc (National)"}

@@ -564,19 +564,19 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 <PrivateDriverWhyChooseUs lang={language} />
 
                 {/* Experience Video Section */}
-                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
+                <section className="pdm-section-video">
                     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
                         <h2 style={{ 
-                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
+                            fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', 
                             fontWeight: 700, 
                             color: 'var(--secondary)', 
-                            marginBottom: '30px',
+                            marginBottom: '24px',
                             fontFamily: 'var(--font-poppins), sans-serif'
                         }}>
                             {isEn ? "What riding with us feels like" : (isEs ? "La experiencia a bordo" : "L'expérience à bord avec nous")}
                         </h2>
                         
-                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
+                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '16px' }}>
                             <VideoPlayer 
                                 src="/img/tours-mdina-tours-morocco.mp4" 
                                 style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
@@ -584,10 +584,10 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         </div>
 
                         <p style={{ 
-                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', 
+                            fontSize: 'clamp(0.9rem, 2.5vw, 1.05rem)', 
                             fontWeight: 500, 
                             color: '#555',
-                            margin: '15px 0 0 0',
+                            margin: '10px 0 0 0',
                             fontFamily: 'var(--font-poppins), sans-serif',
                             fontStyle: 'italic'
                         }}>
@@ -597,18 +597,18 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 </section>
 
                 {/* Independent Ratings Across the Web */}
-                <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px 0 20px' }}>
+                <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '24px 20px 0 20px' }}>
                     <TransferWebRatings isEn={isEn} isEs={isEs} />
                 </div>
 
                 {/* Trust / Reviews Section */}
-                <section id="testimonials" style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
+                <section id="testimonials" className="pdm-section-testimonials">
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                         <div className="testimonials-section-header">
-                            <h2 className="testimonials-section-title" style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
+                            <h2 className="testimonials-section-title" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px', fontFamily: 'var(--font-poppins), sans-serif' }}>
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
-                            <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
+                            <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '0.95rem', marginTop: '4px' }}>
                                 {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
                             </p>
                         </div>
@@ -671,9 +671,9 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         </div>
 
                         {/* Badges / Accreditations */}
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap', opacity: 0.8 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={140} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={150} height={35} loading="lazy" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '30px', marginTop: '28px', flexWrap: 'wrap', opacity: 0.85 }}>
+                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={130} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
+                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={140} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </section>
@@ -683,16 +683,16 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 <PrivateDriverInclusions lang={language} />
 
                 {/* What Affects Your Custom Quote Section */}
-                <section style={{ padding: '70px 20px', backgroundColor: 'var(--bg-color)', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                <section className="pdm-section-pricing-factors">
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+                        <div className="pdm-section-header" style={{ textAlign: 'center', marginBottom: '28px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Pricing Transparency" : (isEs ? "Precios Transparentes" : "Transparence Tarifaire")}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
+                            <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px', fontFamily: 'var(--font-poppins), sans-serif' }}>
                                 {isEn ? "What Affects Your Custom Quote" : (isEs ? "Factores que Influyen en su Presupuesto" : "Ce qui Détermine Votre Devis Sur Mesure")}
                             </h2>
-                            <p style={{ color: '#64748b', fontSize: '0.98rem', maxWidth: '680px', margin: '10px auto 0 auto', lineHeight: 1.55 }}>
+                            <p style={{ color: '#64748b', fontSize: '0.95rem', maxWidth: '680px', margin: '8px auto 0 auto', lineHeight: 1.5 }}>
                                 {isEn 
                                     ? "Because every road trip is organized around your personal itinerary, we calculate an exact fixed price based on your trip details:"
                                     : (isEs 
@@ -701,49 +701,49 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                             </p>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '18px', marginBottom: '28px' }}>
-                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                        <div className="pdm-pricing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '22px' }}>
+                            <div className="pdm-pricing-card" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>📅</div>
-                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
                                     {isEn ? "Dates & Season" : (isEs ? "Fechas y Temporada" : "Dates & Période")}
                                 </h3>
-                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.45, margin: 0 }}>
                                     {isEn 
                                         ? "Travel dates and seasonal vehicle availability across regional hubs." 
                                         : (isEs ? "Fechas de viaje y disponibilidad según temporada en cada ciudad base." : "Dates de séjour et disponibilité selon la saison dans chaque ville.")}
                                 </p>
                             </div>
 
-                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                            <div className="pdm-pricing-card" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>🗺️</div>
-                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
                                     {isEn ? "Route & Distance" : (isEs ? "Ruta y Distancia" : "Itinéraire & Distance")}
                                 </h3>
-                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.45, margin: 0 }}>
                                     {isEn 
                                         ? "Total driving mileage, highway tolls, and regional mountain or desert stages." 
                                         : (isEs ? "Kilometraje total, peajes de autopista y etapas por montaña o desierto." : "Kilométrage total, péages d'autoroute et étapes de montagne ou désert.")}
                                 </p>
                             </div>
 
-                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                            <div className="pdm-pricing-card" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>🚐</div>
-                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
                                     {isEn ? "Vehicle Category" : (isEs ? "Categoría del Vehículo" : "Modèle de Véhicule")}
                                 </h3>
-                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.45, margin: 0 }}>
                                     {isEn 
                                         ? "Sedan, comfort SUV, VIP van, or minibus selected for your party and luggage." 
                                         : (isEs ? "Berlina, SUV, van VIP o minibús elegido para su grupo y equipaje." : "Berline, SUV, van VIP ou minibus adapté à votre groupe et bagages.")}
                                 </p>
                             </div>
 
-                            <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                            <div className="pdm-pricing-card" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                 <div style={{ fontSize: '1.25rem', marginBottom: '8px' }}>⏱️</div>
-                                <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '6px' }}>
                                     {isEn ? "Duration & Scope" : (isEs ? "Duración y Servicios" : "Durée & Disponibilité")}
                                 </h3>
-                                <p style={{ fontSize: '0.86rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.45, margin: 0 }}>
                                     {isEn 
                                         ? "Number of travel days, standby hours, and overnight stops outside home base." 
                                         : (isEs ? "Días de viaje, horas a disposición y pernoctaciones fuera de la base." : "Nombre de jours, heures à disposition et nuitées hors de la ville de départ.")}
@@ -751,13 +751,13 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                             </div>
                         </div>
 
-                        <div style={{
+                        <div className="pdm-pricing-pill" style={{
                             backgroundColor: '#ffffff',
                             border: '1px solid #e2e8f0',
                             borderRadius: '12px',
-                            padding: '14px 20px',
+                            padding: '12px 18px',
                             textAlign: 'center',
-                            fontSize: '0.88rem',
+                            fontSize: '0.86rem',
                             color: '#475569',
                             fontWeight: 500
                         }}>
@@ -771,56 +771,56 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 </section>
 
                 {/* Regional Hubs Section (Contextual Internal Links) */}
-                <section style={{ padding: '60px 20px', backgroundColor: '#fff', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                <section className="pdm-section-hubs">
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                        <div className="pdm-section-header" style={{ textAlign: 'center', marginBottom: '28px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Chauffeur Hubs" : "Agences Locales"}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
+                            <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
                                 {isEn ? "Our Private Driver Services by Destination" : "Nos Services Chauffeur par Ville"}
                             </h2>
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                        <div className="pdm-hubs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '18px' }}>
                             {/* Marrakech Hub */}
-                            <div style={{ backgroundColor: 'var(--bg-color)', padding: '30px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <div className="pdm-hub-card" style={{ backgroundColor: 'var(--bg-color)', padding: '24px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                 <div>
-                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '10px' }}>
+                                    <h3 style={{ fontSize: '1.18rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px' }}>
                                         {isEn ? "Marrakech Chauffeur Service" : "Service Chauffeur Marrakech"}
                                     </h3>
-                                    <p style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.6, marginBottom: '20px' }}>
+                                    <p style={{ fontSize: '0.88rem', color: '#666', lineHeight: 1.55, marginBottom: '16px' }}>
                                         {isEn ? "Visiting Marrakech Medina, the High Atlas Mountains, or taking a coastal day trip to Essaouira? Hire a dedicated standby driver."
                                              : "Visitez la médina de Marrakech, les sommets de l'Atlas ou évadez-vous pour la journée à Essaouira. Chauffeurs locaux disponibles rapidement."}
                                     </p>
                                 </div>
-                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
+                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
                                     {isEn ? "Explore Marrakech Service →" : "Découvrir l'agence Marrakech →"}
                                 </Link>
                             </div>
 
                             {/* Casablanca Hub */}
-                            <div style={{ backgroundColor: 'var(--bg-color)', padding: '30px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <div className="pdm-hub-card" style={{ backgroundColor: 'var(--bg-color)', padding: '24px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                 <div>
-                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '10px' }}>
+                                    <h3 style={{ fontSize: '1.18rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px' }}>
                                         {isEn ? "Casablanca Chauffeur Service" : "Service Chauffeur Casablanca"}
                                     </h3>
-                                    <p style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.6, marginBottom: '20px' }}>
+                                    <p style={{ fontSize: '0.88rem', color: '#666', lineHeight: 1.55, marginBottom: '16px' }}>
                                         {isEn ? "Arriving at Casablanca CMN Airport? Book corporate dispo chauffeur for business meetings, Rabat visits, or north-bound loops."
                                              : "Prise en charge à l'aéroport CMN de Casablanca. Idéal pour vos déplacements d'affaires, réunions, ou départs vers Rabat."}
                                     </p>
                                 </div>
-                                <Link href={getPath('/private-driver-casablanca')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
+                                <Link href={getPath('/private-driver-casablanca')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
                                     {isEn ? "Explore Casablanca Service →" : "Découvrir l'agence Casablanca →"}
                                 </Link>
                             </div>
 
                             {/* 8-Day Package & Terminology Explainer */}
-                            <div style={{ backgroundColor: 'var(--bg-color)', padding: '30px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <div className="pdm-hub-card" style={{ backgroundColor: 'var(--bg-color)', padding: '24px', borderRadius: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                 <div>
-                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '10px' }}>
+                                    <h3 style={{ fontSize: '1.18rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px' }}>
                                         {isEn ? "Itineraries & Dispo Guides" : "Forfaits & Guide Pratique"}
                                     </h3>
-                                    <ul style={{ padding: 0, margin: '0 0 20px 0', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
+                                    <ul style={{ padding: 0, margin: '0 0 16px 0', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.88rem' }}>
                                         <li>
                                              👉 <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
                                                 {isEn ? "8-Day Morocco Tour Package" : "Forfait Chauffeur 8 Jours"}
@@ -842,13 +842,13 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 </section>
 
                 {/* Use Cases / Itineraries (SEO Gold Section) */}
-                <section style={{ padding: '80px 20px', backgroundColor: 'var(--bg-color)', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                <section className="pdm-section-routes">
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <div className="pdm-section-header" style={{ textAlign: 'center', marginBottom: '28px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Chauffeur dispo Routes" : "Trajets Chauffeur Dispo"}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
+                            <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
                                 {textMorocco.useCasesTitle}
                             </h2>
                         </div>
@@ -932,16 +932,16 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 {/* Features & FAQ Section */}
                 <section className={faqStyles.faqSection} id="faq">
                     <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-                        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <div className="pdm-section-header" style={{ textAlign: 'center', marginBottom: '32px' }}>
                             <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                                 {isEn ? "Got Questions?" : "Des Questions ?"}
                             </span>
-                            <h2 style={{ fontSize: '2.1rem', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
+                            <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.1rem)', fontWeight: 700, color: 'var(--secondary)', marginTop: '8px' }}>
                                 {textMorocco.faqTitle}
                             </h2>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {faqs.map((faq, idx) => (
                                 <details key={idx} style={{
                                     backgroundColor: '#fff',
@@ -950,9 +950,9 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                     overflow: 'hidden'
                                 }} className="faq-details">
                                     <summary style={{
-                                        padding: '20px 25px',
+                                        padding: '16px 20px',
                                         fontWeight: 700,
-                                        fontSize: '1.05rem',
+                                        fontSize: '1rem',
                                         color: 'var(--secondary)',
                                         cursor: 'pointer',
                                         userSelect: 'none',
@@ -964,7 +964,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                         <span>{faq.q}</span>
                                         <span style={{ color: 'var(--primary)', fontSize: '1.2rem' }}>+</span>
                                     </summary>
-                                    <div style={{ padding: '0 25px 20px 25px', color: '#555', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                                    <div style={{ padding: '0 20px 16px 20px', color: '#555', fontSize: '0.9rem', lineHeight: 1.55 }}>
                                         {faq.a}
                                     </div>
                                 </details>

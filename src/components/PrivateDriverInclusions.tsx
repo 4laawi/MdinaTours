@@ -53,16 +53,89 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
     ];
 
     return (
-        <section style={{ 
-            padding: '80px 20px', 
-            backgroundColor: '#ffffff', 
-            borderTop: 'none',
-            borderBottom: '1px solid #f1f5f9'
-        }}>
+        <section className="inclusions-section">
+            <style>{`
+                .inclusions-section {
+                    padding: 70px 20px;
+                    background-color: #ffffff;
+                    border-top: none;
+                    border-bottom: 1px solid #f1f5f9;
+                }
+                .inclusions-header {
+                    text-align: center;
+                    margin-bottom: 36px;
+                }
+                .inclusions-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                    gap: 16px 24px;
+                    margin-bottom: 36px;
+                }
+                .inclusion-card {
+                    display: flex;
+                    gap: 12px;
+                    font-size: 0.95rem;
+                    color: #334155;
+                    line-height: 1.5;
+                    align-items: flex-start;
+                    padding: 12px 16px;
+                    background-color: #fff;
+                    border-radius: 12px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+                    border: 1px solid #f1f5f9;
+                }
+                .inclusion-check {
+                    color: #10b981;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    flex-shrink: 0;
+                }
+                .inclusions-footnote {
+                    text-align: center;
+                    max-width: 720px;
+                    margin: 0 auto;
+                }
+                .inclusions-footnote p {
+                    font-size: 0.92rem;
+                    color: #64748b;
+                    margin: 0;
+                    font-weight: 500;
+                    line-height: 1.6;
+                }
+                @media (max-width: 768px) {
+                    .inclusions-section {
+                        padding: 36px 14px 30px 14px !important;
+                    }
+                    .inclusions-header {
+                        margin-bottom: 18px !important;
+                    }
+                    .inclusions-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 8px !important;
+                        margin-bottom: 18px !important;
+                    }
+                    .inclusion-card {
+                        padding: 9px 12px !important;
+                        font-size: 0.85rem !important;
+                        gap: 8px !important;
+                        border-radius: 10px !important;
+                        line-height: 1.4 !important;
+                    }
+                    .inclusion-check {
+                        font-size: 1rem !important;
+                    }
+                    .inclusions-footnote p {
+                        font-size: 0.8rem !important;
+                        line-height: 1.45 !important;
+                    }
+                }
+            `}</style>
             <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <div className="inclusions-header">
                     <h2 style={{ 
-                        fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
+                        fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', 
                         fontWeight: 700, 
                         color: 'var(--secondary)', 
                         margin: 0,
@@ -72,46 +145,17 @@ export default function PrivateDriverInclusions({ lang }: PrivateDriverInclusion
                     </h2>
                 </div>
 
-                <div className="inclusions-grid" style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
-                    gap: '16px 30px',
-                    marginBottom: '40px'
-                }}>
+                <div className="inclusions-grid">
                     {items.map((item, idx) => (
-                        <div key={idx} style={{ 
-                            display: 'flex', 
-                            gap: '12px', 
-                            fontSize: '0.95rem', 
-                            color: '#334155', 
-                            lineHeight: 1.5,
-                            alignItems: 'flex-start',
-                            padding: '12px 16px',
-                            backgroundColor: '#fff',
-                            borderRadius: '12px',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
-                            border: '1px solid #f1f5f9'
-                        }}>
-                            <span style={{ 
-                                color: '#10b981', 
-                                fontWeight: 'bold', 
-                                fontSize: '1.2rem',
-                                display: 'flex',
-                                alignItems: 'center'
-                            }}>✓</span>
+                        <div key={idx} className="inclusion-card">
+                            <span className="inclusion-check">✓</span>
                             <span>{item}</span>
                         </div>
                     ))}
                 </div>
 
-                <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>
-                    <p style={{ 
-                        fontSize: '0.92rem', 
-                        color: '#64748b', 
-                        margin: 0,
-                        fontWeight: 500,
-                        lineHeight: 1.6
-                    }}>
+                <div className="inclusions-footnote">
+                    <p>
                         {isEn 
                             ? "Quoted transportation pricing includes fuel, highway tolls, parking, and driver operating/lodging expenses on multi-day journeys. Major route or itinerary changes requested during travel may affect the quote." 
                             : (isEs 
