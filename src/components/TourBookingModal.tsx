@@ -28,13 +28,16 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
     const [tourLanguage, setTourLanguage] = useState(isEn ? "English" : isEs ? "Spanish" : "French");
     const [notes, setNotes] = useState("");
 
+    const handleClose = () => {
+        setModalStep(1);
+        onClose();
+    };
+
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
-            // reset step when closing
-            setModalStep(1);
         }
         return () => document.body.classList.remove('modal-open');
     }, [isOpen]);
@@ -78,9 +81,9 @@ export default function TourBookingModal({ isOpen, onClose, selectedTour }: Tour
     };
 
     return (
-        <div className={styles.modalOverlay} onClick={onClose}>
+        <div className={styles.modalOverlay} onClick={handleClose}>
             <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                <button className={styles.closeModal} onClick={onClose}>×</button>
+                <button className={styles.closeModal} onClick={handleClose}>×</button>
 
                 <div className={styles.modalHeader}>
                     <div className={styles.modalBadge}>

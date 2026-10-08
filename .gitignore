@@ -56,10 +56,14 @@ PRIVATE_DRIVER_SERVICE_TRUTH.md
 temp_ast/
 scratch/
 
-# Scratch files and backups
+# Scratch files, patches, and backups
 move_navbar*.js
 split.js
 scratch_css.txt
 *.bak
+*.orig
+*.rej
+*.patch
+Thumbs.db
 agent-skills/
 

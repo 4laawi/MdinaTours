@@ -17,7 +17,7 @@ export function initCampaignTracking(): void {
     }
 }
 
-export function trackLeadConversion(source: string, details?: Record<string, any>): void {
+export function trackLeadConversion(source: string, details?: Record<string, unknown>): void {
     if (typeof window === 'undefined') return;
 
     try {
@@ -26,7 +26,7 @@ export function trackLeadConversion(source: string, details?: Record<string, any
         const utmSource = sessionStorage.getItem('mdina_utm_source') || localStorage.getItem('mdina_utm_source') || '';
 
         // 1. Google Tag Manager dataLayer event
-        const dataLayer = (window as unknown as { dataLayer?: Record<string, any>[] }).dataLayer;
+        const dataLayer = (window as unknown as { dataLayer?: Record<string, unknown>[] }).dataLayer;
         if (Array.isArray(dataLayer)) {
             dataLayer.push({
                 event: 'whatsapp_lead',
@@ -39,7 +39,7 @@ export function trackLeadConversion(source: string, details?: Record<string, any
         }
 
         // 2. Google Analytics 4 / Google Ads gtag event
-        const gtag = (window as unknown as { gtag?: (...args: any[]) => void }).gtag;
+        const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
         if (typeof gtag === 'function') {
             gtag('event', 'generate_lead', {
                 event_category: 'engagement',

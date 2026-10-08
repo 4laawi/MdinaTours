@@ -45,12 +45,17 @@ export default function TransfersHero({
     const [preciseLocation, setPreciseLocation] = useState("");
     const [isEditingDateTime, setIsEditingDateTime] = useState(false);
 
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setModalStep(1);
+        setIsEditingDateTime(false);
+    };
+
     useEffect(() => {
         if (isModalOpen) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
-            setIsEditingDateTime(false);
         }
         return () => document.body.classList.remove('modal-open');
     }, [isModalOpen]);
@@ -290,9 +295,9 @@ export default function TransfersHero({
 
             {/* Steps Booking Modal (exact duplicate from Hero.tsx layout) */}
             {isModalOpen && (
-                <div className={styles.modalOverlay} onClick={() => { setIsModalOpen(false); setModalStep(1); }}>
+                <div className={styles.modalOverlay} onClick={handleCloseModal}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                        <button className={styles.closeModal} onClick={() => { setIsModalOpen(false); setModalStep(1); }}>×</button>
+                        <button className={styles.closeModal} onClick={handleCloseModal}>×</button>
 
                         <div className={styles.modalHeader}>
                             <div className={styles.modalBadge}>

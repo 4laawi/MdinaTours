@@ -26,35 +26,32 @@ export default function VideoPlayer({
     maxDuration
 }: VideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [shouldLoad, setShouldLoad] = useState(false);
+    const [shouldLoad, setShouldLoad] = useState(() => {
+        return typeof window !== 'undefined' && typeof IntersectionObserver === 'undefined';
+    });
 
     // Remove media fragment from src if it is passed with #t=... to prevent browser decoding issues
     const cleanSrc = src.split('#')[0];
 
     useEffect(() => {
         const video = videoRef.current;
-        if (!video) return;
+        if (!video || typeof IntersectionObserver === 'undefined') return;
 
-        if (typeof IntersectionObserver !== 'undefined') {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setShouldLoad(true);
-                    } else if (shouldLoad && !video.paused) {
-                        // Pause video when scrolled out of view to save battery and main-thread CPU
-                        video.pause();
-                    }
-                },
-                { rootMargin: '300px' }
-            );
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setShouldLoad(true);
+                } else if (!video.paused) {
+                    // Pause video when scrolled out of view to save battery and main-thread CPU
+                    video.pause();
+                }
+            },
+            { rootMargin: '300px' }
+        );
 
-            observer.observe(video);
-            return () => observer.disconnect();
-        } else {
-            // Fallback for browsers without IntersectionObserver
-            setShouldLoad(true);
-        }
-    }, [shouldLoad]);
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const video = videoRef.current;

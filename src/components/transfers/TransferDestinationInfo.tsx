@@ -99,7 +99,7 @@ export default function TransferDestinationInfo(props: any) {
                   gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
                   gap: '20px' 
               }} className="tips-grid">
-                  {local.travelTips.map((tip: any, idx: number) => (
+                  {local.travelTips.map((tip: { title?: string; content?: string }, idx: number) => (
                       <div key={idx} style={{
                           backgroundColor: '#ffffff',
                           borderRadius: '12px',

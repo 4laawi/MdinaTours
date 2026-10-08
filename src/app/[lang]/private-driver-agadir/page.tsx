@@ -199,7 +199,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
             quote: isEn ? (
                 <>Smooth transfer from Agadir Al-Massira Airport to our resort in Taghazout. Booking via WhatsApp was incredibly fast and easy. <strong style={{ fontWeight: 800 }}>Very professional.</strong></>
             ) : (
-                <>Transfert fluide de l'aéroport d'Agadir à notre hôtel à Taghazout. La réservation sur WhatsApp a été très rapide. <strong style={{ fontWeight: 800 }}>Très professionnel.</strong></>
+                <>Transfert fluide de l&apos;aéroport d&apos;Agadir à notre hôtel à Taghazout. La réservation sur WhatsApp a été très rapide. <strong style={{ fontWeight: 800 }}>Très professionnel.</strong></>
             ),
             author: "Jean-Pascal M.",
             flag: "🇫🇷"

@@ -92,9 +92,10 @@ export async function submitPartnerForm(formData: FormData) {
         }
 
         return { success: true };
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error('Email action error:', err);
-        return { error: err?.message || 'Something went wrong. Please check your details and try again.' };
+        const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please check your details and try again.';
+        return { error: errorMessage };
     }
 }
 

@@ -199,7 +199,7 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
             quote: isEn ? (
                 <>We hired a driver for a day to tour Cape Spartel and Hercules Caves, followed by lunch. The driver was extremely professional and knew the best scenic routes. <strong style={{ fontWeight: 800 }}>Highly recommended.</strong></>
             ) : (
-                <>Nous avons loué un chauffeur pour visiter le Cap Spartel et les Grottes d'Hercule, puis déjeuner. Chauffeur très professionnel, connaissant d'excellentes routes panoramiques. <strong style={{ fontWeight: 800 }}>Recommandé !</strong></>
+                <>Nous avons loué un chauffeur pour visiter le Cap Spartel et les Grottes d&apos;Hercule, puis déjeuner. Chauffeur très professionnel, connaissant d&apos;excellentes routes panoramiques. <strong style={{ fontWeight: 800 }}>Recommandé !</strong></>
             ),
             author: "Nathalie B.",
             flag: "🇫🇷"

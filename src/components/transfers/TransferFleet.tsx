@@ -15,11 +15,12 @@ interface Vehicle {
 
 import { Language } from '@/lib/translations';
 import { trackLeadConversion } from '@/lib/tracking';
+import { LocalizedTransferData } from '@/lib/transfersData';
 
 interface TransferFleetProps {
     prices: { [passengers: number]: number };
     lang: Language;
-    local: any;
+    local: LocalizedTransferData;
 }
 
 export default function TransferFleet({ prices, lang, local }: TransferFleetProps) {

@@ -54,9 +54,10 @@ export async function sendEmail(formData: FormData) {
         }
 
         return { success: true };
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error('Email action error:', err);
-        return { error: err?.message || 'Something went wrong. Please try again.' };
+        const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+        return { error: errorMessage };
     }
 }
 

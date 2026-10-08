@@ -4,10 +4,11 @@ import React from 'react';
 import { Signpost, Clock, Coffee, Armchair, ShieldCheck, ChatsCircle } from '@phosphor-icons/react';
 
 import { Language } from '@/lib/translations';
+import { LocalizedTransferData } from '@/lib/transfersData';
 
 interface TransferWhatsIncludedProps {
     language: Language;
-    local: any;
+    local: LocalizedTransferData;
 }
 
 export default function TransferWhatsIncluded({ language, local }: TransferWhatsIncludedProps) {

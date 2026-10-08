@@ -199,7 +199,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
             quote: isEn ? (
                 <>Very professional service. The driver was waiting at Rabat-Salé Airport, spoke perfect French, and navigated the city beautifully. <strong style={{ fontWeight: 800 }}>Will book again.</strong></>
             ) : (
-                <>Service très professionnel. Le chauffeur nous attendait à l'aéroport de Rabat-Salé, parlait parfaitement français et conduisait très bien. <strong style={{ fontWeight: 800 }}>Je réserverai à nouveau.</strong></>
+                <>Service très professionnel. Le chauffeur nous attendait à l&apos;aéroport de Rabat-Salé, parlait parfaitement français et conduisait très bien. <strong style={{ fontWeight: 800 }}>Je réserverai à nouveau.</strong></>
             ),
             author: "Michel D.",
             flag: "🇫🇷"

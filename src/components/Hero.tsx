@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import ReactDOM from 'react-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './Hero.module.css';
@@ -59,13 +59,14 @@ export default function Hero(props: { imageUrl?: string }) {
     const [nextReady, setNextReady] = useState(false);
 
     const activeSlideRef = useRef(activeSlide);
-    activeSlideRef.current = activeSlide;
-
     const nextSlideRef = useRef(nextSlide);
-    nextSlideRef.current = nextSlide;
-
     const nextReadyRef = useRef(nextReady);
-    nextReadyRef.current = nextReady;
+
+    useEffect(() => {
+        activeSlideRef.current = activeSlide;
+        nextSlideRef.current = nextSlide;
+        nextReadyRef.current = nextReady;
+    }, [activeSlide, nextSlide, nextReady]);
 
     useEffect(() => {
         let timer: NodeJS.Timeout;
@@ -139,12 +140,17 @@ export default function Hero(props: { imageUrl?: string }) {
     const [preciseLocation, setPreciseLocation] = useState("");
     const [isEditingDateTime, setIsEditingDateTime] = useState(false);
 
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setModalStep(1);
+        setIsEditingDateTime(false);
+    };
+
     useEffect(() => {
         if (isModalOpen) {
             document.body.classList.add('modal-open');
         } else {
             document.body.classList.remove('modal-open');
-            setIsEditingDateTime(false);
         }
         return () => document.body.classList.remove('modal-open');
     }, [isModalOpen]);
@@ -248,8 +254,8 @@ export default function Hero(props: { imageUrl?: string }) {
     // Helper for Art Direction
     const renderHeroImage = (desktopSrc: string, mobileSrc: string, isActive: boolean, isPriority: boolean) => {
         const commonProps = { alt: 'Mdina Tours Morocco', fill: true, sizes: '100vw', priority: isPriority };
-        const { props: { srcSet: desktopSrcSet, ...restDesktop } } = require('next/image').getImageProps({ ...commonProps, src: desktopSrc });
-        const { props: { srcSet: mobileSrcSet, ...restMobile } } = require('next/image').getImageProps({ ...commonProps, src: mobileSrc });
+        const { props: { srcSet: desktopSrcSet, ...restDesktop } } = getImageProps({ ...commonProps, src: desktopSrc });
+        const { props: { srcSet: mobileSrcSet, ...restMobile } } = getImageProps({ ...commonProps, src: mobileSrc });
 
         if (isPriority) {
             ReactDOM.preload(restDesktop.src as string, {
@@ -298,21 +304,25 @@ export default function Hero(props: { imageUrl?: string }) {
             )}
 
             {/* 3. Next Slide (preloaded in background with opacity: 0) */}
-            {nextSlide !== activeSlide && nextSlide !== outgoingSlide && (
-                <div key={`preload-${nextSlide}-${displayImages[nextSlide].desktop}`} className={`${styles.bgImageContainer} ${styles.preload}`}>
-                    <picture>
-                        <source media="(min-width: 769px)" srcSet={require('next/image').getImageProps({ src: displayImages[nextSlide].desktop, alt: '', fill: true, sizes: '100vw' }).props.srcSet} />
-                        <source media="(max-width: 768px)" srcSet={require('next/image').getImageProps({ src: displayImages[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' }).props.srcSet} />
-                        <img
-                            {...require('next/image').getImageProps({ src: displayImages[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' }).props}
-                            className={styles.heroBg}
-                            loading="lazy"
-                            aria-hidden="true"
-                            onLoad={() => setNextReady(true)}
-                        />
-                    </picture>
-                </div>
-            )}
+            {nextSlide !== activeSlide && nextSlide !== outgoingSlide && (() => {
+                const preloadDesktop = getImageProps({ src: displayImages[nextSlide].desktop, alt: '', fill: true, sizes: '100vw' });
+                const preloadMobile = getImageProps({ src: displayImages[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' });
+                return (
+                    <div key={`preload-${nextSlide}-${displayImages[nextSlide].desktop}`} className={`${styles.bgImageContainer} ${styles.preload}`}>
+                        <picture>
+                            <source media="(min-width: 769px)" srcSet={preloadDesktop.props.srcSet} />
+                            <source media="(max-width: 768px)" srcSet={preloadMobile.props.srcSet} />
+                            <img
+                                {...preloadMobile.props}
+                                className={styles.heroBg}
+                                loading="lazy"
+                                aria-hidden="true"
+                                onLoad={() => setNextReady(true)}
+                            />
+                        </picture>
+                    </div>
+                );
+            })()}
 
             <div className={styles.overlay} />
 
@@ -435,9 +445,9 @@ export default function Hero(props: { imageUrl?: string }) {
             </div>
 
             {isModalOpen && (
-                <div className={styles.modalOverlay} onClick={() => { setIsModalOpen(false); setModalStep(1); }}>
+                <div className={styles.modalOverlay} onClick={handleCloseModal}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                        <button className={styles.closeModal} onClick={() => { setIsModalOpen(false); setModalStep(1); }}>×</button>
+                        <button className={styles.closeModal} onClick={handleCloseModal}>×</button>
 
                         <div className={styles.modalHeader}>
                             <div className={styles.modalBadge}>

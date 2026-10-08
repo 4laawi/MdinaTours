@@ -190,7 +190,7 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
             quote: isEn ? (
                 <>Our driver in Fes was absolutely fantastic. Navigating the gates of the ancient Medina was so easy, and he gave us great tips for visiting Volubilis. <strong style={{ fontWeight: 800 }}>Highly recommend!</strong></>
             ) : (
-                <>Notre chauffeur à Fès était absolument fantastique. L'accès aux portes de la médina était très simple, et il nous a donné d'excellents conseils pour Volubilis. <strong style={{ fontWeight: 800 }}>Hautement recommandé !</strong></>
+                <>Notre chauffeur à Fès était absolument fantastique. L&apos;accès aux portes de la médina était très simple, et il nous a donné d&apos;excellents conseils pour Volubilis. <strong style={{ fontWeight: 800 }}>Hautement recommandé !</strong></>
             ),
             author: "Sarah M.",
             flag: "🇺🇸"
@@ -199,7 +199,7 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
             quote: isEn ? (
                 <>Fes-Saïss airport pickup was seamless. The Mercedes Vito was immaculate and the driver spoke excellent English. <strong style={{ fontWeight: 800 }}>Great dispo service.</strong></>
             ) : (
-                <>La prise en charge à l'aéroport de Fès-Saïss a été impeccable. Le Mercedes Vito était propre et le chauffeur parlait un excellent anglais. <strong style={{ fontWeight: 800 }}>Excellent service.</strong></>
+                <>La prise en charge à l&apos;aéroport de Fès-Saïss a été impeccable. Le Mercedes Vito était propre et le chauffeur parlait un excellent anglais. <strong style={{ fontWeight: 800 }}>Excellent service.</strong></>
             ),
             author: "Thomas L.",
             flag: "🇩🇪"

@@ -831,7 +831,7 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
                                     <div>
                                         <div style={{ color: 'var(--primary)', fontSize: '1rem', marginBottom: '12px' }}>★★★★★</div>
                                         <p style={{ fontSize: '0.92rem', color: '#475569', lineHeight: 1.65, fontStyle: 'italic', margin: '0 0 18px 0' }}>
-                                            "{rev.quote}"
+                                            &ldquo;{rev.quote}&rdquo;
                                         </p>
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '14px', fontSize: '0.82rem', color: '#64748b' }}>

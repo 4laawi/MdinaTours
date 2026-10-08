@@ -28,7 +28,7 @@ interface TransferBookingFlowProps {
     language: Language;
 }
 
-const tLocal: Record<Language, any> = {
+const tLocal: Record<Language, Record<string, string>> = {
     en: {
         lowestPrice: "Lowest Price Guarantee",
         badgeExcellence: "Badge of Excellence",

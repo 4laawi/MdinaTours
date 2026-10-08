@@ -6,7 +6,7 @@ import { trackLeadConversion } from '@/lib/tracking';
 interface TrackedWhatsAppLinkProps {
     href: string;
     source: string;
-    details?: Record<string, any>;
+    details?: Record<string, unknown>;
     className?: string;
     style?: React.CSSProperties;
     title?: string;

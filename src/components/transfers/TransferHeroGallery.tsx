@@ -140,7 +140,7 @@ export default function TransferHeroGallery(props: any) {
         >
           <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
             <div className="gallery-slider-track" style={trackStyle}>
-              {galleryImages.map((img: any, idx: number) => (
+              {galleryImages.map((img: string, idx: number) => (
                 <div key={idx} className="gallery-slide-item">
                   <Image
                     src={img}
