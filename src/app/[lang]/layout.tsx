@@ -95,6 +95,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 import { Suspense } from 'react';
 import CampaignTracker from '@/components/CampaignTracker';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 export default async function LocaleLayout({
     children,
@@ -160,6 +161,7 @@ export default async function LocaleLayout({
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                     />
                     {children}
+                    <CookieConsentBanner lang={lang} />
                 </LanguageProvider>
                 <Script
                     strategy="lazyOnload"
@@ -172,6 +174,35 @@ export default async function LocaleLayout({
                         __html: `
                             window.dataLayer = window.dataLayer || [];
                             function gtag(){dataLayer.push(arguments);}
+                            
+                            // Initialize Consent Mode V2
+                            if (!localStorage.getItem('cookieConsent')) {
+                                gtag('consent', 'default', {
+                                    'ad_storage': 'denied',
+                                    'analytics_storage': 'denied',
+                                    'ad_user_data': 'denied',
+                                    'ad_personalization': 'denied',
+                                    'wait_for_update': 500
+                                });
+                            } else {
+                                try {
+                                    const consent = JSON.parse(localStorage.getItem('cookieConsent'));
+                                    gtag('consent', 'default', {
+                                        'ad_storage': consent.ads ? 'granted' : 'denied',
+                                        'analytics_storage': consent.analytics ? 'granted' : 'denied',
+                                        'ad_user_data': consent.ads ? 'granted' : 'denied',
+                                        'ad_personalization': consent.ads ? 'granted' : 'denied',
+                                    });
+                                } catch(e) {
+                                    gtag('consent', 'default', {
+                                        'ad_storage': 'denied',
+                                        'analytics_storage': 'denied',
+                                        'ad_user_data': 'denied',
+                                        'ad_personalization': 'denied'
+                                    });
+                                }
+                            }
+
                             gtag('js', new Date());
                             gtag('config', 'G-58G6F3HW5G', {
                                 page_path: window.location.pathname,

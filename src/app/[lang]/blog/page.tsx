@@ -254,49 +254,48 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                 </section>
 
                 {/* Conversion Service Banner on Blog Index */}
-                <section style={{ backgroundColor: '#0f172a', color: '#ffffff', padding: '60px 20px', borderTop: '1px solid rgba(220,131,78,0.3)', borderBottom: '1px solid rgba(220,131,78,0.3)' }}>
-                    <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
-                        <span style={{ display: 'inline-block', backgroundColor: 'rgba(220,131,78,0.18)', border: '1px solid rgba(220,131,78,0.5)', color: '#fbd38d', padding: '6px 16px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '16px' }}>
-                            {isEn ? "Need Transportation in Morocco?" : "Besoin d'un Chauffeur ou d'un Transfert au Maroc ?"}
+                <section style={{ backgroundColor: '#FBFBFA', color: '#111111', padding: '48px 20px', borderTop: '1px solid #EAEAEA', borderBottom: '1px solid #EAEAEA' }}>
+                    <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+                        <span style={{ display: 'inline-block', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#787774', marginBottom: '12px' }}>
+                            {isEn ? "Transportation in Morocco • Mdina Tours" : "Transport au Maroc • Mdina Tours"}
                         </span>
-                        <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: '#ffffff', marginBottom: '14px' }}>
-                            {isEn ? "Book Fixed-Fare Private Transfers & Drivers" : "Réservez vos Transferts Privés & Chauffeurs à Prix Fixe"}
+                        <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', fontWeight: 600, color: '#111111', marginBottom: '10px', lineHeight: 1.3 }}>
+                            {isEn ? "Private Transfers & Chauffeur Services" : "Transferts Privés & Chauffeurs Dédiés"}
                         </h2>
-                        <p style={{ color: '#cbd5e1', fontSize: '1.08rem', maxWidth: '750px', margin: '0 auto 28px auto', lineHeight: 1.6 }}>
+                        <p style={{ color: '#555555', fontSize: '0.96rem', maxWidth: '680px', margin: '0 auto 24px auto', lineHeight: 1.6 }}>
                             {isEn
-                                ? "Skip train queues and taxi haggling. Travel between Casablanca, Rabat, Marrakech, Fes, Merzouga, and Tangier in comfortable Mercedes minivans with licensed bilingual drivers."
-                                : "Évitez les correspondances de train et les négociations de taxi. Voyagez entre Casablanca, Rabat, Marrakech, Fès, Merzouga et Tanger en vans Mercedes grand confort avec chauffeurs bilingues."}
+                                ? "Direct door-to-door transport between Casablanca, Rabat, Marrakech, Fes, Merzouga, and Tangier in comfortable Mercedes vehicles with licensed bilingual drivers."
+                                : "Liaisons directes porte-à-porte entre Casablanca, Rabat, Marrakech, Fès, Merzouga et Tanger en véhicules Mercedes récents avec chauffeurs bilingues professionnels."}
                         </p>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
                             <Link
                                 href={getPath('/transfers')}
                                 style={{
-                                    backgroundColor: '#dc834e',
+                                    backgroundColor: '#111111',
                                     color: '#ffffff',
-                                    padding: '14px 28px',
-                                    borderRadius: '10px',
-                                    fontWeight: 700,
-                                    fontSize: '1rem',
-                                    textDecoration: 'none',
-                                    boxShadow: '0 4px 14px rgba(220,131,78,0.35)'
+                                    padding: '10px 22px',
+                                    borderRadius: '6px',
+                                    fontWeight: 500,
+                                    fontSize: '0.88rem',
+                                    textDecoration: 'none'
                                 }}
                             >
-                                {isEn ? "Explore Transfer Routes →" : "Voir les 18+ Trajets Transferts →"}
+                                {isEn ? "View Transfer Routes →" : "Voir les trajets transferts →"}
                             </Link>
                             <Link
                                 href={getPath('/private-driver')}
                                 style={{
-                                    backgroundColor: 'transparent',
-                                    border: '1px solid rgba(255,255,255,0.3)',
-                                    color: '#ffffff',
-                                    padding: '14px 26px',
-                                    borderRadius: '10px',
-                                    fontWeight: 600,
-                                    fontSize: '1rem',
+                                    backgroundColor: '#ffffff',
+                                    border: '1px solid #EAEAEA',
+                                    color: '#111111',
+                                    padding: '9px 18px',
+                                    borderRadius: '6px',
+                                    fontWeight: 500,
+                                    fontSize: '0.88rem',
                                     textDecoration: 'none'
                                 }}
                             >
-                                {isEn ? "Private Chauffeur Service" : "Service Chauffeur Privé"}
+                                {isEn ? "Private Chauffeur Service" : "Service chauffeur privé"}
                             </Link>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { translations, Language } from "@/lib/translations";
 import styles from "./Footer.module.css";
 import TrackedWhatsAppLink from "./TrackedWhatsAppLink";
+import CookieConsentRevokeLink from "./CookieConsentRevokeLink";
 
 export default function Footer({ lang = 'en' }: { lang?: Language }) {
     const language = lang;
@@ -166,6 +167,7 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                     <div className={styles.legalLinks}>
                         <Link href={getPath('/privacy')}>{t('footer_privacy')}</Link>
                         <Link href={getPath('/terms')}>{t('footer_terms')}</Link>
+                        <CookieConsentRevokeLink lang={lang} />
                     </div>
                 </div>
             </div>
