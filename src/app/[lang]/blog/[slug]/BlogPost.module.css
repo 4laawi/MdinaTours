@@ -401,51 +401,315 @@
 }
 
 .ctaBlock {
-    background: linear-gradient(135deg, #202f59 0%, #121d39 100%);
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid rgba(220, 131, 78, 0.4);
     color: white;
-    padding: 40px;
-    border-radius: 12px;
-    margin: 40px 0;
+    padding: 44px 36px;
+    border-radius: 16px;
+    margin: 48px 0;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(32, 47, 89, 0.15);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    position: relative;
+    overflow: hidden;
 }
 
-.ctaBlock h3 {
-    color: white !important;
-    font-size: 1.6rem;
-    margin-bottom: 15px;
+.ctaBlock::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(220, 131, 78, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.ctaBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(220, 131, 78, 0.18);
+    border: 1px solid rgba(220, 131, 78, 0.5);
+    color: #fbd38d;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
 }
 
-.ctaBlock p {
-    color: #e5e5e5;
+.ctaTitle {
+    color: white !important;
+    font-size: 1.85rem;
+    margin-bottom: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.ctaTextContainer p {
+    color: #cbd5e1;
     font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    max-width: 600px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.ctaButton {
+.ctaActionsRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 28px 0 16px 0;
+}
+
+.ctaPrimaryButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #dc834e;
-    color: white;
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-weight: 600;
+    gap: 10px;
+    background: linear-gradient(135deg, #dc834e 0%, #c26934 100%);
+    color: white !important;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.02rem;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(220, 131, 78, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
 }
 
-.ctaButton:hover {
-    background: #bc8246;
+.ctaPrimaryButton:hover {
+    background: linear-gradient(135deg, #e3905e 0%, #cc733d 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
+    box-shadow: 0 10px 28px rgba(220, 131, 78, 0.5);
     color: white !important;
+}
+
+.ctaArrow {
+    font-size: 1.15rem;
+    transition: transform 0.2s ease;
+}
+
+.ctaPrimaryButton:hover .ctaArrow {
+    transform: translateX(4px);
+}
+
+.ctaWhatsAppButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid rgba(37, 211, 102, 0.5);
+    color: #25d366 !important;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.ctaWhatsAppButton:hover {
+    background: rgba(37, 211, 102, 0.25);
+    border-color: #25d366;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.ctaTrustRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ctaDot {
+    opacity: 0.4;
+}
+
+/* Sidebar Custom Widgets */
+.sidebarTransferWidget {
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 30px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(220, 131, 78, 0.35);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+}
+
+.sidebarTransferBadge {
+    display: inline-block;
+    background: rgba(220, 131, 78, 0.2);
+    border: 1px solid rgba(220, 131, 78, 0.4);
+    color: #fbd38d;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.sidebarTransferTitle {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.sidebarTransferPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.sidebarTransferPriceAmount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #48bb78;
+}
+
+.sidebarTransferPriceSub {
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.sidebarTransferPerks {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebarTransferPerk {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+}
+
+.sidebarTransferPerkCheck {
+    color: #48bb78;
+    font-weight: bold;
+}
+
+.sidebarPrimaryBtn {
+    display: block;
+    width: 100%;
+    background: #dc834e;
+    color: #ffffff !important;
+    text-align: center;
+    padding: 13px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(220, 131, 78, 0.3);
+    transition: all 0.25s ease;
+}
+
+.sidebarPrimaryBtn:hover {
+    background: #c26934;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 131, 78, 0.45);
+}
+
+.sidebarWhatsAppBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid rgba(37, 211, 102, 0.4);
+    color: #25d366 !important;
+    text-align: center;
+    padding: 11px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.sidebarWhatsAppBtn:hover {
+    background: rgba(37, 211, 102, 0.25);
+    color: #ffffff !important;
+}
+
+.sidebarRoutesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarRouteItem {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebarRouteItem:last-child {
+    border-bottom: none;
+}
+
+.sidebarRouteLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.sidebarRouteLink:hover {
+    color: #dc834e;
+}
+
+.sidebarRoutePrice {
+    font-weight: 700;
+    color: #00805a;
+    font-size: 0.85rem;
+}
+
+.sidebarAllTransfersLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #dc834e;
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-top: 14px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.sidebarAllTransfersLink:hover {
+    transform: translateX(4px);
+    color: #c26934;
 }
 
 .faqSection {

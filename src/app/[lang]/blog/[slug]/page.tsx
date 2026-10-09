@@ -1,13 +1,16 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
+import BlogRouteHighlightCard from '@/components/BlogRouteHighlightCard';
+import BlogStickyConversionBar from '@/components/BlogStickyConversionBar';
 import styles from './BlogPost.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 import { notFound } from 'next/navigation';
-import { getProgrammaticPost, programmaticSlugs } from '@/lib/programmaticSeo';
+import { transfersData } from '@/lib/transfersData';
+import { getProgrammaticPost, programmaticSlugs, getRouteInfo, getAirportInfo } from '@/lib/programmaticSeo';
 
 export async function generateStaticParams() {
     const paths: { lang: string; slug: string }[] = [];
@@ -320,11 +323,100 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
     const getPath = (path: string) => (language === 'en' && path === '/' ? '/' : `/${language}${path === '/' ? '' : path}`);
 
-    // WhatsApp Booking Link Builder
+    // Targeted Route & Service Resolver
+    const routeInfo = getRouteInfo(slug);
+    const airportInfo = getAirportInfo(slug);
+
+    let targetedTransferSlug: string | null = null;
+    let targetedTransferTitle: string = '';
+    let targetedTransferSubtitle: string = '';
+    let targetedTransferPrice: number | undefined;
+    let routeStats: { origin: string; destination: string; distance?: string; duration?: string; priceFrom?: number } | undefined;
+
+    if (routeInfo) {
+        targetedTransferSlug = routeInfo.transferSlug;
+        const originName = routeInfo.c1[isEn ? 'en' : 'fr'];
+        const destName = routeInfo.c2[isEn ? 'en' : 'fr'];
+        targetedTransferTitle = isEn 
+            ? `Private Transfer: ${originName} to ${destName}` 
+            : `Transfert Privé : ${originName} ⇄ ${destName}`;
+        targetedTransferSubtitle = isEn
+            ? `Direct door-to-door transportation in an air-conditioned Mercedes Vito minivan or executive sedan.`
+            : `Liaison directe porte-à-porte en van Mercedes Vito ou berline climatisée avec chauffeur bilingue.`;
+        targetedTransferPrice = routeInfo.route.privatePrice;
+        routeStats = {
+            origin: originName,
+            destination: destName,
+            distance: routeInfo.route.distance,
+            duration: routeInfo.route.duration,
+            priceFrom: routeInfo.route.privatePrice
+        };
+    } else if (airportInfo) {
+        targetedTransferSlug = airportInfo.transferSlug;
+        const cityName = airportInfo.city[isEn ? 'en' : 'fr'];
+        targetedTransferTitle = isEn 
+            ? `${cityName} Airport Private Transfer` 
+            : `Navette Privée Aéroport de ${cityName}`;
+        targetedTransferSubtitle = isEn
+            ? `Meet & greet in arrivals hall with nameboard, live flight tracking, and fixed rates to your hotel or riad.`
+            : `Accueil personnalisé avec pancarte à la sortie du terminal, suivi de vol et tarif fixe vers votre riad ou hôtel.`;
+        const tData = transfersData.find(t => t.slug === targetedTransferSlug);
+        targetedTransferPrice = tData ? Object.values(tData.prices)[0] : undefined;
+    } else if (slug === 'sahara-desert-tour-plan') {
+        targetedTransferSlug = 'fes-to-merzouga-transfer';
+        targetedTransferTitle = isEn ? 'Fes ⇄ Merzouga Sahara Transfer' : 'Transfert Fès ⇄ Merzouga Sahara';
+        targetedTransferSubtitle = isEn ? 'Comfortable 4x4 or Mercedes minivan crossing the Middle Atlas to the Erg Chebbi dunes.' : 'Véhicule 4x4 ou van Mercedes confortable traversant le Moyen Atlas vers les dunes de l\'Erg Chebbi.';
+        targetedTransferPrice = 370;
+    } else if (slug === 'chefchaouen-blue-pearl-tips') {
+        targetedTransferSlug = 'tangier-to-chefchaouen-transfer';
+        targetedTransferTitle = isEn ? 'Tangier ⇄ Chefchaouen Transfer' : 'Transfert Tanger ⇄ Chefchaouen';
+        targetedTransferSubtitle = isEn ? 'Direct private transfer from Tangier port, airport, or hotel to Chefchaouen.' : 'Transfert privé direct depuis le port, l\'aéroport ou votre hôtel de Tanger vers Chefchaouen.';
+        targetedTransferPrice = 140;
+    } else if (slug === 'rabat-travel-guide') {
+        targetedTransferSlug = 'rabat-airport-transfer';
+        targetedTransferTitle = isEn ? 'Rabat Airport & City Transfer' : 'Navette Aéroport & Chauffeur Rabat';
+        targetedTransferSubtitle = isEn ? 'Professional private chauffeur for airport pickups and city transfers in Rabat.' : 'Chauffeur privé professionnel pour vos arrivées d\'aéroport et déplacements à Rabat.';
+        targetedTransferPrice = 35;
+    }
+
+    const primaryTransferUrl = targetedTransferSlug ? getPath(`/transfers/${targetedTransferSlug}`) : getPath('/transfers');
+
+    // WhatsApp Booking Link Builder with route awareness
     const getWhatsAppUrl = (type: string, link: string) => {
-        const msg = `Hello Mdina Tours,\nI read your article: "${title}".\nI am interested in booking a private ${type} for this route.\n\nPlease let me know availability.`;
+        const serviceName = targetedTransferTitle || title;
+        const msg = isEn
+            ? `Hello Mdina Tours,\nI read your article: "${title}".\nI would like to book a private transfer/driver (${serviceName}).\n\nPlease let me know availability and pricing.`
+            : `Bonjour Mdina Tours,\nJ'ai lu votre article : "${title}".\nJe souhaite réserver un transfert privé avec chauffeur (${serviceName}).\n\nMerci de me confirmer la disponibilité et le tarif.`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(msg)}`;
     };
+
+    const popularTransfers = [
+        {
+            title: isEn ? "Fes ⇄ Merzouga" : "Fès ⇄ Merzouga",
+            slug: "fes-to-merzouga-transfer",
+            price: 370
+        },
+        {
+            title: isEn ? "Casablanca ⇄ Marrakech" : "Casablanca ⇄ Marrakech",
+            slug: "casablanca-to-marrakech-transfer",
+            price: 220
+        },
+        {
+            title: isEn ? "Marrakech ⇄ Essaouira" : "Marrakech ⇄ Essaouira",
+            slug: "marrakech-to-essaouira-transfer",
+            price: 140
+        },
+        {
+            title: isEn ? "Tangier ⇄ Chefchaouen" : "Tanger ⇄ Chefchaouen",
+            slug: "tangier-to-chefchaouen-transfer",
+            price: 140
+        },
+        {
+            title: isEn ? "Casablanca Airport Transfer" : "Transfert Aéroport Casablanca",
+            slug: "casablanca-airport-transfer",
+            price: 45
+        }
+    ];
 
     // FAQ Schema
     const faqSchema = progPost && progPost.faqs.length > 0 ? {
@@ -472,6 +564,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </ul>
                                         </div>
 
+                                        {/* Featured In-Article Route & Transfer Highlight Card */}
+                                        <BlogRouteHighlightCard
+                                            language={language}
+                                            title={targetedTransferTitle || (isEn ? "Private Chauffeur & Transfers in Morocco" : "Chauffeur Privé & Transferts au Maroc")}
+                                            subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
+                                            routeDetails={routeStats}
+                                            transferLink={primaryTransferUrl}
+                                            transferLinkText={isEn 
+                                                ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
+                                                : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
+                                            whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
+                                            imageUrl={image}
+                                            badgeText={targetedTransferSlug ? (isEn ? "Direct Route Transfer • Mdina Tours" : "Transfert Direct Garanti • Mdina Tours") : undefined}
+                                        />
+
                                         {/* Sections */}
                                         {progPost.sections.map(section => (
                                             <section key={section.id} id={section.id} style={{ scrollMarginTop: '100px' }}>
@@ -519,28 +626,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                 {/* Optional Call to Action Block */}
                                                 {section.isCallToAction && (
                                                     <div className={styles.ctaBlock}>
-                                                        <h3>{section.title}</h3>
+                                                        <div className={styles.ctaBadge}>
+                                                            <span>🛡️ {isEn ? "Official Mdina Tours Service • Fixed Fares" : "Service Officiel Mdina Tours • Prix Fixe"}</span>
+                                                        </div>
+                                                        <h3 className={styles.ctaTitle}>{section.title}</h3>
                                                         <div 
                                                             dangerouslySetInnerHTML={{ __html: section.content }} 
                                                             className={styles.ctaTextContainer} 
                                                         />
-                                                        {section.ctaType === 'internal' ? (
+                                                        <div className={styles.ctaActionsRow}>
                                                             <Link 
-                                                                href={`/${lang}${section.ctaLink}`}
-                                                                className={styles.ctaButton}
+                                                                href={getPath(section.ctaLink || primaryTransferUrl)}
+                                                                className={styles.ctaPrimaryButton}
                                                             >
-                                                                {section.ctaText || (isEn ? "View Details" : "Voir les détails")}
+                                                                <span>{section.ctaText || (isEn ? "Book Transfer Online" : "Réserver le Transfert en Ligne")}</span>
+                                                                <span className={styles.ctaArrow}>→</span>
                                                             </Link>
-                                                        ) : (
                                                             <a 
-                                                                href={getWhatsAppUrl(section.ctaType || 'general', section.ctaLink || '/')}
+                                                                href={getWhatsAppUrl(section.ctaType || 'transfer', section.ctaLink || primaryTransferUrl)}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className={styles.ctaButton}
+                                                                className={styles.ctaWhatsAppButton}
                                                             >
-                                                                {isEn ? "Book via WhatsApp" : "Réserver via WhatsApp"}
+                                                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.203c.044.072.044.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.123.553 4.116 1.521 5.854l-1.619 5.918 6.069-1.592c1.683.916 3.607 1.438 5.65 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
+                                                                </svg>
+                                                                <span>{isEn ? "Book via WhatsApp" : "Réserver via WhatsApp"}</span>
                                                             </a>
-                                                        )}
+                                                        </div>
+                                                        <div className={styles.ctaTrustRow}>
+                                                            <span>🛡️ {isEn ? "No upfront deposit required" : "0€ d'acompte à la réservation"}</span>
+                                                            <span className={styles.ctaDot}>•</span>
+                                                            <span>⭐ {isEn ? "4.9/5 Rating (500+ transfers)" : "Note 4.9/5 sur 500+ transferts"}</span>
+                                                            <span className={styles.ctaDot}>•</span>
+                                                            <span>📍 {isEn ? "Door-to-door riad pickup" : "Prise en charge porte-à-porte"}</span>
+                                                        </div>
                                                     </div>
                                                 )}
                                             </section>
@@ -566,7 +686,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                         )}
                                     </>
                                 ) : (
-                                    /* Render Standard Blog Post Paragraphs with TOC and Sections */
+                                    /* Render Standard Blog Post Paragraphs with TOC, Highlight Card, and Sections */
                                     <>
                                         {/* Table of Contents */}
                                         <div className={styles.toc}>
@@ -580,6 +700,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </ul>
                                         </div>
 
+                                        {/* Featured In-Article Route & Transfer Highlight Card */}
+                                        <BlogRouteHighlightCard
+                                            language={language}
+                                            title={targetedTransferTitle || (isEn ? "Private Chauffeur & Transfers in Morocco" : "Chauffeur Privé & Transferts au Maroc")}
+                                            subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
+                                            routeDetails={routeStats}
+                                            transferLink={primaryTransferUrl}
+                                            transferLinkText={isEn 
+                                                ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
+                                                : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
+                                            whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
+                                            imageUrl={image}
+                                            badgeText={targetedTransferSlug ? (isEn ? "Direct Route Transfer • Mdina Tours" : "Transfert Direct Garanti • Mdina Tours") : undefined}
+                                        />
+
                                         {/* Sections */}
                                         {structuredSections.map(section => (
                                             <section key={section.id} id={section.id} style={{ scrollMarginTop: '100px' }}>
@@ -589,6 +724,50 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                 </div>
                                             </section>
                                         ))}
+
+                                        {/* Conversion CTA Block for Standard Blog Post */}
+                                        <div className={styles.ctaBlock}>
+                                            <div className={styles.ctaBadge}>
+                                                <span>⭐ {isEn ? "Private Transport in Morocco" : "Transport Privé au Maroc"}</span>
+                                            </div>
+                                            <h3 className={styles.ctaTitle}>
+                                                {targetedTransferTitle || (isEn ? "Book Your Private Driver or Transfer in Morocco" : "Réservez Votre Chauffeur Privé ou Transfert au Maroc")}
+                                            </h3>
+                                            <div className={styles.ctaTextContainer}>
+                                                <p>
+                                                    {isEn
+                                                        ? "Explore Morocco comfortably with our professional private drivers and direct transfer services. Modern air-conditioned Mercedes fleet, fixed transparent rates, and pay upon completion."
+                                                        : "Voyagez à travers le Maroc en toute sérénité avec nos chauffeurs privés professionnels et nos liaisons directes. Flotte Mercedes climatisée, prix fixes transparents et paiement sur place."}
+                                                </p>
+                                            </div>
+                                            <div className={styles.ctaActionsRow}>
+                                                <Link 
+                                                    href={primaryTransferUrl}
+                                                    className={styles.ctaPrimaryButton}
+                                                >
+                                                    <span>{isEn ? "Book Transfer Online" : "Réserver le Transfert en Ligne"}</span>
+                                                    <span className={styles.ctaArrow}>→</span>
+                                                </Link>
+                                                <a 
+                                                    href={getWhatsAppUrl('driver', primaryTransferUrl)}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={styles.ctaWhatsAppButton}
+                                                >
+                                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.203c.044.072.044.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.123.553 4.116 1.521 5.854l-1.619 5.918 6.069-1.592c1.683.916 3.607 1.438 5.65 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
+                                                    </svg>
+                                                    <span>{isEn ? "Book via WhatsApp" : "Réserver via WhatsApp"}</span>
+                                                </a>
+                                            </div>
+                                            <div className={styles.ctaTrustRow}>
+                                                <span>🛡️ {isEn ? "0€ Upfront • Pay cash or card" : "0€ d'acompte • Paiement sur place"}</span>
+                                                <span className={styles.ctaDot}>•</span>
+                                                <span>⭐ {isEn ? "4.9/5 Rating (500+ transfers)" : "Note 4.9/5 sur 500+ transferts"}</span>
+                                                <span className={styles.ctaDot}>•</span>
+                                                <span>📍 {isEn ? "Door-to-door riad pickup" : "Prise en charge porte-à-porte"}</span>
+                                            </div>
+                                        </div>
                                     </>
                                 )}
 
@@ -638,21 +817,81 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                             </div>
 
                             <aside className={styles.sidebar}>
+                                {/* Featured Route Transfer Card */}
+                                <div className={styles.sidebarTransferWidget}>
+                                    <span className={styles.sidebarTransferBadge}>
+                                        {targetedTransferSlug ? (isEn ? "Direct Transfer" : "Transfert Direct") : (isEn ? "Private Chauffeur" : "Chauffeur Privé")}
+                                    </span>
+                                    <h3 className={styles.sidebarTransferTitle}>
+                                        {targetedTransferTitle || (isEn ? "Private Chauffeur Morocco" : "Chauffeur Privé au Maroc")}
+                                    </h3>
+                                    <div className={styles.sidebarTransferPrice}>
+                                        <span className={styles.sidebarTransferPriceAmount}>
+                                            {targetedTransferPrice ? `€${targetedTransferPrice}` : (isEn ? "From €25/h" : "Dès 25€/h")}
+                                        </span>
+                                        <span className={styles.sidebarTransferPriceSub}>
+                                            {targetedTransferPrice ? (isEn ? "/ vehicle" : "/ véhicule") : (isEn ? "/ hourly rate" : "/ tarif horaire")}
+                                        </span>
+                                    </div>
+                                    <ul className={styles.sidebarTransferPerks}>
+                                        <li className={styles.sidebarTransferPerk}>
+                                            <span className={styles.sidebarTransferPerkCheck}>✓</span>
+                                            <span>{isEn ? "Door-to-door hotel & riad pickup" : "Prise en charge à votre Riad"}</span>
+                                        </li>
+                                        <li className={styles.sidebarTransferPerk}>
+                                            <span className={styles.sidebarTransferPerkCheck}>✓</span>
+                                            <span>{isEn ? "Modern air-conditioned Mercedes fleet" : "Minivan Mercedes climatisé"}</span>
+                                        </li>
+                                        <li className={styles.sidebarTransferPerk}>
+                                            <span className={styles.sidebarTransferPerkCheck}>✓</span>
+                                            <span>{isEn ? "Zero deposit • Pay upon completion" : "Paiement direct à destination"}</span>
+                                        </li>
+                                    </ul>
+                                    <Link href={primaryTransferUrl} className={styles.sidebarPrimaryBtn}>
+                                        {isEn ? "Book This Service Online →" : "Réserver ce Trajet en Ligne →"}
+                                    </Link>
+                                    <a 
+                                        href={getWhatsAppUrl('transfer', primaryTransferUrl)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.sidebarWhatsAppBtn}
+                                    >
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.203c.044.072.044.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.123.553 4.116 1.521 5.854l-1.619 5.918 6.069-1.592c1.683.916 3.607 1.438 5.65 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                        <span>{isEn ? "WhatsApp Inquiry" : "Réservation via WhatsApp"}</span>
+                                    </a>
+                                </div>
+
+                                {/* Popular Morocco Route Transfers */}
                                 <div className={styles.sidebarWidget}>
-                                    <h3>{isEn ? 'Plan Your Trip' : 'Planifiez Votre Voyage'}</h3>
-                                    <p>{isEn ? 'Ready to experience the magic of Morocco first-hand? Let us be your driver.' : 'Prêt à vivre la magie du Maroc ? Laissez-nous vous guider.'}</p>
-                                    <Link href={getPath('/contact')} className={styles.contactBtn}>
-                                        Contact Mdina Tours
+                                    <h3>{isEn ? 'Popular Transfers' : 'Transferts Populaires'}</h3>
+                                    <ul className={styles.sidebarRoutesList}>
+                                        {popularTransfers.map((p, idx) => (
+                                            <li key={idx} className={styles.sidebarRouteItem}>
+                                                <Link href={getPath(`/transfers/${p.slug}`)} className={styles.sidebarRouteLink}>
+                                                    <span>{p.title}</span>
+                                                    <span className={styles.sidebarRoutePrice}>€{p.price}</span>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Link href={getPath('/transfers')} className={styles.sidebarAllTransfersLink}>
+                                        <span>{isEn ? 'View all 18+ routes' : 'Voir les 18+ trajets'}</span>
+                                        <span>→</span>
                                     </Link>
                                 </div>
 
+                                {/* Our Services */}
                                 <div className={styles.sidebarWidget}>
                                     <h3>{isEn ? 'Our Services' : 'Nos Services'}</h3>
                                     <ul className={styles.widgetList}>
+                                        <li><Link href={getPath('/transfers')}>{isEn ? 'Intercity Transfers' : 'Transferts Intervilles'}</Link></li>
+                                        <li><Link href={getPath('/airport-transfers')}>{isEn ? 'Airport Transfers' : 'Navettes Aéroport'}</Link></li>
                                         <li><Link href={getPath('/private-driver')}>{isEn ? 'Private Chauffeurs' : 'Chauffeurs Privés'}</Link></li>
+                                        <li><Link href={getPath('/chauffeur-dispo-morocco')}>{isEn ? 'Daily Driver at Disposal' : 'Mise à Disposition Journée'}</Link></li>
                                         <li><Link href={getPath('/tours')}>{isEn ? 'Custom Guided Tours' : 'Circuits sur Mesure'}</Link></li>
-                                        <li><Link href={getPath('/blog/sahara-desert-tour-plan')}>{isEn ? 'Desert Adventures' : 'Expéditions Désert'}</Link></li>
-                                        <li><Link href={getPath('/blog')}>{isEn ? 'City Excursions' : 'Excursions de Villes'}</Link></li>
+                                        <li><Link href={getPath('/contact')}>{isEn ? 'Custom Itinerary Quote' : 'Devis Sur Mesure'}</Link></li>
                                     </ul>
                                 </div>
                             </aside>
@@ -662,6 +901,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
             </main>
             <Footer lang={language} />
             <FloatingElements />
+            <BlogStickyConversionBar
+                language={language}
+                routeTitle={targetedTransferTitle || (isEn ? "Private Transfer Morocco" : "Transfert Privé Maroc")}
+                priceFrom={targetedTransferPrice}
+                transferLink={primaryTransferUrl}
+                whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
+            />
         </>
     );
 }

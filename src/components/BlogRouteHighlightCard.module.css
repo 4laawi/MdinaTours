@@ -1,0 +1,351 @@
+.highlightCard {
+    background: linear-gradient(145deg, #0e172a 0%, #1e293b 100%);
+    border: 1px solid rgba(220, 131, 78, 0.4);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 36px 0;
+    color: #ffffff;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.highlightCard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(220, 131, 78, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.topBadgeRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(220, 131, 78, 0.18);
+    border: 1px solid rgba(220, 131, 78, 0.5);
+    color: #fbd38d;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badgePulse {
+    width: 8px;
+    height: 8px;
+    background-color: #48bb78;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(72, 187, 120, 0.4);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(72, 187, 120, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+    }
+}
+
+.pricePill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 999px;
+}
+
+.priceLabel {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.priceAmount {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.pricePerVehicle {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.headerArea {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.headerText {
+    flex: 1;
+}
+
+.title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    line-height: 1.25;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.01em;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.thumbnailWrapper {
+    position: relative;
+    width: 100px;
+    height: 75px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.thumbnailImage {
+    object-fit: cover;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.statIcon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.statContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.statLabel {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.statValue {
+    font-size: 0.95rem;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+.perksList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.perkItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    line-height: 1.45;
+}
+
+.perkCheck {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(72, 187, 120, 0.2);
+    border: 1px solid rgba(72, 187, 120, 0.6);
+    color: #48bb78;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.perkText {
+    flex: 1;
+}
+
+.actionsRow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.primaryCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #dc834e 0%, #c26934 100%);
+    color: #ffffff !important;
+    font-size: 1.02rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(220, 131, 78, 0.35);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex: 1 1 240px;
+    text-align: center;
+}
+
+.primaryCta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(220, 131, 78, 0.5);
+    background: linear-gradient(135deg, #e3905e 0%, #cc733d 100%);
+    color: #ffffff !important;
+}
+
+.arrowIcon {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+.primaryCta:hover .arrowIcon {
+    transform: translateX(4px);
+}
+
+.whatsappCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid rgba(37, 211, 102, 0.5);
+    color: #25d366 !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 13px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    flex: 0 1 auto;
+}
+
+.whatsappCta:hover {
+    background: rgba(37, 211, 102, 0.25);
+    border-color: #25d366;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.whatsappIcon {
+    flex-shrink: 0;
+}
+
+.footerTrust {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.trustItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trustDot {
+    opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+    .highlightCard {
+        padding: 22px 18px;
+        margin: 28px 0;
+        border-radius: 14px;
+    }
+
+    .title {
+        font-size: 1.35rem;
+    }
+
+    .thumbnailWrapper {
+        display: none;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .actionsRow {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .primaryCta,
+    .whatsappCta {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footerTrust {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .trustDot {
+        display: none;
+    }
+}

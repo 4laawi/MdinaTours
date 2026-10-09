@@ -253,6 +253,55 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                     </div>
                 </section>
 
+                {/* Conversion Service Banner on Blog Index */}
+                <section style={{ backgroundColor: '#0f172a', color: '#ffffff', padding: '60px 20px', borderTop: '1px solid rgba(220,131,78,0.3)', borderBottom: '1px solid rgba(220,131,78,0.3)' }}>
+                    <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+                        <span style={{ display: 'inline-block', backgroundColor: 'rgba(220,131,78,0.18)', border: '1px solid rgba(220,131,78,0.5)', color: '#fbd38d', padding: '6px 16px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '16px' }}>
+                            {isEn ? "Need Transportation in Morocco?" : "Besoin d'un Chauffeur ou d'un Transfert au Maroc ?"}
+                        </span>
+                        <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: '#ffffff', marginBottom: '14px' }}>
+                            {isEn ? "Book Fixed-Fare Private Transfers & Drivers" : "Réservez vos Transferts Privés & Chauffeurs à Prix Fixe"}
+                        </h2>
+                        <p style={{ color: '#cbd5e1', fontSize: '1.08rem', maxWidth: '750px', margin: '0 auto 28px auto', lineHeight: 1.6 }}>
+                            {isEn
+                                ? "Skip train queues and taxi haggling. Travel between Casablanca, Rabat, Marrakech, Fes, Merzouga, and Tangier in comfortable Mercedes minivans with licensed bilingual drivers."
+                                : "Évitez les correspondances de train et les négociations de taxi. Voyagez entre Casablanca, Rabat, Marrakech, Fès, Merzouga et Tanger en vans Mercedes grand confort avec chauffeurs bilingues."}
+                        </p>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                            <Link
+                                href={getPath('/transfers')}
+                                style={{
+                                    backgroundColor: '#dc834e',
+                                    color: '#ffffff',
+                                    padding: '14px 28px',
+                                    borderRadius: '10px',
+                                    fontWeight: 700,
+                                    fontSize: '1rem',
+                                    textDecoration: 'none',
+                                    boxShadow: '0 4px 14px rgba(220,131,78,0.35)'
+                                }}
+                            >
+                                {isEn ? "Explore Transfer Routes →" : "Voir les 18+ Trajets Transferts →"}
+                            </Link>
+                            <Link
+                                href={getPath('/private-driver')}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    border: '1px solid rgba(255,255,255,0.3)',
+                                    color: '#ffffff',
+                                    padding: '14px 26px',
+                                    borderRadius: '10px',
+                                    fontWeight: 600,
+                                    fontSize: '1rem',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                {isEn ? "Private Chauffeur Service" : "Service Chauffeur Privé"}
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
                 <section className={styles.gallerySection}>
                     <div className={styles.container}>
                         <div className={styles.galleryHeader}>

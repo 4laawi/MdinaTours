@@ -69,7 +69,7 @@ export const programmaticSlugs = [
     "best-day-trips-from-marrakech"
 ];
 
-const citiesData: Record<string, { en: string; fr: string; attractionsEn: string[]; attractionsFr: string[] }> = {
+export const citiesData: Record<string, { en: string; fr: string; attractionsEn: string[]; attractionsFr: string[] }> = {
     tangier: { en: "Tangier", fr: "Tanger", attractionsEn: ["Caves of Hercules", "The old Kasbah", "Cap Spartel"], attractionsFr: ["Grottes d'Hercule", "Kasbah", "Cap Spartel"] },
     rabat: { en: "Rabat", fr: "Rabat", attractionsEn: ["Hassan Tower", "Kasbah of the Udayas", "Chellah"], attractionsFr: ["Tour Hassan", "Oudayas", "Chellah"] },
     casablanca: { en: "Casablanca", fr: "Casablanca", attractionsEn: ["Hassan II Mosque", "Habous", "The Corniche"], attractionsFr: ["Mosquée Hassan II", "Habous", "La Corniche"] },
@@ -80,7 +80,7 @@ const citiesData: Record<string, { en: string; fr: string; attractionsEn: string
     agadir: { en: "Agadir", fr: "Agadir", attractionsEn: ["Agadir Ouefla", "Agadir Marina", "Taghazout beach"], attractionsFr: ["Kasbah Ouefla", "Marina", "Plage Taghazout"] }
 };
 
-const routesData: Record<string, { distance: string; duration: string; privatePrice: number; train: boolean }> = {
+export const routesData: Record<string, { distance: string; duration: string; privatePrice: number; train: boolean }> = {
     "tangier-to-rabat": { distance: "250 km", duration: "2h 45m", privatePrice: 210, train: true },
     "tangier-to-casablanca": { distance: "340 km", duration: "3h 30m", privatePrice: 280, train: true },
     "tangier-to-chefchaouen": { distance: "120 km", duration: "2h 15m", privatePrice: 140, train: false },
@@ -94,6 +94,37 @@ const routesData: Record<string, { distance: string; duration: string; privatePr
     "fes-to-chefchaouen": { distance: "200 km", duration: "3h 30m", privatePrice: 170, train: false },
     "fes-to-merzouga": { distance: "460 km", duration: "7h 30m", privatePrice: 370, train: false }
 };
+
+export function getRouteInfo(slug: string) {
+    let key: string | null = null;
+    if (slug.startsWith("train-vs-private-transfer-")) {
+        key = slug.replace("train-vs-private-transfer-", "");
+    } else if (slug.startsWith("how-to-get-from-")) {
+        key = slug.replace("how-to-get-from-", "");
+    }
+    if (!key || !routesData[key]) return null;
+    const [c1k, c2k] = key.split("-to-");
+    return {
+        key,
+        route: routesData[key],
+        c1: citiesData[c1k],
+        c2: citiesData[c2k],
+        originSlug: c1k,
+        destinationSlug: c2k,
+        transferSlug: `${key}-transfer`
+    };
+}
+
+export function getAirportInfo(slug: string) {
+    if (!slug.endsWith("-airport-transfer-guide")) return null;
+    const cityKey = slug.replace("-airport-transfer-guide", "");
+    if (!citiesData[cityKey]) return null;
+    return {
+        cityKey,
+        city: citiesData[cityKey],
+        transferSlug: `${cityKey}-airport-transfer`
+    };
+}
 
 export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPost | null {
     const isEn = lang === 'en';
@@ -124,8 +155,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "overview",
                 title: isEn ? "Route Overview & Distance" : "Aperçu de la route et distance",
                 content: isEn 
-                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is a highly popular route in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Below is a comprehensive comparison of transport options including private transfers, public trains, and highway buses to help you choose the best option for your itinerary.</p>`
-                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important du transport marocain. La distance est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong> par l'autoroute. Découvrez notre comparatif complet pour voyager dans les meilleures conditions.</p>`
+                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is a highly popular route in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Below is a comprehensive comparison of transport options including our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfers from ${name1} to ${name2}</a>, public trains, and highway buses to help you choose the best option for your itinerary.</p>`
+                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important du transport marocain. La distance est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong> par la route. Découvrez notre comparatif complet, incluant le <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, le train et le bus pour voyager sereinement.</p>`
             },
             {
                 id: "comparison",
@@ -166,10 +197,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "private-transfer",
                 title: isEn ? "Option 1: Private Transfer (Recommended for Comfort & Groups)" : "Option 1 : Le Transfert Privé (Recommandé pour le confort)",
                 content: isEn
-                    ? `<p>Booking a private transfer with <strong>Mdina Tours</strong> is the most comfortable and flexible way to get from ${name1} to ${name2}. Instead of carrying luggage through busy train stations or waiting in taxi queues, a professional chauffeur picks you up directly from your hotel, riad, or airport terminal in ${name1} and drives you door-to-door to your destination in ${name2}.</p>
-                       <p>Our flat-rate pricing covers the entire vehicle, fuel, highway tolls, and baggage support, making it highly cost-effective for families and travel groups. Standard rates start from €${route.privatePrice}.</p>`
-                    : `<p>Réserver un chauffeur privé avec <strong>Mdina Tours</strong> est la solution la plus simple et sereine pour relier ${name1} et ${name2}. Un chauffeur professionnel vous accueille devant votre hôtel ou à la sortie de votre terminal à ${name1} et vous conduit directement devant votre riad à ${name2}.</p>
-                       <p>Nos prix sont fixés à l'avance par véhicule et comprennent le carburant, les péages et les bagages. Tarifs à partir de ${route.privatePrice}€.</p>`,
+                    ? `<p>Booking a <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer with Mdina Tours</a> is the most comfortable and flexible way to get from ${name1} to ${name2}. Instead of carrying luggage through busy train stations or waiting in taxi queues, a professional chauffeur picks you up directly from your hotel, riad, or airport terminal in ${name1} and drives you door-to-door to your destination in ${name2}.</p>
+                       <p>Our flat-rate pricing covers the entire vehicle, fuel, highway tolls, and baggage support, making it highly cost-effective for families and travel groups. Standard rates start from €${route.privatePrice}. Check vehicle options and <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">reserve your private ${name1} to ${name2} transfer online here</a>.</p>`
+                    : `<p>Réserver un <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé avec Mdina Tours</a> est la solution la plus simple et sereine pour relier ${name1} et ${name2}. Un chauffeur professionnel vous accueille devant votre hôtel ou à la sortie de votre terminal à ${name1} et vous conduit directement devant votre riad à ${name2}.</p>
+                       <p>Nos prix sont fixés à l'avance par véhicule et comprennent le carburant, les péages et les bagages. Tarifs à partir de ${route.privatePrice}€. Découvrez les véhicules disponibles et <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">réservez votre transfert privé ${name1} – ${name2} en ligne ici</a>.</p>`,
                 list: isEn
                     ? [
                         "Complete door-to-door service without city taxi changes",
@@ -199,13 +230,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             },
             {
                 id: "cta",
-                title: isEn ? "Book Your Private Transfer Today" : "Réservez votre transfert privé",
+                title: isEn ? `Book Your Private Transfer from ${name1} to ${name2}` : `Réservez votre transfert privé ${name1} – ${name2}`,
                 content: isEn
-                    ? `<p>Ready to secure your ride from ${name1} to ${name2}? Skip the hassle and reserve a modern vehicle with a professional driver. No deposit is required – book on WhatsApp and pay your driver directly upon completion.</p>`
-                    : `<p>Prêt à réserver votre trajet de ${name1} à ${name2} ? Évitez le stress et réservez un van ou une berline avec chauffeur privé. Aucun prépaiement n'est requis – payez directement à l'arrivée.</p>`,
+                    ? `<p>Ready to secure your ride from ${name1} to ${name2}? Skip the hassle and reserve a modern vehicle with a professional driver. No deposit is required – book on our website or on WhatsApp and pay your driver directly upon arrival.</p>`
+                    : `<p>Prêt à réserver votre trajet de ${name1} à ${name2} ? Évitez le stress et réservez un van ou une berline avec chauffeur privé. Aucun prépaiement n'est requis – réservez en ligne ou sur WhatsApp et payez directement à l'arrivée.</p>`,
                 isCallToAction: true,
                 ctaType: 'transfer',
-                ctaLink: `/transfers/${key}-transfer`
+                ctaLink: `/transfers/${key}-transfer`,
+                ctaText: isEn ? `Book ${name1} to ${name2} Transfer Online` : `Réserver le Transfert ${name1} – ${name2} en Ligne`
             }
         ];
 
@@ -262,8 +294,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "introduction",
                 title: isEn ? "Overview: Train vs Private Driver" : "Présentation : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network is efficient, it operates on fixed timetables and terminates at central stations, which requires additional urban transit. Our private transfers provide a door-to-door option, starting from €${route.privatePrice}.</p>`
-                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et le transfert privé avec chauffeur. Cet article détaille les avantages de chaque moyen de transport pour votre itinéraire.</p>`
+                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network is efficient, it operates on fixed timetables and terminates at central stations, which requires additional urban transit. Our <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle.</p>`
+                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et le <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> avec chauffeur. Cet article détaille les avantages de chaque moyen de transport pour votre itinéraire, avec des véhicules récents et climatisés dès ${route.privatePrice}€.</p>`
             },
             {
                 id: "ratings",
@@ -287,18 +319,19 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "cost-breakdown",
                 title: isEn ? "The Cost Comparison: When is a Driver Cheaper?" : "Le budget : Dans quels cas le chauffeur est-il plus économique ?",
                 content: isEn
-                    ? `<p>At first glance, a train ticket costing €10-€25 per person is cheaper than a private vehicle starting from €${route.privatePrice}. However, if you are traveling as a family of 4 or a group of 5, the math changes. Four train tickets plus the cost of local petits taxis on both sides (e.g. from airport to station, then station to riad) can quickly equal or exceed the cost of a private transfer van. With Mdina Tours, you pay one flat rate for the entire vehicle, regardless of passenger count.</p>`
-                    : `<p>Le budget de transport individuel en train est modéré, mais pour les groupes de 3 à 7 personnes, le transfert privé est vite amorti. En additionnant les billets de train et les taxis indispensables aux transferts gares-hôtels pour chaque membre, le coût du chauffeur privé Mdina Tours est très similaire, le stress en moins.</p>`
+                    ? `<p>At first glance, a train ticket costing €10-€25 per person is cheaper than a private vehicle starting from €${route.privatePrice}. However, if you are traveling as a family of 4 or a group of 5, the math changes. Four train tickets plus the cost of local petits taxis on both sides (e.g. from airport to station, then station to riad) can quickly equal or exceed the cost of a private transfer van. With Mdina Tours, you pay one flat rate for the entire vehicle, regardless of passenger count. Check vehicle categories, transparent pricing, and <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">book your private ${name1} to ${name2} transfer online here</a>.</p>`
+                    : `<p>Le budget de transport individuel en train est modéré, mais pour les groupes de 3 à 7 personnes, le transfert privé est vite amorti. En additionnant les billets de train et les taxis indispensables aux transferts gares-hôtels pour chaque membre, le coût du chauffeur privé Mdina Tours est très similaire, le stress en moins. Consultez nos tarifs par passager et <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">réservez votre transfert privé ${name1} – ${name2} en ligne ici</a>.</p>`
             },
             {
                 id: "cta",
-                title: isEn ? "Book Your Private Driver" : "Réservez Votre Chauffeur Privé",
+                title: isEn ? `Book Your ${name1} to ${name2} Private Transfer` : `Réservez Votre Transfert Privé ${name1} – ${name2}`,
                 content: isEn
-                    ? `<p>Skip the train queues and heavy bags. Book a private transfer between ${name1} and ${name2} with Mdina Tours today.</p>`
-                    : `<p>Évitez l'attente en gare et les valises à porter. Réservez votre navette privée entre ${name1} et ${name2} avec Mdina Tours.</p>`,
+                    ? `<p>Skip the train queues and heavy bags. Book a direct private transfer between ${name1} and ${name2} with Mdina Tours today. Instant confirmation, no upfront payment, and pay directly on arrival.</p>`
+                    : `<p>Évitez l'attente en gare et les valises à porter. Réservez votre navette privée entre ${name1} et ${name2} avec Mdina Tours. Confirmation immédiate, zéro prépaiement et règlement direct à l'arrivée.</p>`,
                 isCallToAction: true,
                 ctaType: 'transfer',
-                ctaLink: `/transfers/${key}-transfer`
+                ctaLink: `/transfers/${key}-transfer`,
+                ctaText: isEn ? `Book ${name1} to ${name2} Transfer Online` : `Réserver le Transfert ${name1} – ${name2} en Ligne`
             }
         ];
 
@@ -343,8 +376,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "landing",
                 title: isEn ? `Arriving at ${cityName} Airport` : `Arrivée à l'Aéroport de ${cityName}`,
                 content: isEn
-                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Terminal layouts, customs queues, and aggressive taxi negotiations can make your arrival stressful. Our airport pickup service at <strong>${cityName} Airport</strong> guarantees a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
-                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Entre le passage de la douane et les négociations animées des taxis locaux, commencez votre séjour sans stress. Nos chauffeurs vous accueillent directement à la sortie de la douane avec une pancarte nominative.</p>`
+                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Terminal layouts, customs queues, and aggressive taxi negotiations can make your arrival stressful. Our <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${cityName} Airport pickup service</a> guarantees a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
+                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Entre le passage de la douane et les négociations animées des taxis locaux, commencez votre séjour sans stress. Notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">navette privée Aéroport de ${cityName}</a> vous accueille directement à la sortie de la douane avec une pancarte nominative pour vous conduire à votre hébergement.</p>`
             },
             {
                 id: "comparison",
@@ -357,24 +390,25 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "24/7 Flight Tracking: No extra charge if your landing is delayed",
                         "Meet & Greet: Direct nameboard greeting at arrivals",
                         "Modern Vehicles: Clean, air-conditioned executive vans and sedans",
-                        "No Prepayment: Book on WhatsApp, pay cash to the driver"
+                        "No Prepayment: Book on WhatsApp or online, pay cash to the driver"
                       ]
                     : [
                         "Suivi des vols gratuit : Pas de frais en cas de retard d'avion",
                         "Accueil personnalisé : Pancarte nominative dès la sortie des bagages",
                         "Flotte moderne : Vans et berlines climatisés spacieux",
-                        "Zéro paiement en ligne : Réservez sur WhatsApp, payez sur place"
+                        "Zéro paiement en ligne : Réservez en ligne ou sur WhatsApp, payez sur place"
                       ]
             },
             {
                 id: "cta",
-                title: isEn ? "Book Your Airport Transfer Now" : "Réservez Votre Navette Aéroport",
+                title: isEn ? `Book Your ${cityName} Airport Private Transfer` : `Réservez Votre Navette Aéroport ${cityName}`,
                 content: isEn
-                    ? `<p>Ensure a stress-free arrival. Reserve your airport transfer with Mdina Tours today.</p>`
-                    : `<p>Assurez-vous d'une arrivée sereine. Réservez votre navette aéroport avec Mdina Tours.</p>`,
+                    ? `<p>Ensure a stress-free arrival in Morocco. Reserve your dedicated ${cityName} airport pickup with Mdina Tours today. Flight tracking included, no upfront deposit, and flat-rate transparency.</p>`
+                    : `<p>Assurez-vous d'une arrivée sereine au Maroc. Réservez votre navette privée à l'Aéroport de ${cityName} dès aujourd'hui. Suivi de vol inclus, zéro prépaiement et tarif fixe garanti.</p>`,
                 isCallToAction: true,
                 ctaType: 'transfer',
-                ctaLink: `/airport-transfers`
+                ctaLink: `/transfers/${cityKey}-airport-transfer`,
+                ctaText: isEn ? `Book ${cityName} Airport Transfer Online` : `Réserver la Navette Aéroport ${cityName} en Ligne`
             }
         ];
 
