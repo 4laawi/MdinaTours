@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   // Optimize barrel imports — eliminates 200-800ms cold start cost per library
   experimental: {
     optimizePackageImports: ["lucide-react", "react-icons", "@phosphor-icons/react"],

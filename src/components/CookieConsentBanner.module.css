@@ -1,0 +1,322 @@
+/* Silktide Consent Manager Clean & Minimalist Style */
+
+.promptWrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 390px;
+    max-width: calc(100% - 32px);
+    z-index: 99999;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.promptCard {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    padding: 20px 22px;
+    color: #1f2937;
+    box-sizing: border-box;
+}
+
+.promptHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.promptTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.promptBody {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4b5563;
+    margin: 0 0 16px 0;
+}
+
+.privacyLink {
+    color: #dc834e;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s ease;
+}
+
+.privacyLink:hover {
+    opacity: 0.8;
+}
+
+.promptActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.btnText {
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+}
+
+.btnText:hover {
+    color: #111827;
+}
+
+.btnGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btnSecondary {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.btnSecondary:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.btnPrimary {
+    background: #dc834e;
+    border: 1px solid #dc834e;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.btnPrimary:hover {
+    background: #c8723f;
+    border-color: #c8723f;
+}
+
+/* Modal Overlay for Preferences */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 100000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modalCard {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    color: #1f2937;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.modalTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.modalCloseBtn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s ease;
+}
+
+.modalCloseBtn:hover {
+    color: #374151;
+}
+
+.modalBody {
+    padding: 18px 22px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modalDescription {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+}
+
+.categoryList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.categoryRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.categoryRow:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.categoryInfo {
+    flex: 1;
+}
+
+.categoryName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+}
+
+.categoryDesc {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* Minimalist Clean Toggle Switch (Silktide green/brand) */
+.toggle {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    background: #e5e7eb;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.toggleActive {
+    background: #10b981;
+}
+
+.toggleDisabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.toggleThumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.toggleActive .toggleThumb {
+    transform: translateX(16px);
+}
+
+.modalFooter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 22px;
+    background: #f9fafb;
+    border-top: 1px solid #f3f4f6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+    .promptWrapper {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+        max-width: none;
+    }
+
+    .promptActions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btnGroup {
+        width: 100%;
+    }
+
+    .btnSecondary,
+    .btnPrimary {
+        flex: 1;
+        text-align: center;
+        padding: 9px;
+    }
+
+    .btnText {
+        text-align: center;
+        padding: 4px;
+    }
+}

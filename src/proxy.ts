@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const locales = ['en', 'fr', 'es'];
 const defaultLocale = 'en';
 
-export function proxy(request: NextRequest) {
+export default function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const host = request.headers.get('host') || '';
 

@@ -1,47 +1,55 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
+import styles from './CookieConsentBanner.module.css';
 
 export default function CookieConsentBanner({ lang = 'en' }: { lang?: string }) {
     const [isVisible, setIsVisible] = useState(false);
-    const [showCustom, setShowCustom] = useState(false);
+    const [showCustomModal, setShowCustomModal] = useState(false);
     const [preferences, setPreferences] = useState({ analytics: false, ads: false });
 
     const t = {
-        title: lang === 'es' ? 'Tu Privacidad' : lang === 'fr' ? 'Votre Confidentialité' : 'Your Privacy',
+        title: lang === 'es' ? 'Cookies' : lang === 'fr' ? 'Cookies' : 'Cookies',
         body: lang === 'es' 
-            ? 'Utilizamos cookies para garantizar el buen funcionamiento del sitio, personalizar anuncios (Google Ads) y analizar nuestro tráfico. Por favor, selecciona tus preferencias.' 
+            ? 'Utilizamos cookies para garantizar el buen funcionamiento del sitio, analizar el tráfico y personalizar la publicidad.' 
             : lang === 'fr' 
-            ? 'Nous utilisons des cookies pour assurer le bon fonctionnement du site, personnaliser les publicités (Google Ads) et analyser notre trafic. Veuillez sélectionner vos préférences.'
-            : 'We use cookies to ensure the proper functioning of the site, personalize advertising (Google Ads), and analyze our traffic. Please select your preferences.',
-        acceptAll: lang === 'es' ? 'Aceptar Todas' : lang === 'fr' ? 'Tout Accepter' : 'Accept All',
-        rejectAll: lang === 'es' ? 'Rechazar Opcionales' : lang === 'fr' ? 'Refuser Optionnels' : 'Reject Non-Essential',
+            ? 'Nous utilisons des cookies pour assurer le bon fonctionnement du site, analyser la fréquentation et personnaliser la publicité.'
+            : 'We use cookies to ensure site functionality, analyze traffic, and personalize advertising.',
+        modalTitle: lang === 'es' 
+            ? 'Personalizar preferencias de cookies' 
+            : lang === 'fr' 
+            ? 'Personnaliser vos préférences' 
+            : 'Customize your cookie preferences',
+        modalDesc: lang === 'es'
+            ? 'Seleccione qué cookies desea permitir. Las cookies esenciales siempre están habilitadas.'
+            : lang === 'fr'
+            ? 'Choisissez les cookies que vous souhaitez autoriser. Les cookies indispensables restent toujours activés.'
+            : 'Choose which cookies you want to allow. Essential cookies are always required.',
+        acceptAll: lang === 'es' ? 'Aceptar todas' : lang === 'fr' ? 'Tout accepter' : 'Accept all',
+        rejectAll: lang === 'es' ? 'Rechazar' : lang === 'fr' ? 'Refuser' : 'Reject',
         customize: lang === 'es' ? 'Personalizar' : lang === 'fr' ? 'Personnaliser' : 'Customize',
-        save: lang === 'es' ? 'Guardar Preferencias' : lang === 'fr' ? 'Enregistrer' : 'Save Preferences',
-        essential: lang === 'es' ? 'Esenciales' : lang === 'fr' ? 'Essentiels' : 'Essential',
-        essentialDesc: lang === 'es' ? 'Necesarias para que el sitio funcione.' : lang === 'fr' ? 'Nécessaires au fonctionnement.' : 'Required for the site to function.',
-        analytics: lang === 'es' ? 'Analíticas' : lang === 'fr' ? 'Analytiques' : 'Analytics',
-        analyticsDesc: lang === 'es' ? 'Para entender cómo usas el sitio.' : lang === 'fr' ? 'Pour comprendre votre utilisation.' : 'To understand how you use the site.',
+        save: lang === 'es' ? 'Guardar' : lang === 'fr' ? 'Enregistrer' : 'Save preferences',
+        cancel: lang === 'es' ? 'Cancelar' : lang === 'fr' ? 'Annuler' : 'Cancel',
+        essential: lang === 'es' ? 'Necesarias' : lang === 'fr' ? 'Nécessaires' : 'Necessary',
+        essentialDesc: lang === 'es' ? 'Requeridas para el funcionamiento técnico de la web.' : lang === 'fr' ? 'Indispensables au fonctionnement technique du site.' : 'Required for the website to function properly.',
+        analytics: lang === 'es' ? 'Rendimiento y Analítica' : lang === 'fr' ? 'Performance et Analytique' : 'Performance & Analytics',
+        analyticsDesc: lang === 'es' ? 'Permiten entender cómo interactúan los usuarios con el sitio.' : lang === 'fr' ? 'Permettent de mesurer l\'audience et d\'améliorer le service.' : 'Help us understand how visitors interact with the site.',
         ads: lang === 'es' ? 'Publicidad' : lang === 'fr' ? 'Publicité' : 'Advertising',
-        adsDesc: lang === 'es' ? 'Para mostrarte anuncios relevantes para ti.' : lang === 'fr' ? 'Pour montrer des annonces pertinentes.' : 'To show you relevant ads.',
+        adsDesc: lang === 'es' ? 'Utilizadas para mostrar anuncios y ofertas relevantes.' : lang === 'fr' ? 'Servent à diffuser des annonces pertinentes.' : 'Used to deliver relevant ads and measure campaigns.',
         privacyLink: lang === 'es' ? 'Política de Privacidad' : lang === 'fr' ? 'Politique de Confidentialité' : 'Privacy Policy',
-        back: lang === 'es' ? 'Volver' : lang === 'fr' ? 'Retour' : 'Back',
     };
 
     useEffect(() => {
         const stored = localStorage.getItem('cookieConsent');
         if (!stored) {
-            // Slight delay before showing so it feels less aggressive
-            const timer = setTimeout(() => setIsVisible(true), 1500);
+            const timer = setTimeout(() => setIsVisible(true), 800);
             return () => clearTimeout(timer);
         } else {
             const handleOpen = () => {
                 const currentPrefs = JSON.parse(localStorage.getItem('cookieConsent') || '{"analytics":false,"ads":false}');
                 setPreferences(currentPrefs);
-                setShowCustom(true);
-                setIsVisible(true);
+                setShowCustomModal(true);
             };
             window.addEventListener('openCookieBanner', handleOpen);
             return () => window.removeEventListener('openCookieBanner', handleOpen);
@@ -73,119 +81,163 @@ export default function CookieConsentBanner({ lang = 'en' }: { lang?: string }) 
         }
         
         setIsVisible(false);
-        setTimeout(() => setShowCustom(false), 300); // reset state after animation
+        setShowCustomModal(false);
     };
 
-    if (!isVisible) return null;
-
     return (
-        <AnimatePresence>
-            {isVisible && (
-                <motion.div
-                    initial={{ y: '100%', opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: '100%', opacity: 0 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 lg:p-8 flex justify-center pointer-events-none"
-                >
-                    <div className="bg-white pointer-events-auto border border-[#EAEAEA] shadow-[0_2px_40px_rgba(0,0,0,0.06)] rounded-xl w-full max-w-4xl flex flex-col overflow-hidden font-sans">
-                        
-                        {!showCustom ? (
-                            <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start md:items-center">
-                                <div className="flex-1 space-y-3">
-                                    <h3 className="text-lg font-semibold text-[#111111] tracking-tight">{t.title}</h3>
-                                    <p className="text-sm text-[#787774] leading-relaxed max-w-2xl">
-                                        {t.body} <Link href={`/${lang === 'en' ? '' : lang + '/'}privacy`} className="underline decoration-[#EAEAEA] underline-offset-4 hover:text-[#111111] transition-colors">{t.privacyLink}</Link>.
-                                    </p>
-                                </div>
-                                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
-                                    <button 
-                                        onClick={() => setShowCustom(true)}
-                                        className="px-5 py-2.5 text-sm font-medium text-[#111111] bg-transparent border border-[#EAEAEA] rounded-md hover:bg-[#F7F6F3] transition-colors active:scale-[0.98]"
-                                    >
-                                        {t.customize}
-                                    </button>
-                                    <button 
-                                        onClick={handleRejectAll}
-                                        className="px-5 py-2.5 text-sm font-medium text-[#111111] bg-transparent border border-[#EAEAEA] rounded-md hover:bg-[#F7F6F3] transition-colors active:scale-[0.98]"
-                                    >
-                                        {t.rejectAll}
-                                    </button>
-                                    <button 
-                                        onClick={handleAcceptAll}
-                                        className="px-5 py-2.5 text-sm font-medium text-white bg-[#111111] rounded-md hover:bg-[#333333] transition-colors active:scale-[0.98]"
-                                    >
-                                        {t.acceptAll}
-                                    </button>
-                                </div>
+        <>
+            {/* 1. Silktide Style Compact Prompt */}
+            {isVisible && !showCustomModal && (
+                <div className={styles.promptWrapper}>
+                    <div className={styles.promptCard} role="region" aria-label="Cookie consent">
+                        <div className={styles.promptHeader}>
+                            <h3 className={styles.promptTitle}>{t.title}</h3>
+                        </div>
+                        <p className={styles.promptBody}>
+                            {t.body}{' '}
+                            <Link href={`/${lang === 'en' ? '' : lang + '/'}privacy`} className={styles.privacyLink}>
+                                {t.privacyLink}
+                            </Link>
+                        </p>
+                        <div className={styles.promptActions}>
+                            <button 
+                                type="button"
+                                onClick={() => setShowCustomModal(true)}
+                                className={styles.btnText}
+                            >
+                                {t.customize}
+                            </button>
+                            <div className={styles.btnGroup}>
+                                <button 
+                                    type="button"
+                                    onClick={handleRejectAll}
+                                    className={styles.btnSecondary}
+                                >
+                                    {t.rejectAll}
+                                </button>
+                                <button 
+                                    type="button"
+                                    onClick={handleAcceptAll}
+                                    className={styles.btnPrimary}
+                                >
+                                    {t.acceptAll}
+                                </button>
                             </div>
-                        ) : (
-                            <div className="p-6 md:p-8 flex flex-col gap-6">
-                                <div className="space-y-2">
-                                    <h3 className="text-lg font-semibold text-[#111111] tracking-tight">{t.customize}</h3>
-                                    <p className="text-sm text-[#787774] leading-relaxed">{t.body}</p>
-                                </div>
-                                
-                                <div className="space-y-4 border-y border-[#EAEAEA] py-6">
-                                    <div className="flex items-start justify-between gap-4">
-                                        <div>
-                                            <div className="text-sm font-medium text-[#111111]">{t.essential}</div>
-                                            <div className="text-xs text-[#787774] mt-1">{t.essentialDesc}</div>
-                                        </div>
-                                        <div className="relative inline-block w-10 shrink-0 align-middle select-none">
-                                            <input type="checkbox" checked disabled className="absolute block w-5 h-5 rounded-full bg-white border-[5px] border-[#111111] appearance-none cursor-not-allowed right-0" />
-                                            <label className="block overflow-hidden h-5 rounded-full bg-[#111111] cursor-not-allowed"></label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="flex items-start justify-between gap-4">
-                                        <div>
-                                            <div className="text-sm font-medium text-[#111111]">{t.analytics}</div>
-                                            <div className="text-xs text-[#787774] mt-1">{t.analyticsDesc}</div>
-                                        </div>
-                                        <div 
-                                            className="relative inline-block w-10 shrink-0 align-middle select-none cursor-pointer"
-                                            onClick={() => setPreferences(prev => ({...prev, analytics: !prev.analytics}))}
-                                        >
-                                            <div className={`absolute top-0 w-5 h-5 rounded-full bg-white transition-all duration-200 ease-in-out z-10 shadow-sm ${preferences.analytics ? 'right-0 border-[5px] border-[#111111]' : 'left-0 border border-[#EAEAEA]'}`} />
-                                            <div className={`block overflow-hidden h-5 rounded-full transition-colors duration-200 ease-in-out ${preferences.analytics ? 'bg-[#111111]' : 'bg-[#EAEAEA]'}`}></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="flex items-start justify-between gap-4">
-                                        <div>
-                                            <div className="text-sm font-medium text-[#111111]">{t.ads}</div>
-                                            <div className="text-xs text-[#787774] mt-1">{t.adsDesc}</div>
-                                        </div>
-                                        <div 
-                                            className="relative inline-block w-10 shrink-0 align-middle select-none cursor-pointer"
-                                            onClick={() => setPreferences(prev => ({...prev, ads: !prev.ads}))}
-                                        >
-                                            <div className={`absolute top-0 w-5 h-5 rounded-full bg-white transition-all duration-200 ease-in-out z-10 shadow-sm ${preferences.ads ? 'right-0 border-[5px] border-[#111111]' : 'left-0 border border-[#EAEAEA]'}`} />
-                                            <div className={`block overflow-hidden h-5 rounded-full transition-colors duration-200 ease-in-out ${preferences.ads ? 'bg-[#111111]' : 'bg-[#EAEAEA]'}`}></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="flex justify-end gap-3">
-                                    <button 
-                                        onClick={() => setShowCustom(false)}
-                                        className="px-5 py-2.5 text-sm font-medium text-[#111111] bg-transparent hover:underline transition-all"
-                                    >
-                                        {t.back}
-                                    </button>
-                                    <button 
-                                        onClick={handleSaveCustom}
-                                        className="px-5 py-2.5 text-sm font-medium text-white bg-[#111111] rounded-md hover:bg-[#333333] transition-colors active:scale-[0.98]"
-                                    >
-                                        {t.save}
-                                    </button>
-                                </div>
-                            </div>
-                        )}
+                        </div>
                     </div>
-                </motion.div>
+                </div>
             )}
-        </AnimatePresence>
+
+            {/* 2. Silktide Style Preferences Modal */}
+            {showCustomModal && (
+                <div 
+                    className={styles.modalBackdrop}
+                    onClick={() => {
+                        if (localStorage.getItem('cookieConsent')) {
+                            setShowCustomModal(false);
+                        }
+                    }}
+                >
+                    <div 
+                        className={styles.modalCard}
+                        onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="cookie-modal-title"
+                    >
+                        <div className={styles.modalHeader}>
+                            <h3 id="cookie-modal-title" className={styles.modalTitle}>{t.modalTitle}</h3>
+                            {localStorage.getItem('cookieConsent') && (
+                                <button 
+                                    type="button"
+                                    onClick={() => setShowCustomModal(false)}
+                                    className={styles.modalCloseBtn}
+                                    aria-label="Close"
+                                >
+                                    &times;
+                                </button>
+                            )}
+                        </div>
+
+                        <div className={styles.modalBody}>
+                            <p className={styles.modalDescription}>{t.modalDesc}</p>
+
+                            <div className={styles.categoryList}>
+                                <div className={styles.categoryRow}>
+                                    <div className={styles.categoryInfo}>
+                                        <div className={styles.categoryName}>{t.essential}</div>
+                                        <div className={styles.categoryDesc}>{t.essentialDesc}</div>
+                                    </div>
+                                    <div className={`${styles.toggle} ${styles.toggleActive} ${styles.toggleDisabled}`} title="Always active">
+                                        <div className={styles.toggleThumb} />
+                                    </div>
+                                </div>
+
+                                <div className={styles.categoryRow}>
+                                    <div className={styles.categoryInfo}>
+                                        <div className={styles.categoryName}>{t.analytics}</div>
+                                        <div className={styles.categoryDesc}>{t.analyticsDesc}</div>
+                                    </div>
+                                    <div 
+                                        className={`${styles.toggle} ${preferences.analytics ? styles.toggleActive : ''}`}
+                                        onClick={() => setPreferences(prev => ({ ...prev, analytics: !prev.analytics }))}
+                                        role="switch"
+                                        aria-checked={preferences.analytics}
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === ' ' || e.key === 'Enter') {
+                                                e.preventDefault();
+                                                setPreferences(prev => ({ ...prev, analytics: !prev.analytics }));
+                                            }
+                                        }}
+                                    >
+                                        <div className={styles.toggleThumb} />
+                                    </div>
+                                </div>
+
+                                <div className={styles.categoryRow}>
+                                    <div className={styles.categoryInfo}>
+                                        <div className={styles.categoryName}>{t.ads}</div>
+                                        <div className={styles.categoryDesc}>{t.adsDesc}</div>
+                                    </div>
+                                    <div 
+                                        className={`${styles.toggle} ${preferences.ads ? styles.toggleActive : ''}`}
+                                        onClick={() => setPreferences(prev => ({ ...prev, ads: !prev.ads }))}
+                                        role="switch"
+                                        aria-checked={preferences.ads}
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === ' ' || e.key === 'Enter') {
+                                                e.preventDefault();
+                                                setPreferences(prev => ({ ...prev, ads: !prev.ads }));
+                                            }
+                                        }}
+                                    >
+                                        <div className={styles.toggleThumb} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={styles.modalFooter}>
+                            <button 
+                                type="button"
+                                onClick={() => setShowCustomModal(false)}
+                                className={styles.btnSecondary}
+                            >
+                                {t.cancel}
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={handleSaveCustom}
+                                className={styles.btnPrimary}
+                            >
+                                {t.save}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
