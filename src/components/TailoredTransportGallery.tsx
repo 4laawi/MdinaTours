@@ -4,6 +4,16 @@ import Link from 'next/link';
 import { Language } from '@/lib/translations';
 import styles from './TailoredTransportGallery.module.css';
 
+interface GalleryItem {
+  id: string;
+  title: string;
+  desc: string;
+  image: string;
+  desktopImage?: string;
+  mobileImage?: string;
+  href: string;
+}
+
 interface TailoredTransportGalleryProps {
   lang?: Language;
 }
@@ -14,7 +24,7 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
 
   const getPath = (path: string) => (lang === 'en' && path === '/' ? '/' : `/${lang}${path === '/' ? '' : path}`);
 
-  const items = [
+  const items: GalleryItem[] = [
     {
       id: 'airport',
       title: isEn ? "Airport Transfers" : (isEs ? "Traslados de Aeropuerto" : "Transferts Aéroport"),
@@ -24,6 +34,8 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
         ? "Recepción personalizada en terminal con seguimiento de vuelos en directo, ayuda con equipaje y salida directa."
         : "Accueil personnalisé en sortie de terminal avec suivi de vol en direct, aide aux bagages et départ immédiat.",
       image: "/img2/aeroport-marrakech.webp",
+      desktopImage: "/img2/aeroport-marrakech(desktop).webp",
+      mobileImage: "/img2/aeroport-marrakech(mobile).webp",
       href: getPath('/transfers')
     },
     {
@@ -35,6 +47,8 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
         ? "Circuito privado de 8 días en vehículo con chófer por ciudades imperiales, el Atlas, las dunas del Sahara y Chefchaouen."
         : "Circuit privé de 8 jours avec véhicule et chauffeur dédié reliant villes impériales, Haut Atlas, dunes du Sahara et Chefchaouen.",
       image: "/img/Morocco-trip-tour-hero01.webp",
+      desktopImage: "/img/Morocco-trip-tour-hero01 (desktop).webp",
+      mobileImage: "/img/Morocco-trip-tour-hero01 (mobile).webp",
       href: getPath('/car-with-driver-morocco-8-days')
     },
     {
@@ -46,6 +60,8 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
         ? "Total libertad de horarios con un vehículo y conductor privado a su disposición para reuniones, cenas o visitas."
         : "Flexibilité totale avec un véhicule et chauffeur privé à votre disposition pour réunions, dîners ou déplacements urbains.",
       image: "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+      desktopImage: "/img/chauffeur-costume-mercedes-noires(desktop).webp",
+      mobileImage: "/img/chauffeur-costume-mercedes-noires(mobile).webp",
       href: getPath('/private-driver-morocco')
     },
     {
@@ -108,13 +124,26 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
           {items.map((item) => (
             <Link key={item.id} href={item.href} className={styles.galleryCard}>
               <div className={styles.imageFrame}>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className={styles.cardImage}
-                />
+                {item.mobileImage && item.desktopImage ? (
+                  <picture className={styles.cardPicture}>
+                    <source media="(max-width: 640px)" srcSet={encodeURI(item.mobileImage)} />
+                    <img
+                      src={encodeURI(item.desktopImage)}
+                      alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      className={styles.cardImage}
+                    />
+                  </picture>
+                ) : (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px"
+                    className={styles.cardImage}
+                  />
+                )}
                 <div className={styles.imageOverlay} />
               </div>
               <div className={styles.cardContent}>
