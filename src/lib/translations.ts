@@ -220,7 +220,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'zt_card_subtitle': 'Experience authentic Moroccan hospitality',
         
         // Footer
-        'footer_desc': 'Mdina Tours is a premium digital travel agency based in Rabat, Morocco. We offer reliable private transfers, professional chauffeur services, and custom tours through our hand-selected local driver network.',
+        'footer_desc': 'At Mdina Tours we provide licensed private drivers, VIP chauffeur services, and direct airport transfers across Morocco. From Casablanca and Rabat to Marrakech, Fes, and the Sahara, enjoy fixed transparent pricing, modern executive vehicles, and total peace of mind with zero upfront deposits, only pay after each travel day',
         'footer_explore': 'Discover Morocco',
         'footer_contact': 'Contact Coordinates',
         'footer_follow': 'Follow Our Journeys',
