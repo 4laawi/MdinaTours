@@ -106,11 +106,11 @@ export default async function LocaleLayout({
 }) {
     const { lang } = await params;
 
-    let agencyDescription = "Mdina Tours is a premium Morocco travel agency offering airport transfers, intercity driver services, and customizable private tours from Rabat.";
+    let agencyDescription = "Mdina Tours provides licensed private drivers, VIP chauffeur services, airport transfers, and bespoke private tours across Morocco.";
     if (lang === 'fr') {
-        agencyDescription = "Mdina Tours est une agence de voyage de premier plan au Maroc proposant des transferts aéroports, des chauffeurs privés et des circuits sur mesure depuis Rabat.";
+        agencyDescription = "Mdina Tours propose des services de chauffeur privé haut de gamme, des transferts aéroport et des circuits privés sur mesure au Maroc.";
     } else if (lang === 'es') {
-        agencyDescription = "Mdina Tours ofrece servicios de transporte privado, traslados de aeropuerto y excursiones a medida en Marruecos con conductores profesionales.";
+        agencyDescription = "Mdina Tours ofrece servicios de chófer privado VIP, traslados de aeropuerto y tours privados a medida en Marruecos con conductores profesionales.";
     }
 
     const jsonLd = {

@@ -391,7 +391,7 @@ export const translations: Record<Language, Record<string, string>> = {
         
         // SEO General
         'seo_title': 'Mdina Tours | Morocco Private Tours & Transfers',
-        'seo_desc': 'Mdina Tours is a premium digital travel agency based in Rabat. We offer reliable private transfers, custom driver services, and official tours across Morocco.'
+        'seo_desc': 'At Mdina Tours we provide licensed private drivers, VIP chauffeur services, and direct airport transfers across Morocco with transparent fixed pricing.'
     },
     fr: {
         'home': 'ACCUEIL',
@@ -612,7 +612,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'zt_card_subtitle': 'Découvrez le sens de l\'hospitalité marocaine',
         
         // Footer
-        'footer_desc': 'Mdina Tours est une agence de voyage numérique haut de gamme basée à Rabat, au Maroc. Nous proposons des transferts privés fiables et des circuits sur mesure grâce à un réseau de chauffeurs rigoureusement sélectionnés.',
+        'footer_desc': 'Chez Mdina Tours, nous mettons à votre disposition des chauffeurs privés agréés, des services de chauffeur VIP et des transferts aéroport directs à travers le Maroc. De Casablanca et Rabat à Marrakech, Fès et le Sahara, profitez de tarifs fixes transparents, de véhicules modernes et d\'une tranquillité totale sans acompte préalable, payez uniquement après chaque journée de voyage',
         'footer_explore': 'Découvrir le Maroc',
         'footer_contact': 'Coordonnées de l\'Agence',
         'footer_follow': 'Suivre Nos Récits',
@@ -1003,7 +1003,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'zt_card_subtitle': 'Hospitalidad y seriedad en cada kilómetro',
         
         // Footer
-        'footer_desc': 'Mdina Tours ofrece servicios de transporte privado, traslados de aeropuerto y excursiones a medida en Marruecos con chóferes locales experimentados.',
+        'footer_desc': 'En Mdina Tours ofrecemos conductores privados autorizados, servicios de chófer VIP y traslados directos de aeropuerto en todo Marruecos. Desde Casablanca y Rabat hasta Marrakech, Fez y el Sáhara, disfrute de precios fijos y transparentes, vehículos ejecutivos modernos y total tranquilidad sin depósito previo, pague solo después de cada día de viaje',
         'footer_explore': 'Explorar Marruecos',
         'footer_contact': 'Contacto',
         'footer_follow': 'Síganos',
