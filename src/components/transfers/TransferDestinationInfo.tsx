@@ -1,9 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
+import { LocalizedTransferData } from '@/lib/transfersData';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function TransferDestinationInfo(props: any) {
-  const { isEn, local, transText, galleryImages, activeImageIndex, setActiveImageIndex, travelers, setTravelers, travelDate, setTravelDate, pickupTime, setPickupTime, isModalOpen, setIsModalOpen, custName, setCustName, custEmail, setCustEmail, custPhone, setCustPhone, custMessage, setCustMessage, isSubmitting, setIsSubmitting, successMessage, setSuccessMessage, errorMessage, setErrorMessage, searchState, setSearchState, showBookingCTAs, setShowBookingCTAs, optionsRef, handleSearchClick, isCalendarOpen, setIsCalendarOpen, isTravelersOpen, setIsTravelersOpen, calendarMonth, setCalendarMonth, calendarYear, setCalendarYear, getDaysInMonth, getFirstDayOfMonth, handlePrevMonth, handleNextMonth, handleDateSelect, formatReadableDate, monthNamesEn, monthNamesFr, weekdayNamesEn, weekdayNamesFr, renderMonth, handleOpenModal, handleSubmit, selectedTier, setSelectedTier, isTimePickerOpen, setIsTimePickerOpen, timePickerRef, getTierLabel, getTierVehicleInfo, getUrgencyDetails, getCancellationDeadline, getWhatsAppUrlForTier, handleShare, timeSlots, currentPrice, urgency, isPast, trans, language } = props;
+interface TransferDestinationInfoProps {
+  local: LocalizedTransferData;
+  isEn?: boolean;
+  transText?: Record<string, string>;
+}
+
+export default function TransferDestinationInfo({ local, isEn = true, transText }: TransferDestinationInfoProps) {
+  const aboutDestLabel = transText?.aboutDest || (isEn ? "About the Destination" : "À propos de la destination");
+  const popularDropoffsLabel = transText?.popularDropoffs || (isEn ? "Popular Drop-off Locations" : "Lieux de dépose fréquents");
+  const travelTipsLabel = transText?.travelTips || (isEn ? "Travel Tips for this Route" : "Conseils de voyage");
 
   return (
     <>
@@ -19,7 +27,7 @@ export default function TransferDestinationInfo(props: any) {
                   letterSpacing: '0.3px', 
                   minHeight: '1.2em' 
               }}>
-                  {transText.aboutDest}: {local.aboutDestination.title}
+                  {aboutDestLabel}: {local.aboutDestination.title}
               </h2>
               <p style={{ 
                   fontSize: '1.02rem', 
@@ -42,7 +50,7 @@ export default function TransferDestinationInfo(props: any) {
                            fontFamily: "'Inter', sans-serif",
                            letterSpacing: '0.2px'
                        }}>
-                           {transText.popularDropoffs}
+                           {popularDropoffsLabel}
                        </h4>
                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }} className="dropoffs-tags-container">
                            {local.popularDropOffs.map((loc: string, idx: number) => {
@@ -92,7 +100,7 @@ export default function TransferDestinationInfo(props: any) {
                   letterSpacing: '0.3px', 
                   minHeight: '1.2em' 
               }}>
-                  {transText.travelTips}
+                  {travelTipsLabel}
               </h2>
               <div style={{ 
                   display: 'grid', 

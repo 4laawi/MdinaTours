@@ -20,14 +20,26 @@ export default function TransferHeroGallery(props: any) {
   const mouseStartX = useRef(0);
 
   const [isMounted, setIsMounted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== 'undefined') {
+      setIsDesktop(window.innerWidth >= 768);
+      const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+      window.addEventListener('resize', handleResize, { passive: true });
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   // Auto-scroll loop: starts after 8s settling delay to keep initial Core Web Vitals metric window calm
   useEffect(() => {
-    setIsMounted(true);
     let interval: NodeJS.Timeout | null = null;
     const delayTimer = setTimeout(() => {
       interval = setInterval(() => {
         if (!isDragging && !isTouchActive.current) {
+          setHasInteracted(true);
           setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
         }
       }, 6000);
@@ -42,6 +54,7 @@ export default function TransferHeroGallery(props: any) {
   // Touch Handlers with Intent Disambiguation
   const onTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length !== 1) return;
+    setHasInteracted(true);
     isTouchActive.current = true;
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -97,6 +110,7 @@ export default function TransferHeroGallery(props: any) {
 
   const onMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
+    setHasInteracted(true);
     isMouseDown.current = true;
     mouseStartX.current = e.clientX;
     setIsDragging(true);
@@ -151,7 +165,7 @@ export default function TransferHeroGallery(props: any) {
           <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
             <div className="gallery-slider-track" style={trackStyle}>
               {galleryImages.map((img: string, idx: number) => {
-                const shouldRender = idx === 0 || (isMounted && Math.abs(idx - activeImageIndex) <= 1);
+                const shouldRender = idx === 0 || ((hasInteracted || activeImageIndex > 0) && Math.abs(idx - activeImageIndex) <= 1);
                 return (
                   <div key={idx} className="gallery-slide-item">
                     {shouldRender ? (
@@ -164,7 +178,7 @@ export default function TransferHeroGallery(props: any) {
                         loading={idx === 0 ? "eager" : "lazy"}
                         decoding={idx === 0 ? "sync" : "async"}
                         style={{ objectFit: 'cover' }}
-                        sizes="(max-width: 768px) 100vw, 750px"
+                        sizes="(max-width: 480px) 384px, (max-width: 768px) 100vw, 750px"
                       />
                     ) : null}
                   </div>
@@ -237,75 +251,100 @@ export default function TransferHeroGallery(props: any) {
           </div>
         </div>
 
-        {/* Clean Fixed 5-Column Thumbnails Grid */}
-        <div className="gallery-thumbnails-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: '8px',
-          marginTop: '10px',
-          width: '100%',
-          boxSizing: 'border-box'
-        }}>
-          {galleryImages.slice(0, 5).map((img: string, idx: number) => {
-            const isSelected = idx === 4 ? activeImageIndex >= 4 : activeImageIndex === idx;
-            const displayImg = idx === 4 && activeImageIndex >= 4 ? galleryImages[activeImageIndex] : img;
-            const remainingCount = galleryImages.length - 4;
-
-            return (
-              <div 
-                key={idx}
-                className="gallery-thumb-item"
-                onClick={() => {
-                  if (idx === 4) {
-                    if (activeImageIndex < 4) {
-                      setActiveImageIndex(4);
-                    } else {
-                      setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 4 : prev + 1));
-                    }
-                  } else {
-                    setActiveImageIndex(idx);
-                  }
-                }}
-                style={{
-                  position: 'relative',
-                  height: '70px',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
-                  boxSizing: 'border-box'
-                }}
-              >
-                <Image
-                  src={displayImg}
-                  alt={`${local.title} thumbnail ${idx + 1}`}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="80px"
-                  loading="lazy"
-                />
-                {idx === 4 && remainingCount > 1 && (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundColor: isSelected ? 'rgba(15, 23, 42, 0.45)' : 'rgba(15, 23, 42, 0.65)',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '12.5px',
-                    fontWeight: 700,
-                    backdropFilter: 'blur(1px)',
-                    transition: 'background-color 0.15s ease'
-                  }}>
-                    <span>+{remainingCount}</span>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+        {/* Mobile pagination indicator dots (saves 5 image requests on mobile) */}
+        <div className="gallery-mobile-dots" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '10px' }}>
+          {galleryImages.map((_: string, dotIdx: number) => (
+            <button
+              key={dotIdx}
+              type="button"
+              onClick={() => { setHasInteracted(true); setActiveImageIndex(dotIdx); }}
+              style={{
+                width: activeImageIndex === dotIdx ? '22px' : '6px',
+                height: '6px',
+                borderRadius: '3px',
+                backgroundColor: activeImageIndex === dotIdx ? 'var(--primary, #00805A)' : '#cbd5e1',
+                border: 'none',
+                padding: 0,
+                transition: 'all 0.25s ease',
+                cursor: 'pointer'
+              }}
+              aria-label={`Go to slide ${dotIdx + 1}`}
+            />
+          ))}
         </div>
+
+        {/* Clean Fixed 5-Column Thumbnails Grid (Rendered on desktop to eliminate mobile image flood) */}
+        {isDesktop && (
+          <div className="gallery-thumbnails-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            gap: '8px',
+            marginTop: '10px',
+            width: '100%',
+            boxSizing: 'border-box'
+          }}>
+            {galleryImages.slice(0, 5).map((img: string, idx: number) => {
+              const isSelected = idx === 4 ? activeImageIndex >= 4 : activeImageIndex === idx;
+              const displayImg = idx === 4 && activeImageIndex >= 4 ? galleryImages[activeImageIndex] : img;
+              const remainingCount = galleryImages.length - 4;
+
+              return (
+                <div 
+                  key={idx}
+                  className="gallery-thumb-item"
+                  onClick={() => {
+                    setHasInteracted(true);
+                    if (idx === 4) {
+                      if (activeImageIndex < 4) {
+                        setActiveImageIndex(4);
+                      } else {
+                        setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 4 : prev + 1));
+                      }
+                    } else {
+                      setActiveImageIndex(idx);
+                    }
+                  }}
+                  style={{
+                    position: 'relative',
+                    height: '70px',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
+                    boxSizing: 'border-box'
+                  }}
+                >
+                  <Image
+                    src={displayImg}
+                    alt={`${local.title} thumbnail ${idx + 1}`}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="80px"
+                    loading="lazy"
+                  />
+                  {idx === 4 && remainingCount > 1 && (
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundColor: isSelected ? 'rgba(15, 23, 42, 0.45)' : 'rgba(15, 23, 42, 0.65)',
+                      color: '#FFFFFF',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      backdropFilter: 'blur(1px)',
+                      transition: 'background-color 0.15s ease'
+                    }}>
+                      <span>+{remainingCount}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -86,6 +86,14 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
                 </div>
 
                 <div className="testimonials-carousel-container">
+                    <svg width="0" height="0" style={{ position: 'absolute' }}>
+                        <defs>
+                            <linearGradient id="transferRevHalfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="50%" stopColor="#f59e0b" />
+                                <stop offset="50%" stopColor="#cbd5e1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <div className="testimonials-marquee-track">
                         {/* First set */}
                         {reviews.map((rev, idx) => (
@@ -93,17 +101,11 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
                                 <div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginBottom: '16px' }}>
                                         {[1, 2, 3, 4].map((s) => (
-                                            <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
+                                             <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
                                                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                             </svg>
                                         ))}
                                         <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
-                                            <defs>
-                                                <linearGradient id="transferRevHalfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                    <stop offset="50%" stopColor="#f59e0b" />
-                                                    <stop offset="50%" stopColor="#cbd5e1" />
-                                                </linearGradient>
-                                            </defs>
                                             <path fill="url(#transferRevHalfGrad)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                         </svg>
                                     </div>

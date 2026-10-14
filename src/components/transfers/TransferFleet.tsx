@@ -151,15 +151,10 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
         }
     };
 
-    // Scroll to the next index (1) ONLY ONCE on initial mount so it starts centered nicely
+    // Initial mount initialization without forced layout reflow
     useEffect(() => {
         if (hasInitialScrolledRef.current || vehicles.length === 0) return;
         hasInitialScrolledRef.current = true;
-        const defaultIndex = vehicles.length > 1 ? 1 : 0;
-        const timer = setTimeout(() => {
-            scrollToIndex(defaultIndex, 'auto');
-        }, 150); // slight delay to ensure layout has completed rendering
-        return () => clearTimeout(timer);
     }, [vehicles.length]);
 
     const scrollPrev = () => {

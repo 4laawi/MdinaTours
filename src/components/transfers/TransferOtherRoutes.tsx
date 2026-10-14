@@ -182,14 +182,10 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
         }
     };
 
-    // Scroll to the first card (index 0) ONLY ONCE on mount so it reliably appears at the beginning
+    // Mark initial mount without forced layout reflow
     useEffect(() => {
         if (hasInitialScrolledRef.current || routes.length === 0) return;
         hasInitialScrolledRef.current = true;
-        const timer = setTimeout(() => {
-            scrollToIndex(0, 'auto');
-        }, 100);
-        return () => clearTimeout(timer);
     }, [routes.length]);
 
     // On scroll reveal: automatically scroll +1 index once the section is revealed into view

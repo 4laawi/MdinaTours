@@ -5,11 +5,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
 import { isSpanishSupported } from '@/lib/seo';
 import TransferBookingFlow from '@/components/TransferBookingFlow';
-import Script from 'next/script';
+import TransferWebRatings from '@/components/transfers/TransferWebRatings';
+import TransferWhatsIncluded from '@/components/transfers/TransferWhatsIncluded';
+import TransferDestinationInfo from '@/components/transfers/TransferDestinationInfo';
+import TransferFAQ from '@/components/transfers/TransferFAQ';
+import faqStyles from '@/components/FAQ.module.css';
+
+// Dynamic code-splitting for heavy off-screen components to avoid blocking the main thread
+const PrivateDriverWhyChooseUs = dynamic(() => import('@/components/PrivateDriverWhyChooseUs'));
+const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'));
+const TransferReviews = dynamic(() => import('@/components/transfers/TransferReviews'));
+const TransferFleet = dynamic(() => import('@/components/transfers/TransferFleet'));
+const TransferOtherRoutes = dynamic(() => import('@/components/transfers/TransferOtherRoutes'));
 
 // Generate static routes for static HTML generation
 export async function generateStaticParams() {
@@ -190,6 +202,79 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             <Header lightBg={true} />
             <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh', paddingTop: '100px' }}>
                 <TransferBookingFlow trans={trans} language={language} />
+
+                {/* Why Choose Us Section */}
+                <PrivateDriverWhyChooseUs lang={language} />
+
+                {/* Video Experience Section */}
+                <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
+                    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+                        <h2 style={{ 
+                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
+                            fontWeight: 700, 
+                            color: 'var(--secondary)', 
+                            marginBottom: '30px',
+                            fontFamily: 'var(--font-poppins), sans-serif'
+                        }}>
+                            {isEn ? "What riding with us feels like" : "L'expérience à bord avec nous"}
+                        </h2>
+                        
+                        <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
+                            <VideoPlayer 
+                                src="/img/tours-mdina-tours-morocco.mp4" 
+                                style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
+                            />
+                        </div>
+
+                        <p style={{ 
+                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', 
+                            fontWeight: 500, 
+                            color: '#555',
+                            margin: '15px 0 0 0',
+                            fontFamily: 'var(--font-poppins), sans-serif',
+                            fontStyle: 'italic'
+                        }}>
+                            {isEn ? "Every transfer. Every time. No surprises." : "Chaque transfert. À chaque fois. Sans surprise."}
+                        </p>
+                    </div>
+                </section>
+
+                {/* Independent Ratings Across the Web */}
+                <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px 0 20px' }}>
+                    <TransferWebRatings isEn={isEn} isEs={isEs} />
+                </div>
+
+                {/* Testimonials (Marquee Reviews) Section */}
+                <TransferReviews language={language} />
+
+                {/* Dynamic Fleet Slider Section */}
+                <TransferFleet prices={trans.prices} lang={language} local={local} />
+
+                {/* Whats Included / What's Covered Section */}
+                <TransferWhatsIncluded language={language} local={local} />
+
+                {/* Other Top Transfer Routes Section */}
+                <TransferOtherRoutes language={language} />
+
+                {/* FAQ Accordion Section */}
+                <section className={faqStyles.faqSection} id="faq">
+                    <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+                        <TransferFAQ faqs={local.faqs} slug={trans.slug} isEn={isEn} />
+                    </div>
+                </section>
+
+                {/* About Destination Section */}
+                {local.aboutDestination && (
+                    <section style={{ 
+                        padding: '100px 20px', 
+                        backgroundColor: '#ffffff', 
+                        borderTop: '1px solid rgba(0,0,0,0.05)' 
+                    }} id="about-destination">
+                        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '50px' }}>
+                            <TransferDestinationInfo local={local} isEn={isEn} />
+                        </div>
+                    </section>
+                )}
             </main>
             <Footer lang={language} />
             <FloatingElements />

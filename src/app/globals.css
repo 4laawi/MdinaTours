@@ -669,6 +669,11 @@ body.modal-open {
     max-width: 100% !important;
     overflow: hidden !important;
 }
+@media (min-width: 769px) {
+    .gallery-mobile-dots {
+        display: none !important;
+    }
+}
 .gallery-thumbnails {
     display: flex;
     overflow-x: auto;
@@ -1010,17 +1015,7 @@ body.modal-open {
         border-radius: 12px !important;
     }
     .gallery-thumbnails-grid {
-        display: grid !important;
-        grid-template-columns: repeat(5, 1fr) !important;
-        gap: 6px !important;
-        margin-top: 6px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    .gallery-thumb-item {
-        height: 52px !important;
-        border-radius: 6px !important;
+        display: none !important;
     }
     .driver-benefit-chips {
         padding: 8px 10px !important;
