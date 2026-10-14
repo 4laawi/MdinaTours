@@ -42,7 +42,7 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                 {/* Brand Column: The Logo and Core Story */}
                 <div className={styles.column}>
                     <div className={styles.logoWrapper}>
-                        <Link href={getPath('/')} aria-label="Mdina Tours Homepage">
+                        <Link href={getPath('/')} prefetch={false} aria-label="Mdina Tours Homepage">
                             <svg viewBox="0 0 280 80" width="180" height="50" className={styles.logoSvg}>
                                 <g transform="translate(10, 15)">
                                     <path d="M25 5 C15 5 10 15 10 25 L10 45 L40 45 L40 25 C40 15 35 5 25 5 Z" fill="none" stroke="#dc834e" strokeWidth="2.5" />
@@ -64,42 +64,42 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                     <h2 className={styles.title}>{t('footer_explore')}</h2>
                     <ul className={styles.linksList}>
                         <li>
-                            <Link href={getPath('/')}>{t('home')}</Link>
+                            <Link href={getPath('/')} prefetch={false}>{t('home')}</Link>
                         </li>
                         <li>
-                            <Link href={getPath('/about')}>{language === 'es' ? 'Sobre Nosotros' : t('footer_our_story')}</Link>
+                            <Link href={getPath('/about')} prefetch={false}>{language === 'es' ? 'Sobre Nosotros' : t('footer_our_story')}</Link>
                         </li>
                         <li>
-                            <Link href={language === 'es' ? '/es/tours/chefchaouen-day-trip' : getPath('/tours')}>
+                            <Link href={language === 'es' ? '/es/tours/chefchaouen-day-trip' : getPath('/tours')} prefetch={false}>
                                 {isEn ? 'Morocco Tours' : (language === 'es' ? 'Excursiones en Marruecos' : 'Circuits Maroc')}
                             </Link>
                         </li>
                         <li>
-                            <Link href={language === 'es' ? '/es/airport-transfers' : getPath('/transfers')}>
+                            <Link href={language === 'es' ? '/es/airport-transfers' : getPath('/transfers')} prefetch={false}>
                                 {isEn ? 'Morocco Transfers' : (language === 'es' ? 'Traslados en Marruecos' : 'Transferts Maroc')}
                             </Link>
                         </li>
                         <li>
-                            <Link href={language === 'es' ? '/es/private-driver-morocco' : getPath('/private-driver')}>
+                            <Link href={language === 'es' ? '/es/private-driver-morocco' : getPath('/private-driver')} prefetch={false}>
                                 {isEn ? 'Private Driver' : (language === 'es' ? 'Chófer Privado' : 'Chauffeur Privé')}
                             </Link>
                         </li>
                         <li>
-                            <Link href={getPath('/faq')}>{t('footer_faq')}</Link>
+                            <Link href={getPath('/faq')} prefetch={false}>{t('footer_faq')}</Link>
                         </li>
                         {language !== 'es' && (
                             <>
                                 <li>
-                                    <Link href={getPath('/blog')}>{t('footer_blog')}</Link>
+                                    <Link href={getPath('/blog')} prefetch={false}>{t('footer_blog')}</Link>
                                 </li>
                                 <li>
-                                    <Link href={getPath('/partners')}>{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
+                                    <Link href={getPath('/partners')} prefetch={false}>{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
                                 </li>
                             </>
                         )}
                         {language === 'es' && (
                             <li>
-                                <Link href="/es/contact">{t('contact_us')}</Link>
+                                <Link href="/es/contact" prefetch={false}>{t('contact_us')}</Link>
                             </li>
                         )}
                     </ul>
@@ -165,8 +165,8 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                         &copy; {currentYear} Mdina Tours Company.
                     </div>
                     <div className={styles.legalLinks}>
-                        <Link href={getPath('/privacy')}>{t('footer_privacy')}</Link>
-                        <Link href={getPath('/terms')}>{t('footer_terms')}</Link>
+                        <Link href={getPath('/privacy')} prefetch={false}>{t('footer_privacy')}</Link>
+                        <Link href={getPath('/terms')} prefetch={false}>{t('footer_terms')}</Link>
                         <CookieConsentRevokeLink lang={lang} />
                     </div>
                 </div>

@@ -99,7 +99,7 @@ export default function VideoPlayer({
         <video
             ref={videoRef}
             src={shouldLoad ? activeSrc : undefined}
-            poster={poster}
+            poster={shouldLoad ? poster : undefined}
             preload={shouldLoad ? 'auto' : 'none'}
             controls={controls}
             autoPlay={autoPlay}

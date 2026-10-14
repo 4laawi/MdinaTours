@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { Language } from '@/lib/translations';
 import { trackLeadConversion } from '@/lib/tracking';
@@ -286,14 +287,14 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                     <div className={styles.routesCarouselGrid} ref={scrollContainerRef}>
                         {routes.map((route, idx) => (
                             <div key={idx} className={styles.routeCard}>
-                                <Link href={getPath(route.slug)} className="private-driver-route-img-link" style={{ display: 'block', position: 'relative' }}>
+                                <Link href={getPath(route.slug)} prefetch={false} className="private-driver-route-img-link" style={{ display: 'block', position: 'relative' }}>
                                     <div className={styles.routeImgContainer}>
-                                        <img 
+                                        <Image 
                                             src={route.image} 
                                             alt={route.title} 
                                             className={styles.routeImg}
-                                            width={380}
-                                            height={220}
+                                            fill
+                                            sizes="(max-width: 680px) 320px, (max-width: 1024px) 50vw, 380px"
                                             loading="lazy"
                                         />
                                         <div style={{
@@ -315,7 +316,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                                 
                                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px', flexGrow: 1 }}>
                                     <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--secondary)', margin: 0 }}>
-                                        <Link href={getPath(route.slug)} style={{ color: 'inherit', textDecoration: 'none' }}>
+                                        <Link href={getPath(route.slug)} prefetch={false} style={{ color: 'inherit', textDecoration: 'none' }}>
                                             {route.title}
                                         </Link>
                                     </h3>
@@ -324,6 +325,7 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
                                     </p>
                                     <Link 
                                         href={getPath(route.slug)}
+                                        prefetch={false}
                                         style={{
                                             display: 'inline-flex',
                                             alignItems: 'center',

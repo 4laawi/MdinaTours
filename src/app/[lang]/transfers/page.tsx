@@ -241,6 +241,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                             </div>
                                             <Link
                                                 href={getPath(`/transfers/${trans.slug}`)}
+                                                prefetch={false}
                                                 style={{
                                                     backgroundColor: 'var(--secondary)',
                                                     color: '#fff',

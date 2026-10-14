@@ -154,10 +154,17 @@ export default function TransfersHero({
     };
 
     return (
-        <section
-            className={styles.banner}
-            style={{ backgroundImage: `url(${bgImage})` }}
-        >
+        <section className={styles.banner}>
+            <Image
+                src={bgImage}
+                alt=""
+                fill
+                priority
+                fetchPriority="high"
+                decoding="sync"
+                style={{ objectFit: 'cover', zIndex: 0 }}
+                sizes="100vw"
+            />
             <div className={styles.overlay}></div>
             <div className={styles.container}>
                 <div className={styles.column}>

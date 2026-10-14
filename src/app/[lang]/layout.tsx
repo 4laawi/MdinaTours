@@ -24,6 +24,7 @@ const cormorant = Cormorant_Garamond({
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-cormorant',
+    preload: false,
 });
 
 const inter = Inter({
@@ -37,6 +38,7 @@ const greatVibes = Great_Vibes({
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-great-vibes',
+    preload: false,
 });
 
 import { Language } from '@/lib/translations';
@@ -146,9 +148,6 @@ export default async function LocaleLayout({
         }
     };
 
-    // Preload the hero image (LCP candidate) is handled via art direction in Hero component
-    ReactDOM.preconnect('https://tangier-trip.com', { crossOrigin: 'anonymous' });
-
     return (
         <html lang={lang} className={`${outfit.variable} ${cormorant.variable} ${inter.variable} ${greatVibes.variable}`}>
             <body>
@@ -164,12 +163,8 @@ export default async function LocaleLayout({
                     <CookieConsentBanner lang={lang} />
                 </LanguageProvider>
                 <Script
-                    strategy="lazyOnload"
-                    src="https://www.googletagmanager.com/gtag/js?id=G-58G6F3HW5G"
-                />
-                <Script
                     id="ga-init"
-                    strategy="lazyOnload"
+                    strategy="afterInteractive"
                     dangerouslySetInnerHTML={{
                         __html: `
                             window.dataLayer = window.dataLayer || [];
@@ -208,6 +203,27 @@ export default async function LocaleLayout({
                                 page_path: window.location.pathname,
                             });
                             gtag('config', 'AW-862828202');
+
+                            // Load GTM script on first user interaction or idle to maximize TBT/Core Web Vitals
+                            function loadGTM() {
+                                if (window.__gtmLoaded) return;
+                                window.__gtmLoaded = true;
+                                var s = document.createElement('script');
+                                s.src = 'https://www.googletagmanager.com/gtag/js?id=G-58G6F3HW5G';
+                                s.async = true;
+                                document.head.appendChild(s);
+                            }
+                            var gtmEvents = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+                            function triggerGTM() {
+                                loadGTM();
+                                gtmEvents.forEach(function(ev) { window.removeEventListener(ev, triggerGTM); });
+                            }
+                            gtmEvents.forEach(function(ev) { window.addEventListener(ev, triggerGTM, { passive: true, once: true }); });
+                            if ('requestIdleCallback' in window) {
+                                requestIdleCallback(function() { setTimeout(loadGTM, 3500); });
+                            } else {
+                                setTimeout(loadGTM, 3500);
+                            }
                         `,
                     }}
                 />

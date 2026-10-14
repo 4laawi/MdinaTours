@@ -19,14 +19,24 @@ export default function TransferHeroGallery(props: any) {
   const isMouseDown = useRef(false);
   const mouseStartX = useRef(0);
 
-  // Auto-scroll loop (slow, non-distracting)
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Auto-scroll loop: starts after 8s settling delay to keep initial Core Web Vitals metric window calm
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isDragging && !isTouchActive.current) {
-        setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-      }
-    }, 5000);
-    return () => clearInterval(interval);
+    setIsMounted(true);
+    let interval: NodeJS.Timeout | null = null;
+    const delayTimer = setTimeout(() => {
+      interval = setInterval(() => {
+        if (!isDragging && !isTouchActive.current) {
+          setActiveImageIndex((prev: number) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+        }
+      }, 6000);
+    }, 8000);
+
+    return () => {
+      clearTimeout(delayTimer);
+      if (interval) clearInterval(interval);
+    };
   }, [galleryImages.length, isDragging, setActiveImageIndex]);
 
   // Touch Handlers with Intent Disambiguation
@@ -140,18 +150,26 @@ export default function TransferHeroGallery(props: any) {
         >
           <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
             <div className="gallery-slider-track" style={trackStyle}>
-              {galleryImages.map((img: string, idx: number) => (
-                <div key={idx} className="gallery-slide-item">
-                  <Image
-                    src={img}
-                    alt={`${local.title} view ${idx + 1}`}
-                    fill
-                    priority={idx === 0}
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, 750px"
-                  />
-                </div>
-              ))}
+              {galleryImages.map((img: string, idx: number) => {
+                const shouldRender = idx === 0 || (isMounted && Math.abs(idx - activeImageIndex) <= 1);
+                return (
+                  <div key={idx} className="gallery-slide-item">
+                    {shouldRender ? (
+                      <Image
+                        src={img}
+                        alt={`${local.title} view ${idx + 1}`}
+                        fill
+                        priority={idx === 0}
+                        fetchPriority={idx === 0 ? "high" : "auto"}
+                        loading={idx === 0 ? "eager" : "lazy"}
+                        decoding={idx === 0 ? "sync" : "async"}
+                        style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 768px) 100vw, 750px"
+                      />
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -255,8 +273,7 @@ export default function TransferHeroGallery(props: any) {
                   overflow: 'hidden',
                   cursor: 'pointer',
                   border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
-                  boxSizing: 'border-box',
-                  transition: 'border-color 0.15s ease, transform 0.1s ease'
+                  boxSizing: 'border-box'
                 }}
               >
                 <Image
@@ -264,7 +281,8 @@ export default function TransferHeroGallery(props: any) {
                   alt={`${local.title} thumbnail ${idx + 1}`}
                   fill
                   style={{ objectFit: 'cover' }}
-                  sizes="120px"
+                  sizes="80px"
+                  loading="lazy"
                 />
                 {idx === 4 && remainingCount > 1 && (
                   <div style={{

@@ -955,16 +955,14 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     return (
         <div style={{ backgroundColor: 'var(--bg-color)', color: 'var(--accent)', fontFamily: "'Inter', sans-serif", width: '100%', maxWidth: '100%', overflowX: 'hidden', paddingBottom: '80px' }} className="transfer-page-wrapper">
             
-            {/* ========================================================================= */}
-            {/* DESKTOP VIEW (>= 768px): 100% Intact 2-Column Grid & Sticky Booking Sidebar */}
-            {/* ========================================================================= */}
-            <div className="transfer-desktop-flow">
+            {/* Unified Responsive Booking & Gallery Flow (Single DOM Instance) */}
+            <div className="transfer-single-flow-wrapper" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 30px 20px' }}>
                 {/* Top Breadcrumb & Title */}
-                <div className="breadcrumbs-title-container" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 20px 20px' }}>
+                <div className="breadcrumbs-title-container" style={{ marginBottom: '14px' }}>
                     <nav className="breadcrumb-nav" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', color: '#64748b', marginBottom: '10px' }}>
-                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.home}</Link>
+                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.home}</Link>
                         <span style={{ color: '#cbd5e1' }}>›</span>
-                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.transfers}</Link>
+                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.transfers}</Link>
                         <span style={{ color: '#cbd5e1' }}>›</span>
                         <span style={{ color: 'var(--accent)', fontWeight: 600, maxWidth: '280px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', verticalAlign: 'bottom' }}>
                             {local.pickup} ⇄ {local.dropoff}
@@ -972,18 +970,18 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     </nav>
 
                     <h1 style={{
-                        fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)',
+                        fontSize: 'clamp(1.35rem, 3vw, 1.8rem)',
                         fontWeight: 700,
                         color: 'var(--secondary)',
                         margin: '0 0 10px 0',
-                        lineHeight: '1.2',
+                        lineHeight: '1.25',
                         fontFamily: "var(--font-poppins), sans-serif",
                     }}>
                         {local.title}
                     </h1>
 
                     {/* Compact Social Proof Row */}
-                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '0.875rem', marginBottom: '16px', color: '#475569' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '0.85rem', marginBottom: '16px', color: '#475569' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
                                 {[1, 2, 3, 4].map((i) => (
@@ -993,12 +991,12 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                 ))}
                                 <svg width="17" height="17" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
                                     <defs>
-                                        <linearGradient id="transferStarHalfGradDesktop" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <linearGradient id="transferStarHalfGradSingle" x1="0%" y1="0%" x2="100%" y2="0%">
                                             <stop offset="50%" stopColor="#f59e0b" />
                                             <stop offset="50%" stopColor="#cbd5e1" />
                                         </linearGradient>
                                     </defs>
-                                    <path fill="url(#transferStarHalfGradDesktop)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                    <path fill="url(#transferStarHalfGradSingle)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                 </svg>
                             </div>
                             <span style={{ fontWeight: 700, color: '#0F172A', marginLeft: '1px' }}>4.9</span>
@@ -1018,114 +1016,26 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 </div>
 
                 {/* Main Visual and Booking Section */}
-                <section id="booking-desktop" className="main-booking-section" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }} className="grid-responsive-layout">
-                        
-                        {/* Left Column: Gallery, details and itinerary options */}
-                        <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
+                <section id="booking" className="main-booking-section">
+                    <div className="transfer-main-layout">
+                        {/* Area 1: Gallery */}
+                        <div className="transfer-gallery-col">
                             <TransferHeroGallery {...propsObj} />
-                            <TransferMetaSection {...propsObj} />
-                            <TransferMeetingInfo {...propsObj} />
-                            <TransferVehicleTiers {...propsObj} />
                         </div>
 
-                        {/* Right Column: Sticky Booking Selector Box */}
-                        <div style={{ 
-                            position: 'sticky', 
-                            top: '100px', 
-                            display: 'flex', 
-                            flexDirection: 'column', 
-                            gap: '16px',
-                            maxWidth: '480px',
-                            width: '100%',
-                            height: 'fit-content',
-                            zIndex: 10
-                        }} className="booking-widget-sticky-wrapper">
+                        {/* Area 2: Booking Widget */}
+                        <div className="transfer-widget-col">
                             <TransferBookingWidget {...propsObj} />
                         </div>
 
+                        {/* Area 3: Meeting info, Meta, and Vehicle Tiers */}
+                        <div className="transfer-details-col">
+                            <TransferMeetingInfo {...propsObj} />
+                            <TransferMetaSection {...propsObj} />
+                            <TransferVehicleTiers {...propsObj} />
+                        </div>
                     </div>
                 </section>
-            </div>
-
-            {/* ========================================================================= */}
-            {/* MOBILE VIEW (< 768px): Strict 7-Step High-Conversion Hierarchy */}
-            {/* ========================================================================= */}
-            <div className="transfer-mobile-flow" style={{ maxWidth: '100%', margin: '0 auto', padding: '0 16px 20px 16px' }}>
-                {/* 1. order-1: Breadcrumbs, Page Title */}
-                <div style={{ marginBottom: '10px' }}>
-                    <nav className="breadcrumb-nav" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.72rem', color: '#64748b', marginBottom: '8px' }}>
-                        <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} style={{ color: '#64748b', textDecoration: 'none' }}>{transText.home}</Link>
-                        <span style={{ color: '#cbd5e1' }}>›</span>
-                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} style={{ color: '#64748b', textDecoration: 'none' }}>{transText.transfers}</Link>
-                        <span style={{ color: '#cbd5e1' }}>›</span>
-                        <span style={{ color: 'var(--accent)', fontWeight: 600, maxWidth: '180px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', verticalAlign: 'bottom' }}>
-                            {local.pickup} ⇄ {local.dropoff}
-                        </span>
-                    </nav>
-
-                    <h1 style={{
-                        fontSize: 'clamp(1.35rem, 5vw, 1.65rem)',
-                        fontWeight: 700,
-                        color: 'var(--secondary)',
-                        margin: '0 0 8px 0',
-                        lineHeight: '1.25',
-                        fontFamily: "var(--font-poppins), sans-serif",
-                    }}>
-                        {local.title}
-                    </h1>
-
-                    {/* Compact Social Proof Row */}
-                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '0.825rem', marginBottom: '14px', color: '#475569' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                                {[1, 2, 3, 4].map((i) => (
-                                    <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" style={{ flexShrink: 0, display: 'block' }}>
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                                    </svg>
-                                ))}
-                                <svg width="16" height="16" viewBox="0 0 24 24" style={{ flexShrink: 0, display: 'block' }}>
-                                    <defs>
-                                        <linearGradient id="transferStarHalfGradMobile" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="50%" stopColor="#f59e0b" />
-                                            <stop offset="50%" stopColor="#cbd5e1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <path fill="url(#transferStarHalfGradMobile)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                                </svg>
-                            </div>
-                            <span style={{ fontWeight: 700, color: '#0F172A', marginLeft: '1px' }}>4.9</span>
-                        </div>
-                        <span style={{ color: '#94A3B8' }}>·</span>
-                        <a href="#reviews" style={{ color: '#475569', textDecoration: 'underline', textUnderlineOffset: '2px', fontWeight: 500 }}>
-                            {trans.slug === "casablanca-airport-transfer" ? "120" : "48"} {isEn ? "reviews" : (language === 'es' ? "opiniones" : "avis")}
-                        </a>
-                        <span style={{ color: '#94A3B8' }}>·</span>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', backgroundColor: '#FEF3C7', padding: '2px 8px', borderRadius: '12px' }}>
-                            <span style={{ fontSize: '0.75rem' }}>🏆</span>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#92400E' }}>
-                                {isEn ? "Badge of Excellence" : (language === 'es' ? "Distintivo de Excelencia" : "Badge d'Excellence")}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* 2. Image Carousel */}
-                <div id="booking" style={{ width: '100%', marginBottom: '18px' }}>
-                    <TransferHeroGallery {...propsObj} />
-                </div>
-
-                {/* 3. The main Booking Card */}
-                <div style={{ width: '100%', marginBottom: '24px' }}>
-                    <TransferBookingWidget {...propsObj} />
-                </div>
-
-                {/* 4. Meeting & Pickup Details, Meta Section, and Vehicle Tiers */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
-                    <TransferMeetingInfo {...propsObj} />
-                    <TransferMetaSection {...propsObj} />
-                    <TransferVehicleTiers {...propsObj} />
-                </div>
             </div>
 
             {/* Why Choose Us Section */}

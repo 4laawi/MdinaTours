@@ -61,12 +61,13 @@ function AnimatedNumber({
             const easedProgress = progress * (2 - progress);
             
             const currentVal = start + easedProgress * (end - start);
-            setCount(currentVal);
+            if (elementRef.current) {
+                const formattedNum = decimals === 0 ? Math.round(currentVal) : currentVal.toFixed(decimals);
+                elementRef.current.textContent = `${prefix}${formattedNum}${suffix}`;
+            }
 
             if (progress < 1) {
                 animationFrameId = requestAnimationFrame(animate);
-            } else {
-                setCount(end);
             }
         };
 
@@ -77,7 +78,7 @@ function AnimatedNumber({
                 cancelAnimationFrame(animationFrameId);
             }
         };
-    }, [hasAnimated, start, end, duration]);
+    }, [hasAnimated, start, end, duration, prefix, suffix, decimals]);
 
     const formattedFinal = `${prefix}${decimals === 0 ? end : end.toFixed(decimals)}${suffix}`;
 

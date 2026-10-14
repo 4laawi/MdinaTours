@@ -8,6 +8,17 @@
     color: var(--accent);
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+}
+
+@media (max-width: 768px) {
+    .faqSection::before,
+    .faqSection::after {
+        display: none !important;
+        content: none !important;
+        background-image: none !important;
+    }
 }
 
 .faqSection::before {

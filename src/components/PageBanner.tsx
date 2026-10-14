@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './PageBanner.module.css';
 
 interface PageBannerProps {
@@ -20,10 +21,17 @@ export default function PageBanner({
     currentLabel,
 }: PageBannerProps) {
     return (
-        <section
-            className={styles.banner}
-            style={{ backgroundImage: `url(${bgImage})` }}
-        >
+        <section className={styles.banner}>
+            <Image
+                src={bgImage}
+                alt=""
+                fill
+                priority
+                fetchPriority="high"
+                decoding="sync"
+                style={{ objectFit: 'cover', zIndex: 0 }}
+                sizes="100vw"
+            />
             <div className={styles.overlay}></div>
             <div className={styles.container}>
                 <div className={styles.column}>

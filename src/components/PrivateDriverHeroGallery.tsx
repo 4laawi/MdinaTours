@@ -31,6 +31,7 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     
     // Touch gesture disambiguation refs
     const touchStartX = useRef(0);
@@ -42,14 +43,22 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     const isMouseDown = useRef(false);
     const mouseStartX = useRef(0);
 
-    // Auto-scroll loop (slow, non-distracting)
+    // Auto-scroll loop: starts after 8s settling delay to keep initial Core Web Vitals metric window calm
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (!isDragging && !isTouchActive.current) {
-                setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-            }
-        }, 5000);
-        return () => clearInterval(interval);
+        setIsMounted(true);
+        let interval: NodeJS.Timeout | null = null;
+        const delayTimer = setTimeout(() => {
+            interval = setInterval(() => {
+                if (!isDragging && !isTouchActive.current) {
+                    setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+                }
+            }, 6000);
+        }, 8000);
+
+        return () => {
+            clearTimeout(delayTimer);
+            if (interval) clearInterval(interval);
+        };
     }, [galleryImages.length, isDragging]);
 
     // Touch Handlers with Intent Disambiguation
@@ -172,18 +181,26 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
                 >
                     <div className="gallery-slider-viewport" style={{ touchAction: 'pan-y' }}>
                         <div className="gallery-slider-track" style={trackStyle}>
-                            {galleryImages.map((img, idx) => (
-                                <div key={idx} className="gallery-slide-item">
-                                    <Image
-                                        src={img}
-                                        alt={`${title} view ${idx + 1}`}
-                                        fill
-                                        priority={idx === 0}
-                                        style={{ objectFit: 'cover' }}
-                                        sizes="(max-width: 768px) 100vw, 750px"
-                                    />
-                                </div>
-                            ))}
+                            {galleryImages.map((img, idx) => {
+                                const shouldRender = idx === 0 || (isMounted && Math.abs(idx - activeImageIndex) <= 1);
+                                return (
+                                    <div key={idx} className="gallery-slide-item">
+                                        {shouldRender ? (
+                                            <Image
+                                                src={img}
+                                                alt={`${title} view ${idx + 1}`}
+                                                fill
+                                                priority={idx === 0}
+                                                fetchPriority={idx === 0 ? "high" : "auto"}
+                                                loading={idx === 0 ? "eager" : "lazy"}
+                                                decoding={idx === 0 ? "sync" : "async"}
+                                                style={{ objectFit: 'cover' }}
+                                                sizes="(max-width: 768px) 100vw, 750px"
+                                            />
+                                        ) : null}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -261,15 +278,17 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
                                     cursor: 'pointer',
                                     border: isSelected ? '2px solid #00805A' : '1px solid #E2E8F0',
                                     boxSizing: 'border-box',
-                                    transition: 'border-color 0.15s ease, transform 0.1s ease'
+                                    transition: 'transform 0.1s ease'
                                 }}
                             >
                                 <Image
                                     src={displayImg}
                                     alt={`${title} thumbnail ${idx + 1}`}
                                     fill
+                                    loading="lazy"
+                                    decoding="async"
                                     style={{ objectFit: 'cover' }}
-                                    sizes="120px"
+                                    sizes="80px"
                                 />
                                 {idx === 4 && remainingCount > 1 && (
                                     <div style={{

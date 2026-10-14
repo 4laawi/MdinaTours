@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import { Users, Briefcase, Wind, Check } from "@phosphor-icons/react";
 
 interface Vehicle {
@@ -655,13 +656,15 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                                 <div key={idx} className={`fleet-card ${isVito ? 'vito-card' : ''} ${activeIndex === idx ? 'active-card' : ''}`}>
                                     {/* Image Area */}
                                     <div className="fleet-img-area">
-                                        <img 
+                                        <Image 
                                             src={v.image} 
                                             alt={v.name} 
                                             className="fleet-img"
                                             width={400}
                                             height={240}
                                             loading="lazy"
+                                            sizes="(max-width: 768px) 290px, 350px"
+                                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
                                         />
                                         <span 
                                             className="fleet-pill fleet-pill-left"

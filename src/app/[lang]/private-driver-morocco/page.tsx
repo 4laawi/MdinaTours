@@ -6,6 +6,7 @@ import VideoPlayer from '@/components/VideoPlayer';
 import { Metadata } from 'next';
 import { Language, translations } from '@/lib/translations';
 import Link from 'next/link';
+import Image from 'next/image';
 import faqStyles from '@/components/FAQ.module.css';
 import PrivateDriverBookingWidget from '@/components/PrivateDriverBookingWidget';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
@@ -466,7 +467,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 {/* Top Breadcrumb & Title */}
                 <div className="breadcrumbs-title-container" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 20px 20px' }}>
                     <nav className="breadcrumb-nav" style={{ display: 'flex', gap: '8px', fontSize: '0.9rem', color: '#666', marginBottom: '15px' }}>
-                        <Link href={getPath('/')} style={{ color: '#666', transition: 'color 0.2s' }}>{t('home')}</Link>
+                        <Link href={getPath('/')} prefetch={false} style={{ color: '#666', transition: 'color 0.2s' }}>{t('home')}</Link>
                         <span style={{ color: '#ccc' }}>›</span>
                         <span style={{ color: 'var(--accent)', fontWeight: 500 }}>{textMorocco.bannerLabel}</span>
                     </nav>
@@ -530,33 +531,15 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
                 {/* Main Visual and Booking Section */}
                 <section id="booking" className="main-booking-section" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 40px 20px' }}>
-                    <div style={{ display: 'grid', gap: '30px' }} className="grid-responsive-layout">
-                        {/* Left Column: Gallery */}
-                        <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div className="grid-responsive-layout pdm-grid-layout">
+                        {/* Column 1: Gallery */}
+                        <div className="transfers-content-col pdm-gallery-col" style={{ display: 'flex', flexDirection: 'column' }}>
                             <PrivateDriverHeroGallery language={language} city="Morocco" title={textMorocco.h1} />
-                            
-                            <div className="mobile-booking-widget" style={{ marginTop: '20px' }}>
-                                <PrivateDriverBookingWidget language={language} defaultCity="Morocco" defaultDays={1} />
-                            </div>
-
-                            <PrivateDriverMetaSection language={language} />
                         </div>
 
-                        {/* Right Column: Sticky Booking Selector Box */}
-                        <div style={{ 
-                            position: 'sticky', 
-                            top: '100px', 
-                            display: 'flex', 
-                            flexDirection: 'column', 
-                            gap: '16px',
-                            maxWidth: '100%',
-                            width: '100%',
-                            height: 'fit-content',
-                            zIndex: 10
-                        }} className="booking-widget-sticky-wrapper">
-                            <div className="desktop-booking-widget">
-                                <PrivateDriverBookingWidget language={language} defaultCity="Morocco" defaultDays={1} />
-                            </div>
+                        {/* Column 2: Booking Selector Box (Single Instance) */}
+                        <div className="pdm-booking-col">
+                            <PrivateDriverBookingWidget language={language} defaultCity="Morocco" defaultDays={1} />
                         </div>
                     </div>
                 </section>
@@ -672,8 +655,8 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
                         {/* Badges / Accreditations */}
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '30px', marginTop: '28px', flexWrap: 'wrap', opacity: 0.85 }}>
-                            <img src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={130} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
-                            <img src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={140} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
+                            <Image src="/img2/trustpilot-logo.webp" alt="Trustpilot" width={130} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
+                            <Image src="/img2/TripAdvisor_Logo.svg" alt="TripAdvisor" width={140} height={32} loading="lazy" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
                         </div>
                     </div>
                 </section>
@@ -793,7 +776,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                              : "Visitez la médina de Marrakech, les sommets de l'Atlas ou évadez-vous pour la journée à Essaouira. Chauffeurs locaux disponibles rapidement."}
                                     </p>
                                 </div>
-                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
+                                <Link href={getPath('/private-driver-marrakech')} prefetch={false} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
                                     {isEn ? "Explore Marrakech Service →" : "Découvrir l'agence Marrakech →"}
                                 </Link>
                             </div>
@@ -809,7 +792,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                              : "Prise en charge à l'aéroport CMN de Casablanca. Idéal pour vos déplacements d'affaires, réunions, ou départs vers Rabat."}
                                     </p>
                                 </div>
-                                <Link href={getPath('/private-driver-casablanca')} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
+                                <Link href={getPath('/private-driver-casablanca')} prefetch={false} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none' }}>
                                     {isEn ? "Explore Casablanca Service →" : "Découvrir l'agence Casablanca →"}
                                 </Link>
                             </div>
@@ -822,12 +805,12 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                     </h3>
                                     <ul style={{ padding: 0, margin: '0 0 16px 0', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.88rem' }}>
                                         <li>
-                                             👉 <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                             👉 <Link href={getPath('/car-with-driver-morocco-8-days')} prefetch={false} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
                                                 {isEn ? "8-Day Morocco Tour Package" : "Forfait Chauffeur 8 Jours"}
                                             </Link>
                                         </li>
                                         <li>
-                                             👉 <Link href={getPath('/chauffeur-dispo-morocco')} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                             👉 <Link href={getPath('/chauffeur-dispo-morocco')} prefetch={false} style={{ color: 'var(--secondary)', fontWeight: 600, textDecoration: 'underline' }}>
                                                 {isEn ? "Understanding 'Chauffeur Dispo'" : "Guide Pratique : Chauffeur Dispo"}
                                             </Link>
                                         </li>
@@ -856,15 +839,17 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                             {itineraries.map((card, idx) => (
                                 <div key={idx} className="private-driver-route-card">
                                     {card.href ? (
-                                        <Link href={getPath(card.href)} className="private-driver-route-img-link">
+                                        <Link href={getPath(card.href)} prefetch={false} className="private-driver-route-img-link">
                                             <div className="private-driver-route-img-container">
-                                                <img 
+                                                <Image 
                                                     src={card.image} 
                                                     alt={card.title} 
                                                     className="private-driver-route-img"
                                                     width={380}
                                                     height={220}
                                                     loading="lazy"
+                                                    sizes="(max-width: 768px) 100vw, 380px"
+                                                    style={{ objectFit: 'cover' }}
                                                 />
                                                 <div className="private-driver-route-price-badge">
                                                     {card.price}
@@ -873,13 +858,15 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                         </Link>
                                     ) : (
                                         <div className="private-driver-route-img-container">
-                                            <img 
+                                            <Image 
                                                 src={card.image} 
                                                 alt={card.title} 
                                                 className="private-driver-route-img"
                                                 width={380}
                                                 height={220}
                                                 loading="lazy"
+                                                sizes="(max-width: 768px) 100vw, 380px"
+                                                style={{ objectFit: 'cover' }}
                                             />
                                             <div className="private-driver-route-price-badge">
                                                 {card.price}
@@ -889,7 +876,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                     <div className="private-driver-route-content">
                                         <h3 className="private-driver-route-title">
                                             {card.href ? (
-                                                <Link href={getPath(card.href)} style={{ color: 'inherit' }}>
+                                                <Link href={getPath(card.href)} prefetch={false} style={{ color: 'inherit' }}>
                                                     {card.title}
                                                 </Link>
                                             ) : (
@@ -902,6 +889,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                         {card.href ? (
                                             <Link 
                                                 href={getPath(card.href)}
+                                                prefetch={false}
                                                 className="private-driver-route-cta private-driver-route-cta-link"
                                             >
                                                 {card.cta}

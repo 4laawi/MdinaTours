@@ -131,7 +131,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
     return (
         <header className={`${styles.header} ${isMenuOpen ? styles.headerActive : ''} ${lightBg ? styles.lightBg : ''}`}>
             <div className={`container ${styles.navInner}`}>
-                <Link href={getPath('/')} className={styles.logo} aria-label="Mdina Tours Homepage">
+                <Link href={getPath('/')} prefetch={false} className={styles.logo} aria-label="Mdina Tours Homepage">
                     <svg viewBox="0 0 280 80" width="180" height="50" className={styles.logoSvg}>
                         <g transform="translate(10, 15)">
                             <path d="M25 5 C15 5 10 15 10 25 L10 45 L40 45 L40 25 C40 15 35 5 25 5 Z" fill="none" stroke="#dc834e" strokeWidth="2.5" />
@@ -149,6 +149,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                         <Link
                             key={item.path}
                             href={getPath(item.path)}
+                            prefetch={false}
                             className={`${styles.navLink} ${isActive(item.path) ? styles.active : ''}`}
                         >
                             {item.label}
@@ -156,6 +157,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                     ))}
                     <Link
                         href={getPath('/contact')}
+                        prefetch={false}
                         className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
                     >
                         {t('contact_us')}
@@ -181,6 +183,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                                     <Link
                                         key={item.path}
                                         href={getPath(item.path)}
+                                        prefetch={false}
                                         className={`${styles.dropdownItem} ${isActive(item.path) ? styles.dropdownItemActive : ''}`}
                                         onClick={() => setIsDropdownOpen(false)}
                                     >
@@ -278,6 +281,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                             <Link
                                 key={`mobile-${item.path}`}
                                 href={getPath(item.path)}
+                                prefetch={false}
                                 className={`${styles.mobileNavLink} ${isActive(item.path) ? styles.mobileActive : ''}`}
                                 onClick={() => setIsMenuOpen(false)}
                                 aria-current={isActive(item.path) ? 'page' : undefined}
@@ -306,6 +310,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                                         <Link
                                             key={`mobile-more-${item.path}`}
                                             href={getPath(item.path)}
+                                            prefetch={false}
                                             className={`${styles.mobileSubLink} ${isActive(item.path) ? styles.mobileSubActive : ''}`}
                                             onClick={() => setIsMenuOpen(false)}
                                         >
@@ -319,6 +324,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                         {/* White Contact Us Pill Button */}
                         <Link
                             href={getPath('/contact')}
+                            prefetch={false}
                             className={styles.mobileContactBtn}
                             onClick={() => setIsMenuOpen(false)}
                         >

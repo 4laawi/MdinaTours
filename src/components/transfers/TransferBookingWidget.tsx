@@ -470,12 +470,13 @@ export default function TransferBookingWidget(props: any) {
               justifyContent: 'center',
               flexShrink: 0
           }}>
-              <img
+              <Image
                   src="/img/fire.webp"
                   alt=""
                   aria-hidden="true"
-                  width="32"
-                  height="32"
+                  width={32}
+                  height={32}
+                  loading="lazy"
               />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>

@@ -604,6 +604,62 @@ body.modal-open {
     grid-template-columns: 1fr;
 }
 
+/* Private Driver Morocco dedicated responsive layout (Single Widget Pattern) */
+.pdm-grid-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 340px !important;
+    gap: 30px !important;
+    align-items: start !important;
+}
+.pdm-gallery-col {
+    min-width: 0 !important;
+}
+.pdm-booking-col {
+    position: sticky !important;
+    top: 100px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    height: fit-content !important;
+    z-index: 10 !important;
+}
+@media (max-width: 767px) {
+    .pdm-grid-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+    .pdm-gallery-col {
+        order: 1 !important;
+        width: 100% !important;
+    }
+    .pdm-booking-col {
+        order: 2 !important;
+        position: static !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+        display: block !important;
+    }
+}
+
+/* Off-screen section rendering optimization for Core Web Vitals */
+.pdm-section-video,
+.pdm-section-testimonials,
+.pdm-section-pricing-factors,
+.pdm-section-hubs,
+.pdm-section-routes,
+#fleet,
+#testimonials,
+#popular-routes,
+#about-destination,
+.transfer-faq-section,
+.about-destination-section,
+.travel-tips-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+}
+
 /* TransferHeroGallery classes */
 .gallery-layout {
     display: flex;
@@ -1072,8 +1128,64 @@ body.modal-open {
     display: none;
 }
 
+/* Transfer Flow Responsive Single Instance Layout */
+.transfer-main-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 380px !important;
+    gap: 30px !important;
+    align-items: start !important;
+}
+.transfer-gallery-col {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+}
+.transfer-widget-col {
+    grid-column: 2 !important;
+    grid-row: 1 / span 2 !important;
+    position: sticky !important;
+    top: 100px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    height: fit-content !important;
+    z-index: 10 !important;
+}
+.transfer-details-col {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    min-width: 0 !important;
+}
+
 /* Mobile overrides for sections and elements */
 @media (max-width: 767px) {
+    .transfer-single-flow-wrapper {
+        padding: 0 16px 20px 16px !important;
+    }
+    .transfer-main-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 18px !important;
+    }
+    .transfer-gallery-col {
+        order: 1 !important;
+        width: 100% !important;
+    }
+    .transfer-widget-col {
+        order: 2 !important;
+        position: static !important;
+        width: 100% !important;
+        margin-top: 4px !important;
+        display: block !important;
+    }
+    .transfer-details-col {
+        order: 3 !important;
+        width: 100% !important;
+    }
     .transfer-desktop-flow {
         display: none !important;
     }
