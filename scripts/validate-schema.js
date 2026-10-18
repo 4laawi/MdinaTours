@@ -95,7 +95,22 @@ function validateSchemaObject(template, schema) {
     if (isProduct) {
         if (!schema.name) logError(template, 'Product schema missing required property "name"');
         if (!schema.image) logWarning(template, 'Product schema missing recommended property "image"');
-        if (!schema.offers) logWarning(template, 'Product schema missing recommended property "offers"');
+        if (!schema.offers && !schema.review && !schema.aggregateRating) {
+            logError(template, 'Product schema missing required property: Either "offers", "review", or "aggregateRating" must be specified (Google Product snippet critical issue)');
+        }
+    }
+
+    // 4b. Offer / Merchant listing structural rules
+    if (schema.offers) {
+        const offers = Array.isArray(schema.offers) ? schema.offers : [schema.offers];
+        offers.forEach((offer, idx) => {
+            if (offer['@type'] !== 'Offer') logError(template, `Offer ${idx} must have @type: "Offer"`);
+            if (!offer.price && !offer.priceSpecification) logError(template, `Offer ${idx} missing "price"`);
+            if (!offer.priceCurrency) logError(template, `Offer ${idx} missing "priceCurrency"`);
+            if (!offer.priceValidUntil && !offer.validThrough) {
+                logWarning(template, `Offer ${idx} missing recommended "priceValidUntil" or "validThrough" for Merchant listings`);
+            }
+        });
     }
 
     // 5. Article / BlogPosting structural rules
@@ -153,6 +168,7 @@ function parseAndValidateFile(filePath) {
         const hasHeadline = blockCode.includes('"headline":') || blockCode.includes('headline:');
         const hasImage = blockCode.includes('"image":');
         const hasOffers = blockCode.includes('"offers":');
+        const hasPriceValidUntil = blockCode.includes('priceValidUntil') || blockCode.includes('validThrough');
         const hasDatePublished = blockCode.includes('"datePublished":');
         const hasAuthor = blockCode.includes('"author":');
         const hasReview = blockCode.includes('"review":') || blockCode.includes('"aggregateRating":');
@@ -163,7 +179,7 @@ function parseAndValidateFile(filePath) {
             name: hasName ? 'Sample Name' : undefined,
             headline: hasHeadline ? 'Sample Headline' : undefined,
             image: hasImage ? 'https://mdinatours.com/sample.jpg' : undefined,
-            offers: hasOffers ? [{ '@type': 'Offer', price: '100', priceCurrency: 'EUR' }] : undefined,
+            offers: hasOffers ? [{ '@type': 'Offer', price: '100', priceCurrency: 'EUR', priceValidUntil: hasPriceValidUntil ? '2027-12-31' : undefined }] : undefined,
             datePublished: hasDatePublished ? '2026-01-01' : undefined,
             author: hasAuthor ? { '@type': 'Organization', name: 'Mdina Tours' } : undefined,
         };

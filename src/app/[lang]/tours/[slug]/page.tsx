@@ -121,7 +121,8 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
             "priceCurrency": "EUR",
             "price": tour.price,
             "availability": "https://schema.org/InStock",
-            "validFrom": "2026-01-01",
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
+            "validFrom": `${new Date().getFullYear()}-01-01`,
             "url": `https://mdinatours.com/${language}/tours/${slug}`
         },
         "itinerary": {

@@ -81,7 +81,7 @@ export default async function AirportTransfersPage({ params }: { params: Promise
 
     const serviceJsonLd = {
         "@context": "https://schema.org",
-        "@type": ["Product", "TaxiService"],
+        "@type": "TaxiService",
         "name": isEn ? "Morocco Airport Transfers" : (isEs ? "Traslados de Aeropuerto en Marruecos" : "Transferts Aéroport au Maroc"),
         "description": serviceDescription,
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero09.webp",

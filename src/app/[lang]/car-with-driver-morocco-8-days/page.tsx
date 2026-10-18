@@ -354,6 +354,7 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
             "price": v.price.replace('€', '').replace(',', ''),
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
             "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`
         }))
     };
@@ -365,6 +366,15 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
         "description": text8Days.subtitle,
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`,
+        "offers": vehicles.map(v => ({
+            "@type": "Offer",
+            "name": v.name,
+            "price": v.price.replace('€', '').replace(',', ''),
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
+            "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`
+        })),
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",

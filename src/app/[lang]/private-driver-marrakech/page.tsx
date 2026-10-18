@@ -343,7 +343,8 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
             "name": v.name,
             "priceCurrency": "EUR",
             "price": v.price.replace('€', ''),
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`
         }))
     };
 
