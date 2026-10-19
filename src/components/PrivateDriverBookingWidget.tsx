@@ -532,8 +532,8 @@ export default function PrivateDriverBookingWidget({
                     }
                     .clean-grid-cell select,
                     .clean-grid-cell input {
-                        font-size: 13px;
-                        height: 26px;
+                        font-size: 16px;
+                        height: 30px;
                     }
                     .dominant-primary-btn {
                         padding: 12px 14px;
@@ -909,12 +909,12 @@ export default function PrivateDriverBookingWidget({
                                     placeholder={t.optionalPlacesPlaceholder}
                                     style={{
                                         width: '100%',
-                                        height: '28px',
+                                        height: '30px',
                                         border: 'none',
                                         outline: 'none',
                                         backgroundColor: 'transparent',
                                         color: '#0F172A',
-                                        fontSize: '13px',
+                                        fontSize: '16px',
                                         fontWeight: 500,
                                         padding: 0
                                     }}
@@ -1023,7 +1023,7 @@ export default function PrivateDriverBookingWidget({
                                         outline: 'none',
                                         backgroundColor: 'transparent',
                                         color: '#0F172A',
-                                        fontSize: '12.5px',
+                                        fontSize: '16px',
                                         fontWeight: 500,
                                         padding: 0,
                                         resize: 'vertical',
@@ -1362,7 +1362,7 @@ export default function PrivateDriverBookingWidget({
                                                 borderRadius: '8px',
                                                 border: '1px solid #CBD5E1',
                                                 padding: '0 12px',
-                                                fontSize: '13.5px',
+                                                fontSize: '16px',
                                                 outline: 'none',
                                                 boxSizing: 'border-box'
                                             }}
@@ -1385,7 +1385,7 @@ export default function PrivateDriverBookingWidget({
                                                 borderRadius: '8px',
                                                 border: '1px solid #CBD5E1',
                                                 padding: '0 12px',
-                                                fontSize: '13.5px',
+                                                fontSize: '16px',
                                                 outline: 'none',
                                                 boxSizing: 'border-box'
                                             }}
@@ -1407,7 +1407,7 @@ export default function PrivateDriverBookingWidget({
                                                 borderRadius: '8px',
                                                 border: '1px solid #CBD5E1',
                                                 padding: '0 12px',
-                                                fontSize: '13.5px',
+                                                fontSize: '16px',
                                                 outline: 'none',
                                                 boxSizing: 'border-box'
                                             }}
@@ -1428,7 +1428,7 @@ export default function PrivateDriverBookingWidget({
                                                 borderRadius: '8px',
                                                 border: '1px solid #CBD5E1',
                                                 padding: '8px 12px',
-                                                fontSize: '13px',
+                                                fontSize: '16px',
                                                 outline: 'none',
                                                 boxSizing: 'border-box',
                                                 fontFamily: 'inherit',

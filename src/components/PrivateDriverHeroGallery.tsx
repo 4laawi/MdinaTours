@@ -17,7 +17,6 @@ export default function PrivateDriverHeroGallery({ language, city, title }: Priv
     const galleryImages = [
         '/b-roll/vitooo.webp',
         '/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp',
-        '/a-mdiinatours/luxury-private-driver-mrocco-private-jet.webp',
         '/a-mdiinatours/chauffeur-costume-mercedes-noires.webp',
         '/img3/vito-mercedes-closeup.webp',
         '/img3/tourists-happy-private-driver-casablanca.webp',

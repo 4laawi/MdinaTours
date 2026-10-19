@@ -2406,3 +2406,17 @@ body.modal-open {
         margin-top: 4px !important;
     }
 }
+
+/* ========================================================
+   Prevent automatic zoom on focus on iOS Safari / Mobile
+   iOS Safari automatically zooms in if an input/select/textarea
+   has a font size < 16px. Enforcing minimum 16px on mobile
+   keeps the viewport completely stable and avoids unwanted zoom.
+   ======================================================== */
+@media screen and (max-width: 768px) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"]),
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
