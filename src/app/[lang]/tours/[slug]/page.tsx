@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { toursData } from '@/lib/toursData';
 import { translations, Language } from '@/lib/translations';
-import { isSpanishSupported } from '@/lib/seo';
+import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import TourBookingWidget from '@/components/TourBookingWidget';
 
 // Generate static routes for static HTML generation
@@ -112,10 +112,7 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
         "image": `https://mdinatours.com${tour.image}`,
         "url": `https://mdinatours.com/${language}/tours/${slug}`,
         "touristType": "International Tourists",
-        "brand": {
-            "@type": "Brand",
-            "name": "Mdina Tours"
-        },
+        "brand": SCHEMA_BRAND,
         "offers": {
             "@type": "Offer",
             "priceCurrency": "EUR",
@@ -123,7 +120,9 @@ export default async function TourLandingPage({ params }: { params: Promise<{ la
             "availability": "https://schema.org/InStock",
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
             "validFrom": `${new Date().getFullYear()}-01-01`,
-            "url": `https://mdinatours.com/${language}/tours/${slug}`
+            "url": `https://mdinatours.com/${language}/tours/${slug}`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         },
         "itinerary": {
             "@type": "ItemList",

@@ -1,5 +1,5 @@
 import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -246,6 +246,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
         "description": textAgadir.subtitle,
         "image": "https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp",
         "url": `https://mdinatours.com/${language}/private-driver-agadir`,
+        "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -268,7 +269,11 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
             "priceCurrency": "EUR",
             "price": v.price.replace('€', ''),
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`
+            "validFrom": `${new Date().getFullYear()}-01-01`,
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
+            "url": `https://mdinatours.com/${language}/private-driver-agadir`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         }))
     };
 

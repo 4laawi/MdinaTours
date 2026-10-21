@@ -67,3 +67,45 @@ export function getAlternates(lang: string, pathWithoutLang: string = '') {
         languages,
     };
 }
+
+export const SCHEMA_BRAND = {
+    "@type": "Brand",
+    "name": "Mdina Tours"
+};
+
+export const SCHEMA_RETURN_POLICY = {
+    "@type": "MerchantReturnPolicy",
+    "applicableCountry": "MA",
+    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+    "merchantReturnDays": 1,
+    "returnMethod": "https://schema.org/ReturnByMail",
+    "returnFees": "https://schema.org/FreeReturn"
+};
+
+export const SCHEMA_SHIPPING_DETAILS = {
+    "@type": "OfferShippingDetails",
+    "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0.00",
+        "currency": "EUR"
+    },
+    "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "MA"
+    },
+    "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+        },
+        "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+        }
+    }
+};

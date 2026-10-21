@@ -1,4 +1,4 @@
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -391,6 +391,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
         "description": textMorocco.subtitle,
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "url": `https://mdinatours.com/${language}/private-driver-morocco`,
+        "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -413,7 +414,11 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
             "priceCurrency": "EUR",
             "price": v.price.replace("€", ""),
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`
+            "validFrom": `${new Date().getFullYear()}-01-01`,
+            "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
+            "url": `https://mdinatours.com/${language}/private-driver-morocco`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         }))
     };
 

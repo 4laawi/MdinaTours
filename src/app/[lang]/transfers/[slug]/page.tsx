@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
-import { isSpanishSupported } from '@/lib/seo';
+import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import TransferBookingFlow from '@/components/TransferBookingFlow';
 import TransferWebRatings from '@/components/transfers/TransferWebRatings';
 import TransferWhatsIncluded from '@/components/transfers/TransferWhatsIncluded';
@@ -130,10 +130,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         "description": local.tagline,
         "image": `https://mdinatours.com${trans.image}`,
         "url": `https://mdinatours.com/${language}/transfers/${slug}`,
-        "brand": {
-            "@type": "Brand",
-            "name": "Mdina Tours"
-        },
+        "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
@@ -155,8 +152,11 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             "priceCurrency": "EUR",
             "price": price,
             "availability": "https://schema.org/InStock",
+            "validFrom": `${new Date().getFullYear()}-01-01`,
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
-            "url": `https://mdinatours.com/${language}/transfers/${slug}`
+            "url": `https://mdinatours.com/${language}/transfers/${slug}`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         }))
     };
 

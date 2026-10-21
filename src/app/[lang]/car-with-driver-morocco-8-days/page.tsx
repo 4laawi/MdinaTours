@@ -1,5 +1,5 @@
 import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
@@ -348,14 +348,18 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
         "name": isEn ? "Morocco 8 Days Itinerary with Private Driver" : isEs ? "Circuito 8 Días en Marruecos con Chófer Privado" : "Circuit 8 Jours Maroc avec Chauffeur Privé",
         "description": text8Days.subtitle,
         "touristType": ["Families", "Couples", "Small Groups"],
+        "brand": SCHEMA_BRAND,
         "offers": vehicles.map(v => ({
             "@type": "Offer",
             "name": v.name,
             "price": v.price.replace('€', '').replace(',', ''),
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
+            "validFrom": `${new Date().getFullYear()}-01-01`,
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
-            "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`
+            "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         }))
     };
 
@@ -366,14 +370,18 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
         "description": text8Days.subtitle,
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`,
+        "brand": SCHEMA_BRAND,
         "offers": vehicles.map(v => ({
             "@type": "Offer",
             "name": v.name,
             "price": v.price.replace('€', '').replace(',', ''),
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
+            "validFrom": `${new Date().getFullYear()}-01-01`,
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
-            "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`
+            "url": `https://mdinatours.com/${language}/car-with-driver-morocco-8-days`,
+            "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
+            "shippingDetails": SCHEMA_SHIPPING_DETAILS
         })),
         "provider": {
             "@type": "LocalBusiness",
