@@ -89,6 +89,11 @@ setPricing("Tangier Airport", "Chefchaouen", { 3: 140, 4: 165, 5: 195, 7: 260 })
 setPricing("Rabat", "Marrakech", { 3: 245, 4: 275, 5: 315, 7: 425 });
 setPricing("Rabat", "Fes", { 3: 165, 4: 190, 5: 220, 7: 295 });
 setPricing("Marrakech", "Agadir", { 3: 185, 4: 215, 5: 250, 7: 345 });
+setPricing("Marrakech Airport", "Agadir", { 3: 185, 4: 215, 5: 250, 7: 345 });
+setPricing("Marrakech Airport", "Agadir Airport", { 3: 185, 4: 215, 5: 250, 7: 345 });
+setPricing("Marrakech", "Agadir Airport", { 3: 185, 4: 215, 5: 250, 7: 345 });
+setPricing("Marrakech Airport", "Essaouira", { 3: 140, 4: 165, 5: 195, 7: 260 });
+setPricing("Marrakech Airport", "Ouarzazate", { 3: 220, 4: 250, 5: 290, 7: 390 });
 setPricing("Fes", "Merzouga", { 3: 370, 4: 425, 5: 495, 7: 640 });
 setPricing("Tangier", "Asilah", { 3: 65, 4: 75, 5: 90, 7: 120 });
 setPricing("Tangier", "Tetouan", { 3: 85, 4: 100, 5: 115, 7: 150 });
@@ -109,7 +114,23 @@ export function getRoutePrice(pickup: string, dropoff: string, passengers: numbe
     }
 
     const key = buildRouteKey(nPickup, nDropoff);
-    const matchedRoute = routePrices[key];
+    let matchedRoute = routePrices[key];
+
+    // If an intercity route between an airport and another destination isn't explicitly configured,
+    // match using the host city if available (e.g. "Marrakech Airport" -> "Agadir" inherits "Marrakech" -> "Agadir")
+    if (!matchedRoute) {
+        const stripAirport = (loc: string) => loc.replace(/\s*Airport$/i, "").trim();
+        const hostPickup = stripAirport(nPickup);
+        const hostDropoff = stripAirport(nDropoff);
+
+        if (hostPickup !== nPickup && routePrices[buildRouteKey(hostPickup, nDropoff)]) {
+            matchedRoute = routePrices[buildRouteKey(hostPickup, nDropoff)];
+        } else if (hostDropoff !== nDropoff && routePrices[buildRouteKey(nPickup, hostDropoff)]) {
+            matchedRoute = routePrices[buildRouteKey(nPickup, hostDropoff)];
+        } else if (hostPickup !== nPickup && hostDropoff !== nDropoff && routePrices[buildRouteKey(hostPickup, hostDropoff)]) {
+            matchedRoute = routePrices[buildRouteKey(hostPickup, hostDropoff)];
+        }
+    }
 
     if (matchedRoute) {
         // Find exact or closest passenger capacity tier
@@ -143,7 +164,7 @@ export function getRoutePrice(pickup: string, dropoff: string, passengers: numbe
     if (airportCityMatch) {
         baseSedanPrice = 45; // Local airport transfer base
     } else if (isAirportTransfer) {
-        baseSedanPrice = 130; // Intercity airport transfer base
+        baseSedanPrice = 185; // Intercity airport transfer base
     }
 
     // Scale price by passenger group size

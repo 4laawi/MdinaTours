@@ -33,17 +33,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
 
-    let title = 'Mdina Tours | Morocco Private Driver, Airport Transfers & Chauffeur Services';
-    let description = 'Reserve private driver services, reliable airport transfers, and custom multi-day private transportation across Morocco. Tailored around your itinerary with pay-after-each-day transparency.';
+    let title = 'Morocco Private Driver & Airport Transfers | Mdina Tours';
+    let description = 'Book premium private driver services and airport transfers across Morocco. Fixed rates, licensed chauffeurs, flight tracking, and transparent daily itineraries.';
     let ogLocale = 'en_US';
 
     if (lang === 'fr') {
-        title = 'Mdina Tours | Chauffeur Privé Maroc, Transferts Aéroport & Transport sur Mesure';
-        description = 'Réservez votre chauffeur privé, transferts aéroport et transport sur plusieurs jours au Maroc. Organisé selon votre propre itinéraire avec paiement à la fin de chaque journée.';
+        title = 'Chauffeur Privé Maroc & Transferts Aéroport | Mdina Tours';
+        description = 'Réservez votre chauffeur privé et transferts aéroport au Maroc. Véhicules avec chauffeur, suivi de vol, tarifs fixes et paiement transparent par journée.';
         ogLocale = 'fr_FR';
     } else if (lang === 'es') {
-        title = 'Mdina Tours | Conductor Privado en Marruecos, Traslados y Chófer Ejecutivo';
-        description = 'Reserve conductor privado, traslados de aeropuerto y transporte personalizado de varios días en Marruecos. Adaptado a su propio itinerario con pago al final de cada jornada.';
+        title = 'Conductor Privado en Marruecos y Traslados | Mdina Tours';
+        description = 'Reserve conductor privado y traslados de aeropuerto en Marruecos. Chófer profesional, tarifas fijas, seguimiento de vuelos y total flexibilidad de ruta.';
         ogLocale = 'es_ES';
     }
 
