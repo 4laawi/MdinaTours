@@ -558,23 +558,67 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                     <div className={styles.container}>
                         <div className={styles.postLayout}>
                             <div className={styles.textContent}>
-                                {/* High-Converting Traveler Alert for No-Train Routes like Chefchaouen */}
-                                {isChefchaouenRoute && (
-                                    <ChefchaouenTrainNotice
-                                        language={language}
-                                        originCity={chefchaouenOrigin}
-                                        transferLink={primaryTransferUrl}
-                                        price={targetedTransferPrice}
-                                        whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
-                                    />
-                                )}
-
                                 {/* Render Programmatic Post Contents */}
                                 {progPost ? (
                                     <>
-                                        {/* Table of Contents */}
+                                        {/* First Section: Heading and Route Overview (Immediate Value to Readers) */}
+                                        {progPost.sections.length > 0 && (
+                                            <section id={progPost.sections[0].id} style={{ scrollMarginTop: '100px' }}>
+                                                <h2 className={styles.firstSectionTitle}>{progPost.sections[0].title}</h2>
+                                                <div 
+                                                    className={styles.sectionContent}
+                                                    dangerouslySetInnerHTML={{ __html: progPost.sections[0].content }}
+                                                />
+                                                {progPost.sections[0].table && (
+                                                    <>
+                                                        <div className={styles.tableScrollHint}>
+                                                            <span>↔ {isEn ? "Scroll table horizontally" : "Faites défiler le tableau"}</span>
+                                                        </div>
+                                                        <div className={styles.comparisonTableWrapper}>
+                                                            <table className={styles.comparisonTable}>
+                                                                <thead>
+                                                                    <tr>
+                                                                        {progPost.sections[0].table.headers.map((h, i) => (
+                                                                            <th key={i}>{h}</th>
+                                                                        ))}
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {progPost.sections[0].table.rows.map((row, i) => (
+                                                                        <tr key={i}>
+                                                                            {row.map((cell, j) => (
+                                                                                <td key={j}>{cell}</td>
+                                                                            ))}
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </>
+                                                )}
+                                                {progPost.sections[0].list && (
+                                                    <ul className={styles.bulletList}>
+                                                        {progPost.sections[0].list.map((item, i) => (
+                                                            <li key={i}>{item}</li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </section>
+                                        )}
+
+                                        {/* Compact Editorial Traveler Notice right below the first paragraph */}
+                                        {isChefchaouenRoute && (
+                                            <ChefchaouenTrainNotice
+                                                language={language}
+                                                originCity={chefchaouenOrigin}
+                                            />
+                                        )}
+
+                                        {/* Compact Quick-Navigation Jump Bar */}
                                         <div className={styles.toc}>
-                                            <h3>{isEn ? "Table of Contents" : "Table des matières"}</h3>
+                                            <div className={styles.tocHeader}>
+                                                <span className={styles.tocTitle}>{isEn ? "In this guide:" : "Dans ce guide :"}</span>
+                                            </div>
                                             <ul className={styles.tocList}>
                                                 {progPost.tableOfContents.map(item => (
                                                     <li key={item.id}>
@@ -589,23 +633,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </ul>
                                         </div>
 
-                                        {/* Featured In-Article Route & Transfer Highlight Card */}
-                                        <BlogRouteHighlightCard
-                                            language={language}
-                                            title={targetedTransferTitle || (isEn ? "Private Chauffeur & Transfers in Morocco" : "Chauffeur Privé & Transferts au Maroc")}
-                                            subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
-                                            routeDetails={routeStats}
-                                            transferLink={primaryTransferUrl}
-                                            transferLinkText={isEn 
-                                                ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
-                                                : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
-                                            whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
-                                            imageUrl={image}
-                                            badgeText={targetedTransferSlug ? (isEn ? "Direct Route Transfer • Mdina Tours" : "Transfert Direct Garanti • Mdina Tours") : undefined}
-                                        />
-
-                                        {/* Sections */}
-                                        {progPost.sections.map(section => (
+                                        {/* Remaining Sections */}
+                                        {progPost.sections.slice(1).map(section => (
                                             <section key={section.id} id={section.id} style={{ scrollMarginTop: '100px' }}>
                                                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                                                 
@@ -623,25 +652,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                         </div>
                                                         <div className={styles.comparisonTableWrapper}>
                                                             <table className={styles.comparisonTable}>
-                                                            <thead>
-                                                                <tr>
-                                                                    {section.table.headers.map((h, i) => (
-                                                                        <th key={i}>{h}</th>
-                                                                    ))}
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {section.table.rows.map((row, i) => (
-                                                                    <tr key={i}>
-                                                                        {row.map((cell, j) => (
-                                                                            <td key={j}>{cell}</td>
+                                                                <thead>
+                                                                    <tr>
+                                                                        {section.table.headers.map((h, i) => (
+                                                                            <th key={i}>{h}</th>
                                                                         ))}
                                                                     </tr>
-                                                                ))}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {section.table.rows.map((row, i) => (
+                                                                        <tr key={i}>
+                                                                            {row.map((cell, j) => (
+                                                                                <td key={j}>{cell}</td>
+                                                                            ))}
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </>
                                                 )}
 
                                                 {/* Optional List */}
@@ -651,39 +680,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                             <li key={i}>{item}</li>
                                                         ))}
                                                     </ul>
-                                                )}
-
-                                                {/* Optional Call to Action Block */}
-                                                {section.isCallToAction && (
-                                                    <div className={styles.ctaBlock}>
-                                                        <span className={styles.ctaBadge}>
-                                                            {isEn ? "Mdina Tours • Private Transfer" : "Mdina Tours • Transfert Privé"}
-                                                        </span>
-                                                        <h3 className={styles.ctaTitle}>{section.title}</h3>
-                                                        <div 
-                                                            dangerouslySetInnerHTML={{ __html: section.content }} 
-                                                            className={styles.ctaTextContainer} 
-                                                        />
-                                                        <div className={styles.ctaActionsRow}>
-                                                            <Link 
-                                                                href={getPath(section.ctaLink || primaryTransferUrl)}
-                                                                className={styles.ctaPrimaryButton}
-                                                            >
-                                                                <span>{section.ctaText || (isEn ? "Book Transfer Online →" : "Réserver le Transfert en Ligne →")}</span>
-                                                            </Link>
-                                                            <a 
-                                                                href={getWhatsAppUrl(section.ctaType || 'transfer', section.ctaLink || primaryTransferUrl)}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className={styles.ctaWhatsAppButton}
-                                                            >
-                                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                                                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.203c.044.072.044.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.123.553 4.116 1.521 5.854l-1.619 5.918 6.069-1.592c1.683.916 3.607 1.438 5.65 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
-                                                                </svg>
-                                                                <span>{isEn ? "WhatsApp Inquiry" : "Réservation WhatsApp"}</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
                                                 )}
                                             </section>
                                         ))}
@@ -706,23 +702,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                 </div>
                                             </section>
                                         )}
-                                    </>
-                                ) : (
-                                    /* Render Standard Blog Post Paragraphs with TOC, Highlight Card, and Sections */
-                                    <>
-                                        {/* Table of Contents */}
-                                        <div className={styles.toc}>
-                                            <h3>{isEn ? "Table of Contents" : "Table des matières"}</h3>
-                                            <ul className={styles.tocList}>
-                                                {tocList.map(item => (
-                                                    <li key={item.id}>
-                                                        <a href={`#${item.id}`}>{item.text}</a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
 
-                                        {/* Featured In-Article Route & Transfer Highlight Card */}
+                                        {/* Single Featured In-Article Route & Transfer Booking Card (Editorial Bottom Placement) */}
                                         <BlogRouteHighlightCard
                                             language={language}
                                             title={targetedTransferTitle || (isEn ? "Private Chauffeur & Transfers in Morocco" : "Chauffeur Privé & Transferts au Maroc")}
@@ -736,9 +717,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             imageUrl={image}
                                             badgeText={targetedTransferSlug ? (isEn ? "Direct Route Transfer • Mdina Tours" : "Transfert Direct Garanti • Mdina Tours") : undefined}
                                         />
+                                    </>
+                                ) : (
+                                    /* Render Standard Blog Post Paragraphs */
+                                    <>
+                                        {/* First Heading and Opening Paragraph */}
+                                        {structuredSections.length > 0 && (
+                                            <section id={structuredSections[0].id} style={{ scrollMarginTop: '100px' }}>
+                                                <h2 className={styles.firstSectionTitle}>{structuredSections[0].title}</h2>
+                                                <div className={styles.sectionContent}>
+                                                    <p className={styles.paragraph}>{structuredSections[0].content}</p>
+                                                </div>
+                                            </section>
+                                        )}
 
-                                        {/* Sections */}
-                                        {structuredSections.map(section => (
+                                        {/* Compact Quick-Navigation Jump Bar */}
+                                        <div className={styles.toc}>
+                                            <div className={styles.tocHeader}>
+                                                <span className={styles.tocTitle}>{isEn ? "In this guide:" : "Dans ce guide :"}</span>
+                                            </div>
+                                            <ul className={styles.tocList}>
+                                                {tocList.map(item => (
+                                                    <li key={item.id}>
+                                                        <a href={`#${item.id}`}>{item.text}</a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* Remaining Sections */}
+                                        {structuredSections.slice(1).map(section => (
                                             <section key={section.id} id={section.id} style={{ scrollMarginTop: '100px' }}>
                                                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                                                 <div className={styles.sectionContent}>
@@ -747,40 +755,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </section>
                                         ))}
 
-                                        <div className={styles.ctaBlock}>
-                                            <span className={styles.ctaBadge}>
-                                                {isEn ? "Mdina Tours • Private Transport" : "Mdina Tours • Transport Privé"}
-                                            </span>
-                                            <h3 className={styles.ctaTitle}>
-                                                {targetedTransferTitle || (isEn ? "Book Your Private Driver or Transfer in Morocco" : "Réservez Votre Chauffeur Privé ou Transfert au Maroc")}
-                                            </h3>
-                                            <div className={styles.ctaTextContainer}>
-                                                <p>
-                                                    {isEn
-                                                        ? "Explore Morocco comfortably with our professional private drivers and direct transfer services. Modern air-conditioned Mercedes fleet, fixed transparent rates, and pay upon completion."
-                                                        : "Voyagez à travers le Maroc en toute sérénité avec nos chauffeurs privés professionnels et nos liaisons directes. Flotte Mercedes climatisée, prix fixes transparents et paiement sur place."}
-                                                </p>
-                                            </div>
-                                            <div className={styles.ctaActionsRow}>
-                                                <Link 
-                                                    href={primaryTransferUrl}
-                                                    className={styles.ctaPrimaryButton}
-                                                >
-                                                    <span>{isEn ? "Book Transfer Online →" : "Réserver le Transfert en Ligne →"}</span>
-                                                </Link>
-                                                <a 
-                                                    href={getWhatsAppUrl('driver', primaryTransferUrl)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={styles.ctaWhatsAppButton}
-                                                >
-                                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                                                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.203c.044.072.044.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.123.553 4.116 1.521 5.854l-1.619 5.918 6.069-1.592c1.683.916 3.607 1.438 5.65 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
-                                                    </svg>
-                                                    <span>{isEn ? "WhatsApp Inquiry" : "Réservation WhatsApp"}</span>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        {/* Single Featured In-Article Route & Transfer Booking Card (Editorial Bottom Placement) */}
+                                        <BlogRouteHighlightCard
+                                            language={language}
+                                            title={targetedTransferTitle || (isEn ? "Private Chauffeur & Transfers in Morocco" : "Chauffeur Privé & Transferts au Maroc")}
+                                            subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
+                                            routeDetails={routeStats}
+                                            transferLink={primaryTransferUrl}
+                                            transferLinkText={isEn 
+                                                ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
+                                                : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
+                                            whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
+                                            imageUrl={image}
+                                            badgeText={targetedTransferSlug ? (isEn ? "Direct Route Transfer • Mdina Tours" : "Transfert Direct Garanti • Mdina Tours") : undefined}
+                                        />
                                     </>
                                 )}
 
@@ -846,6 +834,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             {targetedTransferPrice ? (isEn ? "/ vehicle" : "/ véhicule") : (isEn ? "/ hourly rate" : "/ tarif horaire")}
                                         </span>
                                     </div>
+                                    {targetedTransferPrice && (
+                                        <div className={styles.sidebarGroupValueHelper}>
+                                            {isEn
+                                                ? `Up to 7 guests (~€${Math.round(targetedTransferPrice / 6)}/person for 6)`
+                                                : `Jusqu'à 7 pers. (~${Math.round(targetedTransferPrice / 6)}€/pers. pour 6)`}
+                                        </div>
+                                    )}
                                     <ul className={styles.sidebarTransferPerks}>
                                         <li className={styles.sidebarTransferPerk}>
                                             <span className={styles.sidebarTransferPerkBullet}>•</span>

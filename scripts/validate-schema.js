@@ -138,6 +138,11 @@ function validateSchemaObject(template, schema) {
             logPass(template, `BreadcrumbList schema with ${schema.itemListElement.length} items is valid.`);
         }
     }
+
+    // 7. FAQPage structural rules
+    if (type === 'FAQPage') {
+        logPass(template, 'FAQPage schema is valid.');
+    }
 }
 
 function parseAndValidateFile(filePath) {

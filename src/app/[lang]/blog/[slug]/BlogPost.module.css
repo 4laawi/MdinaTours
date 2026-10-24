@@ -318,30 +318,65 @@
 }
 
 /* Programmatic SEO Element Styles */
+.firstSectionTitle {
+    font-size: 1.85rem;
+    color: #202f59;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid #f0e6df;
+    padding-bottom: 10px;
+    line-height: 1.3;
+}
+
 .toc {
-    background: #fdfaf6;
+    background: #faf8f5;
     border: 1px solid #ebdccb;
     border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 40px;
+    padding: 14px 18px;
+    margin: 24px 0 32px 0;
     max-width: 100%;
     box-sizing: border-box;
 }
 
-.toc h3 {
-    font-size: 1.25rem;
-    color: #202f59;
-    margin-bottom: 15px;
+.tocHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.tocTitle {
+    font-size: 0.82rem;
+    color: #8a622a;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .tocList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+.tocList li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.tocList li::after {
+    content: "•";
+    margin-left: 12px;
+    color: #cbb8a2;
+}
+
+.tocList li:last-child::after {
+    display: none;
 }
 
 .tocList li a {
@@ -349,17 +384,18 @@
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
 }
 
 .tocList li a:hover {
     color: #202f59;
+    text-decoration: underline;
 }
 
 .sectionTitle {
     font-size: 1.75rem;
     color: #202f59;
-    margin-top: 50px;
+    margin-top: 48px;
     margin-bottom: 20px;
     font-weight: 700;
     border-bottom: 1px solid #f0e6df;
@@ -425,12 +461,16 @@
     color: white;
     padding: 14px 18px;
     font-weight: 600;
+    hyphens: none;
+    word-break: normal;
 }
 
 .comparisonTable td {
     padding: 14px 18px;
     border-bottom: 1px solid #eee;
     color: #555;
+    hyphens: none;
+    word-break: normal;
 }
 
 .comparisonTable tr:last-child td {
@@ -623,6 +663,18 @@
 .sidebarTransferPriceSub {
     font-size: 0.78rem;
     color: #787774;
+}
+
+.sidebarGroupValueHelper {
+    font-size: 0.78rem;
+    color: #735414;
+    background-color: #faf5ec;
+    border: 1px solid #ebdccb;
+    border-radius: 4px;
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 14px;
+    font-weight: 500;
 }
 
 .sidebarTransferPerks {

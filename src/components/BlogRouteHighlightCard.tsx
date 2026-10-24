@@ -59,11 +59,18 @@ export default function BlogRouteHighlightCard({
             <div className={styles.kickerRow}>
                 <span className={styles.kicker}>{badgeText || defaultBadge}</span>
                 {routeDetails?.priceFrom && (
-                    <span className={styles.priceTag}>
-                        <span className={styles.pricePrefix}>{isEn ? "From" : "Dès"}</span>
-                        <strong className={styles.priceValue}>€{routeDetails.priceFrom}</strong>
-                        <span className={styles.priceUnit}>{isEn ? "/ vehicle" : "/ véhicule"}</span>
-                    </span>
+                    <div className={styles.priceContainer}>
+                        <div className={styles.priceTag}>
+                            <span className={styles.pricePrefix}>{isEn ? "From" : "Dès"}</span>
+                            <strong className={styles.priceValue}>€{routeDetails.priceFrom}</strong>
+                            <span className={styles.priceUnit}>{isEn ? "/ vehicle" : "/ véhicule"}</span>
+                        </div>
+                        <span className={styles.groupValueHelper}>
+                            {isEn
+                                ? `Up to 7 guests (~€${Math.round(routeDetails.priceFrom / 6)}/person for 6)`
+                                : `Jusqu'à 7 pers. (~${Math.round(routeDetails.priceFrom / 6)}€/pers. pour 6)`}
+                        </span>
+                    </div>
                 )}
             </div>
 

@@ -80,19 +80,26 @@ export const citiesData: Record<string, { en: string; fr: string; attractionsEn:
     agadir: { en: "Agadir", fr: "Agadir", attractionsEn: ["Agadir Ouefla", "Agadir Marina", "Taghazout beach"], attractionsFr: ["Kasbah Ouefla", "Marina", "Plage Taghazout"] }
 };
 
-export const routesData: Record<string, { distance: string; duration: string; privatePrice: number; train: boolean }> = {
-    "tangier-to-rabat": { distance: "250 km", duration: "2h 45m", privatePrice: 210, train: true },
-    "tangier-to-casablanca": { distance: "340 km", duration: "3h 30m", privatePrice: 280, train: true },
-    "tangier-to-chefchaouen": { distance: "120 km", duration: "2h 15m", privatePrice: 140, train: false },
-    "casablanca-to-marrakech": { distance: "240 km", duration: "2h 30m", privatePrice: 220, train: true },
-    "casablanca-to-fes": { distance: "300 km", duration: "3h 15m", privatePrice: 250, train: true },
-    "rabat-to-marrakech": { distance: "325 km", duration: "3h 15m", privatePrice: 245, train: true },
-    "rabat-to-fes": { distance: "200 km", duration: "2h 10m", privatePrice: 165, train: true },
-    "rabat-to-chefchaouen": { distance: "250 km", duration: "4h 00m", privatePrice: 249, train: false },
-    "marrakech-to-essaouira": { distance: "180 km", duration: "2h 45m", privatePrice: 140, train: false },
-    "marrakech-to-agadir": { distance: "250 km", duration: "3h 00m", privatePrice: 185, train: false },
-    "fes-to-chefchaouen": { distance: "200 km", duration: "3h 30m", privatePrice: 170, train: false },
-    "fes-to-merzouga": { distance: "460 km", duration: "7h 30m", privatePrice: 370, train: false }
+export const routesData: Record<string, { 
+    distance: string; 
+    duration: string; 
+    privatePrice: number; 
+    train: boolean;
+    trainType?: 'al-boraq' | 'al-atlas' | 'none';
+    trainDuration?: string;
+}> = {
+    "tangier-to-rabat": { distance: "250 km", duration: "2h 45m", privatePrice: 210, train: true, trainType: 'al-boraq', trainDuration: "1h 20m" },
+    "tangier-to-casablanca": { distance: "340 km", duration: "3h 30m", privatePrice: 280, train: true, trainType: 'al-boraq', trainDuration: "2h 10m" },
+    "tangier-to-chefchaouen": { distance: "120 km", duration: "2h 15m", privatePrice: 140, train: false, trainType: 'none' },
+    "casablanca-to-marrakech": { distance: "240 km", duration: "2h 30m", privatePrice: 220, train: true, trainType: 'al-atlas', trainDuration: "2h 40m" },
+    "casablanca-to-fes": { distance: "300 km", duration: "3h 15m", privatePrice: 250, train: true, trainType: 'al-atlas', trainDuration: "3h 25m" },
+    "rabat-to-marrakech": { distance: "325 km", duration: "3h 15m", privatePrice: 245, train: true, trainType: 'al-atlas', trainDuration: "3h 25m" },
+    "rabat-to-fes": { distance: "200 km", duration: "2h 10m", privatePrice: 165, train: true, trainType: 'al-atlas', trainDuration: "2h 15m" },
+    "rabat-to-chefchaouen": { distance: "250 km", duration: "4h 00m", privatePrice: 249, train: false, trainType: 'none' },
+    "marrakech-to-essaouira": { distance: "180 km", duration: "2h 45m", privatePrice: 140, train: false, trainType: 'none' },
+    "marrakech-to-agadir": { distance: "250 km", duration: "3h 00m", privatePrice: 185, train: false, trainType: 'none' },
+    "fes-to-chefchaouen": { distance: "200 km", duration: "3h 30m", privatePrice: 170, train: false, trainType: 'none' },
+    "fes-to-merzouga": { distance: "460 km", duration: "7h 30m", privatePrice: 370, train: false, trainType: 'none' }
 };
 
 export function getRouteInfo(slug: string) {
@@ -155,10 +162,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "overview",
                 title: isEn ? "Route Overview & Distance" : "Aperçu de la route et distance",
                 content: isEn 
-                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is one of the most scenic journeys in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Whether you choose to hire a <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">licensed private driver in Morocco</a> for complete schedule flexibility, book our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${name1} to ${name2} private transfer</a>, or take public trains and buses, this complete guide breaks down travel times, honest costs, and route advice.</p>
-                       <p>For visitors planning an extended itinerary across imperial cities and desert routes, our <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">custom multi-day private chauffeur service across Morocco</a> provides door-to-door comfort, professional English-speaking drivers, and transparent pay-after-each-day convenience.</p>`
-                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important et pittoresque du voyage au Maroc. La distance routière est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong>. Que vous souhaitiez faire appel à un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a> pour une totale liberté, réserver notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, ou utiliser le train et l'autocar, découvrez notre comparatif complet.</p>
-                       <p>Pour les voyageurs effectuant un circuit touristique à travers plusieurs villes, notre service de <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé pour circuit au Maroc</a> vous permet de découvrir les médinas et paysages à votre rythme avec un véhicule climatisé dédié.</p>`
+                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is one of the most scenic journeys in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Whether you choose to book our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${name1} to ${name2} private transfer</a>, take public trains, or board a regional highway bus, this guide breaks down travel times, honest costs, and route advice.</p>
+                       <p>For visitors planning an extended itinerary across Morocco's imperial cities and desert routes, hiring a dedicated private driver provides door-to-door comfort, professional local chauffeurs, and the flexibility to stop at panoramic viewpoints along the way.</p>`
+                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important et pittoresque du voyage au Maroc. La distance routière est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong>. Que vous souhaitiez réserver notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, prendre le train ou emprunter l'autocar, découvrez notre comparatif complet.</p>
+                       <p>Pour les voyageurs effectuant un circuit touristique à travers plusieurs villes, un chauffeur privé dédié vous permet de découvrir les médinas et paysages à votre rythme avec un véhicule climatisé grand confort.</p>`
             },
             {
                 id: "comparison",
@@ -168,29 +175,33 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     : `<p>Voici un résumé des tarifs, de la durée et du confort pour vous déplacer de ${name1} à ${name2} :</p>`,
                 table: {
                     headers: isEn 
-                        ? ["Option", "Duration", "Cost Estimate", "Flexibility", "Best For"]
-                        : ["Option", "Durée", "Estimation Tarif", "Flexibilité", "Idéal pour"],
+                        ? ["Transport Option", "Door-to-Door Time", "Cost Estimate", "Flexibility", "Best Suited For"]
+                        : ["Mode de Transport", "Temps Porte-à-Porte", "Estimation Tarif", "Flexibilité", "Recommandé Pour"],
                     rows: [
                         [
-                            isEn ? "Private Transfer" : "Transfert Privé",
+                            isEn ? "Private Driver (Mdina Tours)" : "Chauffeur Privé (Mdina Tours)",
                             route.duration,
-                            `€${route.privatePrice} - €${Math.round(route.privatePrice * 1.5)}`,
+                            isEn 
+                                ? `€${route.privatePrice} per van (~€${Math.round(route.privatePrice / 6)}/guest)` 
+                                : `${route.privatePrice}€ par van (~${Math.round(route.privatePrice / 6)}€/pers.)`,
                             isEn ? "Maximum (Door-to-door, any time)" : "Maximale (Porte-à-porte, horaire libre)",
-                            isEn ? "Groups, families, business, stopovers" : "Groupes, familles, valises, confort"
+                            isEn ? "Families, couples, small groups & luggage" : "Familles, couples, petits groupes & bagages"
                         ],
                         [
                             isEn ? "ONCF Train" : "Train ONCF",
-                            route.train ? (isEn ? "Fast (TGV / Express)" : "Rapide (TGV / Ligne)") : "N/A",
-                            route.train ? "€12 - €35" : "N/A",
+                            route.train 
+                                ? (isEn ? `Station-to-station (~${route.duration})` : `Gare à gare (~${route.duration})`) 
+                                : (isEn ? "No direct train (4h30–5h30 with taxi/bus)" : "Pas de train direct (4h30–5h30 avec taxi/bus)"),
+                            route.train ? (isEn ? "€12 - €35 / person" : "12€ - 35€ / personne") : (isEn ? "€25 - €45 (Train + grand taxi)" : "25€ - 45€ (Train + grand taxi)"),
                             isEn ? "Medium (Fixed timetables)" : "Moyenne (Horaires fixes)",
                             isEn ? "Solo travelers, light luggage" : "Voyageurs solos, petits bagages"
                         ],
                         [
-                            isEn ? "Highway Bus (CTM)" : "Autocar (CTM)",
-                            isEn ? "Slower (+1-2 hours)" : "Plus long (+1-2h)",
-                            "€10 - €20",
-                            isEn ? "Low (Fixed terminals)" : "Faible (Gares routières)",
-                            isEn ? "Budget-conscious travelers" : "Voyageurs à budget limité"
+                            isEn ? "Highway Bus (CTM / Supratours)" : "Autocar (CTM / Supratours)",
+                            isEn ? "Slower (+1 to 2 hours vs car)" : "Plus long (+1 à 2h vs voiture)",
+                            isEn ? "€10 - €20 / person" : "10€ - 20€ / personne",
+                            isEn ? "Low (Fixed station terminals)" : "Faible (Gares routières)",
+                            isEn ? "Solo budget backpackers" : "Voyageurs solos à budget limité"
                         ]
                     ]
                 }
@@ -222,24 +233,31 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             {
                 id: "train-alternative",
                 title: isEn ? "Option 2: Travelling by Train" : "Option 2 : Voyager en train",
-                content: route.train
+                content: key.includes("chefchaouen")
                     ? (isEn 
-                        ? `<p>ONCF trains represent a highly popular transport option for this route. High-speed TGV rail services ('Al Boraq') offer fast transit between Tangier, Rabat, and Casablanca. Tickets can be booked online or at the station, though they require local taxis to transport you between the train stations and your accommodation.</p>`
-                        : `<p>Les trains de l'ONCF constituent une option prisée sur cet axe. Le TGV 'Al Boraq' relie rapidement Tanger, Rabat et Casablanca. Les réservations peuvent être effectuées en ligne ou en gare, mais nécessitent de prendre des petits taxis locaux pour rejoindre vos hôtels.</p>`)
-                    : (isEn
-                        ? `<p>Please note that there is no train route connecting ${name1} and ${name2} directly. The mountainous geography or regional rail limits require tourists to choose highway buses, collective grand taxis, or private chauffeur services.</p>`
-                        : `<p>Notez qu'il n'existe pas de liaison ferroviaire directe reliant ${name1} et ${name2}. Les contraintes géographiques ou le réseau ferroviaire imposent de choisir entre les bus, les grands taxis ou un service de chauffeur privé.</p>`)
-            },
-            {
-                id: "cta",
-                title: isEn ? `Book Your Private Transfer from ${name1} to ${name2}` : `Réservez votre transfert privé ${name1} – ${name2}`,
-                content: isEn
-                    ? `<p>Ready to secure your ride from ${name1} to ${name2}? Skip the hassle and reserve a modern vehicle with a professional driver. No deposit is required – book on our website or on WhatsApp and pay your driver directly upon arrival.</p>`
-                    : `<p>Prêt à réserver votre trajet de ${name1} à ${name2} ? Évitez le stress et réservez un van ou une berline avec chauffeur privé. Aucun prépaiement n'est requis – réservez en ligne ou sur WhatsApp et payez directement à l'arrivée.</p>`,
-                isCallToAction: true,
-                ctaType: 'transfer',
-                ctaLink: `/transfers/${key}-transfer`,
-                ctaText: isEn ? `Book ${name1} to ${name2} Transfer Online` : `Réserver le Transfert ${name1} – ${name2} en Ligne`
+                        ? `<p>There is no railway station in Chefchaouen due to the steep Rif Mountain terrain. However, if you want to travel as far as possible by rail, you must use a <strong>two-step train + road connection</strong>:</p>
+                           <ol style="margin: 12px 0 16px 20px; line-height: 1.7;">
+                               <li><strong>Take the ONCF train</strong> from ${name1} to the nearest railway junction—either <strong>Souk El Arbaa</strong> or <strong>Tangier Ville</strong> station.</li>
+                               <li><strong>Transfer with your luggage</strong> to a regional CTM bus or a shared 6-seat collective <em>grand taxi</em>. Keep in mind that collective grand taxis have no fixed departure schedule and only leave when all 6 passenger seats are filled and paid for, with limited trunk space for large suitcases. The road journey from Tangier or Souk El Arbaa into Chefchaouen takes an additional 2 to 2.5 hours through winding mountain passes.</li>
+                           </ol>
+                           <p>While this multi-step route is manageable for solo budget backpackers with light luggage, families and travel groups usually prefer a direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">door-to-door private transfer from ${name1} to Chefchaouen</a> to avoid station transfers and taxi negotiations.</p>`
+                        : `<p>Chefchaouen ne dispose d'aucune gare ferroviaire en raison du relief escarpé des montagnes du Rif. Si vous souhaitez néanmoins faire une partie du trajet sur rails, vous devez suivre une <strong>liaison en deux étapes (train + route)</strong> :</p>
+                           <ol style="margin: 12px 0 16px 20px; line-height: 1.7;">
+                               <li><strong>Prenez le train ONCF</strong> depuis ${name1} jusqu'à la gare ferroviaire la plus proche : <strong>Souk El Arbaa</strong> ou <strong>Tanger Ville</strong>.</li>
+                               <li><strong>Effectuez la correspondance avec vos bagages</strong> vers un autocar CTM ou un grand taxi collectif 6 places. Sachez que les grands taxis ne partent que lorsqu'ils sont complets (les 6 places occupées), avec un coffre souvent restreint pour les valises. Le trajet routier final à travers les lacets du Rif dure encore 2 à 2,5 heures.</li>
+                           </ol>
+                           <p>Bien que cette solution convienne aux routards solos au budget serré, les familles et groupes privilégient largement le confort d'un <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct porte-à-porte de ${name1} à Chefchaouen</a> pour éviter les correspondances et négociations.</p>`)
+                    : (route.train
+                        ? (route.trainType === 'al-boraq'
+                            ? (isEn 
+                                ? `<p>ONCF high-speed rail ('Al Boraq') offers fast, modern transit between Tangier, Rabat, and Casablanca (reaching speeds up to 320 km/h). Tickets can be booked online or at the station. Keep in mind that you will still need local petit taxis on both ends to connect the train station to your hotel or riad.</p>`
+                                : `<p>Le TGV 'Al Boraq' de l'ONCF relie rapidement et confortablement Tanger, Rabat et Casablanca (jusqu'à 320 km/h). Les billets s'achètent en ligne ou en gare. Prévoyez des petits taxis locaux aux deux extrémités pour relier la gare à votre hébergement.</p>`)
+                            : (isEn
+                                ? `<p>The standard ONCF 'Al Atlas' train connects ${name1} and ${name2} directly (taking around ${route.trainDuration} station to station). Trains run multiple times daily. Remember to factor in 30–45 minutes for station arrival, ticket queues, and local taxis to reach your riad on arrival.</p>`
+                                : `<p>Les trains classiques 'Al Atlas' de l'ONCF assurent une liaison directe entre ${name1} et ${name2} (environ ${route.trainDuration} de gare à gare). Plusieurs départs sont programmés chaque jour. Pensez à prévoir 30 à 45 minutes supplémentaires pour les taxis locaux et l'accès à votre riad.</p>`))
+                        : (isEn
+                            ? `<p>Please note that there is no train route connecting ${name1} and ${name2} directly. The regional geography requires travelers to choose highway buses (CTM/Supratours), collective grand taxis, or a direct private chauffeur service.</p>`
+                            : `<p>Notez qu'il n'existe pas de liaison ferroviaire directe reliant ${name1} et ${name2}. Les contraintes géographiques imposent de choisir entre les autocars (CTM/Supratours), les grands taxis ou un service de chauffeur privé.</p>`))
             }
         ];
 
@@ -262,8 +280,16 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 {
                     q: isEn ? `Is there a direct train from ${name1} to ${name2}?` : `Y a-t-il un train direct reliant ${name1} et ${name2} ?`,
                     a: route.train 
-                        ? (isEn ? `Yes, direct train connections are available. You can purchase tickets at the station or via the ONCF portal.` : `Oui, il existe une ligne directe de train. Vous pouvez acheter vos billets en gare ou sur le site de l'ONCF.`)
-                        : (isEn ? `No, there are no direct train routes between these cities. You must rely on highway buses, collective grand taxis, or book a private transfer.` : `Non, il n'y a pas de liaison ferroviaire directe. Il faut utiliser la route, le bus, ou un chauffeur privé.`)
+                        ? (route.trainType === 'al-boraq'
+                            ? (isEn 
+                                ? `Yes, direct high-speed Al Boraq trains operate between ${name1} and ${name2} (approx. ${route.trainDuration} rail time). You can purchase tickets at the station or via the ONCF portal.`
+                                : `Oui, la ligne TGV Al Boraq relie directement ${name1} et ${name2} en environ ${route.trainDuration}. Billets disponibles en gare ou en ligne sur le site de l'ONCF.`)
+                            : (isEn 
+                                ? `Yes, direct ONCF Al Atlas trains run between ${name1} and ${name2} (approx. ${route.trainDuration} rail time). Tickets can be booked at the station or online.`
+                                : `Oui, les trains classiques ONCF Al Atlas assurent une liaison directe entre ${name1} et ${name2} en environ ${route.trainDuration}. Billets disponibles en gare ou sur le portail ONCF.`))
+                        : (isEn 
+                            ? `No, there are no direct train routes between these cities. You must rely on highway buses, collective grand taxis, or book a private transfer.` 
+                            : `Non, il n'y a pas de liaison ferroviaire directe. Il faut utiliser la route, le bus, ou un chauffeur privé.`)
                 }
             ],
             relatedSlugs: [`train-vs-private-transfer-${key}`, `${c1k}-travel-guide`, `${c2k}-travel-guide`]
@@ -296,24 +322,52 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "introduction",
                 title: isEn ? "Overview: Train vs Private Driver" : "Présentation : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network is convenient between certain major hubs, booking a dedicated <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in Morocco</a> eliminates taxi queues, train delays, and luggage hauling. Our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle with total comfort.</p>`
-                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et la réservation d'un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a>. Alors que les gares imposent des horaires stricts et des taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> assure une prise en charge porte-à-porte dès ${route.privatePrice}€ par véhicule.</p>`
+                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network connects certain imperial cities, booking a dedicated <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in Morocco</a> eliminates taxi queues, train station transitions, and heavy luggage hauling. Our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle (up to 7 guests, ~€${Math.round(route.privatePrice / 6)}/person for 6) with total comfort.</p>`
+                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et la réservation d'un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a>. Alors que les gares imposent des horaires stricts et des petits taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> assure une prise en charge porte-à-porte dès ${route.privatePrice}€ par véhicule (jusqu'à 7 personnes, ~${Math.round(route.privatePrice / 6)}€/pers. pour 6).</p>`
             },
             {
-                id: "ratings",
-                title: isEn ? "Factor Rating Comparison" : "Comparatif par critères",
+                id: "comparison",
+                title: isEn ? "Factual Route Comparison: Train vs Private Transfer" : "Comparatif Factuel : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Here is an honest score out of 5 stars comparing both options for the ${name1} to ${name2} route:</p>`
-                    : `<p>Voici notre notation sur 5 étoiles pour les deux modes de transport sur cet axe :</p>`,
+                    ? `<p>Here is an honest side-by-side comparison of door-to-door travel times, actual costs, luggage logistics, and convenience between <strong>${name1}</strong> and <strong>${name2}</strong>:</p>`
+                    : `<p>Voici une comparaison concrète et détaillée des temps de parcours, des coûts réels, de la logistique des bagages et du confort entre <strong>${name1}</strong> et <strong>${name2}</strong> :</p>`,
                 table: {
-                    headers: ["Criteria / Critère", isEn ? "ONCF Train" : "Train ONCF", isEn ? "Private Transfer" : "Transfert Privé"],
+                    headers: [isEn ? "Criteria" : "Critère", isEn ? "ONCF Train" : "Train ONCF", isEn ? "Private Transfer (Mdina Tours)" : "Transfert Privé (Mdina Tours)"],
                     rows: [
-                        [isEn ? "Cost (Solo Traveler)" : "Coût (Voyageur Solo)", "★★★★★", "★★★☆☆"],
-                        [isEn ? "Cost (Families/Groups)" : "Coût (Familles/Groupes)", "★★★☆☆", "★★★★★"],
-                        [isEn ? "Comfort & Convenience" : "Confort & Commodité", "★★★☆☆", "★★★★★"],
-                        [isEn ? "Luggage Ease" : "Facilité Bagages", "★★☆☆•", "★★★★★"],
-                        [isEn ? "Flexibility & Stops" : "Flexibilité & Halte", "★☆☆☆☆", "★★★★★"],
-                        [isEn ? "Door-to-Door Speed" : "Vitesse Porte-à-Porte", "★★★☆☆", "★★★★★"]
+                        [
+                            isEn ? "Travel Time & Speed" : "Temps de Trajet Réel",
+                            route.train 
+                                ? (isEn ? `Station-to-station ~${route.duration} (+ 45m local taxis & station buffer)` : `Gare à gare ~${route.duration} (+ 45 min de taxis et attente)`) 
+                                : (isEn ? "No direct train (4h30–5h30 with bus/taxi transfer)" : "Pas de train direct (4h30–5h30 avec bus/taxi)"),
+                            isEn ? `${route.duration} direct door-to-door (no station transfers)` : `${route.duration} direct porte-à-porte (sans escale)`
+                        ],
+                        [
+                            isEn ? "Door-to-Door Pickup" : "Prise en Charge",
+                            isEn ? "Station only (requires petit taxi to/from your Riad)" : "Gare uniquement (petits taxis nécessaires vers le Riad)",
+                            isEn ? "Direct pickup at your Hotel, Riad or Airport door" : "Prise en charge directe au Riad, Hôtel ou Aéroport"
+                        ],
+                        [
+                            isEn ? "Cost for Solo Traveler (1 Person)" : "Coût pour 1 Personne (Solo)",
+                            route.train 
+                                ? (isEn ? "€15 – €35 (More economical for solo travelers)" : "15€ – 35€ (Plus économique pour voyageur solo)") 
+                                : (isEn ? "€25 – €45 (Train + grand taxi)" : "25€ – 45€ (Train + grand taxi)"),
+                            isEn ? `€${route.privatePrice} flat rate for full vehicle` : `${route.privatePrice}€ forfait pour tout le véhicule`
+                        ],
+                        [
+                            isEn ? "Cost for Group (4 to 6 Guests)" : "Coût pour Groupe (4 à 6 Personnes)",
+                            isEn ? "€100 – €200 (4–6 tickets + multiple city taxis with bags)" : "100€ – 200€ (4–6 billets + multiples petits taxis avec valises)",
+                            isEn ? `€${route.privatePrice} total (~€${Math.round(route.privatePrice / 6)}/guest)` : `${route.privatePrice}€ total (~${Math.round(route.privatePrice / 6)}€/pers.)`
+                        ],
+                        [
+                            isEn ? "Luggage & Bags" : "Bagages et Valises",
+                            isEn ? "Manual carry across stations, stairs & train aisles" : "Portage manuel dans les gares, escaliers et couloirs",
+                            isEn ? "Driver handles all luggage; fits up to 7 large suitcases" : "Chauffeur charge les valises ; jusqu'à 7 grands bagages"
+                        ],
+                        [
+                            isEn ? "Schedule Flexibility & Stops" : "Horaires & Arrêts Photos",
+                            isEn ? "Fixed timetable; no intermediate photo stops" : "Horaires fixes imposés ; aucun arrêt libre",
+                            isEn ? "Depart on your schedule; free photo & coffee stops" : "Départ à l'heure souhaitée ; pauses café et photos libres"
+                        ]
                     ]
                 }
             },
@@ -323,17 +377,6 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 content: isEn
                     ? `<p>At first glance, a train ticket costing €10-€25 per person is cheaper than a private vehicle starting from €${route.privatePrice}. However, if you are traveling as a family of 4 or a group of 5, the math changes. Four train tickets plus the cost of local petits taxis on both sides (e.g. from airport to station, then station to riad) can quickly equal or exceed the cost of a private transfer van. With Mdina Tours, you pay one flat rate for the entire vehicle, regardless of passenger count. Check vehicle categories, transparent pricing, and <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">book your private ${name1} to ${name2} transfer online here</a>.</p>`
                     : `<p>Le budget de transport individuel en train est modéré, mais pour les groupes de 3 à 7 personnes, le transfert privé est vite amorti. En additionnant les billets de train et les taxis indispensables aux transferts gares-hôtels pour chaque membre, le coût du chauffeur privé Mdina Tours est très similaire, le stress en moins. Consultez nos tarifs par passager et <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">réservez votre transfert privé ${name1} – ${name2} en ligne ici</a>.</p>`
-            },
-            {
-                id: "cta",
-                title: isEn ? `Book Your ${name1} to ${name2} Private Transfer` : `Réservez Votre Transfert Privé ${name1} – ${name2}`,
-                content: isEn
-                    ? `<p>Skip the train queues and heavy bags. Book a direct private transfer between ${name1} and ${name2} with Mdina Tours today. Instant confirmation, no upfront payment, and pay directly on arrival.</p>`
-                    : `<p>Évitez l'attente en gare et les valises à porter. Réservez votre navette privée entre ${name1} et ${name2} avec Mdina Tours. Confirmation immédiate, zéro prépaiement et règlement direct à l'arrivée.</p>`,
-                isCallToAction: true,
-                ctaType: 'transfer',
-                ctaLink: `/transfers/${key}-transfer`,
-                ctaText: isEn ? `Book ${name1} to ${name2} Transfer Online` : `Réserver le Transfert ${name1} – ${name2} en Ligne`
             }
         ];
 
@@ -350,8 +393,16 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 {
                     q: isEn ? "Is the train faster than a private transfer?" : "Le train est-il plus rapide que la voiture ?",
                     a: route.train
-                        ? (isEn ? "The high-speed Al Boraq train is faster on the rail (1h20), but once you include hotel check-out, travel to the station, waiting, and taxi connections on arrival, a door-to-door private transfer takes a comparable total time." : "Le TGV Al Boraq est très rapide sur les rails, mais en prenant en compte le trajet vers la gare, l'avance et la navette finale, le transfert privé porte-à-porte affiche une durée globale similaire.")
-                        : (isEn ? "No, for routes without high-speed rail, a private driver is faster as there are no intermediate station stops." : "Non, hors lignes TGV, le transfert privé est plus rapide car il évite les arrêts intermédiaires.")
+                        ? (route.trainType === 'al-boraq'
+                            ? (isEn 
+                                ? `The high-speed Al Boraq TGV train is faster on the tracks (${route.trainDuration}), but once you factor in hotel check-out, arriving at the station 30 minutes early, and hailing a taxi at your destination, our door-to-door private transfer takes a comparable total travel time with no luggage stress.`
+                                : `Le TGV Al Boraq est rapide sur les rails (${route.trainDuration}), mais en comptant le trajet vers la gare, l'avance requise et la navette finale, le transfert privé porte-à-porte affiche un temps de voyage total comparable, le confort en plus.`)
+                            : (isEn 
+                                ? `The standard ONCF Al Atlas train takes approximately ${route.trainDuration} station-to-station. When you include transit to the station, ticket queues, and luggage taxi rides at both ends, a direct door-to-door private driver is typically faster and significantly more convenient.`
+                                : `Le train classique ONCF Al Atlas met environ ${route.trainDuration} de gare à gare. En ajoutant les transferts vers les gares et les petits taxis pour vos bagages, notre chauffeur privé direct porte-à-porte est généralement plus rapide et nettement plus pratique.`))
+                        : (isEn 
+                            ? `No, there is no direct railway line connecting ${name1} and ${name2}. A direct private driver is significantly faster (saving 1.5 to 2.5 hours) compared to public buses or multiple grand taxi transfers.` 
+                            : `Non, il n'existe aucune ligne directe de train entre ${name1} et ${name2}. Le chauffeur privé direct est nettement plus rapide (gain de 1h30 à 2h30) que les bus ou les correspondances de taxis.`)
                 }
             ],
             relatedSlugs: [`how-to-get-from-${key}`, `private-chauffeur-morocco`]

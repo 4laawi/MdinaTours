@@ -27,6 +27,13 @@
     color: #787774;
 }
 
+.priceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
 .priceTag {
     display: inline-flex;
     align-items: baseline;
@@ -51,6 +58,12 @@
 .priceUnit {
     font-size: 0.78rem;
     color: #787774;
+}
+
+.groupValueHelper {
+    font-size: 0.76rem;
+    color: #787774;
+    font-weight: 500;
 }
 
 .headerBlock {
