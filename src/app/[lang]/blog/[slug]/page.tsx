@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import BlogRouteHighlightCard from '@/components/BlogRouteHighlightCard';
+import ChefchaouenTrainNotice from '@/components/ChefchaouenTrainNotice';
 import styles from './BlogPost.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -380,6 +381,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
     const primaryTransferUrl = targetedTransferSlug ? getPath(`/transfers/${targetedTransferSlug}`) : getPath('/transfers');
 
+    const isChefchaouenRoute = slug.includes('chefchaouen');
+    let chefchaouenOrigin: string | undefined = undefined;
+    if (routeInfo?.c1) {
+        chefchaouenOrigin = routeInfo.c1[isEn ? 'en' : 'fr'];
+    } else if (slug.includes('rabat')) {
+        chefchaouenOrigin = 'Rabat';
+    } else if (slug.includes('fes')) {
+        chefchaouenOrigin = isEn ? 'Fes' : 'Fès';
+    } else if (slug.includes('tangier')) {
+        chefchaouenOrigin = isEn ? 'Tangier' : 'Tanger';
+    } else if (slug.includes('casablanca')) {
+        chefchaouenOrigin = 'Casablanca';
+    }
+
     // WhatsApp Booking Link Builder with route awareness
     const getWhatsAppUrl = (type: string, link: string) => {
         const serviceName = targetedTransferTitle || title;
@@ -543,6 +558,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                     <div className={styles.container}>
                         <div className={styles.postLayout}>
                             <div className={styles.textContent}>
+                                {/* High-Converting Traveler Alert for No-Train Routes like Chefchaouen */}
+                                {isChefchaouenRoute && (
+                                    <ChefchaouenTrainNotice
+                                        language={language}
+                                        originCity={chefchaouenOrigin}
+                                        transferLink={primaryTransferUrl}
+                                        price={targetedTransferPrice}
+                                        whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
+                                    />
+                                )}
+
                                 {/* Render Programmatic Post Contents */}
                                 {progPost ? (
                                     <>
@@ -591,8 +617,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
                                                 {/* Optional Comparison Table */}
                                                 {section.table && (
-                                                    <div className={styles.comparisonTableWrapper}>
-                                                        <table className={styles.comparisonTable}>
+                                                    <>
+                                                        <div className={styles.tableScrollHint}>
+                                                            <span>↔ {isEn ? "Scroll table horizontally" : "Faites défiler le tableau"}</span>
+                                                        </div>
+                                                        <div className={styles.comparisonTableWrapper}>
+                                                            <table className={styles.comparisonTable}>
                                                             <thead>
                                                                 <tr>
                                                                     {section.table.headers.map((h, i) => (
@@ -611,6 +641,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                </>
                                                 )}
 
                                                 {/* Optional List */}

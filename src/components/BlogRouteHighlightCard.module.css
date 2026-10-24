@@ -5,6 +5,9 @@
     padding: 24px 28px;
     margin: 32px 0;
     color: #111111;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
 }
 
 .kickerRow {
@@ -181,7 +184,7 @@
 
 @media (max-width: 640px) {
     .cardContainer {
-        padding: 20px 18px;
+        padding: 20px 16px;
     }
 
     .kickerRow {
@@ -191,7 +194,9 @@
     }
 
     .metaRow {
-        gap: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
 
     .actionsRow {
@@ -203,5 +208,13 @@
     .secondaryBtn {
         width: 100%;
         text-align: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 380px) {
+    .metaRow {
+        grid-template-columns: 1fr;
     }
 }

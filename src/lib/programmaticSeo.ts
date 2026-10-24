@@ -155,8 +155,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "overview",
                 title: isEn ? "Route Overview & Distance" : "Aperçu de la route et distance",
                 content: isEn 
-                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is a highly popular route in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Below is a comprehensive comparison of transport options including our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfers from ${name1} to ${name2}</a>, public trains, and highway buses to help you choose the best option for your itinerary.</p>`
-                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important du transport marocain. La distance est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong> par la route. Découvrez notre comparatif complet, incluant le <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, le train et le bus pour voyager sereinement.</p>`
+                    ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is one of the most scenic journeys in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Whether you choose to hire a <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">licensed private driver in Morocco</a> for complete schedule flexibility, book our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${name1} to ${name2} private transfer</a>, or take public trains and buses, this complete guide breaks down travel times, honest costs, and route advice.</p>
+                       <p>For visitors planning an extended itinerary across imperial cities and desert routes, our <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">custom multi-day private chauffeur service across Morocco</a> provides door-to-door comfort, professional English-speaking drivers, and transparent pay-after-each-day convenience.</p>`
+                    : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important et pittoresque du voyage au Maroc. La distance routière est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong>. Que vous souhaitiez faire appel à un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a> pour une totale liberté, réserver notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, ou utiliser le train et l'autocar, découvrez notre comparatif complet.</p>
+                       <p>Pour les voyageurs effectuant un circuit touristique à travers plusieurs villes, notre service de <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé pour circuit au Maroc</a> vous permet de découvrir les médinas et paysages à votre rythme avec un véhicule climatisé dédié.</p>`
             },
             {
                 id: "comparison",
@@ -294,8 +296,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "introduction",
                 title: isEn ? "Overview: Train vs Private Driver" : "Présentation : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network is efficient, it operates on fixed timetables and terminates at central stations, which requires additional urban transit. Our <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle.</p>`
-                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et le <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> avec chauffeur. Cet article détaille les avantages de chaque moyen de transport pour votre itinéraire, avec des véhicules récents et climatisés dès ${route.privatePrice}€.</p>`
+                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network is convenient between certain major hubs, booking a dedicated <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in Morocco</a> eliminates taxi queues, train delays, and luggage hauling. Our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle with total comfort.</p>`
+                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et la réservation d'un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a>. Alors que les gares imposent des horaires stricts et des taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> assure une prise en charge porte-à-porte dès ${route.privatePrice}€ par véhicule.</p>`
             },
             {
                 id: "ratings",
@@ -376,8 +378,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "landing",
                 title: isEn ? `Arriving at ${cityName} Airport` : `Arrivée à l'Aéroport de ${cityName}`,
                 content: isEn
-                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Terminal layouts, customs queues, and aggressive taxi negotiations can make your arrival stressful. Our <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${cityName} Airport pickup service</a> guarantees a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
-                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Entre le passage de la douane et les négociations animées des taxis locaux, commencez votre séjour sans stress. Notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">navette privée Aéroport de ${cityName}</a> vous accueille directement à la sortie de la douane avec une pancarte nominative pour vous conduire à votre hébergement.</p>`
+                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Terminal layouts, customs queues, and aggressive taxi negotiations can make your arrival stressful. Our reliable <a href="/${isEn ? 'en' : 'fr'}/airport-transfers" style="color:var(--primary); font-weight:600; text-decoration:underline;">Morocco airport transfers</a> and dedicated <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${cityName} Airport pickup service</a> guarantee a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
+                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Entre le passage de la douane et les négociations animées des taxis locaux, commencez votre séjour sans stress. Grâce à nos <a href="/${isEn ? 'en' : 'fr'}/airport-transfers" style="color:var(--primary); font-weight:600; text-decoration:underline;">transferts aéroport au Maroc</a> et notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">navette privée Aéroport de ${cityName}</a>, votre chauffeur vous accueille directement à la sortie de la douane avec une pancarte nominative pour vous conduire à votre hébergement.</p>`
             },
             {
                 id: "comparison",
@@ -953,13 +955,16 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
 
         const attractions = isEn ? c.attractionsEn : c.attractionsFr;
 
+        const hasCityDriverPage = ['marrakech', 'casablanca', 'rabat', 'fes', 'tangier', 'agadir', 'chefchaouen'].includes(cityKey);
+        const cityDriverLink = hasCityDriverPage ? `/private-driver-${cityKey}` : `/private-driver`;
+
         const sections: ProgrammaticSection[] = [
             {
                 id: "intro",
                 title: isEn ? `About ${cityName}` : `Découvrir ${cityName}`,
                 content: isEn
-                    ? `<p>Exploring the historic highlights of ${cityName} is an essential part of any Morocco holiday. With unique landmarks and cultural layers, this destination has lots to offer tourists.</p>`
-                    : `<p>Découvrir les richesses historiques de ${cityName} est un moment fort de tout voyage au Maroc. Entre traditions et modernité, cette destination regorge de trésors.</p>`
+                    ? `<p>Exploring the historic highlights of ${cityName} is an essential part of any Morocco holiday. With unique landmarks, bustling medinas, and rich architectural heritage, having a dedicated <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in ${cityName}</a> allows you to explore at your own pace without negotiating taxi fares. You can also book our <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver services across Morocco</a> for comfortable multi-city travel.</p>`
+                    : `<p>Découvrir les richesses historiques de ${cityName} est un moment fort de tout voyage au Maroc. Entre médinas animées et monuments d'exception, faire appel à un <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé à ${cityName}</a> vous permet de visiter en toute sérénité sans négocier les taxis. Retrouvez également nos services de <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a> pour vos circuits interurbains.</p>`
             },
             {
                 id: "attractions",
@@ -971,13 +976,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             },
             {
                 id: "cta",
-                title: isEn ? "Book a Transfer to " + cityName : "Réservez un chauffeur pour " + cityName,
+                title: isEn ? "Book a Driver for " + cityName : "Réservez un chauffeur pour " + cityName,
                 content: isEn
-                    ? `<p>Arrive in style. Reserve your private chauffeur to ${cityName} today.</p>`
-                    : `<p>Voyagez en toute simplicité. Réservez votre chauffeur privé pour ${cityName}.</p>`,
+                    ? `<p>Arrive in style. Reserve your private chauffeur for ${cityName} with Mdina Tours today.</p>`
+                    : `<p>Voyagez en toute simplicité. Réservez votre chauffeur privé pour ${cityName} avec Mdina Tours.</p>`,
                 isCallToAction: true,
-                ctaType: 'transfer',
-                ctaLink: `/transfers`
+                ctaType: 'driver',
+                ctaLink: cityDriverLink,
+                ctaText: isEn ? `Book ${cityName} Private Driver` : `Réserver Chauffeur à ${cityName}`
             }
         ];
 
