@@ -22,6 +22,8 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'));
 const TransferReviews = dynamic(() => import('@/components/transfers/TransferReviews'));
 const TransferFleet = dynamic(() => import('@/components/transfers/TransferFleet'));
 const TransferOtherRoutes = dynamic(() => import('@/components/transfers/TransferOtherRoutes'));
+const TransferTaxiComparison = dynamic(() => import('@/components/transfers/TransferTaxiComparison'));
+const TransferFixedPriceTable = dynamic(() => import('@/components/transfers/TransferFixedPriceTable'));
 
 // Generate static routes for static HTML generation
 export async function generateStaticParams() {
@@ -206,6 +208,16 @@ export default async function TransferLandingPage({ params }: { params: Promise<
 
                 {/* Why Choose Us Section */}
                 <PrivateDriverWhyChooseUs lang={language} />
+
+                {/* Taxi vs Private Transfer Comparison Section (Targets "taxi" keyword intent & objections) */}
+                {local.taxiComparison && (
+                    <TransferTaxiComparison data={local.taxiComparison} isEn={isEn} isEs={isEs} />
+                )}
+
+                {/* Fixed Fares Directory Section (Targets "airport taxi price & cost" featured snippets) */}
+                {local.fixedPriceTable && (
+                    <TransferFixedPriceTable data={local.fixedPriceTable} isEn={isEn} isEs={isEs} />
+                )}
 
                 {/* Video Experience Section */}
                 <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>

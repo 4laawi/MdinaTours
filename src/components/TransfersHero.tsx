@@ -9,6 +9,7 @@ import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
 import { LOCATIONS, getRoutePrice } from '@/lib/transferLocations';
 import LocationCombobox from '@/components/LocationCombobox';
 import { trackLeadConversion } from '@/lib/tracking';
+import { Icon } from '@iconify/react';
 
 interface TransfersHeroProps {
     title: string;
@@ -17,6 +18,8 @@ interface TransfersHeroProps {
     homeLabel?: string;
     homeLink?: string;
     currentLabel: string;
+    initialPickup?: string;
+    initialDropoff?: string;
 }
 
 export default function TransfersHero({
@@ -26,11 +29,13 @@ export default function TransfersHero({
     homeLabel = 'Home',
     homeLink = '/',
     currentLabel,
+    initialPickup = "Rabat",
+    initialDropoff = "Casablanca",
 }: TransfersHeroProps) {
     const { t, language } = useLanguage();
     const today = new Date().toISOString().split('T')[0];
-    const [pickup, setPickup] = useState<string>("Rabat");
-    const [dropoff, setDropoff] = useState<string>("Casablanca");
+    const [pickup, setPickup] = useState<string>(initialPickup);
+    const [dropoff, setDropoff] = useState<string>(initialDropoff);
     const [isCustomPickup, setIsCustomPickup] = useState(false);
     const [isCustomDropoff, setIsCustomDropoff] = useState(false);
     const [date, setDate] = useState("");
@@ -154,7 +159,7 @@ export default function TransfersHero({
     };
 
     return (
-        <section className={styles.banner}>
+        <section className={styles.banner} id="booking">
             <Image
                 src={bgImage}
                 alt=""
@@ -194,7 +199,9 @@ export default function TransfersHero({
                         <div className={styles.searchWrapper}>
                             <div className={styles.searchWidget}>
                                 <div className={styles.searchField}>
-                                    <div className={styles.iconWrapper}>📍</div>
+                                    <div className={styles.iconWrapper}>
+                                        <Icon icon="solar:map-point-bold" width="18" height="18" />
+                                    </div>
                                     <div className={styles.fieldText}>
                                         <span className={styles.fieldLabel}>{t('pickup')}</span>
                                         <LocationCombobox
@@ -211,11 +218,13 @@ export default function TransfersHero({
                                 </div>
 
                                 <button className={styles.swapBtn} onClick={handleSwap} type="button" aria-label="Swap locations" title="Swap locations">
-                                    ⇄
+                                    <Icon icon="solar:transfer-horizontal-bold" width="18" height="18" />
                                 </button>
 
                                 <div className={styles.searchField}>
-                                    <div className={styles.iconWrapper}>🏁</div>
+                                    <div className={styles.iconWrapper}>
+                                        <Icon icon="solar:flag-2-bold" width="18" height="18" />
+                                    </div>
                                     <div className={styles.fieldText}>
                                         <span className={styles.fieldLabel}>{t('dropoff')}</span>
                                         <LocationCombobox
@@ -232,7 +241,9 @@ export default function TransfersHero({
                                 </div>
 
                                 <div className={styles.searchField} onClick={(e) => handleFieldClick(e, dateRef)}>
-                                    <div className={styles.iconWrapper}>📅</div>
+                                    <div className={styles.iconWrapper}>
+                                        <Icon icon="solar:calendar-date-bold" width="18" height="18" />
+                                    </div>
                                     <div className={styles.fieldText}>
                                         <span className={styles.fieldLabel}>{t('date')}</span>
                                         <div className={styles.dateTimeInputGroup}>
@@ -354,7 +365,7 @@ export default function TransfersHero({
                                                     className={styles.inlineSaveBtn}
                                                     onClick={() => setIsEditingDateTime(false)}
                                                 >
-                                                    ✓
+                                                    <Icon icon="solar:check-circle-bold" width="16" height="16" />
                                                 </button>
                                             </div>
                                         ) : (
@@ -394,8 +405,9 @@ export default function TransfersHero({
                                         <span className={styles.priceLabel}>{t('trip_price')}</span>
                                         <span className={styles.priceValue}>{currentPrice ? `${currentPrice}€` : (language === 'es' ? 'Presupuesto a medida' : language === 'fr' ? 'Devis sur-mesure' : 'Custom Quote')}</span>
                                     </div>
-                                    <button className={styles.continueBtn} onClick={() => setModalStep(2)}>
-                                        {t('continue')} →
+                                    <button className={styles.continueBtn} onClick={() => setModalStep(2)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                                        <span>{t('continue')}</span>
+                                        <Icon icon="solar:arrow-right-linear" width="16" height="16" />
                                     </button>
                                 </div>
                             </>
@@ -505,8 +517,9 @@ export default function TransfersHero({
                                                 Call
                                             </a>
                                         </div>
-                                        <button className={styles.backBtn} onClick={() => setModalStep(1)}>
-                                            ← {t('back')}
+                                        <button className={styles.backBtn} onClick={() => setModalStep(1)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                                            <Icon icon="solar:arrow-left-linear" width="16" height="16" />
+                                            <span>{t('back')}</span>
                                         </button>
                                     </div>
                                 </div>

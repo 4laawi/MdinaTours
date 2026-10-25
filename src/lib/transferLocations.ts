@@ -7,6 +7,7 @@ export const LOCATIONS = [
     "Marrakech Airport",
     "Fes Airport",
     "Agadir Airport",
+    "Essaouira Airport",
     // Major Cities & Destinations
     "Rabat",
     "Salé",
@@ -40,6 +41,7 @@ export const normalizeLocation = (loc: string): string => {
     if (cleaned.toLowerCase().includes("marrakech menara") || cleaned.toLowerCase() === "rak airport") return "Marrakech Airport";
     if (cleaned.toLowerCase().includes("fes-saïss") || cleaned.toLowerCase() === "fez airport") return "Fes Airport";
     if (cleaned.toLowerCase().includes("agadir al massira") || cleaned.toLowerCase() === "aga airport") return "Agadir Airport";
+    if (cleaned.toLowerCase().includes("essaouira mogador") || cleaned.toLowerCase() === "esu airport") return "Essaouira Airport";
     if (cleaned.toLowerCase() === "salé" || cleaned.toLowerCase() === "sale" || cleaned.toLowerCase() === "salé city" || cleaned.toLowerCase() === "sale city") return "Rabat";
     return cleaned;
 };
@@ -70,6 +72,9 @@ setPricing("Marrakech Airport", "Marrakech", { 3: 45, 4: 55, 5: 65, 7: 90 });
 setPricing("Fes Airport", "Fes", { 3: 45, 4: 55, 5: 65, 7: 90 });
 setPricing("Agadir Airport", "Agadir", { 3: 50, 4: 60, 5: 75, 7: 100 });
 setPricing("Agadir Airport", "Taghazout", { 3: 65, 4: 75, 5: 90, 7: 120 });
+setPricing("Essaouira Airport", "Essaouira", { 3: 35, 4: 45, 5: 55, 7: 80 });
+setPricing("Essaouira Airport", "Marrakech", { 3: 140, 4: 165, 5: 195, 7: 260 });
+setPricing("Essaouira", "Taghazout", { 3: 130, 4: 155, 5: 180, 7: 240 });
 
 // Intercity & Regional Transfers
 setPricing("Rabat", "Casablanca", { 3: 110, 4: 130, 5: 155, 7: 195 });

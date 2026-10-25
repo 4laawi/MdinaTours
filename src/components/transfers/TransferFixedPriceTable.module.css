@@ -1,0 +1,370 @@
+.section {
+    padding: 76px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #ECE7E1;
+    border-bottom: 1px solid #ECE7E1;
+}
+
+.container {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 38px auto;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta, #c25b3b);
+    background: rgba(194, 91, 59, 0.08);
+    padding: 4px 14px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+}
+
+.title {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--ink-950, #0B132B);
+    line-height: 1.25;
+    margin: 0 0 12px 0;
+}
+
+.subheading {
+    font-size: 1rem;
+    color: #64748B;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Price Table
+   -------------------------------------------------------------------------- */
+.tableCard {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+}
+
+.priceTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.thDestination {
+    padding: 20px 24px;
+    background: #F8FAFC;
+    color: #334155;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #E2E8F0;
+    width: 38%;
+}
+
+.thMeta {
+    padding: 20px 18px;
+    background: #F8FAFC;
+    color: #64748B;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #E2E8F0;
+    width: 14%;
+}
+
+.thPriceSedan {
+    padding: 20px 20px;
+    background: #F8FAFC;
+    color: #0F172A;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 2px solid #E2E8F0;
+    width: 17%;
+}
+
+.thPriceVan {
+    padding: 20px 24px;
+    background: #F8FAFC;
+    color: #0F172A;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 2px solid #E2E8F0;
+    width: 17%;
+}
+
+.trRow {
+    border-bottom: 1px solid #F1F5F9;
+    transition: background-color 0.15s ease;
+}
+
+.trRow:hover {
+    background-color: #F8FAFC;
+}
+
+.trPopular {
+    background-color: #FEFDFB;
+}
+
+.tdDestination {
+    padding: 18px 24px;
+    vertical-align: middle;
+}
+
+.destCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.destIcon {
+    color: var(--terracotta, #c25b3b);
+    flex-shrink: 0;
+}
+
+.destName {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: #0F172A;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.popularTag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+    border-radius: 4px;
+    padding: 2px 7px;
+    vertical-align: middle;
+}
+
+.tdMeta {
+    padding: 18px 18px;
+    vertical-align: middle;
+}
+
+.metaVal {
+    font-size: 0.88rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.tdPriceSedan {
+    padding: 18px 20px;
+    vertical-align: middle;
+}
+
+.priceTag {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0F172A;
+    background: #F1F5F9;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.tdPriceVan {
+    padding: 18px 24px;
+    vertical-align: middle;
+}
+
+.priceTagVan {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--terracotta, #c25b3b);
+    background: rgba(194, 91, 59, 0.08);
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Cards List (below 768px)
+   -------------------------------------------------------------------------- */
+.mobileCardsList {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+}
+
+@media (max-width: 768px) {
+    .tableCard {
+        display: none;
+    }
+    .mobileCardsList {
+        display: flex;
+    }
+}
+
+.mCard {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+}
+
+.mCardPopular {
+    border-color: #FDE68A;
+    background: #FFFDF9;
+}
+
+.mCardHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.mCardHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mDestTitle {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0;
+}
+
+.mMetasRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #64748B;
+    margin-bottom: 16px;
+}
+
+.mMetaItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mMetaDivider {
+    color: #CBD5E1;
+}
+
+.mPricesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.mPriceBlock {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mPriceType {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #64748B;
+}
+
+.mPriceNumber {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0F172A;
+}
+
+.mPriceNumberVan {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--terracotta, #c25b3b);
+}
+
+.mBookBtn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--ink-900, #0B132B);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.mBookBtn:hover {
+    background: var(--terracotta, #c25b3b);
+}
+
+/* --------------------------------------------------------------------------
+   Note Footer
+   -------------------------------------------------------------------------- */
+.noteFooter {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 24px;
+}
+
+.noteIcon {
+    color: #059669;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.noteText {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+}

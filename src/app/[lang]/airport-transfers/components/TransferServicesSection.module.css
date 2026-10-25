@@ -1,0 +1,245 @@
+/* ==========================================================================
+   MDINA TOURS — MOROCCO TRANSFER SERVICES SECTION
+   Clean, Sleek, Direct Competitor Layout with BG-8.svg Tessellation
+   ========================================================================== */
+
+.section {
+    padding: 68px 0;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 42px 0;
+    }
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   1. SECTION HEADER (Matching site design system)
+   -------------------------------------------------------------------------- */
+.sectionHeaderCenter {
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto 38px auto;
+}
+
+@media (max-width: 768px) {
+    .sectionHeaderCenter {
+        margin-bottom: 26px;
+    }
+}
+
+.sectionEyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary, #DC834E);
+    margin-bottom: 10px;
+}
+
+.sectionTitle {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: clamp(2rem, 3.6vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--secondary, #202F59);
+    margin: 0 0 14px 0;
+    text-wrap: balance;
+}
+
+.sectionSubtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #64748B;
+    margin: 0 auto;
+    max-width: 720px;
+    text-wrap: balance;
+}
+
+@media (max-width: 768px) {
+    .sectionSubtitle {
+        font-size: 0.95rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. CARDS GRID (3-Column Layout, No hover jump)
+   -------------------------------------------------------------------------- */
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 1024px) {
+    .cardsGrid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. CARD SHELL & CORE (Static, No animation jump, BG-8.svg background)
+   -------------------------------------------------------------------------- */
+.cardShell {
+    position: relative;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 30px -10px rgba(8, 12, 20, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #0B0F17;
+    background-image: 
+        linear-gradient(180deg, rgba(14, 18, 27, 0.75) 0%, rgba(9, 12, 18, 0.95) 100%),
+        url('/svgs/BG-8.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardCore {
+    position: relative;
+    padding: 36px 30px 32px 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .cardCore {
+        padding: 28px 22px 26px 22px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. FLOATING ICONS (Website Primary Ochre Sand Accent)
+   -------------------------------------------------------------------------- */
+.floatingIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--primary, #DC834E);
+    margin-bottom: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADINGS & CONTENT (Unified Outfit Sans-serif font)
+   -------------------------------------------------------------------------- */
+.cardTitle {
+    font-family: var(--font-outfit), sans-serif;
+    font-size: 1.45rem;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+
+.cardDesc {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: #E2E8F0;
+    margin-bottom: 24px;
+    opacity: 0.92;
+}
+
+/* --------------------------------------------------------------------------
+   6. BULLET POINTS (Moroccan Ochre Arrow Marker)
+   -------------------------------------------------------------------------- */
+.bulletList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.bulletItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #F8FAFC;
+}
+
+.bulletArrow {
+    color: var(--primary, #DC834E);
+    font-size: 15px;
+    line-height: 1;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. CLEAN ACTION LINK / CTA (Harmonious Primary hover feedback)
+   -------------------------------------------------------------------------- */
+.cardActionWrapper {
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.ctaLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #FFFFFF;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctaLink:hover {
+    background: var(--primary, #DC834E);
+    border-color: var(--primary, #DC834E);
+    color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(220, 131, 78, 0.35);
+    transform: translateY(-1px);
+}
+
+.ctaArrow {
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 180ms ease;
+}
+
+.ctaLink:hover .ctaArrow {
+    transform: translateX(3px);
+}
+
+:global([dir="rtl"]) .ctaLink:hover .ctaArrow {
+    transform: translateX(-3px);
+}

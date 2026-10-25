@@ -8,6 +8,37 @@ export interface SightseeingStop {
     image: string;
 }
 
+export interface TaxiComparisonPoint {
+    feature: string;
+    privateTransfer: string;
+    streetTaxi: string;
+}
+
+export interface TaxiComparisonData {
+    badge?: string;
+    heading: string;
+    subheading: string;
+    summary?: string;
+    points: TaxiComparisonPoint[];
+}
+
+export interface FixedPriceRow {
+    destination: string;
+    distance: string;
+    duration: string;
+    sedanPrice: string;
+    vanPrice: string;
+    popular?: boolean;
+}
+
+export interface FixedPriceTableData {
+    badge?: string;
+    heading: string;
+    subheading: string;
+    note?: string;
+    rows: FixedPriceRow[];
+}
+
 export interface LocalizedTransferData {
     title: string;
     tagline: string;
@@ -27,6 +58,8 @@ export interface LocalizedTransferData {
     travelTips?: { title: string; content: string }[];
     amenities?: string[];
     sightseeingStops?: SightseeingStop[];
+    taxiComparison?: TaxiComparisonData;
+    fixedPriceTable?: FixedPriceTableData;
 }
 
 export interface TransferData {
@@ -42,103 +75,227 @@ export const transfersData: TransferData[] = [
     {
         slug: "casablanca-airport-transfer",
         image: "/img3/tourists-happy-private-driver-casablanca.webp",
-        prices: { 3: 120, 4: 140, 5: 165, 7: 210 },
+        prices: { 3: 35, 4: 50, 5: 65, 7: 85 },
         en: {
-            title: "Private Transfer from Casablanca Airport to Rabat or Salé",
-            tagline: "Seamless, Premium Chauffeur Service Direct to Your Hotel or Riad",
+            title: "Casablanca Airport Transfer & Private Taxi Service (CMN)",
+            tagline: "Fixed-Rate Chauffeur Service from Mohammed V Airport to Casablanca, Rabat & Marrakech",
             pickup: "Casablanca Mohammed V International Airport (CMN)",
-            dropoff: "Rabat or Salé City Center",
-            distance: "120 km (75 miles)",
-            duration: "1 hour 30 mins",
-            capacityText: "Executive Sedans (1-3 pax), Spacious Vans (up to 7 pax)",
+            dropoff: "Casablanca City Center, Rabat, Marrakech, or Mohammedia",
+            distance: "32 km (Casablanca) / 120 km (Rabat) / 240 km (Marrakech)",
+            duration: "40 mins (Casablanca) / 1h 30m (Rabat) / 2h 45m (Marrakech)",
+            capacityText: "Executive Sedans (1-3 pax), Spacious Luxury Vans (up to 7 pax)",
             highlights: [
-                "Live Flight Tracking: We actively monitor your flight status so that your driver is waiting for you precisely when you land, with zero stress or waiting fees.",
-                "Transparent Fixed Rates: Enjoy peace of mind with a single upfront price that covers toll roads, fuel, and night arrivals—absolutely no negotiations required.",
-                "Qualified Local Chauffeurs: Travel with courteous, professional drivers fluent in English and French who know the safest routes and medina entry points.",
-                "Elite Fleet Comfort: Relax in our modern, immaculate, fully air-conditioned sedans or spacious minivans tailored to your group size.",
-                "True Door-to-Door Service: Avoid the hassle of train stations and local taxis; we take you directly from the CMN arrivals terminal to your doorstep in Rabat."
+                "Terminal 1 & 2 Meet & Greet: Chauffeur waits inside the terminal holding a personalized sign with your name.",
+                "Live CMN Flight Tracking: Automatic schedule synchronization with 60 minutes free wait time if your flight is delayed.",
+                "Guaranteed Fixed Fares: Transparent pricing per vehicle with zero night surcharges, baggage fees, or highway toll extras.",
+                "Direct Highway Transit: Travel comfortably to Rabat or Marrakech without changing trains or negotiating street taxis.",
+                "Pristine Executive Fleet: Climate-controlled Mercedes-Benz Vitos & executive sedans with complimentary child seats."
             ],
-            aboutRoute: "The route linking Casablanca Airport (CMN) to Rabat winds along the A1 coastal expressway. This modern, multi-lane highway offers a swift and safe transit through Morocco’s western corridor. Over the course of the 90-minute journey, you can connect to our onboard options, unwind in quiet comfort, and watch the changing Moroccan landscape transform from bustling industrial hubs to coastal vistas.",
-            faqs: [
-                { q: "What is the cost of a private taxi from Casablanca Airport to Rabat?", a: "Our private transfer starts at a flat rate of €120 for a comfort vehicle seating up to 3 guests. The price is per vehicle, not per passenger, and includes all highway tolls, luggage handling, and taxes." },
-                { q: "Is ride-sharing like Uber available at CMN Airport?", a: "Ride-sharing apps such as Uber do not operate in Morocco. While local alternatives exist, they face strict regulations and are barred from picking up passengers directly at airport terminals. Pre-booking a private chauffeur is the most reliable way to secure an immediate, authorized ride." },
-                { q: "How does flight tracking work for delays?", a: "We request your flight number during booking to track your arrival in real time. If your plane lands early or gets delayed, your driver adjusts their schedule automatically to be there right as you walk out. No waiting charges apply." },
-                { q: "Where will my driver be waiting?", a: "Once you pass through customs and collect your baggage, walk into the main arrivals hall. Your chauffeur will be standing clearly visible, holding a greeting sign with your name and our company logo." },
-                { q: "Do you supply child safety seats?", a: "Yes, we can provide clean, age-appropriate baby or booster seats free of charge. Simply mention your request and your child's age in the booking details so we can configure the vehicle before pickup." },
-                { q: "Can I book a return transfer from Rabat to Casablanca Airport?", a: "Absolutely. We offer round-trip transfers. Your driver can pick you up from your Rabat hotel and ensure you reach CMN airport with plenty of time before your departure flight." },
-                { q: "Do your drivers speak English?", a: "Yes, our professional drivers are bilingual. They speak English and French, making communication easy and stress-free." },
-                { q: "Are highway tolls included in the price?", a: "Yes, our flat-rate pricing includes all fuel, vehicle costs, and highway toll fees. There are no hidden surprises." },
-                { q: "Can I pay in euros?", a: "Yes, you can pay your driver in cash using either Euros or Moroccan Dirhams (MAD) at the end of your journey." },
-                { q: "How long does it take to get from Casablanca Airport to Rabat?", a: "The drive typically takes about 1 hour and 30 minutes, depending on traffic conditions upon entering Rabat." }
-            ],
-            seoTitle: "Premium Casablanca Airport (CMN) to Rabat & Salé Private Transfer",
-            seoDesc: "Pre-book a first-class private transfer from Casablanca Mohammed V Airport to Rabat. Fixed luxury rates, real-time flight tracking, and pristine modern vehicles.",
-            seoIntro: "Embark on your Moroccan journey with the ultimate comfort of a dedicated private transfer from Casablanca Mohammed V International Airport (CMN) directly to Rabat. Skip the crowded train terminals and the uncertainty of airport taxi lines. Our bespoke service coordinates a professional local chauffeur to meet you inside the arrivals hall, assist with your luggage, and escort you to a premium, climate-controlled vehicle. Whether you are traveling for a business summit in Hay Riad or heading to a boutique riad in the heart of the historic Medina, our door-to-door transit promises a peaceful, reliable, and scenic ride along the Atlantic coast.",
-            aboutDestination: {
-                title: "Discovering Rabat",
-                content: "As Morocco's coastal capital, Rabat presents a captivating blend of deep historical heritage and sophisticated contemporary life. Known for its wide tree-lined boulevards and quiet coastal charm, the city stands in serene contrast to the high-energy pace of Marrakech or Casablanca. Important destinations include the monumental Hassan Tower, the blue-and-white clifftop Kasbah of the Udayas, the ancient Roman ruins of Chellah, and the modern corporate districts of Agdal and Hay Riad."
+            aboutRoute: "Casablanca Mohammed V International Airport (CMN) is Morocco's busiest air transport hub, situated 32 kilometers south of Casablanca and 120 kilometers from Rabat. After international flights, facing crowded grand taxi ranks with unmetered fare disputes or navigating train schedules can be exhausting. Our private transfer provides a seamless, pre-arranged chauffeur greeting you inside the terminal with immediate highway departure.",
+            taxiComparison: {
+                badge: "Taxi vs Private Chauffeur",
+                heading: "Casablanca Airport Taxi vs. Mdina Tours Private Transfer: Why Pre-Booking Wins",
+                subheading: "Navigating Mohammed V Airport (CMN) street taxis can be daunting. See why thousands of international travelers pre-book our private chauffeur service instead.",
+                summary: "Pre-booking your Casablanca airport transfer gives you guaranteed flat rates, automated flight delay tracking, and direct door-to-door transit to Casablanca, Rabat, or Marrakech.",
+                points: [
+                    {
+                        feature: "Transparent Flat Rates",
+                        privateTransfer: "Pre-confirmed flat rates from €35 (~380 MAD) to Casablanca and €75 (~820 MAD) to Rabat. Highway tolls and luggage included. Zero surprise surcharges.",
+                        streetTaxi: "Frequent refusal of meters. Drivers routinely demand 350–500 MAD into downtown Casablanca, with 50% night surcharges and luggage extras."
+                    },
+                    {
+                        feature: "Terminal Arrivals Pickup",
+                        privateTransfer: "Professional chauffeur waiting inside Terminal 1 or 2 arrivals hall immediately past customs with your name sign. Includes 60 min free waiting time.",
+                        streetTaxi: "Exiting into crowded outdoor curbside lines with aggressive solicitation from unofficial taxi hustlers."
+                    },
+                    {
+                        feature: "Direct Intercity Connections",
+                        privateTransfer: "Seamless highway express transit directly to Rabat, Marrakech, or Fes without train station transfers or schedule restrictions.",
+                        streetTaxi: "City grand taxis are legally restricted from leaving Casablanca province without special permits, making intercity trips problematic."
+                    },
+                    {
+                        feature: "Vehicle Standard & Luggage",
+                        privateTransfer: "Immaculate Mercedes-Benz Vitos and executive sedans with spacious, secure enclosed trunks and dual climate control.",
+                        streetTaxi: "Older standard sedans with luggage strapped to roof racks, exposed to exhaust fumes, weather, and traffic."
+                    },
+                    {
+                        feature: "Payment Convenience",
+                        privateTransfer: "Pay upon arrival in EUR or MAD cash, or pay securely online in advance. Exact change is never an issue.",
+                        streetTaxi: "Cash only in exact Moroccan Dirhams. Drivers frequently claim they do not have change for 100 or 200 MAD banknotes."
+                    }
+                ]
             },
-            popularDropOffs: [
-                "Luxury Hotels & Resorts (e.g., La Tour Hassan Palace, Sofitel Rabat Jardin des Roses, Marriott)",
-                "Traditional Riads in the Rabat Medina and Kasbah of the Udayas",
-                "Business Districts: Agdal, Hay Riad, and the Technopolis",
-                "Embassies & Consulates in the diplomatic quarter",
-                "Rabat-Salé Airport (RBA)",
-                "Train Stations: Rabat Ville and Rabat Agdal"
+            fixedPriceTable: {
+                badge: "Featured Snippet Fixed Rates",
+                heading: "Casablanca Airport Taxi Rates & Fixed Price Directory (CMN)",
+                subheading: "Official fixed fares per vehicle (not per passenger). Valid 24/7 with zero nighttime surcharges.",
+                note: "All fares include terminal meet & greet, 60 minutes free wait time, flight delay tracking, and highway toll charges.",
+                rows: [
+                    { destination: "Casablanca Downtown (Maarif, Hassan II Mosque, Habous)", distance: "32 km", duration: "40 min", sedanPrice: "€35 (~380 MAD)", vanPrice: "€50 (~550 MAD)", popular: true },
+                    { destination: "Ain Diab & Corniche (Beachfront Resorts & Hotels)", distance: "38 km", duration: "45 min", sedanPrice: "€40 (~440 MAD)", vanPrice: "€55 (~600 MAD)", popular: true },
+                    { destination: "Rabat City & Salé (Agdal, Hassan Tower, Medina)", distance: "120 km", duration: "1h 30m", sedanPrice: "€75 (~820 MAD)", vanPrice: "€110 (~1,200 MAD)", popular: true },
+                    { destination: "Mohammedia (Coastal City & Marina)", distance: "55 km", duration: "50 min", sedanPrice: "€45 (~490 MAD)", vanPrice: "€65 (~710 MAD)" },
+                    { destination: "Marrakech City (Direct Highway Transfer)", distance: "240 km", duration: "2h 45m", sedanPrice: "€140 (~1,500 MAD)", vanPrice: "€180 (~1,950 MAD)", popular: true },
+                    { destination: "Fes Medina (Imperial City Express)", distance: "320 km", duration: "3h 30m", sedanPrice: "€160 (~1,750 MAD)", vanPrice: "€210 (~2,300 MAD)" }
+                ]
+            },
+            faqs: [
+                { q: "Where do I meet my driver at Casablanca Mohammed V Airport (CMN)?", a: "Once you collect your baggage and clear customs, walk into the main arrivals hall of Terminal 1 or Terminal 2. Your chauffeur will be waiting inside the terminal holding a personalized greeting board with your name clearly displayed. We monitor live flight radar, so even if your flight is delayed, your driver will be waiting." },
+                { q: "What is the cost of a private taxi from Casablanca Airport to Casablanca city center?", a: "A private transfer from Casablanca Airport (CMN) to downtown Casablanca is a guaranteed flat rate of €35 (~380 MAD) for an executive sedan (1–3 passengers) or €50 (~550 MAD) for a luxury minivan (up to 7 passengers), with all taxes and tolls included." },
+                { q: "How much is a private transfer from Casablanca Airport to Rabat?", a: "Our private transfer from Casablanca Airport to Rabat starts at a locked flat rate of €75 (~820 MAD) for an executive sedan or €110 (~1,200 MAD) for a luxury minivan. The journey takes approximately 1 hour and 30 minutes via the A1 coastal expressway." },
+                { q: "Is ride-sharing like Uber available at Casablanca Airport?", a: "Uber does not operate in Morocco. While local transport apps exist within urban Casablanca, they face strict licensing regulations and are legally prohibited from picking up passengers inside airport terminal grounds. Pre-booking a licensed private chauffeur is the safest and most reliable way to secure an authorized ride." },
+                { q: "How does flight delay tracking work?", a: "We ask for your flight number during reservation to track your aircraft in real time. If your arrival is delayed or lands early, your driver's schedule updates automatically, with 60 minutes of complimentary wait time after landing." },
+                { q: "Can I book a transfer from Casablanca Airport directly to Marrakech?", a: "Yes. Many international travelers prefer our direct highway transfer from CMN Airport to Marrakech (€140 flat rate), saving hours compared to traveling into downtown Casablanca to catch a train." },
+                { q: "Do your drivers speak English?", a: "Yes, all our drivers are experienced, professional chauffeurs fluent in English, French, and Arabic." }
             ],
-            travelTips: [
-                { title: "Currency", content: "While many places in Rabat accept credit cards, it's wise to have some Moroccan Dirhams (MAD) for small purchases in the Medina. You can withdraw cash from ATMs at Casablanca Airport before meeting your driver." },
-                { title: "SIM Cards", content: "Free or cheap local SIM cards are often distributed in the airport arrivals hall. Grab one so you have mobile data on the road." },
-                { title: "Medina Access", content: "If you are staying in the Rabat Medina, cars cannot enter the narrow streets. Your driver will drop you at the nearest accessible gate and can call your riad to send a porter for your bags." },
-                { title: "Best Arrival Times", content: "The highway is safe at all hours, but arriving during the day allows you to enjoy the coastal views." }
-            ]
+            seoTitle: "Casablanca Airport Transfer & Private Taxi (CMN) | Fixed Rates",
+            seoDesc: "Pre-book your private Casablanca Airport transfer (CMN) from €35. Fixed rates to Casablanca hotels, Rabat & Marrakech. Terminal meet & greet with 60-min free wait."
         },
         fr: {
-            title: "Transfert Privé de l'Aéroport de Casablanca vers Rabat ou Salé",
-            tagline: "Chauffeur Privé et Service Premium Direct jusqu'à votre Hôtel ou Riad",
+            title: "Transfert Aéroport Casablanca Mohammed V (CMN) & Taxi Privé",
+            tagline: "Tarifs Fixes Garantis et Chauffeur Dédié vers Casablanca, Rabat et Marrakech",
             pickup: "Aéroport International Mohammed V de Casablanca (CMN)",
-            dropoff: "Centre-ville de Rabat ou Salé",
-            distance: "120 km (vers Rabat)",
-            duration: "1 heure 30 mins",
-            capacityText: "1 à 7 passagers avec bagages dans des vans ou berlines de prestige",
+            dropoff: "Centre-ville de Casablanca, Rabat, Marrakech ou Mohammedia",
+            distance: "32 km (Casablanca) / 120 km (Rabat) / 240 km (Marrakech)",
+            duration: "40 min (Casablanca) / 1h 30m (Rabat) / 2h 45m (Marrakech)",
+            capacityText: "Berlines Exécutives (1-3 passagers) et Vans VIP (jusqu'à 7 passagers)",
             highlights: [
-                "Suivi de Vol en Temps Réel : Nous surveillons l'état de votre vol afin que votre chauffeur vous attende à votre atterrissage, sans frais de retard.",
-                "Tarifs Fixes et Transparents : Voyagez l'esprit tranquille avec un prix fixe tout compris (péages, carburant, suppléments de nuit) sans aucune négociation.",
-                "Chauffeurs Professionnels : Des chauffeurs locaux expérimentés, courtois et bilingues (français et anglais) pour vous guider en toute sécurité.",
-                "Flotte Moderne et Confortable : Des berlines et minivans récents, climatisés et nettoyés avec soin avant chaque course.",
-                "Service Porte-à-Porte Intégral : Nous vous prenons en charge au terminal des arrivées et vous déposons directement devant votre hébergement à Rabat."
+                "Accueil dans le terminal : Chauffeur privé avec pancarte nominative à la sortie des douanes des Terminaux 1 et 2.",
+                "Suivi des vols CMN en temps réel : Réajustement automatique de l'heure avec 60 minutes d'attente gratuite offerte.",
+                "Tarifs forfaitaires garantis : Prix ferme par véhicule sans surcoût de nuit, frais de péage ni supplément bagages.",
+                "Liaison autoroutière directe : Trajet sans escale vers Rabat ou Marrakech sans passer par la gare ferroviaire.",
+                "Flotte Mercedes et berlines d'exception : Véhicules soignés et climatisés avec sièges bébé offerts sur demande."
             ],
-            aboutRoute: "La liaison rapide par l'autoroute A1 côtière relie l'aéroport CMN de Casablanca à Rabat. C'est l'axe le plus direct pour rejoindre la capitale. Votre chauffeur privé vous prend en charge dès la sortie des bagages pour vous assurer un trajet confortable sans les tracas des transports publics.",
+            aboutRoute: "L'Aéroport Mohammed V (CMN) est la principale porte d'entrée aérienne du Maroc, situé à 32 km au sud de Casablanca et à 120 km de Rabat. À votre arrivée, éviter les files de taxis collectifs et les prix non régulés est essentiel pour débuter votre séjour sereinement. Notre service de chauffeur privé vous prend en charge directement dans le terminal.",
+            taxiComparison: {
+                badge: "Taxi vs Transfert Privé",
+                heading: "Taxi Aéroport Casablanca vs Transfert Privé Mdina Tours : Le Comparatif",
+                subheading: "Prendre un taxi à l'Aéroport Mohammed V peut être déroutant. Découvrez pourquoi des milliers de voyageurs préfèrent réserver leur chauffeur privé à l'avance.",
+                summary: "Pré-réserver votre transfert CMN vous assure un tarif fixe sans négociation, un accueil chaleureux dès la sortie des douanes et un trajet direct vers votre hôtel.",
+                points: [
+                    {
+                        feature: "Tarifs Fixes & Clairs",
+                        privateTransfer: "Tarif forfaitaire dès 35€ (~380 MAD) pour Casablanca et 75€ (~820 MAD) pour Rabat. Péages, bagages et taxes inclus sans supplément de nuit.",
+                        streetTaxi: "Compteurs rarement allumés. Les chauffeurs réclament souvent 350 à 500 MAD pour Casablanca, avec majoration nocturne de 50%."
+                    },
+                    {
+                        feature: "Accueil au Terminal",
+                        privateTransfer: "Chauffeur professionnel vous attendant dans le hall des arrivées avec pancarte nominative. 60 minutes d'attente offerte et suivi de vol.",
+                        streetTaxi: "File d'attente extérieure sur le trottoir sous la sollicitation d'intermédiaires non officiels."
+                    },
+                    {
+                        feature: "Liaisons Intervilles Directes",
+                        privateTransfer: "Départ immédiat sur autoroute vers Rabat, Marrakech ou Fès sans changement de véhicule ni correspondance de train.",
+                        streetTaxi: "Les grands taxis locaux sont soumis à des restrictions préfectorales strictes hors de leur zone et refusent souvent les longs trajets."
+                    },
+                    {
+                        feature: "Confort & Bagages",
+                        privateTransfer: "Vans Mercedes-Benz Vito et berlines récentes avec coffres spacieux et fermés. Climatisation garantie.",
+                        streetTaxi: "Véhicules plus anciens avec bagages attachés sur le toit, exposés à la poussière et aux intempéries."
+                    },
+                    {
+                        feature: "Paiement Simplifié",
+                        privateTransfer: "Paiement à l'arrivée en Euros ou Dirhams, ou paiement sécurisé en ligne. Aucun souci de rendu de monnaie.",
+                        streetTaxi: "Uniquement en espèces en Dirhams exacts. Les chauffeurs manquent fréquemment de petite monnaie."
+                    }
+                ]
+            },
+            fixedPriceTable: {
+                badge: "Tarifs Forfaitaires CMN",
+                heading: "Grille Tarifaire des Taxis & Transferts Aéroport Casablanca (CMN)",
+                subheading: "Tarifs fixes par véhicule (et non par passager). Valables 24h/24 sans supplément nuit.",
+                note: "Tous nos tarifs incluent l'accueil personnalisé dans le terminal, 60 min d'attente offerte, suivi de vol et péages.",
+                rows: [
+                    { destination: "Centre-ville Casablanca (Maarif, Mosquée Hassan II, Gauthier)", distance: "32 km", duration: "40 min", sedanPrice: "35€ (~380 MAD)", vanPrice: "50€ (~550 MAD)", popular: true },
+                    { destination: "Aïn Diab & La Corniche (Hôtels balnéaires)", distance: "38 km", duration: "45 min", sedanPrice: "40€ (~440 MAD)", vanPrice: "55€ (~600 MAD)", popular: true },
+                    { destination: "Rabat Ville & Salé (Agdal, Tour Hassan, Médina)", distance: "120 km", duration: "1h 30m", sedanPrice: "75€ (~820 MAD)", vanPrice: "110€ (~1 200 MAD)", popular: true },
+                    { destination: "Mohammedia (Marina & Ville côtière)", distance: "55 km", duration: "50 min", sedanPrice: "45€ (~490 MAD)", vanPrice: "65€ (~710 MAD)" },
+                    { destination: "Marrakech Ville (Liaison directe par autoroute)", distance: "240 km", duration: "2h 45m", sedanPrice: "140€ (~1 500 MAD)", vanPrice: "180€ (~1 950 MAD)", popular: true },
+                    { destination: "Fès Médina (Liaison express)", distance: "320 km", duration: "3h 30m", sedanPrice: "160€ (~1 750 MAD)", vanPrice: "210€ (~2 300 MAD)" }
+                ]
+            },
             faqs: [
-                { q: "Que se passe-t-il si mon vol a du retard ?", a: "Nous suivons l'état de votre vol en temps réel. Le chauffeur s'adaptera sans aucun surcoût." },
-                { q: "Comment repérer mon chauffeur à l'aéroport ?", a: "Dès votre sortie du hall des bagages, votre chauffeur se tiendra visible avec une pancarte arborant votre nom et le logo de Mdina Tours." }
+                { q: "Où m'attend mon chauffeur à l'aéroport de Casablanca (CMN) ?", a: "Après avoir récupéré vos bagages et franchi les douanes, entrez dans le hall principal des arrivées du Terminal 1 ou 2. Votre chauffeur privé s'y tiendra avec une pancarte à votre nom. Grâce au suivi en direct des arrivées, il s'adapte sans surcoût à tout retard éventuel de votre avion." },
+                { q: "Combien coûte un taxi entre l'aéroport de Casablanca et le centre-ville ?", a: "Le transfert privé depuis l'aéroport CMN jusqu'au centre de Casablanca est proposé au tarif fixe garanti de 35€ (~380 MAD) pour une berline (1-3 personnes) et 50€ (~550 MAD) pour un van spacieux (jusqu'à 7 personnes), péages et bagages inclus." },
+                { q: "Quel est le tarif d'un transfert de l'aéroport de Casablanca à Rabat ?", a: "Notre transfert aéroport Casablanca vers Rabat est à tarif fixe de 75€ (~820 MAD) en berline et 110€ (~1 200 MAD) en van Mercedes. Le trajet dure environ 1h30 via l'autoroute côtière." },
+                { q: "Existe-t-il des services comme Uber à l'aéroport de Casablanca ?", a: "Non, Uber n'opère pas au Maroc. Bien que des applications locales existent en ville, elles sont interdites de prise en charge dans l'enceinte de l'aéroport. Pré-réserver un chauffeur VTC professionnel reste la solution la plus sûre et rapide." },
+                { q: "Peut-on réserver un transfert direct de l'aéroport de Casablanca vers Marrakech ?", a: "Oui, de nombreux voyageurs internationaux optent pour notre liaison directe aéroport CMN - Marrakech (forfait 140€), ce qui évite les correspondances fastidieuses en train ou taxi urbain." }
             ],
-            seoTitle: "Chauffeur Privé Aéroport Casablanca CMN vers Rabat / Salé | Mdina Tours",
-            seoDesc: "Service de transfert privé haut de gamme depuis l'Aéroport de Casablanca (CMN) vers Rabat. Tarif fixe garanti, accueil personnalisé et berlines/vans climatisés."
+            seoTitle: "Transfert Aéroport Casablanca CMN Privé & Taxi Rabat | Tarifs Fixes",
+            seoDesc: "Réservez votre transfert privé de l'aéroport de Casablanca CMN dès 35€. Tarifs fixes vers Casablanca, Rabat et Marrakech. Accueil en terminal et suivi de vol."
         },
         es: {
-            title: "Traslado Privado desde el Aeropuerto de Casablanca (CMN)",
-            tagline: "Servicio de Chófer Privado Directo a su Hotel o Riad en Rabat, Casablanca y Alrededores",
+            title: "Traslado Aeropuerto Casablanca Mohammed V (CMN) y Taxi Privado",
+            tagline: "Tarifas Fijas Garantizadas con Chófer Privado a Casablanca, Rabat y Marrakech",
             pickup: "Aeropuerto Internacional Mohammed V de Casablanca (CMN)",
-            dropoff: "Centro de Rabat, Salé o Casablanca",
-            distance: "120 km (a Rabat) / 35 km (al centro de Casablanca)",
-            duration: "1 hora 30 min (Rabat) / 45 min (Casablanca)",
-            capacityText: "Berlinas ejecutivas (1-3 pax) y minivans espaciosas (hasta 7 pax)",
+            dropoff: "Centro de Casablanca, Rabat, Marrakech o Mohammedia",
+            distance: "32 km (Casablanca) / 120 km (Rabat) / 240 km (Marrakech)",
+            duration: "40 min (Casablanca) / 1h 30m (Rabat) / 2h 45m (Marrakech)",
+            capacityText: "Berlinas Ejecutivas (1-3 pax) y Furgonetas VIP (hasta 7 pax)",
             highlights: [
-                "Seguimiento de Vuelo en Tiempo Real: Monitorizamos su vuelo para que su conductor le espere puntualmente en la terminal de llegadas sin recargos por retraso.",
-                "Tarifas Fijas y Claras: Precio cerrado por vehículo que incluye peajes de autopista, combustible y suplementos nocturnos.",
-                "Conductores Profesionales: Chóferes locales experimentados y amables con conocimiento de las mejores rutas de acceso a medinas y hoteles.",
-                "Vehículos Modernos y Climatizados: Flota cuidada, limpia y con seguro de transporte turístico en regla.",
-                "Servicio Puerta a Puerta: Le recogemos en la terminal y le llevamos directamente a la puerta de su hotel o riad."
+                "Recepción en Terminal 1 y 2: Su chófer le esperará con un cartel a su nombre en el hall de llegadas tras salir de aduanas.",
+                "Seguimiento de vuelos CMN en directo: Reajuste automático con 60 minutos de cortesía si su vuelo sufre retraso.",
+                "Tarifas fijas todo incluido: Precio cerrado por vehículo sin suplementos nocturnos, costes por maleta ni peajes extra.",
+                "Conexión directa por autopista: Viaje directo a Rabat o Marrakech sin pasar por estaciones de tren ni regateos.",
+                "Flota moderna Mercedes-Benz: Furgonetas Vito y berlinas impecables con sillas para niños gratis bajo petición."
             ],
-            aboutRoute: "El trayecto desde el Aeropuerto Mohammed V de Casablanca (CMN) se realiza por autopistas modernas y seguras. Su conductor le esperará tras la recogida de equipajes con un cartel con su nombre para iniciar un viaje cómodo y directo sin esperas ni negociaciones de taxi.",
+            aboutRoute: "El Aeropuerto Mohammed V (CMN) es el principal centro de conexiones de Marruecos, situado a 32 km de Casablanca y a 120 km de Rabat. Evitar las colas exteriores y los regateos con taxis es fundamental para iniciar su estancia cómodamente. Nuestro chófer privado le recibirá puntualmente dentro de la terminal con salida directa por autopista.",
+            taxiComparison: {
+                badge: "Taxi vs Traslado Privado",
+                heading: "Taxi de Aeropuerto en Casablanca vs Traslado Privado Mdina Tours",
+                subheading: "Conseguir un taxi en el Aeropuerto Mohammed V puede resultar abrumador. Conozca por qué reservar con antelación su chófer privado es la mejor opción.",
+                summary: "Reservar su traslado en Casablanca le asegura precio cerrado sin sorpresas, seguimiento de vuelo y viaje directo a Casablanca, Rabat o Marrakech.",
+                points: [
+                    {
+                        feature: "Precio Fijo y Sin Sorpresas",
+                        privateTransfer: "Tarifa cerrada desde 35€ (~380 MAD) a Casablanca y 75€ (~820 MAD) a Rabat con peajes y maletas incluidos. Sin recargos nocturnos.",
+                        streetTaxi: "Uso infrecuente de taxímetro. Los taxistas suelen pedir entre 350 y 500 MAD, con un recargo nocturno del 50%."
+                    },
+                    {
+                        feature: "Punto de Encuentro en Terminal",
+                        privateTransfer: "Chófer con cartel a su nombre dentro de la terminal de llegadas. 60 minutos de espera de cortesía y seguimiento de vuelo.",
+                        streetTaxi: "Largas colas en el exterior de la acera bajo la insistencia de intermediarios."
+                    },
+                    {
+                        feature: "Traslados a Otras Ciudades",
+                        privateTransfer: "Viaje directo por autopista hacia Rabat, Marrakech o Fez sin tener que cambiar de transporte ni hacer transbordos.",
+                        streetTaxi: "Los taxis locales tienen limitaciones administrativas para salir de la provincia de Casablanca y suelen rechazar trayectos interurbanos."
+                    },
+                    {
+                        feature: "Espacio y Confort",
+                        privateTransfer: "Vehículos Mercedes Vito y berlinas ejecutivas con aire acondicionado y maletero cerrado espacioso.",
+                        streetTaxi: "Taxis más antiguos con el equipaje atado a la baca en el techo, expuesto a la intemperie."
+                    },
+                    {
+                        feature: "Pago Flexible",
+                        privateTransfer: "Pago a la llegada en Euros o Dirhams en efectivo, o pago seguro online por adelantado. Sin problemas de cambio.",
+                        streetTaxi: "Solo en efectivo y en Dirhams justos. Habitualmente aducen no tener cambio para billetes grandes."
+                    }
+                ]
+            },
+            fixedPriceTable: {
+                badge: "Tarifas Fijas CMN",
+                heading: "Tabla de Precios Fijos Taxi y Traslado Aeropuerto Casablanca (CMN)",
+                subheading: "Tarifas cerradas por vehículo completo (no por persona). Válidas 24/7 sin recargos nocturnos.",
+                note: "Incluye bienvenida con cartel en la terminal, 60 min de espera gratuita, seguimiento de vuelo y peajes.",
+                rows: [
+                    { destination: "Centro de Casablanca (Maarif, Mezquita Hassan II, Gauthier)", distance: "32 km", duration: "40 min", sedanPrice: "35€ (~380 MAD)", vanPrice: "50€ (~550 MAD)", popular: true },
+                    { destination: "Aïn Diab y La Corniche (Paseo marítimo)", distance: "38 km", duration: "45 min", sedanPrice: "40€ (~440 MAD)", vanPrice: "55€ (~600 MAD)", popular: true },
+                    { destination: "Rabat y Salé (Agdal, Torre Hassan, Medina)", distance: "120 km", duration: "1h 30m", sedanPrice: "75€ (~820 MAD)", vanPrice: "110€ (~1.200 MAD)", popular: true },
+                    { destination: "Mohammedia (Puerto y Costa)", distance: "55 km", duration: "50 min", sedanPrice: "45€ (~490 MAD)", vanPrice: "65€ (~710 MAD)" },
+                    { destination: "Marrakech Ciudad (Traslado directo por autopista)", distance: "240 km", duration: "2h 45m", sedanPrice: "140€ (~1.500 MAD)", vanPrice: "180€ (~1.950 MAD)", popular: true },
+                    { destination: "Fez Medina (Liaison exprés)", distance: "320 km", duration: "3h 30m", sedanPrice: "160€ (~1.750 MAD)", vanPrice: "210€ (~2.300 MAD)" }
+                ]
+            },
             faqs: [
-                { q: "¿Qué ocurre si mi vuelo sufre un retraso?", a: "Hacemos seguimiento en directo de los vuelos. Su chófer adaptará la hora de llegada sin ningún cargo adicional por espera." },
-                { q: "¿Dónde me esperará el conductor en el aeropuerto?", a: "En el vestíbulo principal de llegadas, justo tras pasar el control de aduanas y recoger sus maletas, sosteniendo un cartel con su nombre." },
-                { q: "¿El precio es por persona o por vehículo?", a: "El precio indicado es por vehículo completo para su grupo e incluye peajes, combustible y maletas." }
+                { q: "¿Dónde me esperará el conductor en el Aeropuerto de Casablanca (CMN)?", a: "Tras recoger el equipaje y pasar el control aduanero, acceda al vestíbulo principal de llegadas de la Terminal 1 o 2. Su chófer le esperará sosteniendo un cartel con su nombre. Gracias al seguimiento de vuelos por radar, se adapta automáticamente a cualquier retraso sin recargos." },
+                { q: "¿Cuánto cuesta un taxi desde el aeropuerto de Casablanca al centro de la ciudad?", a: "El traslado privado desde el aeropuerto CMN hasta el centro de Casablanca tiene un precio cerrado garantizado de 35€ (~380 MAD) para berlina (1-3 personas) o 50€ (~550 MAD) para furgoneta espaciosa (hasta 7 personas), con peajes y maletas incluidos." },
+                { q: "¿Cuánto cuesta el traslado desde el aeropuerto de Casablanca a Rabat?", a: "Nuestro traslado privado desde el aeropuerto de Casablanca a Rabat tiene una tarifa fija de 75€ (~820 MAD) en berlina y 110€ (~1.200 MAD) en furgoneta. El trayecto dura aproximadamente 1 hora y 30 minutos por autopista." },
+                { q: "¿Existe servicio de Uber en el aeropuerto de Casablanca?", a: "No, Uber no opera en Marruecos. Aunque existen aplicaciones locales en la ciudad, tienen prohibido recoger pasajeros dentro del aeropuerto. Reservar un chófer privado oficial con antelación es la opción más segura y eficiente." },
+                { q: "¿Se puede reservar un traslado directo desde el aeropuerto de Casablanca a Marrakech?", a: "Sí, es una opción muy solicitada por viajeros internacionales (tarifa fija 140€) para evitar tener que desplazarse a la estación de tren de Casablanca con maletas." }
             ],
-            seoTitle: "Traslado Aeropuerto Casablanca (CMN) Privado | Mdina Tours",
-            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Casablanca Mohammed V (CMN). Chófer puntual en la terminal, tarifas fijas y vehículos modernos."
+            seoTitle: "Traslado Aeropuerto Casablanca CMN Privado | Tarifas Fijas Rabat",
+            seoDesc: "Reserve su traslado privado en el Aeropuerto de Casablanca CMN desde 35€. Precios cerrados a Casablanca, Rabat y Marrakech. Chófer con cartel en llegadas."
         }
     },
     {
@@ -1136,7 +1293,7 @@ export const transfersData: TransferData[] = [
                 "Traversée des forêts de cèdres d'Ifrane et d'Azrou",
                 "Vues panoramiques sur la vallée du Ziz et ses palmeraies",
                 "Chauffeurs expérimentés formés aux longs trajets",
-                "Dépose à votre hôtel à Merzouga ou au point de rendez-vous de votre camp",
+                "Dépose à votre hôtel à Merzouga ou au point de rencontre de votre camp",
                 "Véhicule 4x4 climatisé ou grand van confortable"
             ],
             aboutRoute: "La route Fès-Merzouga est spectaculaire. Le transfert privé vous offre la flexibilité nécessaire pour faire des pauses déjeuner et photos à votre rythme.",
@@ -1151,75 +1308,230 @@ export const transfersData: TransferData[] = [
     {
         slug: "marrakech-airport-transfer",
         image: "/img3/aeroport-marrakech-menara.webp",
-        prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
+        prices: { 3: 25, 4: 35, 5: 45, 7: 60 },
         en: {
-            title: "Marrakech Menara Airport Private Transfer",
-            tagline: "Direct and Comfortable Taxi from Marrakech RAK Airport to your Medina Riad",
+            title: "Marrakech Airport Transfer & Private Taxi Service (RAK)",
+            tagline: "Guaranteed Flat-Rate Chauffeur Service Direct to Your Medina Riad or Hotel",
             pickup: "Marrakech Menara International Airport (RAK)",
-            dropoff: "Any Hotel or Riad in Marrakech City",
-            distance: "10 km",
-            duration: "20 minutes",
-            capacityText: "1 to 7 passengers with luggage in modern, air-conditioned vehicles",
+            dropoff: "Medina Riads, Gueliz, Palmeraie, or Agafay Desert",
+            distance: "10 km (Medina) / 18 km (Palmeraie)",
+            duration: "20–35 minutes",
+            capacityText: "Executive Sedans (1-3 pax), Luxury Minivans (up to 7 pax)",
             highlights: [
-                "24/7 flight monitoring – driver waits even if your flight is delayed",
-                "Meet & Greet with a name sign at the arrivals terminal",
-                "Fixed prices with no night-time premiums or extra fees",
-                "Drop-off at the closest medina gate with riad staff coordination",
-                "Clean, non-smoking, air-conditioned vans"
+                "Terminal Meet & Greet: Chauffeur waits inside the arrivals hall holding a sign with your name.",
+                "Live Flight Radar Tracking: Automatic schedule adjustment with 60 minutes free wait time if your flight is delayed.",
+                "Guaranteed Fixed Pricing: Flat rate per vehicle with zero night surcharges, baggage fees, or stressful negotiations.",
+                "Medina Doorstep Escort: Direct drop-off at the closest accessible medina gate with riad staff coordination.",
+                "Pristine Air-Conditioned Fleet: Mercedes-Benz Vitos & executive sedans with free child seats on request."
             ],
-            aboutRoute: "Marrakech Menara Airport (RAK) is close to the city center, but local airport taxi drivers are known for difficult price negotiations. Our private transfer ensures a stress-free transition at a flat rate.",
+            aboutRoute: "Marrakech Menara Airport (RAK) is located just 10 kilometers from Jemaa el-Fna and the historic Medina. However, navigating local airport street taxis is famously stressful, with unmetered fare demands and confusion finding hidden riads. Our pre-booked private transfer eliminates the haggling, delivering you safely from the terminal arrivals hall directly to your riad door.",
+            taxiComparison: {
+                badge: "Taxi vs Private Transfer",
+                heading: "Marrakech Airport Taxi vs. Mdina Tours Private Transfer: Why Pre-Booking Wins",
+                subheading: "Skip stressful arrivals negotiations, unmetered fares, and medina drop-off confusion. Here is why pre-booking with Mdina Tours is the smart traveler's choice.",
+                summary: "Pre-booking your Marrakech airport transfer gives you a guaranteed fixed price, a personal meet-and-greet in the terminal, and direct coordination with your riad host.",
+                points: [
+                    {
+                        feature: "Transparent Pricing",
+                        privateTransfer: "Guaranteed flat rate from €20–€25 (~220–270 MAD) per vehicle. All taxes, tolls, and luggage included. No night-time premiums.",
+                        streetTaxi: "Unregulated haggling. Drivers frequently demand 200–350 MAD, plus aggressive night markups and luggage fees."
+                    },
+                    {
+                        feature: "Terminal Meet & Greet",
+                        privateTransfer: "Personalized greeting inside the arrivals hall holding a sign with your name. Includes 60 min free waiting time & flight tracking.",
+                        streetTaxi: "Long outdoor queues at curbside taxi ranks, amidst chaotic crowds and persistent touts."
+                    },
+                    {
+                        feature: "Medina Riad Delivery",
+                        privateTransfer: "Driver escorts you to the closest pedestrian gate and coordinates directly with riad staff to greet you and carry luggage.",
+                        streetTaxi: "Drops you at distant outer avenues or roundabouts, leaving you to wander confusing alleys alone with heavy bags."
+                    },
+                    {
+                        feature: "Vehicle Standard & Safety",
+                        privateTransfer: "Modern, immaculate Mercedes-Benz Vitos & executive sedans with dual A/C. Complimentary child safety seats on request.",
+                        streetTaxi: "Older standard Grand Taxis, often lacking functioning air conditioning, seatbelts, or adequate trunk capacity."
+                    },
+                    {
+                        feature: "Payment Flexibility",
+                        privateTransfer: "Pay upon arrival in EUR or MAD cash, or pay securely online in advance. Exact change is never an issue.",
+                        streetTaxi: "Cash-only in exact Moroccan Dirhams. Drivers frequently claim they have no change for larger banknotes."
+                    }
+                ]
+            },
+            fixedPriceTable: {
+                badge: "Featured Snippet Fixed Rates",
+                heading: "Marrakech Airport Taxi Rates & Fixed Price Directory (RAK)",
+                subheading: "Official fixed fares per vehicle (not per passenger). Valid 24/7 with zero nighttime surcharges.",
+                note: "All fares include meet & greet inside RAK arrivals, flight delay tracking, highway tolls, and medina riad coordination.",
+                rows: [
+                    { destination: "Marrakech Medina (Jemaa el-Fna, Kasbah, Bab Doukkala)", distance: "10 km", duration: "20–25 min", sedanPrice: "€25 (~270 MAD)", vanPrice: "€35 (~380 MAD)", popular: true },
+                    { destination: "Gueliz & Hivernage (Modern City Center)", distance: "8 km", duration: "15–20 min", sedanPrice: "€20 (~220 MAD)", vanPrice: "€30 (~330 MAD)", popular: true },
+                    { destination: "Palmeraie (Luxury Resorts, Golf & Private Villas)", distance: "18 km", duration: "30–35 min", sedanPrice: "€30 (~330 MAD)", vanPrice: "€45 (~490 MAD)", popular: true },
+                    { destination: "Agdal District (Hotel Zone)", distance: "7 km", duration: "15 min", sedanPrice: "€20 (~220 MAD)", vanPrice: "€30 (~330 MAD)" },
+                    { destination: "Agafay Desert (Luxury Camps & Glamping)", distance: "35 km", duration: "45 min", sedanPrice: "€55 (~600 MAD)", vanPrice: "€75 (~820 MAD)", popular: true },
+                    { destination: "Ourika Valley (Atlas Mountain Foothills)", distance: "45 km", duration: "55 min", sedanPrice: "€50 (~550 MAD)", vanPrice: "€70 (~770 MAD)" },
+                    { destination: "Essaouira Coast (Medina & Beach Hotels)", distance: "185 km", duration: "2h 45m", sedanPrice: "€100 (~1,100 MAD)", vanPrice: "€130 (~1,400 MAD)" }
+                ]
+            },
             faqs: [
-                { q: "Can the driver drop me at my Medina Riad?", a: "Marrakech's historic medina has narrow pedestrian streets. Your driver will drop you at the closest accessible gate and coordinate with your riad host to meet you." },
-                { q: "Is the price per person or per vehicle?", a: "All prices are flat rates per vehicle for your private group." }
+                { q: "Where do I meet my driver at Marrakech Menara Airport (RAK)?", a: "Immediately after collecting your luggage and clearing customs, walk into the main arrivals hall. Your chauffeur will be waiting inside the terminal holding an official Mdina Tours greeting board with your name clearly displayed. Because we track flights via live radar, your driver will be waiting even if your flight lands early or is delayed." },
+                { q: "What is the official taxi price from Marrakech airport to the Medina?", a: "While official airport signs cite baseline rates around 100 to 150 MAD, street cab drivers commonly demand 200–300+ MAD, especially after dark. Pre-booking with Mdina Tours guarantees a locked flat rate of €20–€25 (~220–270 MAD) per vehicle with door-to-door escort to your Medina riad." },
+                { q: "How much is a private transfer from Marrakech Airport to Agafay Desert?", a: "A private transfer from Marrakech Airport (RAK) to luxury camps in the Agafay Desert is a flat rate of €55 (~600 MAD) for an executive sedan (1–3 passengers) or €75 (~820 MAD) for a luxury minivan (up to 7 passengers)." },
+                { q: "Can the driver drop me directly at my Medina Riad?", a: "Marrakech's historic medina features pedestrian-only alleys. Your chauffeur will drive to the closest vehicle-accessible gate (e.g. Bab Doukkala, Bab Aylen, Riad Laarous) and coordinate directly with your riad staff to greet you and assist with baggage." },
+                { q: "What happens if my flight to Marrakech is delayed?", a: "All Mdina Tours airport bookings include automated 24/7 flight tracking. When you provide your flight number, our dispatch team monitors your real-time status. Your chauffeur adjusts their pickup time automatically, with 60 minutes of free waiting time included." },
+                { q: "Is the price per person or per vehicle?", a: "All prices are flat rates per vehicle for your private party. There are no per-passenger charges or hidden luggage fees." },
+                { q: "Do your drivers speak English?", a: "Yes, our drivers are courteous local professionals fluent in English, French, and Arabic." }
             ],
-            seoTitle: "Marrakech Airport Transfer & Private Taxi RAK | Mdina Tours",
-            seoDesc: "Book a private airport transfer from Marrakech Menara Airport (RAK) to your hotel or Riad. Fixed rates, free child seats, 24/7 flight tracking."
+            seoTitle: "Marrakech Airport Transfer & Private Taxi (RAK) | Fixed Rates",
+            seoDesc: "Pre-book a private Marrakech Airport transfer (RAK) from €20. Fixed rates to Medina riads, Gueliz & Palmeraie. Terminal meet & greet with 60-min free wait time."
         },
         fr: {
-            title: "Transfert Aéroport de Marrakech-Ménara",
-            tagline: "Navette Aéroport RAK Rapide et Fiable vers votre Hôtel ou Riad",
+            title: "Transfert Aéroport Marrakech-Ménara & Taxi Privé (RAK)",
+            tagline: "Navette Privée et Tarifs Fixes Garantis vers la Médina, Guéliz et Palmeraie",
             pickup: "Aéroport International Marrakech Ménara (RAK)",
-            dropoff: "Tout Riad ou Hôtel à Marrakech",
-            distance: "10 km",
-            duration: "20 minutes",
-            capacityText: "1 à 7 passagers avec bagages inclus",
+            dropoff: "Riads de la Médina, Guéliz, Palmeraie ou Désert d'Agafay",
+            distance: "10 km (Médina) / 18 km (Palmeraie)",
+            duration: "20–35 minutes",
+            capacityText: "Berlines Exécutives (1-3 passagers) et Vans VIP (jusqu'à 7 passagers)",
             highlights: [
-                "Suivi des vols en direct – le chauffeur s'adapte à tout retard",
-                "Accueil personnalisé avec pancarte nominative à la sortie",
-                "Tarif fixe garanti sans frais de bagages ou supplément nuit",
-                "Dépose à la porte de la médina coordonnée avec votre riad",
-                "Vans climatisés propres et confortables"
+                "Accueil dans le terminal : Chauffeur privé vous attendant avec une pancarte à votre nom dès la sortie des douanes.",
+                "Suivi des vols en direct : Réajustement automatique de l'heure d'arrivée avec 60 min d'attente gratuite en cas de retard.",
+                "Tarifs fixes transparents : Prix forfaitaire par véhicule sans aucun supplément bagages ni majoration nocturne.",
+                "Accompagnement jusqu'au riad : Dépose à la porte accessible la plus proche et coordination téléphonique avec votre hébergement.",
+                "Flotte récente climatisée : Mercedes-Benz Vito et berlines soignées avec sièges enfant gratuits sur demande."
             ],
-            aboutRoute: "L'aéroport de Marrakech (RAK) est proche mais négocier un taxi local peut s'avérer stressant. Notre navette privée vous garantit un accueil sans attente et un tarif fixe transparent.",
+            aboutRoute: "L'Aéroport Marrakech Ménara (RAK) est situé à seulement 10 km de la célèbre place Jemaa el-Fna. Toutefois, trouver un taxi à la sortie s'avère souvent source de stress et de surfacturation. Notre service de navette et transfert privé vous assure une prise en charge immédiate et sereine dès l'atterrissage, à tarif fixe garanti.",
+            taxiComparison: {
+                badge: "Taxi vs Navette Privée",
+                heading: "Taxi Aéroport Marrakech vs Navette Privée Mdina Tours : Pourquoi Réserver à l'Avance ?",
+                subheading: "Évitez les négociations houleuses, les compteurs éteints et les arrivées compliquées en médina. Découvrez pourquoi pré-réserver votre chauffeur est le choix idéal.",
+                summary: "Pré-réserver votre navette aéroport vous garantit un tarif fixe sans surprise, un accueil personnalisé dans le terminal et une dépose coordonnée avec votre riad.",
+                points: [
+                    {
+                        feature: "Tarifs & Transparence",
+                        privateTransfer: "Tarif forfaitaire dès 20€–25€ (~220–270 MAD) par véhicule tout compris (péages, bagages, taxes). Zéro surprise.",
+                        streetTaxi: "Négociation obligatoire. Les chauffeurs réclament souvent 200 à 350 MAD, avec majorations la nuit et pour les bagages."
+                    },
+                    {
+                        feature: "Prise en charge au Terminal",
+                        privateTransfer: "Accueil personnalisé dans le hall des arrivées avec pancarte nominative. 60 minutes d'attente offerte et suivi de vol.",
+                        streetTaxi: "File d'attente extérieure dans la cohue et sollicitations insistantes sur le parvis."
+                    },
+                    {
+                        feature: "Arrivée aux Riads Médina",
+                        privateTransfer: "Dépose à la porte piétonne la plus proche avec contact direct du riad pour vous assister avec les valises.",
+                        streetTaxi: "Dépose souvent aléatoire sur les grands boulevards extérieurs, vous laissant chercher votre riad seul dans les ruelles."
+                    },
+                    {
+                        feature: "Confort & Sécurité",
+                        privateTransfer: "Mercedes-Benz Vito et berlines récentes et impeccables avec climatisation active. Sièges bébé gratuits.",
+                        streetTaxi: "Véhicules plus anciens, climatisation rarement fonctionnelle et coffre parfois encombré."
+                    },
+                    {
+                        feature: "Modalités de Paiement",
+                        privateTransfer: "Paiement à l'arrivée en Euros ou Dirhams, ou paiement sécurisé en ligne à l'avance. Pas de problème d'appoint.",
+                        streetTaxi: "Uniquement en espèces et en Dirhams exacts. Les chauffeurs affirment souvent ne pas avoir de monnaie."
+                    }
+                ]
+            },
+            fixedPriceTable: {
+                badge: "Tarifs Forfaitaires RAK",
+                heading: "Prix et Tarifs Fixes : Aéroport Marrakech Menara vers Centre-Ville & Médina",
+                subheading: "Tarifs fixes par véhicule (et non par passager). Valables 24h/24 sans supplément nuit.",
+                note: "Tous nos tarifs comprennent l'accueil dans le terminal, le suivi de vol et l'accompagnement bagages vers votre riad.",
+                rows: [
+                    { destination: "Médina & Place Jemaa el-Fna (Kasbah, Bab Doukkala)", distance: "10 km", duration: "20–25 min", sedanPrice: "25€ (~270 MAD)", vanPrice: "35€ (~380 MAD)", popular: true },
+                    { destination: "Guéliz & Hivernage (Centre-ville moderne)", distance: "8 km", duration: "15–20 min", sedanPrice: "20€ (~220 MAD)", vanPrice: "30€ (~330 MAD)", popular: true },
+                    { destination: "La Palmeraie (Palaces, Hôtels clubs & Villas privées)", distance: "18 km", duration: "30–35 min", sedanPrice: "30€ (~330 MAD)", vanPrice: "45€ (~490 MAD)", popular: true },
+                    { destination: "Zone Hôtelière de l'Agdal", distance: "7 km", duration: "15 min", sedanPrice: "20€ (~220 MAD)", vanPrice: "30€ (~330 MAD)" },
+                    { destination: "Désert d'Agafay (Camps de luxe & Bivouacs)", distance: "35 km", duration: "45 min", sedanPrice: "55€ (~600 MAD)", vanPrice: "75€ (~820 MAD)", popular: true },
+                    { destination: "Vallée de l'Ourika (Pied de l'Atlas)", distance: "45 km", duration: "55 min", sedanPrice: "50€ (~550 MAD)", vanPrice: "70€ (~770 MAD)" },
+                    { destination: "Essaouira (Médina & Front de mer)", distance: "185 km", duration: "2h 45m", sedanPrice: "100€ (~1 100 MAD)", vanPrice: "130€ (~1 400 MAD)" }
+                ]
+            },
             faqs: [
-                { q: "Le chauffeur peut-il me déposer devant mon riad ?", a: "La médina étant interdite aux voitures, nous vous déposons au point d'accès le plus proche et prévenons le personnel de votre riad." },
-                { q: "Le prix comprend-il le suivi des vols ?", a: "Oui, notre équipe vérifie l'heure de votre vol pour assurer la présence du chauffeur sans frais supplémentaires." }
+                { q: "Quel est le prix officiel d'un taxi ou d'une navette de l'aéroport de Marrakech à la Médina / Guéliz ?", a: "Alors que les panneaux d'affichage indiquent 100 à 150 MAD, les chauffeurs de taxi locaux réclament couramment 200 à 350 MAD à la sortie. En réservant avec Mdina Tours, vous bénéficiez d'un tarif fixe garanti dès 20€–25€ (~220–270 MAD) par véhicule pour l'ensemble de votre groupe, sans frais de bagages ni supplément de nuit." },
+                { q: "Où se trouve le point de rencontre avec le chauffeur à l'aéroport Marrakech Ménara (RAK) ?", a: "Dès que vous franchissez les douanes et récupérez vos bagages, entrez dans le hall principal des arrivées. Votre chauffeur privé vous y attendra directement avec une pancarte affichant lisiblement votre nom. Grâce au suivi des vols en direct, il sera présent même si votre vol a du retard." },
+                { q: "Comment se passe la dépose dans un riad piéton de la médina de Marrakech ?", a: "Les ruelles de la médina étant interdites aux voitures, notre chauffeur vous dépose à la porte d'accès carrossable la plus proche (Bab Doukkala, Riad Laarous, Bab Aylen...) et contacte directement votre riad pour qu'un porteur vous assiste avec vos valises." },
+                { q: "Combien coûte un taxi de l'aéroport de Marrakech au désert d'Agafay ?", a: "Le transfert privé direct de l'aéroport RAK vers les camps du désert d'Agafay est proposé au tarif fixe de 55€ pour une berline confortable (1-3 personnes) et 75€ pour un van spacieux (jusqu'à 7 personnes)." },
+                { q: "Que se passe-t-il si mon vol vers Marrakech est retardé ?", a: "Tous nos transferts incluent le suivi de vol en direct 24h/24. Dès que vous nous transmettez votre numéro de vol, notre équipe ajuste automatiquement l'heure d'arrivée du chauffeur, avec 60 minutes d'attente gratuite offerte." }
             ],
-            seoTitle: "Transfert Aéroport Marrakech RAK Privé | Mdina Tours",
-            seoDesc: "Réservez votre transfert privé depuis l'Aéroport de Marrakech (RAK) vers votre riad ou hôtel. Chauffeurs professionnels et tarifs fixes."
+            seoTitle: "Transfert Aéroport Marrakech (RAK) & Navette Privée | Prix Fixe & Taxi",
+            seoDesc: "Réservez votre transfert aéroport marrakech médina et navette aéroport marrakech dès 20€. Meilleur prix taxi marrakech aéroport garanti, accueil en terminal et chauffeur privé."
         },
         es: {
-            title: "Traslado Privado desde el Aeropuerto de Marrakech Menara (RAK)",
-            tagline: "Servicio Directo y Confortable de Chófer Privado a su Hotel o Riad en Marrakech",
-            pickup: "Aeropuerto Internacional de Marrakech Menara (RAK)",
-            dropoff: "Cualquier Hotel o Riad en Marrakech",
-            distance: "10 km",
-            duration: "20 minutos",
-            capacityText: "1 a 7 pasajeros con equipaje en vehículos modernos y climatizados",
+            title: "Traslado Aeropuerto Marrakech Menara (RAK) y Taxi Privado",
+            tagline: "Tarifas Fijas Garantizadas con Chófer Privado a la Medina, Gueliz y Palmeral",
+            pickup: "Aeropuerto Internacional Marrakech Menara (RAK)",
+            dropoff: "Riads de la Medina, Gueliz, Palmeral o Desierto de Agafay",
+            distance: "10 km (Medina) / 18 km (Palmeral)",
+            duration: "20–35 minutos",
+            capacityText: "Berlinas Ejecutivas (1-3 pax) y Furgonetas VIP (hasta 7 pax)",
             highlights: [
-                "Seguimiento de Vuelo 24/7: Su conductor esperará aunque su vuelo sufra retraso.",
-                "Recepción con Cartel: Su chófer le esperará con su nombre en el hall de llegadas.",
-                "Precios Fijos y Transparentes: Sin suplementos nocturnos ni costes por maletas.",
-                "Llegada a Riads en la Medina: Traslado hasta la puerta de acceso más cercana y coordinación con el riad.",
-                "Vehículos Limpios y Climatizados: Máximo confort para empezar su estancia con total tranquilidad."
+                "Recepción en la terminal: Su chófer le esperará con un cartel a su nombre nada más salir de aduanas.",
+                "Seguimiento de vuelo en directo: Reajuste automático con 60 minutos de espera gratuita si su vuelo se retrasa.",
+                "Tarifas fijas y transparentes: Precio cerrado por vehículo sin suplementos nocturnos ni costes por maletas.",
+                "Llegada asistida al riad: Parada en la puerta más cercana de la medina y coordinación con su alojamiento.",
+                "Flota moderna climatizada: Mercedes-Benz Vito y berlinas impecables con sillas infantiles gratuitas bajo petición."
             ],
-            aboutRoute: "El Aeropuerto de Marrakech Menara (RAK) se encuentra a poca distancia del centro, pero evitar regateos con taxis locales le garantizará una llegada tranquila. Nuestro chófer le estará esperando puntualmente para llevarle directo a su alojamiento.",
+            aboutRoute: "El Aeropuerto de Marrakech Menara (RAK) se encuentra a solo 10 kilómetros de la plaza Jemaa el-Fna. Sin embargo, conseguir un taxi a la llegada suele implicar intensos regateos y cobros abusivos. Nuestro servicio de traslado privado elimina las complicaciones y le lleva directamente hasta su alojamiento con un precio fijo cerrado.",
+            taxiComparison: {
+                badge: "Taxi vs Traslado Privado",
+                heading: "Taxi en el Aeropuerto de Marrakech vs Traslado Privado Mdina Tours: Evita Regateos y Sorpresas",
+                subheading: "Evite regateos estresantes a la llegada, tarifas sin taxímetro y dudas para encontrar su riad. Descubra por qué reservar con antelación es la opción más inteligente.",
+                summary: "Reservar su traslado con Mdina Tours le garantiza precio cerrado sin sorpresas, bienvenida personalizada dentro de la terminal y asistencia directa con su riad.",
+                points: [
+                    {
+                        feature: "Precio y Transparencia",
+                        privateTransfer: "Precio fijo garantizado desde 20€–25€ (~220–270 MAD) por vehículo todo incluido (peajes, maletas, tasas). Sin sorpresas.",
+                        streetTaxi: "Regateo obligatorio. Los taxistas suelen pedir entre 200 y 350 MAD, con recargos nocturnos y por equipaje."
+                    },
+                    {
+                        feature: "Punto de Encuentro",
+                        privateTransfer: "Recepción personalizada en la terminal de llegadas con cartel a su nombre. 60 minutos de espera gratuita y seguimiento de vuelo.",
+                        streetTaxi: "Largas colas en el exterior bajo el calor y trato con intermediarios insistentes en la parada."
+                    },
+                    {
+                        feature: "Llegada al Riad en Medina",
+                        privateTransfer: "Le dejamos en la puerta más cercana y avisamos al personal del riad para que le ayude con el equipaje.",
+                        streetTaxi: "Le deja en avenidas exteriores lejanas, dejándole solo para buscar el riad en callejones laberínticos."
+                    },
+                    {
+                        feature: "Vehículo y Confort",
+                        privateTransfer: "Vehículos Mercedes-Benz Vito y berlinas modernas con aire acondicionado y sillas de bebé gratuitas.",
+                        streetTaxi: "Vehículos antiguos, a menudo sin aire acondicionado en funcionamiento o con maletero limitado."
+                    },
+                    {
+                        feature: "Formas de Pago",
+                        privateTransfer: "Pago a la llegada en Euros o Dirhams en efectivo, o pago seguro online por adelantado. Sin problemas de cambio.",
+                        streetTaxi: "Únicamente en efectivo y en Dirhams justos. Habitualmente afirman no tener cambio para billetes grandes."
+                    }
+                ]
+            },
+            fixedPriceTable: {
+                badge: "Tarifas Fijas RAK",
+                heading: "Precios y Tarifas Fijas: Traslados desde el Aeropuerto de Marrakech al Centro y Riad",
+                subheading: "Tarifas cerradas por vehículo completo (no por persona). Válidas 24/7 sin recargos nocturnos.",
+                note: "Incluye bienvenida en la terminal, seguimiento de vuelo y asistencia con el equipaje hasta el riad.",
+                rows: [
+                    { destination: "Medina de Marrakech (Plaza Jemaa el-Fna, Kasbah, Bab Doukkala)", distance: "10 km", duration: "20–25 min", sedanPrice: "25€ (~270 MAD)", vanPrice: "35€ (~380 MAD)", popular: true },
+                    { destination: "Gueliz e Hivernage (Centro moderno de la ciudad)", distance: "8 km", duration: "15–20 min", sedanPrice: "20€ (~220 MAD)", vanPrice: "30€ (~330 MAD)", popular: true },
+                    { destination: "Palmeraie (Hoteles y Villas de lujo)", distance: "18 km", duration: "30–35 min", sedanPrice: "30€ (~330 MAD)", vanPrice: "45€ (~490 MAD)", popular: true },
+                    { destination: "Zona Hotelera de Agdal", distance: "7 km", duration: "15 min", sedanPrice: "20€ (~220 MAD)", vanPrice: "30€ (~330 MAD)" },
+                    { destination: "Desierto de Agafay (Campamentos y Glamping)", distance: "35 km", duration: "45 min", sedanPrice: "55€ (~600 MAD)", vanPrice: "75€ (~820 MAD)", popular: true },
+                    { destination: "Valle de Ourika (Atlas)", distance: "45 km", duration: "55 min", sedanPrice: "50€ (~550 MAD)", vanPrice: "70€ (~770 MAD)" },
+                    { destination: "Esauira Costa (Medina y Playa)", distance: "185 km", duration: "2h 45m", sedanPrice: "100€ (~1.100 MAD)", vanPrice: "130€ (~1.400 MAD)" }
+                ]
+            },
             faqs: [
-                { q: "¿Puede el chófer dejarme en la puerta de mi riad en la medina?", a: "La medina histórica de Marrakech es peatonal. Su conductor le dejará en la puerta o parking más cercano y se pondrá en contacto con el personal de su riad para asistirle." },
-                { q: "¿El precio es por persona o por vehículo?", a: "Todas nuestras tarifas son precios cerrados por vehículo completo para su grupo privado." }
+                { q: "¿Cómo ir del aeropuerto de Marrakech a la Medina o al centro de la ciudad?", a: "La opción más cómoda y segura para llegar a la Medina o a Guéliz es reservar un traslado privado con antelación. A diferencia de los taxis de la terminal que exigen negociar el precio o el autobús L19 con horarios limitados, su chófer privado le recogerá dentro de la terminal y le llevará directo hasta la puerta más cercana de su riad por un precio cerrado desde 20€." },
+                { q: "¿Cuánto cuesta un taxi o traslado privado desde el aeropuerto de Marrakech?", a: "Aunque las tarifas de referencia marcan entre 100 y 150 MAD, los taxistas de la terminal suelen pedir entre 200 y 300 MAD (o más de noche). Con Mdina Tours tienes una tarifa fija garantizada de 20€ a 25€ (~220–270 MAD) por vehículo completo, sin suplementos por maletas ni horario nocturno." },
+                { q: "¿Dónde me esperará mi chofer en el Aeropuerto Menara (RAK)?", a: "Justo después de recoger el equipaje y cruzar el control de aduanas, acceda al vestíbulo principal de llegadas. Su chófer le estará esperando dentro de la terminal sosteniendo un cartel con su nombre. Gracias al seguimiento de vuelo en directo, estará allí puntual aunque su vuelo sufra retraso." },
+                { q: "¿Cuánto cuesta el traslado desde el aeropuerto de Marrakech al desierto de Agafay?", a: "El traslado privado directo desde el aeropuerto RAK a los campamentos de Agafay tiene un precio fijo de 55€ para berlina (1-3 personas) o 75€ para furgoneta espaciosa (hasta 7 personas)." },
+                { q: "¿Qué sucede si mi vuelo a Marrakech sufre un retraso?", a: "Monitorizamos los vuelos las 24 horas. Su chófer adapta la hora de recogida automáticamente sin ningún recargo adicional e incluye 60 minutos de espera de cortesía." }
             ],
-            seoTitle: "Traslado Aeropuerto Marrakech Menara (RAK) Privado | Mdina Tours",
-            seoDesc: "Reserve su traslado privado desde el Aeropuerto de Marrakech Menara (RAK) a su riad u hotel. Chófer puntual, tarifas fijas y vehículos climatizados."
+            seoTitle: "Traslado Aeropuerto Marrakech (RAK) al Centro y Medina | Taxi Privado con Precio Fijo",
+            seoDesc: "Reserve su traslado aeropuerto marrakech y taxi privado al centro y riad desde 20€. Descubra como ir del aeropuerto de marrakech a la medina con el mejor precio taxi aeropuerto marrakech fijo y sin regateos."
         }
     },
     {
