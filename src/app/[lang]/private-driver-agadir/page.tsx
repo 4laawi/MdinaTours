@@ -154,14 +154,14 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
 
     const itineraries = [
         {
-            title: isEn ? "Agadir Al-Massira Airport & Hotel Transfers" : "Transferts Aéroport Agadir Al-Massira & Hôtels",
+            title: isEn ? "Agadir Al-Massira Airport Transfers" : "Transferts Aéroport Agadir Al-Massira",
             desc: isEn 
                 ? "Stress-free transfers between Agadir Airport (AGA) and Taghazout, Essaouira, or local beach hotels."
                 : "Transferts sans stress entre l'Aéroport d'Agadir (AGA) et Taghazout, Essaouira ou les hôtels balnéaires.",
             price: isEn ? "From €40" : "À partir de 40 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
+            cta: isEn ? "Book Airport Transfer" : "Voir les transferts",
             image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Taghazout & Paradise Valley Tour" : "Excursion Taghazout & Paradise Valley",
@@ -441,7 +441,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : "+120 réservations avec des clients satisfaits"}
                             </p>
                         </div>
 

@@ -21,7 +21,7 @@ export default function Services({ lang = 'en' }: { lang?: Language }) {
             title: t('service_airport_title'),
             desc: t('service_airport_desc'),
             image: '/img2/Airport_Casablanca_Mohammed.webp',
-            href: getPath('/transfers')
+            href: getPath('/airport-transfers')
         },
         {
             id: 'intercity',

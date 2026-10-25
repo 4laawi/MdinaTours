@@ -26,17 +26,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     
-    let title = 'Private Driver Morocco – Professional Chauffeur Service | Mdina Tours';
-    let description = 'Hire a professional private driver in Morocco for flexible city travel, day trips, and custom multi-day tours. Transparent daily rates and experienced local drivers.';
+    let title = 'Private Chauffeur & Dedicated Driver in Morocco | Mdina Tours';
+    let description = 'Hire a professional private chauffeur and dedicated driver in Morocco for flexible city travel, day trips, business transport, and multi-day tours. Transparent daily rates and executive fleet.';
     let ogLocale = 'en_US';
 
     if (lang === 'fr') {
-        title = 'Chauffeur Privé Maroc – Service de Transport Professionnel | Mdina Tours';
-        description = 'Louez un véhicule avec chauffeur privé au Maroc pour vos déplacements urbains, excursions et circuits sur mesure. Tarifs clairs et chauffeurs expérimentés.';
+        title = 'Chauffeur Privé & Voiturier Dédié au Maroc | Mdina Tours';
+        description = 'Service de chauffeur privé et mise à disposition au Maroc pour excursions, voyages d\'affaires et circuits sur mesure. Tarifs à la journée et berlines tout confort.';
         ogLocale = 'fr_FR';
     } else if (lang === 'es') {
-        title = 'Conductor Privado en Marruecos – Coche con Chófer | Mdina Tours';
-        description = 'Alquiler de vehículo con conductor privado en Marruecos para traslados, excursiones y rutas personalizadas. Precios transparentes y conductores profesionales.';
+        title = 'Chófer Privado y Conductor Dedicado en Marruecos | Mdina Tours';
+        description = 'Alquiler de coche con chófer privado dedicado en Marruecos para viajes de negocios, excursiones de un día y rutas personalizadas de varios días.';
         ogLocale = 'es_ES';
     }
 
@@ -211,14 +211,14 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
 
     const itineraries = [
         {
-            title: isEn ? "Airport & Intercity Transfers" : (isEs ? "Traslados de Aeropuerto e Interurbanos" : "Transferts Aéroport & Interurbains"),
+            title: isEn ? "Morocco Airport Transfers" : (isEs ? "Traslados de Aeropuerto en Marruecos" : "Transferts Aéroport au Maroc"),
             desc: isEn 
-                ? "Direct, comfortable transportation between Casablanca, Rabat, Marrakech, Tangier, and Fes."
-                : (isEs ? "Transporte directo y cómodo entre Casablanca, Rabat, Marrakech, Tánger y Fez." : "Liaisons confortables entre Casablanca, Rabat, Marrakech, Tanger et Fès."),
-            price: isEn ? "From €45" : (isEs ? "Desde 45 €" : "À partir de 45 €"),
-            cta: isEn ? "View Transfers" : (isEs ? "Ver Traslados" : "Voir les transferts"),
+                ? "Punctual terminal meet & greet, live flight tracking, and fixed rates across Casablanca (CMN), Marrakech (RAK), Rabat, and Tangier."
+                : (isEs ? "Recogida personalizada en terminal con cartel, seguimiento de vuelos y tarifas fijas en Casablanca, Marrakech, Rabat y Tánger." : "Accueil personnalisé avec pancarte en terminal, suivi de vol en direct et prix fixes à Casablanca (CMN), Marrakech (RAK), Rabat et Tanger."),
+            price: isEn ? "From €35" : (isEs ? "Desde 35 €" : "À partir de 35 €"),
+            cta: isEn ? "View Airport Transfers" : (isEs ? "Ver Traslados" : "Voir les transferts"),
             image: "/img2/vito-aeroport.jpg",
-            href: language === 'es' ? "/airport-transfers" : "/transfers",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Excursion to Chefchaouen" : (isEs ? "Excursión a Chefchaouen" : "Excursion à Chefchaouen"),
@@ -598,7 +598,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '0.95rem', marginTop: '4px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : (isEs ? "+120 reservas con clientes satisfechos" : "+120 réservations avec des clients satisfaits")}
                             </p>
                         </div>
 

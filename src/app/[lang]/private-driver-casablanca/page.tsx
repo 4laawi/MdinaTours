@@ -175,14 +175,14 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
 
     const itineraries = [
         {
-            title: isEn ? "Airport & City Transfers" : "Transferts Aéroport & Ville",
+            title: isEn ? "Casablanca Airport Transfers" : "Transferts Aéroport Casablanca",
             desc: isEn 
-                ? "Rabat, Casablanca, Marrakech — we get you there without the stress."
-                : "Rabat, Casablanca, Marrakech — voyagez l'esprit tranquille.",
-            price: isEn ? "From €65" : "À partir de 65 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
-            image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
+                ? "Reliable Mohammed V (CMN) airport pickups with terminal meet & greet, flight tracking, and door-to-door comfort."
+                : "Accueil personnalisé à l'aéroport Mohammed V (CMN) avec pancarte nominative, suivi de vol et trajet porte-à-porte.",
+            price: isEn ? "From €35" : "À partir de 35 €",
+            cta: isEn ? "Book Airport Transfer" : "Réserver Navette Aéroport",
+            image: "/img2/Airport_Casablanca_Mohammed.webp",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Imperial Cities Day Tour" : "Excursion Villes Impériales",
@@ -536,7 +536,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : "+120 réservations avec des clients satisfaits"}
                             </p>
                         </div>
 

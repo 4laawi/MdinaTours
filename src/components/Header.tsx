@@ -22,8 +22,8 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     // Helper to get localized path
     const getPath = (path: string) => {
-        if (language === 'es' && path === '/private-driver') {
-            return '/es/private-driver-morocco';
+        if (path === '/private-driver') {
+            return `/${language}/private-driver-morocco`;
         }
         if (language === 'en' && path === '/') {
             return '/';
@@ -112,12 +112,13 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
 
-    // Primary mobile navigation items
+    // Primary navigation items
     const primaryNavItems = [
         { path: '/', label: t('home') },
-        { path: '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
+        { path: '/airport-transfers', label: isEn ? 'Airport Transfers' : (isEs ? 'Traslados Aeropuerto' : 'Transferts Aéroport') },
         { path: '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
         { path: '/private-driver-morocco', label: isEn ? 'Private Driver' : (isEs ? 'Chófer Privado' : 'Chauffeur Privé') },
+        { path: '/tours', label: isEn ? 'Tours' : (isEs ? 'Excursiones' : 'Circuits') },
     ];
 
     const moreNavItems = [

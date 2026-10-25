@@ -25,55 +25,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
-    if (lang === 'es') {
-        return {
-            title: 'Conductor Privado en Marruecos – Coche con Chófer | Mdina Tours',
-            description: 'Alquiler de vehículo con conductor privado en Marruecos para traslados, excursiones y rutas personalizadas. Precios transparentes y conductores profesionales.',
-            alternates: getAlternates(lang, '/private-driver-morocco'),
-        };
-    }
-    const isEn = lang === 'en';
-
-    const title = isEn ? 'Private Driver Morocco - Professional Chauffeur | Mdina Tours' : 'Chauffeur Privé Maroc - Service de Transport | Mdina Tours';
-    const description = isEn
-        ? 'Book a professional private driver in Morocco. Premium sedans and minivans with English-speaking local chauffeurs for day trips, weekly tours, and business travel.'
-        : 'Louez un véhicule avec chauffeur privé au Maroc. Berlines et minivans confortables pour vos réunions, excursions et voyages interurbains.';
-    const url = `https://mdinatours.com/${lang}/private-driver`;
-
     return {
-        title,
-        description,
-        alternates: getAlternates(lang, '/private-driver'),
-        openGraph: {
-            title,
-            description,
-            url,
-            siteName: 'Mdina Tours',
-            images: [
-                {
-                    url: 'https://mdinatours.com/hero-landscape-1.webp',
-                    width: 1200,
-                    height: 630,
-                    alt: 'Private Driver Mdina Tours',
-                },
-            ],
-            locale: lang === 'fr' ? 'fr_FR' : 'en_US',
-            type: 'website',
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: ['https://mdinatours.com/hero-landscape-1.webp'],
+        title: 'Redirecting to Private Driver Morocco | Mdina Tours',
+        alternates: getAlternates(lang, '/private-driver-morocco'),
+        robots: {
+            index: false,
+            follow: true,
         },
     };
 }
 
 export default async function PrivateDriverPage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
-    if (lang === 'es') {
-        permanentRedirect('/es/private-driver-morocco');
-    }
+    permanentRedirect(`/${lang}/private-driver-morocco`);
     const language = (lang as Language) || 'en';
     const isEn = language === 'en';
 

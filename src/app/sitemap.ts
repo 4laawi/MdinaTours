@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/about',
         '/tours',
         '/transfers',
-        '/private-driver',
         '/private-driver-marrakech',
         '/private-driver-casablanca',
         '/private-driver-fes',

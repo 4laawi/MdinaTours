@@ -952,7 +952,15 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     <nav className="breadcrumb-nav" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', color: '#64748b', marginBottom: '10px' }}>
                         <Link href={isEn ? "/" : (language === 'es' ? "/es" : "/fr")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.home}</Link>
                         <span style={{ color: '#cbd5e1' }}>›</span>
-                        <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>{transText.transfers}</Link>
+                        {trans.slug.toLowerCase().includes('airport') ? (
+                            <Link href={isEn ? "/en/airport-transfers" : (language === 'es' ? "/es/airport-transfers" : "/fr/airport-transfers")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>
+                                {isEn ? 'Airport Transfers' : (language === 'es' ? 'Traslados Aeropuerto' : 'Transferts Aéroport')}
+                            </Link>
+                        ) : (
+                            <Link href={isEn ? "/en/transfers" : (language === 'es' ? "/es/transfers" : "/fr/transfers")} prefetch={false} style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }}>
+                                {isEn ? 'Intercity Transfers' : (language === 'es' ? 'Traslados Interurbanos' : 'Transferts Intervilles')}
+                            </Link>
+                        )}
                         <span style={{ color: '#cbd5e1' }}>›</span>
                         <span style={{ color: 'var(--accent)', fontWeight: 600, maxWidth: '280px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', verticalAlign: 'bottom' }}>
                             {local.pickup} ⇄ {local.dropoff}

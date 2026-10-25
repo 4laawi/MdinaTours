@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import ReactDOM from 'react-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './TransfersHero.module.css';
@@ -18,7 +17,7 @@ interface TransfersHeroProps {
     bgImage: string;
     homeLabel?: string;
     homeLink?: string;
-    currentLabel: string;
+    currentLabel?: string;
     initialPickup?: string;
     initialDropoff?: string;
 }
@@ -180,23 +179,6 @@ export default function TransfersHero({
             <div className={styles.container}>
                 <div className={styles.column}>
                     <div className={styles.contentWrapper}>
-                        {/* Breadcrumbs */}
-                        <div className={styles.breadcrumbWrapper}>
-                            <ul className={styles.breadcrumbList}>
-                                <li className={styles.breadcrumbItem}>
-                                    <Link href={homeLink} className={styles.breadcrumbLink}>{homeLabel}</Link>
-                                </li>
-                                <li className={styles.breadcrumbItem}>
-                                    <span className={styles.breadcrumbIcon}>
-                                        <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
-                                        </svg>
-                                    </span>
-                                    <span>{currentLabel}</span>
-                                </li>
-                            </ul>
-                        </div>
-
                         {/* Title & Subtitle */}
                         <h1 className={styles.title}>{title}</h1>
                         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
@@ -308,9 +290,6 @@ export default function TransfersHero({
                                     </g>
                                 </svg>
                             </div>
-                            <span className={styles.trustpilotScoreText}>
-                                {language === 'es' ? "TrustScore 4.8 | 347 opiniones" : language === 'en' ? "TrustScore 4.8 | 347 reviews" : "TrustScore 4.8 | 347 avis"}
-                            </span>
                         </a>
 
                     </div>

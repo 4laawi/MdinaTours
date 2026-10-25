@@ -118,16 +118,36 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     }
     const language = (lang as Language) || 'en';
     
+    const toIsoDate = (d?: string) => {
+        if (!d) return "2026-03-15";
+        const parsed = Date.parse(d);
+        if (!isNaN(parsed)) {
+            return new Date(parsed).toISOString().split('T')[0];
+        }
+        const parts = d.trim().split(/\s+/);
+        if (parts.length === 2) {
+            const months: Record<string, string> = {
+                january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
+                july: '07', august: '08', september: '09', october: '10', november: '11', december: '12'
+            };
+            const m = months[parts[0].toLowerCase()];
+            if (m) return `${parts[1]}-${m}-01`;
+        }
+        return "2026-03-15";
+    };
+
     // Check programmatic first
     const progPost = getProgrammaticPost(slug, language);
     let title = '';
     let description = '';
     let image = '/Tangier-Morocco-Photo.webp'; // fallback
+    let rawDate: string | undefined;
 
     if (progPost) {
         title = progPost.seoTitle;
         description = progPost.seoDesc;
         image = progPost.image;
+        rawDate = progPost.date;
     } else {
         const t = (key: string) => {
             const langSection = translations[language] || translations['en'];
@@ -135,12 +155,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         };
 
         const blogPosts = [
-            { id: 1, slug: 'rabat-travel-guide', image: "/img2/rabat-hassan-tour.jpg" },
-            { id: 2, slug: 'sahara-desert-tour-plan', image: "/b-roll/activity-sahara-camel-riding-broll.webp" },
-            { id: 3, slug: 'moroccan-architecture-guide', image: "/img2/fes_gate.jpg" },
-            { id: 4, slug: 'moroccan-food-traditions', image: "/Traditional.webp" },
-            { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/hero-chefchaouen.webp" },
-            { id: 6, slug: 'private-driver-morocco-guide', image: "/img2/private-vito-vans-3.webp" }
+            { id: 1, slug: 'rabat-travel-guide', image: "/img2/rabat-hassan-tour.jpg", date: "March 15, 2026" },
+            { id: 2, slug: 'sahara-desert-tour-plan', image: "/b-roll/activity-sahara-camel-riding-broll.webp", date: "March 10, 2026" },
+            { id: 3, slug: 'moroccan-architecture-guide', image: "/img2/fes_gate.jpg", date: "March 5, 2026" },
+            { id: 4, slug: 'moroccan-food-traditions', image: "/Traditional.webp", date: "February 28, 2026" },
+            { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/hero-chefchaouen.webp", date: "February 20, 2026" },
+            { id: 6, slug: 'private-driver-morocco-guide', image: "/img2/private-vito-vans-3.webp", date: "February 15, 2026" }
         ];
 
         const post = blogPosts.find(p => p.slug === slug);
@@ -151,8 +171,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         title = `${t(`blog_post_${post.id}_title`)} – Mdina Tours`;
         description = t(`blog_post_${post.id}_excerpt`);
         image = post.image;
+        rawDate = post.date;
     }
 
+    const isoDate = toIsoDate(rawDate);
     const url = `https://mdinatours.com/${lang}/blog/${slug}`;
 
     return {
@@ -171,6 +193,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             description,
             url,
             siteName: 'Mdina Tours',
+            publishedTime: isoDate,
+            modifiedTime: isoDate,
             images: [
                 {
                     url: `https://mdinatours.com${image}`,
@@ -474,6 +498,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         ]
     };
 
+    // Helper to format ISO date
+    const toIsoDate = (d?: string) => {
+        if (!d) return "2026-03-15";
+        const parsed = Date.parse(d);
+        if (!isNaN(parsed)) {
+            return new Date(parsed).toISOString().split('T')[0];
+        }
+        const parts = d.trim().split(/\s+/);
+        if (parts.length === 2) {
+            const months: Record<string, string> = {
+                january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
+                july: '07', august: '08', september: '09', october: '10', november: '11', december: '12'
+            };
+            const m = months[parts[0].toLowerCase()];
+            if (m) return `${parts[1]}-${m}-01`;
+        }
+        return "2026-03-15";
+    };
+
+    const isoPublishedDate = toIsoDate(date);
+
     // Article / BlogPosting Schema
     const articleSchema = {
         "@context": "https://schema.org",
@@ -481,8 +526,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         "headline": title,
         "description": progPost ? progPost.seoDesc : title,
         "image": `https://mdinatours.com${image}`,
-        "datePublished": "2026-03-15",
-        "dateModified": "2026-03-15",
+        "datePublished": isoPublishedDate,
+        "dateModified": isoPublishedDate,
         "author": {
             "@type": "Organization",
             "name": "Mdina Tours",
@@ -828,7 +873,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
                                 <div className={styles.postFooter}>
                                     <div className={styles.shareSection}>
-                                        <h4>{isEn ? 'Share this story' : 'Partager cet article'}</h4>
+                                        <p className={styles.shareTitle}>{isEn ? 'Share this story' : 'Partager cet article'}</p>
                                         <div className={styles.shareLinks}>
                                             <a href={`https://wa.me/?text=${encodeURIComponent(title + ' - https://mdinatours.com/' + language + '/blog/' + slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>WhatsApp</a>
                                             <button className={styles.shareBtn}>Facebook</button>
@@ -922,7 +967,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                     <ul className={styles.widgetList}>
                                         <li><Link href={getPath('/transfers')}>{isEn ? 'Intercity Transfers' : 'Transferts Intervilles'}</Link></li>
                                         <li><Link href={getPath('/airport-transfers')}>{isEn ? 'Airport Transfers' : 'Navettes Aéroport'}</Link></li>
-                                        <li><Link href={getPath('/private-driver')}>{isEn ? 'Private Chauffeurs' : 'Chauffeurs Privés'}</Link></li>
+                                        <li><Link href={getPath('/private-driver-morocco')}>{isEn ? 'Private Chauffeurs' : 'Chauffeurs Privés'}</Link></li>
                                         <li><Link href={getPath('/chauffeur-dispo-morocco')}>{isEn ? 'Daily Driver at Disposal' : 'Mise à Disposition Journée'}</Link></li>
                                         <li><Link href={getPath('/tours')}>{isEn ? 'Custom Guided Tours' : 'Circuits sur Mesure'}</Link></li>
                                         <li><Link href={getPath('/contact')}>{isEn ? 'Custom Itinerary Quote' : 'Devis Sur Mesure'}</Link></li>

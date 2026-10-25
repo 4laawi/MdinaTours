@@ -33,17 +33,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
 
-    let title = 'Morocco Private Driver & Airport Transfers | Mdina Tours';
-    let description = 'Book premium private driver services and airport transfers across Morocco. Fixed rates, licensed chauffeurs, flight tracking, and transparent daily itineraries.';
+    let title = 'Mdina Tours | Morocco Private Driver, Airport Transfers & Custom Tours';
+    let description = 'Official Mdina Tours: Premium private chauffeurs, airport shuttles, and intercity travel across Morocco. Fixed upfront rates, flight delay tracking, and English-speaking drivers.';
     let ogLocale = 'en_US';
 
     if (lang === 'fr') {
-        title = 'Chauffeur Privé Maroc & Transferts Aéroport | Mdina Tours';
-        description = 'Réservez votre chauffeur privé et transferts aéroport au Maroc. Véhicules avec chauffeur, suivi de vol, tarifs fixes et paiement transparent par journée.';
+        title = 'Mdina Tours | Chauffeur Privé, Transferts Aéroport & Circuits au Maroc';
+        description = 'Mdina Tours : Chauffeurs privés, transferts aéroportuaires et transport intervilles au Maroc. Prix fixes garantis, suivi de vol et service haut de gamme.';
         ogLocale = 'fr_FR';
     } else if (lang === 'es') {
-        title = 'Conductor Privado en Marruecos y Traslados | Mdina Tours';
-        description = 'Reserve conductor privado y traslados de aeropuerto en Marruecos. Chófer profesional, tarifas fijas, seguimiento de vuelos y total flexibilidad de ruta.';
+        title = 'Mdina Tours | Chófer Privado, Traslados de Aeropuerto y Rutas en Marruecos';
+        description = 'Mdina Tours: Chóferes privados profesionales, traslados de aeropuerto y viajes interurbanos en Marruecos. Tarifas fijas transparentes y atención personalizada.';
         ogLocale = 'es_ES';
     }
 

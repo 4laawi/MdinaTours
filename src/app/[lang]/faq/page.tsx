@@ -136,9 +136,9 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
                 },
                 {
                     q: isEn ? "Which airports do you cover?" : isEs ? "¿Qué aeropuertos cubren en Marruecos?" : "Quels aéroports desservez-vous ?",
-                    a: isEn ? "We serve all major Moroccan airports with our premium Morocco Transfers including Marrakech Menara (RAK), Casablanca Mohammed V (CMN), Agadir Al Massira (AGA), Fes Saïss (FEZ), and Rabat-Salé (RBA)."
-                            : isEs ? "Cubrimos los principales aeropuertos de Marruecos, incluidos Casablanca Mohammed V (CMN), Marrakech Menara (RAK), Rabat-Salé (RBA), Fez Saïss (FEZ) y Tánger Ibn Battouta (TNG)."
-                            : "Nous desservons tous les principaux aéroports marocains, y compris Marrakech Menara (RAK), Casablanca Mohammed V (CMN), Agadir Al Massira (AGA), Fès Saïss (FEZ) et Rabat-Salé (RBA) avec nos services de transferts au Maroc."
+                    a: isEn ? "We serve all major Moroccan airports with our premium Morocco Airport Transfers including Marrakech Menara (RAK), Casablanca Mohammed V (CMN), Agadir Al Massira (AGA), Fes Saïss (FEZ), and Rabat-Salé (RBA)."
+                            : isEs ? "Cubrimos los principales aeropuertos de Marruecos con nuestros traslados de aeropuerto, incluidos Casablanca Mohammed V (CMN), Marrakech Menara (RAK), Rabat-Salé (RBA), Fez Saïss (FEZ) y Tánger Ibn Battouta (TNG)."
+                            : "Nous desservons tous les principaux aéroports avec nos transferts aéroport au Maroc, y compris Marrakech Menara (RAK), Casablanca Mohammed V (CMN), Agadir Al Massira (AGA), Fès Saïss (FEZ) et Rabat-Salé (RBA)."
                 },
                 {
                     q: isEn ? "How do I find my driver at the airport?" : isEs ? "¿Cómo encuentro a mi conductor en el aeropuerto?" : "Comment trouver mon chauffeur à l'aéroport ?",
@@ -252,13 +252,20 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
     const allFaqs = categories.flatMap(cat => cat.items);
 
     const renderAnswer = (text: string) => {
-        const regex = /(Morocco Transfers?|Morocco Tours?|WhatsApp|private drivers?|transferts? au Maroc|circuits? au Maroc|chauffeurs? privés?)/gi;
+        const regex = /(Morocco Airport Transfers?|transferts? aéroport au Maroc|traslados? de aeropuerto|Morocco Transfers?|Morocco Tours?|WhatsApp|private drivers?|transferts? au Maroc|circuits? au Maroc|chauffeurs? privés?)/gi;
         const parts = text.split(regex);
         return parts.map((part, i) => {
             const lowerPart = part.toLowerCase();
+            if (lowerPart.startsWith('morocco airport transfer') || lowerPart.includes('aéroport') || lowerPart.includes('aeropuerto')) {
+                return (
+                    <Link key={i} href={getPath('/airport-transfers')} style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
+                        {part}
+                    </Link>
+                );
+            }
             if (lowerPart.startsWith('morocco transfer') || lowerPart.startsWith('transfert')) {
                 return (
-                    <Link key={i} href={isEs ? getPath('/airport-transfers') : getPath('/transfers')} style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
+                    <Link key={i} href={getPath('/transfers')} style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
                         {part}
                     </Link>
                 );
@@ -279,7 +286,7 @@ export default async function FAQListingPage({ params }: { params: Promise<{ lan
             }
             if (lowerPart.startsWith('private driver') || lowerPart.startsWith('chauffeur')) {
                 return (
-                    <Link key={i} href={isEs ? getPath('/private-driver-morocco') : getPath('/private-driver')} style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
+                    <Link key={i} href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 500 }}>
                         {part}
                     </Link>
                 );

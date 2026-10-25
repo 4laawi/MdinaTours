@@ -139,13 +139,6 @@ export default async function LocaleLayout({
             ],
             "opens": "00:00",
             "closes": "23:59"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "184",
-            "bestRating": "5",
-            "worstRating": "1"
         }
     };
 

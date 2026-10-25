@@ -39,7 +39,7 @@
 
     background-color: var(--sand-50);
     color: var(--ink-700);
-    font-family: var(--font-inter), var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -484,34 +484,16 @@
 }
 
 /* --------------------------------------------------------------------------
-   3 Trust Chips under Hero Booking Widget
+   Trust Microcopy under Hero Booking Widget
    -------------------------------------------------------------------------- */
-.trustChipsRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    column-gap: 24px;
-    row-gap: 8px;
-    margin-top: 4px;
-}
-
-.trustChip {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: rgba(226, 232, 240, 0.9);
-    font-size: 0.83rem;
+.heroTrustText {
+    text-align: center;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.88);
+    margin-top: 14px;
     font-weight: 500;
     letter-spacing: -0.01em;
-}
-
-.trustChipIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 0.95rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 768px) {
@@ -521,15 +503,11 @@
         margin-bottom: 16px;
     }
 
-    .trustChipsRow {
-        column-gap: 16px;
-        row-gap: 6px;
-        margin-top: 2px;
-    }
-
-    .trustChip {
-        font-size: 0.77rem;
-        gap: 6px;
+    .heroTrustText {
+        font-size: 0.78rem;
+        line-height: 1.5;
+        margin-top: 12px;
+        padding: 0 8px;
     }
 }
 

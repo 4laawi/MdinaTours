@@ -162,10 +162,13 @@
     gap: 40px;
 }
 
-.shareSection h4 {
+.shareSection h4,
+.shareTitle {
     margin-bottom: 20px;
     font-size: 1.1rem;
+    font-weight: 600;
     color: #666;
+    margin-top: 0;
 }
 
 .shareLinks {

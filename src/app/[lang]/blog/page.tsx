@@ -283,7 +283,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                                 {isEn ? "View Transfer Routes →" : "Voir les trajets transferts →"}
                             </Link>
                             <Link
-                                href={getPath('/private-driver')}
+                                href={getPath('/private-driver-morocco')}
                                 style={{
                                     backgroundColor: '#ffffff',
                                     border: '1px solid #EAEAEA',

@@ -175,14 +175,14 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
 
     const itineraries = [
         {
-            title: isEn ? "Airport & City Transfers" : "Transferts Aéroport & Ville",
+            title: isEn ? "Marrakech Airport Transfers" : "Transferts Aéroport Marrakech",
             desc: isEn 
-                ? "Rabat, Casablanca, Marrakech — we get you there without the stress."
-                : "Rabat, Casablanca, Marrakech — voyagez l'esprit tranquille.",
-            price: isEn ? "From €65" : "À partir de 65 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
+                ? "Direct Menara Airport (RAK) transfers with meet & greet to your medina riad or luxury resort with luggage assistance."
+                : "Transferts directs depuis l'aéroport Menara (RAK) vers votre riad en médina ou palace avec assistance bagages.",
+            price: isEn ? "From €30" : "À partir de 30 €",
+            cta: isEn ? "Book Airport Transfer" : "Réserver Navette Aéroport",
             image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Imperial Cities Day Tour" : "Excursion Villes Impériales",
@@ -537,7 +537,7 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : "+120 réservations avec des clients satisfaits"}
                             </p>
                         </div>
 

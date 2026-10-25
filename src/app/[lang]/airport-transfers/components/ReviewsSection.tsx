@@ -15,22 +15,15 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
     const isEs = lang === 'es';
 
     const text = {
-        eyebrow: isAr ? 'آراء وتجارب المسافرين' : isFr ? 'AVIS CLIENTS VÉRIFIÉS' : isEs ? 'OPINIONES DE VIAJEROS' : 'VERIFIED CLIENT REVIEWS',
-        title: isAr ? 'تقييمات موثقة لتوصيل المطارات في المغرب' : isFr ? 'Avis vérifiés sur nos transferts aéroport au Maroc' : isEs ? 'Opiniones verificadas de traslados en aeropuertos de Marruecos' : 'Verified Morocco Airport Transfer Reviews',
+        eyebrow: isAr ? 'آراء وتجارب المسافرين' : isFr ? 'AVIS CLIENTS' : isEs ? 'OPINIONES DE VIAJEROS' : 'TRAVELER REVIEWS',
+        title: isAr ? 'تجارب المسافرين لتوصيل المطارات في المغرب' : isFr ? 'Avis sur nos transferts aéroport au Maroc' : isEs ? 'Opiniones sobre nuestros traslados en Marruecos' : 'Morocco Airport Transfer Traveler Reviews',
         subtitle: isAr 
-            ? 'تقييمات حقيقية وموثقة من سياح ورجال أعمال اختاروا مدينة تورز لتنقلاتهم في المغرب.'
+            ? 'تجارب وانطباعات حقيقية من سياح ورجال أعمال اختاروا مدينة تورز لتنقلاتهم في المغرب.'
             : isFr 
-            ? 'Témoignages authentiques de voyageurs internationaux ayant confié leur accueil à Mdina Tours.'
+            ? 'Témoignages de voyageurs internationaux ayant confié leur accueil à Mdina Tours.'
             : isEs 
-            ? 'Reseñas reales y contrastadas de viajeros de todo el mundo que confiaron en Mdina Tours.'
-            : 'Genuine feedback from international travelers and business executives who booked their Morocco arrivals with us.',
-        trustSummary: isAr 
-            ? 'تقييم 4.9 من 5 على منصة Trustpilot و Google استناداً إلى أكثر من 340 مراجعة' 
-            : isFr 
-            ? 'Note moyenne de 4.9 / 5 sur Trustpilot & Google basée sur plus de 340 avis vérifiés' 
-            : isEs 
-            ? 'Puntuación media de 4.9 / 5 en Trustpilot y Google basada en más de 340 reseñas' 
-            : 'Rated 4.9 / 5 on Trustpilot & Google across 340+ verified passenger reviews'
+            ? 'Comentarios de viajeros de todo el mundo que confiaron en Mdina Tours para sus traslados.'
+            : 'Feedback and impressions from international travelers and guests who booked their Morocco airport transfers with us.'
     };
 
     const [activeReviewIndex, setActiveReviewIndex] = useState(0);
@@ -42,14 +35,9 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                 <div className={styles.sectionHeaderCenter}>
                     <span className={styles.sectionEyebrow}>{text.eyebrow}</span>
                     <h2 className={styles.sectionTitle}>{text.title}</h2>
-                    <p className={styles.sectionSubtitle} style={{ marginBottom: '14px' }}>
+                    <p className={styles.sectionSubtitle}>
                         {text.subtitle}
                     </p>
-                    {/* Trustpilot & Google summary line */}
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#ffffff', border: '1px solid var(--sand-200, #E2E8F0)', borderRadius: '100px', padding: '6px 18px', fontSize: '0.84rem', color: 'var(--ink-900, #202F59)', fontWeight: 600 }}>
-                        <Icon icon="simple-icons:trustpilot" width="16" height="16" style={{ color: '#00B67A' }} />
-                        <span>{text.trustSummary}</span>
-                    </div>
                 </div>
 
                 <div 

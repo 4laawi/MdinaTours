@@ -75,12 +75,17 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                             </Link>
                         </li>
                         <li>
-                            <Link href={language === 'es' ? '/es/airport-transfers' : getPath('/transfers')} prefetch={false}>
-                                {isEn ? 'Morocco Transfers' : (language === 'es' ? 'Traslados en Marruecos' : 'Transferts Maroc')}
+                            <Link href={getPath('/airport-transfers')} prefetch={false}>
+                                {isEn ? 'Morocco Airport Transfers' : (language === 'es' ? 'Traslados de Aeropuerto' : 'Transferts Aéroport Maroc')}
                             </Link>
                         </li>
                         <li>
-                            <Link href={language === 'es' ? '/es/private-driver-morocco' : getPath('/private-driver')} prefetch={false}>
+                            <Link href={getPath('/transfers')} prefetch={false}>
+                                {isEn ? 'Intercity Transfers' : (language === 'es' ? 'Traslados Interurbanos' : 'Transferts Intervilles')}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={getPath('/private-driver-morocco')} prefetch={false}>
                                 {isEn ? 'Private Driver' : (language === 'es' ? 'Chófer Privado' : 'Chauffeur Privé')}
                             </Link>
                         </li>

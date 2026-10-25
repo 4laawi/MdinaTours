@@ -54,6 +54,27 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // 301 Permanent Redirects to eliminate duplicate URLs & consolidate link equity
+  async redirects() {
+    return [
+      {
+        source: "/private-driver",
+        destination: "/en/private-driver-morocco",
+        permanent: true,
+      },
+      {
+        source: "/:lang(en|fr|es)/private-driver",
+        destination: "/:lang/private-driver-morocco",
+        permanent: true,
+      },
+      {
+        source: "/:lang(en|fr|es)/private-driver/:path*",
+        destination: "/:lang/private-driver-morocco",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

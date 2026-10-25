@@ -10,10 +10,10 @@ export default function TransferWebRatings(props: any) {
         <div className="web-ratings-flex">
             <div className="web-ratings-info">
                 <p className="web-ratings-title">
-                    {isEn ? "Rated across the web" : isEs ? "Reconocido en la web" : "Reconnu sur le web"}
+                    {isEn ? "Recognized across the web" : isEs ? "Reconocido en la web" : "Reconnu sur le web"}
                 </p>
                 <p className="web-ratings-subtitle">
-                    {isEn ? "Independent traveler feedback" : isEs ? "Opiniones de viajeros independientes" : "Avis de voyageurs indépendants"}
+                    {isEn ? "Traveler recommendations & feedback" : isEs ? "Recomendaciones de viajeros" : "Avis et recommandations de voyageurs"}
                 </p>
             </div>
             <div className="web-ratings-badges">
@@ -46,9 +46,8 @@ export default function TransferWebRatings(props: any) {
                             <div className="tripadvisor-dot" />
                             <div className="tripadvisor-dot" />
                         </div>
-                        <span className="web-rating-value">4.9</span>
-                        <span className="web-rating-count">
-                            5,281 {isEn ? "reviews" : "avis"}
+                        <span className="web-rating-value">
+                            {isEn ? "Excellent" : isEs ? "Excelente" : "Excellent"}
                         </span>
                     </div>
                 </a>
@@ -82,9 +81,8 @@ export default function TransferWebRatings(props: any) {
                                 <path d="M48 64.7 62.6 61l6.1 18.8zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM152 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM256 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM360 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM464 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2z" fill="#fff" />
                             </g>
                         </svg>
-                        <span className="web-rating-value">4.6</span>
-                        <span className="web-rating-count">
-                            1,069 {isEn ? "reviews" : "avis"}
+                        <span className="web-rating-value">
+                            {isEn ? "Excellent" : isEs ? "Excelente" : "Excellent"}
                         </span>
                     </div>
                 </a>

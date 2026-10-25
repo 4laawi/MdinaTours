@@ -21,16 +21,16 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const isEn = lang === 'en';
 
     const title = isEs
-        ? 'Traslados Privados y Chófer en Marruecos | Mdina Tours'
+        ? 'Traslados Interurbanos y Viajes Entre Ciudades en Marruecos | Mdina Tours'
         : isEn
-        ? 'Private Driver & Airport Transfers Morocco | Mdina Tours'
-        : 'Chauffeur Privé et Transfert Aéroport Maroc | Mdina Tours';
+        ? 'Morocco Intercity Private Transfers & City-to-City Rides | Mdina Tours'
+        : 'Transferts Privés Intervilles au Maroc & Trajets Longue Distance | Mdina Tours';
 
     const description = isEs
-        ? 'Reserve traslados privados fiables en Marruecos. Tarifas fijas garantizadas, vehículos modernos con aire acondicionado y chóferes profesionales entre Tánger, Marrakech, Casablanca y Fez.'
+        ? 'Reserve traslados privados entre ciudades en Marruecos. Tarifas fijas garantizadas, vehículos con aire acondicionado y recogida puerta a puerta entre Casablanca, Marrakech, Tánger y Fez.'
         : isEn
-        ? 'Book reliable private transfers and driver services in Morocco. Fixed fares, modern air-conditioned vans, and professional drivers between Rabat, Casablanca, and Marrakech.'
-        : 'Réservez des transferts privés fiables au Maroc. Prix fixes, chauffeurs professionnels bilingues entre Rabat, Casablanca, Marrakech et Tanger.';
+        ? 'Book reliable intercity private transfers across Morocco. Guaranteed fixed fares, modern air-conditioned vans, and door-to-door comfort between Casablanca, Marrakech, Tangier, Fes, and Chefchaouen.'
+        : 'Réservez vos transferts privés intervilles au Maroc. Prix fixes tout compris, berlines et minivans climatisés de porte-à-porte entre Casablanca, Marrakech, Tanger, Fès et Chefchaouen.';
 
     const url = `https://mdinatours.com/${lang}/transfers`;
 
@@ -176,6 +176,48 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                 {/* Catalog Listing */}
                 <section style={{ padding: '80px 20px' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        {/* Airport Transfers Callout */}
+                        <div style={{
+                            marginBottom: '30px',
+                            padding: '16px 22px',
+                            backgroundColor: '#fff',
+                            borderRadius: '14px',
+                            border: '1px solid rgba(220, 131, 78, 0.25)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap',
+                            gap: '12px',
+                            boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
+                        }}>
+                            <span style={{ fontSize: '0.95rem', color: '#475569', fontWeight: 500 }}>
+                                {isEn
+                                    ? "Arriving by plane in Casablanca, Marrakech, Rabat or Tangier?"
+                                    : isEs
+                                    ? "¿Llega en avión a Casablanca, Marrakech, Rabat o Tánger?"
+                                    : "Vous atterrissez à Casablanca, Marrakech, Rabat ou Tanger ?"}
+                            </span>
+                            <Link
+                                href={getPath('/airport-transfers')}
+                                prefetch={false}
+                                style={{
+                                    color: 'var(--primary)',
+                                    fontWeight: 700,
+                                    fontSize: '0.95rem',
+                                    textDecoration: 'none',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '4px'
+                                }}
+                            >
+                                {isEn
+                                    ? "Morocco Airport Transfers & Private Shuttles →"
+                                    : isEs
+                                    ? "Ver traslados de aeropuerto con bienvenida →"
+                                    : "Voir les transferts aéroport avec accueil personnalisé →"}
+                            </Link>
+                        </div>
+
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',

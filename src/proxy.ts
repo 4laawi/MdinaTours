@@ -36,6 +36,11 @@ export default function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url), 308);
     }
 
+    // Consolidate duplicate /private-driver directly to /en/private-driver-morocco
+    if (pathname === '/private-driver' || pathname === '/private-driver/') {
+        return NextResponse.redirect(new URL('/en/private-driver-morocco', request.url), 308);
+    }
+
     // Root homepage / -> directly render English homepage via internal rewrite
     if (pathname === '/') {
         return NextResponse.rewrite(new URL(`/${defaultLocale}`, request.url));

@@ -394,13 +394,6 @@ export default async function CarWithDriver8DaysPage({ params }: { params: Promi
                 "addressLocality": "Rabat",
                 "addressCountry": "MA"
             }
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "148",
-            "bestRating": "5",
-            "worstRating": "1"
         }
     };
 

@@ -154,14 +154,14 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
 
     const itineraries = [
         {
-            title: isEn ? "Tangier Ville Port & Airport Transfers" : "Transferts Port de Tanger Ville & Aéroport",
+            title: isEn ? "Tangier Port & Airport Transfers" : "Transferts Port de Tanger & Aéroport",
             desc: isEn 
                 ? "Fast and secure transfers from Tangier Ville Port, Tanger Med, or Tangier Ibn Battouta Airport."
                 : "Transferts rapides et sécurisés depuis le Port de Tanger Ville, Tanger Med ou l'Aéroport de Tanger Ibn Battouta.",
             price: isEn ? "From €40" : "À partir de 40 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
+            cta: isEn ? "Book Airport Transfer" : "Voir les transferts",
             image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Asilah Coastal Day Excursion" : "Excursion Côtière à Asilah",
@@ -441,7 +441,7 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : "+120 réservations avec des clients satisfaits"}
                             </p>
                         </div>
 

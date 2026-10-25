@@ -154,14 +154,14 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
 
     const itineraries = [
         {
-            title: isEn ? "Rabat-Salé Airport & City Transfers" : "Transferts Aéroport Rabat-Salé & Ville",
+            title: isEn ? "Rabat-Salé Airport Transfers" : "Transferts Aéroport Rabat-Salé",
             desc: isEn 
                 ? "Safe and punctual transfers between Rabat-Salé Airport (RBA) and your local hotel or office in Salé or Rabat."
                 : "Transferts sécurisés et ponctuels entre l'Aéroport de Rabat-Salé (RBA) et votre hôtel ou bureau à Salé ou Rabat.",
             price: isEn ? "From €35" : "À partir de 35 €",
-            cta: isEn ? "View Transfers" : "Voir les transferts",
+            cta: isEn ? "Book Airport Transfer" : "Voir les transferts",
             image: "/img2/vito-aeroport.jpg",
-            href: "/transfers",
+            href: "/airport-transfers",
         },
         {
             title: isEn ? "Salé/Rabat to Casablanca Business Transfer" : "Transfert d'Affaires Salé/Rabat - Casablanca",
@@ -441,7 +441,7 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
                                 {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                             </h2>
                             <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                                {isEn ? "4.9★ average across 120+ bookings" : "Moyenne de 4,9★ sur plus de 120 réservations"}
+                                {isEn ? "+120 bookings with satisfied customers" : "+120 réservations avec des clients satisfaits"}
                             </p>
                         </div>
 

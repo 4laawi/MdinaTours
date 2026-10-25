@@ -97,7 +97,7 @@ export default function WhatTravelersSay({ lang, backgroundColor = '#fff' }: Wha
                         {isEn ? "What travelers say" : (isEs ? "Opiniones de nuestros viajeros" : "Ce que disent nos voyageurs")}
                     </h2>
                     <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                        {isEn ? "4.9★ average across 120+ bookings" : (isEs ? "Puntuación media de 4,9★ en más de 120 reservas" : "Moyenne de 4,9★ sur plus de 120 réservations")}
+                        {isEn ? "+120 bookings with satisfied customers" : (isEs ? "+120 reservas con clientes satisfechos" : "+120 réservations avec des clients satisfaits")}
                     </p>
                 </div>
 

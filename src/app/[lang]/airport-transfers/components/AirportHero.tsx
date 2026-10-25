@@ -2,13 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Locale, TRUST_CHIPS } from '@/lib/airportTransfersData';
+import { Locale } from '@/lib/airportTransfersData';
 import { getRoutePrice } from '@/lib/transferLocations';
 import LocationCombobox from '@/components/LocationCombobox';
 import { useLanguage } from '@/context/LanguageContext';
 import { trackLeadConversion } from '@/lib/tracking';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
-import { Icon } from '@iconify/react';
 import styles from '../AirportTransfers.module.css';
 import heroStyles from '@/components/Hero.module.css';
 
@@ -119,8 +118,8 @@ export default function AirportHero({ lang }: AirportHeroProps) {
             }
         };
 
-        window.addEventListener('prefill-transfer-route' as any, handlePrefillRoute);
-        return () => window.removeEventListener('prefill-transfer-route' as any, handlePrefillRoute);
+        window.addEventListener('prefill-transfer-route', handlePrefillRoute as EventListener);
+        return () => window.removeEventListener('prefill-transfer-route', handlePrefillRoute as EventListener);
     }, []);
 
     const handleSearch = () => {
@@ -210,7 +209,14 @@ export default function AirportHero({ lang }: AirportHeroProps) {
             ? 'Transferts privés confortables à Casablanca, Marrakech, Rabat et Tanger. Accueil en terminal avec pancarte nominative, suivi des vols et paiement à l\'arrivée.'
             : isEs 
             ? 'Traslados privados en Casablanca, Marrakech, Rabat y Tánger. Recepción en terminal con cartel a su nombre, seguimiento de vuelos y pago directo a la llegada.'
-            : 'Reliable private transfers across Casablanca, Marrakech, Rabat, Tangier, and Fes. Meet & greet inside arrivals, flight delay tracking, and fixed rates with payment on arrival.'
+            : 'Reliable private transfers across Casablanca, Marrakech, Rabat, Tangier, and Fes. Meet & greet inside arrivals, flight delay tracking, and fixed rates with payment on arrival.',
+        trustMicrocopy: isAr
+            ? 'بدون دفع مسبق · الدفع عند الوصول · بدون رسوم مخفية · بدون مفاجآت'
+            : isFr
+            ? "Aucun prépaiement · Paiement à l'arrivée · Aucun frais caché · Zéro surprise"
+            : isEs
+            ? 'Sin prepago · Pago a la llegada · Sin costes ocultos · Cero sorpresas'
+            : 'No prepayment · Pay upon arrival · No hidden fees · Zero surprises'
     };
 
     return (
@@ -238,7 +244,7 @@ export default function AirportHero({ lang }: AirportHeroProps) {
                 </p>
 
                 {/* Proven Homepage Search Widget */}
-                <div className={heroStyles.searchWrapper} style={{ marginTop: '4px', marginBottom: '18px' }}>
+                <div className={heroStyles.searchWrapper} style={{ marginTop: '4px' }}>
                     <div className={heroStyles.searchWidget}>
                         <div className={heroStyles.searchField}>
                             <div className={heroStyles.iconWrapper}>📍</div>
@@ -311,21 +317,10 @@ export default function AirportHero({ lang }: AirportHeroProps) {
                         </div>
                     )}
 
-                </div>
-
-                {/* 3 Trust Badges */}
-                <div className={styles.trustChipsRow}>
-                    {TRUST_CHIPS.map((chip, idx) => (
-                        <div key={idx} className={styles.trustChip}>
-                            <span 
-                                className={styles.trustChipIcon}
-                                style={{ color: chip.iconColor || '#34D399' }}
-                            >
-                                <Icon icon={chip.icon} width="16" height="16" />
-                            </span>
-                            <span>{chip.label[lang] || chip.label.en}</span>
-                        </div>
-                    ))}
+                    {/* Trust Microcopy - No emojis or icons */}
+                    <p className={styles.heroTrustText}>
+                        {text.trustMicrocopy}
+                    </p>
                 </div>
             </div>
 

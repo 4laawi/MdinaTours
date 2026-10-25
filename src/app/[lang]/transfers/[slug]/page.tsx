@@ -162,6 +162,14 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         }))
     };
 
+    const isAirportRoute = slug.toLowerCase().includes('airport');
+    const parentBreadcrumbName = isAirportRoute
+        ? (isEn ? "Airport Transfers" : isEs ? "Traslados al Aeropuerto" : "Transferts Aéroport")
+        : (isEn ? "Intercity Transfers" : isEs ? "Traslados Interurbanos" : "Transferts Intervilles");
+    const parentBreadcrumbUrl = isAirportRoute
+        ? `https://mdinatours.com/${language}/airport-transfers`
+        : `https://mdinatours.com/${language}/transfers`;
+
     const breadcrumbJsonLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -175,8 +183,8 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": isEn ? "Airport Transfers" : isEs ? "Traslados al Aeropuerto" : "Transferts Aéroport",
-                "item": `https://mdinatours.com/${language}/airport-transfers`
+                "name": parentBreadcrumbName,
+                "item": parentBreadcrumbUrl
             },
             {
                 "@type": "ListItem",

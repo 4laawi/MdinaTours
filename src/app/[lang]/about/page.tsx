@@ -128,7 +128,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                     ? "Traslados al aeropuerto desde y hacia Casablanca, Marrakech, Rabat, Fez y principales ciudades."
                     : "Transferts aéroport au départ et à destination de Casablanca, Marrakech, Rabat, Fès et grandes villes.",
                 icon: "✈️",
-                link: isEs ? getPath('/airport-transfers') : getPath('/transfers')
+                link: getPath('/airport-transfers')
             },
             {
                 title: isEn ? "Private Driver Service" : isEs ? "Conductor Privado por Días" : "Service Chauffeur Privé",
@@ -138,7 +138,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                     ? "Servicio de conductor privado para rutas de varios días, incluidas travesías como Fez a Merzouga y el Sahara."
                     : "Chauffeur privé dédié pour vos circuits de plusieurs jours, y compris Fès vers Merzouga et le Sahara.",
                 icon: "🚘",
-                link: isEs ? getPath('/private-driver-morocco') : getPath('/private-driver')
+                link: getPath('/private-driver-morocco')
             },
             {
                 title: isEn ? "Local Guides & Riads" : isEs ? "Guías Locales y Riads" : "Guides Locaux & Riads",

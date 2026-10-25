@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import AirportTransfersClient from './components/AirportTransfersClient';
-import { Locale, FAQS, REVIEWS } from '@/lib/airportTransfersData';
+import { Locale, FAQS } from '@/lib/airportTransfersData';
 import { Metadata } from 'next';
 import { Language } from '@/lib/translations';
 
@@ -14,21 +14,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     
-    let title = 'Morocco Airport Transfers & Private Chauffeur | Mdina Tours';
-    let description = 'Private Morocco airport transfers across Casablanca, Marrakech, Rabat & Tangier. Fixed fares, 60-min free wait time, flight tracking, and pay on arrival.';
+    let title = 'Morocco Airport Transfers & Private Shuttles | Mdina Tours';
+    let description = 'Private Morocco airport transfers across Casablanca (CMN), Marrakech (RAK), Rabat (RBA) & Tangier (TNG). Flat rates, flight tracking, terminal meet & greet, and pay on arrival.';
     let ogLocale = 'en_US';
 
     if (lang === 'fr') {
-        title = 'Transferts Aéroport Maroc & Chauffeur Privé | Mdina Tours';
-        description = 'Transferts aéroport privés à Casablanca, Marrakech, Rabat et Tanger. Tarifs fixes, 60 min d\'attente offerte, suivi de vol et paiement sécurisé à l\'arrivée.';
+        title = 'Transferts Aéroport Maroc & Navettes Privées | Mdina Tours';
+        description = 'Transferts aéroport privés à Casablanca (CMN), Marrakech (RAK), Rabat et Tanger. Tarifs fixes, 60 min d\'attente offerte, suivi de vol et accueil avec pancarte nominative.';
         ogLocale = 'fr_FR';
     } else if (lang === 'es') {
-        title = 'Traslados Aeropuerto en Marruecos y Chófer | Mdina Tours';
-        description = 'Traslados privados de aeropuerto en Casablanca, Marrakech, Rabat y Tánger. Tarifas fijas garantizadas, 60 min de espera gratuita y pago seguro a la llegada.';
+        title = 'Traslados Aeropuerto en Marruecos y Shuttles Privados | Mdina Tours';
+        description = 'Traslados privados de aeropuerto en Casablanca (CMN), Marrakech (RAK), Rabat y Tánger. Tarifas fijas garantizadas, 60 min de espera gratuita y pago seguro a la llegada.';
         ogLocale = 'es_ES';
     } else if (lang === 'ar') {
-        title = 'خدمات توصيل مطارات المغرب وسائق خاص | مدينة تورز';
-        description = 'خدمة نقل وتوصيل خاصة من مطارات الدار البيضاء، مراكش، الرباط وطنجة. أسعار ثابتة، 60 دقيقة انتظار مجاناً، تتبع مباشر للرحلات ودفع آمن عند الوصول.';
+        title = 'خدمات توصيل مطارات المغرب وحافلات مكوكية خاصة | مدينة تورز';
+        description = 'خدمة نقل وتوصيل خاصة من مطارات الدار البيضاء، مراكش، الرباط وطنجة. أسعار ثابتة، 60 دقيقة انتظار مجاناً، تتبع مباشر للرحلات واستقبال بالاسم.';
         ogLocale = 'ar_MA';
     }
 
@@ -108,25 +108,7 @@ export default async function AirportTransfersPage({ params }: { params: Promise
             "priceCurrency": "EUR",
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
             "availability": "https://schema.org/InStock"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "347",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
-        "review": REVIEWS.map(r => ({
-            "@type": "Review",
-            "author": { "@type": "Person", "name": r.name },
-            "datePublished": "2026-10-01",
-            "reviewBody": r.quote[currentLang] || r.quote.en,
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": r.rating.toString(),
-                "bestRating": "5"
-            }
-        }))
+        }
     };
 
     const breadcrumbJsonLd = {

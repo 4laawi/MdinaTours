@@ -235,12 +235,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     content: isEn
                         ? `<p>For solo budget backpackers and independent travelers, the <strong>CTM highway bus</strong> is the most dependable public transit option between Rabat and Chefchaouen.</p>
                            <p><strong>Departure Station in Rabat:</strong> Direct CTM buses depart from <strong>Gare Routière Al Kamra</strong> (Rabat's main intercity bus terminal) or the central Rabat CTM office. Petit taxis throughout Rabat can easily take you to the station for 15–20 MAD.</p>
-                           <p><strong>Travel Time & Frequency:</strong> The bus trip takes approximately <strong>5 hours 10 minutes to 5 hours 30 minutes</strong>, depending on road traffic and short passenger stops along the route. CTM typically runs <strong>1 to 2 direct departures per day</strong> (usually an early morning bus around 08:30 and an afternoon service). Schedules change seasonally, so verify on the official CTM website (<code>ctm.ma</code>) before your trip.</p>
+                           <p><strong>Travel Time & Frequency:</strong> The bus trip takes approximately <strong>5 hours 10 minutes to 5 hours 30 minutes</strong>, depending on road traffic and short passenger stops along the route. CTM typically runs <strong>1 to 2 direct departures per day</strong> (usually an early morning bus around 08:30 and an afternoon service). Schedules change seasonally, so verify on the official CTM portal (<a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">ctm.ma</a>) before your trip.</p>
                            <p><strong>Ticket Prices & Baggage:</strong> A one-way ticket costs approximately <strong>160 MAD</strong> (~<strong>€15</strong>) per person. If you have rolling suitcases or large backpacks to place in the undercarriage cargo compartment, expect to pay a nominal luggage tag fee of <strong>5 MAD</strong> (~€0.50) per bag at the counter.</p>
                            <p><strong>Arrival in Chefchaouen:</strong> The bus arrives at <strong>Gare Routière de Chefchaouen</strong> located in the lower district on Avenue Mohamed V (around 1.5 km downhill from the old medina). Because the uphill walk with suitcases is steep, take one of the blue <em>petits taxis</em> waiting right outside the station. The 5-minute taxi ride to <strong>Bab El Ain</strong> or <strong>Plaza Uta el-Hammam</strong> costs <strong>10 to 15 MAD</strong>.</p>`
                         : `<p>Pour les voyageurs solos et routards au budget serré, l'<strong>autocar national CTM</strong> est l'option de transport en commun la plus fiable entre Rabat et Chefchaouen.</p>
                            <p><strong>Gare de départ à Rabat :</strong> Les cars CTM partent de la <strong>Gare Routière Al Kamra</strong> ou de l'agence CTM centrale. N'importe quel petit taxi de Rabat vous y emmène pour environ 15 à 20 MAD.</p>
-                           <p><strong>Durée du voyage & fréquence :</strong> Le trajet dure environ <strong>5h10 à 5h30</strong> selon les arrêts intermédiaires. La CTM propose généralement <strong>1 à 2 départs directs par jour</strong> (souvent un car le matin vers 08h30 et un dans l'après-midi). Consultez le site officiel <code>ctm.ma</code> pour les horaires actualisés.</p>
+                           <p><strong>Durée du voyage & fréquence :</strong> Le trajet dure environ <strong>5h10 à 5h30</strong> selon les arrêts intermédiaires. La CTM propose généralement <strong>1 à 2 départs directs par jour</strong> (souvent un car le matin vers 08h30 et un dans l'après-midi). Consultez le portail officiel de la CTM (<a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">ctm.ma</a>) pour les horaires actualisés.</p>
                            <p><strong>Tarif du billet & bagages :</strong> Comptez environ <strong>160 MAD</strong> (~<strong>15€</strong>) par passager. Les valises placées en soute nécessitent une étiquette bagage de <strong>5 MAD</strong> (~0,50€) par sac à enregistrer au guichet.</p>
                            <p><strong>Arrivée à Chefchaouen :</strong> Le car vous dépose à la <strong>Gare Routière de Chefchaouen</strong>, située dans la ville basse (environ 1,5 km en contrebas de la médina). La montée à pied avec des valises étant raide, prenez un petit taxi bleu à la sortie de la gare : la course jusqu'à <strong>Bab El Ain</strong> coûte entre <strong>10 et 15 MAD</strong>.</p>`
                 },
@@ -248,7 +248,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     id: "train-reality",
                     title: isEn ? "Option 3: Is There a Train to Chefchaouen? (Why Rail Is Not an Option)" : "Option 3 : Y a-t-il un train pour Chefchaouen ? (Pourquoi le rail est impossible)",
                     content: isEn
-                        ? `<p>Many travelers planning their Morocco trip look for train tickets from Rabat to Chefchaouen on the ONCF railway website. <strong>To be completely clear: there is no railway station in Chefchaouen, and no train tracks go there.</strong></p>
+                        ? `<p>Many travelers planning their Morocco trip look for train tickets from Rabat to Chefchaouen on the <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">official ONCF railway portal (oncf-voyages.ma)</a>. <strong>To be completely clear: there is no railway station in Chefchaouen, and no train tracks go there.</strong></p>
                            <p>Chefchaouen is built into the steep slopes of the Rif Mountain chain at an elevation of 564 meters above sea level. Morocco's railway infrastructure runs along the flat Atlantic coastline and inland plains, but does not extend into the mountainous interior of the Rif.</p>
                            <p>While some travelers consider taking the train from Rabat to <strong>Tangier Ville</strong> or <strong>Souk El Arbaa</strong> and then catching an onward <em>grand taxi</em> or local bus, this two-step route is not recommended:</p>
                            <ol style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
@@ -256,8 +256,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                                <li>Shared grand taxis only depart when all 6 passenger seats are filled and paid for, which often means long waiting times in the heat.</li>
                                <li>The onward road drive through winding mountain passes from Tangier or Souk El Arbaa still takes 2 to 2.5 hours.</li>
                            </ol>
-                           <p>In total, attempting a train-and-taxi combination takes <strong>6 to 7 hours</strong> and creates unnecessary stress. We strongly advise taking either the direct CTM bus or booking a <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">direct private transfer</a>.</p>`
-                        : `<p>Beaucoup de voyageurs cherchent des billets de train entre Rabat et Chefchaouen sur le site de l'ONCF. <strong>Pour être parfaitement clair : il n'y a aucune gare ferroviaire à Chefchaouen, et aucun rail n'y mène.</strong></p>
+                           <p>In total, attempting a train-and-taxi combination takes <strong>6 to 7 hours</strong> and creates unnecessary stress. We strongly advise taking either the direct CTM bus or arranging a direct door-to-door private transfer.</p>`
+                        : `<p>Beaucoup de voyageurs cherchent des billets de train entre Rabat et Chefchaouen sur le site officiel de l'ONCF (<a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">oncf-voyages.ma</a>). <strong>Pour être parfaitement clair : il n'y a aucune gare ferroviaire à Chefchaouen, et aucun rail n'y mène.</strong></p>
                            <p>Chefchaouen est bâtie sur les pentes escarpées du massif du Rif à près de 600 mètres d'altitude. Le réseau ferré marocain dessert la côte atlantique et les plaines intérieures, mais ne monte pas dans les reliefs du Rif.</p>
                            <p>Si certains envisagent de prendre le train jusqu'à <strong>Tanger Ville</strong> ou <strong>Souk El Arbaa</strong> pour ensuite prendre un <em>grand taxi</em> collectif, cette combinaison est fortement déconseillée :</p>
                            <ol style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
@@ -265,7 +265,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                                <li>Les grands taxis collectifs ne partent que lorsque les 6 places sont occupées et payées, ce qui entraîne de longues attentes.</li>
                                <li>Le trajet routier restant depuis Tanger ou Souk El Arbaa dure encore 2 à 2,5 heures de virages en montagne.</li>
                            </ol>
-                           <p>Au final, cette liaison combinée prend <strong>6 à 7 heures</strong> et s'avère éprouvante. Privilégiez sans hésiter l'autocar direct CTM ou un <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct</a>.</p>`
+                           <p>Au final, cette liaison combinée prend <strong>6 à 7 heures</strong> et s'avère éprouvante. Privilégiez sans hésiter l'autocar direct CTM ou un transfert privé direct porte-à-porte.</p>`
                 },
                 {
                     id: "travel-tips",
@@ -273,14 +273,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     content: isEn
                         ? `<p>Here are key local insights to make your journey between Rabat and Chefchaouen as smooth as possible:</p>
                            <ul style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
-                               <li><strong>Book CTM Seats in Advance:</strong> During spring, autumn, and national holidays, direct CTM buses between Rabat and Chefchaouen frequently sell out 24 to 48 hours ahead. Secure your seat on <code>ctm.ma</code> early.</li>
+                               <li><strong>Book CTM Seats in Advance:</strong> During spring, autumn, and national holidays, direct CTM buses between Rabat and Chefchaouen frequently sell out 24 to 48 hours ahead. Secure your seat on <a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">ctm.ma</a> early.</li>
                                <li><strong>Mountain Curvatures:</strong> The final 60 kilometers of road approaching Chefchaouen wind through the Rif mountains. If you are sensitive to motion sickness, sit near the front of the bus or keep travel tablets handy.</li>
                                <li><strong>Sightseeing Detours:</strong> If you travel with a private driver, you can combine the drive with a visit to the ancient Roman ruins of <strong>Volubilis</strong> or the holy hilltop town of <strong>Moulay Idriss</strong> before heading into the mountains.</li>
                                <li><strong>Morning Departures:</strong> Aim to leave Rabat before 09:30 AM. Arriving in Chefchaouen by early afternoon gives you time to check in, unpack, and climb to the Spanish Mosque for a panoramic sunset over the blue medina.</li>
                            </ul>`
                         : `<p>Voici quelques conseils locaux essentiels pour réussir votre déplacement de Rabat à la Perle Bleue :</p>
                            <ul style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
-                               <li><strong>Réservez le bus à l'avance :</strong> En haute saison (printemps, automne et week-ends prolongés), les cars CTM sont souvent complets 24 à 48h à l'avance. Réservez votre place sur <code>ctm.ma</code> sans attendre.</li>
+                               <li><strong>Réservez le bus à l'avance :</strong> En haute saison (printemps, automne et week-ends prolongés), les cars CTM sont souvent complets 24 à 48h à l'avance. Réservez votre place sur <a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">ctm.ma</a> sans attendre.</li>
                                <li><strong>Virages de montagne :</strong> Les 60 derniers kilomètres comportent de nombreux lacets dans le Rif. Si vous êtes sujet au mal des transports, prévoyez une place à l'avant ou des comprimés adaptés.</li>
                                <li><strong>Escales touristiques avec chauffeur :</strong> En transfert privé, vous avez la liberté d'ajouter une halte aux ruines romaines de <strong>Volubilis</strong> ou à <strong>Moulay Idriss</strong> avant de monter vers Chefchaouen.</li>
                                <li><strong>Privilégiez les départs matinaux :</strong> Partir de Rabat avant 09h30 vous permet d'arriver en début d'après-midi pour profiter de la lumière du jour et monter admirer le coucher de soleil depuis la Mosquée Espagnole.</li>
@@ -413,9 +413,9 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 title: isEn ? "Option 1: Private Transfer (Recommended for Comfort & Groups)" : "Option 1 : Le Transfert Privé (Recommandé pour le confort)",
                 content: isEn
                     ? `<p>Booking a <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer with Mdina Tours</a> is the most comfortable and flexible way to get from ${name1} to ${name2}. Instead of carrying luggage through busy train stations or waiting in taxi queues, a professional chauffeur picks you up directly from your hotel, riad, or airport terminal in ${name1} and drives you door-to-door to your destination in ${name2}.</p>
-                       <p>Our flat-rate pricing covers the entire vehicle, fuel, highway tolls, and baggage support, making it highly cost-effective for families and travel groups. Standard rates start from €${route.privatePrice}. Check vehicle options and <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">reserve your private ${name1} to ${name2} transfer online here</a>.</p>`
+                       <p>Our flat-rate pricing covers the entire vehicle, fuel, highway tolls, and baggage support, making it highly cost-effective for families and travel groups. Standard rates start from €${route.privatePrice} with door-to-door comfort and transparent pricing.</p>`
                     : `<p>Réserver un <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé avec Mdina Tours</a> est la solution la plus simple et sereine pour relier ${name1} et ${name2}. Un chauffeur professionnel vous accueille devant votre hôtel ou à la sortie de votre terminal à ${name1} et vous conduit directement devant votre riad à ${name2}.</p>
-                       <p>Nos prix sont fixés à l'avance par véhicule et comprennent le carburant, les péages et les bagages. Tarifs à partir de ${route.privatePrice}€. Découvrez les véhicules disponibles et <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">réservez votre transfert privé ${name1} – ${name2} en ligne ici</a>.</p>`,
+                       <p>Nos prix sont fixés à l'avance par véhicule et comprennent le carburant, les péages et les bagages. Tarifs à partir de ${route.privatePrice}€ avec prise en charge directe à votre adresse.</p>`,
                 list: isEn
                     ? [
                         "Complete door-to-door service without city taxi changes",
@@ -440,26 +440,26 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         ? `<p>There is no railway station in Chefchaouen due to the steep Rif Mountain terrain. However, if you want to travel as far as possible by rail, you must use a <strong>two-step train + road connection</strong>:</p>
                            <ol style="margin: 12px 0 16px 20px; line-height: 1.7;">
                                <li><strong>Take the ONCF train</strong> from ${name1} to the nearest railway junction—either <strong>Souk El Arbaa</strong> or <strong>Tangier Ville</strong> station.</li>
-                               <li><strong>Transfer with your luggage</strong> to a regional CTM bus or a shared 6-seat collective <em>grand taxi</em>. Keep in mind that collective grand taxis have no fixed departure schedule and only leave when all 6 passenger seats are filled and paid for, with limited trunk space for large suitcases. The road journey from Tangier or Souk El Arbaa into Chefchaouen takes an additional 2 to 2.5 hours through winding mountain passes.</li>
+                               <li><strong>Transfer with your luggage</strong> to a <a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">regional CTM bus (ctm.ma)</a> or a shared 6-seat collective <em>grand taxi</em>. Keep in mind that collective grand taxis have no fixed departure schedule and only leave when all 6 passenger seats are filled and paid for, with limited trunk space for large suitcases. The road journey from Tangier or Souk El Arbaa into Chefchaouen takes an additional 2 to 2.5 hours through winding mountain passes.</li>
                            </ol>
-                           <p>While this multi-step route is manageable for solo budget backpackers with light luggage, families and travel groups usually prefer a direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">door-to-door private transfer from ${name1} to Chefchaouen</a> to avoid station transfers and taxi negotiations.</p>`
+                           <p>While this multi-step route is manageable for solo budget backpackers with light luggage, families and travel groups usually prefer a direct door-to-door private transfer from ${name1} to Chefchaouen to avoid station transfers and taxi negotiations.</p>`
                         : `<p>Chefchaouen ne dispose d'aucune gare ferroviaire en raison du relief escarpé des montagnes du Rif. Si vous souhaitez néanmoins faire une partie du trajet sur rails, vous devez suivre une <strong>liaison en deux étapes (train + route)</strong> :</p>
                            <ol style="margin: 12px 0 16px 20px; line-height: 1.7;">
                                <li><strong>Prenez le train ONCF</strong> depuis ${name1} jusqu'à la gare ferroviaire la plus proche : <strong>Souk El Arbaa</strong> ou <strong>Tanger Ville</strong>.</li>
-                               <li><strong>Effectuez la correspondance avec vos bagages</strong> vers un autocar CTM ou un grand taxi collectif 6 places. Sachez que les grands taxis ne partent que lorsqu'ils sont complets (les 6 places occupées), avec un coffre souvent restreint pour les valises. Le trajet routier final à travers les lacets du Rif dure encore 2 à 2,5 heures.</li>
+                               <li><strong>Effectuez la correspondance avec vos bagages</strong> vers un <a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">autocar CTM (ctm.ma)</a> ou un grand taxi collectif 6 places. Sachez que les grands taxis ne partent que lorsqu'ils sont complets (les 6 places occupées), avec un coffre souvent restreint pour les valises. Le trajet routier final à travers les lacets du Rif dure encore 2 à 2,5 heures.</li>
                            </ol>
-                           <p>Bien que cette solution convienne aux routards solos au budget serré, les familles et groupes privilégient largement le confort d'un <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct porte-à-porte de ${name1} à Chefchaouen</a> pour éviter les correspondances et négociations.</p>`)
+                           <p>Bien que cette solution convienne aux routards solos au budget serré, les familles et groupes privilégient largement le confort d'un transfert privé direct porte-à-porte de ${name1} à Chefchaouen pour éviter les correspondances et négociations.</p>`)
                     : (route.train
                         ? (route.trainType === 'al-boraq'
                             ? (isEn 
-                                ? `<p>ONCF high-speed rail ('Al Boraq') offers fast, modern transit between Tangier, Rabat, and Casablanca (reaching speeds up to 320 km/h). Tickets can be booked online or at the station. Keep in mind that you will still need local petit taxis on both ends to connect the train station to your hotel or riad.</p>`
-                                : `<p>Le TGV 'Al Boraq' de l'ONCF relie rapidement et confortablement Tanger, Rabat et Casablanca (jusqu'à 320 km/h). Les billets s'achètent en ligne ou en gare. Prévoyez des petits taxis locaux aux deux extrémités pour relier la gare à votre hébergement.</p>`)
+                                ? `<p>ONCF high-speed rail ('Al Boraq') offers fast, modern transit between Tangier, Rabat, and Casablanca (reaching speeds up to 320 km/h). Tickets can be booked online via <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">ONCF Voyages (oncf-voyages.ma)</a> or at the station. Keep in mind that you will still need local petit taxis on both ends to connect the train station to your hotel or riad.</p>`
+                                : `<p>Le TGV 'Al Boraq' de l'ONCF relie rapidement et confortablement Tanger, Rabat et Casablanca (jusqu'à 320 km/h). Les billets s'achètent en ligne sur le <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">site officiel ONCF Voyages (oncf-voyages.ma)</a> ou en gare. Prévoyez des petits taxis locaux aux deux extrémités pour relier la gare à votre hébergement.</p>`)
                             : (isEn
-                                ? `<p>The standard ONCF 'Al Atlas' train connects ${name1} and ${name2} directly (taking around ${route.trainDuration} station to station). Trains run multiple times daily. Remember to factor in 30–45 minutes for station arrival, ticket queues, and local taxis to reach your riad on arrival.</p>`
-                                : `<p>Les trains classiques 'Al Atlas' de l'ONCF assurent une liaison directe entre ${name1} et ${name2} (environ ${route.trainDuration} de gare à gare). Plusieurs départs sont programmés chaque jour. Pensez à prévoir 30 à 45 minutes supplémentaires pour les taxis locaux et l'accès à votre riad.</p>`))
+                                ? `<p>The standard ONCF 'Al Atlas' train connects ${name1} and ${name2} directly (taking around ${route.trainDuration} station to station). Trains run multiple times daily with schedules available on <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">oncf-voyages.ma</a>. Remember to factor in 30–45 minutes for station arrival, ticket queues, and local taxis to reach your riad on arrival.</p>`
+                                : `<p>Les trains classiques 'Al Atlas' de l'ONCF assurent une liaison directe entre ${name1} et ${name2} (environ ${route.trainDuration} de gare à gare). Consultez les horaires officiels sur <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">oncf-voyages.ma</a>. Pensez à prévoir 30 à 45 minutes supplémentaires pour les taxis locaux et l'accès à votre riad.</p>`))
                         : (isEn
-                            ? `<p>Please note that there is no train route connecting ${name1} and ${name2} directly. The regional geography requires travelers to choose highway buses (CTM/Supratours), collective grand taxis, or a direct private chauffeur service.</p>`
-                            : `<p>Notez qu'il n'existe pas de liaison ferroviaire directe reliant ${name1} et ${name2}. Les contraintes géographiques imposent de choisir entre les autocars (CTM/Supratours), les grands taxis ou un service de chauffeur privé.</p>`))
+                            ? `<p>Please note that there is no train route connecting ${name1} and ${name2} directly. The regional geography requires travelers to choose highway buses (<a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">CTM</a> or Supratours), collective grand taxis, or a direct private chauffeur service.</p>`
+                            : `<p>Notez qu'il n'existe pas de liaison ferroviaire directe reliant ${name1} et ${name2}. Les contraintes géographiques imposent de choisir entre les autocars (<a href="https://ctm.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">CTM</a> ou Supratours), les grands taxis ou un service de chauffeur privé.</p>`))
             }
         ];
 
@@ -531,8 +531,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "comparison",
                 title: isEn ? "Factual Route Comparison: Train vs Private Transfer" : "Comparatif Factuel : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Here is an honest side-by-side comparison of door-to-door travel times, actual costs, luggage logistics, and convenience between <strong>${name1}</strong> and <strong>${name2}</strong>:</p>`
-                    : `<p>Voici une comparaison concrète et détaillée des temps de parcours, des coûts réels, de la logistique des bagages et du confort entre <strong>${name1}</strong> et <strong>${name2}</strong> :</p>`,
+                    ? `<p>Here is an honest side-by-side comparison of door-to-door travel times, actual costs, luggage logistics, and convenience between <strong>${name1}</strong> and <strong>${name2}</strong> (train schedules and ticket bookings are available on the <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">official ONCF portal (oncf-voyages.ma)</a>):</p>`
+                    : `<p>Voici une comparaison concrète et détaillée des temps de parcours, des coûts réels, de la logistique des bagages et du confort entre <strong>${name1}</strong> et <strong>${name2}</strong> (horaires ferroviaires consultables sur le <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">site officiel ONCF Voyages (oncf-voyages.ma)</a>) :</p>`,
                 table: {
                     headers: [isEn ? "Criteria" : "Critère", isEn ? "ONCF Train" : "Train ONCF", isEn ? "Private Transfer (Mdina Tours)" : "Transfert Privé (Mdina Tours)"],
                     rows: [
@@ -577,8 +577,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "cost-breakdown",
                 title: isEn ? "The Cost Comparison: When is a Driver Cheaper?" : "Le budget : Dans quels cas le chauffeur est-il plus économique ?",
                 content: isEn
-                    ? `<p>At first glance, a train ticket costing €10-€25 per person is cheaper than a private vehicle starting from €${route.privatePrice}. However, if you are traveling as a family of 4 or a group of 5, the math changes. Four train tickets plus the cost of local petits taxis on both sides (e.g. from airport to station, then station to riad) can quickly equal or exceed the cost of a private transfer van. With Mdina Tours, you pay one flat rate for the entire vehicle, regardless of passenger count. Check vehicle categories, transparent pricing, and <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">book your private ${name1} to ${name2} transfer online here</a>.</p>`
-                    : `<p>Le budget de transport individuel en train est modéré, mais pour les groupes de 3 à 7 personnes, le transfert privé est vite amorti. En additionnant les billets de train et les taxis indispensables aux transferts gares-hôtels pour chaque membre, le coût du chauffeur privé Mdina Tours est très similaire, le stress en moins. Consultez nos tarifs par passager et <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">réservez votre transfert privé ${name1} – ${name2} en ligne ici</a>.</p>`
+                    ? `<p>At first glance, a train ticket costing €10-€25 per person is cheaper than a private vehicle starting from €${route.privatePrice}. However, if you are traveling as a family of 4 or a group of 5, the math changes. Four train tickets plus the cost of local petits taxis on both sides (e.g. from airport to station, then station to riad) can quickly equal or exceed the cost of a private transfer van. With Mdina Tours, you pay one flat rate for the entire vehicle, regardless of passenger count, with modern Mercedes Vito minivans, air conditioning, and luggage support included.</p>`
+                    : `<p>Le budget de transport individuel en train est modéré, mais pour les groupes de 3 à 7 personnes, le transfert privé est vite amorti. En additionnant les billets de train et les taxis indispensables aux transferts gares-hôtels pour chaque membre, le coût du chauffeur privé Mdina Tours est très similaire, le stress en moins. Vous profitez d'un tarif forfaitaire transparent tout compris par véhicule avec assistance bagages et confort optimal.</p>`
             }
         ];
 
@@ -631,8 +631,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "landing",
                 title: isEn ? `Arriving at ${cityName} Airport` : `Arrivée à l'Aéroport de ${cityName}`,
                 content: isEn
-                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Terminal layouts, customs queues, and aggressive taxi negotiations can make your arrival stressful. Our reliable <a href="/${isEn ? 'en' : 'fr'}/airport-transfers" style="color:var(--primary); font-weight:600; text-decoration:underline;">Morocco airport transfers</a> and dedicated <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${cityName} Airport pickup service</a> guarantee a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
-                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Entre le passage de la douane et les négociations animées des taxis locaux, commencez votre séjour sans stress. Grâce à nos <a href="/${isEn ? 'en' : 'fr'}/airport-transfers" style="color:var(--primary); font-weight:600; text-decoration:underline;">transferts aéroport au Maroc</a> et notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">navette privée Aéroport de ${cityName}</a>, votre chauffeur vous accueille directement à la sortie de la douane avec une pancarte nominative pour vous conduire à votre hébergement.</p>`
+                    ? `<p>Landing at a busy airport in Morocco can be an intense experience. Official terminal information, live arrival schedules, and airport facilities are provided on the <a href="https://www.onda.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">National Airports Office portal (onda.ma)</a>.</p>
+                       <p>To avoid terminal queues and taxi negotiations outside the terminal, our dedicated <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${cityName} Airport pickup service</a> guarantees a smooth start to your vacation. Your private chauffeur waits in the arrivals hall with a name sign, assists with luggage, and drives you directly to your hotel or Riad.</p>`
+                    : `<p>L'arrivée dans un aéroport marocain peut s'avérer intimidante. Les horaires de vol en temps réel et les services terminaux sont accessibles sur le site officiel de l'<a href="https://www.onda.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-weight:600; text-decoration:underline;">Office National Des Aéroports (onda.ma)</a>.</p>
+                       <p>Pour éviter l'attente et les négociations animées des taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${cityKey}-airport-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">navette privée Aéroport de ${cityName}</a> vous assure un trajet serein. Votre chauffeur vous accueille avec une pancarte nominative dès la sortie des bagages pour vous conduire à votre hébergement.</p>`
             },
             {
                 id: "comparison",
@@ -750,7 +752,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     : `<p>Prêt à voyager sans stress ? Contactez notre équipe sur WhatsApp pour obtenir un devis rapide adapté à vos dates.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 
@@ -808,7 +810,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     : `<p>Envoyez-nous vos horaires et trajets pour recevoir une confirmation immédiate sur WhatsApp.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 
@@ -860,7 +862,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 content: isEn ? `<p>Reserve your VIP Mercedes transport with Mdina Tours today.</p>` : `<p>Réservez votre transfert VIP Mercedes avec Mdina Tours dès maintenant.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 
@@ -912,7 +914,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 content: isEn ? `<p>Guarantee an English-fluent chauffeur for your journey by booking on WhatsApp.</p>` : `<p>Garantissez un chauffeur bilingue français/anglais en réservant via WhatsApp.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 
@@ -964,7 +966,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 content: isEn ? `<p>Experience Morocco through the eyes of a local expert. Reserve your driver-guide on WhatsApp.</p>` : `<p>Découvrez le Maroc avec un expert local. Réservez votre chauffeur-guide sur WhatsApp.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 
@@ -1094,7 +1096,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 content: isEn ? `<p>Reserve your private driver for the Marrakech-Merzouga-Fes desert route on WhatsApp.</p>` : `<p>Réservez votre chauffeur privé pour la traversée du désert sur WhatsApp.</p>`,
                 isCallToAction: true,
                 ctaType: 'driver',
-                ctaLink: '/private-driver'
+                ctaLink: '/private-driver-morocco'
             }
         ];
 

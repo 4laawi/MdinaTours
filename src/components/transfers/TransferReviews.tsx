@@ -81,7 +81,7 @@ export default function TransferReviews({ language }: TransferReviewsProps) {
                         {isEn ? "What travelers say" : "Ce que disent nos voyageurs"}
                     </h2>
                     <p className="testimonials-section-rating-text" style={{ color: '#666', fontSize: '1rem', marginTop: '5px' }}>
-                        {isEn ? "4.9★ average across 120+ route bookings" : "Moyenne de 4,9★ sur plus de 120 réservations de transferts"}
+                        {isEn ? "+120 bookings with satisfied customers" : "Plus de 120 réservations avec des clients satisfaits"}
                     </p>
                 </div>
 
