@@ -481,6 +481,40 @@
     background-color: #fbf9f6;
 }
 
+.unavailableRow {
+    background-color: #fdf8f7 !important;
+}
+
+.unavailableRow td {
+    color: #6b7280;
+}
+
+.optionWithBadge {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.unavailableBadge {
+    display: inline-block;
+    background: #f4f4f5;
+    color: #71717a;
+    border: 1px solid #e4e4e7;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.unavailablePrice {
+    color: #71717a;
+    font-weight: 500;
+}
+
 .bulletList {
     margin: 25px 0;
     padding-left: 20px;
@@ -497,11 +531,12 @@
 }
 
 .bulletList li::before {
-    content: "✓";
+    content: "•";
     position: absolute;
-    left: 0;
-    color: #dc834e;
-    font-weight: bold;
+    left: 8px;
+    color: #A8541F;
+    font-size: 1.2rem;
+    line-height: 1.4;
 }
 
 .ctaBlock {
@@ -814,7 +849,62 @@
 .faqContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+}
+
+.faqDetails {
+    border: 1px solid #ebdccb;
+    border-radius: 8px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faqDetails[open] {
+    border-color: #bc8246;
+    box-shadow: 0 4px 14px rgba(188, 130, 70, 0.08);
+}
+
+.faqSummary {
+    padding: 16px 20px;
+    font-weight: 700;
+    color: #202f59;
+    cursor: pointer;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    list-style: none;
+    font-size: 1.05rem;
+}
+
+.faqSummary::-webkit-details-marker {
+    display: none;
+}
+
+.faqChevron {
+    font-size: 1.1rem;
+    color: #bc8246;
+    transition: transform 0.25s ease;
+    display: inline-block;
+}
+
+.faqDetails[open] .faqChevron {
+    transform: rotate(180deg);
+}
+
+.faqAnswer {
+    padding: 0 20px 18px 20px;
+    color: #4b5563;
+    line-height: 1.7;
+    font-size: 0.98rem;
+    border-top: 1px solid #f6f0ea;
+    background: #fdfbf8;
+}
+
+.faqAnswer p {
+    margin: 14px 0 0 0;
 }
 
 .faqItem {

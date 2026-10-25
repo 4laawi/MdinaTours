@@ -149,13 +149,215 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const name1 = isEn ? c1.en : c1.fr;
         const name2 = isEn ? c2.en : c2.fr;
 
+        if (key === "rabat-to-chefchaouen") {
+            const title = isEn 
+                ? "How to Get From Rabat to Chefchaouen: Bus, Car & Transport Guide (2026)"
+                : "Comment aller de Rabat à Chefchaouen : Bus, Voiture & Conseils Trajet (2026)";
+            
+            const excerpt = isEn
+                ? "The definitive guide to traveling between Rabat and Chefchaouen. Compare direct CTM buses, private transfers, travel times, and why there is no train to Chefchaouen."
+                : "Le guide complet pour relier Rabat et Chefchaouen. Comparez autocars CTM, transferts privés avec chauffeur, durées de route et l'absence de gare à Chefchaouen.";
+
+            const sections: ProgrammaticSection[] = [
+                {
+                    id: "overview",
+                    title: isEn ? "Route Overview & Travel Times" : "Aperçu de la route et temps de trajet",
+                    content: isEn
+                        ? `<p>There are only two direct ways to travel between Rabat and Chefchaouen: <strong>by car (private transfer or rental)</strong> or <strong>by highway bus (CTM)</strong>. Because Chefchaouen is built high into the Rif mountain range, <strong>there is no railway line or train station</strong> in the town.</p>
+                           <p>The road distance is approximately <strong>250 km (155 miles)</strong>. Traveling north from Rabat takes you through the agricultural plains of Sidi Kacem and Ouezzane, before climbing into the winding, scenic limestone peaks of the Rif mountains where the famous Blue Pearl of Morocco awaits. Door-to-door driving takes around <strong>3 hours 45 minutes to 4 hours</strong>, while the direct CTM bus takes about <strong>5 hours 10 minutes</strong>.</p>`
+                        : `<p>Il n'existe que deux façons directes de voyager entre Rabat et Chefchaouen : <strong>en voiture (transfert privé ou location)</strong> ou <strong>en autocar direct (CTM)</strong>. Comme Chefchaouen se trouve au cœur du massif du Rif, <strong>il n'existe aucune ligne ferroviaire ni gare</strong> dans la ville.</p>
+                           <p>La distance routière est d'environ <strong>250 km</strong>. Le trajet quitte Rabat par l'autoroute puis traverse les collines d'oliviers d'Ouezzane avant de gravir les superbes panoramas du Rif jusqu'à la Perle Bleue. Le trajet en voiture dure environ <strong>3h45 à 4 heures</strong>, tandis que l'autocar direct CTM met environ <strong>5h10</strong>.</p>`
+                },
+                {
+                    id: "comparison",
+                    title: isEn ? "Quick Transport Comparison: Speed, Cost & Comfort" : "Comparatif rapide des modes de transport",
+                    content: isEn 
+                        ? `<p>Here is a clear, transparent comparison of travel times, costs, and flexibility for traveling between Rabat and Chefchaouen:</p>`
+                        : `<p>Voici un comparatif transparent des durées, des prix et de la flexibilité entre Rabat et Chefchaouen :</p>`,
+                    table: {
+                        headers: isEn 
+                            ? ["Transport Option", "Door-to-Door Time", "Cost Estimate", "Flexibility", "Best Suited For"]
+                            : ["Mode de Transport", "Temps Porte-à-Porte", "Estimation Tarif", "Flexibilité", "Recommandé Pour"],
+                        rows: [
+                            [
+                                isEn ? "Private Driver (Mdina Tours)" : "Chauffeur Privé (Mdina Tours)",
+                                "3h 45m – 4h 00m",
+                                isEn ? "€249 per van (~€42/guest for 6)" : "249€ par van (~42€/pers. pour 6)",
+                                isEn ? "Maximum (Door-to-door, 24/7 anytime)" : "Maximale (Porte-à-porte, horaire libre 24/7)",
+                                isEn ? "Families, couples, small groups & luggage" : "Familles, couples, petits groupes & bagages"
+                            ],
+                            [
+                                isEn ? "Highway Bus (CTM)" : "Autocar (CTM)",
+                                "~5h 10m – 5h 30m",
+                                isEn ? "~160 MAD (~€15 / person)" : "~160 MAD (~15€ / personne)",
+                                isEn ? "Fixed schedule (1–2 departures daily from Rabat Kamra)" : "Horaires fixes (1 à 2 départs par jour)",
+                                isEn ? "Solo budget backpackers" : "Voyageurs solos à budget économique"
+                            ],
+                            [
+                                isEn ? "ONCF Train" : "Train ONCF",
+                                isEn ? "No direct train line" : "Aucune ligne ferroviaire",
+                                isEn ? "No railway line" : "Pas de voie ferrée",
+                                "N/A",
+                                isEn ? "Not available (Chefchaouen has no railway station)" : "Non disponible (Chefchaouen n'a pas de gare)"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    id: "private-transfer",
+                    title: isEn ? "Option 1: Private Transfer (Fastest & Recommended for Groups)" : "Option 1 : Le Transfert Privé (Recommandé pour les groupes & le confort)",
+                    content: isEn
+                        ? `<p>Booking a <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from Rabat to Chefchaouen with Mdina Tours</a> is by far the most convenient, comfortable, and scenic way to make the trip. Instead of hauling luggage through busy bus stations, negotiating taxi connections, or adhering to rigid timetables, a professional local chauffeur greets you directly at your hotel, riad, or Rabat-Salé Airport (RBA) at whatever hour fits your itinerary.</p>
+                           <p>The journey takes around <strong>3 hours 45 minutes to 4 hours</strong> via the modern A1 toll highway and the regional scenic route via Sidi Kacem and Ouezzane. Traveling in a private vehicle allows you the freedom to request scenic photo stops overlooking the Rif mountain valleys or enjoy freshly brewed mint tea along the road.</p>
+                           <p>With guaranteed flat pricing starting from <strong>€249</strong> per vehicle for a spacious, air-conditioned Mercedes Vito minivan accommodating up to 7 passengers, private transfers are particularly cost-effective for families, couples, and small travel groups (averaging around <strong>€42 per person</strong> for a group of 6). Your driver drops you off directly at Bab El Ain, the primary gateway into Chefchaouen's pedestrian medina.</p>`
+                        : `<p>Réserver un <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de Rabat à Chefchaouen avec Mdina Tours</a> est la solution la plus sereine et agréable. Votre chauffeur professionnel vous accueille directement devant votre riad, hôtel ou à la sortie de l'Aéroport de Rabat-Salé (RBA), à l'heure exacte de votre choix.</p>
+                           <p>Le trajet dure environ <strong>3h45 à 4h</strong> par l'autoroute A1 puis la route panoramique passant par Sidi Kacem et Ouezzane. Vous profitez d'une flexibilité totale pour faire des pauses photos devant les panoramas du Rif ou savourer un thé à la menthe traditionnel en chemin.</p>
+                           <p>Avec un tarif fixe transparent à partir de <strong>249€</strong> pour un monospace Mercedes Vito climatisé pouvant accueillir jusqu'à 7 passagers (environ <strong>42€ par personne</strong> pour un groupe de 6), c'est une option très avantageuse pour les familles, couples et groupes avec bagages. Vous êtes déposé directement devant Bab El Ain, l'entrée principale de la médina piétonne.</p>`,
+                    list: isEn
+                        ? [
+                            "Complete door-to-door service directly from Rabat to your Chefchaouen riad entrance",
+                            "24/7 flexible departure time tailored to your travel plans",
+                            "Recent air-conditioned Mercedes Vito minivans with ample luggage capacity",
+                            "Professional English and French-speaking drivers offering friendly local context",
+                            "Free child safety and baby booster seats upon request"
+                          ]
+                        : [
+                            "Prise en charge porte-à-porte depuis votre hébergement à Rabat jusqu'à l'entrée de votre riad",
+                            "Flexibilité horaire totale 24h/24 selon vos préférences",
+                            "Véhicules récents Mercedes Vito climatisés avec grand coffre pour vos valises",
+                            "Chauffeurs professionnels bilingues attentifs et accueillants",
+                            "Sièges bébé et rehausseurs fournis gratuitement sur demande"
+                          ]
+                },
+                {
+                    id: "bus-guide",
+                    title: isEn ? "Option 2: Direct Highway Bus (CTM) (Best Budget Pick)" : "Option 2 : L'Autocar Direct CTM (Le Meilleur Choix Économique)",
+                    content: isEn
+                        ? `<p>For solo budget backpackers and independent travelers, the <strong>CTM highway bus</strong> is the most dependable public transit option between Rabat and Chefchaouen.</p>
+                           <p><strong>Departure Station in Rabat:</strong> Direct CTM buses depart from <strong>Gare Routière Al Kamra</strong> (Rabat's main intercity bus terminal) or the central Rabat CTM office. Petit taxis throughout Rabat can easily take you to the station for 15–20 MAD.</p>
+                           <p><strong>Travel Time & Frequency:</strong> The bus trip takes approximately <strong>5 hours 10 minutes to 5 hours 30 minutes</strong>, depending on road traffic and short passenger stops along the route. CTM typically runs <strong>1 to 2 direct departures per day</strong> (usually an early morning bus around 08:30 and an afternoon service). Schedules change seasonally, so verify on the official CTM website (<code>ctm.ma</code>) before your trip.</p>
+                           <p><strong>Ticket Prices & Baggage:</strong> A one-way ticket costs approximately <strong>160 MAD</strong> (~<strong>€15</strong>) per person. If you have rolling suitcases or large backpacks to place in the undercarriage cargo compartment, expect to pay a nominal luggage tag fee of <strong>5 MAD</strong> (~€0.50) per bag at the counter.</p>
+                           <p><strong>Arrival in Chefchaouen:</strong> The bus arrives at <strong>Gare Routière de Chefchaouen</strong> located in the lower district on Avenue Mohamed V (around 1.5 km downhill from the old medina). Because the uphill walk with suitcases is steep, take one of the blue <em>petits taxis</em> waiting right outside the station. The 5-minute taxi ride to <strong>Bab El Ain</strong> or <strong>Plaza Uta el-Hammam</strong> costs <strong>10 to 15 MAD</strong>.</p>`
+                        : `<p>Pour les voyageurs solos et routards au budget serré, l'<strong>autocar national CTM</strong> est l'option de transport en commun la plus fiable entre Rabat et Chefchaouen.</p>
+                           <p><strong>Gare de départ à Rabat :</strong> Les cars CTM partent de la <strong>Gare Routière Al Kamra</strong> ou de l'agence CTM centrale. N'importe quel petit taxi de Rabat vous y emmène pour environ 15 à 20 MAD.</p>
+                           <p><strong>Durée du voyage & fréquence :</strong> Le trajet dure environ <strong>5h10 à 5h30</strong> selon les arrêts intermédiaires. La CTM propose généralement <strong>1 à 2 départs directs par jour</strong> (souvent un car le matin vers 08h30 et un dans l'après-midi). Consultez le site officiel <code>ctm.ma</code> pour les horaires actualisés.</p>
+                           <p><strong>Tarif du billet & bagages :</strong> Comptez environ <strong>160 MAD</strong> (~<strong>15€</strong>) par passager. Les valises placées en soute nécessitent une étiquette bagage de <strong>5 MAD</strong> (~0,50€) par sac à enregistrer au guichet.</p>
+                           <p><strong>Arrivée à Chefchaouen :</strong> Le car vous dépose à la <strong>Gare Routière de Chefchaouen</strong>, située dans la ville basse (environ 1,5 km en contrebas de la médina). La montée à pied avec des valises étant raide, prenez un petit taxi bleu à la sortie de la gare : la course jusqu'à <strong>Bab El Ain</strong> coûte entre <strong>10 et 15 MAD</strong>.</p>`
+                },
+                {
+                    id: "train-reality",
+                    title: isEn ? "Option 3: Is There a Train to Chefchaouen? (Why Rail Is Not an Option)" : "Option 3 : Y a-t-il un train pour Chefchaouen ? (Pourquoi le rail est impossible)",
+                    content: isEn
+                        ? `<p>Many travelers planning their Morocco trip look for train tickets from Rabat to Chefchaouen on the ONCF railway website. <strong>To be completely clear: there is no railway station in Chefchaouen, and no train tracks go there.</strong></p>
+                           <p>Chefchaouen is built into the steep slopes of the Rif Mountain chain at an elevation of 564 meters above sea level. Morocco's railway infrastructure runs along the flat Atlantic coastline and inland plains, but does not extend into the mountainous interior of the Rif.</p>
+                           <p>While some travelers consider taking the train from Rabat to <strong>Tangier Ville</strong> or <strong>Souk El Arbaa</strong> and then catching an onward <em>grand taxi</em> or local bus, this two-step route is not recommended:</p>
+                           <ol style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
+                               <li>You must transfer stations with all your heavy luggage, hailing local city taxis between stations.</li>
+                               <li>Shared grand taxis only depart when all 6 passenger seats are filled and paid for, which often means long waiting times in the heat.</li>
+                               <li>The onward road drive through winding mountain passes from Tangier or Souk El Arbaa still takes 2 to 2.5 hours.</li>
+                           </ol>
+                           <p>In total, attempting a train-and-taxi combination takes <strong>6 to 7 hours</strong> and creates unnecessary stress. We strongly advise taking either the direct CTM bus or booking a <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">direct private transfer</a>.</p>`
+                        : `<p>Beaucoup de voyageurs cherchent des billets de train entre Rabat et Chefchaouen sur le site de l'ONCF. <strong>Pour être parfaitement clair : il n'y a aucune gare ferroviaire à Chefchaouen, et aucun rail n'y mène.</strong></p>
+                           <p>Chefchaouen est bâtie sur les pentes escarpées du massif du Rif à près de 600 mètres d'altitude. Le réseau ferré marocain dessert la côte atlantique et les plaines intérieures, mais ne monte pas dans les reliefs du Rif.</p>
+                           <p>Si certains envisagent de prendre le train jusqu'à <strong>Tanger Ville</strong> ou <strong>Souk El Arbaa</strong> pour ensuite prendre un <em>grand taxi</em> collectif, cette combinaison est fortement déconseillée :</p>
+                           <ol style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
+                               <li>Vous devez déplacer vos valises entre la gare ferroviaire et la station de taxis avec un taxi urbain intermédiaire.</li>
+                               <li>Les grands taxis collectifs ne partent que lorsque les 6 places sont occupées et payées, ce qui entraîne de longues attentes.</li>
+                               <li>Le trajet routier restant depuis Tanger ou Souk El Arbaa dure encore 2 à 2,5 heures de virages en montagne.</li>
+                           </ol>
+                           <p>Au final, cette liaison combinée prend <strong>6 à 7 heures</strong> et s'avère éprouvante. Privilégiez sans hésiter l'autocar direct CTM ou un <a href="/${isEn ? 'en' : 'fr'}/transfers/rabat-to-chefchaouen-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct</a>.</p>`
+                },
+                {
+                    id: "travel-tips",
+                    title: isEn ? "Practical Travel Advice for the Rabat to Chefchaouen Route" : "Conseils Pratiques pour le Trajet Rabat – Chefchaouen",
+                    content: isEn
+                        ? `<p>Here are key local insights to make your journey between Rabat and Chefchaouen as smooth as possible:</p>
+                           <ul style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
+                               <li><strong>Book CTM Seats in Advance:</strong> During spring, autumn, and national holidays, direct CTM buses between Rabat and Chefchaouen frequently sell out 24 to 48 hours ahead. Secure your seat on <code>ctm.ma</code> early.</li>
+                               <li><strong>Mountain Curvatures:</strong> The final 60 kilometers of road approaching Chefchaouen wind through the Rif mountains. If you are sensitive to motion sickness, sit near the front of the bus or keep travel tablets handy.</li>
+                               <li><strong>Sightseeing Detours:</strong> If you travel with a private driver, you can combine the drive with a visit to the ancient Roman ruins of <strong>Volubilis</strong> or the holy hilltop town of <strong>Moulay Idriss</strong> before heading into the mountains.</li>
+                               <li><strong>Morning Departures:</strong> Aim to leave Rabat before 09:30 AM. Arriving in Chefchaouen by early afternoon gives you time to check in, unpack, and climb to the Spanish Mosque for a panoramic sunset over the blue medina.</li>
+                           </ul>`
+                        : `<p>Voici quelques conseils locaux essentiels pour réussir votre déplacement de Rabat à la Perle Bleue :</p>
+                           <ul style="margin: 12px 0 16px 20px; line-height: 1.7; color: #444;">
+                               <li><strong>Réservez le bus à l'avance :</strong> En haute saison (printemps, automne et week-ends prolongés), les cars CTM sont souvent complets 24 à 48h à l'avance. Réservez votre place sur <code>ctm.ma</code> sans attendre.</li>
+                               <li><strong>Virages de montagne :</strong> Les 60 derniers kilomètres comportent de nombreux lacets dans le Rif. Si vous êtes sujet au mal des transports, prévoyez une place à l'avant ou des comprimés adaptés.</li>
+                               <li><strong>Escales touristiques avec chauffeur :</strong> En transfert privé, vous avez la liberté d'ajouter une halte aux ruines romaines de <strong>Volubilis</strong> ou à <strong>Moulay Idriss</strong> avant de monter vers Chefchaouen.</li>
+                               <li><strong>Privilégiez les départs matinaux :</strong> Partir de Rabat avant 09h30 vous permet d'arriver en début d'après-midi pour profiter de la lumière du jour et monter admirer le coucher de soleil depuis la Mosquée Espagnole.</li>
+                           </ul>`
+                }
+            ];
+
+            const faqs: ProgrammaticFAQ[] = [
+                {
+                    q: isEn ? "What is the fastest way to get from Rabat to Chefchaouen?" : "Quel est le moyen le plus rapide pour aller de Rabat à Chefchaouen ?",
+                    a: isEn 
+                        ? "The fastest way is by car or private transfer, taking approximately 3 hours 45 minutes to 4 hours door-to-door via the A1 toll highway and regional road R413."
+                        : "Le moyen le plus rapide est la voiture ou le transfert privé avec chauffeur, qui prend environ 3h45 à 4h de porte à porte via l'autoroute A1 et la R413."
+                },
+                {
+                    q: isEn ? "What is the cheapest way to get from Rabat to Chefchaouen?" : "Quel est le moyen le moins cher pour aller de Rabat à Chefchaouen ?",
+                    a: isEn 
+                        ? "The cheapest way is the direct CTM highway bus, which costs roughly 160 MAD (~€15) per person and takes around 5 hours 10 minutes from Rabat Kamra terminal."
+                        : "Le moyen le moins cher est l'autocar direct CTM, qui coûte environ 160 MAD (~15€) par passager pour un trajet d'environ 5h10 depuis la gare Al Kamra."
+                },
+                {
+                    q: isEn ? "Is there a direct train from Rabat to Chefchaouen?" : "Y a-t-il un train direct de Rabat à Chefchaouen ?",
+                    a: isEn 
+                        ? "No. There is no direct train and no railway station in Chefchaouen. The town is located high in the Rif mountain range where no train tracks exist."
+                        : "Non. Il n'y a aucun train direct et aucune gare à Chefchaouen, la ville étant située au cœur des montagnes du Rif sans voies ferrées."
+                },
+                {
+                    q: isEn ? "Is there a direct bus between Rabat and Chefchaouen?" : "Y a-t-il un bus direct entre Rabat et Chefchaouen ?",
+                    a: isEn 
+                        ? "Yes, national carrier CTM operates direct highway coaches between Rabat (Gare Routière Al Kamra) and Chefchaouen bus station 1 to 2 times daily."
+                        : "Oui, la compagnie nationale CTM assure 1 à 2 départs directs par jour entre la Gare Routière Al Kamra de Rabat et la gare routière de Chefchaouen."
+                },
+                {
+                    q: isEn ? "Can you do a day trip from Rabat to Chefchaouen?" : "Peut-on faire l'excursion d'une journée de Rabat à Chefchaouen ?",
+                    a: isEn 
+                        ? "While technically possible with a private driver (approx. 4 hours driving each way), we strongly recommend spending at least one night in Chefchaouen to truly enjoy the calm blue medina and sunset without rushing."
+                        : "Même si cela est faisable avec un chauffeur privé (environ 4h de route par trajet), nous recommandons vivement de passer au moins une nuit sur place pour profiter des ruelles bleues et du coucher de soleil sans vous presser."
+                },
+                {
+                    q: isEn ? "Where does the bus drop you off in Chefchaouen?" : "Où le bus dépose-t-il les passagers à Chefchaouen ?",
+                    a: isEn 
+                        ? "The CTM bus arrives at the Chefchaouen Bus Terminal (Gare Routière) located in the lower town. Blue petit taxis waiting outside can drive you up to the medina gate (Bab El Ain) in 5 minutes for 10–15 MAD."
+                        : "Le car CTM arrive à la Gare Routière de Chefchaouen dans la ville basse. Des petits taxis bleus stationnés devant la gare vous montent à l'entrée de la médina (Bab El Ain) en 5 minutes pour 10 à 15 MAD."
+                }
+            ];
+
+            return {
+                slug,
+                title,
+                excerpt,
+                category: isEn ? "Travel Guides" : "Guides de Voyage",
+                date: "March 2026",
+                image: "/hero-chefchaouen.webp",
+                seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
+                seoDesc: excerpt,
+                tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
+                sections,
+                faqs,
+                relatedSlugs: ["train-vs-private-transfer-rabat-to-chefchaouen", "chefchaouen-travel-guide", "rabat-travel-guide"]
+            };
+        }
+
         const title = isEn 
-            ? `How to Get From ${name1} to ${name2}: Private Transfer, Train & Bus`
-            : `Comment se rendre de ${name1} à ${name2} : Transfert, Train et Bus`;
+            ? (route.train 
+                ? `How to Get From ${name1} to ${name2}: Private Transfer, Train & Bus`
+                : `How to Get From ${name1} to ${name2}: Bus, Car & Transport Guide`)
+            : (route.train
+                ? `Comment se rendre de ${name1} à ${name2} : Transfert, Train et Bus`
+                : `Comment se rendre de ${name1} à ${name2} : Bus, Voiture et Conseils`);
         
         const excerpt = isEn
-            ? `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, high-speed rail, highway buses, and sightseeing stops.`
-            : `Le guide de voyage complet pour relier ${name1} à ${name2}. Comparez chauffeurs privés, train ONCF, autocars CTM et haltes touristiques.`;
+            ? (route.train
+                ? `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, high-speed rail, highway buses, and sightseeing stops.`
+                : `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, highway buses, travel times, and sightseeing stops.`)
+            : (route.train
+                ? `Le guide de voyage complet pour relier ${name1} à ${name2}. Comparez chauffeurs privés, train ONCF, autocars CTM et haltes touristiques.`
+                : `Le guide de voyage complet pour relier ${name1} à ${name2}. Comparez chauffeurs privés, autocars CTM, temps de route et haltes touristiques.`);
 
         const sections: ProgrammaticSection[] = [
             {
@@ -188,13 +390,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                             isEn ? "Families, couples, small groups & luggage" : "Familles, couples, petits groupes & bagages"
                         ],
                         [
-                            isEn ? "ONCF Train" : "Train ONCF",
+                            isEn ? (route.train ? "ONCF Train" : "ONCF Train (Not Available)") : (route.train ? "Train ONCF" : "Train ONCF (Non disponible)"),
                             route.train 
                                 ? (isEn ? `Station-to-station (~${route.duration})` : `Gare à gare (~${route.duration})`) 
-                                : (isEn ? "No direct train (4h30–5h30 with taxi/bus)" : "Pas de train direct (4h30–5h30 avec taxi/bus)"),
-                            route.train ? (isEn ? "€12 - €35 / person" : "12€ - 35€ / personne") : (isEn ? "€25 - €45 (Train + grand taxi)" : "25€ - 45€ (Train + grand taxi)"),
-                            isEn ? "Medium (Fixed timetables)" : "Moyenne (Horaires fixes)",
-                            isEn ? "Solo travelers, light luggage" : "Voyageurs solos, petits bagages"
+                                : (isEn ? "No direct train line" : "Aucune ligne ferroviaire"),
+                            route.train ? (isEn ? "€12 - €35 / person" : "12€ - 35€ / personne") : (isEn ? "N/A — No Railway Line" : "N/A — Pas de voie ferrée"),
+                            route.train ? (isEn ? "Medium (Fixed timetables)" : "Moyenne (Horaires fixes)") : "N/A",
+                            route.train ? (isEn ? "Solo travelers, light luggage" : "Voyageurs solos, petits bagages") : (isEn ? "Not available on this route" : "Non disponible sur ce trajet")
                         ],
                         [
                             isEn ? "Highway Bus (CTM / Supratours)" : "Autocar (CTM / Supratours)",

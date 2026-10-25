@@ -139,6 +139,11 @@ export default function Hero(props: { imageUrl?: string }) {
     const [flightNumber, setFlightNumber] = useState("");
     const [preciseLocation, setPreciseLocation] = useState("");
     const [isEditingDateTime, setIsEditingDateTime] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -444,7 +449,7 @@ export default function Hero(props: { imageUrl?: string }) {
                 </svg>
             </div>
 
-            {isModalOpen && (
+            {mounted && isModalOpen && ReactDOM.createPortal(
                 <div className={styles.modalOverlay} onClick={handleCloseModal}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <button className={styles.closeModal} onClick={handleCloseModal}>×</button>
@@ -656,7 +661,8 @@ export default function Hero(props: { imageUrl?: string }) {
                             </>
                         )}
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </section>
     );

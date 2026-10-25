@@ -3,9 +3,11 @@ import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import BlogRouteHighlightCard from '@/components/BlogRouteHighlightCard';
 import ChefchaouenTrainNotice from '@/components/ChefchaouenTrainNotice';
+import RouteQuickSummary from '@/components/RouteQuickSummary';
 import styles from './BlogPost.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
 import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 import { notFound } from 'next/navigation';
@@ -500,6 +502,63 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         }
     };
 
+    const renderComparisonTable = (table: { headers: string[]; rows: string[][] }) => (
+        <>
+            <div className={styles.tableScrollHint}>
+                <span>↔ {isEn ? "Scroll table horizontally" : "Faites défiler le tableau"}</span>
+            </div>
+            <div className={styles.comparisonTableWrapper}>
+                <table className={styles.comparisonTable}>
+                    <thead>
+                        <tr>
+                            {table.headers.map((h, i) => (
+                                <th key={i}>{h}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table.rows.map((row, i) => {
+                            const isUnavailable = row.some(c => 
+                                c.toLowerCase().includes('not available') || 
+                                c.toLowerCase().includes('non disponible') || 
+                                c.toLowerCase().includes('no direct train') || 
+                                c.toLowerCase().includes('aucune ligne') ||
+                                c.toLowerCase().includes('n/a — no railway') ||
+                                c.toLowerCase().includes('n/a — pas de voie')
+                            );
+                            return (
+                                <tr key={i} className={isUnavailable ? styles.unavailableRow : ''}>
+                                    {row.map((cell, j) => {
+                                        if (isUnavailable && j === 0) {
+                                            return (
+                                                <td key={j}>
+                                                    <div className={styles.optionWithBadge}>
+                                                        <span>{cell.replace(/\s*\((?:Not Available|Non disponible)\)/i, '')}</span>
+                                                        <span className={styles.unavailableBadge}>
+                                                            {isEn ? "Not available" : "Non disponible"}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            );
+                                        }
+                                        if (isUnavailable && j === 2) {
+                                            return (
+                                                <td key={j}>
+                                                    <span className={styles.unavailablePrice}>{cell}</span>
+                                                </td>
+                                            );
+                                        }
+                                        return <td key={j}>{cell}</td>;
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </>
+    );
+
     return (
         <>
             <Header />
@@ -569,33 +628,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                     className={styles.sectionContent}
                                                     dangerouslySetInnerHTML={{ __html: progPost.sections[0].content }}
                                                 />
-                                                {progPost.sections[0].table && (
-                                                    <>
-                                                        <div className={styles.tableScrollHint}>
-                                                            <span>↔ {isEn ? "Scroll table horizontally" : "Faites défiler le tableau"}</span>
-                                                        </div>
-                                                        <div className={styles.comparisonTableWrapper}>
-                                                            <table className={styles.comparisonTable}>
-                                                                <thead>
-                                                                    <tr>
-                                                                        {progPost.sections[0].table.headers.map((h, i) => (
-                                                                            <th key={i}>{h}</th>
-                                                                        ))}
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    {progPost.sections[0].table.rows.map((row, i) => (
-                                                                        <tr key={i}>
-                                                                            {row.map((cell, j) => (
-                                                                                <td key={j}>{cell}</td>
-                                                                            ))}
-                                                                        </tr>
-                                                                    ))}
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </>
-                                                )}
+                                                {progPost.sections[0].table && renderComparisonTable(progPost.sections[0].table)}
                                                 {progPost.sections[0].list && (
                                                     <ul className={styles.bulletList}>
                                                         {progPost.sections[0].list.map((item, i) => (
@@ -606,8 +639,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </section>
                                         )}
 
-                                        {/* Compact Editorial Traveler Notice right below the first paragraph */}
-                                        {isChefchaouenRoute && (
+                                        {/* Rome2Rio-Inspired Visual Route Quick Summary (Answer-First) */}
+                                        {routeInfo && (
+                                            <RouteQuickSummary
+                                                language={language}
+                                                origin={routeInfo.c1[isEn ? 'en' : 'fr']}
+                                                destination={routeInfo.c2[isEn ? 'en' : 'fr']}
+                                                distance={routeInfo.route.distance}
+                                                carDuration={routeInfo.route.duration}
+                                                carPrice={routeInfo.route.privatePrice}
+                                                hasTrain={routeInfo.route.train}
+                                                trainDuration={routeInfo.route.trainDuration}
+                                                busDuration={slug.includes("chefchaouen") ? "5h 10m" : "5h 30m"}
+                                                busPriceMAD={slug.includes("chefchaouen") ? 160 : 150}
+                                                busPriceEUR={slug.includes("chefchaouen") ? 15 : 14}
+                                                transferUrl={primaryTransferUrl}
+                                            />
+                                        )}
+
+                                        {/* Fallback Notice for other Chefchaouen articles without routeInfo */}
+                                        {!routeInfo && isChefchaouenRoute && (
                                             <ChefchaouenTrainNotice
                                                 language={language}
                                                 originCity={chefchaouenOrigin}
@@ -645,33 +696,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                                 />
 
                                                 {/* Optional Comparison Table */}
-                                                {section.table && (
-                                                    <>
-                                                        <div className={styles.tableScrollHint}>
-                                                            <span>↔ {isEn ? "Scroll table horizontally" : "Faites défiler le tableau"}</span>
-                                                        </div>
-                                                        <div className={styles.comparisonTableWrapper}>
-                                                            <table className={styles.comparisonTable}>
-                                                                <thead>
-                                                                    <tr>
-                                                                        {section.table.headers.map((h, i) => (
-                                                                            <th key={i}>{h}</th>
-                                                                        ))}
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    {section.table.rows.map((row, i) => (
-                                                                        <tr key={i}>
-                                                                            {row.map((cell, j) => (
-                                                                                <td key={j}>{cell}</td>
-                                                                            ))}
-                                                                        </tr>
-                                                                    ))}
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </>
-                                                )}
+                                                {section.table && renderComparisonTable(section.table)}
 
                                                 {/* Optional List */}
                                                 {section.list && (
@@ -684,20 +709,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             </section>
                                         ))}
 
-                                        {/* FAQs */}
+                                        {/* FAQs with Collapsible Accordions */}
                                         {progPost.faqs.length > 0 && (
                                             <section id="faqs" className={styles.faqSection} style={{ scrollMarginTop: '100px' }}>
                                                 <h2>{isEn ? "Frequently Asked Questions" : "Questions Fréquentes"}</h2>
                                                 <div className={styles.faqContainer}>
                                                     {progPost.faqs.map((faq, i) => (
-                                                        <div key={i} className={styles.faqItem}>
-                                                            <div className={styles.faqQuestion}>
+                                                        <details key={i} className={styles.faqDetails} open={i === 0}>
+                                                            <summary className={styles.faqSummary}>
                                                                 <span>{faq.q}</span>
-                                                            </div>
+                                                                <ChevronDown className={styles.faqChevron} size={18} aria-hidden="true" />
+                                                            </summary>
                                                             <div className={styles.faqAnswer}>
                                                                 <p>{faq.a}</p>
                                                             </div>
-                                                        </div>
+                                                        </details>
                                                     ))}
                                                 </div>
                                             </section>

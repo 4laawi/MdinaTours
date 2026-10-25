@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReactDOM from 'react-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './TransfersHero.module.css';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
@@ -49,6 +50,11 @@ export default function TransfersHero({
     const [flightNumber, setFlightNumber] = useState("");
     const [preciseLocation, setPreciseLocation] = useState("");
     const [isEditingDateTime, setIsEditingDateTime] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -312,7 +318,7 @@ export default function TransfersHero({
             </div>
 
             {/* Steps Booking Modal (exact duplicate from Hero.tsx layout) */}
-            {isModalOpen && (
+            {mounted && isModalOpen && ReactDOM.createPortal(
                 <div className={styles.modalOverlay} onClick={handleCloseModal}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <button className={styles.closeModal} onClick={handleCloseModal}>×</button>
@@ -526,7 +532,8 @@ export default function TransfersHero({
                             </>
                         )}
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
 
             {/* Bottom Shape Divider */}
