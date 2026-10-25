@@ -543,20 +543,6 @@ export default function AirportHero({ lang }: AirportHeroProps) {
                 </div>
             )}
 
-            {/* Bottom Shape Divider */}
-            <div className={styles.bottomShapeDivider} aria-hidden="true">
-                <svg
-                    data-name="Layer 1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                >
-                    <path
-                        d="M0,0 Q600,120 1200,0 L1200,120 L0,120 Z"
-                        className={styles.shapeFill}
-                    />
-                </svg>
-            </div>
         </section>
     );
 }

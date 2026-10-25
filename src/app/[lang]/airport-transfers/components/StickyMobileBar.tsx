@@ -18,23 +18,27 @@ export default function StickyMobileBar({ lang }: StickyMobileBarProps) {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Show after scrolling past 400px (hero)
+            // Show after scrolling past 420px (hero)
             if (window.scrollY > 420) {
                 setVisible(true);
+                document.body.classList.add('sticky-bar-active');
             } else {
                 setVisible(false);
+                document.body.classList.remove('sticky-bar-active');
             }
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.classList.remove('sticky-bar-active');
+        };
     }, []);
 
     if (!visible) return null;
 
     const text = {
         checkPrice: isAr ? 'احسب السعر الثابت' : isFr ? 'Voir le prix fixe' : isEs ? 'Ver precio fijo' : 'Check fixed price',
-        whatsAppAria: isAr ? 'محادثة عبر الواتساب' : isFr ? 'Contacter sur WhatsApp' : isEs ? 'Contactar por WhatsApp' : 'Chat on WhatsApp'
     };
 
     const handleScrollToBooking = () => {
@@ -43,10 +47,6 @@ export default function StickyMobileBar({ lang }: StickyMobileBarProps) {
             widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
-
-    const whatsAppUrl = `https://wa.me/212724114775?text=${encodeURIComponent(
-        isAr ? "السلام عليكم، أود حجز خدمة توصيل من المطار." : isFr ? "Bonjour, je souhaite réserver un transfert aéroport." : isEs ? "Hola, me gustaría reservar un traslado de aeropuerto." : "Hello, I would like to book an airport transfer."
-    )}`;
 
     return (
         <aside className={styles.stickyMobileBar} aria-label="Quick Actions">
@@ -58,16 +58,6 @@ export default function StickyMobileBar({ lang }: StickyMobileBarProps) {
                 <span>{text.checkPrice}</span>
                 <Icon icon="solar:tag-price-bold" width="18" height="18" />
             </button>
-
-            <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.stickyMobileWhatsAppBtn}
-                aria-label={text.whatsAppAria}
-            >
-                <Icon icon="ri:whatsapp-fill" width="24" height="24" />
-            </a>
         </aside>
     );
 }

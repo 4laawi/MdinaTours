@@ -2,7 +2,6 @@
     background: #ffffff;
     padding: 80px 24px;
     font-family: var(--font-inter), var(--font-outfit), system-ui, -apple-system, sans-serif;
-    border-top: 1px solid var(--sand-200, #E2E8F0);
     position: relative;
 }
 
