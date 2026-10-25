@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from 'react';
 import { Locale } from '@/lib/airportTransfersData';
-import AirportHero, { BookingState } from './AirportHero';
+import AirportHero from './AirportHero';
 import FleetSection from './FleetSection';
 import PopularRoutesSection from './PopularRoutesSection';
 import StepsSection from './StepsSection';
@@ -13,7 +12,6 @@ import FAQSection from './FAQSection';
 import FinalCTASection from './FinalCTASection';
 import TransferServicesSection from './TransferServicesSection';
 import StickyMobileBar from './StickyMobileBar';
-import BookingModal from './BookingModal';
 import styles from '../AirportTransfers.module.css';
 
 interface AirportTransfersClientProps {
@@ -22,15 +20,11 @@ interface AirportTransfersClientProps {
 
 export default function AirportTransfersClient({ lang }: AirportTransfersClientProps) {
     const isAr = lang === 'ar';
-    const [bookingState, setBookingState] = useState<BookingState | null>(null);
 
     return (
         <div className={styles.pageWrapper} dir={isAr ? 'rtl' : 'ltr'}>
             {/* 1. Hero with integrated instant booking widget & 3 trust chips */}
-            <AirportHero
-                lang={lang}
-                onOpenBookingModal={(state) => setBookingState(state)}
-            />
+            <AirportHero lang={lang} />
 
             {/* 2. Popular airport routes (Pricing first: guaranteed flat rates, instant prefill) */}
             <PopularRoutesSection lang={lang} />
@@ -61,15 +55,6 @@ export default function AirportTransfersClient({ lang }: AirportTransfersClientP
 
             {/* Mobile Sticky Quick Action Bar */}
             <StickyMobileBar lang={lang} />
-
-            {/* Booking confirmation modal */}
-            {bookingState && (
-                <BookingModal
-                    lang={lang}
-                    booking={bookingState}
-                    onClose={() => setBookingState(null)}
-                />
-            )}
         </div>
     );
 }

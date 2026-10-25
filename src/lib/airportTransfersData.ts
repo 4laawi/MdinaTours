@@ -828,8 +828,41 @@ export const STATS = [
     { value: '24 / 7', label: { en: 'Flight Delay Monitoring', fr: 'Suivi des Vols en Continu', es: 'Seguimiento de Retrasos 24/7', ar: 'متابعة مباشرة للرحلات' }, icon: 'solar:clock-circle-bold' }
 ];
 
-export const TRUST_CHIPS = [
-    { icon: 'solar:shield-check-bold', label: { en: 'Free cancellation up to 24h', fr: 'Annulation gratuite jusqu\'à 24h', es: 'Cancelación gratuita hasta 24h', ar: 'إلغاء مجاني حتى 24 ساعة' } },
-    { icon: 'solar:star-bold', label: { en: '4.9 Rating · 340+ Reviews', fr: 'Note 4.9 · 340+ Avis', es: 'Nota 4.9 · 340+ Reseñas', ar: 'تقييم 4.9 · أكثر من 340 تقييماً' } },
-    { icon: 'solar:tag-price-bold', label: { en: '100% Fixed price · Zero surprises', fr: 'Prix fixe 100% garanti · Sans surprise', es: 'Precio cerrado · Sin costes ocultos', ar: 'سعر ثابت 100% · بدون مفاجآت' } }
+export interface TrustChipItem {
+    icon: string;
+    iconColor?: string;
+    label: Record<Locale, string>;
+}
+
+export const TRUST_CHIPS: TrustChipItem[] = [
+    { 
+        icon: 'solar:shield-check-bold', 
+        iconColor: '#34D399', 
+        label: { 
+            en: 'Free cancellation up to 24h', 
+            fr: 'Annulation gratuite jusqu\'à 24h', 
+            es: 'Cancelación gratuita hasta 24h', 
+            ar: 'إلغاء مجاني حتى 24 ساعة' 
+        } 
+    },
+    { 
+        icon: 'solar:star-bold', 
+        iconColor: '#FBBF24', 
+        label: { 
+            en: '4.9 Rating · 340+ Reviews', 
+            fr: 'Note 4.9 · 340+ Avis', 
+            es: 'Nota 4.9 · 340+ Reseñas', 
+            ar: 'تقييم 4.9 · أكثر من 340 تقييماً' 
+        } 
+    },
+    { 
+        icon: 'solar:tag-price-bold', 
+        iconColor: '#FB923C', 
+        label: { 
+            en: '100% Fixed price · Zero surprises', 
+            fr: 'Prix fixe 100% garanti · Sans surprise', 
+            es: 'Precio cerrado · Sin costes ocultos', 
+            ar: 'سعر ثابت 100% · بدون مفاجآت' 
+        } 
+    }
 ];

@@ -15,6 +15,7 @@ export default function FAQSection({ lang }: FAQSectionProps) {
     const isEs = lang === 'es';
 
     const [openIndices, setOpenIndices] = useState<number[]>([0]);
+    const [showAllFaqs, setShowAllFaqs] = useState(false);
 
     const toggle = (idx: number) => {
         setOpenIndices(prev => 
@@ -31,7 +32,9 @@ export default function FAQSection({ lang }: FAQSectionProps) {
             ? 'Réponses claires et concises sur le suivi des vols, les paiements et l\'accès aux riads.'
             : isEs 
             ? 'Respuestas claras sobre cancelaciones, seguimiento de vuelos y accesos a la medina.'
-            : 'Direct, clear answers regarding flight tracking, riad luggage escort, and payment on arrival.'
+            : 'Direct, clear answers regarding flight tracking, riad luggage escort, and payment on arrival.',
+        showAll: (count: number) => isAr ? `عرض جميع الأسئلة (${count})` : isFr ? `Voir toutes les questions (${count})` : isEs ? `Ver todas las preguntas (${count})` : `View all ${count} questions`,
+        showLess: isAr ? 'عرض أقل' : isFr ? 'Réduire' : isEs ? 'Ver menos' : 'Show fewer'
     };
 
     return (
@@ -46,11 +49,12 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                 <div className={styles.faqGrid}>
                     {FAQS.map((faq, idx) => {
                         const isOpen = openIndices.includes(idx);
+                        const isHiddenOnMobile = !showAllFaqs && idx >= 4;
 
                         return (
                             <div
                                 key={idx}
-                                className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ''}`}
+                                className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ''} ${isHiddenOnMobile ? styles.faqHiddenMobile : ''}`}
                             >
                                 <button
                                     type="button"
@@ -76,6 +80,24 @@ export default function FAQSection({ lang }: FAQSectionProps) {
                         );
                     })}
                 </div>
+
+                {/* Mobile FAQ Toggle */}
+                {FAQS.length > 4 && (
+                    <div className={styles.faqToggleWrapper}>
+                        <button
+                            type="button"
+                            className={styles.faqToggleBtn}
+                            onClick={() => setShowAllFaqs(!showAllFaqs)}
+                        >
+                            <span>{showAllFaqs ? text.showLess : text.showAll(FAQS.length)}</span>
+                            <Icon
+                                icon={showAllFaqs ? "solar:alt-arrow-up-linear" : "solar:alt-arrow-down-linear"}
+                                width="16"
+                                height="16"
+                            />
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     );

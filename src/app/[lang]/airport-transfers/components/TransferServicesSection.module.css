@@ -57,18 +57,18 @@
 
 .sectionTitle {
     font-family: var(--font-outfit), sans-serif;
-    font-size: clamp(2rem, 3.6vw, 2.75rem);
+    font-size: clamp(1.45rem, 3.2vw, 2.75rem);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--secondary, #202F59);
-    margin: 0 0 14px 0;
+    margin: 0 0 10px 0;
     text-wrap: balance;
 }
 
 .sectionSubtitle {
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+    line-height: 1.55;
     color: #64748B;
     margin: 0 auto;
     max-width: 720px;
@@ -92,8 +92,17 @@
 
 @media (max-width: 1024px) {
     .cardsGrid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding: 4px 16px 18px 16px;
+        margin: 0 -16px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .cardsGrid::-webkit-scrollbar {
+        display: none;
     }
 }
 
@@ -117,6 +126,14 @@
     background-repeat: no-repeat;
 }
 
+@media (max-width: 1024px) {
+    .cardShell {
+        flex: 0 0 85vw;
+        max-width: 330px;
+        scroll-snap-align: center;
+    }
+}
+
 .cardCore {
     position: relative;
     padding: 36px 30px 32px 30px;
@@ -127,7 +144,26 @@
 
 @media (max-width: 768px) {
     .cardCore {
-        padding: 28px 22px 26px 22px;
+        padding: 22px 18px 20px 18px;
+    }
+    .floatingIcon {
+        margin-bottom: 14px;
+    }
+    .cardTitle {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+    .cardDesc {
+        font-size: 0.88rem;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+    .bulletList {
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+    .bulletItem {
+        font-size: 0.82rem;
     }
 }
 
@@ -242,4 +278,36 @@
 
 :global([dir="rtl"]) .ctaLink:hover .ctaArrow {
     transform: translateX(-3px);
+}
+
+/* Mobile Carousel Dots */
+.mobileCarouselDots {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .mobileCarouselDots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+    }
+
+    .mobileCarouselDot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #CBD5E1;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobileCarouselDotActive {
+        background-color: var(--primary, #DC834E);
+        width: 24px;
+        border-radius: 4px;
+    }
 }

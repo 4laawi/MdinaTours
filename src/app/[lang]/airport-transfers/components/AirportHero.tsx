@@ -24,10 +24,9 @@ export interface BookingState {
 
 interface AirportHeroProps {
     lang: Locale;
-    onOpenBookingModal?: (bookingState: BookingState) => void;
 }
 
-export default function AirportHero({ lang, onOpenBookingModal }: AirportHeroProps) {
+export default function AirportHero({ lang }: AirportHeroProps) {
     const { t, language } = useLanguage();
     const isAr = lang === 'ar';
     const isFr = lang === 'fr' || language === 'fr';
@@ -148,18 +147,6 @@ export default function AirportHero({ lang, onOpenBookingModal }: AirportHeroPro
 
         setIsModalOpen(true);
         setSearchResult(null);
-
-        if (onOpenBookingModal) {
-            onOpenBookingModal({
-                pickup,
-                dropoff,
-                date,
-                time: hour,
-                passengers,
-                flightNumber,
-                price: currentPrice
-            });
-        }
     };
 
     const isCustomRoute = isCustomPickup || isCustomDropoff;
@@ -251,7 +238,7 @@ export default function AirportHero({ lang, onOpenBookingModal }: AirportHeroPro
                 </p>
 
                 {/* Proven Homepage Search Widget */}
-                <div className={heroStyles.searchWrapper} style={{ marginTop: '8px', marginBottom: '24px' }}>
+                <div className={heroStyles.searchWrapper} style={{ marginTop: '4px', marginBottom: '18px' }}>
                     <div className={heroStyles.searchWidget}>
                         <div className={heroStyles.searchField}>
                             <div className={heroStyles.iconWrapper}>📍</div>
@@ -326,11 +313,14 @@ export default function AirportHero({ lang, onOpenBookingModal }: AirportHeroPro
 
                 </div>
 
-                {/* 3 Trust Chips */}
+                {/* 3 Trust Badges */}
                 <div className={styles.trustChipsRow}>
                     {TRUST_CHIPS.map((chip, idx) => (
                         <div key={idx} className={styles.trustChip}>
-                            <span className={styles.trustChipIcon}>
+                            <span 
+                                className={styles.trustChipIcon}
+                                style={{ color: chip.iconColor || '#34D399' }}
+                            >
                                 <Icon icon={chip.icon} width="16" height="16" />
                             </span>
                             <span>{chip.label[lang] || chip.label.en}</span>

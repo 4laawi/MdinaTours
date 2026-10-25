@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef } from 'react';
 import { Locale, REVIEWS } from '@/lib/airportTransfersData';
 import { Icon } from '@iconify/react';
 import styles from '../AirportTransfers.module.css';
@@ -32,6 +33,9 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
             : 'Rated 4.9 / 5 on Trustpilot & Google across 340+ verified passenger reviews'
     };
 
+    const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+    const reviewsRef = useRef<HTMLDivElement>(null);
+
     return (
         <section className={styles.sectionAlt} id="reviews">
             <div className={styles.container}>
@@ -48,7 +52,18 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                     </div>
                 </div>
 
-                <div className={styles.reviewsGrid}>
+                <div 
+                    className={styles.reviewsGrid}
+                    ref={reviewsRef}
+                    onScroll={(e) => {
+                        const el = e.currentTarget;
+                        if (el.scrollWidth > el.clientWidth) {
+                            const step = el.scrollWidth / REVIEWS.length;
+                            const idx = Math.round(el.scrollLeft / step);
+                            setActiveReviewIndex(Math.max(0, Math.min(REVIEWS.length - 1, idx)));
+                        }
+                    }}
+                >
                     {REVIEWS.map((rev, idx) => (
                         <div key={idx} className={styles.reviewCardShell}>
                             <div className={styles.reviewCardCore}>
@@ -76,6 +91,27 @@ export default function ReviewsSection({ lang }: ReviewsSectionProps) {
                                 </div>
                             </div>
                         </div>
+                    ))}
+                </div>
+
+                {/* Mobile Carousel Indicators */}
+                <div className={styles.mobileCarouselDots} aria-hidden="true">
+                    {REVIEWS.map((_, dIdx) => (
+                        <button
+                            key={dIdx}
+                            type="button"
+                            className={`${styles.mobileCarouselDot} ${activeReviewIndex === dIdx ? styles.mobileCarouselDotActive : ''}`}
+                            onClick={() => {
+                                if (reviewsRef.current) {
+                                    const card = reviewsRef.current.children[dIdx] as HTMLElement;
+                                    if (card) {
+                                        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                                        setActiveReviewIndex(dIdx);
+                                    }
+                                }
+                            }}
+                            aria-label={`Go to review ${dIdx + 1}`}
+                        />
                     ))}
                 </div>
             </div>

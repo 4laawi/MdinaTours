@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Locale } from '@/lib/airportTransfersData';
 import { Route, CarFront, Compass } from 'lucide-react';
@@ -14,6 +15,9 @@ export default function TransferServicesSection({ lang }: TransferServicesSectio
     const isAr = lang === 'ar';
     const isFr = lang === 'fr';
     const isEs = lang === 'es';
+
+    const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const cardsRef = useRef<HTMLDivElement>(null);
 
     const getPath = (path: string) => `/${lang}${path}`;
 
@@ -118,7 +122,18 @@ export default function TransferServicesSection({ lang }: TransferServicesSectio
                 </div>
 
                 {/* 3 Cards Grid with BG-8.svg Background */}
-                <div className={styles.cardsGrid}>
+                <div 
+                    className={styles.cardsGrid}
+                    ref={cardsRef}
+                    onScroll={(e) => {
+                        const el = e.currentTarget;
+                        if (el.scrollWidth > el.clientWidth) {
+                            const step = el.scrollWidth / 3;
+                            const idx = Math.round(el.scrollLeft / step);
+                            setActiveCardIndex(Math.max(0, Math.min(2, idx)));
+                        }
+                    }}
+                >
                     {/* Card 1: City-To-City Transfers Across Morocco */}
                     <div className={styles.cardShell}>
                         <div className={styles.cardCore}>
@@ -247,6 +262,27 @@ export default function TransferServicesSection({ lang }: TransferServicesSectio
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Mobile Carousel Dots */}
+                <div className={styles.mobileCarouselDots} aria-hidden="true">
+                    {[0, 1, 2].map((idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            className={`${styles.mobileCarouselDot} ${activeCardIndex === idx ? styles.mobileCarouselDotActive : ''}`}
+                            onClick={() => {
+                                if (cardsRef.current) {
+                                    const card = cardsRef.current.children[idx] as HTMLElement;
+                                    if (card) {
+                                        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                                        setActiveCardIndex(idx);
+                                    }
+                                }
+                            }}
+                            aria-label={`Go to service ${idx + 1}`}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
