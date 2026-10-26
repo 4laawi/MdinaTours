@@ -200,19 +200,6 @@
     font-weight: 400;
 }
 
-.agencyLink {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-left: 5px;
-}
-
-.agencyLink:hover {
-    color: var(--primary);
-    text-decoration: underline;
-}
-
 .legalLinks {
     display: flex;
     gap: 24px;

@@ -231,7 +231,6 @@ export const translations: Record<Language, Record<string, string>> = {
         'footer_blog': 'Morocco Travel Blog',
         'footer_privacy': 'Privacy Policy',
         'footer_terms': 'Terms of Service',
-        'footer_built_by': 'Maintained by',
         
         // Blog
         'blog_banner_title': 'Morocco Travel Guides & Expert Insights',
@@ -623,7 +622,6 @@ export const translations: Record<Language, Record<string, string>> = {
         'footer_blog': 'Blog Voyage Maroc',
         'footer_privacy': 'Politique de confidentialité',
         'footer_terms': 'Conditions d\'utilisation',
-        'footer_built_by': 'Maintenant par',
         
         // Blog
         'blog_banner_title': 'Actualités Voyage & Conseils d\'Experts sur le Maroc',
@@ -1014,7 +1012,6 @@ export const translations: Record<Language, Record<string, string>> = {
         'footer_blog': 'Blog de Viajes',
         'footer_privacy': 'Política de Privacidad',
         'footer_terms': 'Términos del Servicio',
-        'footer_built_by': 'Gestionado por',
         
         // Blog
         'blog_banner_title': 'Guías de Viaje y Consejos para Marruecos',
