@@ -25,11 +25,16 @@ export const APPROVED_ES_PATHS = new Set([
     '/tours/atlas-mountains-tour',
     '/tours/agafay-desert-experience',
     '/tours/merzouga-desert-tour',
+    '/tours/fes-guided-tour',
+    '/tours/casablanca-city-tour',
+    '/tours/rabat-city-tour',
     // Static Pages
     '/contact',
     '/faq',
     '/about',
     '/car-with-driver-morocco-8-days',
+    '/privacy',
+    '/terms',
 ]);
 
 export const APPROVED_PHASE1_ES_PATHS = APPROVED_ES_PATHS;

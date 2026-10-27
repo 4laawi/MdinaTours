@@ -27,7 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/chauffeur-dispo-morocco',
         '/car-with-driver-morocco-8-days',
         '/airport-transfers',
-        '/faq'
+        '/faq',
+        '/privacy',
+        '/terms'
     ];
 
     const blogSlugs = [

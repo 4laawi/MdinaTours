@@ -197,7 +197,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasTangier) {
             images.push('/img2/tangier_hero.webp'); // Avoid AVIF build issue
         } else if (hasFes) {
-            images.push('/img2/fes-airport.jpeg');
+            images.push('/a-mdiinatours/fes-airport-transfer.webp');
         } else if (hasAgadir) {
             images.push('/img2/agadir-airport.webp');
         } else if (hasMarrakech) {

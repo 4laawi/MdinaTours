@@ -67,14 +67,6 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                             <Link href={getPath('/')} prefetch={false}>{t('home')}</Link>
                         </li>
                         <li>
-                            <Link href={getPath('/about')} prefetch={false}>{language === 'es' ? 'Sobre Nosotros' : t('footer_our_story')}</Link>
-                        </li>
-                        <li>
-                            <Link href={language === 'es' ? '/es/tours/chefchaouen-day-trip' : getPath('/tours')} prefetch={false}>
-                                {isEn ? 'Morocco Tours' : (language === 'es' ? 'Excursiones en Marruecos' : 'Circuits Maroc')}
-                            </Link>
-                        </li>
-                        <li>
                             <Link href={getPath('/airport-transfers')} prefetch={false}>
                                 {isEn ? 'Morocco Airport Transfers' : (language === 'es' ? 'Traslados de Aeropuerto' : 'Transferts Aéroport Maroc')}
                             </Link>
@@ -86,26 +78,61 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                         </li>
                         <li>
                             <Link href={getPath('/private-driver-morocco')} prefetch={false}>
-                                {isEn ? 'Private Driver' : (language === 'es' ? 'Chófer Privado' : 'Chauffeur Privé')}
+                                {isEn ? 'Private Driver Morocco' : (language === 'es' ? 'Chófer Privado Marruecos' : 'Chauffeur Privé Maroc')}
                             </Link>
                         </li>
-                        <li>
-                            <Link href={getPath('/faq')} prefetch={false}>{t('footer_faq')}</Link>
-                        </li>
-                        {language !== 'es' && (
+                        {language !== 'es' ? (
                             <>
+                                <li>
+                                    <Link href={getPath('/private-driver-marrakech')} prefetch={false}>
+                                        {isEn ? 'Private Driver Marrakech' : 'Chauffeur Privé Marrakech'}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={getPath('/private-driver-casablanca')} prefetch={false}>
+                                        {isEn ? 'Private Driver Casablanca' : 'Chauffeur Privé Casablanca'}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={getPath('/private-driver-fes')} prefetch={false}>
+                                        {isEn ? 'Private Driver Fes' : 'Chauffeur Privé Fès'}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={getPath('/private-driver-tangier')} prefetch={false}>
+                                        {isEn ? 'Private Driver Tangier' : 'Chauffeur Privé Tanger'}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={getPath('/tours')} prefetch={false}>
+                                        {isEn ? 'Morocco Guided Tours' : 'Circuits Guidés Maroc'}
+                                    </Link>
+                                </li>
                                 <li>
                                     <Link href={getPath('/blog')} prefetch={false}>{t('footer_blog')}</Link>
                                 </li>
+                            </>
+                        ) : (
+                            <>
                                 <li>
-                                    <Link href={getPath('/partners')} prefetch={false}>{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
+                                    <Link href="/es/car-with-driver-morocco-8-days" prefetch={false}>
+                                        Ruta 8 Días con Conductor
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/es/tours" prefetch={false}>
+                                        Excursiones en Marruecos
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/es/tours/chefchaouen-day-trip" prefetch={false}>
+                                        Excursión a Chefchaouen
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/es/contact" prefetch={false}>{t('contact_us')}</Link>
                                 </li>
                             </>
-                        )}
-                        {language === 'es' && (
-                            <li>
-                                <Link href="/es/contact" prefetch={false}>{t('contact_us')}</Link>
-                            </li>
                         )}
                     </ul>
                 </div>
@@ -170,8 +197,13 @@ export default function Footer({ lang = 'en' }: { lang?: Language }) {
                         &copy; {currentYear} Mdina Tours Company.
                     </div>
                     <div className={styles.legalLinks}>
-                        <Link href={getPath('/privacy')} prefetch={false}>{t('footer_privacy')}</Link>
-                        <Link href={getPath('/terms')} prefetch={false}>{t('footer_terms')}</Link>
+                        <Link href={getPath('/about')} prefetch={false} rel="nofollow">{language === 'es' ? 'Sobre Nosotros' : (isEn ? 'About Us' : 'À Propos')}</Link>
+                        <Link href={getPath('/faq')} prefetch={false} rel="nofollow">FAQ</Link>
+                        {language !== 'es' && (
+                            <Link href={getPath('/partners')} prefetch={false} rel="nofollow">{isEn ? 'B2B Partner Hub' : 'Espace B2B Partenaires'}</Link>
+                        )}
+                        <Link href={getPath('/privacy')} prefetch={false} rel="nofollow">{t('footer_privacy')}</Link>
+                        <Link href={getPath('/terms')} prefetch={false} rel="nofollow">{t('footer_terms')}</Link>
                         <CookieConsentRevokeLink lang={lang} />
                     </div>
                 </div>

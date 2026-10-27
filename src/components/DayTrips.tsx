@@ -24,7 +24,8 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
             rating: 5.0,
             reviews: 148,
             price: '31',
-            badge: isEn ? 'Most Popular' : (isEs ? 'Más Popular' : 'Plus Populaire')
+            badge: isEn ? 'Most Popular' : (isEs ? 'Más Popular' : 'Plus Populaire'),
+            tourSlug: 'agafay-desert-experience'
         },
         {
             id: 2,
@@ -35,7 +36,8 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
             rating: 4.9,
             reviews: 96,
             price: '56',
-            badge: isEn ? 'Top Choice' : (isEs ? 'Recomendado' : 'Coup de Cœur')
+            badge: isEn ? 'Top Choice' : (isEs ? 'Recomendado' : 'Coup de Cœur'),
+            tourSlug: 'atlas-mountains-tour'
         },
         {
             id: 3,
@@ -46,7 +48,8 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
             rating: 5.0,
             reviews: 84,
             price: '37',
-            badge: isEn ? 'Cultural Heritage' : (isEs ? 'Patrimonio Cultural' : 'Patrimoine Culturel')
+            badge: isEn ? 'Cultural Heritage' : (isEs ? 'Patrimonio Cultural' : 'Patrimoine Culturel'),
+            tourSlug: 'marrakech-day-trip'
         }
     ];
 
@@ -103,7 +106,7 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
                                 </div>
                             </div>
 
-                            <div className={styles.content} style={{ padding: '32px' }}>
+                            <div className={styles.content} style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
                                 <div className={styles.infoBar}>
                                     <span className={styles.duration} style={{ color: 'var(--primary)', fontWeight: '700' }}>
                                         <svg className={styles.svgIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -118,9 +121,14 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
                                 </div>
 
                                 <h3 className={styles.title} style={{ marginBottom: '15px', color: '#1a1a1a' }}>{trip.title}</h3>
-                                <p className={styles.tourDescription} style={{ fontSize: '1rem', color: '#666', marginBottom: '10px', height: 'auto', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                                <p className={styles.tourDescription} style={{ fontSize: '1rem', color: '#666', marginBottom: '20px', height: 'auto', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flexGrow: 1 }}>
                                     {trip.description}
                                 </p>
+                                <div style={{ marginTop: 'auto', paddingTop: '10px' }}>
+                                    <Link href={getPath(`/tours/${trip.tourSlug}`)} className={styles.bookBtn} style={{ width: '100%', textAlign: 'center' }}>
+                                        {isEn ? 'View Tour Details' : (isEs ? 'Ver Detalles de la Excursión' : 'Voir les Détails')}
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -136,7 +144,7 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
                         <p style={{ color: '#666', fontStyle: 'italic', fontSize: '1.1rem' }}>
                             {t('still_questions_desc')}
                         </p>
-                        <Link href={getPath('/contact')} className={styles.bookBtn} style={{
+                        <Link href={getPath('/tours')} className={styles.bookBtn} style={{
                             padding: '18px 48px',
                             fontSize: '1.1rem',
                             display: 'inline-flex',
@@ -148,7 +156,7 @@ export default function DayTrips({ lang = 'en' }: { lang?: Language }) {
                             boxShadow: '0 15px 35px rgba(0,0,0,0.15)',
                             transition: 'all 0.4s ease'
                         }}>
-                            {t('all_activities_btn')}
+                            {isEn ? 'Explore All Tours & Excursions' : (isEs ? 'Explorar Todas las Excursiones' : 'Découvrir Tous les Circuits')}
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>

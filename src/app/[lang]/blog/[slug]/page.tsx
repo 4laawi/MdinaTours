@@ -7,7 +7,7 @@ import RouteQuickSummary from '@/components/RouteQuickSummary';
 import styles from './BlogPost.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Car, Plane, Compass, ArrowRight } from 'lucide-react';
 import { Metadata } from 'next';
 import { translations, Language } from '@/lib/translations';
 import { notFound } from 'next/navigation';
@@ -298,7 +298,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/Airport_Casablanca_Mohammed.webp", tag: "Casablanca Airport", alt: "Mohammed V Airport Casablanca", keywords: ["casablanca", "airport", "transfer"] },
         { src: "/img2/fes_gate.jpg", tag: "Fes Palace", alt: "Royal Palace Fes Golden Gate", keywords: ["fes", "gate", "architecture"] },
         { src: "/img2/fes_3.webp", tag: "Fes Medina", alt: "Fes historic medina view", keywords: ["fes"] },
-        { src: "/img2/fes-airport.jpeg", tag: "Fes Airport", alt: "Fes Airport Terminal", keywords: ["fes", "airport", "transfer"] },
+        { src: "/a-mdiinatours/fes-airport-transfer.webp", tag: "Fes Airport", alt: "Fes Airport Terminal", keywords: ["fes", "airport", "transfer"] },
         { src: "/img2/tangier_hero.webp", tag: "Tangier Harbor", alt: "Tangier view", keywords: ["tangier"] },
         { src: "/img2/tangier-mdina.jpg", tag: "Tangier Medina", alt: "Tangier old town streets", keywords: ["tangier", "medina"] },
         { src: "/img2/tangier-airport.avif", tag: "Tangier Airport", alt: "Tangier Airport Terminal", keywords: ["tangier", "airport", "transfer"] },
@@ -408,6 +408,209 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     const primaryTransferUrl = targetedTransferSlug ? getPath(`/transfers/${targetedTransferSlug}`) : getPath('/transfers');
 
     const isChefchaouenRoute = slug.includes('chefchaouen');
+
+    // Resolve primary focus city for commercial interlinking
+    const getFocusCity = (currentSlug: string) => {
+        const lower = currentSlug.toLowerCase();
+        if (routeInfo) {
+            return {
+                name: routeInfo.c1[isEn ? 'en' : 'fr'],
+                slug: routeInfo.originSlug
+            };
+        }
+        if (airportInfo) {
+            return {
+                name: airportInfo.city[isEn ? 'en' : 'fr'],
+                slug: airportInfo.cityKey
+            };
+        }
+        if (lower.includes('marrakech')) return { name: 'Marrakech', slug: 'marrakech' };
+        if (lower.includes('casablanca')) return { name: 'Casablanca', slug: 'casablanca' };
+        if (lower.includes('fes')) return { name: isEn ? 'Fes' : 'Fès', slug: 'fes' };
+        if (lower.includes('tangier')) return { name: isEn ? 'Tangier' : 'Tanger', slug: 'tangier' };
+        if (lower.includes('rabat')) return { name: 'Rabat', slug: 'rabat' };
+        if (lower.includes('chefchaouen')) return { name: 'Chefchaouen', slug: 'chefchaouen' };
+        if (lower.includes('agadir')) return { name: 'Agadir', slug: 'agadir' };
+        if (lower.includes('sahara') || lower.includes('merzouga')) return { name: isEn ? 'Sahara & Merzouga' : 'Sahara & Merzouga', slug: 'sahara' };
+        return { name: isEn ? 'Morocco' : 'Maroc', slug: 'morocco' };
+    };
+
+    const focusCity = getFocusCity(slug);
+
+    const getRelatedCommercialLinks = (citySlug: string) => {
+        switch (citySlug) {
+            case 'marrakech':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Marrakech' : 'Chauffeur Privé Marrakech',
+                        desc: isEn ? 'Dedicated bilingual chauffeur with Mercedes fleet for city tours, dinners, and day trips.' : 'Chauffeur bilingue dédié avec flotte Mercedes pour visites et soirées.',
+                        href: getPath('/private-driver-marrakech'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Marrakech Airport Transfer' : 'Transfert Aéroport Marrakech RAK',
+                        desc: isEn ? 'Direct terminal meet & greet with flat fixed rates to your medina riad or hotel.' : 'Accueil en terminal avec tarif fixe vers votre riad ou hôtel.',
+                        href: getPath('/transfers/marrakech-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Marrakech Day Trip & Medina Tour' : 'Excursion Privée Marrakech',
+                        desc: isEn ? 'Explore Bahia Palace, Majorelle Gardens, and vibrant souks with certified local guides.' : 'Découvrez le Palais Bahia et le Jardin Majorelle avec guide officiel.',
+                        href: getPath('/tours/marrakech-day-trip'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'casablanca':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Casablanca' : 'Chauffeur Privé Casablanca',
+                        desc: isEn ? 'Executive transport for business meetings, Hassan II Mosque visits, and Corniche dining.' : 'Transport exécutif pour vos rendez-vous, la Mosquée Hassan II et la Corniche.',
+                        href: getPath('/private-driver-casablanca'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Casablanca Airport Transfer (CMN)' : 'Transfert Aéroport Casablanca CMN',
+                        desc: isEn ? 'Seamless highway express transit from Mohammed V Airport directly to your hotel.' : 'Liaison directe par autoroute de l\'aéroport Mohammed V à votre hôtel.',
+                        href: getPath('/transfers/casablanca-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Casablanca City Tour' : 'Visite Guidée de Casablanca',
+                        desc: isEn ? 'Discover architectural landmarks, Art Deco boulevards, and the Habous quarter.' : 'Explorez le patrimoine Art Déco et le quartier des Habous avec guide privé.',
+                        href: getPath('/tours/casablanca-city-tour'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'fes':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Fes' : 'Chauffeur Privé Fès',
+                        desc: isEn ? 'Comfortable private transport for navigating the imperial city and regional excursions.' : 'Transport privé tout confort pour vos déplacements et excursions régionales.',
+                        href: getPath('/private-driver-fes'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Fes Airport Transfer (FEZ)' : 'Transfert Aéroport Fès-Saïss',
+                        desc: isEn ? 'Flat-rate private transfer connecting Fes-Saïss Airport to your medina riad.' : 'Navette à tarif fixe reliant l\'aéroport de Fès-Saïss à votre riad.',
+                        href: getPath('/transfers/fes-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Fes Medina Guided Tour' : 'Visite Guidée Médina de Fès',
+                        desc: isEn ? 'Official guided exploration of Al-Qarawiyyin, tanneries, and artisan workshops.' : 'Visite officielle de la médina, des tanneries et des ateliers d\'artisans.',
+                        href: getPath('/tours/fes-guided-tour'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'tangier':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Tangier' : 'Chauffeur Privé Tanger',
+                        desc: isEn ? 'Reliable coastal and intercity driver for Cap Spartel, medina, and business trips.' : 'Chauffeur privé pour vos trajets vers le Cap Spartel, la médina ou vos affaires.',
+                        href: getPath('/private-driver-tangier'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Tangier Airport & Port Transfer' : 'Transfert Aéroport & Port Tanger',
+                        desc: isEn ? 'Punctual private pickup from Tangier Port or Ibn Battouta Airport to your stay.' : 'Prise en charge au Port de Tanger ou à l\'aéroport Ibn Battouta.',
+                        href: getPath('/transfers/tangier-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Tangier to Chefchaouen Transfer' : 'Transfert Tanger ⇄ Chefchaouen',
+                        desc: isEn ? 'Scenic mountain ride connecting the northern coast to the Blue Pearl.' : 'Trajet panoramique reliant la côte nord à la Perle Bleue.',
+                        href: getPath('/transfers/tangier-to-chefchaouen-transfer'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'rabat':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Rabat' : 'Chauffeur Privé Rabat',
+                        desc: isEn ? 'Professional chauffeur service for embassy visits, administrative meetings, and touring.' : 'Service de chauffeur professionnel pour ambassades et visites officielles.',
+                        href: getPath('/private-driver-rabat'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Rabat Airport Transfer (RBA)' : 'Transfert Aéroport Rabat-Salé',
+                        desc: isEn ? 'Direct meet & greet transfer between Rabat-Salé Airport and downtown hotels.' : 'Accueil direct à l\'aéroport de Rabat-Salé vers votre hôtel ou riad.',
+                        href: getPath('/transfers/rabat-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Rabat Imperial City Tour' : 'Visite Guidée Rabat Impériale',
+                        desc: isEn ? 'Private guided tour of the Kasbah of the Udayas, Hassan Tower, and Chellah.' : 'Visite privée de la Kasbah des Oudayas, de la Tour Hassan et du Chellah.',
+                        href: getPath('/tours/rabat-city-tour'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'chefchaouen':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Chefchaouen' : 'Chauffeur Privé Chefchaouen',
+                        desc: isEn ? 'Stress-free mountain transportation through the Rif region with experienced drivers.' : 'Transport serein à travers le Rif avec nos chauffeurs expérimentés.',
+                        href: getPath('/private-driver-chefchaouen'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Fes to Chefchaouen Transfer' : 'Transfert Fès ⇄ Chefchaouen',
+                        desc: isEn ? 'Direct door-to-door private transfer between Fes medina and Chefchaouen.' : 'Liaison directe porte-à-porte entre la médina de Fès et Chefchaouen.',
+                        href: getPath('/transfers/fes-to-chefchaouen-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Chefchaouen Day Trip' : 'Excursion Privée Chefchaouen',
+                        desc: isEn ? 'Full-day private guided trip exploring the blue-washed streets and viewpoints.' : 'Journée complète avec chauffeur pour explorer la ville bleue et ses panoramas.',
+                        href: getPath('/tours/chefchaouen-day-trip'),
+                        icon: 'compass'
+                    }
+                ];
+            case 'agadir':
+                return [
+                    {
+                        title: isEn ? 'Private Driver Agadir' : 'Chauffeur Privé Agadir',
+                        desc: isEn ? 'Private vehicle and driver for Taghazout, Paradise Valley, and Atlantic coastal exploration.' : 'Véhicule avec chauffeur pour Taghazout, la Vallée du Paradis et la côte.',
+                        href: getPath('/private-driver-agadir'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Agadir Airport Transfer (AGA)' : 'Transfert Aéroport Agadir Al Massira',
+                        desc: isEn ? 'Fast, hassle-free private transfers to beachfront resorts and surf lodges.' : 'Navette rapide et confortable vers les complexes hôteliers et surf camps.',
+                        href: getPath('/transfers/agadir-airport-transfer'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Marrakech to Agadir Transfer' : 'Transfert Marrakech ⇄ Agadir',
+                        desc: isEn ? 'Express highway connection between Marrakech and the coastal resort of Agadir.' : 'Liaison autoroutière express entre Marrakech et la côte d\'Agadir.',
+                        href: getPath('/transfers/marrakech-to-agadir-transfer'),
+                        icon: 'compass'
+                    }
+                ];
+            default:
+                return [
+                    {
+                        title: isEn ? 'Private Driver Across Morocco' : 'Chauffeur Privé Partout au Maroc',
+                        desc: isEn ? 'Certified English and French-speaking drivers with modern Mercedes-Benz vehicles.' : 'Chauffeurs professionnels bilingues avec véhicules Mercedes récents.',
+                        href: getPath('/private-driver-morocco'),
+                        icon: 'car'
+                    },
+                    {
+                        title: isEn ? 'Morocco Airport Transfers' : 'Transferts Aéroport au Maroc',
+                        desc: isEn ? 'Fixed-rate airport meet & greet across Casablanca, Marrakech, Rabat, and Fes.' : 'Navettes aéroport à prix fixe à Casablanca, Marrakech, Rabat et Fès.',
+                        href: getPath('/airport-transfers'),
+                        icon: 'plane'
+                    },
+                    {
+                        title: isEn ? 'Multi-Day Guided Tours' : 'Circuits Guidés & Excursions',
+                        desc: isEn ? 'Tailor-made private journeys through imperial cities, coastal gems, and the Sahara.' : 'Voyages privés sur mesure à travers les villes impériales et le désert.',
+                        href: getPath('/tours'),
+                        icon: 'compass'
+                    }
+                ];
+        }
+    };
+
+    const relatedCommercialLinks = getRelatedCommercialLinks(focusCity.slug);
     let chefchaouenOrigin: string | undefined = undefined;
     if (routeInfo?.c1) {
         chefchaouenOrigin = routeInfo.c1[isEn ? 'en' : 'fr'];
@@ -842,6 +1045,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                         />
                                     </>
                                 )}
+
+                                {/* Contextual Commercial Services Linking Box */}
+                                <section className={styles.relatedServicesSection}>
+                                    <div className={styles.relatedServicesHeader}>
+                                        <div className={styles.relatedServicesEyebrow}>
+                                            {isEn ? "Travel Services & Chauffeurs" : "Services & Chauffeurs"}
+                                        </div>
+                                        <h3 className={styles.relatedServicesTitle}>
+                                            {isEn 
+                                                ? `Private Travel Services in ${focusCity.name}` 
+                                                : `Services de Transport Privé à ${focusCity.name}`}
+                                        </h3>
+                                        <p className={styles.relatedServicesSubtitle}>
+                                            {isEn
+                                                ? `Pre-book fixed-rate transfers, airport greetings, and private day tours with professional chauffeurs.`
+                                                : `Réservez vos transferts à tarif garanti, navettes aéroport et excursions avec chauffeur privé.`}
+                                        </p>
+                                    </div>
+                                    <div className={styles.relatedServicesGrid}>
+                                        {relatedCommercialLinks.map((service, idx) => (
+                                            <Link key={idx} href={service.href} className={styles.relatedServiceCard}>
+                                                <div className={styles.relatedServiceCardTop}>
+                                                    <div className={styles.relatedServiceIconWrapper}>
+                                                        {service.icon === 'car' && <Car size={18} strokeWidth={2} />}
+                                                        {service.icon === 'plane' && <Plane size={18} strokeWidth={2} />}
+                                                        {service.icon === 'compass' && <Compass size={18} strokeWidth={2} />}
+                                                    </div>
+                                                    <ArrowRight size={16} strokeWidth={2.5} className={styles.relatedServiceArrow} />
+                                                </div>
+                                                <h4 className={styles.relatedServiceCardTitle}>{service.title}</h4>
+                                                <p className={styles.relatedServiceCardDesc}>{service.desc}</p>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </section>
 
                                 {/* Contextual Visual Journey Gallery */}
                                 <section className={styles.journeyGallery}>

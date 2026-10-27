@@ -1536,7 +1536,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "fes-airport-transfer",
-        image: "/img2/fes-airport.jpeg",
+        image: "/a-mdiinatours/fes-airport-transfer.webp",
         prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Fes-Saïss Airport Private Transfer",

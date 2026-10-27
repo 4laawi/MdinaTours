@@ -62,5 +62,5 @@ export default function proxy(request: NextRequest) {
 
 export const config = {
     // Skip all internal paths (_next, api, static files, etc.)
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.png$|.*\\.jpg$|.*\\.svg$|.*\\.webp$|.*\\.lottie$|.*\\.json$|.*\\.mp4$).*)'],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.webp$|.*\\.avif$|.*\\.svg$|.*\\.gif$|.*\\.ico$|.*\\.lottie$|.*\\.json$|.*\\.mp4$|.*\\.webm$).*)'],
 };

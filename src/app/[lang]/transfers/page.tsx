@@ -79,7 +79,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
         if (hasCasablanca) return '/img2/Airport_Casablanca_Mohammed.webp';
         if (hasRabat) return '/img2/rabat-airport.webp';
         if (hasTangier) return '/img2/tangier_hero.webp';
-        if (hasFes) return '/img2/fes-airport.jpeg';
+        if (hasFes) return '/a-mdiinatours/fes-airport-transfer.webp';
         if (hasAgadir) return '/img2/agadir-airport.webp';
         return '/b-roll/3-Mercedes-vito-airoport.jpg';
     } else {

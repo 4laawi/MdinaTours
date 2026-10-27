@@ -122,9 +122,9 @@ export default function Header({ lightBg = false }: HeaderProps) {
     ];
 
     const moreNavItems = [
-        { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos') },
-        { path: '/faq', label: 'FAQ' },
-        ...(language === 'es' ? [] : [{ path: '/blog', label: t('blog') }]),
+        { path: '/about', label: isEn ? 'About Us' : (isEs ? 'Sobre Nosotros' : 'À Propos'), nofollow: true },
+        { path: '/faq', label: 'FAQ', nofollow: true },
+        ...(language === 'es' ? [] : [{ path: '/blog', label: t('blog'), nofollow: false }]),
     ];
 
     const isMoreActive = moreNavItems.some((item) => isActive(item.path));
@@ -185,6 +185,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                                         key={item.path}
                                         href={getPath(item.path)}
                                         prefetch={false}
+                                        rel={item.nofollow ? 'nofollow' : undefined}
                                         className={`${styles.dropdownItem} ${isActive(item.path) ? styles.dropdownItemActive : ''}`}
                                         onClick={() => setIsDropdownOpen(false)}
                                     >
@@ -312,6 +313,7 @@ export default function Header({ lightBg = false }: HeaderProps) {
                                             key={`mobile-more-${item.path}`}
                                             href={getPath(item.path)}
                                             prefetch={false}
+                                            rel={item.nofollow ? 'nofollow' : undefined}
                                             className={`${styles.mobileSubLink} ${isActive(item.path) ? styles.mobileSubActive : ''}`}
                                             onClick={() => setIsMenuOpen(false)}
                                         >

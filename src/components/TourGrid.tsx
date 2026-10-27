@@ -34,7 +34,7 @@ export default function TourGrid() {
                 </div>
 
                 <div className={styles.grid}>
-                    {toursData.slice(0, 6).map(tour => {
+                    {(language === 'es' ? toursData.filter(tour => tour.es) : toursData).map(tour => {
                         const local = tour[language] || tour.en;
 
                         return (

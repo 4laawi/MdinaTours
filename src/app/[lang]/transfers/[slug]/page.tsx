@@ -275,7 +275,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                 <TransferWhatsIncluded language={language} local={local} />
 
                 {/* Other Top Transfer Routes Section */}
-                <TransferOtherRoutes language={language} />
+                <TransferOtherRoutes language={language} currentSlug={trans.slug} />
 
                 {/* FAQ Accordion Section */}
                 <section className={faqStyles.faqSection} id="faq">

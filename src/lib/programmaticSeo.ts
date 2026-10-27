@@ -77,7 +77,8 @@ export const citiesData: Record<string, { en: string; fr: string; attractionsEn:
     marrakech: { en: "Marrakech", fr: "Marrakech", attractionsEn: ["Jemaa el-Fnaa", "Majorelle Garden", "Bahia Palace"], attractionsFr: ["Place Jemaa el-Fna", "Jardin Majorelle", "Palais Bahia"] },
     fes: { en: "Fes", fr: "Fès", attractionsEn: ["Chouara Tannery", "Al-Qarawiyyin", "Bab Boujloud"], attractionsFr: ["Tannerie Chouara", "Al-Qarawiyyin", "Bab Boujloud"] },
     merzouga: { en: "Merzouga", fr: "Merzouga", attractionsEn: ["Erg Chebbi Dunes", "Khamlia Village", "Desert Camps"], attractionsFr: ["Dunes Erg Chebbi", "Khamlia", "Bivouacs"] },
-    agadir: { en: "Agadir", fr: "Agadir", attractionsEn: ["Agadir Ouefla", "Agadir Marina", "Taghazout beach"], attractionsFr: ["Kasbah Ouefla", "Marina", "Plage Taghazout"] }
+    agadir: { en: "Agadir", fr: "Agadir", attractionsEn: ["Agadir Ouefla", "Agadir Marina", "Taghazout beach"], attractionsFr: ["Kasbah Ouefla", "Marina", "Plage Taghazout"] },
+    essaouira: { en: "Essaouira", fr: "Essaouira", attractionsEn: ["Essaouira Medina & Skala", "Historic Fishing Port", "Essaouira Beach & Kitesurf"], attractionsFr: ["Médina d'Essaouira et la Skala", "Port de Pêche Historique", "Plage d'Essaouira et Kitesurf"] }
 };
 
 export const routesData: Record<string, { 
@@ -524,8 +525,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 id: "introduction",
                 title: isEn ? "Overview: Train vs Private Driver" : "Présentation : Train ou Chauffeur Privé",
                 content: isEn
-                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network connects certain imperial cities, booking a dedicated <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in Morocco</a> eliminates taxi queues, train station transitions, and heavy luggage hauling. Our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle (up to 7 guests, ~€${Math.round(route.privatePrice / 6)}/person for 6) with total comfort.</p>`
-                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et la réservation d'un <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a>. Alors que les gares imposent des horaires stricts et des petits taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> assure une prise en charge porte-à-porte dès ${route.privatePrice}€ par véhicule (jusqu'à 7 personnes, ~${Math.round(route.privatePrice / 6)}€/pers. pour 6).</p>`
+                    ? `<p>Choosing how to travel between <strong>${name1}</strong> and <strong>${name2}</strong> depends on your budget, travel group size, and preferred schedule flexibility. While Morocco's rail network connects certain imperial cities, booking a dedicated <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in Morocco</a> eliminates taxi queues, train station transitions, and heavy luggage hauling. Our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">private transfer from ${name1} to ${name2}</a> provides a door-to-door option, starting from €${route.privatePrice} per vehicle (up to 7 guests, ~€${Math.round(route.privatePrice / 6)}/person for 6) with total comfort.</p>`
+                    : `<p>Pour voyager confortablement de <strong>${name1}</strong> à <strong>${name2}</strong>, deux options principales s'offrent à vous : le train et la réservation d'un <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a>. Alors que les gares imposent des horaires stricts et des petits taxis locaux, notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé de ${name1} à ${name2}</a> assure une prise en charge porte-à-porte dès ${route.privatePrice}€ par véhicule (jusqu'à 7 personnes, ~${Math.round(route.privatePrice / 6)}€/pers. pour 6).</p>`
             },
             {
                 id: "comparison",
@@ -673,7 +674,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Airport Guides" : "Guides Aéroport",
             date: "June 14, 2026",
-            image: cityKey === "casablanca" ? "/img2/Airport_Casablanca_Mohammed.webp" : cityKey === "rabat" ? "/img2/rabat-airport.webp" : cityKey === "tangier" ? "/img2/tangier-airport.avif" : cityKey === "marrakech" ? "/img2/aeroport-marrakech.webp" : cityKey === "fes" ? "/img2/fes-airport.jpeg" : cityKey === "agadir" ? "/img2/agadir-airport.webp" : "/img2/private-van-at-hotel.webp",
+            image: cityKey === "casablanca" ? "/img2/Airport_Casablanca_Mohammed.webp" : cityKey === "rabat" ? "/img2/rabat-airport.webp" : cityKey === "tangier" ? "/img2/tangier-airport.avif" : cityKey === "marrakech" ? "/img2/aeroport-marrakech.webp" : cityKey === "fes" ? "/a-mdiinatours/fes-airport-transfer.webp" : cityKey === "agadir" ? "/img2/agadir-airport.webp" : "/img2/private-van-at-hotel.webp",
             seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
@@ -1211,15 +1212,15 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const attractions = isEn ? c.attractionsEn : c.attractionsFr;
 
         const hasCityDriverPage = ['marrakech', 'casablanca', 'rabat', 'fes', 'tangier', 'agadir', 'chefchaouen'].includes(cityKey);
-        const cityDriverLink = hasCityDriverPage ? `/private-driver-${cityKey}` : `/private-driver`;
+        const cityDriverLink = hasCityDriverPage ? `/private-driver-${cityKey}` : `/private-driver-morocco`;
 
         const sections: ProgrammaticSection[] = [
             {
                 id: "intro",
                 title: isEn ? `About ${cityName}` : `Découvrir ${cityName}`,
                 content: isEn
-                    ? `<p>Exploring the historic highlights of ${cityName} is an essential part of any Morocco holiday. With unique landmarks, bustling medinas, and rich architectural heritage, having a dedicated <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in ${cityName}</a> allows you to explore at your own pace without negotiating taxi fares. You can also book our <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver services across Morocco</a> for comfortable multi-city travel.</p>`
-                    : `<p>Découvrir les richesses historiques de ${cityName} est un moment fort de tout voyage au Maroc. Entre médinas animées et monuments d'exception, faire appel à un <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé à ${cityName}</a> vous permet de visiter en toute sérénité sans négocier les taxis. Retrouvez également nos services de <a href="/${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a> pour vos circuits interurbains.</p>`
+                    ? `<p>Exploring the historic highlights of ${cityName} is an essential part of any Morocco holiday. With unique landmarks, bustling medinas, and rich architectural heritage, having a dedicated <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver in ${cityName}</a> allows you to explore at your own pace without negotiating taxi fares. You can also book our <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">private driver services across Morocco</a> for comfortable multi-city travel.</p>`
+                    : `<p>Découvrir les richesses historiques de ${cityName} est un moment fort de tout voyage au Maroc. Entre médinas animées et monuments d'exception, faire appel à un <a href="/${isEn ? 'en' : 'fr'}${cityDriverLink}" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé à ${cityName}</a> vous permet de visiter en toute sérénité sans négocier les taxis. Retrouvez également nos services de <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600; text-decoration:underline;">chauffeur privé au Maroc</a> pour vos circuits interurbains.</p>`
             },
             {
                 id: "attractions",
@@ -1547,7 +1548,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                        <p>In this guide, we break down exactly what to expect from the most popular <strong>Marrakech excursions</strong>. You'll find practical advice on visiting the stony Agafay Desert, exploring the UNESCO-listed village of Aït Benhaddou, hiking the breathtaking <strong>Ouzoud Waterfalls from Marrakech</strong>, and enjoying fresh seafood on a <strong>Marrakech to Essaouira day trip</strong>.</p>`
                     : `<p>Si vous ne disposez que de quelques jours à Marrakech, vous voudrez sans doute vous imprégner de la ville et explorer les souks, les places et les sites de la Médina. Mais si vous avez un ou deux jours de plus, la possibilité de s'éloigner de l'agitation est irrésistible.</p>
                        <img src="/img/marrakech.webp" alt="Médina de Marrakech" style="width:100%; max-height:450px; object-fit:cover; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
-                       <p>Si vous êtes encore en phase de préparation, nous vous recommandons d'ajouter quelques jours supplémentaires car il y a tant à voir à <a href="/\${isEn ? 'en' : 'fr'}/blog/marrakech-travel-guide" style="color:var(--primary); font-weight:600;">Marrakech</a>. Que vous souhaitiez monter à dos de chameau dans le désert, admirer les cascades ou explorer les villages berbères de l'Atlas.</p>`
+                       <p>Si vous êtes encore en phase de préparation, nous vous recommandons d'ajouter quelques jours supplémentaires car il y a tant à voir à <a href="/${isEn ? 'en' : 'fr'}/blog/marrakech-travel-guide" style="color:var(--primary); font-weight:600;">Marrakech</a>. Que vous souhaitiez monter à dos de chameau dans le désert, admirer les cascades ou explorer les villages berbères de l'Atlas.</p>`
             },
             {
                 id: "agafay-desert",
@@ -1564,12 +1565,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                        - Wide range of experiences — camel rides, quad biking, music, dinner under the stars.<br>
                        - Stunning sunset and stargazing opportunities.<br>
                        <strong>Cons:</strong> It’s not the Sahara, so expect rocky barren hills instead of huge golden sand dunes.</p>
-                       <p>You can easily arrange a trip here by booking a <a href="/\${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600;">private driver</a>.</p>`
+                       <p>You can easily arrange a trip here by booking a <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600;">private driver</a>.</p>`
                     : `<p>Contrairement aux dunes dorées du Sahara, Agafay est un désert de pierres. C'est une excellente option si vous souhaitez vivre une expérience désertique sans faire le long trajet vers le Sahara.</p>
                        <img src="/img/agafay.jpg" alt="Désert d'Agafay" style="width:100%; max-height:450px; object-fit:cover; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
                        <p>Ce plateau aride vous offre de grands espaces, de magnifiques couchers de soleil, et l'occasion de faire une balade à dos de chameau ou en quad à seulement une heure de la ville. De nombreuses excursions se terminent par un dîner sous les étoiles dans l'un des camps luxueux du désert.</p>
                        <p><strong>Les avantages :</strong> Trajet très court, idéal pour admirer le coucher de soleil, nombreuses activités (quad, chameau).<br><strong>Les inconvénients :</strong> Ce n'est pas le Sahara, il n'y a donc pas de dunes de sable.</p>
-                       <p>Réservez facilement votre excursion avec un <a href="/\${isEn ? 'en' : 'fr'}/private-driver" style="color:var(--primary); font-weight:600;">chauffeur privé</a>.</p>`
+                       <p>Réservez facilement votre excursion avec un <a href="/${isEn ? 'en' : 'fr'}/private-driver-morocco" style="color:var(--primary); font-weight:600;">chauffeur privé</a>.</p>`
             },
             {
                 id: "ait-benhaddou",
@@ -1588,7 +1589,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                        <strong>Cons:</strong> The drive is long with hours on winding mountain roads.</p>`
                     : `<p>Aït Benhaddou était autrefois une étape florissante sur les anciennes routes caravanières reliant Tombouctou à Marrakech. Ce site classé au patrimoine mondial de l'UNESCO est l'un des exemples les mieux préservés d'architecture berbère en terre crue.</p>
                        <img src="/img/Ait%20Benhaddou.jpg" alt="Kasbah Ait Benhaddou" style="width:100%; max-height:450px; object-fit:cover; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
-                       <p>Le trajet est long mais vous traversez le col de Tizi n'Tichka offrant des vues panoramiques sur l'Atlas. Vous découvrirez également Ouarzazate, la porte du Sahara et ses célèbres studios de cinéma. C'est une étape incontournable de tout <a href="/\${isEn ? 'en' : 'fr'}/blog/morocco-itinerary-5-days" style="color:var(--primary); font-weight:600;">circuit dans le sud marocain</a>.</p>
+                       <p>Le trajet est long mais vous traversez le col de Tizi n'Tichka offrant des vues panoramiques sur l'Atlas. Vous découvrirez également Ouarzazate, la porte du Sahara et ses célèbres studios de cinéma. C'est une étape incontournable de tout <a href="/${isEn ? 'en' : 'fr'}/blog/morocco-itinerary-5-days" style="color:var(--primary); font-weight:600;">circuit dans le sud marocain</a>.</p>
                        <p><strong>Les avantages :</strong> Paysages spectaculaires, riche passé historique, studios de cinéma.<br><strong>Les inconvénients :</strong> Beaucoup de route de montagne sinueuse.</p>`
             },
             {
@@ -1605,7 +1606,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                        - Relaxed, breezy alternative to the chaotic city.<br>
                        - Amazing seafood and unique artisanal shopping in the medina.<br>
                        <strong>Cons:</strong> It can be very windy, which isn't ideal for a traditional beach day.</p>`
-                    : `<p>Si la chaleur de Marrakech devient trop forte, la brise océanique d'Essaouira est parfaite. Cette charmante ville côtière possède une médina historique fortifiée, un port de pêche animé rempli de barques bleues et une grande plage célèbre pour le kitesurf. L'ambiance y est beaucoup plus détendue et bohème. Lisez notre guide sur <a href="/\${isEn ? 'en' : 'fr'}/blog/how-to-get-from-marrakech-to-essaouira" style="color:var(--primary); font-weight:600;">comment se rendre à Essaouira</a>.</p>
+                    : `<p>Si la chaleur de Marrakech devient trop forte, la brise océanique d'Essaouira est parfaite. Cette charmante ville côtière possède une médina historique fortifiée, un port de pêche animé rempli de barques bleues et une grande plage célèbre pour le kitesurf. L'ambiance y est beaucoup plus détendue et bohème. Lisez notre guide sur <a href="/${isEn ? 'en' : 'fr'}/blog/how-to-get-from-marrakech-to-essaouira" style="color:var(--primary); font-weight:600;">comment se rendre à Essaouira</a>.</p>
                        <img src="/img/Essaouira.webp" alt="Port d'Essaouira" loading="eager" style="width:100%; max-height:450px; object-fit:cover; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
                        <p>Sur la route, vous pourrez vous arrêter dans une coopérative d'huile d'argan et déguster d'excellents fruits de mer une fois sur place.</p>`
             },
@@ -1651,9 +1652,9 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 title: isEn ? "5. The Ultimate Addition: The Sahara Desert" : "5. L'Incontournable : Le Désert du Sahara",
                 content: isEn
                     ? `<p>While day trips are fantastic, no trip to Morocco is complete without spending a night under the stars in the Sahara Desert. Unlike the rocky Agafay, the Sahara offers towering golden dunes like Erg Chebbi in Merzouga.</p>
-                       <p>Because the Sahara is an 8+ hour drive from Marrakech, it cannot be done in a single day. We highly recommend reading our complete guide on planning a <a href="/\${isEn ? 'en' : 'fr'}/blog/sahara-desert-tour-plan" style="color:var(--primary); font-weight:600;">Sahara Desert Tour</a> to see how you can fit it into a multi-day trip. It is one of our most requested and highest-rated experiences!</p>`
+                       <p>Because the Sahara is an 8+ hour drive from Marrakech, it cannot be done in a single day. We highly recommend reading our complete guide on planning a <a href="/${isEn ? 'en' : 'fr'}/blog/sahara-desert-tour-plan" style="color:var(--primary); font-weight:600;">Sahara Desert Tour</a> to see how you can fit it into a multi-day trip. It is one of our most requested and highest-rated experiences!</p>`
                     : `<p>Bien que les excursions d'une journée soient fantastiques, aucun voyage au Maroc n'est complet sans une nuit sous les étoiles dans le désert du Sahara.</p>
-                       <p>Le Sahara étant à plus de 8 heures de route de Marrakech, cela ne peut pas être fait en une journée. Lisez notre guide complet sur la planification d'un <a href="/\${isEn ? 'en' : 'fr'}/blog/sahara-desert-tour-plan" style="color:var(--primary); font-weight:600;">circuit dans le désert du Sahara</a>.</p>`
+                       <p>Le Sahara étant à plus de 8 heures de route de Marrakech, cela ne peut pas être fait en une journée. Lisez notre guide complet sur la planification d'un <a href="/${isEn ? 'en' : 'fr'}/blog/sahara-desert-tour-plan" style="color:var(--primary); font-weight:600;">circuit dans le désert du Sahara</a>.</p>`
             },
             {
                 id: "cta-mid",

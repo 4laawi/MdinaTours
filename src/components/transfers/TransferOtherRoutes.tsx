@@ -6,13 +6,40 @@ import Image from 'next/image';
 
 import { Language } from '@/lib/translations';
 import { trackLeadConversion } from '@/lib/tracking';
+import { transfersData, LocalizedTransferData } from '@/lib/transfersData';
+import { isSpanishSupported } from '@/lib/seo';
 import styles from './TransferOtherRoutes.module.css';
 
 interface TransferOtherRoutesProps {
     language: Language;
+    currentSlug?: string;
 }
 
-export default function TransferOtherRoutes({ language }: TransferOtherRoutesProps) {
+function formatRouteTitle(slug: string, local: LocalizedTransferData, language: Language): string {
+    if (slug.includes('-to-')) {
+        const parts = slug.replace('-transfer', '').split('-to-');
+        const from = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+        const to = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
+        return `${from} ⇄ ${to}`;
+    }
+    if (slug.includes('-airport-transfer')) {
+        const city = slug.replace('-airport-transfer', '');
+        const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+        if (language === 'es') return `Aeropuerto de ${cityName}`;
+        if (language === 'fr') return `Aéroport de ${cityName}`;
+        return `${cityName} Airport Transfer`;
+    }
+    if (slug.includes('-port-transfer')) {
+        const city = slug.replace('-port-transfer', '');
+        const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+        if (language === 'es') return `Puerto de ${cityName}`;
+        if (language === 'fr') return `Port de ${cityName}`;
+        return `${cityName} Port Transfer`;
+    }
+    return local.title.split(' - ')[0].split(' & ')[0];
+}
+
+export default function TransferOtherRoutes({ language, currentSlug }: TransferOtherRoutesProps) {
     const isEn = language === 'en';
     const isEs = language === 'es';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -25,96 +52,45 @@ export default function TransferOtherRoutes({ language }: TransferOtherRoutesPro
     const [isHovered, setIsHovered] = useState(false);
     const [isInView, setIsInView] = useState(false);
 
-    const routes = useMemo(() => [
-        {
-            title: "Casablanca Airport ⇄ Rabat",
-            desc: isEn 
-                ? "Direct highway transfer from CMN airport to your Rabat hotel or embassy."
-                : isEs
-                ? "Traslado directo por autopista desde el aeropuerto CMN a su hotel o estancia en Rabat."
-                : "Transfert direct par autoroute de l'aéroport CMN à votre hôtel ou ambassade à Rabat.",
-            price: "€120",
-            image: "/img2/Airport_Casablanca_Mohammed.webp",
-            slug: "casablanca-airport-transfer"
-        },
-        {
-            title: "Marrakech ⇄ Essaouira",
-            desc: isEn 
-                ? "Travel from the Red City to the Atlantic coast with photo stops to see tree-climbing goats."
-                : isEs
-                ? "Viaje desde la Ciudad Roja hasta la costa atlántica con paradas fotográficas."
-                : "Voyagez de la Ville Rouge à la côte atlantique avec arrêt photo pour voir les chèvres.",
-            price: "€140",
-            image: "/img2/Essaouira-maroc.jpg",
-            slug: "marrakech-to-essaouira-transfer"
-        },
-        {
-            title: "Fes ⇄ Chefchaouen",
-            desc: isEn 
-                ? "Scenic private transport through the Rif Mountains to the beautiful Blue Pearl."
-                : isEs
-                ? "Transporte privado panorámico por las montañas del Rif hasta la Perla Azul."
-                : "Transport privé panoramique à travers le Rif jusqu'à la magnifique Perle Bleue.",
-            price: "€170",
-            image: "/img2/fes_gate.jpg",
-            slug: "fes-to-chefchaouen-transfer"
-        },
-        {
-            title: "Casablanca ⇄ Marrakech",
-            desc: isEn 
-                ? "Fast southern expressway transfer between Casablanca CMN and Marrakech medina."
-                : isEs
-                ? "Traslado rápido por autopista entre Casablanca CMN y la medina de Marrakech."
-                : "Transfert rapide par l'autoroute du Sud entre Casablanca CMN et la médina de Marrakech.",
-            price: "€220",
-            image: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
-            slug: "casablanca-to-marrakech-transfer"
-        },
-        {
-            title: "Tangier ⇄ Chefchaouen",
-            desc: isEn 
-                ? "Scenic mountain transfer from Tangier port or airport to the Blue City."
-                : isEs
-                ? "Traslado de montaña desde el puerto o aeropuerto de Tánger a la Ciudad Azul."
-                : "Transfert de montagne panoramique du port ou de l'aéroport de Tanger à la Ville Bleue.",
-            price: "€140",
-            image: "/img2/tangier-mdina.jpg",
-            slug: "tangier-to-chefchaouen-transfer"
-        },
-        {
-            title: "Rabat ⇄ Casablanca",
-            desc: isEn 
-                ? "Convenient intercity transfer between the administrative capital and Casablanca."
-                : isEs
-                ? "Cómodo traslado interurbano entre la capital administrativa y Casablanca."
-                : "Transfert interville pratique entre la capitale administrative et Casablanca.",
-            price: "€110",
-            image: "/img2/rabat-hassan-tour.jpg",
-            slug: "rabat-to-casablanca-transfer"
-        },
-        {
-            title: "Marrakech ⇄ Agadir",
-            desc: isEn 
-                ? "Relaxing highway transfer to the premier seaside resort town of Agadir."
-                : isEs
-                ? "Traslado relajante por autopista hacia la ciudad costera de Agadir."
-                : "Transfert relaxant par l'autoroute vers la célèbre station balnéaire d'Agadir.",
-            price: "€185",
-            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
-            slug: "marrakech-to-agadir-transfer"
-        },
-        {
-            title: "Tangier ⇄ Rabat",
-            desc: isEn 
-                ? "Comfortable expressway transfer connecting the northern port city of Tangier to Rabat."
-                : isEs
-                ? "Traslado cómodo por autopista conectando la ciudad portuaria de Tánger con Rabat."
-                : "Transfert confortable par l'autoroute reliant la ville portuaire de Tanger à Rabat.",
-            price: "€210",
-            image: "/Tangier-Morocco-Photo.webp",
-            slug: "tangier-to-rabat-transfer"
-        }
-    ], [isEn, isEs]);
+    const routes = useMemo(() => {
+        // Filter transfers based on Spanish support if on /es
+        const eligibleTransfers = transfersData.filter(t => {
+            if (currentSlug && t.slug === currentSlug) return false;
+            if (language === 'es') {
+                return Boolean(t.es) && isSpanishSupported(`/transfers/${t.slug}`);
+            }
+            return true;
+        });
+
+        const KNOWN_CITIES = ['casablanca', 'marrakech', 'rabat', 'tangier', 'fes', 'chefchaouen', 'agadir', 'essaouira', 'merzouga', 'sale'];
+        const matchedCurrentCities = currentSlug
+            ? KNOWN_CITIES.filter(city => currentSlug.toLowerCase().includes(city))
+            : [];
+
+        const isRelated = (slug: string) => {
+            if (matchedCurrentCities.length === 0) return false;
+            const lowerSlug = slug.toLowerCase();
+            return matchedCurrentCities.some(city => lowerSlug.includes(city));
+        };
+
+        const related = eligibleTransfers.filter(t => isRelated(t.slug));
+        const nonRelated = eligibleTransfers.filter(t => !isRelated(t.slug));
+
+        // Prioritize matching city corridors, fill up to 8 cards with remaining transfers
+        const selected = [...related, ...nonRelated].slice(0, 8);
+
+        return selected.map(t => {
+            const local = (language === 'es' && t.es) ? t.es : (language === 'fr' ? t.fr : t.en);
+            const basePrice = t.prices[3] || t.prices[1] || Object.values(t.prices)[0];
+            return {
+                title: formatRouteTitle(t.slug, local, language),
+                desc: local.tagline,
+                price: `€${basePrice}`,
+                image: t.image,
+                slug: t.slug,
+            };
+        });
+    }, [language, currentSlug]);
 
     // Observe section visibility so autoplay and reveal scroll only run when user is looking at this section
     useEffect(() => {
