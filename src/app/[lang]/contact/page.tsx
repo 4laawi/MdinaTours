@@ -1,4 +1,4 @@
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -91,7 +91,8 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",
                 "addressCountry": "MA"
-            }
+            },
+            "sameAs": SCHEMA_SAME_AS
         }
     };
 

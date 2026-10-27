@@ -114,3 +114,19 @@ export const SCHEMA_SHIPPING_DETAILS = {
         }
     }
 };
+
+export const MDINA_SOCIAL_LINKS = {
+    instagram: 'https://www.instagram.com/mdinatours/',
+    tiktok: 'https://www.tiktok.com/@mdinatours',
+    linkedin: 'https://www.linkedin.com/company/mdina-tours',
+    facebook: 'https://www.facebook.com/p/Mdina-tours-61594608887112/',
+    twitter: 'https://x.com/Haifadev',
+};
+
+export const SCHEMA_SAME_AS = [
+    'https://www.instagram.com/mdinatours/',
+    'https://www.tiktok.com/@mdinatours',
+    'https://www.linkedin.com/company/mdina-tours',
+    'https://www.facebook.com/p/Mdina-tours-61594608887112/',
+    'https://x.com/Haifadev',
+];

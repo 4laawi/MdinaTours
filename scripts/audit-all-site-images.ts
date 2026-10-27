@@ -5,7 +5,6 @@ import path from 'path';
 import { programmaticSlugs, getProgrammaticPost } from '../src/lib/programmaticSeo';
 import { toursData } from '../src/lib/toursData';
 import { transfersData } from '../src/lib/transfersData';
-import { airportTransfersData } from '../src/lib/airportTransfersData';
 
 const publicDir = path.join(process.cwd(), 'public');
 

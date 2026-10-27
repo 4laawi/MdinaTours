@@ -1,4 +1,4 @@
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
 import type { Metadata, Viewport } from 'next';
 import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
 import '../globals.css';
@@ -126,6 +126,7 @@ export default async function LocaleLayout({
         "url": lang === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${lang}`,
         "telephone": "+212724114775",
         "priceRange": "$$",
+        "sameAs": SCHEMA_SAME_AS,
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Rabat",

@@ -1,5 +1,5 @@
 import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
@@ -279,7 +279,8 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
                 "addressCountry": "MA"
             },
             "areaServed": "Morocco",
-            "priceRange": "$$"
+            "priceRange": "$$",
+            "sameAs": SCHEMA_SAME_AS
         }
     };
 
