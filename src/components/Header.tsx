@@ -114,7 +114,6 @@ export default function Header({ lightBg = false }: HeaderProps) {
 
     // Primary navigation items
     const primaryNavItems = [
-        { path: '/', label: t('home') },
         { path: '/airport-transfers', label: isEn ? 'Airport Transfers' : (isEs ? 'Traslados Aeropuerto' : 'Transferts Aéroport') },
         { path: '/transfers', label: isEn ? 'Transfers' : (isEs ? 'Traslados' : 'Transferts') },
         { path: '/private-driver-morocco', label: isEn ? 'Private Driver' : (isEs ? 'Chófer Privado' : 'Chauffeur Privé') },
