@@ -14,6 +14,8 @@ import { notFound } from 'next/navigation';
 import { transfersData } from '@/lib/transfersData';
 import { getProgrammaticPost, programmaticSlugs, getRouteInfo, getAirportInfo } from '@/lib/programmaticSeo';
 
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
     const paths: { lang: string; slug: string }[] = [];
     const locales = ['en', 'fr'];

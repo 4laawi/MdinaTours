@@ -19,6 +19,7 @@ import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
 import ChauffeurDestinations from '@/components/ChauffeurDestinations';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }];
@@ -626,6 +627,9 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
                         </div>
                     </div>
                 </section>
+
+                {/* Direct Intercity Transfer Routes from Tangier */}
+                <TransferHubRoutesGrid language={language} activeCity="tangier" showTours={false} />
 
                 <ChauffeurDestinations lang={language} pageType="tangier" />
 

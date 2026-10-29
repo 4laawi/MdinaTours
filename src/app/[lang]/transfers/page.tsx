@@ -10,6 +10,9 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
+
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
@@ -344,6 +347,9 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                         </div>
                     </div>
                 </section>
+
+                {/* Complete Morocco Intercity Transfer & Tour Route Grid (Crawlable network for Googlebot) */}
+                <TransferHubRoutesGrid language={language} showTours={true} />
             </main>
             <Footer lang={language} />
             <FloatingElements />

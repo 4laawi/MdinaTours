@@ -43,7 +43,12 @@ export function isSpanishSupported(pathWithoutLang: string = ''): boolean {
     const cleanPath = pathWithoutLang 
         ? (pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`) 
         : '';
-    return APPROVED_ES_PATHS.has(cleanPath);
+    if (APPROVED_ES_PATHS.has(cleanPath)) return true;
+    if (cleanPath.startsWith('/transfers/')) {
+        const withTransfer = cleanPath.endsWith('-transfer') ? cleanPath : `${cleanPath}-transfer`;
+        return APPROVED_ES_PATHS.has(withTransfer);
+    }
+    return false;
 }
 
 export function getAlternates(lang: string, pathWithoutLang: string = '') {

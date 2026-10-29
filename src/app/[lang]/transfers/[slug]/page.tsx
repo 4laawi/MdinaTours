@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
 import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
@@ -16,52 +15,85 @@ import TransferDestinationInfo from '@/components/transfers/TransferDestinationI
 import TransferFAQ from '@/components/transfers/TransferFAQ';
 import faqStyles from '@/components/FAQ.module.css';
 
-// Dynamic code-splitting for heavy off-screen components to avoid blocking the main thread
-const PrivateDriverWhyChooseUs = dynamic(() => import('@/components/PrivateDriverWhyChooseUs'));
-const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'));
-const TransferReviews = dynamic(() => import('@/components/transfers/TransferReviews'));
-const TransferFleet = dynamic(() => import('@/components/transfers/TransferFleet'));
-const TransferOtherRoutes = dynamic(() => import('@/components/transfers/TransferOtherRoutes'));
-const TransferTaxiComparison = dynamic(() => import('@/components/transfers/TransferTaxiComparison'));
-const TransferFixedPriceTable = dynamic(() => import('@/components/transfers/TransferFixedPriceTable'));
+// Direct imports guarantee full server-side HTML rendering without client-bundle delay
+import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
+import VideoPlayer from '@/components/VideoPlayer';
+import TransferReviews from '@/components/transfers/TransferReviews';
+import TransferFleet from '@/components/transfers/TransferFleet';
+import TransferOtherRoutes from '@/components/transfers/TransferOtherRoutes';
+import TransferTaxiComparison from '@/components/transfers/TransferTaxiComparison';
+import TransferFixedPriceTable from '@/components/transfers/TransferFixedPriceTable';
 
-// Generate static routes for static HTML generation
+// Enable SSG with ISR revalidation every 24 hours
+export const revalidate = 86400;
+export const dynamicParams = true;
+
+// Helper to look up transfer by canonical slug or core route slug (with or without -transfer)
+function getTransferBySlug(slug: string) {
+    if (!slug) return undefined;
+    const clean = slug.trim().toLowerCase();
+    return transfersData.find(t => {
+        const tSlug = t.slug.toLowerCase();
+        return (
+            tSlug === clean ||
+            tSlug === `${clean}-transfer` ||
+            tSlug.replace(/-transfer$/, '') === clean
+        );
+    });
+}
+
+// Generate static routes for all core Moroccan transfer slugs and variants
 export async function generateStaticParams() {
     const paths: { lang: string; slug: string }[] = [];
     const locales = ['en', 'fr'];
+    
     transfersData.forEach(trans => {
+        const baseSlug = trans.slug.replace(/-transfer$/, '');
+        // Statically pre-render both the canonical slug and core slug (e.g. casablanca-to-marrakech)
+        const slugsToGenerate = [trans.slug];
+        if (baseSlug !== trans.slug) {
+            slugsToGenerate.push(baseSlug);
+        }
+
         locales.forEach(lang => {
-            paths.push({ lang, slug: trans.slug });
+            slugsToGenerate.forEach(slug => {
+                paths.push({ lang, slug });
+            });
         });
-        // Include 'es' only for strictly approved Spanish transfer routes
-        if (isSpanishSupported(`/transfers/${trans.slug}`)) {
-            paths.push({ lang: 'es', slug: trans.slug });
+
+        // Include 'es' for strictly approved Spanish transfer routes
+        if (isSpanishSupported(`/transfers/${trans.slug}`) || isSpanishSupported(`/transfers/${baseSlug}`)) {
+            slugsToGenerate.forEach(slug => {
+                paths.push({ lang: 'es', slug });
+            });
         }
     });
+
     return paths;
 }
 
 // Generate dynamic SEO metadata
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
     const { lang, slug } = await params;
-    const trans = transfersData.find(t => t.slug === slug);
+    const trans = getTransferBySlug(slug);
     if (!trans) return { title: 'Transfer Route Not Found - Mdina Tours' };
 
     // Strict boundary check for Spanish
-    if (lang === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${slug}`))) {
+    if (lang === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${trans.slug}`))) {
         return { title: 'Not Found - Mdina Tours' };
     }
 
     const local = trans[lang as Language] || trans.en;
-    const url = `https://mdinatours.com/${lang}/transfers/${slug}`;
+    // Keep canonical URL consolidated to the primary canonical slug
+    const url = `https://mdinatours.com/${lang}/transfers/${trans.slug}`;
 
     const alternatesLanguages: Record<string, string> = {
-        'en': `https://mdinatours.com/en/transfers/${slug}`,
-        'fr': `https://mdinatours.com/fr/transfers/${slug}`,
-        'x-default': `https://mdinatours.com/en/transfers/${slug}`,
+        'en': `https://mdinatours.com/en/transfers/${trans.slug}`,
+        'fr': `https://mdinatours.com/fr/transfers/${trans.slug}`,
+        'x-default': `https://mdinatours.com/en/transfers/${trans.slug}`,
     };
-    if (isSpanishSupported(`/transfers/${slug}`)) {
-        alternatesLanguages['es'] = `https://mdinatours.com/es/transfers/${slug}`;
+    if (isSpanishSupported(`/transfers/${trans.slug}`)) {
+        alternatesLanguages['es'] = `https://mdinatours.com/es/transfers/${trans.slug}`;
     }
 
     return {
@@ -102,11 +134,11 @@ export default async function TransferLandingPage({ params }: { params: Promise<
     const isEn = language === 'en';
     const isEs = language === 'es';
 
-    const trans = transfersData.find(t => t.slug === slug);
+    const trans = getTransferBySlug(slug);
     if (!trans) notFound();
 
     // Strict boundary check: unsupported Spanish transfers return 404
-    if (language === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${slug}`))) {
+    if (language === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${trans.slug}`))) {
         notFound();
     }
 
@@ -131,7 +163,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         "name": local.title,
         "description": local.tagline,
         "image": `https://mdinatours.com${trans.image}`,
-        "url": `https://mdinatours.com/${language}/transfers/${slug}`,
+        "url": `https://mdinatours.com/${language}/transfers/${trans.slug}`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
@@ -156,13 +188,13 @@ export default async function TransferLandingPage({ params }: { params: Promise<
             "availability": "https://schema.org/InStock",
             "validFrom": `${new Date().getFullYear()}-01-01`,
             "priceValidUntil": `${new Date().getFullYear() + 1}-12-31`,
-            "url": `https://mdinatours.com/${language}/transfers/${slug}`,
+            "url": `https://mdinatours.com/${language}/transfers/${trans.slug}`,
             "hasMerchantReturnPolicy": SCHEMA_RETURN_POLICY,
             "shippingDetails": SCHEMA_SHIPPING_DETAILS
         }))
     };
 
-    const isAirportRoute = slug.toLowerCase().includes('airport');
+    const isAirportRoute = trans.slug.toLowerCase().includes('airport');
     const parentBreadcrumbName = isAirportRoute
         ? (isEn ? "Airport Transfers" : isEs ? "Traslados al Aeropuerto" : "Transferts Aéroport")
         : (isEn ? "Intercity Transfers" : isEs ? "Traslados Interurbanos" : "Transferts Intervilles");
@@ -190,7 +222,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                 "@type": "ListItem",
                 "position": 3,
                 "name": local.title,
-                "item": `https://mdinatours.com/${language}/transfers/${slug}`
+                "item": `https://mdinatours.com/${language}/transfers/${trans.slug}`
             }
         ]
     };

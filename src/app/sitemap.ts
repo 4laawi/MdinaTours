@@ -44,8 +44,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Combine static and programmatic blog slugs
     const allBlogSlugs = Array.from(new Set([...blogSlugs, ...programmaticSlugs]));
 
-    // Dynamic transfer slugs from transfersData
-    const allTransferSlugs = transfersData.map(t => t.slug);
+    // Dynamic transfer slugs from transfersData (including both canonical and core city-to-city slugs)
+    const allTransferSlugs: string[] = [];
+    transfersData.forEach(t => {
+        allTransferSlugs.push(t.slug);
+        const baseSlug = t.slug.replace(/-transfer$/, '');
+        if (baseSlug !== t.slug && !allTransferSlugs.includes(baseSlug)) {
+            allTransferSlugs.push(baseSlug);
+        }
+    });
 
     // Dynamic tour slugs from toursData
     const allTourSlugs = toursData.map(t => t.slug);

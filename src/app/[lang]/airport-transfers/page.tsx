@@ -6,6 +6,9 @@ import AirportTransfersClient from './components/AirportTransfersClient';
 import { Locale, FAQS } from '@/lib/airportTransfersData';
 import { Metadata } from 'next';
 import { Language } from '@/lib/translations';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
+
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
@@ -163,6 +166,7 @@ export default async function AirportTransfersPage({ params }: { params: Promise
 
             <main>
                 <AirportTransfersClient lang={currentLang} />
+                <TransferHubRoutesGrid language={currentLang === 'ar' ? 'en' : (currentLang as Language)} showTours={true} />
             </main>
 
             <Footer lang={currentLang === 'ar' ? 'en' : (currentLang as Language)} />

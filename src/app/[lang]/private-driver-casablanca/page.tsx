@@ -19,6 +19,7 @@ import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
 import ChauffeurDestinations from '@/components/ChauffeurDestinations';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
 
 
 export async function generateStaticParams() {
@@ -727,6 +728,9 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                         </div>
                     </div>
                 </section>
+
+                {/* Direct Intercity Transfer Routes from Casablanca */}
+                <TransferHubRoutesGrid language={language} activeCity="casablanca" showTours={false} />
 
                 <ChauffeurDestinations lang={language} pageType="casablanca" />
 

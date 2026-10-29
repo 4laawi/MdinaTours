@@ -10,6 +10,8 @@ import { translations, Language } from '@/lib/translations';
 import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
 import TourBookingWidget from '@/components/TourBookingWidget';
 
+export const revalidate = 86400;
+
 // Generate static routes for static HTML generation
 export async function generateStaticParams() {
     const paths: { lang: string; slug: string }[] = [];

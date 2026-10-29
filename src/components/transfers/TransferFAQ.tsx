@@ -1,6 +1,6 @@
-"use client";
-
-import { useState } from 'react';
+import React from 'react';
+import { ChevronDown } from 'lucide-react';
+import styles from '@/components/FAQ.module.css';
 
 interface FAQItem {
     q: string;
@@ -14,30 +14,34 @@ interface TransferFAQProps {
 }
 
 const getCleanCities = (slug: string) => {
+    const cleanSlug = slug.replace(/-transfer$/, '');
     const mapping: { [key: string]: { from: string; to: string; fromFr: string; toFr: string } } = {
-        "casablanca-airport-transfer": { from: "Casablanca CMN Airport", to: "Rabat", fromFr: "l'Aéroport de Casablanca (CMN)", toFr: "Rabat" },
-        "rabat-airport-transfer": { from: "Rabat RBA Airport", to: "Rabat City Center", fromFr: "l'Aéroport de Rabat (RBA)", toFr: "Rabat Centre" },
-        "tangier-to-rabat-transfer": { from: "Tangier", to: "Rabat", fromFr: "Tanger", toFr: "Rabat" },
-        "rabat-to-casablanca-transfer": { from: "Rabat", to: "Casablanca", fromFr: "Rabat", toFr: "Casablanca" },
-        "marrakech-to-essaouira-transfer": { from: "Marrakech", to: "Essaouira", fromFr: "Marrakech", toFr: "Essaouira" },
-        "fes-to-chefchaouen-transfer": { from: "Fes", to: "Chefchaouen", fromFr: "Fès", toFr: "Chefchaouen" },
-        "casablanca-to-marrakech-transfer": { from: "Casablanca", to: "Marrakech", fromFr: "Casablanca", toFr: "Marrakech" },
-        "tangier-airport-transfer": { from: "Tangier TNG Airport", to: "Tangier City Center", fromFr: "l'Aéroport de Tanger (TNG)", toFr: "Tanger Centre" },
-        "tangier-to-casablanca-transfer": { from: "Tangier", to: "Casablanca", fromFr: "Tanger", toFr: "Casablanca" },
-        "tangier-to-chefchaouen-transfer": { from: "Tangier", to: "Chefchaouen", fromFr: "Tanger", toFr: "Chefchaouen" },
-        "casablanca-to-fes-transfer": { from: "Casablanca", to: "Fes", fromFr: "Casablanca", toFr: "Fès" },
+        "casablanca-airport": { from: "Casablanca CMN Airport", to: "Rabat", fromFr: "l'Aéroport de Casablanca (CMN)", toFr: "Rabat" },
+        "rabat-airport": { from: "Rabat RBA Airport", to: "Rabat City Center", fromFr: "l'Aéroport de Rabat (RBA)", toFr: "Rabat Centre" },
+        "tangier-to-rabat": { from: "Tangier", to: "Rabat", fromFr: "Tanger", toFr: "Rabat" },
+        "rabat-to-casablanca": { from: "Rabat", to: "Casablanca", fromFr: "Rabat", toFr: "Casablanca" },
+        "marrakech-to-essaouira": { from: "Marrakech", to: "Essaouira", fromFr: "Marrakech", toFr: "Essaouira" },
+        "fes-to-chefchaouen": { from: "Fes", to: "Chefchaouen", fromFr: "Fès", toFr: "Chefchaouen" },
+        "casablanca-to-marrakech": { from: "Casablanca", to: "Marrakech", fromFr: "Casablanca", toFr: "Marrakech" },
+        "tangier-airport": { from: "Tangier TNG Airport", to: "Tangier City Center", fromFr: "l'Aéroport de Tanger (TNG)", toFr: "Tanger Centre" },
+        "tangier-to-casablanca": { from: "Tangier", to: "Casablanca", fromFr: "Tanger", toFr: "Casablanca" },
+        "tangier-to-chefchaouen": { from: "Tangier", to: "Chefchaouen", fromFr: "Tanger", toFr: "Chefchaouen" },
+        "casablanca-to-fes": { from: "Casablanca", to: "Fes", fromFr: "Casablanca", toFr: "Fès" },
+        "rabat-to-marrakech": { from: "Rabat", to: "Marrakech", fromFr: "Rabat", toFr: "Marrakech" },
+        "rabat-to-fes": { from: "Rabat", to: "Fes", fromFr: "Rabat", toFr: "Fès" },
+        "rabat-to-chefchaouen": { from: "Rabat", to: "Chefchaouen", fromFr: "Rabat", toFr: "Chefchaouen" },
+        "marrakech-to-agadir": { from: "Marrakech", to: "Agadir", fromFr: "Marrakech", toFr: "Agadir" },
+        "fes-to-merzouga": { from: "Fes", to: "Merzouga", fromFr: "Fès", toFr: "Merzouga" },
+        "marrakech-airport": { from: "Marrakech RAK Airport", to: "Marrakech City Center", fromFr: "l'Aéroport de Marrakech (RAK)", toFr: "Marrakech Centre" },
+        "fes-airport": { from: "Fes FEZ Airport", to: "Fes City Center", fromFr: "l'Aéroport de Fès (FEZ)", toFr: "Fès Centre" },
+        "agadir-airport": { from: "Agadir AGA Airport", to: "Agadir City Center", fromFr: "l'Aéroport d'Agadir (AGA)", toFr: "Agadir Centre" },
+        "tangier-port": { from: "Tangier Port", to: "Tangier City Center", fromFr: "le Port de Tanger", toFr: "Tanger Centre" },
     };
-    return mapping[slug] || { from: "Origin", to: "Destination", fromFr: "Origine", toFr: "Destination" };
+    return mapping[cleanSlug] || { from: "Origin", to: "Destination", fromFr: "Origine", toFr: "Destination" };
 };
 
 export default function TransferFAQ({ faqs, slug, isEn }: TransferFAQProps) {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
-
     if (!faqs || faqs.length === 0) return null;
-
-    const toggleFaq = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
 
     const cities = getCleanCities(slug);
     
@@ -71,87 +75,33 @@ export default function TransferFAQ({ faqs, slug, isEn }: TransferFAQProps) {
                 </h2>
             </div>
             
-            {/* FAQ Cards Accordion Grid */}
+            {/* Native Accordion FAQ Items (Zero-JS for Googlebot & SEO) */}
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '15px'
             }}>
-                {faqs.map((faq, index) => {
-                    const isOpen = openIndex === index;
-                    return (
-                        <div key={index} style={{
-                            backgroundColor: '#fff',
-                            border: '1px solid rgba(0, 0, 0, 0.05)',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.01)',
-                            transition: 'all 0.2s ease'
-                        }} className="faq-card-item">
-                            <button
-                                onClick={() => toggleFaq(index)}
-                                style={{
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    background: 'none',
-                                    border: 'none',
-                                    padding: '20px 25px',
-                                    margin: 0,
-                                    cursor: 'pointer',
-                                    textAlign: 'left',
-                                    color: 'var(--secondary)',
-                                    gap: '20px'
-                                }}
-                            >
-                                <span style={{
-                                    fontSize: '1.05rem',
-                                    fontWeight: 700,
-                                    lineHeight: 1.4,
-                                    fontFamily: "var(--font-poppins), sans-serif",
-                                    color: 'var(--secondary)'
-                                }}>
-                                    {faq.q}
-                                </span>
-                                <span style={{
-                                    fontSize: '1.4rem',
-                                    fontWeight: 600,
-                                    lineHeight: 1,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'var(--primary)',
-                                    userSelect: 'none',
-                                    transition: 'transform 0.2s ease',
-                                    transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)'
-                                }}>
-                                    +
-                                </span>
-                            </button>
-                            
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateRows: isOpen ? '1fr' : '0fr',
-                                transition: 'grid-template-rows 0.3s ease-out, opacity 0.3s ease',
-                                opacity: isOpen ? 1 : 0
-                            }}>
-                                <div style={{ overflow: 'hidden' }}>
-                                    <div style={{
-                                        padding: '0 25px 20px 25px',
-                                        fontSize: '0.92rem',
-                                        lineHeight: 1.6,
-                                        color: '#555',
-                                        fontWeight: 400,
-                                        fontFamily: "'Inter', sans-serif"
-                                    }}>
-                                        {faq.a}
-                                    </div>
-                                </div>
+                {faqs.map((faq, index) => (
+                    <details 
+                        key={index} 
+                        className={styles.accordionItem}
+                        open={index === 0}
+                    >
+                        <summary className={styles.accordionHeader}>
+                            <span className={styles.question} style={{ color: 'var(--secondary)' }}>
+                                {faq.q}
+                            </span>
+                            <div className={styles.iconWrapper}>
+                                <ChevronDown className={styles.chevron} size={18} aria-hidden="true" />
+                            </div>
+                        </summary>
+                        <div className={styles.accordionContent}>
+                            <div className={styles.answerInner} style={{ color: '#555', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                                <p style={{ margin: 0 }}>{faq.a}</p>
                             </div>
                         </div>
-                    );
-                })}
+                    </details>
+                ))}
             </div>
         </div>
     );

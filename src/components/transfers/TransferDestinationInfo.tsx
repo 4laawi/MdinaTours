@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { MapPin, Plane, Train, Hotel, Building2, Lightbulb } from 'lucide-react';
 import { LocalizedTransferData } from '@/lib/transfersData';
 
 interface TransferDestinationInfoProps {
@@ -54,13 +55,12 @@ export default function TransferDestinationInfo({ local, isEn = true, transText 
                        </h4>
                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }} className="dropoffs-tags-container">
                            {local.popularDropOffs.map((loc: string, idx: number) => {
-                               // Choose icon dynamically based on name matches
-                               let icon = "📍";
                                const lowerLoc = loc.toLowerCase();
-                               if (lowerLoc.includes("airport") || lowerLoc.includes("aéroport")) icon = "✈️";
-                               else if (lowerLoc.includes("station") || lowerLoc.includes("gare")) icon = "🚉";
-                               else if (lowerLoc.includes("hotel") || lowerLoc.includes("riad")) icon = "🏨";
-                               else if (lowerLoc.includes("center") || lowerLoc.includes("centre")) icon = "🏢";
+                               let IconComponent = MapPin;
+                               if (lowerLoc.includes("airport") || lowerLoc.includes("aéroport")) IconComponent = Plane;
+                               else if (lowerLoc.includes("station") || lowerLoc.includes("gare")) IconComponent = Train;
+                               else if (lowerLoc.includes("hotel") || lowerLoc.includes("riad")) IconComponent = Hotel;
+                               else if (lowerLoc.includes("center") || lowerLoc.includes("centre")) IconComponent = Building2;
 
                                return (
                                    <div key={idx} style={{
@@ -77,7 +77,7 @@ export default function TransferDestinationInfo({ local, isEn = true, transText 
                                        boxShadow: '0 2px 6px rgba(0,0,0,0.01)',
                                        fontFamily: "'Inter', sans-serif"
                                    }} className="dropoff-tag">
-                                       <span>{icon}</span>
+                                       <IconComponent size={14} className="text-amber-600" aria-hidden="true" />
                                        <span>{loc}</span>
                                    </div>
                                );
@@ -128,7 +128,7 @@ export default function TransferDestinationInfo({ local, isEn = true, transText 
                               gap: '8px',
                               fontFamily: "var(--font-poppins), sans-serif"
                           }}>
-                              <span>💡</span>
+                              <Lightbulb size={16} aria-hidden="true" />
                               <span>{tip.title}</span>
                           </h4>
                           <p style={{ 

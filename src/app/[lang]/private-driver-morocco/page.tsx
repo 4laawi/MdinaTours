@@ -17,6 +17,7 @@ import PrivateDriverFleet from '@/components/PrivateDriverFleet';
 import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
 import ChauffeurDestinations from '@/components/ChauffeurDestinations';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
 import PrivateDriverStickyBar from '@/components/PrivateDriverStickyBar';
 
 export async function generateStaticParams() {
@@ -966,6 +967,9 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                         </div>
                     </div>
                 </section>
+
+                {/* Complete Intercity Transfer Network across Morocco */}
+                <TransferHubRoutesGrid language={language} showTours={true} />
 
                 <ChauffeurDestinations lang={language} pageType="morocco" />
             </main>
