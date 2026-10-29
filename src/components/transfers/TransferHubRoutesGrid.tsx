@@ -242,7 +242,6 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                             if (isEs && !isSpanishSupported(`/transfers/${slug}`)) return null;
 
                                             const local = trans[language] || trans.en;
-                                            const baseSlug = trans.slug.replace(/-transfer$/, '');
                                             const minPrice = trans.prices[3] || trans.prices[4] || Object.values(trans.prices)[0];
 
                                             return (
@@ -277,14 +276,6 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '4px', fontSize: '0.78rem', color: '#94a3b8' }}>
                                                             {local.distance && <span>{local.distance}</span>}
                                                             {local.duration && <span>• {local.duration}</span>}
-                                                            {/* Crawlable clean secondary alias link */}
-                                                            <Link 
-                                                                href={getPath(baseSlug)} 
-                                                                prefetch={false}
-                                                                style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}
-                                                            >
-                                                                [Direct URL]
-                                                            </Link>
                                                         </div>
                                                     </div>
 

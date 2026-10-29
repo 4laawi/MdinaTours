@@ -18,6 +18,7 @@ import PrivateDriverWhyChooseUs from '@/components/PrivateDriverWhyChooseUs';
 import PrivateDriverInclusions from '@/components/PrivateDriverInclusions';
 import ProfessionalDriverSection from '@/components/ProfessionalDriverSection';
 import ModernCTA from '@/components/ModernCTA';
+import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
 
 export async function generateStaticParams() {
     return [{ lang: 'en' }, { lang: 'fr' }, { lang: 'es' }];
@@ -410,6 +411,9 @@ export default async function PrivateDriverPage({ params }: { params: Promise<{ 
                         </div>
                     </div>
                 </section>
+
+                {/* Complete Intercity Transfer Network across Morocco */}
+                <TransferHubRoutesGrid language={language} showTours={true} />
             </main>
             <Footer lang={language} />
             <FloatingElements />
