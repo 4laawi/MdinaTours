@@ -1,4 +1,6 @@
 import { getAlternates } from '@/lib/seo';
+import ReactDOM from 'react-dom';
+import { getImageProps } from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -7,6 +9,7 @@ import { Locale, FAQS } from '@/lib/airportTransfersData';
 import { Metadata } from 'next';
 import { Language } from '@/lib/translations';
 import TransferHubRoutesGrid from '@/components/transfers/TransferHubRoutesGrid';
+import { HERO_BACKGROUND_IMAGES } from '@/lib/heroImages';
 
 export const revalidate = 86400;
 
@@ -145,6 +148,26 @@ export default async function AirportTransfersPage({ params }: { params: Promise
             }
         }))
     };
+
+    // Server-side preload for LCP Hero image (avoids waiting for Client Component hydration)
+    const commonProps = { alt: 'Mdina Tours Morocco Airport Transfers', fill: true, sizes: '100vw', priority: true };
+    const { props: { srcSet: desktopSrcSet, ...restDesktop } } = getImageProps({ ...commonProps, src: HERO_BACKGROUND_IMAGES[0].desktop });
+    const { props: { srcSet: mobileSrcSet, ...restMobile } } = getImageProps({ ...commonProps, src: HERO_BACKGROUND_IMAGES[0].mobile });
+
+    ReactDOM.preload(restDesktop.src as string, {
+        as: 'image',
+        imageSrcSet: desktopSrcSet,
+        imageSizes: commonProps.sizes,
+        fetchPriority: 'high',
+        media: '(min-width: 769px)',
+    });
+    ReactDOM.preload(restMobile.src as string, {
+        as: 'image',
+        imageSrcSet: mobileSrcSet,
+        imageSizes: commonProps.sizes,
+        fetchPriority: 'high',
+        media: '(max-width: 768px)',
+    });
 
     return (
         <>

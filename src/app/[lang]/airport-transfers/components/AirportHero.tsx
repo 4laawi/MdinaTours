@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
+import ReactDOM from 'react-dom';
 import { Locale } from '@/lib/airportTransfersData';
 import { getRoutePrice } from '@/lib/transferLocations';
 import LocationCombobox from '@/components/LocationCombobox';
 import { useLanguage } from '@/context/LanguageContext';
 import { trackLeadConversion } from '@/lib/tracking';
 import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
+import { HERO_BACKGROUND_IMAGES } from '@/lib/heroImages';
 import styles from '../AirportTransfers.module.css';
 import heroStyles from '@/components/Hero.module.css';
 
@@ -32,6 +34,82 @@ export default function AirportHero({ lang }: AirportHeroProps) {
     const isEs = lang === 'es' || language === 'es';
 
     const today = new Date().toISOString().split('T')[0];
+
+    // Background image rotation system matching homepage hero
+    const [activeSlide, setActiveSlide] = useState(0);
+    const [outgoingSlide, setOutgoingSlide] = useState<number | null>(null);
+    const [nextSlide, setNextSlide] = useState(1);
+    const [nextReady, setNextReady] = useState(false);
+
+    const activeSlideRef = useRef(activeSlide);
+    const nextSlideRef = useRef(nextSlide);
+    const nextReadyRef = useRef(nextReady);
+
+    useEffect(() => {
+        activeSlideRef.current = activeSlide;
+        nextSlideRef.current = nextSlide;
+        nextReadyRef.current = nextReady;
+    }, [activeSlide, nextSlide, nextReady]);
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        let pollTimer: NodeJS.Timeout;
+        let unmountTimer: NodeJS.Timeout;
+        let isMounted = true;
+
+        const triggerTransition = () => {
+            const currentActive = activeSlideRef.current;
+            const incoming = nextSlideRef.current;
+
+            // 1. Move current active to outgoing (starts crossfade fade-out)
+            setOutgoingSlide(currentActive);
+            // 2. Set incoming as new active (fades in)
+            setActiveSlide(incoming);
+            // 3. Prepare next slide for eager background loading
+            const following = (incoming + 1) % HERO_BACKGROUND_IMAGES.length;
+            setNextSlide(following);
+            setNextReady(false);
+
+            // 4. After crossfade transition (1500ms), unmount outgoing slide
+            unmountTimer = setTimeout(() => {
+                if (!isMounted) return;
+                setOutgoingSlide(null);
+            }, 1500);
+        };
+
+        const scheduleNextCycle = () => {
+            timer = setTimeout(() => {
+                if (!isMounted) return;
+                if (nextReadyRef.current) {
+                    triggerTransition();
+                    scheduleNextCycle();
+                } else {
+                    // Delay transition if next image is not ready yet
+                    const waitForLoad = () => {
+                        pollTimer = setTimeout(() => {
+                            if (!isMounted) return;
+                            if (nextReadyRef.current) {
+                                triggerTransition();
+                                scheduleNextCycle();
+                            } else {
+                                waitForLoad();
+                            }
+                        }, 300);
+                    };
+                    waitForLoad();
+                }
+            }, 8500);
+        };
+
+        scheduleNextCycle();
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timer);
+            clearTimeout(pollTimer);
+            clearTimeout(unmountTimer);
+        };
+    }, []);
 
     // State matching Homepage's proven booking system
     const [pickup, setPickup] = useState<string>("Casablanca Airport");
@@ -219,20 +297,79 @@ export default function AirportHero({ lang }: AirportHeroProps) {
             : 'No prepayment · Pay upon arrival · No hidden fees · Zero surprises'
     };
 
+    const renderHeroImage = (desktopSrc: string, mobileSrc: string, isActive: boolean, isPriority: boolean) => {
+        const commonProps = { alt: 'Mdina Tours Morocco Airport Transfers', fill: true, sizes: '100vw', priority: isPriority };
+        const { props: { srcSet: desktopSrcSet, ...restDesktop } } = getImageProps({ ...commonProps, src: desktopSrc });
+        const { props: { srcSet: mobileSrcSet, ...restMobile } } = getImageProps({ ...commonProps, src: mobileSrc });
+
+        if (isPriority) {
+            ReactDOM.preload(restDesktop.src as string, {
+                as: 'image',
+                imageSrcSet: desktopSrcSet,
+                imageSizes: commonProps.sizes,
+                fetchPriority: 'high',
+                media: '(min-width: 769px)',
+            });
+
+            ReactDOM.preload(restMobile.src as string, {
+                as: 'image',
+                imageSrcSet: mobileSrcSet,
+                imageSizes: commonProps.sizes,
+                fetchPriority: 'high',
+                media: '(max-width: 768px)',
+            });
+        }
+
+        return (
+            <picture>
+                <source media="(min-width: 769px)" srcSet={desktopSrcSet} />
+                <source media="(max-width: 768px)" srcSet={mobileSrcSet} />
+                <img
+                    {...restMobile}
+                    className={heroStyles.heroBg}
+                    fetchPriority={isPriority ? "high" : "auto"}
+                    loading={isPriority ? "eager" : "lazy"}
+                />
+            </picture>
+        );
+    };
+
     return (
         <section className={styles.heroSection} id="hero-booking-widget">
-            {/* Background Media with Dark Vignette */}
-            <div className={styles.heroMediaBg}>
-                <Image
-                    src="/b-roll/private-transfer-chauffeur-vito.jpg"
-                    alt="Mdina Tours private airport transfer chauffeur waiting at arrivals"
-                    fill
-                    priority
-                    sizes="100vw"
-                    className={styles.heroImage}
-                />
-                <div className={styles.heroGradientOverlay} />
+            {/* 1. Active Slide */}
+            <div key={`active-${activeSlide}-${HERO_BACKGROUND_IMAGES[activeSlide].desktop}`} className={`${heroStyles.bgImageContainer} ${heroStyles.active}`}>
+                {renderHeroImage(HERO_BACKGROUND_IMAGES[activeSlide].desktop, HERO_BACKGROUND_IMAGES[activeSlide].mobile, true, activeSlide === 0)}
             </div>
+
+            {/* 2. Outgoing Slide (during 1.5s crossfade) */}
+            {outgoingSlide !== null && (
+                <div key={`outgoing-${outgoingSlide}-${HERO_BACKGROUND_IMAGES[outgoingSlide].desktop}`} className={`${heroStyles.bgImageContainer} ${heroStyles.outgoing}`}>
+                    {renderHeroImage(HERO_BACKGROUND_IMAGES[outgoingSlide].desktop, HERO_BACKGROUND_IMAGES[outgoingSlide].mobile, false, false)}
+                </div>
+            )}
+
+            {/* 3. Next Slide (preloaded in background with opacity: 0) */}
+            {nextSlide !== activeSlide && nextSlide !== outgoingSlide && (() => {
+                const preloadDesktop = getImageProps({ src: HERO_BACKGROUND_IMAGES[nextSlide].desktop, alt: '', fill: true, sizes: '100vw' });
+                const preloadMobile = getImageProps({ src: HERO_BACKGROUND_IMAGES[nextSlide].mobile, alt: '', fill: true, sizes: '100vw' });
+                return (
+                    <div key={`preload-${nextSlide}-${HERO_BACKGROUND_IMAGES[nextSlide].desktop}`} className={`${heroStyles.bgImageContainer} ${heroStyles.preload}`}>
+                        <picture>
+                            <source media="(min-width: 769px)" srcSet={preloadDesktop.props.srcSet} />
+                            <source media="(max-width: 768px)" srcSet={preloadMobile.props.srcSet} />
+                            <img
+                                {...preloadMobile.props}
+                                className={heroStyles.heroBg}
+                                loading="lazy"
+                                aria-hidden="true"
+                                onLoad={() => setNextReady(true)}
+                            />
+                        </picture>
+                    </div>
+                );
+            })()}
+
+            <div className={heroStyles.overlay} />
 
             <div className={`${styles.container} ${styles.heroContent}`}>
                 {/* Strong Promise H1 - Top badge removed as requested */}
@@ -322,6 +459,28 @@ export default function AirportHero({ lang }: AirportHeroProps) {
                         {text.trustMicrocopy}
                     </p>
                 </div>
+            </div>
+
+            {/* SVG Bottom Curve Transition into White Section */}
+            <div className={styles.heroBottomCurve} aria-hidden="true">
+                <svg
+                    viewBox="0 0 1440 64"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                    className={styles.curveSvg}
+                >
+                    <path
+                        d="M0,64 C480,14 960,14 1440,64"
+                        fill="none"
+                        stroke="rgba(220, 131, 78, 0.35)"
+                        strokeWidth="1.5"
+                    />
+                    <path
+                        d="M0,64 C480,14 960,14 1440,64 L1440,66 L0,66 Z"
+                        fill="#ffffff"
+                    />
+                </svg>
             </div>
 
             {/* Proven 2-Step Booking Modal */}

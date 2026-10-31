@@ -10,33 +10,9 @@ import { Clock, Calendar, PencilSimple } from '@phosphor-icons/react';
 import { LOCATIONS, getRoutePrice } from '@/lib/transferLocations';
 import LocationCombobox from '@/components/LocationCombobox';
 import { trackLeadConversion } from '@/lib/tracking';
+import { HERO_BACKGROUND_IMAGES } from '@/lib/heroImages';
 
-const BACKGROUND_IMAGES = [
-    {
-        desktop: "/img/Morocco-trip-tour-hero01.webp",
-        mobile: "/img/private-driver-morocco-hero01.webp"
-    },
-    {
-        desktop: "/img/Morocco-trip-tour-hero02.webp",
-        mobile: "/img/private-driver-morocco-hero02.webp"
-    },
-    {
-        desktop: "/img/Morocco-trip-tour-hero04.webp",
-        mobile: "/img/private-driver-morocco-hero03.webp"
-    },
-    {
-        desktop: "/img/Morocco-trip-tour-hero09.webp",
-        mobile: "/img/private-driver-morocco-hero01.webp"
-    },
-    {
-        desktop: "/img/sergey-pesterev-9-5-WYEBDz0-unsplash.webp",
-        mobile: "/img/private-driver-morocco-hero02.webp"
-    },
-    {
-        desktop: "/img/hero-landscape-3.webp",
-        mobile: "/img/private-driver-morocco-hero03.webp"
-    }
-];
+export const BACKGROUND_IMAGES = HERO_BACKGROUND_IMAGES;
 
 export default function Hero(props: { imageUrl?: string }) {
     const { t, language } = useLanguage();

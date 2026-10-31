@@ -132,10 +132,10 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
         : toursData;
 
     return (
-        <section 
-            id="morocco-intercity-network" 
-            style={{ 
-                padding: '80px 20px', 
+        <section
+            id="morocco-intercity-network"
+            style={{
+                padding: '80px 20px',
                 backgroundColor: '#ffffff',
                 borderTop: '1px solid rgba(0,0,0,0.06)'
             }}
@@ -144,12 +144,12 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 {/* Section Header */}
                 <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                    <div style={{ 
-                        display: 'inline-flex', 
-                        alignItems: 'center', 
-                        gap: '6px', 
-                        padding: '6px 14px', 
-                        borderRadius: '20px', 
+                    <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '6px 14px',
+                        borderRadius: '20px',
                         backgroundColor: 'rgba(220, 131, 78, 0.08)',
                         color: 'var(--primary)',
                         fontSize: '0.82rem',
@@ -162,39 +162,39 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                         <span>{isEn ? "Crawlable Route Directory" : isEs ? "Directorio Oficial de Rutas" : "Réseau Officiel de Trajets"}</span>
                     </div>
 
-                    <h2 style={{ 
-                        fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', 
-                        fontWeight: 700, 
-                        color: 'var(--secondary)', 
+                    <h2 style={{
+                        fontSize: 'clamp(1.8rem, 4vw, 2.4rem)',
+                        fontWeight: 700,
+                        color: 'var(--secondary)',
                         margin: '0 0 12px 0',
                         fontFamily: 'var(--font-poppins), sans-serif'
                     }}>
-                        {isEn 
-                            ? "Complete Morocco Private Transfer & City-to-City Network" 
-                            : isEs 
-                            ? "Red Completa de Traslados Privados y Viajes Entre Ciudades" 
-                            : "Réseau Complet de Transferts Privés & Liaisons Intervilles"}
+                        {isEn
+                            ? "Complete Morocco Private Transfer & City-to-City Network"
+                            : isEs
+                                ? "Red Completa de Traslados Privados y Viajes Entre Ciudades"
+                                : "Réseau Complet de Transferts Privés & Liaisons Intervilles"}
                     </h2>
 
-                    <p style={{ 
-                        color: '#64748b', 
-                        fontSize: '1.02rem', 
-                        maxWidth: '750px', 
-                        margin: '0 auto', 
-                        lineHeight: 1.6 
+                    <p style={{
+                        color: '#64748b',
+                        fontSize: '1.02rem',
+                        maxWidth: '750px',
+                        margin: '0 auto',
+                        lineHeight: 1.6
                     }}>
                         {isEn
                             ? "Explore our 100% fixed-rate intercity routes, airport shuttles, and private chauffeur connections across all Moroccan travel hubs."
                             : isEs
-                            ? "Descubra todas nuestras rutas interurbanas con tarifa fija garantizada, transfers al aeropuerto y vehículos privados entre las principales ciudades de Marruecos."
-                            : "Découvrez toutes nos liaisons intervilles à prix ferme garanti, navettes aéroport et chauffeurs privés reliant les grands pôles touristiques et économiques du Maroc."}
+                                ? "Descubra todas nuestras rutas interurbanas con tarifa fija garantizada, transfers al aeropuerto y vehículos privados entre las principales ciudades de Marruecos."
+                                : "Découvrez toutes nos liaisons intervilles à prix ferme garanti, navettes aéroport et chauffeurs privés reliant les grands pôles touristiques et économiques du Maroc."}
                     </p>
                 </div>
 
                 {/* Hub Groups Grid */}
-                <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', 
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
                     gap: '24px',
                     marginBottom: showTours ? '60px' : '0px'
                 }}>
@@ -203,7 +203,7 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                         const hubTagline = hub.tagline[language] || hub.tagline.en;
 
                         return (
-                            <div 
+                            <div
                                 key={hub.cityKey}
                                 style={{
                                     backgroundColor: '#f8fafc',
@@ -219,10 +219,10 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                 <div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                                         <MapPin size={18} style={{ color: 'var(--primary)' }} aria-hidden="true" />
-                                        <h3 style={{ 
-                                            fontSize: '1.25rem', 
-                                            fontWeight: 700, 
-                                            color: 'var(--secondary)', 
+                                        <h3 style={{
+                                            fontSize: '1.25rem',
+                                            fontWeight: 700,
+                                            color: 'var(--secondary)',
                                             margin: 0,
                                             fontFamily: 'var(--font-poppins), sans-serif'
                                         }}>
@@ -256,12 +256,12 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                                     gap: '12px'
                                                 }}>
                                                     <div style={{ minWidth: 0, flex: 1 }}>
-                                                        <Link 
-                                                            href={getPath(trans.slug)} 
+                                                        <Link
+                                                            href={getPath(trans.slug)}
                                                             prefetch={false}
-                                                            style={{ 
-                                                                color: 'var(--secondary)', 
-                                                                fontWeight: 600, 
+                                                            style={{
+                                                                color: 'var(--secondary)',
+                                                                fontWeight: 600,
                                                                 fontSize: '0.92rem',
                                                                 textDecoration: 'none',
                                                                 display: 'block',
@@ -272,7 +272,7 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                                         >
                                                             {local.pickup} ⇄ {local.dropoff}
                                                         </Link>
-                                                        
+
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '4px', fontSize: '0.78rem', color: '#94a3b8' }}>
                                                             {local.distance && <span>{local.distance}</span>}
                                                             {local.duration && <span>• {local.duration}</span>}
@@ -283,16 +283,16 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                                         <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary)' }}>
                                                             €{minPrice}
                                                         </span>
-                                                        <Link 
+                                                        <Link
                                                             href={getPath(trans.slug)}
                                                             prefetch={false}
                                                             aria-label={`View ${local.pickup} to ${local.dropoff} transfer`}
-                                                            style={{ 
-                                                                display: 'flex', 
-                                                                alignItems: 'center', 
-                                                                justifyContent: 'flex-end', 
-                                                                color: 'var(--secondary)', 
-                                                                marginTop: '2px' 
+                                                            style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'flex-end',
+                                                                color: 'var(--secondary)',
+                                                                marginTop: '2px'
                                                             }}
                                                         >
                                                             <ArrowRight size={14} aria-hidden="true" />
@@ -326,7 +326,7 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                     {isEn ? "Complete Your Trip with Licensed Driver-Guides" : isEs ? "Complete su Viaje con Excursiones Guiadas Privadas" : "Complétez Votre Séjour avec nos Circuits Guidés"}
                                 </h3>
                             </div>
-                            <Link 
+                            <Link
                                 href={`/${language}/tours`}
                                 prefetch={false}
                                 style={{
@@ -346,15 +346,15 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                             </Link>
                         </div>
 
-                        <div style={{ 
-                            display: 'grid', 
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-                            gap: '14px' 
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                            gap: '14px'
                         }}>
                             {displayedTours.map(tour => {
                                 const local = tour[language] || tour.en;
                                 return (
-                                    <Link 
+                                    <Link
                                         key={tour.slug}
                                         href={getTourPath(tour.slug)}
                                         prefetch={false}
@@ -372,10 +372,10 @@ export default function TransferHubRoutesGrid({ language, activeCity, showTours 
                                         }}
                                     >
                                         <div style={{ minWidth: 0 }}>
-                                            <span style={{ 
-                                                display: 'block', 
-                                                fontSize: '0.92rem', 
-                                                fontWeight: 600, 
+                                            <span style={{
+                                                display: 'block',
+                                                fontSize: '0.92rem',
+                                                fontWeight: 600,
                                                 color: 'var(--secondary)',
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
