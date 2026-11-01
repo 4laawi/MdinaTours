@@ -212,7 +212,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasRabat) {
             images.push('/img2/rabat-hassan-tour.jpg');
         } else if (hasCasablanca) {
-            images.push('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp');
+            images.push('/img3/casablanca-private-driver-tourists-mosque.webp');
         } else if (hasFes) {
             images.push('/img2/fes_gate.jpg');
         } else if (hasMarrakech) {
@@ -226,8 +226,8 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (isAirport && hasRabat && !images.includes('/img3/aeroport-rabat-sale-mdinatours.webp')) {
         images.push('/img3/aeroport-rabat-sale-mdinatours.webp');
     }
-    if (hasCasablanca && !images.includes('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp')) {
-        images.push('/img3/casablanca-mosque-tour-private-driver-trasnportation.webp');
+    if (hasCasablanca && !images.includes('/img3/casablanca-private-driver-tourists-mosque.webp')) {
+        images.push('/img3/casablanca-private-driver-tourists-mosque.webp');
     }
     if (hasFes && !images.includes('/img2/fes_gate.jpg')) {
         images.push('/img2/fes_gate.jpg');
@@ -305,8 +305,10 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const local: LocalizedTransferData = trans[language] || trans.en;
     const transText = tLocal[language] || tLocal.en;
 
-    // Build photo gallery array dynamically using trans.image + relevant assets
-    const galleryImages = getGalleryImages(trans.slug, trans.image);
+    // Build photo gallery array dynamically using trans.galleryImages or trans.image + relevant assets
+    const galleryImages = trans.galleryImages && trans.galleryImages.length > 0
+        ? trans.galleryImages
+        : getGalleryImages(trans.slug, trans.image);
 
 
     const [activeImageIndex, setActiveImageIndex] = useState(0);

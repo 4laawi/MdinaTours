@@ -171,7 +171,7 @@ export default async function PrivateDriverRabatPage({ params }: { params: Promi
                 : "Trajet d'affaires rapide entre la capitale administrative Rabat et la capitale économique Casablanca.",
             price: isEn ? "From €80" : "À partir de 80 €",
             cta: isEn ? "View Tours" : "Voir les circuits",
-            image: "/img2/casablanca_MOSQUE.webp",
+            image: "/img3/casablanca-private-driver-tourists-mosque.webp",
             href: "/tours",
         },
         {

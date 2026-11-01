@@ -321,13 +321,13 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Casablanca" : "Service de Chauffeur Privé et Disposition Casablanca",
         "description": textCasablanca.subtitle,
-        "image": "https://mdinatours.com/img2/casablanca_MOSQUE.webp",
+        "image": "https://mdinatours.com/img3/casablanca-private-driver-tourists-mosque.webp",
         "url": `https://mdinatours.com/${language}/private-driver-casablanca`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/img2/casablanca_MOSQUE.webp",
+            "image": "https://mdinatours.com/img3/casablanca-private-driver-tourists-mosque.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {

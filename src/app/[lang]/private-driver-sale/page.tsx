@@ -171,7 +171,7 @@ export default async function PrivateDriverSalePage({ params }: { params: Promis
                 : "Trajet d'affaires rapide entre la région de Rabat-Salé et la capitale économique Casablanca.",
             price: isEn ? "From €80" : "À partir de 80 €",
             cta: isEn ? "View Tours" : "Voir les circuits",
-            image: "/img2/casablanca_MOSQUE.webp",
+            image: "/img3/casablanca-private-driver-tourists-mosque.webp",
             href: "/tours",
         },
         {

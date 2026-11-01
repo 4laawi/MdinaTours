@@ -37,7 +37,7 @@ for (const file of sourceFiles) {
     if (!imgPath.startsWith('/')) {
       imgPath = '/' + imgPath;
     }
-    
+
     // Ignore dynamic syntax
     if (imgPath.includes('${') || imgPath.includes('http')) continue;
 

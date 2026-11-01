@@ -27,8 +27,7 @@ interface TransferFleetProps {
 export default function TransferFleet({ prices, lang, local }: TransferFleetProps) {
     const isEn = lang === 'en';
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const hasInitialScrolledRef = useRef(false);
-    const isProgrammaticScrollRef = useRef(false);
+    const isProgrammaticScrollRef = useRef(true);
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const vehicles = useMemo(() => {
@@ -38,8 +37,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 spec: isEn ? "Premium Sedan" : "Berline Premium",
                 capacity: "1-3 PAX",
                 luggage: "3 Bags",
-                suitability: isEn 
-                    ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or solo travelers." 
+                suitability: isEn
+                    ? "A quiet, highly comfortable sedan perfect for executive transfers, couples, or solo travelers."
                     : "Une berline silencieuse et très confortable, idéale pour les voyages d'affaires ou les couples.",
                 price: prices[3] ? `€${prices[3]}` : null,
                 image: "/cars/flotte-superb.webp"
@@ -49,8 +48,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 spec: isEn ? "Comfort SUV" : "SUV Grand Confort",
                 capacity: "1-5 PAX",
                 luggage: "4 Bags",
-                suitability: isEn 
-                    ? "A premium mid-size SUV offering high ground clearance, excellent stability, and spacious comfort." 
+                suitability: isEn
+                    ? "A premium mid-size SUV offering high ground clearance, excellent stability, and spacious comfort."
                     : "Un SUV familial haut de gamme offrant une excellente garde au sol et une stabilité parfaite.",
                 price: `€${prices[4]}`,
                 image: "/cars/flotte-skoda-kodiaq.webp"
@@ -60,8 +59,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 spec: isEn ? "VIP Van" : "Van VIP",
                 capacity: "1-6 PAX",
                 luggage: "5 Bags",
-                suitability: isEn 
-                    ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions." 
+                suitability: isEn
+                    ? "A modern, highly versatile people mover. Offers excellent value for family trips and group excursions."
                     : "Un monospace moderne et très polyvalent. Excellent rapport qualité-prix pour les voyages en famille.",
                 price: `€${prices[5]}`,
                 image: "/cars/flotte-fiat-scudo.webp"
@@ -71,8 +70,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 spec: isEn ? "VIP Minivan" : "Minivan VIP",
                 capacity: "1-7 PAX",
                 luggage: "6 Bags",
-                suitability: isEn 
-                    ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room." 
+                suitability: isEn
+                    ? "The absolute gold standard for tourist travel in Morocco. Features individual air-con vents and spacious luggage room."
                     : "La référence absolue pour le voyage au Maroc. Aérateurs individuels et immense coffre à bagages.",
                 price: prices[7] ? `€${prices[7]}` : null,
                 image: "/cars/flotte-vito.webp"
@@ -82,8 +81,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 spec: isEn ? "VIP Minibus" : "Minibus Prestige",
                 capacity: "8-16 PAX",
                 luggage: "12 Bags",
-                suitability: isEn 
-                    ? "A custom-configured executive minibus designed for large tour groups or multi-family excursions." 
+                suitability: isEn
+                    ? "A custom-configured executive minibus designed for large tour groups or multi-family excursions."
                     : "Un minibus de prestige configuré sur mesure, conçu pour les grands groupes et familles.",
                 price: isEn ? "Custom quote" : "Devis personnalisé",
                 image: "/cars/flotte-sprinter.webp"
@@ -93,6 +92,67 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
     }, [prices, isEn]);
 
     const [activeIndex, setActiveIndex] = useState(vehicles && vehicles.length > 1 ? 1 : 0);
+    const activeIndexRef = useRef(activeIndex);
+
+    useEffect(() => {
+        activeIndexRef.current = activeIndex;
+    }, [activeIndex]);
+
+    // Initial positioning to index 1 (+1) showing 3 cars immediately
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container || !vehicles || vehicles.length === 0) return;
+
+        const defaultIndex = vehicles.length > 1 ? 1 : 0;
+        isProgrammaticScrollRef.current = true;
+
+        const applyPosition = () => {
+            if (!scrollContainerRef.current) return;
+            const grid = scrollContainerRef.current;
+            const cardElement = grid.children[defaultIndex] as HTMLElement;
+            if (cardElement) {
+                const containerWidth = grid.clientWidth;
+                const cardWidth = cardElement.clientWidth;
+                const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
+                grid.scrollLeft = targetLeft;
+            }
+        };
+
+        // Execute immediately
+        applyPosition();
+
+        // Frame-level updates to ensure exact scroll after layout & font/asset measurement
+        const raf1 = requestAnimationFrame(applyPosition);
+        const raf2 = requestAnimationFrame(() => {
+            requestAnimationFrame(applyPosition);
+        });
+
+        const timer = setTimeout(() => {
+            applyPosition();
+            isProgrammaticScrollRef.current = false;
+        }, 350);
+
+        const handleResize = () => {
+            if (!scrollContainerRef.current) return;
+            const grid = scrollContainerRef.current;
+            const currentCard = grid.children[activeIndexRef.current] as HTMLElement;
+            if (currentCard) {
+                const containerWidth = grid.clientWidth;
+                const cardWidth = currentCard.clientWidth;
+                const targetLeft = currentCard.offsetLeft - (containerWidth - cardWidth) / 2;
+                grid.scrollLeft = targetLeft;
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            cancelAnimationFrame(raf1);
+            cancelAnimationFrame(raf2);
+            clearTimeout(timer);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [vehicles?.length]);
 
     useEffect(() => {
         const container = scrollContainerRef.current;
@@ -100,7 +160,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
 
         const observerOptions = {
             root: container,
-            rootMargin: '0px -40% 0px -40%', // Observe when the card occupies the middle area
+            rootMargin: '0px -35% 0px -35%', // Observe when the card occupies the middle area
             threshold: 0
         };
 
@@ -117,7 +177,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
-        
+
         // Observe each card in the scroll container
         Array.from(container.children).forEach(child => {
             observer.observe(child);
@@ -136,7 +196,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
             const containerWidth = container.clientWidth;
             const cardWidth = cardElement.clientWidth;
             const targetLeft = cardElement.offsetLeft - (containerWidth - cardWidth) / 2;
-            
+
             isProgrammaticScrollRef.current = true;
             if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
             scrollTimeoutRef.current = setTimeout(() => {
@@ -150,12 +210,6 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
             setActiveIndex(index);
         }
     };
-
-    // Initial mount initialization without forced layout reflow
-    useEffect(() => {
-        if (hasInitialScrolledRef.current || vehicles.length === 0) return;
-        hasInitialScrolledRef.current = true;
-    }, [vehicles.length]);
 
     const scrollPrev = () => {
         if (activeIndex > 0) {
@@ -173,7 +227,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
     const canScrollRight = activeIndex < vehicles.length - 1;
 
     const getWhatsAppUrl = (vName: string, priceStr: string) => {
-        const baseMsg = isEn 
+        const baseMsg = isEn
             ? `Hello Mdina Tours,\nI would like to book a private transfer: "${local.title}".\n\n• Route: ${local.pickup} ⇄ ${local.dropoff}\n• Vehicle: ${vName}\n• Price: ${priceStr}\n\nPlease let me know availability.`
             : `Bonjour Mdina Tours,\nJe souhaite réserver un transfert privé : "${local.title}".\n\n• Trajet : ${local.pickup} ⇄ ${local.dropoff}\n• Véhicule : ${vName}\n• Tarif : ${priceStr}\n\nMerci de me confirmer la disponibilité.`;
         return `https://wa.me/212724114775?text=${encodeURIComponent(baseMsg)}`;
@@ -249,9 +303,9 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
     if (vehicles.length === 0) return null;
 
     return (
-        <section style={{ 
-            padding: '140px 20px 140px 20px', 
-            backgroundColor: 'var(--bg-color)', 
+        <section style={{
+            padding: '140px 20px 140px 20px',
+            backgroundColor: 'var(--bg-color)',
             borderTop: 'none',
             position: 'relative',
             overflow: 'hidden'
@@ -273,13 +327,13 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                     width: 'calc(100% + 1.3px)',
                     height: '80px'
                 }}>
-                    <path 
-                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
+                    <path
+                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z"
                         fill="#ffffff"
                         opacity="0.5"
                     />
-                    <path 
-                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
+                    <path
+                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z"
                         fill="#ffffff"
                     />
                 </svg>
@@ -611,10 +665,10 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                     <span style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                         {isEn ? "OUR PREMIUM FLEET" : "NOTRE FLOTTE PREMIUM"}
                     </span>
-                    <h2 style={{ 
-                        fontSize: '2.1rem', 
-                        fontWeight: 700, 
-                        color: 'var(--secondary)', 
+                    <h2 style={{
+                        fontSize: '2.1rem',
+                        fontWeight: 700,
+                        color: 'var(--secondary)',
                         marginTop: '8px',
                         fontFamily: 'var(--font-poppins), sans-serif',
                         textWrap: 'balance'
@@ -622,7 +676,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                         {isEn ? "Select Your Transfer Vehicle" : "Choisissez Votre Véhicule de Transfert"}
                     </h2>
                     <p style={{ color: '#666', marginTop: '10px', fontSize: '1.02rem' }}>
-                        {isEn 
+                        {isEn
                             ? "Meticulously maintained, fully licensed vehicles to match your group size and travel style."
                             : "Des véhicules parfaitement entretenus et agréés pour répondre à la taille de votre groupe."}
                     </p>
@@ -631,8 +685,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                 {/* Fleet Cards Grid */}
                 <div className="fleet-carousel-wrapper" style={{ position: 'relative' }}>
                     {/* Previous Button */}
-                    <button 
-                        onClick={scrollPrev} 
+                    <button
+                        onClick={scrollPrev}
                         disabled={!canScrollLeft}
                         className="carousel-btn carousel-btn-left"
                         aria-label={isEn ? "Previous vehicles" : "Véhicules précédents"}
@@ -651,9 +705,9 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                                 <div key={idx} className={`fleet-card ${isVito ? 'vito-card' : ''} ${activeIndex === idx ? 'active-card' : ''}`}>
                                     {/* Image Area */}
                                     <div className="fleet-img-area">
-                                        <Image 
-                                            src={v.image} 
-                                            alt={v.name} 
+                                        <Image
+                                            src={v.image}
+                                            alt={v.name}
                                             className="fleet-img"
                                             width={400}
                                             height={240}
@@ -661,7 +715,7 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                                             sizes="(max-width: 768px) 290px, 350px"
                                             style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
                                         />
-                                        <span 
+                                        <span
                                             className="fleet-pill fleet-pill-left"
                                             style={{ backgroundColor: meta.bg, color: meta.color }}
                                         >
@@ -731,8 +785,8 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                     </div>
 
                     {/* Next Button */}
-                    <button 
-                        onClick={scrollNext} 
+                    <button
+                        onClick={scrollNext}
                         disabled={!canScrollRight}
                         className="carousel-btn carousel-btn-right"
                         aria-label={isEn ? "Next vehicles" : "Véhicules suivants"}
@@ -774,13 +828,13 @@ export default function TransferFleet({ prices, lang, local }: TransferFleetProp
                     height: '80px',
                     transform: 'rotate(180deg)'
                 }}>
-                    <path 
-                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z" 
+                    <path
+                        d="M0,0 C480,100 960,20 1440,90 L1440,0 L0,0 Z"
                         fill="#ffffff"
                         opacity="0.5"
                     />
-                    <path 
-                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z" 
+                    <path
+                        d="M0,0 C320,90 960,30 1440,70 L1440,0 L0,0 Z"
                         fill="#ffffff"
                     />
                 </svg>

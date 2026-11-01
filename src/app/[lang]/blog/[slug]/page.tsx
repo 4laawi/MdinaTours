@@ -296,7 +296,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/rabat-hassan-tour.jpg", tag: "Rabat Capital", alt: "Hassan Tower Rabat", keywords: ["rabat", "hassan"] },
         { src: "/img2/rabat_monemont.jpg", tag: "Rabat", alt: "Mausoleum of Mohammed V", keywords: ["rabat"] },
         { src: "/img2/rabat-airport.webp", tag: "Rabat Airport", alt: "Rabat Airport Terminal", keywords: ["rabat", "airport", "transfer"] },
-        { src: "/img2/casablanca_MOSQUE.webp", tag: "Casablanca", alt: "Hassan II Mosque Casablanca", keywords: ["casablanca", "mosque"] },
+        { src: "/img3/casablanca-private-driver-tourists-mosque.webp", tag: "Casablanca", alt: "Private driver and travelers at Hassan II Mosque Casablanca", keywords: ["casablanca", "mosque"] },
         { src: "/img2/Airport_Casablanca_Mohammed.webp", tag: "Casablanca Airport", alt: "Mohammed V Airport Casablanca", keywords: ["casablanca", "airport", "transfer"] },
         { src: "/img2/fes_gate.jpg", tag: "Fes Palace", alt: "Royal Palace Fes Golden Gate", keywords: ["fes", "gate", "architecture"] },
         { src: "/img2/fes_3.webp", tag: "Fes Medina", alt: "Fes historic medina view", keywords: ["fes"] },

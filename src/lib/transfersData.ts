@@ -65,6 +65,7 @@ export interface LocalizedTransferData {
 export interface TransferData {
     slug: string;
     image: string;
+    galleryImages?: string[];
     prices: { [passengers: number]: number };
     en: LocalizedTransferData;
     fr: LocalizedTransferData;
@@ -728,7 +729,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-marrakech-transfer",
-        image: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
+        image: "/img3/casablanca-private-driver-tourists-mosque.webp",
         prices: { 3: 220, 4: 250, 5: 290, 7: 390 },
         en: {
             title: "Casablanca to Marrakech Expressway Transfer",
@@ -1001,7 +1002,17 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-fes-transfer",
-        image: "/img2/casablanca_MOSQUE.webp",
+        image: "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+        galleryImages: [
+            "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+            "/img3/casablanca-private-driver-tourists-mosque.webp",
+            "/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp",
+            "/img2/fes_gate.jpg",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/a-mdiinatours/sourire-devant-van-mercedes.webp",
+            "/img2/fes_3.webp"
+        ],
         prices: { 3: 250, 4: 290, 5: 335, 7: 445 },
         en: {
             title: "Casablanca to Fes Private Transfer",
