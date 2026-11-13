@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
@@ -42,30 +42,19 @@ function getTransferBySlug(slug: string) {
     });
 }
 
-// Generate static routes for all core Moroccan transfer slugs and variants
+// Generate static routes ONLY for canonical -transfer slugs
 export async function generateStaticParams() {
     const paths: { lang: string; slug: string }[] = [];
     const locales = ['en', 'fr'];
     
     transfersData.forEach(trans => {
-        const baseSlug = trans.slug.replace(/-transfer$/, '');
-        // Statically pre-render both the canonical slug and core slug (e.g. casablanca-to-marrakech)
-        const slugsToGenerate = [trans.slug];
-        if (baseSlug !== trans.slug) {
-            slugsToGenerate.push(baseSlug);
-        }
-
         locales.forEach(lang => {
-            slugsToGenerate.forEach(slug => {
-                paths.push({ lang, slug });
-            });
+            paths.push({ lang, slug: trans.slug });
         });
 
         // Include 'es' for strictly approved Spanish transfer routes
-        if (isSpanishSupported(`/transfers/${trans.slug}`) || isSpanishSupported(`/transfers/${baseSlug}`)) {
-            slugsToGenerate.forEach(slug => {
-                paths.push({ lang: 'es', slug });
-            });
+        if (isSpanishSupported(`/transfers/${trans.slug}`)) {
+            paths.push({ lang: 'es', slug: trans.slug });
         }
     });
 
@@ -77,6 +66,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang, slug } = await params;
     const trans = getTransferBySlug(slug);
     if (!trans) return { title: 'Transfer Route Not Found - Mdina Tours' };
+
+    // Consolidate non-canonical URLs (e.g. missing -transfer suffix) directly to canonical
+    if (slug !== trans.slug) {
+        permanentRedirect(`/${lang}/transfers/${trans.slug}`);
+    }
 
     // Strict boundary check for Spanish
     if (lang === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${trans.slug}`))) {
@@ -136,6 +130,11 @@ export default async function TransferLandingPage({ params }: { params: Promise<
 
     const trans = getTransferBySlug(slug);
     if (!trans) notFound();
+
+    // Consolidate non-canonical URLs (e.g. missing -transfer suffix) directly to canonical
+    if (slug !== trans.slug) {
+        permanentRedirect(`/${language}/transfers/${trans.slug}`);
+    }
 
     // Strict boundary check: unsupported Spanish transfers return 404
     if (language === 'es' && (!trans.es || !isSpanishSupported(`/transfers/${trans.slug}`))) {

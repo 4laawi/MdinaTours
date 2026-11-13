@@ -20,6 +20,16 @@ export default function proxy(request: NextRequest) {
             return NextResponse.redirect(canonicalUrl, 308);
         }
 
+        // Consolidate transfer URLs in www redirect to avoid multi-hop
+        const transferMatch = pathname.match(/^\/(?:(en|fr|es)\/)?transfers\/([a-zA-Z0-9_-]+)$/);
+        if (transferMatch) {
+            const langPrefix = transferMatch[1] || defaultLocale;
+            const slug = transferMatch[2];
+            const targetSlug = slug.endsWith('-transfer') ? slug : `${slug}-transfer`;
+            canonicalUrl.pathname = `/${langPrefix}/transfers/${targetSlug}`;
+            return NextResponse.redirect(canonicalUrl, 301);
+        }
+
         const missingLocale = locales.every(
             (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
         );
@@ -39,6 +49,19 @@ export default function proxy(request: NextRequest) {
     // Consolidate duplicate /private-driver directly to /en/private-driver-morocco
     if (pathname === '/private-driver' || pathname === '/private-driver/') {
         return NextResponse.redirect(new URL('/en/private-driver-morocco', request.url), 308);
+    }
+
+    // 301 permanent redirect for transfer URLs missing -transfer suffix (Google Search Console duplicate consolidation)
+    const transferMatch = pathname.match(/^\/(?:(en|fr|es)\/)?transfers\/([a-zA-Z0-9_-]+)$/);
+    if (transferMatch) {
+        const langPrefix = transferMatch[1] || defaultLocale;
+        const slug = transferMatch[2];
+        if (!slug.endsWith('-transfer')) {
+            return NextResponse.redirect(
+                new URL(`/${langPrefix}/transfers/${slug}-transfer`, request.url),
+                301
+            );
+        }
     }
 
     // Root homepage / -> directly render English homepage via internal rewrite

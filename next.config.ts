@@ -61,17 +61,33 @@ const nextConfig: NextConfig = {
       {
         source: "/private-driver",
         destination: "/en/private-driver-morocco",
-        permanent: true,
+        statusCode: 301,
       },
       {
         source: "/:lang(en|fr|es)/private-driver",
         destination: "/:lang/private-driver-morocco",
-        permanent: true,
+        statusCode: 301,
       },
       {
         source: "/:lang(en|fr|es)/private-driver/:path*",
         destination: "/:lang/private-driver-morocco",
-        permanent: true,
+        statusCode: 301,
+      },
+      // Consolidate transfer URLs missing -transfer suffix to canonical -transfer URLs
+      {
+        source: "/:lang(en|fr|es)/transfers/:slug((?!.*-transfer$).*)",
+        destination: "/:lang/transfers/:slug-transfer",
+        statusCode: 301,
+      },
+      {
+        source: "/transfers/:slug((?!.*-transfer$).*)",
+        destination: "/en/transfers/:slug-transfer",
+        statusCode: 301,
+      },
+      {
+        source: "/transfers/:slug(.*-transfer)",
+        destination: "/en/transfers/:slug",
+        statusCode: 301,
       },
     ];
   },
