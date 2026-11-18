@@ -1006,9 +1006,10 @@ export const transfersData: TransferData[] = [
         galleryImages: [
             "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
             "/img3/casablanca-private-driver-tourists-mosque.webp",
+            "/a-mdiinatours/private-driver-vito-morocco.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
             "/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp",
             "/img2/fes_gate.jpg",
-            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
             "/img3/vito-mercedes-closeup.webp",
             "/a-mdiinatours/sourire-devant-van-mercedes.webp",
             "/img2/fes_3.webp"
@@ -1548,6 +1549,15 @@ export const transfersData: TransferData[] = [
     {
         slug: "fes-airport-transfer",
         image: "/a-mdiinatours/fes-airport-transfer.webp",
+        galleryImages: [
+            "/a-mdiinatours/fes-airport-transfer.webp",
+            "/a-mdiinatours/private-driver-fes-airport-transfer.webp",
+            "/a-mdiinatours/private-driver-vito-morocco.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/img3/mdinatours-drivers-cars.webp",
+            "/img3/two-big-van.webp"
+        ],
         prices: { 3: 45, 4: 55, 5: 65, 7: 90 },
         en: {
             title: "Fes-Saïss Airport Private Transfer",

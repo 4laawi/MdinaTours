@@ -301,6 +301,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/fes_gate.jpg", tag: "Fes Palace", alt: "Royal Palace Fes Golden Gate", keywords: ["fes", "gate", "architecture"] },
         { src: "/img2/fes_3.webp", tag: "Fes Medina", alt: "Fes historic medina view", keywords: ["fes"] },
         { src: "/a-mdiinatours/fes-airport-transfer.webp", tag: "Fes Airport", alt: "Fes Airport Terminal", keywords: ["fes", "airport", "transfer"] },
+        { src: "/a-mdiinatours/private-driver-fes-airport-transfer.webp", tag: "Fes Airport Van", alt: "Private driver transfer van at Fes Saïss Airport", keywords: ["fes", "airport", "transfer", "driver"] },
         { src: "/img2/tangier_hero.webp", tag: "Tangier Harbor", alt: "Tangier view", keywords: ["tangier"] },
         { src: "/img2/tangier-mdina.jpg", tag: "Tangier Medina", alt: "Tangier old town streets", keywords: ["tangier", "medina"] },
         { src: "/img2/tangier-airport.avif", tag: "Tangier Airport", alt: "Tangier Airport Terminal", keywords: ["tangier", "airport", "transfer"] },

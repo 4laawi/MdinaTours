@@ -43,7 +43,7 @@ const tLocal: Record<Language, Record<string, string>> = {
         pickupDetails: "We pick you up directly from your arrivals terminal, hotel lobby, or riad access point.",
         dropoffLocation: "Drop-off Point",
         openMaps: "Open in Google Maps",
-                whatsIncluded: "What's Covered",
+        whatsIncluded: "What's Covered",
         whatsNotIncluded: "Not Included",
         overview: "Overview",
         travelTips: "Travel Tips for this Route",
@@ -174,9 +174,9 @@ const tLocal: Record<Language, Record<string, string>> = {
 const getGalleryImages = (slug: string, transImage: string) => {
     const images: string[] = [];
     const normalizedSlug = slug.toLowerCase();
-    
+
     const isAirport = normalizedSlug.includes('airport') || normalizedSlug.includes('aeroport');
-    
+
     // Determine cities involved
     const hasCasablanca = normalizedSlug.includes('casablanca');
     const hasFes = normalizedSlug.includes('fes');
@@ -226,10 +226,13 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (isAirport && hasRabat && !images.includes('/img3/aeroport-rabat-sale-mdinatours.webp')) {
         images.push('/img3/aeroport-rabat-sale-mdinatours.webp');
     }
+    if (isAirport && hasFes && !images.includes('/a-mdiinatours/private-driver-fes-airport-transfer.webp')) {
+        images.push('/a-mdiinatours/private-driver-fes-airport-transfer.webp');
+    }
     if (hasCasablanca && !images.includes('/img3/casablanca-private-driver-tourists-mosque.webp')) {
         images.push('/img3/casablanca-private-driver-tourists-mosque.webp');
     }
-    if (hasFes && !images.includes('/img2/fes_gate.jpg')) {
+    if (hasFes && !isAirport && !images.includes('/img2/fes_gate.jpg')) {
         images.push('/img2/fes_gate.jpg');
     }
     if (hasMarrakech && !hasEssaouira) { // Do not push Marrakech landmark for Essaouira route
@@ -269,18 +272,25 @@ const getGalleryImages = (slug: string, transImage: string) => {
         images.push(transImage);
     }
 
-    // 4. Vehicle & Fleet Showcase
+    // 4. High-Trust Real Fleet & Happy Family In-Car Photos (Added to all transfers for trust)
+    if (!images.includes('/a-mdiinatours/private-driver-vito-morocco.webp')) {
+        images.push('/a-mdiinatours/private-driver-vito-morocco.webp');
+    }
+    if (!images.includes('/a-mdiinatours/selfie-joyeux-voiture-famille.webp')) {
+        images.push('/a-mdiinatours/selfie-joyeux-voiture-famille.webp');
+    }
+
+    // 5. Vehicle & Fleet Showcase
     images.push('/img3/vito-mercedes-closeup.webp');
     images.push('/img3/mdinatours-drivers-cars.webp');
 
-    // 5. Fifth image position: Happy Travelers / Family
+    // 6. Extra supporting images (avoiding duplicate Vitos)
     if (hasCasablanca) {
         images.push('/img3/happy-tourists-in-casabalanca.webp');
     } else {
         images.push('/img2/happy-traverlers-group.webp');
     }
 
-    // 6. Extra supporting images (avoiding duplicate Vitos)
     if (hasFes && !isAirport) {
         images.push('/img2/fes_3.webp');
     }
@@ -295,8 +305,8 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
     images.push('/img3/two-big-van.webp');
 
-    // Return unique elements, capped at 6 images for clean layout
-    return Array.from(new Set(images)).slice(0, 6);
+    // Return unique elements, capped at 7 images for clean layout
+    return Array.from(new Set(images)).slice(0, 7);
 };
 
 export default function TransferBookingFlow({ trans, language }: TransferBookingFlowProps) {
@@ -462,7 +472,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const renderMonth = (year: number, month: number, showNav: boolean) => {
         const daysInMonth = getDaysInMonth(year, month);
         const firstDay = getFirstDayOfMonth(year, month);
-        
+
         const days = [];
         for (let i = 0; i < firstDay; i++) {
             days.push(null);
@@ -488,7 +498,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     height: '28px'
                 }}>
                     {showNav ? (
-                        <button 
+                        <button
                             type="button"
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -511,7 +521,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                             className="calendar-nav-btn"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="m15 18-6-6 6-6"/>
+                                <path d="m15 18-6-6 6-6" />
                             </svg>
                         </button>
                     ) : (
@@ -528,7 +538,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     </span>
 
                     {!showNav ? (
-                        <button 
+                        <button
                             type="button"
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -551,7 +561,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                             className="calendar-nav-btn"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="m9 18 6-6-6-6"/>
+                                <path d="m9 18 6-6-6-6" />
                             </svg>
                         </button>
                     ) : (
@@ -590,11 +600,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
                         const cellDate = new Date(year, month, day);
                         const isPast = cellDate < today;
-                        
+
                         const isSelected = travelDate === `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
                         return (
-                            <div 
+                            <div
                                 key={`day-${day}`}
                                 onClick={() => {
                                     if (!isPast) {
@@ -629,11 +639,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
     const handleOpenModal = () => {
         const vehicle = getTierLabel(selectedTier);
-        const msg = isEn 
+        const msg = isEn
             ? `Route: ${local.pickup} ⇄ ${local.dropoff}\nVehicle: ${vehicle}\nTravel Date: ${travelDate}\nNumber of Travelers: ${travelers}\nPickup Time: ${pickupTime}`
             : isEs
-            ? `Trayecto: ${local.pickup} ⇄ ${local.dropoff}\nVehículo: ${vehicle}\nFecha del viaje: ${travelDate}\nNúmero de viajeros: ${travelers}\nHora de recogida: ${pickupTime}`
-            : `Trajet: ${local.pickup} ⇄ ${local.dropoff}\nVéhicule: ${vehicle}\nDate du voyage: ${travelDate}\nNombre de voyageurs: ${travelers}\nHeure de départ: ${pickupTime}`;
+                ? `Trayecto: ${local.pickup} ⇄ ${local.dropoff}\nVehículo: ${vehicle}\nFecha del viaje: ${travelDate}\nNúmero de viajeros: ${travelers}\nHora de recogida: ${pickupTime}`
+                : `Trajet: ${local.pickup} ⇄ ${local.dropoff}\nVéhicule: ${vehicle}\nDate du voyage: ${travelDate}\nNombre de voyageurs: ${travelers}\nHeure de départ: ${pickupTime}`;
         setCustMessage(msg);
         setIsModalOpen(true);
         setSuccessMessage('');
@@ -681,7 +691,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 setCustName('');
                 setCustEmail('');
                 setCustPhone('');
-                
+
                 setTimeout(() => {
                     setIsModalOpen(false);
                     setSuccessMessage('');
@@ -759,66 +769,66 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         try {
             const departureDateTime = new Date(`${searchedTravelDate}T${searchedPickupTime}:00`);
             const now = new Date();
-            
+
             const cutoffTime = new Date(departureDateTime.getTime() - 12 * 60 * 60 * 1000);
             const timeLeftMs = cutoffTime.getTime() - now.getTime();
-            
+
             let urgencyText = "";
             let isUrgent = false;
             let isClosed = false;
             const hoursLeft = timeLeftMs > 0 ? Math.floor(timeLeftMs / (1000 * 60 * 60)) : 0;
             const isPlentyOfTime = timeLeftMs > 0 && hoursLeft >= 24;
-            
+
             if (timeLeftMs > 0) {
                 isUrgent = true;
-                
+
                 if (hoursLeft >= 24) {
                     urgencyText = isEn
                         ? `Book ahead! This route is highly popular. Secure your spot soon.`
                         : isEs
-                        ? `¡Reserve con antelación! Esta ruta es muy solicitada. Asegure su plaza pronto.`
-                        : `Réservez à l'avance ! Ce trajet est très demandé. Garantissez votre place bientôt.`;
+                            ? `¡Reserve con antelación! Esta ruta es muy solicitada. Asegure su plaza pronto.`
+                            : `Réservez à l'avance ! Ce trajet est très demandé. Garantissez votre place bientôt.`;
                 } else if (hoursLeft < 5) {
                     const displayHours = hoursLeft === 0 ? "<1" : hoursLeft;
                     urgencyText = isEn
                         ? `${displayHours}h left to book. The tour operator will stop accepting bookings for your date soon.`
                         : isEs
-                        ? `Quedan ${displayHours}h para reservar. Se cerrarán las reservas para su fecha en breve.`
-                        : `${displayHours}h restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
+                            ? `Quedan ${displayHours}h para reservar. Se cerrarán las reservas para su fecha en breve.`
+                            : `${displayHours}h restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
                 } else {
                     urgencyText = isEn
                         ? `${hoursLeft} hours left to book. The tour operator will stop accepting bookings for your date soon.`
                         : isEs
-                        ? `Quedan ${hoursLeft} horas para reservar. Se cerrarán las reservas para su fecha en breve.`
-                        : `${hoursLeft} heures restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
+                            ? `Quedan ${hoursLeft} horas para reservar. Se cerrarán las reservas para su fecha en breve.`
+                            : `${hoursLeft} heures restantes pour réserver. L'opérateur arrêtera bientôt d'accepter les réservations pour votre date.`;
                 }
             } else {
                 isClosed = true;
                 urgencyText = isEn
                     ? "Last-minute booking: Online booking window is closed. Please book directly via WhatsApp for quick confirmation."
                     : isEs
-                    ? "Reserva de última hora: Las reservas online están cerradas. Reserve por WhatsApp para confirmación inmediata."
-                    : "Réservation de dernière minute : Les réservations en ligne sont fermées. Veuillez réserver par WhatsApp pour confirmation rapide.";
+                        ? "Reserva de última hora: Las reservas online están cerradas. Reserve por WhatsApp para confirmación inmediata."
+                        : "Réservation de dernière minute : Les réservations en ligne sont fermées. Veuillez réserver par WhatsApp pour confirmation rapide.";
             }
-            
+
             const cancellationCutoff = new Date(departureDateTime.getTime() - 24 * 60 * 60 * 1000);
             const isNonRefundable = now.getTime() > cancellationCutoff.getTime();
-            
+
             let cancellationText = "";
             if (isNonRefundable) {
                 cancellationText = isEn
                     ? "Non-refundable - The free cancellation window has closed for this date."
                     : isEs
-                    ? "No reembolsable - El periodo de cancelación gratuita ha finalizado para esta fecha."
-                    : "Non remboursable - La période d'annulation gratuite est dépassée pour cette date.";
+                        ? "No reembolsable - El periodo de cancelación gratuita ha finalizado para esta fecha."
+                        : "Non remboursable - La période d'annulation gratuite est dépassée pour cette date.";
             } else {
                 cancellationText = isEn
                     ? "Free cancellation up to 24 hours in advance. Reserve Now & Pay Later."
                     : isEs
-                    ? "Cancelación gratuita hasta 24h antes. Reserve ahora y pague después."
-                    : "Annulation gratuite jusqu'à 24h à l'avance. Réservez maintenant & payez plus tard.";
+                        ? "Cancelación gratuita hasta 24h antes. Reserve ahora y pague después."
+                        : "Annulation gratuite jusqu'à 24h à l'avance. Réservez maintenant & payez plus tard.";
             }
-            
+
             return {
                 urgencyText,
                 isUrgent,
@@ -829,11 +839,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             };
         } catch (e) {
             return {
-                urgencyText: isEn 
-                    ? "Book ahead! This route is highly popular." 
+                urgencyText: isEn
+                    ? "Book ahead! This route is highly popular."
                     : isEs
-                    ? "¡Reserve con antelación! Esta ruta es muy solicitada."
-                    : "Réservez à l'avance ! Ce trajet est très demandé.",
+                        ? "¡Reserve con antelación! Esta ruta es muy solicitada."
+                        : "Réservez à l'avance ! Ce trajet est très demandé.",
                 isUrgent: false,
                 isClosed: false,
                 isPlentyOfTime: true,
@@ -841,8 +851,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 cancellationText: isEn
                     ? "Free cancellation up to 24 hours in advance."
                     : isEs
-                    ? "Cancelación gratuita hasta 24h antes."
-                    : "Annulation gratuite jusqu'à 24h à l'avance."
+                        ? "Cancelación gratuita hasta 24h antes."
+                        : "Annulation gratuite jusqu'à 24h à l'avance."
             };
         }
     };
@@ -851,7 +861,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         try {
             const departureDateTime = new Date(`${searchedTravelDate}T${searchedPickupTime}:00`);
             const deadline = new Date(departureDateTime.getTime() - 24 * 60 * 60 * 1000);
-            
+
             // Format time: e.g. 7:00 AM
             let hours = deadline.getHours();
             const minutes = deadline.getMinutes().toString().padStart(2, '0');
@@ -859,11 +869,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
             hours = hours % 12;
             hours = hours ? hours : 12;
             const timeStr = `${hours}:${minutes} ${ampm}`;
-            
+
             // Format date: e.g. Jun 17
             const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
             const dateStr = deadline.toLocaleDateString(isEn ? 'en-US' : 'fr-FR', options);
-            
+
             return {
                 timeStr,
                 dateStr
@@ -876,7 +886,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const getWhatsAppUrlForTier = (tierLimit: number) => {
         const price = trans.prices[tierLimit] || trans.prices[3];
         const tierLabel = getTierLabel(tierLimit);
-        
+
         let msg = transText.whatsappMessage;
         msg = msg.replace("%title%", local.title);
         msg = msg.replace("%pickup%", local.pickup);
@@ -896,7 +906,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 title: local.seoTitle,
                 text: local.tagline,
                 url: window.location.href,
-            }).catch(() => {});
+            }).catch(() => { });
         } else {
             navigator.clipboard.writeText(window.location.href);
             alert(isEn ? "Link copied to clipboard!" : isEs ? "¡Enlace copiado al portapapeles!" : "Lien copié dans le presse-papiers !");
@@ -946,7 +956,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
     return (
         <div style={{ backgroundColor: 'var(--bg-color)', color: 'var(--accent)', fontFamily: "'Inter', sans-serif", width: '100%', maxWidth: '100%', overflowX: 'hidden', paddingBottom: '80px' }} className="transfer-page-wrapper">
-            
+
             {/* Unified Responsive Booking & Gallery Flow (Single DOM Instance) */}
             <div className="transfer-single-flow-wrapper" style={{ maxWidth: '1150px', margin: '0 auto', padding: '0 20px 30px 20px' }}>
                 {/* Top Breadcrumb & Title */}
@@ -1102,11 +1112,11 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                 {isEn ? "Request to Book" : isEs ? "Solicitud de Reserva" : "Demande de Réservation"}
                             </h3>
                             <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '28px', lineHeight: 1.6 }}>
-                                {isEn 
-                                    ? "Almost there! Fill out your details below and our team will confirm your transfer shortly." 
+                                {isEn
+                                    ? "Almost there! Fill out your details below and our team will confirm your transfer shortly."
                                     : isEs
-                                    ? "¡Casi listo! Complete sus datos y nuestro equipo confirmará su traslado a la brevedad."
-                                    : "Presque terminé ! Remplissez vos coordonnées et notre équipe confirmera votre transfert sous peu."}
+                                        ? "¡Casi listo! Complete sus datos y nuestro equipo confirmará su traslado a la brevedad."
+                                        : "Presque terminé ! Remplissez vos coordonnées et notre équipe confirmera votre transfert sous peu."}
                             </p>
 
                             {successMessage ? (
@@ -1237,8 +1247,8 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                             gap: '8px'
                                         }}
                                     >
-                                        {isSubmitting 
-                                            ? (isEn ? "Sending..." : isEs ? "Enviando..." : "Envoi...") 
+                                        {isSubmitting
+                                            ? (isEn ? "Sending..." : isEs ? "Enviando..." : "Envoi...")
                                             : (isEn ? "Confirm Booking Request" : isEs ? "Confirmar solicitud de reserva" : "Confirmer la demande")}
                                         {!isSubmitting && (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1319,7 +1329,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                 >
                     <span>{isEn ? "Check Availability" : isEs ? "Ver disponibilidad" : "Voir disponibilité"}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                        <path d="m9 18 6-6-6-6"/>
+                        <path d="m9 18 6-6-6-6" />
                     </svg>
                 </button>
             </div>
