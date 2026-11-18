@@ -212,7 +212,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasRabat) {
             images.push('/img2/rabat-hassan-tour.jpg');
         } else if (hasCasablanca) {
-            images.push('/img3/casablanca-private-driver-tourists-mosque.webp');
+            images.push(transImage);
         } else if (hasFes) {
             images.push('/img2/fes_gate.jpg');
         } else if (hasMarrakech) {
@@ -228,9 +228,6 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
     if (isAirport && hasFes && !images.includes('/a-mdiinatours/private-driver-fes-airport-transfer.webp')) {
         images.push('/a-mdiinatours/private-driver-fes-airport-transfer.webp');
-    }
-    if (hasCasablanca && !images.includes('/img3/casablanca-private-driver-tourists-mosque.webp')) {
-        images.push('/img3/casablanca-private-driver-tourists-mosque.webp');
     }
     if (hasFes && !isAirport && !images.includes('/img2/fes_gate.jpg')) {
         images.push('/img2/fes_gate.jpg');

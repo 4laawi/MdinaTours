@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     }
     const isEn = lang === 'en';
 
-    const title = isEn 
-        ? 'Private Driver Casablanca – Professional Chauffeur Service | Mdina Tours' 
+    const title = isEn
+        ? 'Private Driver Casablanca – Professional Chauffeur Service | Mdina Tours'
         : 'Chauffeur Privé Casablanca – Voiture avec Chauffeur au Maroc | Mdina Tours';
     const description = isEn
         ? 'Book a professional private driver in Casablanca. Premium sedans, minivans, and SUVs with English-speaking local chauffeurs (Dispo Chauffeur) for business, airport, and custom tours.'
@@ -91,11 +91,11 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
 
     const textCasablanca = {
         h1: isEn ? "Private Driver in Casablanca – Professional Chauffeur Service" : "Chauffeur Privé à Casablanca – Service de Chauffeur de Disposition",
-        subtitle: isEn 
+        subtitle: isEn
             ? "Explore Morocco's economic hub, travel to Rabat, or embark on a multi-day tour with a professional English-speaking driver at your dispo. Comfortable luxury, clear pricing."
             : "Explorez le centre économique du Maroc, rendez-vous à Rabat ou entamez un circuit multi-jours avec un chauffeur privé bilingue à disposition. Confort premium et tarifs clairs.",
         bannerLabel: isEn ? "Casablanca Driver" : "Chauffeur Casablanca",
-        whatsappHeroMsg: isEn 
+        whatsappHeroMsg: isEn
             ? "Hello Mdina Tours, I would like to book a private driver service in Casablanca."
             : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé à Casablanca.",
         introTitle: isEn ? "Premium Casablanca Chauffeur & Dispo Service" : "Service de Chauffeur Privé & Disposition Premium à Casablanca",
@@ -177,7 +177,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
     const itineraries = [
         {
             title: isEn ? "Casablanca Airport Transfers" : "Transferts Aéroport Casablanca",
-            desc: isEn 
+            desc: isEn
                 ? "Reliable Mohammed V (CMN) airport pickups with terminal meet & greet, flight tracking, and door-to-door comfort."
                 : "Accueil personnalisé à l'aéroport Mohammed V (CMN) avec pancarte nominative, suivi de vol et trajet porte-à-porte.",
             price: isEn ? "From €35" : "À partir de 35 €",
@@ -187,7 +187,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
         },
         {
             title: isEn ? "Imperial Cities Day Tour" : "Excursion Villes Impériales",
-            desc: isEn 
+            desc: isEn
                 ? "Fes, Meknes, Volubilis — one private car, your own pace, no group rush."
                 : "Fès, Meknès, Volubilis — voiture privée, à votre rythme, sans la cohue.",
             price: isEn ? "From €180" : "À partir de 180 €",
@@ -197,7 +197,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
         },
         {
             title: isEn ? "VIP & Corporate Travel" : "Voyages VIP & Affaires",
-            desc: isEn 
+            desc: isEn
                 ? "Executive pickups, event transfers, roadshows — suited chauffeur, on time."
                 : "Accueil VIP, transferts d'événements, roadshows — chauffeur en costume, à l'heure.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
@@ -267,7 +267,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
     const faqs = [
         {
             q: isEn ? "What is a private driver (\"dispo chauffeur\") in Casablanca?" : "Qu'est-ce qu'un service de chauffeur privé (« dispo chauffeur ») à Casablanca ?",
-            a: isEn 
+            a: isEn
                 ? "A dispo chauffeur is a vehicle hired with a professional driver at your full disposal. There is no fixed route. The driver remains standby at your location, ready to take you to meetings, tourist sights, or transfer you to other cities."
                 : "La formule « dispo chauffeur » désigne la location d'un véhicule avec chauffeur à votre entière disposition. Il n'y a pas d'itinéraire fixe : le chauffeur vous attend et vous emmène là où vous le souhaitez pour vos réunions, visites ou déplacements."
         },
@@ -321,13 +321,13 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Casablanca" : "Service de Chauffeur Privé et Disposition Casablanca",
         "description": textCasablanca.subtitle,
-        "image": "https://mdinatours.com/img3/casablanca-private-driver-tourists-mosque.webp",
+        "image": "https://mdinatours.com/img3/tourists-happy-private-driver-casablanca.webp",
         "url": `https://mdinatours.com/${language}/private-driver-casablanca`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/img3/casablanca-private-driver-tourists-mosque.webp",
+            "image": "https://mdinatours.com/img3/tourists-happy-private-driver-casablanca.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
@@ -464,7 +464,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                         {/* Left Column: Gallery */}
                         <div className="transfers-content-col" style={{ display: 'flex', flexDirection: 'column' }}>
                             <PrivateDriverHeroGallery language={language} city="Casablanca" title={textCasablanca.h1} />
-                            
+
                             <div className="mobile-booking-widget" style={{ marginTop: '20px' }}>
                                 <PrivateDriverBookingWidget language={language} defaultCity="Casablanca" defaultDays={1} />
                             </div>
@@ -473,11 +473,11 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                         </div>
 
                         {/* Right Column: Sticky Booking Selector Box */}
-                        <div style={{ 
-                            position: 'sticky', 
-                            top: '100px', 
-                            display: 'flex', 
-                            flexDirection: 'column', 
+                        <div style={{
+                            position: 'sticky',
+                            top: '100px',
+                            display: 'flex',
+                            flexDirection: 'column',
                             gap: '16px',
                             maxWidth: '480px',
                             width: '100%',
@@ -499,26 +499,26 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                 {/* Experience Video Section */}
                 <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-                        <h2 style={{ 
-                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
-                            fontWeight: 700, 
-                            color: 'var(--secondary)', 
+                        <h2 style={{
+                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+                            fontWeight: 700,
+                            color: 'var(--secondary)',
                             marginBottom: '30px',
                             fontFamily: 'var(--font-poppins), sans-serif'
                         }}>
                             {isEn ? "What riding with us feels like" : "L'expérience à bord avec nous"}
                         </h2>
-                        
+
                         <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
-                            <VideoPlayer 
-                                src="/img/tours-mdina-tours-morocco.mp4" 
+                            <VideoPlayer
+                                src="/img/tours-mdina-tours-morocco.mp4"
                                 style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
                             />
                         </div>
 
-                        <p style={{ 
-                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', 
-                            fontWeight: 500, 
+                        <p style={{
+                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)',
+                            fontWeight: 500,
                             color: '#555',
                             margin: '15px 0 0 0',
                             fontFamily: 'var(--font-poppins), sans-serif',
@@ -613,9 +613,9 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                                     {card.href ? (
                                         <Link href={getPath(card.href)} className="private-driver-route-img-link">
                                             <div className="private-driver-route-img-container">
-                                                <img 
-                                                    src={card.image} 
-                                                    alt={card.title} 
+                                                <img
+                                                    src={card.image}
+                                                    alt={card.title}
                                                     className="private-driver-route-img"
                                                     width={380}
                                                     height={220}
@@ -628,9 +628,9 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                                         </Link>
                                     ) : (
                                         <div className="private-driver-route-img-container">
-                                            <img 
-                                                src={card.image} 
-                                                alt={card.title} 
+                                            <img
+                                                src={card.image}
+                                                alt={card.title}
                                                 className="private-driver-route-img"
                                                 width={380}
                                                 height={220}
@@ -655,24 +655,24 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                                             {card.desc}
                                         </p>
                                         {card.href ? (
-                                            <Link 
+                                            <Link
                                                 href={getPath(card.href)}
                                                 className="private-driver-route-cta private-driver-route-cta-link"
                                             >
                                                 {card.cta}
                                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
                                                 </svg>
                                             </Link>
                                         ) : (
-                                            <a 
+                                            <a
                                                 href={getWhatsAppUrl(card.msg!)}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="private-driver-route-cta"
                                             >
                                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z"/>
+                                                    <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z" />
                                                 </svg>
                                                 {card.cta}
                                             </a>
@@ -737,20 +737,20 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                 {/* Bottom Internal Linking / Navigation Bar */}
                 <section style={{ padding: '40px 20px', backgroundColor: 'var(--bg-color)' }}>
                     <div style={{ maxWidth: '1150px', margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
-                            <div style={{ fontSize: '0.9rem', color: '#555', display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', backgroundColor: '#fff', padding: '12px 20px', borderRadius: '12px', border: '1px solid #eee' }}>
-                                <span>👉 {isEn ? "Chauffeur Services:" : "Services de Chauffeur :"}</span>
-                                <Link href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                    {isEn ? "Morocco (National)" : "Maroc (National)"}
-                                </Link>
-                                <span>|</span>
-                                <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                    {isEn ? "Marrakech dispo" : "Marrakech dispo"}
-                                </Link>
-                                <span>|</span>
-                                <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
-                                    {isEn ? "8-Day Chauffeur Package" : "Forfait Chauffeur 8 Jours"}
-                                </Link>
-                            </div>
+                        <div style={{ fontSize: '0.9rem', color: '#555', display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', backgroundColor: '#fff', padding: '12px 20px', borderRadius: '12px', border: '1px solid #eee' }}>
+                            <span>👉 {isEn ? "Chauffeur Services:" : "Services de Chauffeur :"}</span>
+                            <Link href={getPath('/private-driver-morocco')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                {isEn ? "Morocco (National)" : "Maroc (National)"}
+                            </Link>
+                            <span>|</span>
+                            <Link href={getPath('/private-driver-marrakech')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                {isEn ? "Marrakech dispo" : "Marrakech dispo"}
+                            </Link>
+                            <span>|</span>
+                            <Link href={getPath('/car-with-driver-morocco-8-days')} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
+                                {isEn ? "8-Day Chauffeur Package" : "Forfait Chauffeur 8 Jours"}
+                            </Link>
+                        </div>
                     </div>
                 </section>
             </main>

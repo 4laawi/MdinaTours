@@ -81,10 +81,10 @@ export const citiesData: Record<string, { en: string; fr: string; attractionsEn:
     essaouira: { en: "Essaouira", fr: "Essaouira", attractionsEn: ["Essaouira Medina & Skala", "Historic Fishing Port", "Essaouira Beach & Kitesurf"], attractionsFr: ["Médina d'Essaouira et la Skala", "Port de Pêche Historique", "Plage d'Essaouira et Kitesurf"] }
 };
 
-export const routesData: Record<string, { 
-    distance: string; 
-    duration: string; 
-    privatePrice: number; 
+export const routesData: Record<string, {
+    distance: string;
+    duration: string;
+    privatePrice: number;
     train: boolean;
     trainType?: 'al-boraq' | 'al-atlas' | 'none';
     trainDuration?: string;
@@ -136,7 +136,7 @@ export function getAirportInfo(slug: string) {
 
 export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPost | null {
     const isEn = lang === 'en';
-    
+
     // 1. ROUTE GUIDES: "how-to-get-from-[c1]-to-[c2]"
     if (slug.startsWith("how-to-get-from-")) {
         const key = slug.replace("how-to-get-from-", "");
@@ -151,10 +151,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const name2 = isEn ? c2.en : c2.fr;
 
         if (key === "rabat-to-chefchaouen") {
-            const title = isEn 
+            const title = isEn
                 ? "How to Get From Rabat to Chefchaouen: Bus, Car & Transport Guide (2026)"
                 : "Comment aller de Rabat à Chefchaouen : Bus, Voiture & Conseils Trajet (2026)";
-            
+
             const excerpt = isEn
                 ? "The definitive guide to traveling between Rabat and Chefchaouen. Compare direct CTM buses, private transfers, travel times, and why there is no train to Chefchaouen."
                 : "Le guide complet pour relier Rabat et Chefchaouen. Comparez autocars CTM, transferts privés avec chauffeur, durées de route et l'absence de gare à Chefchaouen.";
@@ -172,11 +172,11 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                 {
                     id: "comparison",
                     title: isEn ? "Quick Transport Comparison: Speed, Cost & Comfort" : "Comparatif rapide des modes de transport",
-                    content: isEn 
+                    content: isEn
                         ? `<p>Here is a clear, transparent comparison of travel times, costs, and flexibility for traveling between Rabat and Chefchaouen:</p>`
                         : `<p>Voici un comparatif transparent des durées, des prix et de la flexibilité entre Rabat et Chefchaouen :</p>`,
                     table: {
-                        headers: isEn 
+                        headers: isEn
                             ? ["Transport Option", "Door-to-Door Time", "Cost Estimate", "Flexibility", "Best Suited For"]
                             : ["Mode de Transport", "Temps Porte-à-Porte", "Estimation Tarif", "Flexibilité", "Recommandé Pour"],
                         rows: [
@@ -221,14 +221,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                             "Recent air-conditioned Mercedes Vito minivans with ample luggage capacity",
                             "Professional English and French-speaking drivers offering friendly local context",
                             "Free child safety and baby booster seats upon request"
-                          ]
+                        ]
                         : [
                             "Prise en charge porte-à-porte depuis votre hébergement à Rabat jusqu'à l'entrée de votre riad",
                             "Flexibilité horaire totale 24h/24 selon vos préférences",
                             "Véhicules récents Mercedes Vito climatisés avec grand coffre pour vos valises",
                             "Chauffeurs professionnels bilingues attentifs et accueillants",
                             "Sièges bébé et rehausseurs fournis gratuitement sur demande"
-                          ]
+                        ]
                 },
                 {
                     id: "bus-guide",
@@ -292,37 +292,37 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             const faqs: ProgrammaticFAQ[] = [
                 {
                     q: isEn ? "What is the fastest way to get from Rabat to Chefchaouen?" : "Quel est le moyen le plus rapide pour aller de Rabat à Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "The fastest way is by car or private transfer, taking approximately 3 hours 45 minutes to 4 hours door-to-door via the A1 toll highway and regional road R413."
                         : "Le moyen le plus rapide est la voiture ou le transfert privé avec chauffeur, qui prend environ 3h45 à 4h de porte à porte via l'autoroute A1 et la R413."
                 },
                 {
                     q: isEn ? "What is the cheapest way to get from Rabat to Chefchaouen?" : "Quel est le moyen le moins cher pour aller de Rabat à Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "The cheapest way is the direct CTM highway bus, which costs roughly 160 MAD (~€15) per person and takes around 5 hours 10 minutes from Rabat Kamra terminal."
                         : "Le moyen le moins cher est l'autocar direct CTM, qui coûte environ 160 MAD (~15€) par passager pour un trajet d'environ 5h10 depuis la gare Al Kamra."
                 },
                 {
                     q: isEn ? "Is there a direct train from Rabat to Chefchaouen?" : "Y a-t-il un train direct de Rabat à Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "No. There is no direct train and no railway station in Chefchaouen. The town is located high in the Rif mountain range where no train tracks exist."
                         : "Non. Il n'y a aucun train direct et aucune gare à Chefchaouen, la ville étant située au cœur des montagnes du Rif sans voies ferrées."
                 },
                 {
                     q: isEn ? "Is there a direct bus between Rabat and Chefchaouen?" : "Y a-t-il un bus direct entre Rabat et Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "Yes, national carrier CTM operates direct highway coaches between Rabat (Gare Routière Al Kamra) and Chefchaouen bus station 1 to 2 times daily."
                         : "Oui, la compagnie nationale CTM assure 1 à 2 départs directs par jour entre la Gare Routière Al Kamra de Rabat et la gare routière de Chefchaouen."
                 },
                 {
                     q: isEn ? "Can you do a day trip from Rabat to Chefchaouen?" : "Peut-on faire l'excursion d'une journée de Rabat à Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "While technically possible with a private driver (approx. 4 hours driving each way), we strongly recommend spending at least one night in Chefchaouen to truly enjoy the calm blue medina and sunset without rushing."
                         : "Même si cela est faisable avec un chauffeur privé (environ 4h de route par trajet), nous recommandons vivement de passer au moins une nuit sur place pour profiter des ruelles bleues et du coucher de soleil sans vous presser."
                 },
                 {
                     q: isEn ? "Where does the bus drop you off in Chefchaouen?" : "Où le bus dépose-t-il les passagers à Chefchaouen ?",
-                    a: isEn 
+                    a: isEn
                         ? "The CTM bus arrives at the Chefchaouen Bus Terminal (Gare Routière) located in the lower town. Blue petit taxis waiting outside can drive you up to the medina gate (Bab El Ain) in 5 minutes for 10–15 MAD."
                         : "Le car CTM arrive à la Gare Routière de Chefchaouen dans la ville basse. Des petits taxis bleus stationnés devant la gare vous montent à l'entrée de la médina (Bab El Ain) en 5 minutes pour 10 à 15 MAD."
                 }
@@ -344,14 +344,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             };
         }
 
-        const title = isEn 
-            ? (route.train 
+        const title = isEn
+            ? (route.train
                 ? `How to Get From ${name1} to ${name2}: Private Transfer, Train & Bus`
                 : `How to Get From ${name1} to ${name2}: Bus, Car & Transport Guide`)
             : (route.train
                 ? `Comment se rendre de ${name1} à ${name2} : Transfert, Train et Bus`
                 : `Comment se rendre de ${name1} à ${name2} : Bus, Voiture et Conseils`);
-        
+
         const excerpt = isEn
             ? (route.train
                 ? `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, high-speed rail, highway buses, and sightseeing stops.`
@@ -364,7 +364,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             {
                 id: "overview",
                 title: isEn ? "Route Overview & Distance" : "Aperçu de la route et distance",
-                content: isEn 
+                content: isEn
                     ? `<p>Traveling from <strong>${name1}</strong> to <strong>${name2}</strong> is one of the most scenic journeys in Morocco. The physical highway distance is approximately <strong>${route.distance}</strong>, and driving takes around <strong>${route.duration}</strong> under normal traffic. Whether you choose to book our direct <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">${name1} to ${name2} private transfer</a>, take public trains, or board a regional highway bus, this guide breaks down travel times, honest costs, and route advice.</p>
                        <p>For visitors planning an extended itinerary across Morocco's imperial cities and desert routes, hiring a dedicated private driver provides door-to-door comfort, professional local chauffeurs, and the flexibility to stop at panoramic viewpoints along the way.</p>`
                     : `<p>Le trajet entre <strong>${name1}</strong> et <strong>${name2}</strong> est un axe important et pittoresque du voyage au Maroc. La distance routière est d'environ <strong>${route.distance}</strong>, pour un temps de trajet estimé à <strong>${route.duration}</strong>. Que vous souhaitiez réserver notre <a href="/${isEn ? 'en' : 'fr'}/transfers/${key}-transfer" style="color:var(--primary); font-weight:600; text-decoration:underline;">transfert privé direct ${name1} – ${name2}</a>, prendre le train ou emprunter l'autocar, découvrez notre comparatif complet.</p>
@@ -373,27 +373,27 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             {
                 id: "comparison",
                 title: isEn ? "Quick Transport Comparison" : "Comparatif rapide des modes de transport",
-                content: isEn 
+                content: isEn
                     ? `<p>Here is a breakdown of speed, cost, and comfort for different travel options from ${name1} to ${name2}:</p>`
                     : `<p>Voici un résumé des tarifs, de la durée et du confort pour vous déplacer de ${name1} à ${name2} :</p>`,
                 table: {
-                    headers: isEn 
+                    headers: isEn
                         ? ["Transport Option", "Door-to-Door Time", "Cost Estimate", "Flexibility", "Best Suited For"]
                         : ["Mode de Transport", "Temps Porte-à-Porte", "Estimation Tarif", "Flexibilité", "Recommandé Pour"],
                     rows: [
                         [
                             isEn ? "Private Driver (Mdina Tours)" : "Chauffeur Privé (Mdina Tours)",
                             route.duration,
-                            isEn 
-                                ? `€${route.privatePrice} per van (~€${Math.round(route.privatePrice / 6)}/guest)` 
+                            isEn
+                                ? `€${route.privatePrice} per van (~€${Math.round(route.privatePrice / 6)}/guest)`
                                 : `${route.privatePrice}€ par van (~${Math.round(route.privatePrice / 6)}€/pers.)`,
                             isEn ? "Maximum (Door-to-door, any time)" : "Maximale (Porte-à-porte, horaire libre)",
                             isEn ? "Families, couples, small groups & luggage" : "Familles, couples, petits groupes & bagages"
                         ],
                         [
                             isEn ? (route.train ? "ONCF Train" : "ONCF Train (Not Available)") : (route.train ? "Train ONCF" : "Train ONCF (Non disponible)"),
-                            route.train 
-                                ? (isEn ? `Station-to-station (~${route.duration})` : `Gare à gare (~${route.duration})`) 
+                            route.train
+                                ? (isEn ? `Station-to-station (~${route.duration})` : `Gare à gare (~${route.duration})`)
                                 : (isEn ? "No direct train line" : "Aucune ligne ferroviaire"),
                             route.train ? (isEn ? "€12 - €35 / person" : "12€ - 35€ / personne") : (isEn ? "N/A — No Railway Line" : "N/A — Pas de voie ferrée"),
                             route.train ? (isEn ? "Medium (Fixed timetables)" : "Moyenne (Horaires fixes)") : "N/A",
@@ -424,20 +424,20 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Modern air-conditioned vans and executive sedans",
                         "English and French speaking drivers offering local context",
                         "Free baby seats and child booster seats on demand"
-                      ]
+                    ]
                     : [
                         "Service complet porte-à-porte évitant les correspondances",
                         "Flexibilité totale : vous déterminez l'heure de départ",
                         "Véhicules récents et climatisés (berlines et monospaces)",
                         "Chauffeurs professionnels bilingues accueillants",
                         "Sièges enfants et bébés fournis gratuitement sur demande"
-                      ]
+                    ]
             },
             {
                 id: "train-alternative",
                 title: isEn ? "Option 2: Travelling by Train" : "Option 2 : Voyager en train",
                 content: key.includes("chefchaouen")
-                    ? (isEn 
+                    ? (isEn
                         ? `<p>There is no railway station in Chefchaouen due to the steep Rif Mountain terrain. However, if you want to travel as far as possible by rail, you must use a <strong>two-step train + road connection</strong>:</p>
                            <ol style="margin: 12px 0 16px 20px; line-height: 1.7;">
                                <li><strong>Take the ONCF train</strong> from ${name1} to the nearest railway junction—either <strong>Souk El Arbaa</strong> or <strong>Tangier Ville</strong> station.</li>
@@ -452,7 +452,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                            <p>Bien que cette solution convienne aux routards solos au budget serré, les familles et groupes privilégient largement le confort d'un transfert privé direct porte-à-porte de ${name1} à Chefchaouen pour éviter les correspondances et négociations.</p>`)
                     : (route.train
                         ? (route.trainType === 'al-boraq'
-                            ? (isEn 
+                            ? (isEn
                                 ? `<p>ONCF high-speed rail ('Al Boraq') offers fast, modern transit between Tangier, Rabat, and Casablanca (reaching speeds up to 320 km/h). Tickets can be booked online via <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">ONCF Voyages (oncf-voyages.ma)</a> or at the station. Keep in mind that you will still need local petit taxis on both ends to connect the train station to your hotel or riad.</p>`
                                 : `<p>Le TGV 'Al Boraq' de l'ONCF relie rapidement et confortablement Tanger, Rabat et Casablanca (jusqu'à 320 km/h). Les billets s'achètent en ligne sur le <a href="https://www.oncf-voyages.ma" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">site officiel ONCF Voyages (oncf-voyages.ma)</a> ou en gare. Prévoyez des petits taxis locaux aux deux extrémités pour relier la gare à votre hébergement.</p>`)
                             : (isEn
@@ -468,7 +468,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Travel Guides" : "Guides de Voyage",
             date: "June 14, 2026",
-            image: key.includes("merzouga") ? "/b-roll/activity-sahara-camel-riding-broll.webp" : key.includes("chefchaouen") ? "/hero-chefchaouen.webp" : key.includes("essaouira") ? "/img/Essaouira.webp" : key.includes("agadir") ? "/a-mdiinatours/selman-marrakech-mdinatours.webp" : key.includes("rabat") ? "/img2/rabat-hassan-tour.jpg" : key.includes("casablanca") ? "/img3/casablanca-private-driver-tourists-mosque.webp" : key.includes("fes") ? "/img2/fes_gate.jpg" : "/img/Morocco-trip-tour-hero08.webp",
+            image: key.includes("merzouga") ? "/b-roll/activity-sahara-camel-riding-broll.webp" : key.includes("chefchaouen") ? "/hero-chefchaouen.webp" : key.includes("essaouira") ? "/img/Essaouira.webp" : key.includes("agadir") ? "/a-mdiinatours/selman-marrakech-mdinatours.webp" : key.includes("rabat") ? "/img2/rabat-hassan-tour.jpg" : key.includes("casablanca") ? "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp" : key.includes("fes") ? "/img2/fes_gate.jpg" : "/img/Morocco-trip-tour-hero08.webp",
             seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
@@ -476,22 +476,22 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             faqs: [
                 {
                     q: isEn ? `How long does it take to drive from ${name1} to ${name2}?` : `Combien de temps faut-il pour aller de ${name1} à ${name2} en voiture ?`,
-                    a: isEn 
+                    a: isEn
                         ? `The driving duration is approximately ${route.duration} via the highway, depending on your pickup location and traffic entering the cities.`
                         : `Le trajet par la route prend environ ${route.duration} via l'autoroute, selon votre lieu de départ exact et le trafic.`
                 },
                 {
                     q: isEn ? `Is there a direct train from ${name1} to ${name2}?` : `Y a-t-il un train direct reliant ${name1} et ${name2} ?`,
-                    a: route.train 
+                    a: route.train
                         ? (route.trainType === 'al-boraq'
-                            ? (isEn 
+                            ? (isEn
                                 ? `Yes, direct high-speed Al Boraq trains operate between ${name1} and ${name2} (approx. ${route.trainDuration} rail time). You can purchase tickets at the station or via the ONCF portal.`
                                 : `Oui, la ligne TGV Al Boraq relie directement ${name1} et ${name2} en environ ${route.trainDuration}. Billets disponibles en gare ou en ligne sur le site de l'ONCF.`)
-                            : (isEn 
+                            : (isEn
                                 ? `Yes, direct ONCF Al Atlas trains run between ${name1} and ${name2} (approx. ${route.trainDuration} rail time). Tickets can be booked at the station or online.`
                                 : `Oui, les trains classiques ONCF Al Atlas assurent une liaison directe entre ${name1} et ${name2} en environ ${route.trainDuration}. Billets disponibles en gare ou sur le portail ONCF.`))
-                        : (isEn 
-                            ? `No, there are no direct train routes between these cities. You must rely on highway buses, collective grand taxis, or book a private transfer.` 
+                        : (isEn
+                            ? `No, there are no direct train routes between these cities. You must rely on highway buses, collective grand taxis, or book a private transfer.`
                             : `Non, il n'y a pas de liaison ferroviaire directe. Il faut utiliser la route, le bus, ou un chauffeur privé.`)
                 }
             ],
@@ -512,10 +512,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const name1 = isEn ? c1.en : c1.fr;
         const name2 = isEn ? c2.en : c2.fr;
 
-        const title = isEn 
+        const title = isEn
             ? `Train vs Private Transfer from ${name1} to ${name2}: The Honest Verdict`
             : `Train ou Chauffeur Privé de ${name1} à ${name2} : Le Comparatif`;
-        
+
         const excerpt = isEn
             ? `An in-depth comparison of the train and private car transfers between ${name1} and ${name2}. We compare cost, comfort, and schedules.`
             : `Comparatif détaillé entre le train de l'ONCF et un chauffeur privé entre ${name1} et ${name2}. Confort, tarifs, horaires et bagages.`;
@@ -539,8 +539,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     rows: [
                         [
                             isEn ? "Travel Time & Speed" : "Temps de Trajet Réel",
-                            route.train 
-                                ? (isEn ? `Station-to-station ~${route.duration} (+ 45m local taxis & station buffer)` : `Gare à gare ~${route.duration} (+ 45 min de taxis et attente)`) 
+                            route.train
+                                ? (isEn ? `Station-to-station ~${route.duration} (+ 45m local taxis & station buffer)` : `Gare à gare ~${route.duration} (+ 45 min de taxis et attente)`)
                                 : (isEn ? "No direct train (4h30–5h30 with bus/taxi transfer)" : "Pas de train direct (4h30–5h30 avec bus/taxi)"),
                             isEn ? `${route.duration} direct door-to-door (no station transfers)` : `${route.duration} direct porte-à-porte (sans escale)`
                         ],
@@ -551,8 +551,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         ],
                         [
                             isEn ? "Cost for Solo Traveler (1 Person)" : "Coût pour 1 Personne (Solo)",
-                            route.train 
-                                ? (isEn ? "€15 – €35 (More economical for solo travelers)" : "15€ – 35€ (Plus économique pour voyageur solo)") 
+                            route.train
+                                ? (isEn ? "€15 – €35 (More economical for solo travelers)" : "15€ – 35€ (Plus économique pour voyageur solo)")
                                 : (isEn ? "€25 – €45 (Train + grand taxi)" : "25€ – 45€ (Train + grand taxi)"),
                             isEn ? `€${route.privatePrice} flat rate for full vehicle` : `${route.privatePrice}€ forfait pour tout le véhicule`
                         ],
@@ -597,14 +597,14 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                     q: isEn ? "Is the train faster than a private transfer?" : "Le train est-il plus rapide que la voiture ?",
                     a: route.train
                         ? (route.trainType === 'al-boraq'
-                            ? (isEn 
+                            ? (isEn
                                 ? `The high-speed Al Boraq TGV train is faster on the tracks (${route.trainDuration}), but once you factor in hotel check-out, arriving at the station 30 minutes early, and hailing a taxi at your destination, our door-to-door private transfer takes a comparable total travel time with no luggage stress.`
                                 : `Le TGV Al Boraq est rapide sur les rails (${route.trainDuration}), mais en comptant le trajet vers la gare, l'avance requise et la navette finale, le transfert privé porte-à-porte affiche un temps de voyage total comparable, le confort en plus.`)
-                            : (isEn 
+                            : (isEn
                                 ? `The standard ONCF Al Atlas train takes approximately ${route.trainDuration} station-to-station. When you include transit to the station, ticket queues, and luggage taxi rides at both ends, a direct door-to-door private driver is typically faster and significantly more convenient.`
                                 : `Le train classique ONCF Al Atlas met environ ${route.trainDuration} de gare à gare. En ajoutant les transferts vers les gares et les petits taxis pour vos bagages, notre chauffeur privé direct porte-à-porte est généralement plus rapide et nettement plus pratique.`))
-                        : (isEn 
-                            ? `No, there is no direct railway line connecting ${name1} and ${name2}. A direct private driver is significantly faster (saving 1.5 to 2.5 hours) compared to public buses or multiple grand taxi transfers.` 
+                        : (isEn
+                            ? `No, there is no direct railway line connecting ${name1} and ${name2}. A direct private driver is significantly faster (saving 1.5 to 2.5 hours) compared to public buses or multiple grand taxi transfers.`
                             : `Non, il n'existe aucune ligne directe de train entre ${name1} et ${name2}. Le chauffeur privé direct est nettement plus rapide (gain de 1h30 à 2h30) que les bus ou les correspondances de taxis.`)
                 }
             ],
@@ -619,10 +619,10 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         if (!c) return null;
 
         const cityName = isEn ? c.en : c.fr;
-        const title = isEn 
+        const title = isEn
             ? `${cityName} Airport Transfer Guide: Pickups, Prices & Taxis`
             : `Guide du Transfert Aéroport de ${cityName} : Tarifs et Navettes`;
-        
+
         const excerpt = isEn
             ? `The complete guide to landing at ${cityName} Airport. Find out how to arrange transfers, grand taxi prices, and meet-and-greet services.`
             : `Le guide de voyage pour votre arrivée à l'Aéroport de ${cityName}. Évitez les pièges, comparez les prix des grands taxis et réservez une navette.`;
@@ -649,13 +649,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Meet & Greet: Direct nameboard greeting at arrivals",
                         "Modern Vehicles: Clean, air-conditioned executive vans and sedans",
                         "No Prepayment: Book on WhatsApp or online, pay cash to the driver"
-                      ]
+                    ]
                     : [
                         "Suivi des vols gratuit : Pas de frais en cas de retard d'avion",
                         "Accueil personnalisé : Pancarte nominative dès la sortie des bagages",
                         "Flotte moderne : Vans et berlines climatisés spacieux",
                         "Zéro paiement en ligne : Réservez en ligne ou sur WhatsApp, payez sur place"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -737,13 +737,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Chauffeur meals and overnight lodging during multi-day tours",
                         "Unlimited luggage space and passenger insurance",
                         "Complimentary bottled water and phone charging ports"
-                      ]
+                    ]
                     : [
                         "Carburant et péages autoroutiers inclus",
                         "Hébergement et repas du chauffeur pris en charge lors des circuits",
                         "Bagages illimités et assurance passagers",
                         "Bouteilles d'eau offertes et prises de recharge"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1019,12 +1019,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Imperial Cities Loop (7 Days): Rabat, Meknes, Fes, Volubilis & Marrakech",
                         "Northern Blue Pearl & Coast (5 Days): Tangier, Chefchaouen, Asilah & Rabat",
                         "Grand Sahara Expedition (10 Days): Tangier to Merzouga Dunes ending in Marrakech"
-                      ]
+                    ]
                     : [
                         "Villes Impériales (7 Jours) : Rabat, Meknès, Fès, Volubilis & Marrakech",
                         "Perle Bleue & Côte Nord (5 Jours) : Tanger, Chefchaouen, Asilah & Rabat",
                         "Grand Circuit Désert (10 Jours) : De Tanger à Merzouga avec arrivée à Marrakech"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1083,13 +1083,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Ouarzazate Film Studios & Taourirt Kasbah",
                         "Dades & Todra Gorges – Massive red limestone canyons",
                         "Merzouga Camel Treks – Seamless handover to desert luxury camps"
-                      ]
+                    ]
                     : [
                         "Kasbah d'Aït Benhaddou (Patrimoine UNESCO)",
                         "Studios de cinéma de Ouarzazate",
                         "Gorges du Dadès et du Todra",
                         "Accueil aux pieds des dunes pour la balade à dromadaire"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1123,11 +1123,11 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
     // 5. ITINERARY PAGES: "morocco-itinerary-[X]-days"
     if (slug.startsWith("morocco-itinerary-") && slug.endsWith("-days")) {
         const days = slug.replace("morocco-itinerary-", "").replace("-days", "");
-        
+
         const title = isEn
             ? `${days}-Day Morocco Itinerary: The Ultimate Road Trip Guide`
             : `Circuit ${days} Jours au Maroc : Itinéraire et Conseils de Voyage`;
-        
+
         const excerpt = isEn
             ? `Plan your perfect ${days}-day trip to Morocco. Discover the best routes, historic imperial cities, Atlas mountains, and desert camping.`
             : `Découvrez notre itinéraire de ${days} jours pour visiter le Maroc. Cités impériales, randonnées dans l'Atlas et dunes du Sahara.`;
@@ -1204,7 +1204,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const title = isEn
             ? `The Ultimate ${cityName} Travel Guide: What to See & Do`
             : `Le Guide Complet de ${cityName} : Incontournables et Conseils`;
-        
+
         const excerpt = isEn
             ? `Plan your visit to ${cityName}. Discover top historical attractions, medina markets, local cuisine, and transfer routes.`
             : `Toutes les informations utiles pour visiter ${cityName}. Lieux d'intérêt, bonnes adresses et transports locaux.`;
@@ -1225,7 +1225,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             {
                 id: "attractions",
                 title: isEn ? "Top Attractions to Visit" : "Les visites incontournables",
-                content: isEn 
+                content: isEn
                     ? `<p>When visiting ${cityName}, ensure you add these historical sites to your list:</p>`
                     : `<p>Voici les monuments et quartiers essentiels à découvrir lors de votre passage :</p>`,
                 list: attractions
@@ -1247,7 +1247,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "City Guides" : "Guides Villes",
             date: "June 14, 2026",
-            image: cityKey === "marrakech" ? "/img/marrakech.jpg" : cityKey === "chefchaouen" ? "/hero-chefchaouen.webp" : cityKey === "rabat" ? "/img2/rabat-hassan-tour.jpg" : cityKey === "casablanca" ? "/img3/casablanca-private-driver-tourists-mosque.webp" : cityKey === "fes" ? "/img2/fes_gate.jpg" : cityKey === "tangier" ? "/img2/tangier_hero.webp" : cityKey === "agadir" ? "/a-mdiinatours/selman-marrakech-mdinatours.webp" : cityKey === "merzouga" ? "/Sahara.webp" : "/Traditional.webp",
+            image: cityKey === "marrakech" ? "/img/marrakech.jpg" : cityKey === "chefchaouen" ? "/hero-chefchaouen.webp" : cityKey === "rabat" ? "/img2/rabat-hassan-tour.jpg" : cityKey === "casablanca" ? "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp" : cityKey === "fes" ? "/img2/fes_gate.jpg" : cityKey === "tangier" ? "/img2/tangier_hero.webp" : cityKey === "agadir" ? "/a-mdiinatours/selman-marrakech-mdinatours.webp" : cityKey === "merzouga" ? "/Sahara.webp" : "/Traditional.webp",
             seoTitle: isEn ? `${title} | Mdina Tours` : `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
@@ -1293,13 +1293,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Caves of Hercules – Ancient sea-carved caverns shaped like Africa",
                         "The Historic Tangier Kasbah & Sultan's Palace (Dar el-Makhzen)",
                         "Grand Socco & Petit Socco Medina Markets"
-                      ]
+                    ]
                     : [
                         "Cap Spartel – Rencontre entre l'Océan Atlantique et la Méditerranée",
                         "Grottes d'Hercule – Cavités mythiques surplombant la mer",
                         "La Kasbah de Tanger et le Palais du Sultan",
                         "Grand Socco et ruelles vivantes de la Médina"
-                      ]
+                    ]
             },
             {
                 id: "guarantee",
@@ -1364,12 +1364,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Chefchaouen Blue City Day Trip (8 Hours) – Scenic Rif Mountain drive to the famous blue-painted alleys.",
                         "Asilah Atlantic Coastal Village (5 Hours) – Historic Portuguese sea ramparts and whitewashed medina.",
                         "Tetouan UNESCO Medina Tour (6 Hours) – Authentic Hispano-Moorish architecture and artisan souks."
-                      ]
+                    ]
                     : [
                         "Excursion à Chefchaouen (8 Hours) – Traversée du Rif vers les ruelles bleues photogéniques.",
                         "Excursion à Asilah (5 Hours) – Remparts portugais et médina blanche au bord de l'océan.",
                         "Visite de Tétouan (6 Hours) – Médina UNESCO à l'architecture hispano-mauresque."
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1428,13 +1428,13 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Habous Quarter – Traditional New Medina famous for pastries and olive markets",
                         "Rick's Cafe – Photo stop at the iconic Casablanca movie-themed landmark",
                         "Ain Diab Corniche – Oceanfront promenade and Boulevard Mohammed V architecture"
-                      ]
+                    ]
                     : [
                         "Mosquée Hassan II – Visite de ce chef-d'œuvre surplombant l'océan",
                         "Quartier des Habous – Nouvelle médina célèbre pour ses pâtisseries",
                         "Rick's Café – Halte photo devant l'adresse mythique du film Casablanca",
                         "La Corniche d'Aïn Diab – Promenade en bord de mer"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1450,7 +1450,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             slug, title, excerpt,
             category: isEn ? "Shore Excursions" : "Escales Croisières",
             date: "June 14, 2026",
-            image: "/img3/casablanca-private-driver-tourists-mosque.webp",
+            image: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
             seoTitle: `${title} | Mdina Tours`,
             seoDesc: excerpt,
             tableOfContents: sections.map(s => ({ id: s.id, text: s.title })),
@@ -1492,12 +1492,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
                         "Rabat Imperial Capital Day Trip (6 Hours total) – Hassan Tower, Kasbah Oudayas & Chellah (Only 1 hour highway drive)",
                         "Marrakech Red City Day Trip (10 Hours total) – Majorelle Garden, Bahia Palace & Jemaa el-Fnaa (2.5 hour drive each way)",
                         "El Jadida Portuguese Fortress (6 Hours total) – UNESCO Portuguese cistern and coastal fortress (1.5 hour drive)"
-                      ]
+                    ]
                     : [
                         "Excursion à Rabat (6 Hours) – Tour Hassan, Oudayas et Chellah à seulement 1h de route",
                         "Excursion à Marrakech (10 Hours) – Jardin Majorelle, Palais Bahia et la place Jemaa el-Fna (2h30 de route)",
                         "Cité Portugaise d'El Jadida (6 Hours) – Citerne portugaise classée par l'UNESCO (1h30 de route)"
-                      ]
+                    ]
             },
             {
                 id: "cta",
@@ -1533,7 +1533,7 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const title = isEn
             ? "Best Day Trips from Marrakech : Mountains, Deserts & The Atlantic Coast"
             : "Les Meilleures Excursions depuis Marrakech : Montagnes, Déserts & Côte Atlantique";
-        
+
         const excerpt = isEn
             ? "Discover the ultimate day trips from Marrakech. From riding camels in the Agafay Desert and hiking the High Atlas Mountains, to exploring the UNESCO Ksar of Ait Benhaddou and Essaouira."
             : "Découvrez les meilleures excursions d'une journée au départ de Marrakech. Désert d'Agafay, montagnes de l'Atlas, Ait Benhaddou ou la côte d'Essaouira.";
@@ -1659,8 +1659,8 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
             {
                 id: "cta-mid",
                 title: isEn ? "Book Your Marrakech Day Trip" : "Réservez Votre Excursion depuis Marrakech",
-                content: isEn 
-                    ? `<p>Ready to explore beyond the red city? Browse our curated day trips and secure your spot today for a seamless, unforgettable experience.</p>` 
+                content: isEn
+                    ? `<p>Ready to explore beyond the red city? Browse our curated day trips and secure your spot today for a seamless, unforgettable experience.</p>`
                     : `<p>Prêt à explorer les environs de la ville rouge ? Découvrez nos excursions d'une journée et réservez dès aujourd'hui pour une expérience inoubliable.</p>`,
                 isCallToAction: true,
                 ctaType: 'internal',

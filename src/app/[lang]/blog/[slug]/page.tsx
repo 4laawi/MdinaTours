@@ -119,7 +119,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         return { title: 'Not Found - Mdina Tours' };
     }
     const language = (lang as Language) || 'en';
-    
+
     const toIsoDate = (d?: string) => {
         if (!d) return "2026-03-15";
         const parsed = Date.parse(d);
@@ -230,7 +230,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     };
 
     const progPost = getProgrammaticPost(slug, language);
-    
+
     let title = '';
     let category = '';
     let image = '';
@@ -238,7 +238,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     let content = '';
     let tocList: { id: string; text: string }[] = [];
     let structuredSections: { id: string; title: string; content: string }[] = [];
-    
+
     const blogPosts = [
         { id: 1, slug: 'rabat-travel-guide', image: "/img2/rabat-hassan-tour.jpg", date: "March 15, 2026" },
         { id: 2, slug: 'sahara-desert-tour-plan', image: "/b-roll/activity-sahara-camel-riding-broll.webp", date: "March 10, 2026" },
@@ -256,7 +256,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     } else {
         const postData = blogPosts.find(p => p.slug === slug);
         if (!postData) notFound();
-        
+
         title = t(`blog_post_${postData.id}_title`);
         content = t(`blog_post_${postData.id}_content`);
         category = t(`blog_post_${postData.id}_category`);
@@ -269,7 +269,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
 
         const sectionsMetadata = standardPostSections[postData.id as keyof typeof standardPostSections]?.[language as 'en' | 'fr'] || [];
         const paragraphs = content.split('\n\n');
-        
+
         structuredSections = paragraphs.map((p, idx) => {
             const meta = sectionsMetadata[idx] || { title: `Section ${idx + 1}`, id: `section-${idx + 1}` };
             return {
@@ -296,7 +296,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/rabat-hassan-tour.jpg", tag: "Rabat Capital", alt: "Hassan Tower Rabat", keywords: ["rabat", "hassan"] },
         { src: "/img2/rabat_monemont.jpg", tag: "Rabat", alt: "Mausoleum of Mohammed V", keywords: ["rabat"] },
         { src: "/img2/rabat-airport.webp", tag: "Rabat Airport", alt: "Rabat Airport Terminal", keywords: ["rabat", "airport", "transfer"] },
-        { src: "/img3/casablanca-private-driver-tourists-mosque.webp", tag: "Casablanca", alt: "Private driver and travelers at Hassan II Mosque Casablanca", keywords: ["casablanca", "mosque"] },
+        { src: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp", tag: "Casablanca", alt: "Hassan II Mosque Casablanca", keywords: ["casablanca", "mosque"] },
         { src: "/img2/Airport_Casablanca_Mohammed.webp", tag: "Casablanca Airport", alt: "Mohammed V Airport Casablanca", keywords: ["casablanca", "airport", "transfer"] },
         { src: "/img2/fes_gate.jpg", tag: "Fes Palace", alt: "Royal Palace Fes Golden Gate", keywords: ["fes", "gate", "architecture"] },
         { src: "/img2/fes_3.webp", tag: "Fes Medina", alt: "Fes historic medina view", keywords: ["fes"] },
@@ -333,7 +333,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     ];
 
     const normalizedSlug = slug.toLowerCase();
-    let relatedGalleryImages = allGalleryImages.filter(img => 
+    let relatedGalleryImages = allGalleryImages.filter(img =>
         img.keywords.some(keyword => normalizedSlug.includes(keyword))
     );
 
@@ -366,8 +366,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         targetedTransferSlug = routeInfo.transferSlug;
         const originName = routeInfo.c1[isEn ? 'en' : 'fr'];
         const destName = routeInfo.c2[isEn ? 'en' : 'fr'];
-        targetedTransferTitle = isEn 
-            ? `Private Transfer: ${originName} to ${destName}` 
+        targetedTransferTitle = isEn
+            ? `Private Transfer: ${originName} to ${destName}`
             : `Transfert Privé : ${originName} ⇄ ${destName}`;
         targetedTransferSubtitle = isEn
             ? `Direct door-to-door transportation in an air-conditioned Mercedes Vito minivan or executive sedan.`
@@ -383,8 +383,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
     } else if (airportInfo) {
         targetedTransferSlug = airportInfo.transferSlug;
         const cityName = airportInfo.city[isEn ? 'en' : 'fr'];
-        targetedTransferTitle = isEn 
-            ? `${cityName} Airport Private Transfer` 
+        targetedTransferTitle = isEn
+            ? `${cityName} Airport Private Transfer`
             : `Navette Privée Aéroport de ${cityName}`;
         targetedTransferSubtitle = isEn
             ? `Meet & greet in arrivals hall with nameboard, live flight tracking, and fixed rates to your hotel or riad.`
@@ -769,10 +769,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                     </thead>
                     <tbody>
                         {table.rows.map((row, i) => {
-                            const isUnavailable = row.some(c => 
-                                c.toLowerCase().includes('not available') || 
-                                c.toLowerCase().includes('non disponible') || 
-                                c.toLowerCase().includes('no direct train') || 
+                            const isUnavailable = row.some(c =>
+                                c.toLowerCase().includes('not available') ||
+                                c.toLowerCase().includes('non disponible') ||
+                                c.toLowerCase().includes('no direct train') ||
                                 c.toLowerCase().includes('aucune ligne') ||
                                 c.toLowerCase().includes('n/a — no railway') ||
                                 c.toLowerCase().includes('n/a — pas de voie')
@@ -875,7 +875,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                         {progPost.sections.length > 0 && (
                                             <section id={progPost.sections[0].id} style={{ scrollMarginTop: '100px' }}>
                                                 <h2 className={styles.firstSectionTitle}>{progPost.sections[0].title}</h2>
-                                                <div 
+                                                <div
                                                     className={styles.sectionContent}
                                                     dangerouslySetInnerHTML={{ __html: progPost.sections[0].content }}
                                                 />
@@ -939,9 +939,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                         {progPost.sections.slice(1).map(section => (
                                             <section key={section.id} id={section.id} style={{ scrollMarginTop: '100px' }}>
                                                 <h2 className={styles.sectionTitle}>{section.title}</h2>
-                                                
+
                                                 {/* Text Content */}
-                                                <div 
+                                                <div
                                                     className={styles.sectionContent}
                                                     dangerouslySetInnerHTML={{ __html: section.content }}
                                                 />
@@ -987,7 +987,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
                                             routeDetails={routeStats}
                                             transferLink={primaryTransferUrl}
-                                            transferLinkText={isEn 
+                                            transferLinkText={isEn
                                                 ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
                                                 : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
                                             whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
@@ -1039,7 +1039,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             subtitle={targetedTransferSubtitle || (isEn ? "Transparent fixed rates, modern Mercedes fleet, professional drivers, and direct hotel pickup." : "Tarifs fixes garantis, flotte Mercedes récente, chauffeurs professionnels et prise en charge à votre Riad.")}
                                             routeDetails={routeStats}
                                             transferLink={primaryTransferUrl}
-                                            transferLinkText={isEn 
+                                            transferLinkText={isEn
                                                 ? (targetedTransferSlug ? `View Rates & Book This Transfer Online` : `Explore Morocco Private Transfers`)
                                                 : (targetedTransferSlug ? `Voir les Tarifs & Réserver ce Transfert en Ligne` : `Découvrir nos Transferts au Maroc`)}
                                             whatsAppUrl={getWhatsAppUrl('transfer', primaryTransferUrl)}
@@ -1056,8 +1056,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                             {isEn ? "Travel Services & Chauffeurs" : "Services & Chauffeurs"}
                                         </div>
                                         <h3 className={styles.relatedServicesTitle}>
-                                            {isEn 
-                                                ? `Private Travel Services in ${focusCity.name}` 
+                                            {isEn
+                                                ? `Private Travel Services in ${focusCity.name}`
                                                 : `Services de Transport Privé à ${focusCity.name}`}
                                         </h3>
                                         <p className={styles.relatedServicesSubtitle}>
@@ -1090,8 +1090,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                         {isEn ? "Visual Journey" : "Voyage Visuel"}
                                     </h3>
                                     <p className={styles.journeySubtitle}>
-                                        {isEn 
-                                            ? "Explore real photos of the destinations, services, and routes from this article." 
+                                        {isEn
+                                            ? "Explore real photos of the destinations, services, and routes from this article."
                                             : "Explorez les photos réelles des destinations, des services et des itinéraires de cet article."}
                                     </p>
                                     <div className={styles.journeyGrid}>
@@ -1170,7 +1170,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                                     <Link href={primaryTransferUrl} className={styles.sidebarPrimaryBtn}>
                                         {isEn ? "Book This Service Online →" : "Réserver ce Trajet en Ligne →"}
                                     </Link>
-                                    <a 
+                                    <a
                                         href={getWhatsAppUrl('transfer', primaryTransferUrl)}
                                         target="_blank"
                                         rel="noopener noreferrer"

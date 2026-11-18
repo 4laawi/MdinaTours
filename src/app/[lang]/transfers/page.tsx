@@ -26,14 +26,14 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const title = isEs
         ? 'Traslados Interurbanos y Viajes Entre Ciudades en Marruecos | Mdina Tours'
         : isEn
-        ? 'Morocco Intercity Private Transfers & City-to-City Rides | Mdina Tours'
-        : 'Transferts Privés Intervilles au Maroc & Trajets Longue Distance | Mdina Tours';
+            ? 'Morocco Intercity Private Transfers & City-to-City Rides | Mdina Tours'
+            : 'Transferts Privés Intervilles au Maroc & Trajets Longue Distance | Mdina Tours';
 
     const description = isEs
         ? 'Reserve traslados privados entre ciudades en Marruecos. Tarifas fijas garantizadas, vehículos con aire acondicionado y recogida puerta a puerta entre Casablanca, Marrakech, Tánger y Fez.'
         : isEn
-        ? 'Book reliable intercity private transfers across Morocco. Guaranteed fixed fares, modern air-conditioned vans, and door-to-door comfort between Casablanca, Marrakech, Tangier, Fes, and Chefchaouen.'
-        : 'Réservez vos transferts privés intervilles au Maroc. Prix fixes tout compris, berlines et minivans climatisés de porte-à-porte entre Casablanca, Marrakech, Tanger, Fès et Chefchaouen.';
+            ? 'Book reliable intercity private transfers across Morocco. Guaranteed fixed fares, modern air-conditioned vans, and door-to-door comfort between Casablanca, Marrakech, Tangier, Fes, and Chefchaouen.'
+            : 'Réservez vos transferts privés intervilles au Maroc. Prix fixes tout compris, berlines et minivans climatisés de porte-à-porte entre Casablanca, Marrakech, Tanger, Fès et Chefchaouen.';
 
     const url = `https://mdinatours.com/${lang}/transfers`;
 
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 const getTransferThumbnail = (slug: string, transImage: string) => {
     const normalizedSlug = slug.toLowerCase();
     const isAirport = normalizedSlug.includes('airport') || normalizedSlug.includes('aeroport');
-    
+
     const hasCasablanca = normalizedSlug.includes('casablanca');
     const hasFes = normalizedSlug.includes('fes');
     const hasRabat = normalizedSlug.includes('rabat');
@@ -88,7 +88,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
     } else {
         if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasRabat) return '/img2/rabat-hassan-tour.jpg';
-        if (hasCasablanca) return '/img3/casablanca-private-driver-tourists-mosque.webp';
+        if (hasCasablanca) return '/img3/casablanca-mosque-tour-private-driver-trasnportation.webp';
         if (hasFes) return '/img2/fes_gate.jpg';
         if (hasMarrakech) return '/a-mdiinatours/selman-marrakech-mdinatours.webp';
         if (hasEssaouira) return '/img2/Essaouira-maroc.jpg';
@@ -167,7 +167,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
             />
 
             <main style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
-                <TransfersHero 
+                <TransfersHero
                     title={isEs ? 'Traslados Privados en Marruecos' : isEn ? 'Morocco Private Transfers' : 'Transferts Privés au Maroc'}
                     subtitle={isEs ? 'Servicio de chófer puntual con cartel de bienvenida, tarifas fijas y vehículos modernos climatizados en aeropuertos, puertos y medinas.' : isEn ? 'Punctual meet & greet service, fixed rates, and clean air-conditioned vehicles between all major airports and medinas.' : 'Service d\'accueil ponctuel, prix fermes sans surprise, berlines et monospaces climatisés reliant tous les aéroports.'}
                     bgImage="/img/Morocco-trip-tour-hero04.webp"
@@ -197,8 +197,8 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                 {isEn
                                     ? "Arriving by plane in Casablanca, Marrakech, Rabat or Tangier?"
                                     : isEs
-                                    ? "¿Llega en avión a Casablanca, Marrakech, Rabat o Tánger?"
-                                    : "Vous atterrissez à Casablanca, Marrakech, Rabat ou Tanger ?"}
+                                        ? "¿Llega en avión a Casablanca, Marrakech, Rabat o Tánger?"
+                                        : "Vous atterrissez à Casablanca, Marrakech, Rabat ou Tanger ?"}
                             </span>
                             <Link
                                 href={getPath('/airport-transfers')}
@@ -216,8 +216,8 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                 {isEn
                                     ? "Morocco Airport Transfers & Private Shuttles →"
                                     : isEs
-                                    ? "Ver traslados de aeropuerto con bienvenida →"
-                                    : "Voir les transferts aéroport avec accueil personnalisé →"}
+                                        ? "Ver traslados de aeropuerto con bienvenida →"
+                                        : "Voir les transferts aéroport avec accueil personnalisé →"}
                             </Link>
                         </div>
 
@@ -244,7 +244,7 @@ export default async function TransfersCatalogPage({ params }: { params: Promise
                                         alignItems: 'center',
                                         transition: 'transform 0.2s, box-shadow 0.2s'
                                     }} className="transfer-card">
-                                        
+
                                         {/* Image and basic info */}
                                         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                                             <div style={{ position: 'relative', width: '100px', height: '100px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>

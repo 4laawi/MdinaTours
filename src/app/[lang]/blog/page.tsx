@@ -163,7 +163,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
         { src: "/img2/Asilah_water.webp", alt: "Coast walls of ocean-side Asilah", tag: "Asilah" },
         { src: "/img2/Marrakech_atlas.jpg", alt: "Panoramic view of Atlas mountains from Marrakech", tag: "Atlas" },
         { src: "/a-mdiinatours/selman-marrakech-mdinatours.webp", alt: "Modern Agadir Marina and yachts", tag: "Agadir" },
-        { src: "/img3/casablanca-private-driver-tourists-mosque.webp", alt: "Private driver and travelers at Hassan II Mosque Casablanca", tag: "Casablanca" },
+        { src: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp", alt: "Hassan II Mosque Casablanca", tag: "Casablanca" },
         { src: "/img2/fes_gate.jpg", alt: "Golden gates of Fes Royal Palace", tag: "Fes" },
         { src: "/img2/rabat-hassan-tour.jpg", alt: "Iconic Hassan Tower in Rabat capital", tag: "Rabat" },
         { src: "/img2/tangier_hero.webp", alt: "Aerial harbor view of Tangier", tag: "Tangier" },
@@ -216,7 +216,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
             />
             <Header />
             <main>
-                <PageBanner 
+                <PageBanner
                     title={t('blog_banner_title')}
                     bgImage="/img/Morocco-trip-tour-hero02.webp"
                     homeLabel={t('home')}
@@ -308,7 +308,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                                 {isEn ? "Morocco in Photos" : "Le Maroc en Photos"}
                             </h2>
                             <p className={styles.gallerySubtitle}>
-                                {isEn 
+                                {isEn
                                     ? "A visual journey through the locations we serve, our fleet, and local experiences."
                                     : "Un voyage visuel à travers nos destinations, notre flotte et les expériences locales."}
                             </p>

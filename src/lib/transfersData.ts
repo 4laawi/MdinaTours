@@ -729,7 +729,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-marrakech-transfer",
-        image: "/img3/casablanca-private-driver-tourists-mosque.webp",
+        image: "/hero-marrakech.webp",
         prices: { 3: 220, 4: 250, 5: 290, 7: 390 },
         en: {
             title: "Casablanca to Marrakech Expressway Transfer",
@@ -1005,7 +1005,7 @@ export const transfersData: TransferData[] = [
         image: "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
         galleryImages: [
             "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
-            "/img3/casablanca-private-driver-tourists-mosque.webp",
+            "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp",
             "/a-mdiinatours/private-driver-vito-morocco.webp",
             "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
             "/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp",
