@@ -152,12 +152,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
 
         if (key === "rabat-to-chefchaouen") {
             const title = isEn
-                ? "How to Get From Rabat to Chefchaouen: Bus, Car & Transport Guide (2026)"
-                : "Comment aller de Rabat à Chefchaouen : Bus, Voiture & Conseils Trajet (2026)";
+                ? "Rabat to Chefchaouen: 4h Transfer (€249) vs CTM Bus Guide (2026)"
+                : "Trajet Rabat – Chefchaouen : Transfert Privé (249€) ou Bus CTM (2026)";
 
             const excerpt = isEn
-                ? "The definitive guide to traveling between Rabat and Chefchaouen. Compare direct CTM buses, private transfers, travel times, and why there is no train to Chefchaouen."
-                : "Le guide complet pour relier Rabat et Chefchaouen. Comparez autocars CTM, transferts privés avec chauffeur, durées de route et l'absence de gare à Chefchaouen.";
+                ? "Compare direct CTM buses (160 MAD, ~5h) vs private door-to-door transfer (€249, 4h). Complete 2026 schedule, fixed prices, and why there is no train to Chefchaouen."
+                : "Comparez le car direct CTM (160 MAD, ~5h) et le transfert privé porte-à-porte (249€, 4h). Horaires 2026, tarifs fixes et explications sur l'absence de gare.";
 
             const sections: ProgrammaticSection[] = [
                 {
@@ -346,19 +346,19 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
 
         const title = isEn
             ? (route.train
-                ? `How to Get From ${name1} to ${name2}: Private Transfer, Train & Bus`
-                : `How to Get From ${name1} to ${name2}: Bus, Car & Transport Guide`)
+                ? `${name1} to ${name2}: Train (${route.trainDuration || route.duration}) or Private Transfer (€${route.privatePrice}) (2026)`
+                : `${name1} to ${name2}: ${route.duration} Transfer (€${route.privatePrice}) vs Bus Guide (2026)`)
             : (route.train
-                ? `Comment se rendre de ${name1} à ${name2} : Transfert, Train et Bus`
-                : `Comment se rendre de ${name1} à ${name2} : Bus, Voiture et Conseils`);
+                ? `Trajet ${name1} – ${name2} : Train (${route.trainDuration || route.duration}) ou Transfert Privé dès ${route.privatePrice}€ (2026)`
+                : `Trajet ${name1} – ${name2} : Transfert Privé (${route.privatePrice}€, ${route.duration}) ou Bus (2026)`);
 
         const excerpt = isEn
             ? (route.train
-                ? `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, high-speed rail, highway buses, and sightseeing stops.`
-                : `The ultimate travel guide on traveling between ${name1} and ${name2}. Compare private drivers, highway buses, travel times, and sightseeing stops.`)
+                ? `Compare ONCF train schedules (${route.trainDuration || route.duration}) vs direct door-to-door private transfer (€${route.privatePrice}) between ${name1} and ${name2}. Upfront prices & 2026 travel tips.`
+                : `Compare direct highway buses vs private chauffeur transfer (€${route.privatePrice}, ${route.duration}) between ${name1} and ${name2}. Verified 2026 route advice & fixed prices.`)
             : (route.train
-                ? `Le guide de voyage complet pour relier ${name1} à ${name2}. Comparez chauffeurs privés, train ONCF, autocars CTM et haltes touristiques.`
-                : `Le guide de voyage complet pour relier ${name1} à ${name2}. Comparez chauffeurs privés, autocars CTM, temps de route et haltes touristiques.`);
+                ? `Comparez les horaires du train ONCF (${route.trainDuration || route.duration}) et le transfert privé avec chauffeur (${route.privatePrice}€) entre ${name1} et ${name2}. Prix fixes et conseils 2026.`
+                : `Comparez l'autocar de ligne et le transfert privé direct (${route.privatePrice}€, ${route.duration}) entre ${name1} et ${name2}. Conseils de route vérifiés et tarifs 2026.`);
 
         const sections: ProgrammaticSection[] = [
             {
@@ -513,12 +513,20 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
         const name2 = isEn ? c2.en : c2.fr;
 
         const title = isEn
-            ? `Train vs Private Transfer from ${name1} to ${name2}: The Honest Verdict`
-            : `Train ou Chauffeur Privé de ${name1} à ${name2} : Le Comparatif`;
+            ? (route.train
+                ? `Train vs Private Transfer: ${name1} to ${name2} (Prices, Times & 2026 Guide)`
+                : `Is There a Train from ${name1} to ${name2}? Transit Reality & Alternatives (2026)`)
+            : (route.train
+                ? `Train ou Chauffeur Privé ${name1} – ${name2} : Prix, Durée & Comparatif 2026`
+                : `Y a-t-il un Train de ${name1} à ${name2} ? Réalité du Rail & Alternatives (2026)`);
 
         const excerpt = isEn
-            ? `An in-depth comparison of the train and private car transfers between ${name1} and ${name2}. We compare cost, comfort, and schedules.`
-            : `Comparatif détaillé entre le train de l'ONCF et un chauffeur privé entre ${name1} et ${name2}. Confort, tarifs, horaires et bagages.`;
+            ? (route.train
+                ? `Detailed 2026 comparison between ONCF train and private door-to-door driver (€${route.privatePrice}) from ${name1} to ${name2}. Real costs, luggage handling, and schedules.`
+                : `Planning to take a train from ${name1} to ${name2}? Find out why there is no railway line, how long the drive takes (${route.duration}), and direct transfer options (€${route.privatePrice}).`)
+            : (route.train
+                ? `Comparatif 2026 concret entre le train ONCF et le chauffeur privé porte-à-porte (${route.privatePrice}€) entre ${name1} et ${name2}. Coûts réels, bagages et horaires.`
+                : `Vous cherchez un train entre ${name1} et ${name2} ? Découvrez pourquoi le rail n'existe pas sur cet axe, les temps de route (${route.duration}) et les transferts (${route.privatePrice}€).`);
 
         const sections: ProgrammaticSection[] = [
             {
@@ -620,12 +628,12 @@ export function getProgrammaticPost(slug: string, lang: string): ProgrammaticPos
 
         const cityName = isEn ? c.en : c.fr;
         const title = isEn
-            ? `${cityName} Airport Transfer Guide: Pickups, Prices & Taxis`
-            : `Guide du Transfert Aéroport de ${cityName} : Tarifs et Navettes`;
+            ? `${cityName} Airport Transfer Guide (2026): Fixed Taxi Fares & Private Pickups`
+            : `Navette Aéroport de ${cityName} (2026) : Tarifs Taxis Officiels & Chauffeur Privé`;
 
         const excerpt = isEn
-            ? `The complete guide to landing at ${cityName} Airport. Find out how to arrange transfers, grand taxi prices, and meet-and-greet services.`
-            : `Le guide de voyage pour votre arrivée à l'Aéroport de ${cityName}. Évitez les pièges, comparez les prix des grands taxis et réservez une navette.`;
+            ? `Avoid terminal taxi queues and price haggling at ${cityName} Airport. Compare official grand taxi rates, private meet & greet transfers, and direct door-to-door service.`
+            : `Évitez l'attente et les négociations à l'Aéroport de ${cityName}. Tarifs officiels des taxis, accueil avec pancarte en navette privée et réservation sans prépaiement.`;
 
         const sections: ProgrammaticSection[] = [
             {

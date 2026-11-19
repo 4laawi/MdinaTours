@@ -263,189 +263,75 @@ export default function TransferBookingWidget(props: any) {
           </div>
 
 
-          {/* Availability Booking Flow Buttons (Airbnb Style) */}
-          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', boxSizing: 'border-box' }}>
-              {searchState === 'initial' && (
-                  <>
-                      <button
-                      type="button"
-                      onClick={handleSearchClick}
-                      style={{
-                          border: '2px solid #222',
-                          color: '#222',
-                          backgroundColor: '#fff',
-                          padding: '14px 20px',
-                          borderRadius: '8px',
-                          textAlign: 'center',
-                          fontWeight: 700,
-                          fontSize: '16px',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                          width: '100%',
-                          boxSizing: 'border-box'
-                      }}
-                      className="search-sidebar-btn"
-                  >
-                      {isEn ? "Check Availability" : (language === 'es' ? "Verificar disponibilidad" : "Vérifier la disponibilité")}
-                  </button>
-                  <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '8px' }}>
-                      {isEn ? "No deposit · Pay upon arrival (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago a la llegada (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement à l'arrivée (espèces ou carte) · Annulation gratuite")}
-                  </div>
-              </>
-              )}
+          {/* Direct High-Converting Booking CTAs (Instant 1-Tap Booking) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', boxSizing: 'border-box' }}>
+              {/* Primary CTA (WhatsApp 1-Tap) */}
+              <a 
+                  href={getCustomizedWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackLeadConversion('transfer_sidebar_whatsapp', { travelers, travelDate, price: displayPrice })}
+                  style={{
+                      backgroundColor: '#25D366',
+                      color: '#fff',
+                      padding: '14px 20px',
+                      borderRadius: '8px',
+                      textAlign: 'center',
+                      fontWeight: 600,
+                      fontSize: '15px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px',
+                      textDecoration: 'none',
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      boxShadow: '0 4px 14px rgba(37, 211, 102, 0.25)',
+                      transition: 'background-color 0.2s, transform 0.2s'
+                  }}
+                  className="whatsapp-sidebar-btn"
+              >
+                  <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.949h.004c4.368 0 7.927-3.561 7.928-7.928a7.89 7.89 0 0 0-2.325-5.695M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.618-4.934c-.198-.099-1.17-.578-1.353-.646-.182-.068-.315-.099-.448.099-.133.197-.513.646-.629.775-.115.13-.232.146-.43.047-.197-.099-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.09-.088.198-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.448-1.078-.613-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                  </svg>
+                  {transText.reserveWhatsApp}
+              </a>
 
-              {searchState === 'searching' && (
-                  <button
-                      type="button"
-                      disabled
-                      style={{
-                          border: '2px solid #666',
-                          color: '#666',
-                          backgroundColor: '#f1f5f9',
-                          padding: '14px 20px',
-                          borderRadius: '8px',
-                          textAlign: 'center',
-                          fontWeight: 700,
-                          fontSize: '16px',
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '8px',
-                          cursor: 'not-allowed'
-                      }}
-                  >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-spin">
-                          <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="8" />
-                      </svg>
-                      {isEn ? "Searching..." : (isEs ? "Buscando..." : "Recherche en cours...")}
-                  </button>
-              )}
+              {/* Secondary CTA (Instant Booking Form Modal) */}
+              <button
+                  type="button"
+                  onClick={handleOpenModal}
+                  style={{
+                      border: '1.5px solid #222222',
+                      color: '#222222',
+                      backgroundColor: 'transparent',
+                      padding: '12px 20px',
+                      borderRadius: '8px',
+                      textAlign: 'center',
+                      fontWeight: 600,
+                      fontSize: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      width: '100%',
+                      boxSizing: 'border-box'
+                  }}
+                  className="email-sidebar-btn"
+              >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  {isEn ? "Book via Online Form" : (isEs ? "Reservar mediante formulario" : "Réserver via Formulaire en Ligne")}
+              </button>
 
-              {searchState === 'searched' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', animation: 'fadeIn 0.3s ease-out' }}>
-                      {/* "Check Availability" button or CTAs */}
-                      {!showBookingCTAs ? (
-                          <button
-                              type="button"
-                              onClick={() => setShowBookingCTAs(true)}
-                              style={{
-                                  backgroundColor: 'var(--primary)',
-                                  color: '#fff',
-                                  padding: '14px 20px',
-                                  borderRadius: '8px',
-                                  textAlign: 'center',
-                                  fontWeight: 700,
-                                  fontSize: '16px',
-                                  cursor: 'pointer',
-                                  border: 'none',
-                                  transition: 'all 0.2s',
-                                  width: '100%',
-                                  boxSizing: 'border-box',
-                                  boxShadow: '0 4px 12px rgba(220, 131, 78, 0.25)'
-                              }}
-                              className="check-availability-btn"
-                          >
-                              {isEn ? "Check Availability" : (isEs ? "Verificar disponibilidad" : "Vérifier la disponibilité")}
-                          </button>
-                      ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', animation: 'fadeIn 0.3s ease-out' }}>
-                              {/* If inputs changed, show 'Update Search' button here */}
-                              {hasPendingChanges && (
-                                  <button
-                                      type="button"
-                                      onClick={handleSearchClick}
-                                      style={{
-                                          backgroundColor: 'var(--secondary)',
-                                          color: '#fff',
-                                          padding: '14px 20px',
-                                          borderRadius: '8px',
-                                          textAlign: 'center',
-                                          fontWeight: 700,
-                                          fontSize: '16px',
-                                          cursor: 'pointer',
-                                          border: 'none',
-                                          transition: 'all 0.2s',
-                                          width: '100%',
-                                          boxSizing: 'border-box',
-                                          marginBottom: '6px'
-                                      }}
-                                      className="update-search-btn"
-                                  >
-                                      {isEn ? "Update search" : (isEs ? "Actualizar búsqueda" : "Mettre à jour la recherche")}
-                                  </button>
-                              )}
-                              {/* Primary CTA (WhatsApp) */}
-                              <a 
-                                  href={getCustomizedWhatsAppUrl()}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={() => trackLeadConversion('transfer_sidebar_whatsapp', { travelers, travelDate, price: displayPrice })}
-                                  style={{
-                                      backgroundColor: '#25D366',
-                                      color: '#fff',
-                                      padding: '14px 20px',
-                                      borderRadius: '8px',
-                                      textAlign: 'center',
-                                      fontWeight: 600,
-                                      fontSize: '15px',
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      gap: '10px',
-                                      textDecoration: 'none',
-                                      width: '100%',
-                                      boxSizing: 'border-box',
-                                      transition: 'background-color 0.2s, transform 0.2s'
-                                  }}
-                                  className="whatsapp-sidebar-btn"
-                              >
-                                  <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                                      <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.949h.004c4.368 0 7.927-3.561 7.928-7.928a7.89 7.89 0 0 0-2.325-5.695M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.618-4.934c-.198-.099-1.17-.578-1.353-.646-.182-.068-.315-.099-.448.099-.133.197-.513.646-.629.775-.115.13-.232.146-.43.047-.197-.099-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.09-.088.198-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.448-1.078-.613-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                                  </svg>
-                                  {transText.reserveWhatsApp}
-                              </a>
-
-                              {/* Secondary CTA (Email) */}
-                              <button
-                                  onClick={handleOpenModal}
-                                  style={{
-                                      border: '1.5px solid #222222',
-                                      color: '#222222',
-                                      backgroundColor: 'transparent',
-                                      padding: '14px 20px',
-                                      borderRadius: '8px',
-                                      textAlign: 'center',
-                                      fontWeight: 600,
-                                      fontSize: '15px',
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      gap: '8px',
-                                      cursor: 'pointer',
-                                      transition: 'all 0.2s',
-                                      width: '100%',
-                                      boxSizing: 'border-box'
-                                  }}
-                                  className="booking-request-btn"
-                              >
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                  </svg>
-                                  {isEn ? "Book via Email" : (isEs ? "Reservar por Email" : "Réserver par Email")}
-                              </button>
-                          </div>
-                      )}
-                      {/* Single Trust Line */}
-                      <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '10px' }}>
-                          {isEn ? "No deposit · Pay upon arrival (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago a la llegada (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement à l'arrivée (espèces ou carte) · Annulation gratuite")}
-                      </div>
-                  </div>
-              )}
+              <div style={{ textAlign: 'center', fontSize: '11.5px', color: '#64748B', fontWeight: 500, marginTop: '4px' }}>
+                  {isEn ? "No deposit · Pay upon arrival (cash or card) · Free cancellation" : (isEs ? "Sin fianza · Pago a la llegada (efectivo o tarjeta) · Cancelación gratuita" : "Sans acompte · Paiement à l'arrivée (espèces ou carte) · Annulation gratuite")}
+              </div>
           </div>
-
       </div>
 
       {/* Book Ahead Info Card */}
