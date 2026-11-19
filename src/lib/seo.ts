@@ -135,3 +135,219 @@ export const SCHEMA_SAME_AS = [
     'https://www.facebook.com/p/Mdina-tours-61594608887112/',
     'https://x.com/Haifadev',
 ];
+
+export const SCHEMA_ORGANIZATION_ID = 'https://mdinatours.com/#organization';
+
+export const SCHEMA_KNOWS_LANGUAGE = ['en', 'fr', 'es', 'ar'];
+
+export const SCHEMA_AREA_SERVED = [
+    {
+        "@type": "Country",
+        "name": "Morocco"
+    },
+    {
+        "@type": "City",
+        "name": "Casablanca"
+    },
+    {
+        "@type": "City",
+        "name": "Marrakech"
+    },
+    {
+        "@type": "City",
+        "name": "Rabat"
+    },
+    {
+        "@type": "City",
+        "name": "Tangier"
+    },
+    {
+        "@type": "City",
+        "name": "Fes"
+    },
+    {
+        "@type": "City",
+        "name": "Agadir"
+    },
+    {
+        "@type": "City",
+        "name": "Chefchaouen"
+    },
+    {
+        "@type": "City",
+        "name": "Essaouira"
+    },
+    {
+        "@type": "City",
+        "name": "Merzouga"
+    },
+    {
+        "@type": "City",
+        "name": "Ouarzazate"
+    },
+    {
+        "@type": "Airport",
+        "name": "Casablanca Mohammed V International Airport",
+        "iataCode": "CMN"
+    },
+    {
+        "@type": "Airport",
+        "name": "Marrakech Menara Airport",
+        "iataCode": "RAK"
+    },
+    {
+        "@type": "Airport",
+        "name": "Rabat-Salé Airport",
+        "iataCode": "RBA"
+    },
+    {
+        "@type": "Airport",
+        "name": "Tangier Ibn Battouta Airport",
+        "iataCode": "TNG"
+    },
+    {
+        "@type": "Airport",
+        "name": "Fes-Saïss Airport",
+        "iataCode": "FEZ"
+    },
+    {
+        "@type": "Airport",
+        "name": "Agadir Al Massira Airport",
+        "iataCode": "AGA"
+    }
+];
+
+export const SCHEMA_PROVIDER = {
+    "@type": "TravelAgency",
+    "@id": SCHEMA_ORGANIZATION_ID,
+    "name": "Mdina Tours",
+    "telephone": "+212724114775",
+    "url": "https://mdinatours.com/",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rabat",
+        "addressRegion": "Rabat-Salé-Kénitra",
+        "addressCountry": "MA"
+    }
+};
+
+export const SCHEMA_OFFER_CATALOG = {
+    "@type": "OfferCatalog",
+    "name": "Mdina Tours Transport Services",
+    "itemListElement": [
+        {
+            "@type": "OfferCatalog",
+            "name": "Airport Transfers Morocco",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Casablanca Mohammed V Airport (CMN) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/casablanca-airport-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Marrakech Menara Airport (RAK) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/marrakech-airport-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Rabat-Salé Airport (RBA) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/rabat-airport-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Tangier Ibn Battouta Airport (TNG) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/tangier-airport-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Fes-Saïss Airport (FEZ) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/fes-airport-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Agadir Al Massira Airport (AGA) Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/agadir-airport-transfer"
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "OfferCatalog",
+            "name": "Private Chauffeur & Driver at Disposal",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Hourly Chauffeur Hire in Morocco (from €25/hour)",
+                        "url": "https://mdinatours.com/en/private-driver-morocco"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Full-Day Private Driver at Disposal (~8 hours, from €140/day)",
+                        "url": "https://mdinatours.com/en/private-driver-morocco"
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "OfferCatalog",
+            "name": "Intercity Private Transfers",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Casablanca to Marrakech Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/casablanca-to-marrakech-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Tangier to Chefchaouen Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/tangier-to-chefchaouen-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Fes to Chefchaouen Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/fes-to-chefchaouen-transfer"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Marrakech to Essaouira Private Transfer",
+                        "url": "https://mdinatours.com/en/transfers/marrakech-to-essaouira-transfer"
+                    }
+                }
+            ]
+        }
+    ]
+};

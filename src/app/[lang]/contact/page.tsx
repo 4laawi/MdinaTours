@@ -1,4 +1,4 @@
-import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
+import { getAlternates, SCHEMA_SAME_AS, SCHEMA_ORGANIZATION_ID } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -84,6 +84,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
         "url": `https://mdinatours.com/${language}/contact`,
         "mainEntity": {
             "@type": "TravelAgency",
+            "@id": SCHEMA_ORGANIZATION_ID,
             "name": "Mdina Tours",
             "telephone": "+212724114775",
             "email": "contact@mdinatours.com",

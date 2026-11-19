@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "generate-llms": "tsx scripts/generate-llms.ts",
     "validate-schema": "node scripts/validate-schema.js",
-    "build": "npm run validate-schema && next build --webpack",
+    "build": "npm run generate-llms && npm run validate-schema && next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
@@ -30,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

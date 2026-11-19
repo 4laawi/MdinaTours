@@ -7,7 +7,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { transfersData } from '@/lib/transfersData';
 import { translations, Language } from '@/lib/translations';
-import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
+import { isSpanishSupported, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS, SCHEMA_ORGANIZATION_ID } from '@/lib/seo';
 import TransferBookingFlow from '@/components/TransferBookingFlow';
 import TransferWebRatings from '@/components/transfers/TransferWebRatings';
 import TransferWhatsIncluded from '@/components/transfers/TransferWhatsIncluded';
@@ -165,10 +165,12 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         "url": `https://mdinatours.com/${language}/transfers/${trans.slug}`,
         "brand": SCHEMA_BRAND,
         "provider": {
-            "@type": "LocalBusiness",
+            "@type": "TravelAgency",
+            "@id": SCHEMA_ORGANIZATION_ID,
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img3/mdinatours-drivers-cars.webp",
             "telephone": "+212724114775",
+            "priceRange": "€25 - €640",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",

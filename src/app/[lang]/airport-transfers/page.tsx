@@ -1,4 +1,4 @@
-import { getAlternates } from '@/lib/seo';
+import { getAlternates, SCHEMA_ORGANIZATION_ID } from '@/lib/seo';
 import ReactDOM from 'react-dom';
 import { getImageProps } from 'next/image';
 import Header from '@/components/Header';
@@ -89,10 +89,11 @@ export default async function AirportTransfersPage({ params }: { params: Promise
         "image": "https://mdinatours.com/b-roll/private-transfer-chauffeur-vito.jpg",
         "url": `https://mdinatours.com/${currentLang}/airport-transfers`,
         "provider": {
-            "@type": "LocalBusiness",
+            "@type": "TravelAgency",
+            "@id": SCHEMA_ORGANIZATION_ID,
             "name": "Mdina Tours",
             "telephone": "+212724114775",
-            "priceRange": "$$",
+            "priceRange": "€25 - €640",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",
@@ -100,12 +101,18 @@ export default async function AirportTransfersPage({ params }: { params: Promise
             }
         },
         "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Casablanca" },
-            { "@type": "AdministrativeArea", "name": "Marrakech" },
-            { "@type": "AdministrativeArea", "name": "Rabat" },
-            { "@type": "AdministrativeArea", "name": "Tangier" },
-            { "@type": "AdministrativeArea", "name": "Fes" },
-            { "@type": "AdministrativeArea", "name": "Agadir" }
+            { "@type": "City", "name": "Casablanca" },
+            { "@type": "City", "name": "Marrakech" },
+            { "@type": "City", "name": "Rabat" },
+            { "@type": "City", "name": "Tangier" },
+            { "@type": "City", "name": "Fes" },
+            { "@type": "City", "name": "Agadir" },
+            { "@type": "Airport", "name": "Casablanca Mohammed V International Airport", "iataCode": "CMN" },
+            { "@type": "Airport", "name": "Marrakech Menara Airport", "iataCode": "RAK" },
+            { "@type": "Airport", "name": "Rabat-Salé Airport", "iataCode": "RBA" },
+            { "@type": "Airport", "name": "Tangier Ibn Battouta Airport", "iataCode": "TNG" },
+            { "@type": "Airport", "name": "Fes-Saïss Airport", "iataCode": "FEZ" },
+            { "@type": "Airport", "name": "Agadir Al Massira Airport", "iataCode": "AGA" }
         ],
         "offers": {
             "@type": "AggregateOffer",

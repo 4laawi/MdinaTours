@@ -52,6 +52,20 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Ensure llms.txt and llms-full.txt are served with UTF-8 text/plain
+      {
+        source: "/llms(.*)\\.txt",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/plain; charset=utf-8",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
     ];
   },
 

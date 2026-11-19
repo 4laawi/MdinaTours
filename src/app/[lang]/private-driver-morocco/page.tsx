@@ -1,4 +1,4 @@
-import { getAlternates, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS } from '@/lib/seo';
+import { getAlternates, SCHEMA_BRAND, SCHEMA_RETURN_POLICY, SCHEMA_SHIPPING_DETAILS, SCHEMA_ORGANIZATION_ID } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingElements from '@/components/FloatingElements';
@@ -394,11 +394,12 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
         "url": `https://mdinatours.com/${language}/private-driver-morocco`,
         "brand": SCHEMA_BRAND,
         "provider": {
-            "@type": "LocalBusiness",
+            "@type": "TravelAgency",
+            "@id": SCHEMA_ORGANIZATION_ID,
             "name": "Mdina Tours",
             "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
             "telephone": "+212724114775",
-            "priceRange": "$$",
+            "priceRange": "€25 - €640",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",

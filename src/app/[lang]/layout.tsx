@@ -1,4 +1,11 @@
-import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
+import {
+    getAlternates,
+    SCHEMA_SAME_AS,
+    SCHEMA_ORGANIZATION_ID,
+    SCHEMA_KNOWS_LANGUAGE,
+    SCHEMA_AREA_SERVED,
+    SCHEMA_OFFER_CATALOG
+} from '@/lib/seo';
 import type { Metadata, Viewport } from 'next';
 import { Outfit, Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
 import '../globals.css';
@@ -118,14 +125,22 @@ export default async function LocaleLayout({
 
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "TravelAgency",
+        "@type": ["TravelAgency", "TaxiService"],
+        "@id": SCHEMA_ORGANIZATION_ID,
         "name": "Mdina Tours",
+        "alternateName": ["Mdina Tours Morocco", "MdinaTours"],
         "image": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "logo": "https://mdinatours.com/img/Morocco-trip-tour-hero01.webp",
         "description": agencyDescription,
         "url": lang === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${lang}`,
         "telephone": "+212724114775",
-        "priceRange": "$$",
+        "email": "contact@mdinatours.com",
+        "priceRange": "€25 - €640",
+        "currenciesAccepted": "EUR, USD, MAD",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "knowsLanguage": SCHEMA_KNOWS_LANGUAGE,
+        "areaServed": SCHEMA_AREA_SERVED,
+        "hasOfferCatalog": SCHEMA_OFFER_CATALOG,
         "sameAs": SCHEMA_SAME_AS,
         "address": {
             "@type": "PostalAddress",
@@ -145,6 +160,9 @@ export default async function LocaleLayout({
 
     return (
         <html lang={lang} className={`${outfit.variable} ${cormorant.variable} ${inter.variable} ${greatVibes.variable}`}>
+            <head>
+                <link rel="help" type="text/markdown" href="/llms.txt" />
+            </head>
             <body>
                 <LanguageProvider initialLanguage={lang as Language}>
                     <Suspense fallback={null}>

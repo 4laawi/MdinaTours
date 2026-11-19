@@ -1,0 +1,760 @@
+# Mdina Tours - Comprehensive Service, Pricing & Route Database
+
+> This document contains the exhaustive catalog of private transport, airport pickup, intercity transfers, and chauffeur services operated by Mdina Tours in Morocco.
+
+Last Updated: 2026-11-19
+Official Website: https://mdinatours.com/
+Contact & WhatsApp Concierge: +212 724 114 775 (https://wa.me/212724114775)
+Email: contact@mdinatours.com
+
+---
+
+## Section 1: Dedicated Private Driver & Chauffeur Service (At Disposal)
+
+Mdina Tours provides licensed, bilingual private chauffeurs on an hourly, daily, or multi-day basis throughout Morocco.
+
+### Rates & Terms
+- **Hourly Chauffeur Hire**: Starting from €25/hour ($25/hour)
+- **Full-Day Private Driver (At Disposal)**: Starting from €140–€150/day (1,500 MAD) for a standard ~8-hour day
+- **Service Details**: The driver stays at the client's full disposal throughout the day, waits on-site during stops (sightseeing, meetings, shopping, dining), and picks them up on call anywhere within their itinerary.
+- **Working Hours**: Standard ~8 hours/day with flexible scheduling according to client's itinerary.
+- **Languages**: Professional drivers fluent in English, French, Spanish, and Arabic.
+- **Included Amenities**: Premium air-conditioned vehicle, fuel, highway toll charges, parking fees, passenger liability insurance, chilled bottled water, and phone charging cables.
+
+### City-by-City Driver Availability
+- **Casablanca**: https://mdinatours.com/en/private-driver-casablanca (Business trips, Hassan II Mosque, Corniche, transfers to Rabat/Marrakech)
+- **Marrakech**: https://mdinatours.com/en/private-driver-marrakech (Medina, Palmeraie, Agafay Desert, Atlas Mountains day trips)
+- **Rabat**: https://mdinatours.com/en/private-driver-rabat (Embassies, government business, Hassan Tower, Oudayas Kasbah)
+- **Tangier**: https://mdinatours.com/en/private-driver-tangier (Tanger Ville Port, Tanger Med, Cap Spartel, Chefchaouen day tours)
+- **Fes**: https://mdinatours.com/en/private-driver-fes (Fes el-Bali Medina, Meknes, Volubilis Roman ruins)
+- **Agadir**: https://mdinatours.com/en/private-driver-agadir (Taghazout surf shuttles, Paradise Valley, Marina)
+- **Chefchaouen**: https://mdinatours.com/en/private-driver-chefchaouen (Rif mountains, Akchour waterfalls)
+
+---
+
+## Section 2: Complete Transfer Route & Fixed Pricing Catalog (20 Verified Routes)
+
+All prices are fixed per vehicle in Euros (€). They include fuel, highway tolls, vehicle insurance, and bottled water.
+
+### 1. Casablanca Airport Transfer & Private Taxi Service (CMN)
+- **Route Slug**: `casablanca-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/casablanca-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Casablanca Mohammed V International Airport (CMN)
+- **Dropoff**: Casablanca City Center, Rabat, Marrakech, or Mohammedia
+- **Distance**: 32 km (Casablanca) / 120 km (Rabat) / 240 km (Marrakech)
+- **Estimated Driving Duration**: 40 mins (Casablanca) / 1h 30m (Rabat) / 2h 45m (Marrakech)
+- **Price Range**: €35 – €85
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €35 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €50 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €65 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €85 |
+
+#### Key Route Highlights:
+- Terminal 1 & 2 Meet & Greet: Chauffeur waits inside the terminal holding a personalized sign with your name.
+- Live CMN Flight Tracking: Automatic schedule synchronization with 60 minutes free wait time if your flight is delayed.
+- Guaranteed Fixed Fares: Transparent pricing per vehicle with zero night surcharges, baggage fees, or highway toll extras.
+- Direct Highway Transit: Travel comfortably to Rabat or Marrakech without changing trains or negotiating street taxis.
+- Pristine Executive Fleet: Climate-controlled Mercedes-Benz Vitos & executive sedans with complimentary child seats.
+
+
+---
+
+### 2. Rabat-Salé Airport (RBA) Private Chauffeur
+- **Route Slug**: `rabat-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/rabat-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Rabat-Salé International Airport (RBA)
+- **Dropoff**: Any Hotel or Riad in Rabat or Salé
+- **Distance**: 15 km
+- **Estimated Driving Duration**: 25-30 minutes
+- **Price Range**: €45 – €95
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €45 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €55 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €70 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €95 |
+
+#### Key Route Highlights:
+- Fixed Flat Rates: Enjoy transparent pricing covering the entire Rabat-Salé metropolitan area with zero hidden surprises.
+- Meet & Greet Service: Your private driver will be waiting directly at the terminal exit, holding a sign for quick greeting.
+- Air-Conditioned Comfort: Travel in clean, climate-controlled executive vehicles configured for ultimate relaxation.
+- No Prepayment Required: Lock in your booking instantly and pay cash (Dirhams or Euros) directly to your chauffeur upon arrival.
+- Medina Gate Drop-Offs: Seamless coordination with riad hosts for smooth porter hand-off at pedestrian-only medina entry gates.
+
+
+---
+
+### 3. Tangier Ferry Port Private Transfer (Tanger Ville & Tanger Med)
+- **Route Slug**: `tangier-port-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/tangier-port-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Tangier Ferry Port (Tanger Ville Port or Tanger Med)
+- **Dropoff**: Tangier (City Center, Hotels, Medina)
+- **Distance**: 5 - 45 km
+- **Estimated Driving Duration**: 15 - 45 minutes
+- **Price Range**: €45 – €90
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €45 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €55 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €65 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €90 |
+
+#### Key Route Highlights:
+- Direct meet & greet outside passenger customs at both Tanger Ville and Tanger Med terminals
+- Ferry arrival tracking across all operators (FRS, Balearia, AML, Trasmediterranea, GNV)
+- Fixed all-inclusive pricing with zero negotiation and no luggage surcharges (starting from €45 for Tanger Ville)
+- Modern air-conditioned sedans and spacious minivans for families and small groups
+- Direct coordination with riad hosts inside the historic Tangier Kasbah and Medina
+
+
+---
+
+### 4. Tangier to Rabat or Salé Private Expressway Transfer
+- **Route Slug**: `tangier-to-rabat-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/tangier-to-rabat-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Tangier (Airport, Port, or Hotel)
+- **Dropoff**: Rabat or Salé (Hotel, Riad, or Airport)
+- **Distance**: 250 km
+- **Estimated Driving Duration**: 2 hours 45 minutes
+- **Price Range**: €210 – €390
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €210 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €245 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €280 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €390 |
+
+#### Key Route Highlights:
+- Scenic Coastal Routing: Travel safely along the multi-lane Atlantic highway linking the north to the capital.
+- Bespoke Scheduling: Select your exact departure time to fit your itinerary, cruise arrival, or hotel checkout.
+- On-Demand Comfort Stops: Request breaks at clean highway rest areas for coffee, fresh snacks, or stretching.
+- Spacious Group Vehicles: Stretch out in modern, high-clearance minivans with ample space for large suitcases.
+- Safe Driving Standards: Professional drivers committed to strict speed limits and passenger safety.
+
+
+---
+
+### 5. Rabat or Salé to Casablanca Private Transfer
+- **Route Slug**: `rabat-to-casablanca-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/rabat-to-casablanca-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Rabat or Salé (Hotel, Office, or Airport)
+- **Dropoff**: Casablanca (Hotel, Office, Port, or Airport)
+- **Distance**: 90 km
+- **Estimated Driving Duration**: 1 hour 10 minutes
+- **Price Range**: €110 – €195
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €110 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €130 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €155 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €195 |
+
+#### Key Route Highlights:
+- Ideal for business travelers needing punctuality
+- Door-to-door transfer skipping crowded train stations
+- On-board Wi-Fi and phone chargers on request
+- Experienced highway drivers with local road expertise
+- Professional invoicing for companies
+
+
+---
+
+### 6. Marrakech to Essaouira Coastal Transfer
+- **Route Slug**: `marrakech-to-essaouira-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/marrakech-to-essaouira-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Marrakech (Hotel or Airport)
+- **Dropoff**: Essaouira (Hotel, Riad, or Port)
+- **Distance**: 180 km
+- **Estimated Driving Duration**: 2 hours 45 minutes
+- **Price Range**: €140 – €260
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €140 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €165 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €195 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €260 |
+
+#### Key Route Highlights:
+- Stop along the road to see the famous tree-climbing goats
+- See the changing landscapes from arid plains to argan forests
+- Direct door-to-door transfer directly to Essaouira's medina gates
+- Clean, non-smoking, air-conditioned vehicles
+- Stop at an authentic Argan cooperative on request
+
+
+---
+
+### 7. Fes to Chefchaouen Scenic Mountain Transfer
+- **Route Slug**: `fes-to-chefchaouen-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/fes-to-chefchaouen-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Fes (Riad, Hotel, or Airport)
+- **Dropoff**: Chefchaouen (Hotel or Riad)
+- **Distance**: 200 km
+- **Estimated Driving Duration**: 3 hours 30 minutes
+- **Price Range**: €170 – €310
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €170 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €195 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €230 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €310 |
+
+#### Key Route Highlights:
+- Drive through the scenic Rif mountain valleys
+- Paved mountain-road expertise prioritizing passenger comfort
+- Stop for panoramic photographs overlooking the Sidi Chahed dam
+- Air-conditioned vans designed for steep ascents
+- Smooth hotel-to-hotel coordination
+
+
+---
+
+### 8. Casablanca to Marrakech Expressway Transfer
+- **Route Slug**: `casablanca-to-marrakech-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/casablanca-to-marrakech-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Casablanca (Hotel, Port, or Airport)
+- **Dropoff**: Marrakech (Hotel, Riad, or Airport)
+- **Distance**: 240 km
+- **Estimated Driving Duration**: 2 hours 30 minutes
+- **Price Range**: €220 – €390
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €220 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €250 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €290 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €390 |
+
+#### Key Route Highlights:
+- Fast, direct expressway routing with zero stops unless requested
+- Ideal for airport arrivals at CMN heading straight to Marrakech
+- Comfortable seating with individual air conditioning controls
+- Drivers who understand Marrakech riad gate drops
+- Available 24/7 for night flights
+
+
+---
+
+### 9. Tangier Ibn Battouta Airport Private Transfer
+- **Route Slug**: `tangier-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/tangier-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Tangier Ibn Battouta International Airport (TNG)
+- **Dropoff**: Tangier (City Center, Hilton Houara, Port, or Medina)
+- **Distance**: 15 km
+- **Estimated Driving Duration**: 20-25 minutes
+- **Price Range**: €45 – €90
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €45 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €55 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €65 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €90 |
+
+#### Key Route Highlights:
+- Flight-tracked pickup – no waiting times at the terminal exit
+- Meet & Greet with a personalized sign in the arrivals hall
+- Fixed rates with no night-time premiums or extra fees
+- Comfortable air-conditioned vehicles skipping local taxi queues
+- Coordination with hotels inside the historic Kasbah
+
+
+---
+
+### 10. Tangier to Casablanca Private Transfer
+- **Route Slug**: `tangier-to-casablanca-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/tangier-to-casablanca-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Tangier (Hotel, Port, or Airport)
+- **Dropoff**: Casablanca (Hotel, Port, or CMN Airport)
+- **Distance**: 340 km
+- **Estimated Driving Duration**: 3 hours 30 minutes
+- **Price Range**: €280 – €490
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €280 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €320 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €365 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €490 |
+
+#### Key Route Highlights:
+- Direct door-to-door transit between Tangier and Casablanca
+- Travel via the modern A1 Atlantic highway safely
+- Complimentary bottled water and stops on request
+- Professional drivers speaking English, French, and Spanish
+- Flight tracking included if dropoff is Casablanca CMN airport
+
+
+---
+
+### 11. Tangier to Chefchaouen Private Transfer
+- **Route Slug**: `tangier-to-chefchaouen-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/tangier-to-chefchaouen-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Tangier (Hotel, Port, or Airport)
+- **Dropoff**: Chefchaouen (Hotel or Riad)
+- **Distance**: 120 km
+- **Estimated Driving Duration**: 2 hours 15 minutes
+- **Price Range**: €140 – €260
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €140 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €165 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €195 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €260 |
+
+#### Key Route Highlights:
+- Fastest connection to Chefchaouen from Tangier port or airport
+- Experienced mountain road drivers
+- Panoramic photo stops in the Rif region
+- Fixed rates with no hidden baggage surcharges
+- Coordination with riads in Chefchaouen medina
+
+
+---
+
+### 12. Casablanca to Fes Private Transfer
+- **Route Slug**: `casablanca-to-fes-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/casablanca-to-fes-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Casablanca (Hotel, Port, or CMN Airport)
+- **Dropoff**: Fes (Hotel, Riad, or Airport)
+- **Distance**: 300 km
+- **Estimated Driving Duration**: 3 hours 15 minutes
+- **Price Range**: €250 – €445
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €250 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €290 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €335 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €445 |
+
+#### Key Route Highlights:
+- Direct expressway transit connecting Casablanca to Fes
+- Avoid busy train stations and luggage carrying
+- Comfortable climate-controlled vans and sedans
+- Stop at rest areas along the highway on request
+- Door-to-door service directly to Fes Medina gates
+
+
+---
+
+### 13. Rabat or Salé to Marrakech Private Transfer
+- **Route Slug**: `rabat-to-marrakech-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/rabat-to-marrakech-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Rabat or Salé (Hotel, Riad, or Office)
+- **Dropoff**: Marrakech (Hotel, Riad, or Airport)
+- **Distance**: 325 km
+- **Estimated Driving Duration**: 3 hours 15 minutes
+- **Price Range**: €245 – €425
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €245 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €275 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €315 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €425 |
+
+#### Key Route Highlights:
+- Direct highway drive bypassing transit stations
+- Flexible pickup time matching your schedule
+- Experienced drivers with highway safety certification
+- Dropoff at Marrakech medina gates with riad coordination
+- Modern air-conditioned vans with phone chargers
+
+
+---
+
+### 14. Rabat or Salé to Fes Private Transfer
+- **Route Slug**: `rabat-to-fes-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/rabat-to-fes-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Rabat or Salé (Hotel, Riad, or Office)
+- **Dropoff**: Fes (Hotel, Riad, or Airport)
+- **Distance**: 200 km
+- **Estimated Driving Duration**: 2 hours 10 minutes
+- **Price Range**: €165 – €295
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €165 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €190 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €220 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €295 |
+
+#### Key Route Highlights:
+- Fast expressway connection between Rabat and Fes
+- Direct hotel-to-hotel pickup and drop-off
+- Polite local drivers who speak English and French
+- Comfortable clean vehicles with spacious seating
+- Free baby seats available on request
+
+
+---
+
+### 15. Rabat or Salé to Chefchaouen Private Transfer
+- **Route Slug**: `rabat-to-chefchaouen-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/rabat-to-chefchaouen-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Rabat or Salé (Hotel, Riad, or Office)
+- **Dropoff**: Chefchaouen (Hotel or Riad)
+- **Distance**: 250 km
+- **Estimated Driving Duration**: 4 hours
+- **Price Range**: €249 – €429
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €249 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €289 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €329 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €429 |
+
+#### Key Route Highlights:
+- Direct transfer from Rabat to the heart of Chefchaouen
+- Comfortable mountain drive with experienced chauffeurs
+- Stops for photographs in scenic rural regions
+- Fixed, transparent rates with zero hidden fees
+- Coordination with riads in Chefchaouen medina
+
+
+---
+
+### 16. Marrakech to Agadir Highway Transfer
+- **Route Slug**: `marrakech-to-agadir-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/marrakech-to-agadir-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Marrakech (Hotel or Airport)
+- **Dropoff**: Agadir (Hotel, Marina, or Airport)
+- **Distance**: 250 km
+- **Estimated Driving Duration**: 3 hours
+- **Price Range**: €185 – €345
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €185 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €215 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €250 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €345 |
+
+#### Key Route Highlights:
+- Fast expressway transfer connecting Marrakech to Agadir
+- Travel via the High Atlas highway safely
+- Experienced drivers with local highway certification
+- Dropoff directly at your Agadir hotel, resort, or beach club
+- Modern air-conditioned vans with phone chargers
+
+
+---
+
+### 17. Fes to Merzouga Private Transfer
+- **Route Slug**: `fes-to-merzouga-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/fes-to-merzouga-transfer
+- **Category**: Intercity Private Transfer
+- **Pickup**: Fes (Hotel, Riad, or Airport)
+- **Dropoff**: Merzouga (Hotel, Desert Camp, or Dunes Gate)
+- **Distance**: 460 km
+- **Estimated Driving Duration**: 7 hours 30 minutes
+- **Price Range**: €370 – €640
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €370 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €425 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €495 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €640 |
+
+#### Key Route Highlights:
+- Drive through the Middle Atlas cedar forests and Ifrane
+- Scenic views of the Ziz Valley palm groves and gorges
+- Experienced drivers trained for long-distance mountain driving
+- Drop-off directly at your Merzouga hotel or desert camp meeting point
+- Clean air-conditioned 4x4 or spacious van
+
+
+---
+
+### 18. Marrakech Airport Transfer & Private Taxi Service (RAK)
+- **Route Slug**: `marrakech-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/marrakech-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Marrakech Menara International Airport (RAK)
+- **Dropoff**: Medina Riads, Gueliz, Palmeraie, or Agafay Desert
+- **Distance**: 10 km (Medina) / 18 km (Palmeraie)
+- **Estimated Driving Duration**: 20–35 minutes
+- **Price Range**: €25 – €60
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €25 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €35 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €45 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €60 |
+
+#### Key Route Highlights:
+- Terminal Meet & Greet: Chauffeur waits inside the arrivals hall holding a sign with your name.
+- Live Flight Radar Tracking: Automatic schedule adjustment with 60 minutes free wait time if your flight is delayed.
+- Guaranteed Fixed Pricing: Flat rate per vehicle with zero night surcharges, baggage fees, or stressful negotiations.
+- Medina Doorstep Escort: Direct drop-off at the closest accessible medina gate with riad staff coordination.
+- Pristine Air-Conditioned Fleet: Mercedes-Benz Vitos & executive sedans with free child seats on request.
+
+
+---
+
+### 19. Fes-Saïss Airport Private Transfer
+- **Route Slug**: `fes-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/fes-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Fes-Saïss International Airport (FEZ)
+- **Dropoff**: Any Hotel or Riad in Fes City
+- **Distance**: 15 km
+- **Estimated Driving Duration**: 25 minutes
+- **Price Range**: €45 – €90
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €45 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €55 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €65 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €90 |
+
+#### Key Route Highlights:
+- Meet & Greet service with a name sign at the arrivals hall
+- Flight-tracked arrival – no waiting times or delay fees
+- Fixed rates with no hidden baggage charges
+- Drop-off at the closest medina gate with riad staff coordination
+- Comfortable clean vans with professional bilingual drivers
+
+
+---
+
+### 20. Agadir Al Massira Airport Private Transfer
+- **Route Slug**: `agadir-airport-transfer`
+- **Canonical URL**: https://mdinatours.com/en/transfers/agadir-airport-transfer
+- **Category**: Airport / Port Transfer
+- **Pickup**: Agadir Al Massira International Airport (AGA)
+- **Dropoff**: Agadir City, Marina, Taghazout, or Hotels
+- **Distance**: 25 km
+- **Estimated Driving Duration**: 35 minutes
+- **Price Range**: €50 – €100
+
+#### Fixed Price Matrix by Vehicle Tier:
+| Vehicle Class | Capacity | Price |
+| :--- | :--- | :--- |
+| Executive Sedan (Skoda Superb) | 1–3 Passengers, 3 Bags | €50 |
+| Comfort SUV (Skoda Kodiaq) | 4 Passengers, 4 Bags | €60 |
+| VIP Minivan (Mercedes-Benz Vito) | 5 Passengers, 5 Bags | €75 |
+| Large Executive Van (Mercedes-Benz Vito) | Up to 7 Passengers, 7 Bags | €100 |
+
+#### Key Route Highlights:
+- Flight tracking included – driver stands by when you land
+- Meet & Greet with a nameboard at the terminal exit
+- Fixed rates with no night-time premiums or extra fees
+- Direct door-to-door transit to Taghazout surf camps or hotels
+- Spacious vans with room for surfboards
+
+
+---
+
+
+## Section 3: Morocco Airport Arrival & Meet & Greet Guide
+
+Mdina Tours services all major Moroccan international gateways:
+
+1. **Casablanca Mohammed V Airport (CMN)**:
+   - Meeting Location: Terminal 1 and Terminal 2 Arrivals Hall directly after baggage claim and customs.
+   - Chauffeur Identification: Holding a clear, personalized signboard with the passenger's full name.
+   - Flight Tracking: Automatic schedule synchronization with live CMN radar. 60 minutes free wait time from actual landing time.
+   - Popular Destinations from CMN: Casablanca City Center (€35), Rabat (€110), Marrakech (€220), Fes (€250).
+
+2. **Marrakech Menara Airport (RAK)**:
+   - Meeting Location: Immediately outside the main glass exit of Terminal 1/2.
+   - Popular Destinations from RAK: Marrakech Medina / Hivernage / Palmeraie (€25), Essaouira (€140), Agadir (€185).
+
+3. **Rabat-Salé Airport (RBA)**:
+   - Meeting Location: Public arrivals lobby opposite exit doors.
+   - Popular Destinations from RBA: Rabat City Center / Agdal / Hassan (€45), Casablanca (€110).
+
+4. **Tangier Ibn Battouta Airport (TNG) & Tanger Ports**:
+   - Meeting Location: TNG Terminal exit / Tanger Ville Ferry Terminal / Tanger Med Port.
+   - Popular Destinations: Tangier City (€45), Chefchaouen (€140), Asilah (€65), Rabat (€210).
+
+5. **Fes-Saïss Airport (FEZ)**:
+   - Meeting Location: Arrivals concourse.
+   - Popular Destinations: Fes Medina / Riad drops (€45), Chefchaouen (€170), Meknes (€80).
+
+6. **Agadir Al Massira Airport (AGA)**:
+   - Meeting Location: Main terminal exit.
+   - Popular Destinations: Agadir City / Beach Promenade (€50), Taghazout Bay (€65).
+
+---
+
+## Section 4: Day Trips & Guided Tours Catalog
+
+### 1. Marrakech Day Trip
+- **URL**: https://mdinatours.com/en/tours/marrakech-day-trip
+- **Duration**: 10-12 hours
+- **Starting Price**: From €249
+- **Departure City**: Casablanca
+- **Highlights**:
+  - Private transport with a professional chauffeur from Rabat/Casablanca
+  - Guided walking tour of the historic Marrakech Medina
+  - Visit the iconic Koutoubia Mosque and the Bahia Palace
+  - Explore the enchanting Majorelle Gardens and Yves Saint Laurent Museum
+  - Experience the sensory overload of Jemaa el-Fnaa square at sunset
+
+### 2. Chefchaouen Blue City Tour
+- **URL**: https://mdinatours.com/en/tours/chefchaouen-day-trip
+- **Duration**: 12-14 hours
+- **Starting Price**: From €249
+- **Departure City**: Rabat / Casablanca / Tangier
+- **Highlights**:
+  - Comfortable private drive through the scenic Rif Mountain range
+  - Stroll along the iconic blue-painted streets of the old Medina
+  - Visit the historic Kasbah museum and Outa el-Hammam square
+  - Hike up to the Spanish Mosque for an unforgettable sunset panorama
+  - Shop for unique hand-woven textiles and local goat cheese
+
+### 3. Atlas Mountains & Ourika Valley Tour
+- **URL**: https://mdinatours.com/en/tours/atlas-mountains-tour
+- **Duration**: 8-10 hours
+- **Starting Price**: From €210
+- **Departure City**: Marrakech
+- **Highlights**:
+  - Breathtaking mountain drives through the foothills of Mount Toubkal
+  - Guided trek to the seven cooling waterfalls of Setti Fatma
+  - Cross traditional wooden suspension bridges over the Ourika river
+  - Visit a local Berber family home for freshly baked bread and mint tea
+  - Stop at an authentic women's Argan oil co-operative
+
+### 4. Agafay Desert Dinner & Camel Experience
+- **URL**: https://mdinatours.com/en/tours/agafay-desert-experience
+- **Duration**: 5-6 hours
+- **Starting Price**: From €120
+- **Departure City**: Marrakech
+- **Highlights**:
+  - Private round-trip transfer to the rocky Agafay Desert
+  - Sunset camel ride wearing traditional Berber nomadic blue robes
+  - Traditional Moroccan welcome tea in a luxury desert camp
+  - Three-course gourmet dinner featuring fresh regional tagines
+  - Live entertainment around the campfire (Gnaoua drums and fire dancers)
+
+### 5. 3-Day Merzouga Desert Expedition
+- **URL**: https://mdinatours.com/en/tours/merzouga-desert-tour
+- **Duration**: 3 Days / 2 Nights
+- **Starting Price**: From €620
+- **Departure City**: Marrakech
+- **Highlights**:
+  - Drive through the high Tizi n'Tichka pass (2,260m) with panoramic views
+  - Guided tour of the UNESCO World Heritage site of Ait Benhaddou
+  - Walk through the sheer, towering limestone cliffs of Todra Gorge
+  - Trek into the golden Erg Chebbi dunes on camelback for sunset
+  - Spend a magical night under the stars in a luxury Sahara tent
+
+### 6. Fes Medina Walking Tour
+- **URL**: https://mdinatours.com/en/tours/fes-guided-tour
+- **Duration**: 5-6 hours
+- **Starting Price**: From €75
+- **Departure City**: Fes
+- **Highlights**:
+  - Private walking tour with a licensed academic historian guide
+  - Explore the Chouara Tanneries and watch ancient leather dyeing techniques
+  - Visit the historic Al-Qarawiyyin University, founded in 859 AD
+  - View the beautiful blue tilework of the Bab Boujloud gate
+  - Discover hidden caravanserais and ancient hand-weaving workshops
+
+### 7. Casablanca Highlights Tour
+- **URL**: https://mdinatours.com/en/tours/casablanca-city-tour
+- **Duration**: 4-5 hours
+- **Starting Price**: From €90
+- **Departure City**: Casablanca
+- **Highlights**:
+  - Guided tour inside the Hassan II Mosque, showing unique hand-crafted details
+  - Stroll through the clean alleys of the Habous (the 'New Medina')
+  - Walk along the beachfront promenade of the Boulevard de la Corniche
+  - Visit the grand Place Mohammed V and see its Art Deco buildings
+  - Stop outside the historic Church of the Sacred Heart
+
+### 8. Rabat Imperial Capital Tour
+- **URL**: https://mdinatours.com/en/tours/rabat-city-tour
+- **Duration**: 4-5 hours
+- **Starting Price**: From €105
+- **Departure City**: Rabat
+- **Highlights**:
+  - Stroll through the narrow, blue-painted alleys of the Kasbah of the Udayas
+  - Visit the iconic Hassan Tower, the minaret of an unfinished 12th-century mosque
+  - Pay respects at the marble Mausoleum of Mohammed V, guarded by Royal Horsemen
+  - Explore the Roman and medieval ruins of the Chellah necropolis
+  - Walk along the scenic Bouregreg river marina
+
+
+---
+
+## Section 5: Frequently Asked Questions (FAQ)
+
+### Q: How do I meet my private driver at the airport?
+A: Your chauffeur monitors your flight number in real time and waits inside the terminal arrivals area holding a tablet or signboard with your name. You receive the driver's direct WhatsApp contact and vehicle license plate 2 to 4 hours before landing.
+
+### Q: What if my flight into Morocco is delayed?
+A: We provide 60 minutes of complimentary waiting time after your flight actually lands. Because we track flights live, your driver's schedule automatically adjusts to delayed landings at zero extra cost.
+
+### Q: Can I pay by credit card or in Euros?
+A: Yes. You can pay your driver upon completion in Euros (€), US Dollars ($), or Moroccan Dirhams (MAD) in cash, or via mobile payment/card terminal. No advance deposit is needed for standard transfers.
+
+### Q: Are child safety car seats provided?
+A: Yes, infant seats and booster seats are available free of charge upon request during booking.
+
+### Q: Are highway tolls and fuel included in the price?
+A: Yes. Every rate quoted by Mdina Tours is 100% all-inclusive: vehicle hire, licensed driver, fuel, highway toll tickets (autoroute péage), airport parking fees, and passenger insurance.
+
+---
+
+## Section 6: Direct Booking & Contact Information
+- **WhatsApp Concierge (24/7)**: https://wa.me/212724114775
+- **Direct Phone Line**: +212 724 114 775
+- **Email Inquiries**: contact@mdinatours.com
+- **Main Office Address**: Rabat, Rabat-Salé-Kénitra, Morocco
+- **Official Web Portals**:
+  - English: https://mdinatours.com/
+  - French: https://mdinatours.com/fr
+  - Spanish: https://mdinatours.com/es

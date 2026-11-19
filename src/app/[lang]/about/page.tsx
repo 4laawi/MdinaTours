@@ -1,5 +1,11 @@
 import TrackedWhatsAppLink from "@/components/TrackedWhatsAppLink";
-import { getAlternates, SCHEMA_SAME_AS } from '@/lib/seo';
+import {
+    getAlternates,
+    SCHEMA_SAME_AS,
+    SCHEMA_ORGANIZATION_ID,
+    SCHEMA_AREA_SERVED,
+    SCHEMA_KNOWS_LANGUAGE
+} from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
@@ -263,6 +269,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
         "url": `https://mdinatours.com/${language}/about`,
         "mainEntity": {
             "@type": "TravelAgency",
+            "@id": SCHEMA_ORGANIZATION_ID,
             "name": "Mdina Tours",
             "url": language === 'en' ? "https://mdinatours.com/" : `https://mdinatours.com/${language}`,
             "telephone": "+212724114775",
@@ -276,10 +283,12 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Rabat",
+                "addressRegion": "Rabat-Salé-Kénitra",
                 "addressCountry": "MA"
             },
-            "areaServed": "Morocco",
-            "priceRange": "$$",
+            "areaServed": SCHEMA_AREA_SERVED,
+            "priceRange": "€25 - €640",
+            "knowsLanguage": SCHEMA_KNOWS_LANGUAGE,
             "sameAs": SCHEMA_SAME_AS
         }
     };
