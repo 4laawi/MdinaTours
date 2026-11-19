@@ -1156,8 +1156,16 @@ body.modal-open {
     min-width: 0 !important;
 }
 
+/* Calendar navigation helper classes for responsive dual vs single month */
+.calendar-next-mobile-only {
+    display: none !important;
+}
+.calendar-spacer-desktop-only {
+    display: block !important;
+}
+
 /* Mobile overrides for sections and elements */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .transfer-single-flow-wrapper {
         padding: 0 16px 20px 16px !important;
     }
@@ -1329,6 +1337,12 @@ body.modal-open {
         gap: 20px !important;
     }
     .calendar-month-item:last-child {
+        display: none !important;
+    }
+    .calendar-next-mobile-only {
+        display: flex !important;
+    }
+    .calendar-spacer-desktop-only {
         display: none !important;
     }
     .traveler-option {
@@ -1832,7 +1846,7 @@ body.modal-open {
 }
 
 /* Show mobile sheet header in bottom sheets on mobile viewports */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .mobile-sheet-header {
         display: flex !important;
     }

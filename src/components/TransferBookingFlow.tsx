@@ -408,38 +408,48 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     };
 
     const handlePrevMonth = () => {
-        setCalendarMonth(prev => {
-            if (prev === 0) {
-                setCalendarYear(y => y - 1);
-                return 11;
-            }
-            return prev - 1;
-        });
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        const currentMonth = today.getMonth();
+        if (calendarYear < currentYear || (calendarYear === currentYear && calendarMonth <= currentMonth)) {
+            return;
+        }
+        if (calendarMonth === 0) {
+            setCalendarYear(y => y - 1);
+            setCalendarMonth(11);
+        } else {
+            setCalendarMonth(m => m - 1);
+        }
     };
 
     const handleNextMonth = () => {
-        setCalendarMonth(prev => {
-            if (prev === 11) {
-                setCalendarYear(y => y + 1);
-                return 0;
-            }
-            return prev + 1;
-        });
+        if (calendarMonth === 11) {
+            setCalendarYear(y => y + 1);
+            setCalendarMonth(0);
+        } else {
+            setCalendarMonth(m => m + 1);
+        }
     };
 
     const handleDateSelect = (year: number, month: number, day: number) => {
         const yyyy = year.toString();
         const mm = (month + 1).toString().padStart(2, '0');
         const dd = day.toString().padStart(2, '0');
-        setTravelDate(`${yyyy}-${mm}-${dd}`);
+        const selectedDateStr = `${yyyy}-${mm}-${dd}`;
+        setTravelDate(selectedDateStr);
+        setSearchedTravelDate(selectedDateStr);
         setIsCalendarOpen(false);
     };
 
     const formatReadableDate = (dateStr: string, lang: Language) => {
         try {
             const parts = dateStr.split('-');
-            const dateObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-            const options: Intl.DateTimeFormatOptions = { weekday: 'short', month: 'short', day: 'numeric' };
+            const year = parseInt(parts[0], 10);
+            const currentYear = new Date().getFullYear();
+            const dateObj = new Date(year, parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            const options: Intl.DateTimeFormatOptions = year === currentYear
+                ? { weekday: 'short', month: 'short', day: 'numeric' }
+                : { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
             const localeStr = lang === 'es' ? 'es-ES' : lang === 'fr' ? 'fr-FR' : 'en-US';
             return dateObj.toLocaleDateString(localeStr, options);
         } catch (e) {
@@ -483,6 +493,9 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
+        const currentYear = today.getFullYear();
+        const currentMonth = today.getMonth();
+        const isCurrentOrPastMonth = year < currentYear || (year === currentYear && month <= currentMonth);
 
         return (
             <div style={{ flex: 1 }} className="calendar-month-item">
@@ -497,25 +510,30 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                     {showNav ? (
                         <button
                             type="button"
+                            disabled={isCurrentOrPastMonth}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                handlePrevMonth();
+                                if (!isCurrentOrPastMonth) {
+                                    handlePrevMonth();
+                                }
                             }}
                             style={{
                                 background: 'none',
                                 border: 'none',
-                                cursor: 'pointer',
+                                cursor: isCurrentOrPastMonth ? 'not-allowed' : 'pointer',
+                                opacity: isCurrentOrPastMonth ? 0.25 : 1,
                                 padding: '4px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: '50%',
-                                transition: 'background-color 0.2s',
+                                transition: 'background-color 0.2s, opacity 0.2s',
                                 color: '#222',
                                 width: '28px',
                                 height: '28px'
                             }}
                             className="calendar-nav-btn"
+                            aria-label="Previous month"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <path d="m15 18-6-6 6-6" />
@@ -534,7 +552,37 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                         {monthName} {year}
                     </span>
 
-                    {!showNav ? (
+                    {showNav ? (
+                        <>
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleNextMonth();
+                                }}
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    padding: '4px',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderRadius: '50%',
+                                    transition: 'background-color 0.2s',
+                                    color: '#222',
+                                    width: '28px',
+                                    height: '28px'
+                                }}
+                                className="calendar-nav-btn calendar-next-mobile-only"
+                                aria-label="Next month"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </button>
+                            <div className="calendar-spacer-desktop-only" style={{ width: '28px', height: '28px' }} />
+                        </>
+                    ) : (
                         <button
                             type="button"
                             onClick={(e) => {
@@ -556,13 +604,12 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
                                 height: '28px'
                             }}
                             className="calendar-nav-btn"
+                            aria-label="Next month"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </button>
-                    ) : (
-                        <div style={{ width: '28px', height: '28px' }} />
                     )}
                 </div>
 
@@ -720,15 +767,29 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         };
     }, []);
 
-    // Sync searchedTravelers selection to selected vehicle tier
+    // Sync travelers selection to selected vehicle tier
     useEffect(() => {
-        const passengerTiers = [3, 5, 7];
-        // Find the smallest tier capacity that fits the searched number of travelers
-        const matchedTier = passengerTiers.find(tier => searchedTravelers <= tier) || passengerTiers[passengerTiers.length - 1];
+        const availableTiers = Object.keys(trans.prices)
+            .map(Number)
+            .sort((a, b) => a - b);
+        const matchedTier = availableTiers.find(tier => travelers <= tier) || availableTiers[availableTiers.length - 1];
         if (matchedTier) {
             setSelectedTier(matchedTier);
         }
-    }, [searchedTravelers, trans.prices]);
+    }, [travelers, trans.prices]);
+
+    // Keep searchedTravelers, searchedTravelDate, searchedPickupTime in sync with user selections
+    useEffect(() => {
+        setSearchedTravelers(travelers);
+    }, [travelers]);
+
+    useEffect(() => {
+        setSearchedTravelDate(travelDate);
+    }, [travelDate]);
+
+    useEffect(() => {
+        setSearchedPickupTime(pickupTime);
+    }, [pickupTime]);
 
     const getTierLabel = (tierLimit: number) => {
         if (isEn) {
@@ -764,7 +825,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
     const getUrgencyDetails = () => {
         try {
-            const departureDateTime = new Date(`${searchedTravelDate}T${searchedPickupTime}:00`);
+            const departureDateTime = new Date(`${travelDate}T${pickupTime}:00`);
             const now = new Date();
 
             const cutoffTime = new Date(departureDateTime.getTime() - 12 * 60 * 60 * 1000);
@@ -856,7 +917,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
 
     const getCancellationDeadline = () => {
         try {
-            const departureDateTime = new Date(`${searchedTravelDate}T${searchedPickupTime}:00`);
+            const departureDateTime = new Date(`${travelDate}T${pickupTime}:00`);
             const deadline = new Date(departureDateTime.getTime() - 24 * 60 * 60 * 1000);
 
             // Format time: e.g. 7:00 AM
@@ -888,9 +949,9 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
         msg = msg.replace("%title%", local.title);
         msg = msg.replace("%pickup%", local.pickup);
         msg = msg.replace("%dropoff%", local.dropoff);
-        msg = msg.replace("%date%", searchedTravelDate);
-        msg = msg.replace("%time%", searchedPickupTime);
-        msg = msg.replace("%travelers%", searchedTravelers.toString());
+        msg = msg.replace("%date%", travelDate);
+        msg = msg.replace("%time%", pickupTime);
+        msg = msg.replace("%travelers%", travelers.toString());
         msg = msg.replace("%tier%", tierLabel);
         msg = msg.replace("%price%", price.toString());
 
@@ -943,7 +1004,7 @@ export default function TransferBookingFlow({ trans, language }: TransferBooking
     const urgency = getUrgencyDetails() || { isNonRefundable: false, urgencyText: '' };
     const isPast = (() => {
         try {
-            const selectedDateTime = new Date(`${searchedTravelDate}T${searchedPickupTime}:00`);
+            const selectedDateTime = new Date(`${travelDate}T${pickupTime}:00`);
             return selectedDateTime < new Date();
         } catch {
             return false;

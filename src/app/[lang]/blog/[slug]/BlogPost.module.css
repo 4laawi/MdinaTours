@@ -294,12 +294,12 @@
 @media (max-width: 768px) {
     .postHero {
         height: auto;
-        min-height: 320px;
-        padding-top: 80px;
+        min-height: 220px;
+        padding-top: 65px;
     }
 
     .heroContent {
-        padding: 40px 0 30px 0;
+        padding: 20px 0 16px 0;
     }
 
     .container {
@@ -307,16 +307,16 @@
     }
 
     .textContent {
-        padding: 24px 16px;
+        padding: 20px 16px;
         border-radius: 8px;
     }
 
     .title {
-        font-size: 1.85rem;
+        font-size: 1.65rem;
     }
 
     .postContentSection {
-        padding: 40px 0 60px 0;
+        padding: 20px 0 40px 0;
     }
 }
 
@@ -971,7 +971,7 @@
     height: 200px;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -1023,11 +1023,11 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
+
     .journeyItem {
         height: 160px;
     }
-    
+
     .journeyOverlay {
         opacity: 1;
         padding: 10px;
@@ -1038,7 +1038,7 @@
     .journeyGrid {
         grid-template-columns: 1fr;
     }
-    
+
     .journeyItem {
         height: 200px;
     }
@@ -1155,7 +1155,7 @@
         grid-template-columns: 1fr;
         gap: 12px;
     }
-    
+
     .relatedServicesSection {
         padding: 24px 20px;
     }

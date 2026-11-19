@@ -127,6 +127,29 @@
     transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
+.ctaGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btnWhatsApp {
+    background: #25D366;
+    color: #ffffff !important;
+    border: 1.5px solid #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+}
+
+.btnWhatsApp:hover {
+    background: #20ba59;
+    border-color: #20ba59;
+}
+
 .btnFill {
     background: #1d2759;
     color: #ffffff !important;
