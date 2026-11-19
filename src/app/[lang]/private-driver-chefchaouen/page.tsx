@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://mdinatours.com/hero-chefchaouen.webp',
+                    url: 'https://mdinatours.com/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp',
                     width: 1200,
                     height: 630,
                     alt: 'Private Driver Chefchaouen Mdina Tours',
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://mdinatours.com/hero-chefchaouen.webp'],
+            images: ['https://mdinatours.com/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp'],
         },
     };
 }
@@ -161,7 +161,7 @@ export default async function PrivateDriverChefchaouenPage({ params }: { params:
                 : "Transfert fiable porte-à-porte entre Tanger (Port ou Aéroport) et votre hôtel à Chefchaouen.",
             price: isEn ? "From €90" : "À partir de 90 €",
             cta: isEn ? "View Transfers" : "Voir les transferts",
-            image: "/img2/vito-aeroport.jpg",
+            image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             href: "/transfers",
         },
         {
@@ -181,7 +181,7 @@ export default async function PrivateDriverChefchaouenPage({ params }: { params:
                 : "Voyagez confortablement depuis la capitale spirituelle Fès vers la superbe Ville Bleue.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/img2/fes_gate.jpg",
+            image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             msg: "Hello Mdina Tours, I would like to get a quote for a private driver service from Chefchaouen to Fes."
         }
     ];
@@ -245,13 +245,13 @@ export default async function PrivateDriverChefchaouenPage({ params }: { params:
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Chefchaouen" : "Service de Chauffeur Privé et Disposition Chefchaouen",
         "description": textChefchaouen.subtitle,
-        "image": "https://mdinatours.com/hero-chefchaouen.webp",
+        "image": "https://mdinatours.com/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
         "url": `https://mdinatours.com/${language}/private-driver-chefchaouen`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/hero-chefchaouen.webp",
+            "image": "https://mdinatours.com/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {

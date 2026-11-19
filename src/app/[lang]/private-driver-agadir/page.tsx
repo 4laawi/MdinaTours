@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     }
     const isEn = lang === 'en';
 
-    const title = isEn 
-        ? 'Private Driver Agadir – Professional Chauffeur Service | Mdina Tours' 
+    const title = isEn
+        ? 'Private Driver Agadir – Professional Chauffeur Service | Mdina Tours'
         : 'Chauffeur Privé Agadir – Voiture avec Chauffeur au Maroc | Mdina Tours';
     const description = isEn
         ? 'Book a professional private driver in Agadir. Premium sedans, minivans, and SUVs with English-speaking local chauffeurs (Dispo Chauffeur) for resort transfers and coastal day trips.'
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp',
+                    url: 'https://mdinatours.com/img2/agadir-airport.webp',
                     width: 1200,
                     height: 630,
                     alt: 'Private Driver Agadir Mdina Tours',
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp'],
+            images: ['https://mdinatours.com/img2/agadir-airport.webp'],
         },
     };
 }
@@ -90,11 +90,11 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
 
     const textAgadir = {
         h1: isEn ? "Private Driver in Agadir – Professional Chauffeur Service" : "Chauffeur Privé à Agadir – Service de Chauffeur de Disposition",
-        subtitle: isEn 
+        subtitle: isEn
             ? "Explore Morocco's premier beach destination, Taghazout, and Paradise Valley at your own pace with a dedicated, English-speaking driver. Fixed daily rates."
             : "Explorez la première station balnéaire du Maroc, Taghazout et Paradise Valley à votre rythme avec un chauffeur privé bilingue à votre entière disposition. Tarifs fixes.",
         bannerLabel: isEn ? "Agadir Driver" : "Chauffeur Agadir",
-        whatsappHeroMsg: isEn 
+        whatsappHeroMsg: isEn
             ? "Hello Mdina Tours, I would like to book a private driver service in Agadir."
             : "Bonjour Mdina Tours, je souhaite réserver un chauffeur privé à Agadir.",
         introTitle: isEn ? "Premium Agadir Chauffeur & Dispo Service" : "Service de Chauffeur Privé & Disposition Premium à Agadir",
@@ -156,7 +156,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
     const itineraries = [
         {
             title: isEn ? "Agadir Al-Massira Airport Transfers" : "Transferts Aéroport Agadir Al-Massira",
-            desc: isEn 
+            desc: isEn
                 ? "Stress-free transfers between Agadir Airport (AGA) and Taghazout, Essaouira, or local beach hotels."
                 : "Transferts sans stress entre l'Aéroport d'Agadir (AGA) et Taghazout, Essaouira ou les hôtels balnéaires.",
             price: isEn ? "From €40" : "À partir de 40 €",
@@ -166,22 +166,22 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
         },
         {
             title: isEn ? "Taghazout & Paradise Valley Tour" : "Excursion Taghazout & Paradise Valley",
-            desc: isEn 
+            desc: isEn
                 ? "Ride into the Atlas foothills to see Paradise Valley palm groves, then visit the surf haven of Taghazout."
                 : "Traversée des contreforts de l'Atlas vers Paradise Valley, puis visite de la station de surf de Taghazout.",
             price: isEn ? "From €120" : "À partir de 120 €",
             cta: isEn ? "View Tours" : "Voir les circuits",
-            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
+            image: "/img2/agadir-airport.webp",
             href: "/tours",
         },
         {
             title: isEn ? "Agadir to Marrakech Transfer / Day Trip" : "Transfert / Excursion d'Agadir à Marrakech",
-            desc: isEn 
+            desc: isEn
                 ? "Travel comfortably on the modern expressway from the coast to the Red City of Marrakech."
                 : "Voyagez confortablement sur l'autoroute depuis la côte jusqu'à la ville rouge de Marrakech.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
+            image: "/a-mdiinatours/marrakech-airport-transfer.webp",
             msg: "Hello Mdina Tours, I would like to get a quote for a private transfer/driver from Agadir to Marrakech."
         }
     ];
@@ -210,7 +210,7 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
     const faqs = [
         {
             q: isEn ? "What is a private driver (\"dispo chauffeur\") in Agadir?" : "Qu'est-ce qu'un service de chauffeur privé (« dispo chauffeur ») à Agadir ?",
-            a: isEn 
+            a: isEn
                 ? "A dispo chauffeur is a private vehicle hired with a professional driver at your full disposal. Perfect for exploring coastal locations, surf towns like Taghazout, or doing transfers without fixed schedules."
                 : "La formule « dispo chauffeur » désigne la location d'un véhicule avec chauffeur à votre entière disposition. Idéal pour explorer la côte, Taghazout, ou faire vos trajets sans horaire rigide."
         },
@@ -245,13 +245,13 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Agadir" : "Service de Chauffeur Privé et Disposition Agadir",
         "description": textAgadir.subtitle,
-        "image": "https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp",
+        "image": "https://mdinatours.com/img2/agadir-airport.webp",
         "url": `https://mdinatours.com/${language}/private-driver-agadir`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/a-mdiinatours/selman-marrakech-mdinatours.webp",
+            "image": "https://mdinatours.com/img2/agadir-airport.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {
@@ -382,11 +382,11 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                             <PrivateDriverMetaSection language={language} />
                         </div>
 
-                        <div style={{ 
-                            position: 'sticky', 
-                            top: '100px', 
-                            display: 'flex', 
-                            flexDirection: 'column', 
+                        <div style={{
+                            position: 'sticky',
+                            top: '100px',
+                            display: 'flex',
+                            flexDirection: 'column',
                             gap: '16px',
                             maxWidth: '480px',
                             width: '100%',
@@ -407,24 +407,24 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
 
                 <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-                        <h2 style={{ 
-                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', 
-                            fontWeight: 700, 
-                            color: 'var(--secondary)', 
+                        <h2 style={{
+                            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+                            fontWeight: 700,
+                            color: 'var(--secondary)',
                             marginBottom: '30px',
                             fontFamily: 'var(--font-poppins), sans-serif'
                         }}>
                             {isEn ? "What riding with us feels like" : "L'expérience à bord avec nous"}
                         </h2>
                         <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
-                            <VideoPlayer 
-                                src="/img/tours-mdina-tours-morocco.mp4" 
+                            <VideoPlayer
+                                src="/img/tours-mdina-tours-morocco.mp4"
                                 style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
                             />
                         </div>
-                        <p style={{ 
-                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', 
-                            fontWeight: 500, 
+                        <p style={{
+                            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)',
+                            fontWeight: 500,
                             color: '#555',
                             margin: '15px 0 0 0',
                             fontFamily: 'var(--font-poppins), sans-serif',
@@ -514,9 +514,9 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                                     {card.href ? (
                                         <Link href={getPath(card.href)} className="private-driver-route-img-link">
                                             <div className="private-driver-route-img-container">
-                                                <img 
-                                                    src={card.image} 
-                                                    alt={card.title} 
+                                                <img
+                                                    src={card.image}
+                                                    alt={card.title}
                                                     className="private-driver-route-img"
                                                     width={380}
                                                     height={220}
@@ -529,9 +529,9 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                                         </Link>
                                     ) : (
                                         <div className="private-driver-route-img-container">
-                                            <img 
-                                                src={card.image} 
-                                                alt={card.title} 
+                                            <img
+                                                src={card.image}
+                                                alt={card.title}
                                                 className="private-driver-route-img"
                                                 width={380}
                                                 height={220}
@@ -556,24 +556,24 @@ export default async function PrivateDriverAgadirPage({ params }: { params: Prom
                                             {card.desc}
                                         </p>
                                         {card.href ? (
-                                            <Link 
+                                            <Link
                                                 href={getPath(card.href)}
                                                 className="private-driver-route-cta private-driver-route-cta-link"
                                             >
                                                 {card.cta}
                                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
                                                 </svg>
                                             </Link>
                                         ) : (
-                                            <a 
+                                            <a
                                                 href={getWhatsAppUrl(card.msg!)}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="private-driver-route-cta"
                                             >
                                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                                    <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z"/>
+                                                    <path d="M12.012 2.25c-5.378 0-9.755 4.378-9.755 9.756 0 2.102.665 4.05 1.794 5.656L2.836 21.8c-.144.425.263.832.688.688l4.137-1.215c1.554.981 3.4 1.545 5.351 1.545 5.378 0 9.756-4.379 9.756-9.756S17.39 2.25 12.012 2.25zm5.176 13.9c-.22.617-1.272 1.134-1.748 1.18-.466.046-.902.213-2.923-.59-2.583-1.026-4.237-3.666-4.364-3.836-.129-.17-.932-1.243-.932-2.375 0-1.132.582-1.688.815-1.921.233-.233.51-.292.68-.292.17 0 .34.004.488.01.15.008.353-.06.554.423.204.492.698 1.706.759 1.83.06.124.1.267.017.433-.083.167-.124.267-.25.413-.125.146-.263.325-.375.437-.125.125-.254.26-.109.51.146.25.648 1.07 1.39 1.733.957.854 1.76 1.117 2.01.124.25-.25.146-.51.25-.678.104-.167.208-.125.353-.083.146.042.921.433 1.079.512.158.08.263.117.304.188.042.07.042.413-.178 1.03z" />
                                                 </svg>
                                                 {card.cta}
                                             </a>

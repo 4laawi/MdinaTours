@@ -124,8 +124,8 @@ export default function Morocco8DaysItinerarySelector({ lang }: Morocco8DaysItin
                     route: "Casablanca → Rabat → Chefchaouen",
                     drivingTime: "~4.5 hrs",
                     distance: "340 km",
-                    image: "/hero-chefchaouen.webp",
-                    imageAlt: "Chefchaouen Blue Medina Morocco",
+                    image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
+                    imageAlt: "Chefchaouen Blue Medina Morocco with Private Van",
                     highlights: isEn 
                         ? ["Hassan II Mosque ocean viewpoint", "Rabat Kasbah des Oudayas", "Scenic Rif Mountain drive"]
                         : isEs
@@ -332,8 +332,8 @@ export default function Morocco8DaysItinerarySelector({ lang }: Morocco8DaysItin
                     route: "Tangier → Tetouan → Chefchaouen",
                     drivingTime: "~2.5 hrs",
                     distance: "120 km",
-                    image: "/hero-chefchaouen.webp",
-                    imageAlt: "Chefchaouen Blue city",
+                    image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
+                    imageAlt: "Chefchaouen Blue city with Private Van",
                     highlights: isEn ? ["Tetouan UNESCO medina overview", "Rif green valleys", "Chefchaouen sunset at Spanish Mosque"] : isEs ? ["Medina de Tetuán", "Valles del Rif", "Puesta de sol en la Mezquita Española"] : ["Médina de Tétouan", "Montagnes du Rif", "Coucher de soleil à Chefchaouen"],
                     overnight: isEn ? "Riad in Chefchaouen" : isEs ? "Riad en Chefchaouen" : "Riad à Chefchaouen",
                     description: isEn 
@@ -579,8 +579,8 @@ export default function Morocco8DaysItinerarySelector({ lang }: Morocco8DaysItin
                     route: "Marrakech City → Airport (RAK)",
                     drivingTime: "~30 mins",
                     distance: "15 km",
-                    image: "/img/marrakech.jpg",
-                    imageAlt: "Marrakech Airport departure",
+                    image: "/a-mdiinatours/marrakech-airport-transfer.webp",
+                    imageAlt: "Marrakech Menara Airport departure private transfer",
                     highlights: isEn ? ["Majorelle Garden & Koutoubia", "Souk shopping", "Stress-free airport drop-off"] : isEs ? ["Jardín Majorelle y Koutoubia", "Compras finales", "Traslado puntual al aeropuerto"] : ["Jardin Majorelle", "Derniers achats", "Transfert ponctuel aéroport"],
                     overnight: isEn ? "Departure flight" : isEs ? "Vuelo de regreso" : "Vol retour",
                     description: isEn 

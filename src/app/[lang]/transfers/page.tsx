@@ -78,22 +78,25 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
     const hasEssaouira = normalizedSlug.includes('essaouira');
     const hasMarrakech = normalizedSlug.includes('marrakech');
     const hasMerzouga = normalizedSlug.includes('merzouga');
+    const hasChefchaouen = normalizedSlug.includes('chefchaouen');
 
     if (isAirport) {
-        if (hasCasablanca) return '/img2/Airport_Casablanca_Mohammed.webp';
+        if (hasCasablanca) return '/a-mdiinatours/casablanca-airport-transfer.webp';
+        if (hasMarrakech) return '/a-mdiinatours/marrakech-airport-transfer.webp';
         if (hasRabat) return '/img2/rabat-airport.webp';
         if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasFes) return '/a-mdiinatours/fes-airport-transfer.webp';
         if (hasAgadir) return '/img2/agadir-airport.webp';
         return '/b-roll/3-Mercedes-vito-airoport.jpg';
     } else {
+        if (hasChefchaouen) return '/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp';
         if (hasMerzouga) return '/a-mdiinatours/FES-Merzouga-private-driver.webp';
         if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasRabat) return '/img2/rabat-hassan-tour.jpg';
         if (hasCasablanca) return '/img3/casablanca-mosque-tour-private-driver-trasnportation.webp';
-        if (hasFes) return '/img2/fes_gate.jpg';
-        if (hasMarrakech) return '/a-mdiinatours/selman-marrakech-mdinatours.webp';
+        if (hasMarrakech) return '/a-mdiinatours/marrakech-airport-transfer.webp';
         if (hasEssaouira) return '/img2/Essaouira-maroc.jpg';
+        if (hasFes) return '/a-mdiinatours/chauffeur-costume-mercedes-noires.webp';
     }
     return transImage;
 };

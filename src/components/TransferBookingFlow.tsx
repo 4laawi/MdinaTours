@@ -187,11 +187,12 @@ const getGalleryImages = (slug: string, transImage: string) => {
     const hasTangier = normalizedSlug.includes('tangier') || normalizedSlug.includes('tanger');
     const hasAgadir = normalizedSlug.includes('agadir');
     const hasEssaouira = normalizedSlug.includes('essaouira');
+    const hasChefchaouen = normalizedSlug.includes('chefchaouen');
 
     // 1. First image position: Absolute most relevant image for the starting point / route
     if (isAirport) {
         if (hasCasablanca) {
-            images.push('/img3/tourists-happy-private-driver-casablanca.webp');
+            images.push('/a-mdiinatours/casablanca-airport-transfer.webp');
         } else if (hasRabat) {
             images.push('/img2/rabat-airport.webp');
         } else if (hasTangier) {
@@ -201,11 +202,13 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasAgadir) {
             images.push('/img2/agadir-airport.webp');
         } else if (hasMarrakech) {
-            images.push('/img3/aeroport-marrakech-menara.webp');
+            images.push('/a-mdiinatours/marrakech-airport-transfer.webp');
         }
     } else {
-        // If city-to-city, prioritize landmarks (prioritizing Essaouira first to ensure it displays correctly)
-        if (hasMerzouga) {
+        // If city-to-city, prioritize landmarks (prioritizing Chefchaouen & Merzouga custom vehicle landmarks first)
+        if (hasChefchaouen) {
+            images.push('/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp');
+        } else if (hasMerzouga) {
             images.push('/a-mdiinatours/FES-Merzouga-private-driver.webp');
         } else if (hasEssaouira) {
             images.push('/img2/Essaouira-maroc.jpg');
@@ -216,9 +219,9 @@ const getGalleryImages = (slug: string, transImage: string) => {
         } else if (hasCasablanca) {
             images.push(transImage);
         } else if (hasFes) {
-            images.push('/img2/fes_gate.jpg');
+            images.push(transImage.includes('fes_gate') ? '/a-mdiinatours/chauffeur-costume-mercedes-noires.webp' : transImage);
         } else if (hasMarrakech) {
-            images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
+            images.push('/a-mdiinatours/marrakech-airport-transfer.webp');
         } else {
             images.push(transImage);
         }
@@ -231,25 +234,11 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (isAirport && hasFes && !images.includes('/a-mdiinatours/private-driver-fes-airport-transfer.webp')) {
         images.push('/a-mdiinatours/private-driver-fes-airport-transfer.webp');
     }
-    if (hasFes && !isAirport && !images.includes('/img2/fes_gate.jpg')) {
-        images.push('/img2/fes_gate.jpg');
-    }
-    if (hasMarrakech && !hasEssaouira) { // Do not push Marrakech landmark for Essaouira route
-        if (isAirport) {
-            if (!images.includes('/img3/aeroport-marrakech-menara.webp')) {
-                images.push('/img3/aeroport-marrakech-menara.webp');
-            }
-        } else {
-            if (!images.includes('/a-mdiinatours/selman-marrakech-mdinatours.webp')) {
-                images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
-            }
-        }
-    }
     if (hasAsilah && !images.includes('/img2/Asilah-Morocco.jpg')) {
         images.push('/img2/Asilah-Morocco.jpg');
     }
-    if (hasAgadir && !images.includes('/a-mdiinatours/selman-marrakech-mdinatours.webp')) {
-        images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');
+    if (hasAgadir && !images.includes('/img2/agadir-airport.webp')) {
+        images.push('/img2/agadir-airport.webp');
     }
     if (hasRabat && !isAirport && !images.includes('/img2/rabat-hassan-tour.jpg')) {
         images.push('/img2/rabat-hassan-tour.jpg');
@@ -264,7 +253,7 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
 
     // Ensure transImage is in the list if not generic landscape placeholder
-    if (!images.includes(transImage) && !transImage.includes('hero-landscape')) {
+    if (!images.includes(transImage) && !transImage.includes('hero-landscape') && !transImage.includes('hero-marrakech') && !transImage.includes('selman-marrakech')) {
         images.push(transImage);
     }
 
@@ -272,6 +261,12 @@ const getGalleryImages = (slug: string, transImage: string) => {
     if (!images.includes('/a-mdiinatours/private-driver-vito-morocco.webp')) {
         images.push('/a-mdiinatours/private-driver-vito-morocco.webp');
     }
+
+    // Secondary departure landmark for Fes routes (placed at 3rd/4th position, never first or second)
+    if (hasFes && !isAirport && !images.includes('/img2/fes_gate.jpg')) {
+        images.push('/img2/fes_gate.jpg');
+    }
+
     if (!images.includes('/a-mdiinatours/selfie-joyeux-voiture-famille.webp')) {
         images.push('/a-mdiinatours/selfie-joyeux-voiture-famille.webp');
     }
@@ -281,13 +276,16 @@ const getGalleryImages = (slug: string, transImage: string) => {
     images.push('/img3/mdinatours-drivers-cars.webp');
 
     // 6. Extra supporting images (avoiding duplicate Vitos)
+    // Only show airport group photo on airport transfers or major metropolitan hub routes (Casa, Rabat, Tangier)
+    // Never show on Merzouga or routes to cities without an airport (Chefchaouen, Essaouira, Merzouga)
+    const isBigCityHub = (hasTangier || hasRabat || hasCasablanca) && !hasChefchaouen && !hasEssaouira && !hasMerzouga;
     if (hasCasablanca) {
         images.push('/img3/happy-tourists-in-casabalanca.webp');
-    } else {
+    } else if (!hasMerzouga && (isAirport || isBigCityHub)) {
         images.push('/img2/happy-traverlers-group.webp');
     }
 
-    if (hasFes && !isAirport) {
+    if (hasFes && !isAirport && !hasMerzouga) {
         images.push('/img2/fes_3.webp');
     }
     if (hasAsilah && !isAirport) {
@@ -301,8 +299,10 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
     images.push('/img3/two-big-van.webp');
 
-    // Return unique elements, capped at 7 images for clean layout
-    return Array.from(new Set(images)).slice(0, 7);
+    // Return unique elements, filtered from placeholder/generic landscape assets, capped at 7 images
+    return Array.from(new Set(images))
+        .filter(img => !img.includes('hero-marrakech') && !img.includes('selman-marrakech'))
+        .slice(0, 7);
 };
 
 export default function TransferBookingFlow({ trans, language }: TransferBookingFlowProps) {

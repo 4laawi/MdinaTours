@@ -228,7 +228,7 @@ export default async function PrivateDriverMoroccoPage({ params }: { params: Pro
                 : (isEs ? "Visite Chefchaouen y el Rif a su propio ritmo con un vehículo privado dedicado." : "Visite de Chefchaouen et du Rif à votre rythme avec un véhicule dédié."),
             price: isEn ? "From €249" : (isEs ? "Desde 249 €" : "À partir de 249 €"),
             cta: isEn ? "View Tour" : (isEs ? "Ver Excursión" : "Voir l'excursion"),
-            image: "/hero-chefchaouen.webp",
+            image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             href: "/tours/chefchaouen-day-trip",
         },
         {

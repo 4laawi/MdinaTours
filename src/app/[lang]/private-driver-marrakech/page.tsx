@@ -182,7 +182,7 @@ export default async function PrivateDriverMarrakechPage({ params }: { params: P
                 : "Transferts directs depuis l'aéroport Menara (RAK) vers votre riad en médina ou palace avec assistance bagages.",
             price: isEn ? "From €30" : "À partir de 30 €",
             cta: isEn ? "Book Airport Transfer" : "Réserver Navette Aéroport",
-            image: "/img2/vito-aeroport.jpg",
+            image: "/a-mdiinatours/marrakech-airport-transfer.webp",
             href: "/airport-transfers",
         },
         {

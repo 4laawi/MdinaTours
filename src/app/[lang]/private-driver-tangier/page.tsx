@@ -181,7 +181,7 @@ export default async function PrivateDriverTangierPage({ params }: { params: Pro
                 : "Un trajet pittoresque dans le Rif pour passer la journée dans la superbe Ville Bleue.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/hero-chefchaouen.webp",
+            image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             msg: "Hello Mdina Tours, I would like to get a quote for a private driver service from Tangier to Chefchaouen."
         }
     ];

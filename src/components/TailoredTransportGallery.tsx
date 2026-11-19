@@ -33,9 +33,9 @@ export default function TailoredTransportGallery({ lang = 'en' }: TailoredTransp
         : isEs
         ? "Recepción personalizada en terminal con seguimiento de vuelos en directo, ayuda con equipaje y salida directa."
         : "Accueil personnalisé en sortie de terminal avec suivi de vol en direct, aide aux bagages et départ immédiat.",
-      image: "/img2/aeroport-marrakech.webp",
-      desktopImage: "/img2/aeroport-marrakech(desktop).webp",
-      mobileImage: "/img2/aeroport-marrakech(mobile).webp",
+      image: "/a-mdiinatours/marrakech-airport-transfer.webp",
+      desktopImage: "/a-mdiinatours/marrakech-airport-transfer.webp",
+      mobileImage: "/a-mdiinatours/marrakech-airport-transfer.webp",
       href: getPath('/transfers')
     },
     {

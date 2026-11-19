@@ -182,7 +182,7 @@ export default async function PrivateDriverCasablancaPage({ params }: { params: 
                 : "Accueil personnalisé à l'aéroport Mohammed V (CMN) avec pancarte nominative, suivi de vol et trajet porte-à-porte.",
             price: isEn ? "From €35" : "À partir de 35 €",
             cta: isEn ? "Book Airport Transfer" : "Réserver Navette Aéroport",
-            image: "/img2/Airport_Casablanca_Mohammed.webp",
+            image: "/a-mdiinatours/casablanca-airport-transfer.webp",
             href: "/airport-transfers",
         },
         {

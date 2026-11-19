@@ -175,7 +175,7 @@ export const toursData: TourData[] = [
     },
     {
         slug: "chefchaouen-day-trip",
-        image: "/hero-chefchaouen.webp",
+        image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
         price: 249,
         en: {
             title: "Chefchaouen Blue City Tour",

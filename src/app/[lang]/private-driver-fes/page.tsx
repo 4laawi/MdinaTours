@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: 'Mdina Tours',
             images: [
                 {
-                    url: 'https://mdinatours.com/img2/fes_gate.jpg',
+                    url: 'https://mdinatours.com/a-mdiinatours/chauffeur-costume-mercedes-noires.webp',
                     width: 1200,
                     height: 630,
                     alt: 'Private Driver Fes Mdina Tours',
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://mdinatours.com/img2/fes_gate.jpg'],
+            images: ['https://mdinatours.com/a-mdiinatours/chauffeur-costume-mercedes-noires.webp'],
         },
     };
 }
@@ -181,7 +181,7 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
                 : "Voyagez vers la Ville Bleue dans le Rif avec un véhicule privé et chauffeur dédié.",
             price: isEn ? "Custom quote" : "Devis personnalisé",
             cta: isEn ? "Get a quote" : "Demander un devis",
-            image: "/hero-chefchaouen.webp",
+            image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
             msg: "Hello Mdina Tours, I would like to get a quote for a private driver service from Fes to Chefchaouen."
         }
     ];
@@ -245,13 +245,13 @@ export default async function PrivateDriverFesPage({ params }: { params: Promise
         "@type": ["Product", "TaxiService"],
         "name": isEn ? "Professional Private Driver & Chauffeur Service Fes" : "Service de Chauffeur Privé et Disposition Fès",
         "description": textFes.subtitle,
-        "image": "https://mdinatours.com/img2/fes_gate.jpg",
+        "image": "https://mdinatours.com/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
         "url": `https://mdinatours.com/${language}/private-driver-fes`,
         "brand": SCHEMA_BRAND,
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/img2/fes_gate.jpg",
+            "image": "https://mdinatours.com/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
             "telephone": "+212724114775",
             "priceRange": "$$",
             "address": {

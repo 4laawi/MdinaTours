@@ -75,7 +75,15 @@ export interface TransferData {
 export const transfersData: TransferData[] = [
     {
         slug: "casablanca-airport-transfer",
-        image: "/img3/tourists-happy-private-driver-casablanca.webp",
+        image: "/a-mdiinatours/casablanca-airport-transfer.webp",
+        galleryImages: [
+            "/a-mdiinatours/casablanca-airport-transfer.webp",
+            "/a-mdiinatours/private-driver-vito-morocco.webp",
+            "/img3/tourists-happy-private-driver-casablanca.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/img3/mdinatours-drivers-cars.webp"
+        ],
         prices: { 3: 35, 4: 50, 5: 65, 7: 85 },
         en: {
             title: "Casablanca Airport Transfer & Private Taxi Service (CMN)",
@@ -655,7 +663,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "fes-to-chefchaouen-transfer",
-        image: "/img2/fes_gate.jpg",
+        image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
         prices: { 3: 170, 4: 195, 5: 230, 7: 310 },
         en: {
             title: "Fes to Chefchaouen Scenic Mountain Transfer",
@@ -729,7 +737,18 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "casablanca-to-marrakech-transfer",
-        image: "/hero-marrakech.webp",
+        image: "/b-roll/vitooo.webp",
+        galleryImages: [
+            "/b-roll/vitooo.webp",
+            "/a-mdiinatours/fourgon-mercedes-entree-marocaine.webp",
+            "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/a-mdiinatours/private-driver-vito-morocco.webp",
+            "/a-mdiinatours/happy-mdinatours-client.webp",
+            "/a-mdiinatours/sourire-devant-van-mercedes.webp",
+            "/a-mdiinatours/fiat-scudo-9-places-mdinatours.webp"
+        ],
         prices: { 3: 220, 4: 250, 5: 290, 7: 390 },
         en: {
             title: "Casablanca to Marrakech Expressway Transfer",
@@ -928,7 +947,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "tangier-to-chefchaouen-transfer",
-        image: "/img2/tangier-mdina.jpg",
+        image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
         prices: { 3: 140, 4: 165, 5: 195, 7: 260 },
         en: {
             title: "Tangier to Chefchaouen Private Transfer",
@@ -1166,7 +1185,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "rabat-to-chefchaouen-transfer",
-        image: "/img2/rabat-hassan-tour.jpg",
+        image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp",
         prices: { 3: 249, 4: 289, 5: 329, 7: 429 },
         en: {
             title: "Rabat or Salé to Chefchaouen Private Transfer",
@@ -1217,7 +1236,15 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "marrakech-to-agadir-transfer",
-        image: "/a-mdiinatours/selman-marrakech-mdinatours.webp",
+        image: "/a-mdiinatours/marrakech-airport-transfer.webp",
+        galleryImages: [
+            "/a-mdiinatours/marrakech-airport-transfer.webp",
+            "/img2/agadir-airport.webp",
+            "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/img3/mdinatours-drivers-cars.webp"
+        ],
         prices: { 3: 185, 4: 215, 5: 250, 7: 345 },
         en: {
             title: "Marrakech to Agadir Highway Transfer",
@@ -1319,7 +1346,14 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "marrakech-airport-transfer",
-        image: "/img3/aeroport-marrakech-menara.webp",
+        image: "/a-mdiinatours/marrakech-airport-transfer.webp",
+        galleryImages: [
+            "/a-mdiinatours/marrakech-airport-transfer.webp",
+            "/a-mdiinatours/chauffeur-costume-mercedes-noires.webp",
+            "/a-mdiinatours/selfie-joyeux-voiture-famille.webp",
+            "/img3/vito-mercedes-closeup.webp",
+            "/img3/mdinatours-drivers-cars.webp"
+        ],
         prices: { 3: 25, 4: 35, 5: 45, 7: 60 },
         en: {
             title: "Marrakech Airport Transfer & Private Taxi Service (RAK)",

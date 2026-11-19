@@ -161,7 +161,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             { id: 2, slug: 'sahara-desert-tour-plan', image: "/b-roll/activity-sahara-camel-riding-broll.webp", date: "March 10, 2026" },
             { id: 3, slug: 'moroccan-architecture-guide', image: "/img2/fes_gate.jpg", date: "March 5, 2026" },
             { id: 4, slug: 'moroccan-food-traditions', image: "/Traditional.webp", date: "February 28, 2026" },
-            { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/hero-chefchaouen.webp", date: "February 20, 2026" },
+            { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp", date: "February 20, 2026" },
             { id: 6, slug: 'private-driver-morocco-guide', image: "/img2/private-vito-vans-3.webp", date: "February 15, 2026" }
         ];
 
@@ -244,7 +244,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { id: 2, slug: 'sahara-desert-tour-plan', image: "/b-roll/activity-sahara-camel-riding-broll.webp", date: "March 10, 2026" },
         { id: 3, slug: 'moroccan-architecture-guide', image: "/img2/fes_gate.jpg", date: "March 5, 2026" },
         { id: 4, slug: 'moroccan-food-traditions', image: "/Traditional.webp", date: "February 28, 2026" },
-        { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/hero-chefchaouen.webp", date: "February 20, 2026" },
+        { id: 5, slug: 'chefchaouen-blue-pearl-tips', image: "/a-mdiinatours/tangier-to-chefchaouen-private-driver-van.webp", date: "February 20, 2026" },
         { id: 6, slug: 'private-driver-morocco-guide', image: "/img2/private-vito-vans-3.webp", date: "February 15, 2026" }
     ];
 
@@ -287,7 +287,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img/marrakech-tour.webp", tag: "Marrakech", alt: "Marrakech streets", keywords: ["marrakech", "tour"] },
         { src: "/img/marrakech.jpg", tag: "Marrakech", alt: "Marrakech Medina", keywords: ["marrakech"] },
         { src: "/img/marrakech.webp", tag: "Marrakech", alt: "Marrakech highlights", keywords: ["marrakech"] },
-        { src: "/img2/aeroport-marrakech.webp", tag: "Marrakech Airport", alt: "Marrakech Airport Terminal", keywords: ["marrakech", "airport", "transfer"] },
+        { src: "/a-mdiinatours/marrakech-airport-transfer.webp", tag: "Marrakech Airport", alt: "Marrakech Menara Airport transfer", keywords: ["marrakech", "airport", "transfer"] },
         { src: "/img2/Marrakech_atlas.jpg", tag: "Marrakech Atlas", alt: "Atlas mountains from Marrakech", keywords: ["marrakech", "atlas", "mountains"] },
         { src: "/b-roll/activity-sahara-camel-riding-broll.webp", tag: "Sahara Desert", alt: "Camel trekking", keywords: ["sahara", "merzouga", "desert", "camel", "riding"] },
         { src: "/Sahara.webp", tag: "Sahara Desert", alt: "Sahara Dunes", keywords: ["sahara", "merzouga", "desert"] },
@@ -297,7 +297,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/rabat_monemont.jpg", tag: "Rabat", alt: "Mausoleum of Mohammed V", keywords: ["rabat"] },
         { src: "/img2/rabat-airport.webp", tag: "Rabat Airport", alt: "Rabat Airport Terminal", keywords: ["rabat", "airport", "transfer"] },
         { src: "/img3/casablanca-mosque-tour-private-driver-trasnportation.webp", tag: "Casablanca", alt: "Hassan II Mosque Casablanca", keywords: ["casablanca", "mosque"] },
-        { src: "/img2/Airport_Casablanca_Mohammed.webp", tag: "Casablanca Airport", alt: "Mohammed V Airport Casablanca", keywords: ["casablanca", "airport", "transfer"] },
+        { src: "/a-mdiinatours/casablanca-airport-transfer.webp", tag: "Casablanca Airport", alt: "Mohammed V Airport Casablanca", keywords: ["casablanca", "airport", "transfer"] },
         { src: "/img2/fes_gate.jpg", tag: "Fes Palace", alt: "Royal Palace Fes Golden Gate", keywords: ["fes", "gate", "architecture"] },
         { src: "/img2/fes_3.webp", tag: "Fes Medina", alt: "Fes historic medina view", keywords: ["fes"] },
         { src: "/a-mdiinatours/fes-airport-transfer.webp", tag: "Fes Airport", alt: "Fes Airport Terminal", keywords: ["fes", "airport", "transfer"] },
@@ -309,7 +309,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
         { src: "/img2/Asilah_water.webp", tag: "Asilah Coast", alt: "Asilah ocean walls", keywords: ["asilah"] },
         { src: "/img/Essaouira.webp", tag: "Essaouira Port", alt: "Essaouira coast", keywords: ["essaouira"] },
         { src: "/img2/Essaouira-maroc.jpg", tag: "Essaouira Medina", alt: "Walled town of Essaouira", keywords: ["essaouira"] },
-        { src: "/a-mdiinatours/selman-marrakech-mdinatours.webp", tag: "Agadir Marina", alt: "Agadir port view", keywords: ["agadir"] },
+        { src: "/img2/agadir-airport.webp", tag: "Agadir Airport", alt: "Agadir Al Massira Airport Terminal", keywords: ["agadir", "airport", "transfer"] },
         { src: "/img2/agadir-airport.webp", tag: "Agadir Airport", alt: "Agadir Airport Terminal", keywords: ["agadir", "airport", "transfer"] },
         { src: "/img/Ait Benhaddou.jpg", tag: "Aït Benhaddou", alt: "Ait Benhaddou Kasbah", keywords: ["ait-benhaddou", "ouarzazate"] },
         { src: "/img/ouzoud waterfalls.jpg", tag: "Ouzoud Waterfalls", alt: "Ouzoud Waterfalls", keywords: ["ouzoud", "waterfalls"] },

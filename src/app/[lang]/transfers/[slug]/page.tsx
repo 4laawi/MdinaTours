@@ -167,7 +167,7 @@ export default async function TransferLandingPage({ params }: { params: Promise<
         "provider": {
             "@type": "LocalBusiness",
             "name": "Mdina Tours",
-            "image": "https://mdinatours.com/hero-marrakech.webp",
+            "image": "https://mdinatours.com/img3/mdinatours-drivers-cars.webp",
             "telephone": "+212724114775",
             "address": {
                 "@type": "PostalAddress",

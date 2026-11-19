@@ -20,7 +20,7 @@ export default function Services({ lang = 'en' }: { lang?: Language }) {
             tag: isEn ? "Arrival & Departure" : (isEs ? "Llegadas y Salidas" : "Arrivées & Départs"),
             title: t('service_airport_title'),
             desc: t('service_airport_desc'),
-            image: '/img2/Airport_Casablanca_Mohammed.webp',
+            image: '/a-mdiinatours/casablanca-airport-transfer.webp',
             href: getPath('/airport-transfers')
         },
         {
