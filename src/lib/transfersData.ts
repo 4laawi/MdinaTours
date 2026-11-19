@@ -1268,7 +1268,7 @@ export const transfersData: TransferData[] = [
     },
     {
         slug: "fes-to-merzouga-transfer",
-        image: "/b-roll/activity-sahara-camel-riding-broll.webp",
+        image: "/a-mdiinatours/FES-Merzouga-private-driver.webp",
         prices: { 3: 370, 4: 425, 5: 495, 7: 640 },
         en: {
             title: "Fes to Merzouga Private Transfer",

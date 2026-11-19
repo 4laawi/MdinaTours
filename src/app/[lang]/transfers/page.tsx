@@ -77,6 +77,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
     const hasAgadir = normalizedSlug.includes('agadir');
     const hasEssaouira = normalizedSlug.includes('essaouira');
     const hasMarrakech = normalizedSlug.includes('marrakech');
+    const hasMerzouga = normalizedSlug.includes('merzouga');
 
     if (isAirport) {
         if (hasCasablanca) return '/img2/Airport_Casablanca_Mohammed.webp';
@@ -86,6 +87,7 @@ const getTransferThumbnail = (slug: string, transImage: string) => {
         if (hasAgadir) return '/img2/agadir-airport.webp';
         return '/b-roll/3-Mercedes-vito-airoport.jpg';
     } else {
+        if (hasMerzouga) return '/a-mdiinatours/FES-Merzouga-private-driver.webp';
         if (hasTangier) return '/img2/tangier_hero.webp';
         if (hasRabat) return '/img2/rabat-hassan-tour.jpg';
         if (hasCasablanca) return '/img3/casablanca-mosque-tour-private-driver-trasnportation.webp';

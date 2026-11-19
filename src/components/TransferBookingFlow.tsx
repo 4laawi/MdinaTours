@@ -205,7 +205,9 @@ const getGalleryImages = (slug: string, transImage: string) => {
         }
     } else {
         // If city-to-city, prioritize landmarks (prioritizing Essaouira first to ensure it displays correctly)
-        if (hasEssaouira) {
+        if (hasMerzouga) {
+            images.push('/a-mdiinatours/FES-Merzouga-private-driver.webp');
+        } else if (hasEssaouira) {
             images.push('/img2/Essaouira-maroc.jpg');
         } else if (hasTangier) {
             images.push('/img2/tangier_hero.webp');
@@ -245,9 +247,6 @@ const getGalleryImages = (slug: string, transImage: string) => {
     }
     if (hasAsilah && !images.includes('/img2/Asilah-Morocco.jpg')) {
         images.push('/img2/Asilah-Morocco.jpg');
-    }
-    if (hasMerzouga && !images.includes('/b-roll/activity-sahara-camel-riding-broll.webp')) {
-        images.push('/b-roll/activity-sahara-camel-riding-broll.webp');
     }
     if (hasAgadir && !images.includes('/a-mdiinatours/selman-marrakech-mdinatours.webp')) {
         images.push('/a-mdiinatours/selman-marrakech-mdinatours.webp');

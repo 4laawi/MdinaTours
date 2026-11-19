@@ -248,16 +248,6 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                 {/* Why Choose Us Section */}
                 <PrivateDriverWhyChooseUs lang={language} />
 
-                {/* Taxi vs Private Transfer Comparison Section (Targets "taxi" keyword intent & objections) */}
-                {local.taxiComparison && (
-                    <TransferTaxiComparison data={local.taxiComparison} isEn={isEn} isEs={isEs} />
-                )}
-
-                {/* Fixed Fares Directory Section (Targets "airport taxi price & cost" featured snippets) */}
-                {local.fixedPriceTable && (
-                    <TransferFixedPriceTable data={local.fixedPriceTable} isEn={isEn} isEs={isEs} />
-                )}
-
                 {/* Video Experience Section */}
                 <section style={{ padding: '80px 20px', backgroundColor: '#fff', borderTop: 'none' }}>
                     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
@@ -326,6 +316,16 @@ export default async function TransferLandingPage({ params }: { params: Promise<
                             <TransferDestinationInfo local={local} isEn={isEn} />
                         </div>
                     </section>
+                )}
+
+                {/* Taxi vs Private Transfer Comparison Section (Targets "taxi" keyword intent & objections) */}
+                {local.taxiComparison && (
+                    <TransferTaxiComparison data={local.taxiComparison} isEn={isEn} isEs={isEs} />
+                )}
+
+                {/* Fixed Fares Directory Section (Targets "airport taxi price & cost" featured snippets) */}
+                {local.fixedPriceTable && (
+                    <TransferFixedPriceTable data={local.fixedPriceTable} isEn={isEn} isEs={isEs} />
                 )}
             </main>
             <Footer lang={language} />
